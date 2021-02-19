@@ -1,0 +1,121 @@
+/*
+*   this file includes icon selector styles for icon element.
+*   @giraykarasinir
+*/
+
+.forIcons {
+  .tabMenu {
+    background-color: $inputGrayBorder;
+
+    &-link {
+      padding: 10px 7px;
+      flex: 1;
+      border-bottom: 2px solid transparent;
+
+      &:first-child {
+        border-radius: 3px 0 0;
+      }
+
+      &:last-child {
+        border-radius: 0 3px 0 0;
+      }
+
+      &:hover {
+        background-color: $white;
+      }
+
+      &.is-active {
+        background-color: $white;
+        border-color: $blue;
+      }
+    }
+  }
+
+  .tabContent {
+    height: calc(100% - 40px);
+
+    &-wrapper {
+      display: block;
+      padding: 3px;
+    }
+
+    .iconSelector {
+      &-search {
+        width: 100%;
+        margin: 5px 4px;
+
+        .jfReportInput {
+          padding: 10px 14px;
+        }
+      }
+
+      &-autoSizerWrapper {
+        flex: 1 1 auto;
+
+        &.isSearch {
+          height: calc(100% - 48px);
+        }
+
+        & > div > div > div {
+          position: relative;
+          margin: auto;
+        }
+      }
+
+      &-searchResult {
+        font-size: .75rem;
+        margin: 5px 4px;
+      }
+
+      &-searchText {
+        font-weight: 700;
+      }
+
+      &-item {
+        display: inline-flex;
+        justify-content: center;
+        position: relative;
+        width: 20%;
+      }
+
+
+      &-label {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        justify-content: center;
+        margin: 4px;
+        padding: 5px;
+        border-radius: 3px;
+
+        &:hover {
+          background-color: rgba(179, 181, 199, 0.5);
+        }
+      }
+
+      &-icon {
+        width: 100%;
+        max-width: 16px;
+        max-height: 16px;
+        transition: fill .3s;
+      }
+
+      &-input {
+        position: absolute;
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      &-item.isSelected {
+        .iconSelector-label {
+          background-color: $green;
+        }
+
+        .iconSelector-icon {
+          fill: $white;
+        }
+      }
+    }
+  }
+}

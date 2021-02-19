@@ -1,0 +1,35 @@
+import { useState } from 'react';
+import { Meta, Canvas } from '@storybook/addon-docs/blocks';
+import { BuilderProvider } from '../../../../src/utils/builderContext.js';
+import { PropProvider } from '../../../../src/utils/propContext.js';
+import RightPanel from '../../../../src/components/Panels/RightPanel';
+
+<Meta title="Documentation/Items/Reserved Items/Layout" />
+
+# Layout Item
+
+This item is reserved for the general layout settings.
+
+its item type is  `__layout__`. and you should not use this keyword for other items.
+
+<Canvas>
+  <BuilderProvider>
+    {(() => {
+      const [_layout, editLayout] = useState({
+        reportBackgroundColor: '#fa8900',
+        reportLayout: 'Web',
+        reportLayoutHeight: '800',
+        reportLayoutWidth: '800',
+      });
+      return (
+        <div className="jfReport">
+          <PropProvider settings={_layout}>
+            <BuilderProvider isRightPanelOpen>
+              <RightPanel onSettingChange={(id, setting) => {editLayout({ ..._layout, ...setting})}} />
+            </BuilderProvider>
+          </PropProvider>
+        </div>
+      )
+    })()}
+  </BuilderProvider>
+</Canvas>

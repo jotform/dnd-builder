@@ -1,0 +1,4 @@
+{
+  "*.js": "./node_modules/.bin/eslint",
+  "*.scss": "./node_modules/.bin/stylelint"
+}

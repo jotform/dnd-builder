@@ -1,0 +1,137 @@
+/*
+*   this file includes modal styles for reports.
+*   @giraykarasinir
+*/
+
+.jfReportModal {
+
+  &-overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(#282828,.61);
+    z-index: 99999999999;
+    opacity: 0;
+    transition: $transition;
+
+    &.ReactModal__Overlay--after-open {
+      opacity: 1;
+
+      .jfReportModal {
+        opacity: 1;
+        margin-top: 0;
+      }
+    }
+  }
+
+  position: relative;
+  width: 94%;
+  margin-top: 40px;
+  max-width: 700px;
+  background-color: $white;
+  border-radius: 4px;
+  transition: $transition;
+  opacity: 0;
+  box-shadow: 0 2px 7px 0 rgba(#000000,.5);
+
+  button.jfReportModal-close {
+    position: absolute;
+    right: 15px;
+    top: 20px;
+    border: 0;
+    cursor: pointer;
+    border-radius: 50%;
+    background: #edeef5;
+    width: 42px;
+    height: 42px;
+    padding: 0;
+
+    .icon-close {
+      vertical-align: middle;
+      margin: auto;
+      width: 16px;
+      height: 16px;
+      fill: rgba(43, 50, 69, 0.4);
+      transition: .3s;
+    }
+
+    &:hover .jfReportSVG {
+      fill: rgba(43, 50, 69, 0.8);
+    }
+
+    &:focus {
+      box-shadow: 0 0 0 2px rgba(0,0,0,0.1) inset;
+    }
+  }
+
+  &-header {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+
+    &Icon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-color: rgba(1, 189, 111, .1);
+
+      .icon-share {
+        width: 22px;
+        height: 16px;
+        fill: $green;
+      }
+    }
+  }
+
+  &-title {
+    font-size: 1.25rem;
+  }
+
+  &-subTitle {
+    font-size: 0.875rem;
+    line-height: 24px;
+    color: #8D8FA8;
+  }
+
+  &-body {
+    padding: 20px 30px;
+    transition: $transition;
+  }
+
+  &-footer {
+    padding: 5px 15px 20px;
+
+    .jfReportButton {
+      height: 40px;
+    }
+  }
+
+  .jfReportPermission-toggle {
+    margin-bottom: 20px;
+
+    .toolToggle {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+
+  .jfReportDisclaimer {
+    padding: 10px;
+    font-size: .75rem;
+    border-radius: 4px;
+    background-color: $inputGray;
+
+    &.isDanger {
+      background-color: transparentize($danger, .9);
+    }
+  }
+}

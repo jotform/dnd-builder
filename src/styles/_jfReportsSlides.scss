@@ -1,0 +1,238 @@
+/*
+*   this file includes slide list styles.
+*   @giraykarasinir
+*/
+
+.thumbnailOrder {
+  margin: auto;
+  font-size: 0.875rem;
+  color: $additionalGray;
+  transition: $transition;
+}
+
+.thumbnailFrame {
+  border: 1px solid rgba($additionalGray, .3);
+  border-radius: 2px;
+  pointer-events: none;
+}
+
+.thumbnailActions {
+  margin: auto;
+  opacity: 0;
+  transition: $transition;
+}
+
+.thumbnailWrapper {
+  border-radius: 2px;
+  transition: $transition;
+  user-select: none;
+  cursor: pointer;
+
+  &.forPageAdder {
+    justify-content: flex-end;
+
+    .pageAdder {
+      width: 192px;
+      height: 136px;
+      border-radius: 1px;
+
+      &:hover {
+        background-color: rgba($blue, .15);
+        background-clip: content-box;
+        padding: 4px;
+      }
+    }
+    &:hover {
+      background-color: transparent;
+    }
+  }
+}
+
+.thumbnailWrapper:hover {
+  background-color: rgba($additionalGray, .1);
+
+  .thumbnailActions {
+    opacity: 1;
+  }
+
+  .thumbnailOrder {
+    color: #2C3345;
+  }
+}
+
+.thumbnailWrapper.isSelected, .thumbnailWrapper.isSelected:hover {
+  background-color: rgba($blue, .15);
+}
+
+.forSlides .thumbnailFrame {
+  width: 158px;
+  height: 112px;
+}
+
+.forSlides .thumbnailWrapper {
+  margin-top: 7px;
+  /* stylelint-disable-next-line declaration-no-important */
+  height: 120px !important;
+}
+
+.pageThumbnailHelper > div:not(.thumbnailFrame):not(.floatingController-container) {
+  width: calc((100% - 158px) / 2);
+  text-align: center;
+}
+
+.forSlides .thumbnailWrapper > div:not(.thumbnailFrame):not(.floatingController-container) {
+  width: calc((100% - 158px) / 2);
+  text-align: center;
+}
+
+.pageThumbnailHelper .thumbnailFrame {
+  width: 158px;
+  height: 112px;
+}
+
+.forSlides .thumbnailWrapper, .pageThumbnailHelper {
+  min-height: 120px;
+  padding: 4px;
+  border-left: 3px solid transparent;
+
+  &.isSelected {
+    border-left-color: $blue;
+  }
+}
+
+.forAllSlides .thumbnailWrapper, .pageThumbnailHelper.forAllSlides {
+  flex-direction: column;
+  width: 206px;
+  padding: 7px;
+  border-top: 3px solid transparent;
+  margin: 0 10px 25px;
+
+  .thumbnailFrame {
+    width: 192px;
+    height: 136px;
+  }
+
+  .thumbnailOrder {
+    margin-bottom: 7px;
+  }
+
+  &.isSelected {
+    border-top-color: $blue;
+
+    .thumbnailOrder {
+      color: #2C3345;
+    }
+  }
+
+  &:hover {
+    .thumbnailOrder {
+      opacity: 0;
+    }
+  }
+
+  .thumbnailActions {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .forPageAction {
+    padding: 0 20px;
+  }
+}
+
+.forAllSlides .spacer {
+  width: 206px;
+  height: 0;
+  margin: 0 10px;
+}
+
+.pageThumbnailHelper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 3;
+  transition: none;
+  background-color: rgba($blue, .15);
+
+  &:hover .thumbnailActions {
+    opacity: 1;
+  }
+}
+
+.forAllSlides .pageActionsBar {
+  bottom: 0;
+  width: calc(100% - 150px);
+  height: 58px;
+  padding: 5px 15px;
+  background-color: $white;
+  border-radius: 4px 4px 0 0;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.08);
+  transition: $transition;
+
+  @media screen and (max-width: 828px) {
+    left: 0;
+    width: 100%;
+    border-radius: 0;
+  }
+
+  .jfReportButton {
+    vertical-align: middle;
+    @media screen and (max-width: 740px) {
+      span {
+        display: none;
+      }
+    }
+
+    &.forDeselect {
+      @media screen and (min-width: 741px) {
+        svg {
+          display: none;
+        }
+      }
+    }
+  }
+
+  span + .forPageActionsBar {
+    margin-left: 10px;
+  }
+
+  .pageSummary {
+    color: $blue;
+    vertical-align: middle;
+
+    & + span {
+      vertical-align: middle;
+    }
+  }
+
+  .forDuplicate, .forDeselect {
+    .jfReportSVG {
+      fill: $additionalGray;
+      transition: .3s fill;
+    }
+
+    &:hover .jfReportSVG {
+      fill: inherit;
+    }
+  }
+
+  .isDanger {
+    background-color: rgba($danger, .1);
+    margin-left: 10px;
+
+    &:hover {
+      background-color: rgba($danger, .2);
+    }
+  }
+}
+
+.forAllSlides.isIdle .pageActionsBar {
+  bottom: -58px;
+}
+
+.jfReport .forAllSlides .jfReport-pageThumbnailList {
+  @media screen and (max-width: 740px) {
+    justify-content: center;
+  }
+}

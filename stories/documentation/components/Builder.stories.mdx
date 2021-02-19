@@ -1,0 +1,297 @@
+
+import { Meta, ArgsTable } from '@storybook/addon-docs/blocks';
+import LinkTo from '@storybook/addon-links/react';
+import DndWrapper from '../../../src/components/Builder/DndWrapper.js';
+import { BuilderProvider } from '../../../src/utils/builderContext.js';
+import { Builder } from '../../../src/index';
+import LeftPanel from '../../../src/components/Panels/LeftPanel';
+
+<Meta title="Documentation/Components/Builder" />
+
+# Builder Component
+
+This is the main component. You can build your page and organize your items with this.
+<p>
+  <LinkTo kind="examples--builder">See examples</LinkTo>
+</p>
+
+## Props Table 🔧
+<ArgsTable of={Builder} />
+
+### acceptedItems - Object
+
+This is an object with keys as itemType and values as Item Object*(maybe Link to Items/Items.mdx). Let's take a look at an example:
+
+```javascript
+const acceptedItems = {
+  header: {
+    Component: HeaderElement,
+    details: {
+      headerFontColor: '#000000',
+      headerFontFamily: 'Roboto',
+      headerFontSize: 24,
+      ...
+    },
+    itemType: 'header',
+    settings: [
+      {
+        key: 'headerFontFamily',
+        label: 'Font Family',
+        options: fontTypes.fonts,
+        section: 'Header',
+        type: 'dropdown'
+      },
+      ...
+    ],
+  },
+};
+```
+
+### additionalPageItems - Array - _optional_
+
+An array of *rendered* React components which will be added on each page. You may use this to add a watermark to your pages.
+
+```javascript
+const additionalPageItems = [
+  <MyWatermarkComponent />,
+];
+```
+
+### itemAccessor - Function - _optional_
+
+To pass on extra props to items and/or override existing ones, you may use this function which will be called with the `item` before rendering the item itself and its settings panel. The function should only return extra props as an object which will be used to extend the original item internally.
+
+```javascript
+function itemAccessor(item) {
+  if (item.type === 'myCustomItem') {
+    return {
+      beep: 'boop',
+    },
+  }
+  return {};
+};
+```
+
+### leftPanelConfig - Array
+
+An array of objects with the details of the items that will be rendered on the left panel where users will be able to add items to their reports. You can also divide items into sections.
+
+```javascript
+const leftPanelConfig = [
+  {
+    title: 'Report Elements',
+    elements: [
+      {
+        iconType: 'textElement',
+        itemType: 'text',
+        title: 'Text',
+      },
+      ...
+    ],
+  },
+  {
+    title: 'My Custom Elements',
+    elements: [
+      {
+        iconType: 'customChartElement',
+        itemType: 'chartElement',
+        title: 'Custom Chart',
+      },
+      ...
+    ],
+  },
+  ...
+];
+```
+
+Regarding the icons, you may also provide a rendered component with icon key
+
+```javascript
+const leftPanelConfig = [
+  {
+    title: 'My Custom Elements',
+    elements: [
+      {
+        icon: () => <svg><path ... /></svg>,
+        itemType: 'chartElement',
+        title: 'Custom Chart',
+      },
+      ...
+    ],
+  },
+  ...
+];
+```
+<div style={{ display: 'block', height: '150px' }}>
+  <div className="jfReport" style={{ height: '150px' }}>
+    <DndWrapper>
+      <BuilderProvider isLeftPanelOpen>
+        <LeftPanel
+          leftPanelConfig={[
+            {
+              elements: [
+                {
+                  iconType: 'image',
+                  itemType: 'logo',
+                  title: 'Podo Switcher',
+                },
+              ],
+              title: 'Items',
+            },
+          ]}
+        />
+      </BuilderProvider>
+    </DndWrapper>
+  </div>
+</div>
+
+If you want to provide search ability in your sections, you should provide `hasSearch` boolean and `searchKeys` prop which will be used in fuzzy search.
+
+```javascript
+const leftPanelConfig = [
+  {
+    title: 'My Custom Elements',
+    hasSearch: true,
+    searchKeys: [
+      { name: 'title', weight: 0.7 },
+      { name: 'myCustomSearchKey', weight: 0.3 },
+    ],
+    elements: [
+      {
+        iconType: 'customChartElement',
+        itemType: 'chartElement',
+        title: 'Custom Chart',
+        myCustomSearchKey: 'myCustomValue'
+      },
+      ...
+    ],
+  },
+  ...
+];
+```
+<div style={{ display: 'block', height: '200px' }}>
+  <div className="jfReport" style={{ height: '200px' }}>
+    <DndWrapper>
+      <BuilderProvider isLeftPanelOpen>
+        <LeftPanel
+          leftPanelConfig={[
+            {
+              elements: [
+                {
+                  iconType: 'image',
+                  itemType: 'logo',
+                  title: 'Podo Switcher',
+                },
+              ],
+              title: 'Items',
+              hasSearch: true,
+              searchKeys: [
+                { name: 'title', weight: 0.7 },
+                { name: 'myCustomSearchKey', weight: 0.3 },
+              ]
+            },
+          ]}
+        />
+      </BuilderProvider>
+    </DndWrapper>
+  </div>
+</div>
+
+
+
+### onAnEventTrigger - Function - _optional_
+
+This function will give you the action and the target if you want to keep track of the user actions for statistics.
+
+```javascript
+function onAnEventTrigger(action, target) {
+  ...
+}
+```
+
+### ** Item Functions **
+
+### onItemAdd
+
+```javascript
+function onItemAdd(itemToAdd) {
+  ...
+}
+```
+
+### onItemChange
+
+```javascript
+function onItemChange(currentItem, changedSettings) {
+ ...
+}
+```
+
+### onItemMove
+
+```javascript
+function onItemMove(updatedItem) {
+  ...
+}
+```
+
+### onItemRemove
+
+```javascript
+function onItemRemove(itemToDelete) {
+  ...
+}
+```
+
+### onItemResize
+
+```javascript
+function onItemResize(currentItem, newSizes) {
+  ...
+}
+```
+
+### ** Page Functions **
+
+### onPageAdd
+
+```javascript
+function onPageAdd(pageOrder) {
+  const pageID = generateId();
+  ...
+}
+```
+
+### onPageChange
+
+```javascript
+function onPageChange(page, changedConfigs) {
+  ...
+}
+```
+
+### onPageDuplicate
+
+```javascript
+function onPageDuplicate(pageID) {
+  const newPageID = generateId();
+  ...
+}
+```
+
+
+### onPageOrdersChange
+
+```javascript
+function onPageOrdersChange(updatedPages) {
+  ...
+}
+```
+
+### onPageRemove
+
+```javascript
+function onPageRemove(pageID) {
+  ...
+}
+```

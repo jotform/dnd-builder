@@ -1,0 +1,24 @@
+
+import { Meta } from '@storybook/addon-docs/blocks';
+import LinkTo from '@storybook/addon-links/react';
+
+<Meta title="Documentation/Settings/Custom Settings" />
+
+# Custom Settings
+
+It is possible to create a new setting for a item. You need to create a setting like in the example below.
+
+```shell
+[
+  {
+    key: 'customSetting',
+    label: 'My Custom Setting',
+    section: 'General',
+    component: CustomComponent # React Component
+    ...
+  },
+  ....
+]
+```
+
+You can continue the features of the created custom component from this <LinkTo kind="documentation--advanced--setting-component">link.</LinkTo>

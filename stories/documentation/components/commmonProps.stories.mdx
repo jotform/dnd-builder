@@ -1,0 +1,125 @@
+
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Documentation/Components/commonProps" />
+
+## This props are used in all of the components
+
+## Props Table
+
+| parameter                         | type     | required | default | description                                                                 |
+|-----------------------------------|----------|----------|---------|-----------------------------------------------------------------------------|
+| acceptedItems                     | object   |          |         | Items for to render in the report                                           |
+| additionalPageItems               | array    |          |         | Array of React components to render statically on each page (eg. watermark) |
+| itemAccessor                      | function |          |         | To pass in extra props to items selectively                                 |
+| pages                             | array    |          |         | Array of pages with their settings and items                                |
+| settings                          | object   |          |         | General report settings such as layout size and background color            |
+
+### acceptedItems - Object
+
+This is an object with keys as itemType and values as Item Object*(maybe Link to Items/Items.mdx). Let's take a look at an example:
+
+```javascript
+const acceptedItems = {
+  header: {
+    Component: HeaderElement,
+    details: {
+      headerFontColor: '#000000',
+      headerFontFamily: 'Roboto',
+      headerFontSize: 24,
+      ...
+    },
+    itemType: 'header',
+    settings: [
+      {
+        key: 'headerFontFamily',
+        label: 'Font Family',
+        options: fontTypes.fonts,
+        section: 'Header',
+        type: 'dropdown'
+      },
+      ...
+    ],
+  },
+};
+```
+
+
+### additionalPageItems - Array - _optional_
+
+An array of *rendered* React components which will be added on each page. You may use this to add a watermark to your pages.
+
+```javascript
+const additionalPageItems = [
+  <MyWatermarkComponent />,
+];
+```
+
+### itemAccessor - Function - _optional_
+
+To pass on extra props to items and/or override existing ones, you may use this function which will be called with the `item` before rendering the item itself and its settings panel. The function should only return extra props as an object which will be used to extend the original item internally.
+
+```javascript
+function itemAccessor(item) {
+  if (item.type === 'myCustomItem') {
+    return {
+      beep: 'boop',
+    },
+  }
+  return {};
+};
+```
+
+### pages - Array
+
+An array of objects containing each page's settings and their items.
+
+```javascript
+const pages = [
+ {
+    backgroundColor: '#fa8900',
+    id: '72m4j4',
+    items: [
+      {
+        id: '745o4o',
+        itemType: 'shapes',
+        ...
+      },
+      ...
+    ],
+    order: 1,
+  },
+  {
+    id: '018r03',
+    items: [
+      {
+        id: 'jr4647',
+        itemType: 'image',
+        url: 'https://www.jotform.com/resources/assets/icon/jotform-logomark-transparent-400x400.png',
+        ...
+      },
+      ...
+    ],
+    order: 2,
+  },
+  ...
+];
+```
+
+### settings - Object
+
+General report settings such as layout size, background color and page transitions. You may extend this behaviour.
+
+You can change settings Object from Right Panel with Layout Item. *link to Layout Item*
+
+```javascript
+const settings = {
+  reportBackgroundColor: '#fa8900',
+  reportLayout: 'Web',
+  reportLayoutWidth: '800',
+  reportLayoutHeight: '800',
+  pageTransition: 'noAnimation' || 'verticalSlide' || 'scaleAndFade' || 'scaleAndSlide' || 'horizontalSlide'
+};
+```
+ 
+You should have `reportLayoutWidth` and `reportLayoutHeight` props in your settings object.

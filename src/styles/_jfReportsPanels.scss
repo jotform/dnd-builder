@@ -1,0 +1,564 @@
+/*
+*   this file includes pane styles.
+*   @giraykarasinir
+*/
+
+$pane-width: 260px;
+
+.jfReport {
+  display: flex;
+  position: absolute;
+
+  &-pane {
+    font-size: 0.875rem;
+
+    // Panel Layout //
+
+    .toolItem {
+      flex-shrink: 0;
+
+      & > span {
+        @include text-ellipsis;
+      }
+
+      &:not(.toolSection) {
+        height: 54px;
+        padding: 0;
+        border-bottom: 1px solid #dde0ea;
+      }
+
+      &.toolSection {
+        cursor: inherit;
+      }
+
+      &.toolTitle {
+        font-size: 1rem;
+        font-weight: 500;
+        padding: 0 20px;
+
+        &.hasSearch {
+          align-items: flex-start;
+          flex-direction: column;
+          height: auto;
+          padding: 14px 20px;
+        }
+
+        .titleIcon {
+          margin-right: 10px;
+        }
+
+        &.hasAdditional {
+          justify-content: space-between;
+          padding-right: 40px;
+
+          .titleName {
+            flex: 1;
+            margin-right: 5px;
+          }
+        }
+      }
+
+      &-icon {
+        width: 54px;
+        flex-shrink: 0;
+
+        .jfReportSVG {
+          transition: .3s fill ease-in-out;
+        }
+      }
+
+      &-name {
+        display: inline-block;
+        vertical-align: middle;
+        flex: 1 1;
+        padding: 0 15px;
+        transition: .3s ease-in-out;
+      }
+
+      &-tabs {
+        max-width: $pane-width;
+        background-color: $white;
+        z-index: 1;
+        flex-shrink: 0;
+      }
+
+      &-tabContent {
+        height: 100%;
+        padding: 30px 10px 0;
+        overflow-y: auto;
+
+        &.hasInnerScroll {
+          padding-bottom: 30px;
+
+          .toolItem {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+          }
+        }
+
+        &:not(.hasInnerScroll):after {
+          content: "";
+          display: block;
+          height: 30px;
+          pointer-events: none;
+        }
+      }
+
+      .note {
+        opacity: .6;
+        font-size: .75rem;
+        font-style: italic;
+      }
+
+      &.previewPanel {
+        padding: 20px 30px;
+        border-radius: 2px;
+        border-bottom: none;
+        background-color: #EFEFF6;
+      }
+    }
+
+    .no-search-result-text {
+      color: #8586A6;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .toolSection {
+      margin: 0 10px;
+
+      & + .toolSection {
+        margin-top: 20px;
+      }
+
+      & + hr {
+        border: none;
+        border-top: 1px solid #efeff6;
+        margin: 30px -10px 0;
+
+        & + .toolSection {
+          margin-top: 30px;
+        }
+
+        & + hr {
+          display: none;
+
+          & + .toolSection {
+            margin-top: 30px;
+          }
+        }
+      }
+
+      &-wrapper {
+        &:not(:last-child) {
+          margin-bottom: 20px;
+        }
+      }
+
+      &-subItem {
+        flex: 1;
+        &.hasAspect {
+          flex: 0 0 24px;
+        }
+      }
+
+      &-title {
+        margin-bottom: 10px;
+
+        &:empty {
+          display: none;
+        }
+      }
+
+      &-title:empty + .toolSection {
+        margin-top: 30px;
+      }
+
+      &-subLabel {
+        margin-top: 5px;
+        font-size: .75rem;
+        color: $infoGray;
+      }
+
+      &.isHalf {
+        width: calc(50% - 20px);
+        display: inline-block;
+        vertical-align: middle;
+      }
+
+      .forAspect {
+        &:before, &:after {
+          content: "";
+          position: absolute;
+          bottom: 6px;
+          width: 4px;
+          border-bottom: 1px solid $inputGrayBorder;
+        }
+        &:before {
+          left: 0;
+        }
+        &:after {
+          right: 0;
+        }
+      }
+    }
+
+    .toolTabs {
+      flex-shrink: 0;
+
+      &-indicator {
+        left: 0;
+        bottom: 0;
+        height: 2px;
+        transition: left .3s ease-in-out;
+
+        &[data-tab="2"] {
+          width: 50%;
+        }
+
+        &[data-tab="3"] {
+          width: 33.3%;
+        }
+      }
+
+      label {
+        flex: 1 1;
+        padding: 13px 8px;
+        color: #bcbecf;
+        background-color: #efeff6;
+        border-bottom: 1px solid #e1e1e6;
+        text-align: center;
+        user-select: none;
+        cursor: pointer;
+        transition: .3s ease-in-out;
+        @include text-ellipsis;
+
+        &:hover {
+          background-color: $white;
+        }
+      }
+
+      &-tab {
+        display: none;
+
+        &:checked + label {
+          color: #2a3244;
+          background-color: $white;
+        }
+      }
+
+      &[data-tab="2"] {
+        .toolTabs-tab[tab-count="0"]:checked ~ .toolTabs-indicator {
+          left: 0;
+        }
+        .toolTabs-tab[tab-count="1"]:checked ~ .toolTabs-indicator {
+          left: 50%;
+        }
+      }
+
+      &[data-tab="3"] {
+        .toolTabs-tab[tab-count="0"]:checked ~ .toolTabs-indicator {
+          left: 0;
+        }
+        .toolTabs-tab[tab-count="1"]:checked ~ .toolTabs-indicator {
+          left: 33.3%;
+        }
+        .toolTabs-tab[tab-count="2"]:checked ~ .toolTabs-indicator {
+          left: 66.6%;
+        }
+      }
+    }
+
+    // Panel Layout //
+
+    // Panel Open & Hide Actions //
+
+    .paneToggler {
+      position: absolute;
+      top: 15px;
+      width: 36px; // IE FIX //
+      padding: 10px;
+      border: none;
+      border-radius: 6px;
+      background-color: $blue;
+      transition: .5s ease-in-out;
+      z-index: 2;
+      opacity: .3;
+
+      &:hover {
+        box-shadow: 0 0 0 5px rgba(106, 110, 143, 0.25);
+      }
+
+      .jfReportSVG {
+        width: 16px;
+        height: 16px;
+      }
+    }
+
+    .paneClose {
+      right: 15px;
+      z-index: 2;
+      transition: .5s ease-in-out;
+
+      .jfReportSVG {
+        width: 14px;
+        height: 14px;
+        fill: #B3B5C5;
+        transition: .3s fill;
+      }
+
+      &:hover {
+        svg {
+          fill: $blue;
+        }
+      }
+    }
+
+    .toolItemWrapper {
+      min-width: calc(#{$pane-width} - 1px);
+      opacity: 1;
+      transition: all .5s  ease-in-out;
+    }
+
+    &.jfReport-toolbox {
+      .paneToggler {
+        left: -290px;
+      }
+
+      .paneClose {
+        top: 15px;
+        padding: 5px;
+        background-color: $white;
+        border-radius: 3px;
+      }
+
+      .toolItem:not(.toolTitle) {
+        cursor: pointer;
+        cursor: grab;
+      }
+    }
+
+    &.forAllSlides:not(.jfReport-toolbox) .paneClose .jfReportSVG {
+      fill: #fff;
+    }
+
+    &:not(.jfReport-settings) {
+      .toolItem:not(.toolTitle) {
+        background-color: #fafafc;
+        transition: .3s ease-in-out;
+
+        .toolItem-icon {
+          height: 53px;
+          background-color: $white;
+          transition: .3s ease-in-out;
+        }
+
+        &.isOneLine {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+
+          .toolSection-title {
+            margin-bottom: 0;
+          }
+        }
+
+        &:hover {
+          background-color: #3A69ED;
+
+          .toolItem-icon {
+            background-color: $blue;
+            color: $white;
+
+            .jfReportSVG {
+              fill: $white;
+            }
+
+            .icon-bar path {
+              fill: $white;
+            }
+          }
+
+          .toolItem-name {
+            color: $white;
+          }
+        }
+      }
+    }
+
+    &.jfReport-settings {
+      animation: .5s ease-in-out openRightSide forwards;
+      right: 0;
+
+      .paneToggler {
+        right: -290px;
+      }
+
+      .paneClose {
+        top: 20px;
+        padding: 0;
+      }
+    }
+
+    &.forSlides {
+      .paneToggler {
+        top: 59px;
+        background-color: #2E354A;
+      }
+    }
+
+    &.isIdle {
+      border-width: 0;
+      box-shadow: none;
+      flex: 0;
+
+      .paneClose {
+        opacity: 0;
+      }
+
+      .toolItemWrapper {
+        opacity: 0;
+      }
+    }
+
+    &.isIdle:not(.jfReport-settings) {
+      transform: translateX(-260px);
+
+      .paneToggler {
+        left: calc(100% + 15px);
+      }
+
+      // .toolItemWrapper {
+      // }
+    }
+
+    &.isIdle:not(.jfReport-toolbox) {
+      animation: .5s ease-in-out closeRightSide forwards;
+
+      .paneToggler {
+        right: 15px;
+      }
+
+      .paneClose {
+        right: -275px;
+      }
+
+      .toolItemWrapper {
+        margin-right: -260px;
+      }
+    }
+
+    &.otherOpened:not(.jfReport-toolbox).forSlides {
+      .paneToggler {
+        right: -290px;
+      }
+    }
+
+    &.otherOpened:not(.jfReport-toolbox).forSettings {
+      .paneToggler {
+        right: -550px;
+      }
+    }
+
+    &.forAllSlides:not(.jfReport-toolbox) {
+      top: 0;
+      left: 0;
+      max-width: none;
+      background-color: #EDEDF4;
+      opacity: 1;
+      z-index: 11;
+      animation: .5s ease-in-out openAllSlide forwards;
+
+      &.isIdle {
+        pointer-events: none;
+        user-select: none;
+        animation: .5s ease-in-out closeAllSlide forwards;
+
+        .toolItemWrapper {
+          margin: unset;
+        }
+      }
+
+      .paneClose {
+        top: 15px;
+        left: 15px;
+        padding: 11px 13px;
+        border-radius: 4px;
+        background-color: #2E354A;
+
+        &:hover {
+          background: lighten(#2E354A, 5);
+        }
+      }
+    }
+
+    .toolScrollableContent {
+      flex-grow: 1;
+    }
+
+    // Panel Open & Hide Actions //
+
+    &.forSlides .toolItem-tabContent {
+      padding: 0 0 39px;
+
+      .recharts-responsive-container > div {
+        padding: 23px 10px 30px;
+
+        & > div {
+          position: relative;
+        }
+      }
+    }
+
+    &.forAllSlides .toolItem-tabContent {
+      padding: 35px 75px 70px;
+
+      @media screen and (max-width: 828px) {
+        padding: 35px 35px 70px;
+      }
+    }
+  }
+
+  &-toolbox {
+    .toolTitle {
+      background-color: $white;
+    }
+  }
+}
+
+@keyframes openRightSide {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 260px;
+  }
+}
+
+@keyframes closeRightSide {
+  0% {
+    width: 260px;
+  }
+  100% {
+    width: 0;
+  }
+}
+
+@keyframes openAllSlide {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes closeAllSlide {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

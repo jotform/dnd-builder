@@ -1,0 +1,196 @@
+/*
+*   this file includes page styles for reports.
+*   @giraykarasinir
+*/
+
+.jfReport, .jfPresentation {
+  .jfReport-pageContainer {
+    position: relative;
+    background-color: $white;
+  }
+}
+
+.jfReport-page {
+  font-size: initial;
+  margin: 0 auto;
+  z-index: 1;
+}
+
+.jfReport {
+
+  &-canvas {
+    margin: auto;
+  }
+
+  .jfReport-pageInfo {
+    position: relative;
+    color: $gray;
+    margin: 0 auto 6px;
+    padding-top: 30px;
+    transition: .3s ease-in-out;
+
+    .pageCounter {
+      display: inline-flex;
+      justify-content: center;
+      width: 40px;
+      padding: 3px;
+      font-size: 0.875rem;
+      background-color: $white;
+      border-radius: 3px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.08);
+    }
+  }
+}
+
+.jfReport .pageAdder {
+  width: 100%;
+  user-select: none;
+  transition: .3s ease-in-out;
+  color: $gray;
+
+  .icon-plus {
+    margin-right: 10px;
+    transition: .3s fill ease-in;
+  }
+}
+
+.jfReport .jfReport-pages .pageAdder {
+  margin: 20px auto;
+  padding: 16px;
+  border: dashed 2px rgba(133, 131, 169, 0.3);
+  border-radius: 4px;
+
+  .jfReportSVG {
+    fill: $gray;
+  }
+}
+
+.jfReport .forAllSlides .pageAdder {
+  color: $additionalGray;
+  border: 1px dashed rgba($additionalGray, .6);
+
+  .icon-plus {
+    fill: $additionalGray;
+  }
+}
+
+.jfReport .pageAdder:hover {
+  color: $blue;
+  border-color: $blue;
+
+  .icon-plus {
+    fill: $blue;
+  }
+}
+
+.jfReport .forSlides .pageAdder {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  padding: 11px;
+  background-color: #fff;
+  border-top: 1px solid #DDE0EA;
+  box-shadow: 0 -5px 0 rgba(#6A6E8F, 0.05);
+  color: $blue;
+  transition: $transition;
+
+  .icon-plus {
+    fill: $blue;
+  }
+
+  span {
+    white-space: nowrap;
+  }
+
+  &:hover {
+    background-color: #DDE0EA;
+
+    .jfReportSVG {
+      fill: $blue;
+    }
+  }
+}
+
+// Report Layout //
+
+.guide {
+  background-color: #ff18ff;
+  color: #ff18ff;
+  display: none;
+  left: 0;
+  position: absolute;
+  top: 0;
+  z-index: 100;
+}
+
+.active {
+  display: block;
+}
+
+.xAxis {
+  height: 100%;
+  width: 1px;
+}
+
+.yAxis {
+  height: 1px;
+  width: 100%;
+}
+
+// Context Menu //
+
+
+.contextMenu-wrapper {
+  border-radius: 3px;
+  background: #fff;
+  color: #fff;
+  display: block;
+  position: absolute;
+  width: 154px;
+  z-index: 10;
+  box-shadow: 0 0 8px 1px rgba(0, 0, 0, 0.2);
+}
+
+.contextMenu-button {
+  transition: .2s ease-in-out;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  height: 45px;
+  width: 100%;
+  font-size: 0.875rem;
+
+  .contextMenu-icon {
+    margin-right: 9px;
+    width: 15px;
+    height: 14px;
+
+    .icon-lock {
+      width: 16px;
+      height: 14px;
+      fill: $blue;
+      stroke: $blue;
+    }
+  }
+
+  &:hover {
+    background: #f0f0f0;
+  }
+}
+
+.contextMenu-button.isDanger {
+
+  .contextMenu-icon {
+    svg {
+      width: 10px;
+      height: 14px;
+    }
+  }
+}
+
+.contextMenu-button + .contextMenu-button {
+  border-top: 1px solid #F0F0F0;
+}

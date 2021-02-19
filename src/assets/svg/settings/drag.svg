@@ -1,0 +1,10 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='7' height='11' viewBox="0 0 7 11">
+    <g fillRule='evenodd'>
+        <circle cx='1.17' cy='1.17' r='1.17' />
+        <circle cx='1.17' cy='5.25' r='1.17' />
+        <circle cx='1.17' cy='9.33' r='1.17' />
+        <circle cx='5.83' cy='1.17' r='1.17' />
+        <circle cx='5.83' cy='5.25' r='1.17' />
+        <circle cx='5.83' cy='9.33' r='1.17' />
+    </g>
+</svg>

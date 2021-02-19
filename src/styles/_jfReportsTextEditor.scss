@@ -1,0 +1,253 @@
+/*
+*   this file includes text editor additional styles.
+*   @giraykarasinir
+*/
+
+.jfReport {
+  .ql-editor {
+    a {
+      pointer-events: none;
+    }
+  }
+}
+
+.jfReport, .jfPresentation {
+  .quill {
+    overflow: visible;
+  }
+
+  .ql-editor {
+    padding: 0;
+    line-height: inherit;
+    font-style: inherit;
+    overflow-y: visible;
+    &[contentEditable="true"] {
+      cursor: text;
+    }
+
+    a {
+      text-decoration: underline;
+    }
+  }
+
+  .ql-container {
+    height: 100%;
+    overflow: visible;
+    font-family: inherit;
+    font-size: inherit;
+
+    &.ql-snow {
+      border: none;
+
+      a {
+        color: initial;
+      }
+    }
+
+    .ql-blank:before {
+      left: 0;
+      right: 0;
+      font-style: inherit;
+    }
+  }
+
+  .ql-toolbar.ql-snow {
+    padding: 0;
+    border: none;
+  }
+
+  .ql-toolbar {
+    font-family: inherit;
+    font-size: .75rem;
+    margin-top: 10px;
+    width: 100%;
+
+    .toolbarWrapper {
+      flex-wrap: nowrap;
+      background-color: $white;
+      border: 1px solid $inputGrayBorder;
+      border-radius: 3px;
+      max-width: 100%;
+      padding: 4px;
+
+      &.isOpened {
+        width: auto;
+      }
+    }
+
+    .ql-button {
+      width: 22px;
+      flex-shrink: 0;
+
+      svg {
+        width: 18px;
+      }
+
+      &.hiddenVisibility {
+        display: none;
+      }
+
+      .ql-stroke {
+        stroke: #8D8FA8;
+      }
+
+      .ql-fill {
+        fill: #8D8FA8;
+        stroke-width: 0;
+      }
+
+      &.ql-active {
+        .ql-stroke {
+          stroke: #8D8FA8;
+        }
+
+        .ql-fill {
+          fill: #8D8FA8;
+        }
+      }
+    }
+
+    .ql-select .ql-picker-label, .ql-button {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      height: 22px;
+      padding: 0;
+      border-radius: 2px;
+      border: none;
+      margin-left: 4px;
+
+      &:hover {
+        stroke: $blue;
+      }
+
+      &.ql-active {
+        color: #8D8FA8;
+        background-color: rgba($inputGrayBorder, .3);
+        border-radius: 2px;
+      }
+    }
+
+
+    .qlMore {
+      height: 22px;
+      color: #8D8FA8;
+      position: absolute;
+      right: 0;
+      background-color: $white;
+      border-radius: 0 5px 5px 0;
+    }
+
+    .ql-transparent {
+      opacity: 1;
+    }
+
+    .ql-picker.ql-size {
+      width: 60px;
+
+      .ql-picker-label {
+        justify-content: flex-start;
+        padding-left: 5px;
+        margin-left: 0;
+      }
+    }
+
+    .ql-select {
+      width: auto;
+      height: 22px;
+      flex-shrink: 0;
+      font-size: .75rem;
+
+      &.hiddenVisibility {
+        display: none;
+      }
+
+      .ql-active {
+        .ql-stroke {
+          stroke: #8D8FA8;
+        }
+      }
+    }
+
+    .ql-select:not(.ql-size) .ql-picker-label {
+      width: 22px;
+    }
+
+    .ql-divider {
+      width: 1px;
+      flex-shrink: 0;
+      background-color: rgba($inputGrayBorder, .3);
+      margin-left: 4px;
+    }
+
+    .ql-picker-options {
+      background-color: #FBFBFE;
+      border: 1px solid $inputGrayBorder;
+      border-radius: 3px;
+      max-height: 200px;
+      overflow: auto;
+    }
+
+    .ql-color svg, .ql-align .ql-picker-label svg {
+      width: 20px;
+    }
+
+    .ql-align .ql-picker-options {
+      margin-left: 2px;
+    }
+
+    &.isOpened {
+      max-width: none;
+    }
+  }
+
+  .ql-tooltip {
+    position: fixed;
+    /* stylelint-disable-next-line declaration-no-important */
+    top: auto !important;
+    /* stylelint-disable-next-line declaration-no-important */
+    left: auto !important;
+    align-items: center;
+    height: 32px;
+    transform: translate(100%, 150%);
+    background-color: $inputGray;
+    border: 1px solid $inputGrayBorder;
+    border-radius: 3px;
+    box-shadow: none;
+    font-size: .75rem;
+    font-weight: 500;
+    margin-left: -156px;
+    padding: 4px;
+    color: #8483A9;
+
+    input[type="text"] {
+      border-radius: 3px;
+      height: 26px;
+      font-size: .75rem;
+      padding: 0 5px;
+    }
+
+    &:not(.ql-hidden) {
+      display: flex;
+    }
+
+    a.ql-action {
+      margin-left: 4px;
+      padding: 4px 10px;
+      color: $white;
+      background-color: $blue;
+      line-height: inherit;
+      border-radius: 2px;
+
+      &:after {
+        margin: 0;
+        padding: 0;
+        border: none;
+      }
+    }
+  }
+
+  .ql-editing {
+    z-index: 100000;
+  }
+}

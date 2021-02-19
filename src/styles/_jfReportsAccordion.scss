@@ -1,0 +1,68 @@
+/*
+*   this file includes accordion section styles for settings pane.
+*   @giraykarasinir
+*/
+
+.jfReportAccordion {
+  padding: 0;
+
+  &.jfReportPalette {
+    padding: 0;
+  }
+
+  .jfReportAccordion-tab {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .jfReportAccordion-tabContent {
+    padding: 0 20px;
+    max-height: 0;
+    overflow: hidden;
+  }
+
+  .isOpen {
+    &:after {
+      transform: rotateX(-180deg);
+    }
+
+    & + .jfReportAccordion-tabContent {
+      max-height: 100%;
+      padding: 20px;
+    }
+  }
+
+  input {
+    position: absolute;
+    opacity: 0;
+    z-index: -1;
+  }
+  label {
+    position: relative;
+    cursor: pointer;
+    background-color: #EFEFF6;
+    padding: 13px 20px;
+    border-bottom: 1px solid #DDE0EA;
+    transition: $transition;
+
+    &:after {
+      content: "";
+      position: absolute;
+      top: calc(50% - 3px);
+      right: 20px;
+      width: 10px;
+      height: 6px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 16 9'%3E%3Cpath fill='%232b3245' fill-rule='evenodd' d='M242.656854,19.2928932 C243.047379,18.9023689 243.680544,18.9023689 244.071068,19.2928932 C244.461592,19.6834175 244.461592,20.3165825 244.071068,20.7071068 L238.414214,26.363961 L244.071068,32.0208153 C244.461592,32.4113396 244.461592,33.0445046 244.071068,33.4350288 C243.680544,33.8255531 243.047379,33.8255531 242.656854,33.4350288 L236.292893,27.0710678 C235.902369,26.6805435 235.902369,26.0473785 236.292893,25.6568542 L242.656854,19.2928932 Z' transform='rotate(-90 113.182 131.364)'/%3E%3C/svg%3E%0A");
+      transform: rotateX(0deg);
+      opacity: .4;
+      transition: $transition;
+    }
+
+    &:hover {
+      background-color: rgba(#EFEFF6, .5);
+      &:after {
+        opacity: 1;
+      }
+    }
+  }
+}

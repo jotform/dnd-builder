@@ -1,0 +1,23 @@
+# IDE / Editor related
+.vscode/
+.idea
+
+# OS specific
+.DS_STORE
+
+# npm/yarn stuff
+node_modules/
+.pnp
+.pnp.js
+
+# log files
+*.log
+
+# sync files
+sftp-config.json
+
+# build directories
+lib/
+build/
+.docz
+storybook-static/

@@ -1,0 +1,103 @@
+import { Meta, Story } from '@storybook/addon-docs/blocks';
+
+<Meta title="Documentation/Advanced/Item Component" />
+
+# Item Component
+
+You can find an example of an item component and its props.
+
+<h2 id="props-table-" class="sbdocs sbdocs-h2 css-1lg570m">Props Table 🔧</h2>
+
+
+|  Name                         | Type | Required | Default | Description   |                                                                                          required|
+|-----------------------------------|----|---|-------------------|----------------------------------------------------------------------------------------------|
+| isMultipleItemSelected|boolean|no|false|Determines whether the item is selected together with another item.|
+| isSelected|boolean|no|false|Determines whether the item is selected.|
+| item|object|no|{}|The item object.|
+| itemAccessor|function|no|(item) => ({})|To pass extra item properties. Must resolve to an object|
+| onAnEventTrigger|function|no|(action, target) => {}|Callback fired when the any item action occurs.|
+| onItemChange|function|no|(item, data) => {}|Callback fired when the item value changes.|
+
+You can find an example below.
+
+<Story id="examples-builder--extend-component" />
+
+Here is our item definition.
+
+```js
+  import { RichText } from '@jotforminc/dnd-builder';
+  const Github = {
+  ...RichText,
+  itemType: 'github',
+  settings: [
+    {
+      key: 'username',
+      label: 'Github Username',
+      section: 'Integration',
+      type: 'textbox',
+    },
+    ...RichText.settings,
+  ],
+  details: {
+    ...RichText.details,
+    itemType: 'github'
+  }
+};
+```
+
+This is our item component.
+
+```js
+Github.Component = ({
+    item: {
+      fontColor,
+      fontFamily,
+      fontSize,
+      fontStyle,
+      id,
+      isLocked,
+      opacity,
+      textAlign,
+      value,
+      username
+    }
+  }) => {
+    const _fontStyle = safeJSONParse(fontStyle, []);
+    const textStyle = {
+      color: fontColor,
+      fontFamily,
+      fontSize: parseInt(fontSize, 10),
+      fontStyle: _fontStyle.includes('italic') ? 'italic' : 'normal',
+      fontWeight: _fontStyle.includes('bold') ? 'bold' : 'normal',
+      opacity,
+      textAlign,
+      textDecoration: _fontStyle.includes('underline') ? 'underline' : 'none',
+    };
+    const [stats, setStats] = useState({});
+
+    const fetchStats = async () => {
+      const response = await fetch(`https://api.github.com/users/${username}`);
+      response
+        .json()
+        .then(res => {
+          setStats(res);
+        });
+    }
+    useEffect(() => {
+      if (username) {
+        fetchStats();
+      }
+    },[username])
+
+    if(!username) {
+     return  <div>Please setup your Github username.</div>
+    }
+    return (
+     <div style={textStyle}>
+       <img src={stats.avatar_url} />
+       <h1>{username}</h1>
+       <p>{stats.name}</p>
+     </div>
+    )
+  }
+```

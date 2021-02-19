@@ -1,0 +1,265 @@
+/*
+*   this file includes general helpers & mixins for reports.
+*   @giraykarasinir
+*/
+
+// Mixins //
+
+@mixin text-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin inputDefault {
+  background-color: $inputGray;
+  border: 1px solid $inputGrayBorder;
+  border-radius: 4px;
+  transition: .3s ease-in-out;
+
+  &:hover {
+    border-color: $inputGrayBorderHover;
+  }
+}
+
+// Mixins //
+
+// Helpers //
+
+.jfReport, .jfPresentation, .jfReportModal, .pageThumbnailHelper {
+
+  .disabled {
+    opacity: .4;
+    user-select: none;
+    pointer-events: none;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  .p- { // Position Helpers
+
+    &relative {
+      position: relative;
+    }
+
+    &absolute {
+      position: absolute;
+    }
+
+    &fixed {
+      position: fixed;
+    }
+
+    &sticky {
+      position: sticky;
+    }
+  }
+
+  .d- {  // Display Helpers
+
+    &none {
+      display: none;
+    }
+
+    &flex {
+      display: flex;
+
+      &.j-start {
+        justify-content: flex-start;
+      }
+      &.a-start {
+        align-items: flex-start;
+      }
+      &.j-center {
+        justify-content: center;
+      }
+      &.a-center {
+        align-items: center;
+      }
+      &.j-end {
+        justify-content: flex-end;
+      }
+      &.a-end {
+        align-items: flex-end;
+      }
+      &.j-between {
+        justify-content: space-between;
+      }
+      &.a-between {
+        align-items: space-between;
+      }
+      &.j-around {
+        justify-content: space-around;
+      }
+      &.a-around {
+        align-items: space-around;
+      }
+      &.j-stretch {
+        justify-content: stretch;
+      }
+      &.a-stretch {
+        align-items: stretch;
+      }
+
+      &.dir-row {
+        flex-direction: row;
+      }
+      &.dir-row-reverse {
+        flex-direction: row-reverse;
+      }
+      &.dir-col {
+        flex-direction: column;
+      }
+      &.dir-col-reverse {
+        flex-direction: column-reverse;
+      }
+
+      &.f-wrap {
+        flex-wrap: wrap;
+      }
+      &.f-noWrap {
+        flex-wrap: nowrap;
+      }
+      &.f-wrapReverse {
+        flex-wrap: wrap-reverse;
+      }
+    }
+
+    &iblock {
+      display: inline-block;
+
+      .v-top {
+        vertical-align: top;
+      }
+      .v-middle {
+        vertical-align: middle;
+      }
+      .v-bottom {
+        vertical-align: bottom;
+      }
+      .v-baseline {
+        vertical-align: baseline;
+      }
+    }
+
+    &block {
+      display: block;
+    }
+  }
+
+  .f- { // Fit width, height, all
+
+    &width {
+      width: 100%;
+    }
+
+    &height {
+      height: 100%;
+    }
+
+    &all {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .o- { // Overflow Helpers
+
+    &auto {
+      overflow: auto;
+    }
+
+    &hidden {
+      overflow: hidden;
+    }
+
+    &visible {
+      overflow: visible;
+    }
+  }
+
+  .c- {
+
+    &blue {
+      color: $blue;
+    }
+
+    &green {
+      color: $green;
+    }
+
+    &white {
+      color: $white;
+    }
+  }
+
+  .t {
+    &-main {
+      font-family: $reportFont;
+    }
+
+    &-normal {
+      font-weight: 400;
+    }
+
+    &-medium {
+      font-weight: 500;
+    }
+
+    &-bold {
+      font-weight: 700;
+    }
+
+    &-italic {
+      font-style: italic;
+    }
+
+    &-underline {
+      text-decoration: underline;
+    }
+  }
+
+  .no- {
+
+    &padding {
+      padding: 0;
+    }
+
+    &margin {
+      margin: 0;
+    }
+
+    &color {
+      background-color: transparent;
+    }
+  }
+
+  .is {
+    &Danger {
+      color: $danger;
+    }
+
+    &DangerBg {
+      background-color: $danger;
+    }
+  }
+}
+
+.jfReport .bg- {
+
+  &blue {
+    background-color: $blue;
+  }
+
+  &green {
+    background-color: $green;
+  }
+
+  &white {
+    background-color: $white;
+  }
+}
+
+// Helpers //

@@ -1,0 +1,94 @@
+import { useState } from 'react';
+import { Canvas, Meta } from '@storybook/addon-docs/blocks';
+import { Counter, ItemAccessorExample1 as CustomBuilder } from '../../templates/builder.template.js';
+
+<Meta title="Documentation/Advanced/ItemAccessor" />
+
+# Item Accessor
+
+Item Accessor is make a connection between your items and outside the DND components (Builder, Presentation, Report, Print, ....)
+
+If you want to use some variable that is not stored in the item. you can use this item Accessor function to get that value to
+use it inside the component. Implementation system is up to you.
+
+Look at the given code. There is a custom item that render outside and inside value. Inside value can be changed from settings panel.
+Outside value can be changed button.
+
+
+```javascript
+const Counter = {
+  Component: ({ item, itemAccessor }) => {
+    const counterValue = itemAccessor(item);
+    return (
+      <div>
+        <div>Outside Value: {counterValue}</div>
+        <div>Inside Value: {item.inside}</div>
+      </div>
+    );
+  },
+  details: {
+    height: 100,
+    itemType: 'counter',
+    width: 100,
+  },
+  itemType: 'counter',
+  settings: [
+    {
+      type: 'textbox',
+      key: 'inside',
+      label: 'Inside value',
+      section: 'General',
+    },
+  ]
+};
+```
+
+and item accessor function's job is returning counter value. Which is stored outside of the item and components.
+```javascript
+    const itemAccessor = () => counter;
+```
+
+If you want to rerender your items when the outside value is changed. You should pass it to the <Builder\> Component, like given example
+
+```javascript
+<Builder
+  acceptedItems={{ [Counter.itemType]: Counter }}
+  leftPanelConfig={[{
+    elements: [{
+      itemType: Counter.itemType,
+      title: 'Counter'
+    }]
+  }]}
+  itemAccessor={itemAccessor}
+  ...
+  counter={counter}  // You should pass counter value to Builder Component
+/>
+```
+
+PS: If you don't pass outside variables to Builder Component, items won't be rerender.
+
+Working Example:
+
+<Canvas>
+  {(() => {
+    const [counter, setCounter] = useState(0);
+    const itemAccessor = () => counter;
+ 
+    return (
+      <div>
+        <button onClick={() => {setCounter(counter + 1)}}>Increase Outside Value</button>
+        <CustomBuilder
+          acceptedItems={{ [Counter.itemType]: Counter }}
+          leftPanelConfig={[{
+            elements: [{
+              itemType: Counter.itemType,
+              title: 'Counter'
+            }]
+          }]}
+          itemAccessor={itemAccessor}
+          counter={counter}
+        />
+      </div>
+    )
+  })()}
+</Canvas>

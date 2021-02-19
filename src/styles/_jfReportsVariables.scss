@@ -1,0 +1,35 @@
+/*
+*   this file includes general variables for reports.
+*   @giraykarasinir
+*/
+
+$baseSize: 16px;
+
+$green: #01bd6f;
+$blue: #4277FF;
+$white: #FFFFFF;
+$danger: #d13723;
+$lightGray: #cccdd9;
+$gray: #9294aa;
+$inputGray: #fbfbfe;
+$inputGrayBorder: #d3d4de;
+$ctaGreen: #04bd6f;
+$placeholderColor: #abadc1;
+$infoGray: #cccdd9;
+$additionalGray: #8583A9;
+
+$greenHover: lighten( $green, 3% );
+$blueHover: lighten( $blue, 7% );
+$grayHover: lighten( $gray, 10% );
+$lightGrayHover: lighten( $lightGray, 15% );
+$inputGrayBorderHover: darken( $inputGrayBorder, 10% );
+
+$systemFont: -apple-system, blinkmacsystemfont, "Segoe UI", roboto, oxygen-sans,
+  ubuntu, cantarell, "Helvetica Neue", sans-serif;
+$reportFont: "Circular Std", "Work Sans Medium", $systemFont;
+
+$transition: .3s ease-in;
+
+$jfReportChoice-checkIcon: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='8' height='6'%3e%3cpath fill='none' fill-rule='evenodd' stroke='%23FFF' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M1 3.1l2.7 2.1L7 1'/%3e%3c/svg%3e");
+$jfReportChoice-uncheckIcon: url("data:image/svg+xml;charset=UTF-8,%3Csvg width='8px' height='2px' viewBox='0 0 8 3' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Cg id='Page-1' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd' stroke-linecap='square'%3E%3Cg id='check' transform='translate%28-4.000000, -7.000000%29' stroke='%23808298' stroke-width='3'%3E%3Cpath d='M5.5,8.5 L10.5,8.5' id='Line'%3E%3C/path%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+$jfReportChoice-bigCheckIcon: url("data:image/svg+xml,%3Csvg width='12' height='9' viewBox='0 0 12 9' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M9.97957 0.347444C10.4632 -0.138033 11.2226 -0.111511 11.6757 0.406683C12.1288 0.924877 12.1041 1.73851 11.6204 2.22399L5.21609 8.65255C4.72805 9.14244 3.96041 9.11035 3.50948 8.5812L0.313826 4.8312C-0.133041 4.30682 -0.0985411 3.49359 0.390883 3.01481C0.880307 2.53602 1.63932 2.57298 2.08619 3.09737L4.46227 5.88562L9.97957 0.347444Z' fill='%2304BD6F'/%3E%3C/svg%3E");

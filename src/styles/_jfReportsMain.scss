@@ -1,0 +1,106 @@
+/*
+*   this file includes main layout styles for reports.
+*   @giraykarasinir
+*/
+
+body {
+  font-family: $reportFont;
+  font-size: $baseSize;
+  color: #2b3245;
+}
+
+.jfReport, .jfPresentation {
+  height: 100%;
+  width: 100%;
+  font-family: $reportFont;
+  overflow: hidden;
+
+  &-col {
+    flex: 1 1;
+  }
+
+  &-toolbox {
+    border-right: 1px solid #B1B2C3;
+    box-shadow: 5px 0 0 0 rgba(106, 110, 143, 0.1);
+    background-color: #f1f1f5;
+  }
+
+  &-settings {
+    border-left: 1px solid #B1B2C3;
+    box-shadow: -3px 0 0 0 rgba(106, 110, 143, 0.1);
+    background-color: $white;
+  }
+
+  &-pane {
+    position: absolute;
+    width: 260px;
+    transition: all .5s ease-in-out;
+    z-index: 2;
+
+    &.isIdle {
+      .paneToggler {
+        opacity: 1;
+      }
+
+      .paneClose {
+        opacity: 0;
+      }
+    }
+  }
+
+  &-pages {
+    transition: margin .5s ease-in-out;
+  }
+
+  &-viewport {
+    top: 0;
+    left: 0;
+    z-index: 1;
+  }
+}
+
+.jfReport {
+  background-color: #F4F4F8;
+}
+
+.sb-show-main .jfReport {
+  min-height: 150px;
+  position: relative;
+}
+
+.leftPaneIsActive {
+  .jfReport-pages {
+    margin-left: 260px;
+  }
+}
+
+.rightPaneIsActive {
+  .jfReport-pages {
+    margin-right: 260px;
+  }
+
+  .jfReport-pane.otherOpened:not(.jfReport-toolbox).forSlides .paneToggler {
+    top: 15px;
+    right: 277px;
+  }
+}
+
+.slidesPaneIsActive {
+  .jfReport-pane.otherOpened:not(.jfReport-toolbox).forSettings .js-openRightPanel {
+    right: 277px;
+  }
+}
+
+.jfReport:not(.black) {
+  &:before {
+    position: absolute;
+    left: 0;
+    right: 0;
+    content: "";
+    height: 5px;
+    z-index: 3;
+    pointer-events: none;
+    user-select: none;
+    background-color: rgba(106, 110, 143, 0.1);
+  }
+}

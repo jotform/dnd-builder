@@ -1,0 +1,30 @@
+/* eslint-disable */
+export { default as arrowDiverge } from '../assets/svg/icon-selector/jfc_icon_solid-arrow-diverge.svg';
+export { default as arrowDownLeft } from '../assets/svg/icon-selector/jfc_icon_solid-arrow-down-left.svg';
+export { default as arrowDownRight } from '../assets/svg/icon-selector/jfc_icon_solid-arrow-down-right.svg';
+export { default as arrowDown } from '../assets/svg/icon-selector/jfc_icon_solid-arrow-down.svg';
+export { default as arrowLeft } from '../assets/svg/icon-selector/jfc_icon_solid-arrow-left.svg';
+export { default as arrowRight } from '../assets/svg/icon-selector/jfc_icon_solid-arrow-right.svg';
+export { default as arrowUpLeft } from '../assets/svg/icon-selector/jfc_icon_solid-arrow-up-left.svg';
+export { default as arrowUpRight } from '../assets/svg/icon-selector/jfc_icon_solid-arrow-up-right.svg';
+export { default as caretDownCircle } from '../assets/svg/icon-selector/jfc_icon_solid-caret-down-circle.svg';
+export { default as caretDownDouble } from '../assets/svg/icon-selector/jfc_icon_solid-caret-down-double.svg';
+export { default as caretDown } from '../assets/svg/icon-selector/jfc_icon_solid-caret-down.svg';
+export { default as caretLeftCircle } from '../assets/svg/icon-selector/jfc_icon_solid-caret-left-circle.svg';
+export { default as caretLeftDouble } from '../assets/svg/icon-selector/jfc_icon_solid-caret-left-double.svg';
+export { default as caretLeft } from '../assets/svg/icon-selector/jfc_icon_solid-caret-left.svg';
+export { default as caretRightCircle } from '../assets/svg/icon-selector/jfc_icon_solid-caret-right-circle.svg';
+export { default as caretRightDouble } from '../assets/svg/icon-selector/jfc_icon_solid-caret-right-double.svg';
+export { default as caretRight } from '../assets/svg/icon-selector/jfc_icon_solid-caret-right.svg';
+export { default as caretUpCircle } from '../assets/svg/icon-selector/jfc_icon_solid-caret-up-circle.svg';
+export { default as caretUpDouble } from '../assets/svg/icon-selector/jfc_icon_solid-caret-up-double.svg';
+export { default as caretUp } from '../assets/svg/icon-selector/jfc_icon_solid-caret-up.svg';
+export { default as cloud } from '../assets/svg/icon-selector/jfc_icon_solid-cloud.svg';
+export { default as download } from '../assets/svg/icon-selector/jfc_icon_solid-download.svg';
+export { default as eye } from '../assets/svg/icon-selector/jfc_icon_solid-eye.svg';
+export { default as folder } from '../assets/svg/icon-selector/jfc_icon_solid-folder.svg';
+export { default as heart } from '../assets/svg/icon-selector/jfc_icon_solid-heart.svg';
+export { default as home } from '../assets/svg/icon-selector/jfc_icon_solid-home.svg';
+export { default as thumbsDown } from '../assets/svg/icon-selector/jfc_icon_solid-thumbs-down.svg';
+export { default as thumbsUp } from '../assets/svg/icon-selector/jfc_icon_solid-thumbs-up.svg';
+

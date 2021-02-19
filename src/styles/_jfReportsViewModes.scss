@@ -1,0 +1,69 @@
+.jfReport.previewMode {
+  .jfReport-canvas {
+    padding: 0 40px;
+  }
+
+  .jfReport-page {
+    margin: 40px auto;
+  }
+}
+
+.jfPresentation, .jfReport.previewMode {
+  .recharts-surface {
+    pointer-events: all;
+  }
+
+  .reportItem .jfReportEditable:empty {
+    display: none;
+  }
+
+  .reportItem .isEmptyTextElement {
+    display: none;
+  }
+}
+
+.jfReport.customizeMode {
+  .jfReport-canvas {
+    padding: 0 88px;
+  }
+
+  .jfReport-page {
+    position: relative;
+  }
+
+  .reportItemResizer-wrapper.isLocked {
+    .reportItemResizer {
+      border-color: #B6B5CD;
+    }
+  }
+
+  .forLocked {
+    background-color: #BFBED3;
+
+    .isWhite {
+      fill: $additionalGray;
+    }
+
+    .reportItemMenu-item:hover .isWhite {
+      fill: darken($additionalGray, 10);
+      opacity: 1;
+    }
+  }
+
+  .reportItem {
+    outline: 1px solid transparent;
+    outline-offset: -1px;
+  }
+
+  .reportItemWrapper.isSelected:hover .isLocked {
+    pointer-events: none;
+  }
+
+  .reportItemWrapper .reportItem:not(.isLocked):hover {
+    cursor: move;
+  }
+
+  .reportItemWrapper:not(.isSelected) .reportItem:not(.isLocked):hover {
+    outline-color: $blue;
+  }
+}

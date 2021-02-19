@@ -1,0 +1,124 @@
+/*
+*   this file includes checkbox and radio styles for reports.
+*   @giraykarasinir
+*/
+
+// Checkbox-Radio Input //
+
+.jfReportChoice {
+  display: inline-block;
+  vertical-align: top;
+
+  &-label {
+    display: inline-block;
+    vertical-align: middle;
+    user-select: none;
+    cursor: pointer;
+    padding: 0;
+    border: 0;
+    background: 0;
+
+    &:not(.forPin):before {
+      width: 16px;
+      height: 16px;
+      transition: 0.3s;
+      content: "";
+      margin-right: 10px;
+      border-radius: 3px;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 10px;
+      display: inline-block;
+      vertical-align: top;
+      @include inputDefault;
+    }
+
+    &:hover:before {
+      border-color: $inputGrayBorderHover;
+    }
+
+    &.forPin {
+      position: absolute;
+      top: calc(50% - 5px);
+      right: 8px;
+      transition: $transition;
+
+      svg {
+        display: block;
+        width: 10px;
+        height: 10px;
+      }
+
+      &:not(.isPinned) {
+        opacity: 0;
+      }
+    }
+
+    &.radio {
+      position: relative;
+
+      &:before {
+        border-radius: 50%;
+        width: 16px;
+        height: 16px;
+      }
+
+      &:hover:before {
+        border-color: $green;
+      }
+    }
+  }
+
+  &.hasNotText {
+    .jfReportChoice-label {
+      &:before {
+        margin-right: 0;
+        vertical-align: text-top;
+      }
+    }
+  }
+
+  &.forUncheck {
+    .jfReportChoice-label:before {
+      background-image: $jfReportChoice-uncheckIcon;
+    }
+  }
+
+  & + .jfReportSelectOption-list {
+    margin-top: 10px;
+  }
+
+  &-input {
+    display: none;
+
+    &:checked + .jfReportChoice-labelIcon {
+      .jfReportChoice-label:before {
+        background-image: $jfReportChoice-checkIcon;
+        background-color: $green;
+        border-color: $green;
+      }
+      .jfReportChoice-label.radio:before {
+        background-image: none;
+        background-color: transparent;
+        border-color: $green;
+      }
+      .jfReportChoice-label.radio:after {
+        position: absolute;
+        left: 4px;
+        top: 4px;
+        background-color: $green;
+        border-radius: 50%;
+        width: 10px;
+        height: 10px;
+        transition: 0.3s;
+        content: "";
+      }
+    }
+  }
+
+  &-label:not(:checked) + .jfReportChoice-labelIcon .jfReportChoice-label:focus:before {
+    border-color: $blue;
+  }
+}
+
+// Checkbox-Radio Input //

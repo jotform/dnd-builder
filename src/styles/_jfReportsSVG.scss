@@ -1,0 +1,372 @@
+/*
+*   this file includes svg styles for reports.
+*   @giraykarasinir
+*/
+
+.jfReport, .jfPresentation {
+
+  &SVG {
+    width: 100%;
+    height: 100%;
+    max-width: 36px;
+    max-height: 36px;
+    display: block;
+    pointer-events: none;
+
+    &.isWhite {
+      fill: $white;
+
+      &.isTick {
+        stroke: $white;
+      }
+    }
+
+    &.isGray {
+      fill: #a8aabf;
+
+      &.isTick {
+        stroke: #a8aabf;
+      }
+    }
+
+    &.isTick {
+      stroke-width: .5px;
+    }
+
+    &.isExtraTick {
+      stroke-width: 1px;
+    }
+  }
+
+  &-toolbox .toolItem .jfReportSVG {
+    fill: $additionalGray;
+  }
+
+  .controllerItem .jfReportSVG {
+    fill: $additionalGray;
+  }
+
+  .toolItem-icon {
+    color: $additionalGray;
+
+    .icon-bar path {
+      fill: $additionalGray;
+    }
+  }
+
+  .icon-fit {
+    width: 20px;
+    height: 20px;
+  }
+
+  .icon-settings {
+    width: 14px;
+    height: 14px;
+  }
+
+  .icon-pageSettings {
+    width: 14px;
+    height: 14px;
+  }
+
+  .icon-rotate {
+    width: 18px;
+    height: 18px;
+    fill: $blue;
+  }
+
+  .icon-duplicate {
+    width: 12px;
+    height: 14px;
+  }
+
+  .icon-duplicateLine {
+    width: 10px;
+    height: 12px;
+  }
+
+  .icon-trash {
+    width: 10px;
+    height: 15px;
+  }
+
+  .icon-trashLine {
+    width: 10px;
+    height: 14px;
+  }
+
+  .icon-arrow {
+    width: 12px;
+    height: 8px;
+  }
+
+  .icon-plus {
+    width: 12px;
+    height: 12px;
+  }
+
+  .icon-print {
+    width: 16px;
+    height: 16px;
+  }
+
+  .icon-download {
+    width: 11px;
+    height: 14px;
+  }
+
+  .icon-play {
+    width: 17px;
+    height: 14px;
+  }
+
+  .icon-share {
+    width: 14px;
+    height: 10px;
+  }
+
+  .icon-close {
+    width: 12px;
+    height: 12px;
+    fill: #fff;
+  }
+
+  .icon-fullscreen {
+    width: 12px;
+    height: 12px;
+  }
+
+  .icon-aspectLock, .icon-aspectUnlock {
+    width: 12px;
+    height: 14px;
+    margin-top: 8px;
+  }
+
+  .icon-aspectLock {
+    fill: $additionalGray;
+  }
+
+  .icon-aspectUnlock {
+    fill: #2b3245;
+  }
+
+  .icon-lock {
+    width: 10px;
+    height: 12px;
+  }
+
+  .icon-drag {
+    width: 6px;
+    height: 10px;
+  }
+
+  .icon-color {
+    width: 10px;
+    height: 10px;
+  }
+
+  .icon-dots {
+    width: 3px;
+    height: 16px;
+  }
+
+  .icon-layout {
+    width: 11px;
+    height: 11px;
+  }
+
+  .icon-pause {
+    width: 9px;
+    height: 12px;
+  }
+
+  .icon-alignment {
+    width: 12px;
+    height: 12px;
+  }
+
+  .icon-bold, .icon-italic {
+    width: 10px;
+    height: 12px;
+  }
+
+  .icon-underline {
+    width: 10px;
+    height: 14px;
+  }
+
+  .icon-infoRow {
+    width: 36px;
+    height: 14px;
+  }
+
+  .icon-infoCol {
+    width: 18px;
+    height: 22px;
+  }
+
+  // Left Pane //
+  .icon-textElement {
+    width: 20px;
+    height: 14px;
+  }
+
+  .icon-header, .icon-image, .icon-table {
+    width: 16px;
+    height: 16px;
+  }
+
+  .icon-shapes, .icon-label {
+    width: 18px;
+    height: 18px;
+  }
+
+  .icon-question:not(.icon-email):not(.icon-text):not(.icon-shapes):not(.icon-icon):not(.icon-textElement) {
+    width: 16px;
+    height: 16px;
+  }
+
+  .icon-shapes {
+    width: 18px;
+    height: 18px;
+  }
+  .icon-icon {
+    width: 22px;
+    height: 18px;
+  }
+
+  .icon-email {
+    width: 18px;
+    height: 18px;
+  }
+
+  .icon-text {
+    width: 14px;
+    height: 14px;
+  }
+
+  .icon-loadingCircle {
+    animation: rotateAnimation 1s linear infinite both;
+    width: 15px;
+    height: 15px;
+    fill: #fff;
+  }
+
+  .icon-allSlides {
+    width: 16px;
+    height: 16px;
+  }
+
+  .titleIcon .jfReportSVG {
+    width: 16px;
+    height: 16px;
+    fill: $additionalGray;
+  }
+
+  .iconFor-slides .jfReportSVG {
+    fill: #2C3345;
+  }
+
+  .forSegments .jfReportSVG {
+    rect, circle {
+      fill: #8483A9;
+    }
+
+    rect {
+      opacity: .7;
+    }
+    circle {
+      opacity: .3;
+    }
+  }
+
+  .forSegments .isSelected .jfReportSVG {
+    rect, circle {
+      fill: #fff;
+    }
+  }
+
+  .forZoom .controllerItem .jfReportSVG:not(.icon-fit) {
+    width: 12px;
+    height: 12px;
+  }
+}
+
+.jfReportModal {
+  .icon-passwordLock {
+    width: 14px;
+    height: 16px;
+    fill: $green;
+  }
+
+  .icon-pen {
+    width: 14px;
+    height: 14px;
+    fill: #949FAE;
+  }
+
+  .icon-key {
+    width: 16px;
+    height: 16px;
+    fill: #8D8FA8;
+  }
+
+  .icon-eye {
+    width: 21px;
+    height: 14px;
+    fill: #C5C5D0;
+  }
+
+  .icon-attachment {
+    width: 16px;
+    height: 16px;
+    fill: $white;
+  }
+}
+
+@keyframes rotateAnimation {
+  100% {
+    transform: rotate(1turn);
+  }
+}
+
+.icon-use {
+  width: 14px;
+  height: 14px;
+}
+.icon-edit {
+  width: 14px;
+  height: 14px;
+  g g {
+    fill: #fff;
+  }
+}
+.forPalette .icon-duplicate {
+  width: 10px;
+  height: 12px;
+}
+.forPalette .icon-trash {
+  width: 10px;
+  height: 15px;
+}
+.contextMenu-itemIcon .icon-duplicate {
+  fill: #fff;
+}
+.contextMenu-item.hasError .contextMenu-itemIcon .icon-trash g {
+  fill: none;
+}
+.list-stars {
+  width: 12px;
+  height: 13px;
+
+  &:not(:first-child) {
+    margin-left: 3px;
+  }
+
+  &.forLabel {
+    width: 9px;
+    height: 9px;
+    display: inline-block;
+    vertical-align: initial;
+  }
+}

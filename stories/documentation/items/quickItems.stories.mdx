@@ -1,0 +1,59 @@
+
+import { Meta, Story, ArgsTable, Canvas } from '@storybook/addon-docs/blocks';
+import DndWrapper from '../../../src/components/Builder/DndWrapper.js';
+import { BuilderProvider } from '../../../src/utils/builderContext.js';
+import { Builder } from '../../../src/index';
+import LeftPanel from '../../../src/components/Panels/LeftPanel';
+
+<Meta title="Documentation/Items/Ready to Use Items" />
+
+# Ready to Use Items
+
+You can use ready elements in your project.
+
+itemTypes:  `text`, `image`, `shapes`, `icon`, `chart`
+
+export const leftPanelConfig = [
+  {
+    elements: [
+      {
+        iconType: 'text',
+        itemType: 'text',
+        title: 'Text',
+      },
+      {
+        iconType: 'image',
+        itemType: 'logo',
+        title: 'Image',
+      },
+      {
+        iconType: 'shapes',
+        itemType: 'shapes',
+        title: 'Shapes',
+      },
+      {
+        iconType: 'icon',
+        itemType: 'icon',
+        title: 'Icon',
+      },
+      {
+        iconType: 'chart',
+        itemType: 'chart',
+        title: 'Chart',
+      },
+    ],
+    title: 'Items',
+  }
+];
+
+<Canvas>
+  <div style={{ display: 'block', height: '400px' }}>
+    <div className="jfReport" style={{ height: '400px' }}>
+      <DndWrapper>
+        <BuilderProvider isLeftPanelOpen>
+          <LeftPanel leftPanelConfig={leftPanelConfig} />
+        </BuilderProvider>
+      </DndWrapper>
+    </div>
+  </div>
+</Canvas>

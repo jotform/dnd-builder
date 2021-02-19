@@ -1,0 +1,253 @@
+/*
+*   this file includes floating button styles for page, presentation, slides & zoom actions.
+*   @giraykarasinir
+*/
+
+.floatingController {
+  user-select: none;
+  transition: all .4s ease-out;
+  opacity: 1;
+  &.hideElement {
+    opacity: 0;
+  }
+
+  &-container {
+    display: flex;
+    flex-direction: column;
+    background-color: $white;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.08);
+
+    .controllerItem {
+      transition: $transition;
+
+      &.isGray {
+        background-color: $inputGray;
+      }
+
+      &.isSingle {
+        border-radius: 6px;
+      }
+
+      &:hover .jfReportSVG:not(.icon-trashLine) {
+        fill: $blue;
+      }
+
+      &:hover .jfReportSVG.icon-trashLine {
+        fill: $danger;
+      }
+    }
+
+    .controllerIndicator {
+      font-size: 0.75rem;
+      margin: 15px auto;
+      text-align: center;
+    }
+
+    & + .floatingController-container {
+      margin-top: 10px;
+    }
+  }
+
+  &.forBar, &.forZoom {
+    z-index: 2;
+  }
+
+  &.forBar {
+    height: 50px;
+    background: #212736;
+    border-radius: 6px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    max-width: 436px;
+    min-width: 280px;
+    padding: 13px 15px;
+    text-align: center;
+
+    .divider {
+      width: 1px;
+      height: 30px;
+      background: #272D3D;
+    }
+
+    .select-zoom {
+      height: 24px;
+      width: 61px;
+      color: #fff;
+      background: #2E354A;
+      border: none;
+      font-size: 0.875rem;
+      cursor: pointer;
+      margin-right: 20px;
+    }
+
+    .forSlide {
+      margin: 0 20px;
+    }
+
+    .jfReportButton, .controllerItem {
+      height: 24px;
+      width: 24px;
+      padding: 0 4px;
+    }
+
+    .jfReportButton {
+      &.download {
+        .icon-download {
+          width: 8px;
+          height: 10px;
+        }
+      }
+      &.print {
+        border: 1px solid #A8AABF;
+        .icon-print {
+          width: 10px;
+          height: 10px;
+          fill: #A8AABF;
+        }
+      }
+      &.download, &.print {
+        background-color: rgba(1, 189, 111, 0.1);
+        &:hover {
+          background-color: #2e525c;
+        }
+      }
+      .icon-fullscreen {
+        width: 14px;
+        height: 14px;
+      }
+    }
+
+    .action-container {
+      margin-left: 20px;
+      .jfReportButton + .jfReportButton:not(.close) {
+        margin-left: 10px;
+      }
+      .close {
+        margin-left: 15px;
+        stroke: 1px;
+
+        &:hover {
+          svg {
+            fill: #fff;
+            opacity: .7;
+          }
+        }
+      }
+    }
+
+    .controllerItem {
+      background: #2E354A;
+      border-radius: 3px;
+      border: none;
+      transition: $transition;
+
+      &:hover {
+        background: lighten(#2E354A, 5);
+      }
+    }
+
+    .navigation-container {
+      color: #fff;
+      display: flex;
+      align-items: center;
+    }
+
+    .floatingController-container {
+      display: inline-flex;
+      flex-direction: row;
+      border-radius: 6px;
+    }
+
+    .controllerItem .icon-navs {
+      width: 5px;
+      height: 8px;
+      fill: #fff;
+    }
+
+    .controllerItem:last-child .icon-navs {
+      transform: rotate(-180deg);
+    }
+
+    .controllerIndicator {
+      letter-spacing: .7px;
+      font-size: 0.875rem;
+      line-height: 28px;
+      min-width: 65px;
+      padding: 0 5px;
+
+      span {
+        opacity: 0.5;
+      }
+    }
+  }
+
+
+  &.forZoom {
+    left: 15px;
+    bottom: 15px;
+
+    .floatingController-container {
+      border-radius: 6px;
+
+      & > .controllerItem:not(.isSingle) {
+        padding: 8px 6px;
+      }
+    }
+
+    .controllerItem:not(.isSingle):first-child {
+      border-radius: 6px 6px 0 0;
+      border-bottom: 1px solid #F2F2F6;
+    }
+    .controllerItem:not(.isSingle):last-child {
+      border-radius: 0 0 6px 6px;
+      border-top: 1px solid #F2F2F6;
+    }
+
+    .isSingle {
+      padding: 8px;
+    }
+  }
+
+  &.forSlides {
+    .floatingController-container {
+      background-color: transparent;
+      box-shadow: none;
+    }
+    .controllerItem:hover .jfReportSVG.icon-trashLine {
+      fill: $danger;
+    }
+  }
+
+  &.forSlides, &.forPageAction {
+    .floatingController-container:not(.hasGroup) {
+      .controllerItem {
+        padding: 7px 6px;
+        border-radius: 6px;
+      }
+    }
+  }
+
+  &.forPageAction:not(.forSlides) {
+    top: 60px;
+    right: -36px;
+    transition: $transition;
+
+    .floatingController-container {
+      border-radius: 3px;
+    }
+
+    .floatingController-container.hasGroup {
+      padding: 6px 0;
+      .controllerItem {
+        padding: 6px 5px;
+      }
+    }
+  }
+
+  &:not(.forSlides):not(.forBar) {
+    position: absolute;
+  }
+
+  &.forSlides, &.forBar {
+    position: relative;
+  }
+}

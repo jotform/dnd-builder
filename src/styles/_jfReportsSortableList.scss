@@ -1,0 +1,329 @@
+/*
+*   this file includes dnd list styles for reports in settings pane.
+*   @giraykarasinir
+*/
+
+// Sortable List //
+
+.jfReportSelectOption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  transition: .3s ease-in-out;
+  max-width: 100%;
+
+  .jfReportChoice-label {
+    display: block;
+  }
+
+  &-drag, &-color, &-collapse, &-delete {
+    position: absolute;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 10px;
+    height: 100%;
+    transition: .3s ease-in-out;
+
+    .icon-drag, .icon-down, .icon-arrow, .icon-color, .icon-trash {
+      fill: #2c3345;
+      color: #2c3345;
+    }
+  }
+
+  &-drag {
+    left: 6px;
+    cursor: grab;
+    opacity: .4;
+
+    &:active {
+      cursor: grabbing;
+    }
+  }
+
+  &-color {
+    right: 10px;
+    cursor: pointer;
+    opacity: 0;
+
+    &.forReset {
+      right: 24px;
+    }
+  }
+
+  &-collapse {
+    right: 10px;
+    transform: rotateX(180deg);
+    opacity: .4;
+  }
+
+  &:hover {
+    .jfReportSelectOption-drag, .jfReportSelectOption-color, .jfReportSelectOption-collapse {
+      opacity: 1;
+    }
+
+    .forPin {
+      opacity: .4;
+    }
+
+    .isPinned {
+      opacity: 1;
+    }
+  }
+
+  &-icon {
+    margin-right: 10px;
+
+    svg {
+      display: block;
+      width: 12px;
+      fill: #8483A9;
+    }
+  }
+
+  &-name {
+    width: calc(100% - 28px);
+    background-color: $lightGrayHover;
+    border-radius: 5px;
+    padding: 6px 12px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    position: relative;
+    user-select: none;
+    flex: 1;
+    cursor: pointer;
+    opacity: .4;
+    transition: $transition;
+    min-width: 0;
+
+    &.isDark {
+      color: #f2f2f2;
+      svg {
+        color: #f2f2f2;
+        fill: #f2f2f2;
+      }
+    }
+  }
+
+  &-visibility + .jfReportSelectOption-name {
+    margin-left: 10px;
+  }
+
+  &.isSelected {
+    .jfReportSelectOption-name {
+      opacity: 1;
+    }
+  }
+
+  &-img {
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
+    margin-right: 5px;
+    overflow: hidden;
+
+    &:not(.forEmoji) {
+      border: 1px solid $inputGrayBorder;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    &.forEmoji {
+      img {
+        box-shadow: 0 0 0 5px rgba($inputGrayBorder, 1);
+      }
+    }
+  }
+
+  &-text {
+    flex: 1;
+    @include text-ellipsis;
+
+    &.jSheetEditable {
+      cursor: text;
+    }
+
+    &.isEditMode {
+      text-overflow: unset;
+      text-decoration: underline;
+      white-space: pre-wrap;
+    }
+  }
+
+  & + .jfReportSelectOption {
+    margin-top: 10px;
+  }
+
+  &.forHelper {
+    font-size: 0.875rem;
+    z-index: 10;
+    transition: none;
+    opacity: .9;
+
+    .icon-drag {
+      width: 6px;
+    }
+
+    .jfReportSelectOption-color {
+      opacity: 0;
+    }
+  }
+
+  &.withDnd {
+    .jfReportSelectOption-name {
+      padding-left: 26px;
+    }
+  }
+
+  &.withColorSelect {
+    .jfReportSelectOption-name {
+      padding-right: 26px;
+    }
+  }
+
+  &-subContainer {
+    position: relative;
+    padding: 10px 0 0 30px;
+    overflow: hidden;
+
+    &:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 8px;
+      width: 1px;
+      height: calc(100% - 15px);
+      background-color: $inputGrayBorder;
+    }
+
+    & > .jfReportSelectOption {
+      position: relative;
+
+      &:before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: -22px;
+        width: 10px;
+        height: 1px;
+        background-color: $inputGrayBorder;
+      }
+    }
+
+    & + .jfReportSelectOption {
+      margin-top: 10px;
+    }
+  }
+
+  &-list {
+
+    &.withDnd {
+      .jfReportSelectOption-name {
+        padding-left: 26px;
+      }
+    }
+
+    &.withPin {
+      .jfReportSelectOption-name {
+        padding-right: 20px;
+      }
+      .jSheetEditable:not(.isEditMode) {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        cursor: text;
+      }
+    }
+
+    &.forPageLayer {
+      .jfReportSelectOption-name {
+        border: 1px solid $inputGrayBorder;
+      }
+    }
+
+    &.withColorSelect {
+      .jfReportSelectOption-name {
+        padding-right: 26px;
+        &.isEdited {
+          padding-right: 36px;
+        }
+      }
+
+      .activeHandle {
+        .jfReportSelectOption-color {
+          opacity: 1;
+        }
+      }
+
+      &.withDelete {
+        .jfReportSelectOption-name {
+          padding-right: 52px;
+        }
+
+        .jfReportSelectOption-delete {
+          right: 26px;
+          opacity: 0;
+          padding: 0;
+          color: #2c3345;
+          transition: .3s ease-in-out;
+
+          .icon-trash {
+            width: 12px;
+            height: 12px;
+          }
+        }
+      }
+    }
+
+    &.withDnd, &.withColorSelect {
+      .hasSub {
+        .jfReportSelectOption-name {
+          padding-right: 52px;
+        }
+        .jfReportSelectOption-color {
+          right: 26px;
+        }
+      }
+    }
+
+    &.forPageLayer .jfReportSelectOption-name:hover {
+      border-color: $inputGrayBorderHover;
+    }
+
+    &.withDelete .jfReportSelectOption-name:hover .jfReportSelectOption-delete {
+      opacity: 1;
+    }
+
+    &.withDnd, &.withColorSelect, &.withPin {
+      .jfReportSelectOption-subContainer {
+        .jfReportSelectOption-name {
+          padding: 6px 12px;
+        }
+      }
+    }
+  }
+
+  &.isCollapsed + .jfReportSelectOption-subContainer {
+    display: none;
+  }
+
+  &.isCollapsed .jfReportSelectOption-collapse {
+    transform: rotateX(0);
+  }
+
+  .starWrapper {
+    display: flex;
+    padding: 3px 6px;
+    background-color: #fff;
+    border-radius: 4px;
+  }
+}
+
+// Sortable List //

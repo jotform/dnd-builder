@@ -1,0 +1,89 @@
+/*
+*   this file includes search input styles for element search.
+*   @giraykarasinir
+*/
+
+.jfReport {
+  &-searchContainer {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+
+    .section-search-button {
+      position: absolute;
+      right: 1px;
+      bottom: 1px;
+      height: calc(100% - 2px);
+      border-radius: 0 15px 15px 0;
+
+      &:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -15px;
+        width: 15px;
+        height: 100%;
+        background: rgb(255,255,255);
+        background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(#FAFAFC,1) 100%);
+        pointer-events: none;
+      }
+
+      &.showDelete {
+        padding-right: 10px;
+        &:hover .delete {
+          fill: $danger;
+        }
+      }
+    }
+
+    .section-search-icon {
+      height: 16px;
+      width: 16px;
+      stroke-width: 1px;
+      stroke: #8586A6;
+      transition: all .3s ease-in-out;
+
+      &.delete {
+        fill: #8586A6;
+        height: 10px;
+        width: 10px;
+        stroke: none;
+
+        &:hover {
+          fill: $danger;
+          display: none;
+        }
+      }
+    }
+
+    .section-search-input {
+      background-color: #FAFAFC;
+      border: 1px solid #CCCDDA;
+      width: 100%;
+      box-shadow: none;
+      padding: 5px 30px 5px 12px;
+      line-height: 18px;
+      font-size: 0.875rem;
+      border-radius: 15px;
+      transition: all .3s ease-in-out;
+      height: 32px;
+      color: #2C3345;
+
+      &::placeholder {
+        color: $additionalGray;
+      }
+
+      &:hover ~ .section-search-button,
+      &:focus ~ .section-search-button {
+        .section-search-icon:not(.delete) {
+          stroke: #4277FF;
+        }
+      }
+
+      &:hover, &:focus {
+        border-color: #4277FF;
+      }
+    }
+  }
+}

@@ -1,0 +1,270 @@
+/*
+*   this file includes report item styles.
+*   @giraykarasinir
+*/
+
+.jfReport, .jfPresentation {
+  .reportItem {
+    position: absolute;
+    transition: .3s ease-in-out;
+
+    &Inner {
+      padding: 5px;
+
+      strong {
+        font-family: inherit;
+      }
+    }
+
+    &-header {
+      font-weight: 500;
+      will-change: transform;
+    }
+
+    &-headerLine {
+      margin: 8px auto;
+      will-change: transform;
+    }
+
+    &-subHeader {
+      color: #9798AE;
+      will-change: transform;
+    }
+
+    &-header + .reportItem-subHeader {
+      margin-top: 5px;
+    }
+
+    &-line {
+      width: 100%;
+      border: none;
+      border-color: $gray;
+      will-change: transform;
+    }
+
+    &.isDraggingLayerElement {
+      opacity: .8;
+      transition: none;
+      cursor: pointer;
+    }
+
+    .jfReportEditable {
+      display: block;
+      overflow-wrap: break-word;
+    }
+
+    .jfReportEditable:empty {
+      text-decoration: inherit;
+
+      &:empty:before {
+        content: attr(placeholder);
+      }
+    }
+
+    .isUnread {
+      background: #fff;
+    }
+  }
+
+  .reportHandle {
+    opacity: 1;
+    pointer-events: all;
+
+    &:after {
+      content: "";
+      position: absolute;
+      display: block;
+      background-color: #ddefff;
+      border: 1px solid $blue;
+      transition: .3s ease-in-out;
+    }
+
+    &:not(.forLine):after {
+      left: 2px;
+      top: 2px;
+      right: 2px;
+      bottom: 2px;
+      border-radius: 2px;
+    }
+
+    &.forLine {
+      &:after {
+        border-radius: 3px;
+      }
+      &:not(.isVertical) {
+        &:after {
+          top: 1px;
+          bottom: 1px;
+          left: calc(50% - 10px);
+          width: 18px;
+        }
+      }
+
+      &.isVertical {
+        &:after {
+          top: calc(50% - 10px);
+          left: 1px;
+          right: 1px;
+          height: 18px;
+        }
+      }
+    }
+
+    &:hover {
+      &:after {
+        background-color: #B4DCFF;
+      }
+    }
+  }
+
+  .reportRotater {
+    position: absolute;
+    left: calc(50% - 15px);
+    top: -50px;
+    padding: 5px;
+    background-color: #ddefff;
+    border: 1px solid $blue;
+    border-radius: 50%;
+
+    &:before {
+      content: "";
+      position: absolute;
+      bottom: -20px;
+      left: calc(50% - .5px);
+      width: 1px;
+      height: 20px;
+      background-color: $blue;
+    }
+  }
+
+  .reportItemWrapper.isSelected {
+    .jfReportEditable {
+      cursor: text;
+
+      &:empty:focus:before {
+        color: $placeholderColor;
+      }
+    }
+  }
+
+  .reportItemResizer {
+    border: 1px solid $blue;
+    box-shadow: 0 0 0 3px rgba(106, 110, 143, 0.15);
+    border-radius: 3px;
+
+    &.hideVerticalHandle {
+      .forLine.isVertical:after {
+        opacity: 0;
+      }
+    }
+
+    &.hideHorizontalHandle {
+      .forLine:not(.isVertical):after {
+        opacity: 0;
+      }
+    }
+  }
+}
+
+.jfReport, .jfPresentation, .pageThumbnailHelper {
+  .reportItem {
+    .fitFor- {
+      width: 100%;
+      height: 100%;
+    }
+    .fitFor-2px {
+      height: calc(100% - 4px);
+      width: calc(100% - 4px);
+      margin-top: 2px;
+      margin-left: 2px;
+      &.forStar {
+        height: calc(100% - 5px);
+      }
+    }
+    .fitFor-4px {
+      height: calc(100% - 6px);
+      width: calc(100% - 6px);
+      margin-top: 3px;
+      margin-left: 3px;
+      &.forStar {
+        height: calc(100% - 10px);
+        width: calc(100% - 8px);
+        margin-top: 5px;
+        margin-left: 4px;
+      }
+    }
+    .fitFor-6px {
+      height: calc(100% - 8px);
+      width: calc(100% - 8px);
+      margin-top: 4px;
+      margin-left: 4px;
+      &.forStar {
+        height: calc(100% - 12px);
+        width: calc(100% - 10px);
+        margin-top: 6px;
+        margin-left: 5px;
+      }
+    }
+  }
+}
+
+.pageThumbnailHelper {
+  .reportItemWrapper {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.jfReport {
+  .reportItemMenu {
+    position: absolute;
+    top: 0;
+    right: -24px;
+    background-color: $blue;
+    border-radius: 3px;
+    text-align: center;
+    pointer-events: all;
+    animation: .2s fadeRight forwards;
+
+    &-item {
+      display: inline-block;
+      padding: 6px 5px;
+      background-color: transparent;
+
+      svg {
+        width: 14px;
+        height: 14px;
+        backface-visibility: hidden;
+        transition: .3s ease-in-out;
+        transform: translateZ(0);
+      }
+
+      &:hover svg {
+        opacity: .7;
+      }
+    }
+
+    &:not(.forLocked) {
+      .reportItemMenu-item {
+        &:first-child {
+          margin-top: 6px;
+        }
+
+        &:last-child {
+          margin-bottom: 6px;
+        }
+      }
+    }
+  }
+
+  @keyframes fadeRight {
+    0% {
+      right: -24px;
+      opacity: 0;
+    }
+    100% {
+      right: -35px;
+      opacity: 1;
+    }
+  }
+}

@@ -1,0 +1,62 @@
+import { Meta, Story } from '@storybook/addon-docs/blocks';
+
+<Meta title="Documentation/Advanced/Setting Component" />
+
+## Each Setting item receives the followin props
+
+| parameter                         | type     | required | default | description                                                                 |
+|-----------------------------------|----------|----------|---------|-----------------------------------------------------------------------------|
+| config                            | object   |          |         | Config options for which setting item to render and with what props         |
+| item                              | object   |          |         | Object that contains item's props (eg its value, coordinates)               |
+| itemAccessor                      | function |          |         | Higher order function to pass on extra props to items based on their types  |
+| onItemChange                      | function |          |         | Function to capture changes on setting value                                |
+| value                             | any      |          |         | Given setting's value                                                       |
+
+
+### config
+
+| parameter | type   | required | default   | description                                                     |
+|-----------|--------|----------|-----------|-----------------------------------------------------------------|
+| key       | string | yes      |           | Identifier (e.g. to be used as propPath to save values)         |
+| label     | string | no       | ''        | Label to render on the right panel before component             |
+| section   | string | no       | 'General' | On which Tab to render the setting ittem                        |
+| type      | string | no       | 'text'    | identifier for how the setting will be rendered (details below) |
+| component | React  | no       |           | Custom React Component to render the setting item               |
+
+Lets look at a `type: 'dropdown'` example
+
+```javascript
+config = {
+  key: 'fontFamily',
+  label: 'Font Family',
+  options: ['Abril Fatface', 'Arial', 'Arial Black'],
+  section: 'General',
+  type: 'dropdown',
+};
+```
+
+As you can see the `dropdown` is a given setting type within this scope. And also it needs `(Array) options` prop to render the dropdown options.
+For more details refer stories under Settings folder (link?).
+
+Apart from the default setting components given by this repo, you can pass in your React components which will take upon the mentioned props before.
+
+This is especially usefull when you pass in your custom item types with their custom setting configs
+
+```javascript
+config = {
+  key: 'myCustomSetting',
+  label: 'Super Custom Setting',
+  myCustomArray: ['arrayItem1', 'arrayItem2'],
+  myCustomMap: { item1: 'custom1', item2: 'custom2' },
+  section: 'Custom Tab',
+  component: MyCustomSettingRenderer
+}
+```
+
+If you pass in the config below, we will automatically pass the config object to the React Component you have given as props.
+
+Which then you will be able to customize the UI how ever you want to.
+
+Here below is a simple example on what you can do with custom settings components
+
+<Story id="examples-builder--custom-setting-component" />

@@ -1,0 +1,78 @@
+/* stylelint-disable */
+.jfReport.printMode {
+  display: block;
+  border: none;
+  height: auto;
+
+  ::-webkit-scrollbar {
+    width: 0px; /* remove scrollbar space */
+    background: transparent; /* optional: just make scrollbar invisible */
+  }
+}
+.jfReport.printMode .p-absolute {
+  position: static;
+}
+.jfReport.printMode .jfReport-canvas {
+  margin: 0;
+}
+.jfReport.printMode .jfReport-page {
+  margin: 0;
+  width: 100vw !important;
+  height: 100vh !important;
+}
+.jfReport.printMode .jfReport-viewport {
+  display: block;
+}
+.jfReport.printMode .jfReport-col {
+  display: block;
+}
+.jfReport.printMode:before {
+  display: none;
+}
+.jfPresentation .jfReportButton.isOutline:disabled {
+  opacity: 0.4;
+}
+.ReportPrintPortal {
+  opacity: 0;
+  visibility: hidden;
+}
+.jfReport.printMode .isEmptyTextElement, .jfReport.printMode .jfReportEditable:empty {
+  display: none;
+}
+
+.jfReport.printMode .scrollbar-track {
+  display: none !important;
+}
+
+@media print {
+  body {
+    overflow: hidden !important;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .jfReport-viewport {
+    overflow: hidden !important;
+  }
+
+  .ReportPrintPortal {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .PresentationModal {
+    display: none;
+  }
+  
+  .jfPresentation-barContainer {
+    display: none !important;
+  }
+
+  .jfBranding:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-top: 48px solid #2e354a;
+  }
+}

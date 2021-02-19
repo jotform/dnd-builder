@@ -1,0 +1,101 @@
+
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Documentation/Items/Items" />
+
+# Items
+
+Items are Object and contains some properties which is used by Components.
+
+Every Items Should contain 4 properties which are
+
+Property Name           | Type
+---                     | ---
+`Component`             | React Component
+`details`               | Object
+`itemType`              | String
+`settings`              | Object
+`defaultItem`(optional) | Object
+
+
+## _Here is the basic Item Object example_
+  ```javascript
+  const Image = {
+    Component: ImageElement,
+    details,
+    itemType: 'image',
+    settings,
+  };
+  ```
+
+<details>
+<summary>Show extended example</summary>
+<p>
+
+  ```javascript
+  const Logo = {
+      Component: ({ item }) => {
+        return (
+          <img
+            alt="Logo"
+            {...item}
+          />
+        );
+      },
+      details: {
+        height: 300,
+        itemType: 'logo',
+        src: 'https://miro.medium.com/max/2100/1*khbx3PQVp4qttqDdHcdFng.jpeg',
+        width: 300,
+      },
+      itemType: 'logo',
+      settings: [
+        {
+          key: 'src',
+          label: 'Change Podo',
+          options: [
+            {
+              icon: <img
+                alt="Logo1"
+                height="20"
+                src="https://miro.medium.com/max/2100/1*khbx3PQVp4qttqDdHcdFng.jpeg"
+                width="20"
+              />,
+              value: 'https://miro.medium.com/max/2100/1*khbx3PQVp4qttqDdHcdFng.jpeg',
+            },
+            {
+              icon: <img
+                alt="Logo1"
+                height="20"
+                src="https://www.jotform.com/resources/assets/podo/podo_4.png"
+                width="20"
+              />,
+              value: 'https://www.jotform.com/resources/assets/podo/podo_4.png',
+            },
+            {
+              icon: <img
+                alt="Logo1"
+                height="20"
+                src="https://cms.jotform.com/uploads/image_upload/image_upload/chad/36448_Screen%20Shot%202016-02-11%20at%202.19.32%20PM.png"
+                width="20"
+              />,
+              value: 'https://cms.jotform.com/uploads/image_upload/image_upload/chad/36448_Screen%20Shot%202016-02-11%20at%202.19.32%20PM.png',
+            },
+          ],
+          optionsDisplay: ['icon'],
+          section: 'General',
+          type: 'segmentControl',
+        },
+      ],
+    };
+  ```
+
+</p>
+</details>
+
+- `Component` is expected to be a React component.
+- `details` are default properties to be set to item when added for the first time. This properties merge to item which you get from onItemadd function parameter.
+- `itemType` is unique and used for to coupling items to render. *_`layout` & `page` are reserved types so do not use them for items_*
+- `settings` is an array of config objects that will be used in rendering the settings panel of the item.
+<!-- TODO :: add setting config types and usage. and link from here maybe. -->
+<!-- TODO :: add detail config types and usage. and link from here maybe. -->

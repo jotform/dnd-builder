@@ -1,0 +1,363 @@
+
+import { Meta } from '@storybook/addon-docs/blocks';
+import LinkTo from '@storybook/addon-links/react';
+
+<Meta title="Documentation/Getting Started/Tutorial" />
+
+# Getting Started with Jotform DND Builder
+
+Jotform DND Builder is an opinionated but fully overridable, ecosystem of various  React components for building interactive drag and drop based applications.
+
+## Tutorial
+
+In this guide, we’ll show you how to get started with Jotform DND Builder and walk you through simple drag and drop application.
+
+#### 1. Add Jotform DND Builder to your project.
+
+```shell
+# npm
+$ npm i --save @jotforminc/dnd-builder
+# or yarn
+$ yarn add @jotforminc/dnd-builder
+```
+#### 2. Add Builder component:
+
+```js
+import React from 'react';
+import { render } from 'react-dom';
+import { Builder } from '@jotforminc/dnd-builder';
+
+const DNDApplication = () => {
+  return <Builder />;
+};
+
+render(<DNDApplication />, document.getElementById('app'));
+```
+
+
+#### 3. Define your accepted items
+
+The Builder component should know draggable and droppable items to work with. We are calling them as `acceptedItems`. We'll use some predefined items as `acceptedItems` in this case.
+```jsx
+const acceptedItems = {
+  [RichText.itemType]: RichText,
+  [Image.itemType]: Image,
+  [Shapes.itemType]: Shapes,
+  [Icon.itemType]: Icon,
+};
+```
+
+#### 4. Add your accepted items to the Builder component
+
+We are passing our acceptedItems definition to our main Builder component.
+```jsx
+import React from 'react';
+import { render } from 'react-dom';
+import { Builder, RichText, Image, Shapes, Icon } from '@jotforminc/dnd-builder';
+
+const acceptedItems = {
+  [RichText.itemType]: RichText,
+  [Image.itemType]: Image,
+  [Shapes.itemType]: Shapes,
+  [Icon.itemType]: Icon,
+};
+
+const DNDApplication = () => {
+  return <Builder acceptedItems={acceptedItems}/>;
+};
+
+render(<DNDApplication />, document.getElementById('app'));
+```
+
+#### 5. Make your items in use to by adding left sidebar.
+
+If you want to list your accepted items to left sidebar to make it in use the `leftPanelConfig` structure should be like this, 
+
+```jsx
+const leftPanelConfig = [{
+  elements: [
+    {
+      iconType: 'textElement',
+      itemType: RichText.itemType,
+      title: 'Text',
+    },
+    {
+      iconType: 'image',
+      itemType: Image.itemType,
+      title: 'Image',
+    },
+    {
+      iconType: 'shapes',
+      itemType: Shapes.itemType,
+      title: 'Shapes',
+    },
+    {
+      iconType: 'icon',
+      itemType: Icon.itemType,
+      title: 'Icon',
+    },
+  ],
+  title: 'Items',
+}];
+```
+
+#### 6. Add your left panel config to the Builder component
+
+Next, let's add our left panel config to the Builder component.
+
+```jsx
+import React from 'react';
+import { render } from 'react-dom';
+import { Builder, RichText, Image, Shapes, Icon } from '@jotforminc/dnd-builder';
+
+const acceptedItems = {
+  [RichText.itemType]: RichText,
+  [Image.itemType]: Image,
+  [Shapes.itemType]: Shapes,
+  [Icon.itemType]: Icon,
+};
+
+const leftPanelConfig = [{
+  elements: [
+    {
+      iconType: 'textElement',
+      itemType: RichText.itemType,
+      title: 'Text',
+    },
+    {
+      iconType: 'image',
+      itemType: Image.itemType,
+      title: 'Image',
+    },
+    {
+      iconType: 'shapes',
+      itemType: Shapes.itemType,
+      title: 'Shapes',
+    },
+    {
+      iconType: 'icon',
+      itemType: Icon.itemType,
+      title: 'Icon',
+    },
+  ],
+  title: 'Items',
+}];
+
+const DNDApplication = () => {
+  return <Builder 
+    acceptedItems={acceptedItems}
+    leftPanelConfig={leftPanelConfig}
+  />;
+};
+
+render(<DNDApplication />, document.getElementById('app'));
+```
+
+#### 7. Add pages to the Builder component.
+
+We have to pass our pages object to the Builder to component to work with.
+
+```jsx
+import React from 'react';
+import { render } from 'react-dom';
+import { Builder, RichText, Image, Shapes, Icon } from '@jotforminc/dnd-builder';
+
+const acceptedItems = {
+  [RichText.itemType]: RichText,
+  [Image.itemType]: Image,
+  [Shapes.itemType]: Shapes,
+  [Icon.itemType]: Icon,
+};
+
+const leftPanelConfig = [{
+  elements: [
+    {
+      iconType: 'textElement',
+      itemType: RichText.itemType,
+      title: 'Text',
+    },
+    {
+      iconType: 'image',
+      itemType: Image.itemType,
+      title: 'Image',
+    },
+    {
+      iconType: 'shapes',
+      itemType: Shapes.itemType,
+      title: 'Shapes',
+    },
+    {
+      iconType: 'icon',
+      itemType: Icon.itemType,
+      title: 'Icon',
+    },
+  ],
+  title: 'Items',
+}];
+
+const pages = [
+  {
+    id: "1",
+    items: [],
+    order: 1,
+  },
+];
+
+const DNDApplication = () => {
+  return <Builder 
+    acceptedItems={acceptedItems}
+    leftPanelConfig={leftPanelConfig}
+    pages={pages}
+  />;
+};
+
+render(<DNDApplication />, document.getElementById('app'));
+```
+
+#### 8. Add an event callback to track added items.
+
+You can easily watch the Builder component events by adding event callbacks. We want to see which item was tried to add to our Builder scene in this case. Also you can find all event callbacks from <LinkTo kind="documentation-components-builder--page#props-table-">here.</LinkTo>
+
+```jsx
+import React from 'react';
+import { render } from 'react-dom';
+import { Builder, RichText, Image, Shapes, Icon } from '@jotforminc/dnd-builder';
+
+const acceptedItems = {
+  [RichText.itemType]: RichText,
+  [Image.itemType]: Image,
+  [Shapes.itemType]: Shapes,
+  [Icon.itemType]: Icon,
+};
+
+const leftPanelConfig = [{
+  elements: [
+    {
+      iconType: 'textElement',
+      itemType: RichText.itemType,
+      title: 'Text',
+    },
+    {
+      iconType: 'image',
+      itemType: Image.itemType,
+      title: 'Image',
+    },
+    {
+      iconType: 'shapes',
+      itemType: Shapes.itemType,
+      title: 'Shapes',
+    },
+    {
+      iconType: 'icon',
+      itemType: Icon.itemType,
+      title: 'Icon',
+    },
+  ],
+  title: 'Items',
+}];
+
+const pages = [
+  {
+    id: "1",
+    items: [],
+    order: 1,
+  },
+];
+
+const onItemAdd = item => {
+  console.log(item);
+};
+
+const DNDApplication = () => {
+  return <Builder 
+    acceptedItems={acceptedItems}
+    leftPanelConfig={leftPanelConfig}
+    pages={pages}
+    onItemAdd={onItemAdd}
+  />;
+};
+
+render(<DNDApplication />, document.getElementById('app'));
+```
+
+#### 9. Making our Builder component to stateful by using hooks.
+
+Next, we will try to make our Builder component more interactive by using React's `useReducer` hook.
+
+```jsx
+import React, { useReducer } from 'react';
+import { render } from 'react-dom';
+import { Builder, RichText, Image, Shapes, Icon, generateId } from '@jotforminc/dnd-builder';
+
+const acceptedItems = {
+  [RichText.itemType]: RichText,
+  [Image.itemType]: Image,
+  [Shapes.itemType]: Shapes,
+  [Icon.itemType]: Icon,
+};
+
+const leftPanelConfig = [{
+  elements: [
+    {
+      iconType: 'textElement',
+      itemType: RichText.itemType,
+      title: 'Text',
+    },
+    {
+      iconType: 'image',
+      itemType: Image.itemType,
+      title: 'Image',
+    },
+    {
+      iconType: 'shapes',
+      itemType: Shapes.itemType,
+      title: 'Shapes',
+    },
+    {
+      iconType: 'icon',
+      itemType: Icon.itemType,
+      title: 'Icon',
+    },
+  ],
+  title: 'Items',
+}];
+
+const initialPages = () => [
+  {
+    id: '1',
+    items: [],
+    order: 1,
+  },
+];
+
+const pagesReducer = (state, action) => {
+  switch (action.type) {
+    case 'onItemAdd':
+      return state.map(page => {
+        if (page.id === action.payload.pageID) {
+          page.items.push(action.payload);
+        }
+        return page;
+      });
+    default:
+      throw new Error();
+  }
+};
+
+const DNDApplication = () => {
+  const [pages, dispatch] = useReducer(pagesReducer, initialPages());
+
+  return <Builder 
+    acceptedItems={acceptedItems}
+    leftPanelConfig={leftPanelConfig}
+    pages={pages}
+    onItemAdd={item => dispatch({ payload: item, type: 'onItemAdd' })}
+  />;
+};
+
+render(<DNDApplication />, document.getElementById('app'));
+```
+
+## Next Steps
+
+Congratulations! You’ve created your first drag and drop application with JotForm DND Builder. To view more advanced examples, visit <LinkTo kind="examples-all-in-one--full-controlled">here.</LinkTo>.

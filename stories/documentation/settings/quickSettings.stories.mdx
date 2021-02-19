@@ -1,0 +1,85 @@
+
+import { Meta } from '@storybook/addon-docs/blocks';
+import LinkTo from '@storybook/addon-links/react';
+
+<Meta title="Documentation/Settings/Quick Settings" />
+
+# Quick Settings
+
+You can use ready-to-use settings in dnd builder. Settings renderer accept array of object. It should be correct type for using ready-to-use settings.
+
+<LinkTo kind="examples--all-in-one">See the story using all settings</LinkTo>
+
+The following is a simple example.
+
+```shell
+[
+  {
+    key: 'fillColor', # required
+    label: 'Fill Color', # optional
+    section: 'Style', # optional
+    type: 'colorPicker', # required for ready-to-use setting
+    component: ReactComponent # required for custom setting
+    # `type` or `component` must be found for a setting
+    value: (value, item) => item.fillColor # optional
+  },
+  ....
+]
+```
+
+| parameter                         | required | default | description                                                                 |
+|-----------------------------------|----------|---------|-----------------------------------------------------------------------------|
+| key                               |    yes   |         | It must be and unique. When item related value changed, onItemChange method return with this key.|
+| label                             |    no    |         | Information text on the setting.                                            |
+| section                           |    no    |'General'| Section name for tab-based panel.                                           |
+| type                              |          |         | It is necessary for using ready-to-use settings.                            |
+| component                         |          |         | If you use your custom setting component, you have to add React component.  |
+| value                             |    no    |         | ...                                                                         |
+
+The following is a advanced example.
+
+```shell
+[
+  {
+    key: 'shapeType',
+    label: 'Shape Type',
+    options: [
+      { label: 'Line', value: 'line' },
+      { label: 'Triangle', value: 'triangle' },
+      { label: 'Square', value: 'square' },
+    ],
+    type: 'dropdown'
+  },
+  {
+    key: 'details', # required
+    label: 'Show Detail', # optional
+    section: 'General', # optional
+    type: 'toggle', # required for ready-to-use setting
+    showWhen: { # optional 
+      shapeType: 'line',
+    },
+    wrapperClass: 'isOneLine', # optional
+    ifValueEquals: { # optional
+      on: {
+        detailText: {
+          cast: 'string',
+          value: 'Hello world!',
+        },
+      }
+    }
+  },
+  {
+    key: 'detailText',
+    type: 'textbox'
+  }
+  ....
+]
+```
+
+| parameter                         | required | default | description                                                                 |
+|-----------------------------------|----------|---------|-----------------------------------------------------------------------------|
+| showWhen                          |    no    |         | You can set the condition in which the setting will be displayed with this key.|
+| hideWhen                          |    no    |         | You can set the condition in which the setting will be hidden with this key. |
+| wrapperClass                      |    no    |         | className for wrapper                                                        |
+| ifValueEquals                     |    no    |         | Used to trigger another setting when the setting changes                     |
+
