@@ -1,9 +1,0 @@
-{
-  "name": "@jotforminc/dnd-builder-system",
-  "version": "0.0.0",
-  "description": "Node & Yarn binaries",
-  "dependencies": {
-    "node": "14.4.0",
-    "yarn": "1.22.4"
-  }
-}
