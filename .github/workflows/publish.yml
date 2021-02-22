@@ -1,5 +1,8 @@
 name: Publish
 on:
+  # manual trigger
+  workflow_dispatch:
+  # on release creation
   release:
     types: [created]
 jobs:

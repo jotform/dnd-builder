@@ -1,5 +1,8 @@
 name: Test
 on:
+  # manual trigger
+  workflow_dispatch:
+  # on push to master branch
   push:
     branches:
       - 'master'
