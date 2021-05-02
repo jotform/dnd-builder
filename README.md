@@ -42,7 +42,7 @@ $npm install @jotforminc/dnd-builder --save
 
 ## Documentation & API Reference📖
 
-[Stories & Documentation](https://www.jotform.com/)
+[Stories & Documentation](https://www.jotform.com/open-source/dnd-builder/)
 
 ## Features
 
