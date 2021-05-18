@@ -1,5 +1,6 @@
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
+import domPurify from 'dompurify';
 import 'react-quill/dist/quill.snow.css';
 import { fontTypes } from '../../constants/fonts';
 
@@ -18,7 +19,7 @@ const StaticRichTextElement = ({
   >
     <div
       className="f-all ql-editor"
-      dangerouslySetInnerHTML={{ __html: value }}
+      dangerouslySetInnerHTML={{ __html: domPurify.sanitize(value) }}
     />
   </div>
 );
