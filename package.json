@@ -92,6 +92,7 @@
     "rollup-plugin-sourcemaps": "0.6.3",
     "rollup-plugin-static-import": "0.1.1",
     "sass-loader": "10.1.1",
+    "standard-version": "9.3.0",
     "style-loader": "2.0.0",
     "stylelint": "13.10.0",
     "stylelint-scss": "3.19.0"
