@@ -112,6 +112,7 @@
     "test:unit": "yarn jest [^\\.]+\\.spec.js --verbose --passWithNoTests",
     "lint:js:fix": "eslint src --fix --ignore-pattern 'src/__tests__'",
     "storybook": "start-storybook",
-    "lint-staged": "lint-staged"
+    "lint-staged": "lint-staged",
+    "release": "standard-version"
   }
 }
