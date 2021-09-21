@@ -89,9 +89,10 @@ module.exports = {
       ignoreCase: true,
       reservedFirst: true,
     }],
+    'react/jsx-uses-react': 'off',
     'react/no-danger': 0,
     'react/prefer-stateless-function': 0,
-
+    'react/react-in-jsx-scope': 'off',
     'react-hooks/rules-of-hooks': 'error',
     // 'react-hooks/exhaustive-deps': 'warn',
 

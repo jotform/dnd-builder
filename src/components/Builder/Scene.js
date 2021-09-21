@@ -1,7 +1,8 @@
 /* eslint-disable complexity */
-import React, {
+import {
   useCallback,
   createRef,
+  Fragment,
   useEffect,
   useRef,
   useState,
@@ -408,7 +409,7 @@ const Scene = ({
         >
           {pages.map((page, index) => (
             // TODO: This part can be moved into a different component
-            <React.Fragment key={page.id}>
+            <Fragment key={page.id}>
               <PageActions
                 disableInteraction={disableInteraction}
                 onAnEventTrigger={onAnEventTrigger}
@@ -450,7 +451,7 @@ const Scene = ({
                   style={pageContainerStyles.current}
                 />
               </div>
-            </React.Fragment>
+            </Fragment>
           ))}
           <PageAdder
             onPageAdd={onPageAdd}

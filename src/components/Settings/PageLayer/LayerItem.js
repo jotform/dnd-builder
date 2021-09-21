@@ -1,4 +1,4 @@
-import React, { memo, useCallback } from 'react';
+import { memo, useCallback } from 'react';
 import { sortableElement, sortableHandle } from 'react-sortable-hoc';
 import classNames from 'classnames';
 import { capitalize, stripHTML } from '../../../utils/string';

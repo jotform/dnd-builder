@@ -1,4 +1,4 @@
-import React, { useState, memo, useRef } from 'react';
+import { useState, memo, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { SketchPicker } from 'react-color';
 import withClickOutside from '../withClickOutside';

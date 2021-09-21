@@ -1,4 +1,4 @@
-import React, { useEffect, memo } from 'react';
+import { useEffect, memo } from 'react';
 import PropTypes from 'prop-types';
 import { useDrag } from 'react-dnd-cjs';
 import { getEmptyImage } from 'react-dnd-html5-backend-cjs';

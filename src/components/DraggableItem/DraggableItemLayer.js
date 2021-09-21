@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import { memo } from 'react';
 import PropTypes from 'prop-types';
 import memoizeOne from 'memoize-one';
 import { useDragLayer } from 'react-dnd-cjs';

@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import { memo, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { safeJSONParse } from '../../utils/functions';
@@ -50,14 +50,14 @@ const Orientation = ({
             type="button"
           >
             {optionsDisplay ? optionsDisplay.map(display => (
-              <React.Fragment key={display}>
+              <Fragment key={display}>
                 <span className="orientationIcon d-flex a-center j-center">
                   {option[display]}
                 </span>
                 <span>
                   {key.charAt(0).toUpperCase() + key.slice(1)}
                 </span>
-              </React.Fragment>
+              </Fragment>
             )) : option.label}
           </button>
         );

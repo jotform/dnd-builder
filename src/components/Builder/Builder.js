@@ -1,4 +1,4 @@
-import React, { StrictMode } from 'react';
+import { StrictMode } from 'react';
 import PropTypes from 'prop-types';
 import objectHash from 'object-hash';
 import DndWrapper from './DndWrapper';

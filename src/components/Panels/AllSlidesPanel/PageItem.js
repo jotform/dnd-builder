@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import { memo } from 'react';
 import { SortableElement } from 'react-sortable-hoc';
 import classNames from 'classnames';
 import StaticPage from '../../Preview/StaticPage';

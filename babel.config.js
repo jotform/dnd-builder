@@ -35,7 +35,7 @@ module.exports = function createConfig(api) {
     ]);
   }
 
-  config.presets.push(require.resolve('@babel/preset-react'));
+  config.presets.push([require.resolve('@babel/preset-react'), { runtime: 'automatic' }]);
 
   return config;
 };

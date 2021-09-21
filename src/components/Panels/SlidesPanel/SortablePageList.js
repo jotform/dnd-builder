@@ -1,4 +1,4 @@
-import React from 'react';
+import { PureComponent, createRef } from 'react';
 import PropTypes from 'prop-types';
 import { SortableContainer } from 'react-sortable-hoc';
 import memoize from 'memoize-one';
@@ -35,12 +35,12 @@ const createItemData = memoize((
 }));
 
 const SortablePageList = Component => {
-  class ReactWindowList extends React.PureComponent {
+  class ReactWindowList extends PureComponent {
     constructor(props) {
       super(props);
 
-      this.sortablePageListRef = React.createRef();
-      this.sortableOuterRef = React.createRef();
+      this.sortablePageListRef = createRef();
+      this.sortableOuterRef = createRef();
     }
 
     get itemData() {

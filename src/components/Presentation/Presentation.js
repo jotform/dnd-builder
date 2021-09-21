@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types';
-import React from 'react';
 import objectHash from 'object-hash';
 import { PresentationProvider } from '../../utils/presentationContext';
 import { BuilderProvider } from '../../utils/builderContext';

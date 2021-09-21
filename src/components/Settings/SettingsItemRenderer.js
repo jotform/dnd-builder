@@ -1,11 +1,11 @@
-import React, { memo } from 'react';
+import { memo, Fragment } from 'react';
 import classNames from 'classnames';
 import isEqual from 'lodash.isequal';
 import PropTypes from 'prop-types';
 import Settings from './index';
 
 const getItemComponent = settingType => {
-  return Settings[settingType] || React.Fragment;
+  return Settings[settingType] || Fragment;
 };
 
 const SettingsItemRenderer = ({

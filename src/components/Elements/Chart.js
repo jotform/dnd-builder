@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import { memo } from 'react';
 import PropTypes from 'prop-types';
 import {
   BarChart, Bar, PieChart, Pie, XAxis, YAxis, Legend, ResponsiveContainer, Cell,

@@ -1,4 +1,4 @@
-import React, { memo, useRef } from 'react';
+import { memo, useRef } from 'react';
 import { SortableContainer } from 'react-sortable-hoc';
 import PageItem from './PageItem';
 import { getScaleForPageThumbnailLarge } from '../../../utils/functions';

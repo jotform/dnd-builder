@@ -1,4 +1,3 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import objectHash from 'object-hash';
 import { PropProvider } from '../../utils/propContext';

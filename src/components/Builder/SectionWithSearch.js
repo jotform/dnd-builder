@@ -1,4 +1,4 @@
-import React, { memo, useState } from 'react';
+import { memo, useState } from 'react';
 import PropTypes from 'prop-types';
 import SearchInput from './SearchInput';
 import { useTranslatedTexts } from '../../utils/hooks';

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import * as icons from '../../utils/icons';
 import { roundForDecimalPart } from '../../utils/functions';

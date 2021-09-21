@@ -1,4 +1,3 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import HTML5Backend from 'react-dnd-html5-backend-cjs';
 import { DndProvider } from 'react-dnd-cjs';

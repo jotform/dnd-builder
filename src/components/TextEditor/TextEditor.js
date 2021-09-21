@@ -1,4 +1,4 @@
-import React from 'react';
+import { useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import QuillEditor from './QuillEditor';
 import { useBuilderContext } from '../../utils/builderContext';
@@ -12,19 +12,19 @@ const TextEditor = ({
 }) => {
   const { isTextEditorOpen, setIsTextEditorOpen } = useBuilderContext();
 
-  const onClick = React.useCallback(() => {
+  const onClick = useCallback(() => {
     if (isSelected && !isLocked) {
       setIsTextEditorOpen(true);
     }
   }, [isSelected, isLocked]);
 
-  const isNotEmpty = React.useMemo(() => {
+  const isNotEmpty = useMemo(() => {
     const el = document.createElement('div');
     el.innerHTML = content;
     return !!el.innerText;
   }, [content]);
 
-  const onClickOutside = React.useCallback(() => {
+  const onClickOutside = useCallback(() => {
     setTimeout(() => setIsTextEditorOpen(false), 1000);
   }, [isTextEditorOpen]);
 

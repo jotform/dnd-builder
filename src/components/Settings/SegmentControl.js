@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import { memo, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { safeJSONParse } from '../../utils/functions';
@@ -49,9 +49,9 @@ const SegmentControl = ({
             type="button"
           >
             {optionsDisplay ? optionsDisplay.map(display => (
-              <React.Fragment key={display}>
+              <Fragment key={display}>
                 {option[display]}
-              </React.Fragment>
+              </Fragment>
             )) : option.label}
           </button>
         );

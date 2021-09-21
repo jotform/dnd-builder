@@ -1,4 +1,3 @@
-import React from 'react';
 import * as icons from './icons';
 
 export const getDefaultPresentationActions = ({

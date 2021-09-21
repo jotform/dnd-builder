@@ -1,4 +1,4 @@
-import React from 'react';
+import { memo } from 'react';
 import ReportItemRenderer from './Builder/ReportItemRenderer';
 import DraggableItem from './DraggableItem/DraggableItem';
 import getMergedItem from '../utils/getMergedItem';
@@ -84,4 +84,4 @@ const ReportItemsWrapper = ({
     });
 };
 
-export default React.memo(ReportItemsWrapper);
+export default memo(ReportItemsWrapper);

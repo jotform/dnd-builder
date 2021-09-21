@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import { memo } from 'react';
 import PropTypes from 'prop-types';
 import domPurify from 'dompurify';
 import 'react-quill/dist/quill.snow.css';

@@ -1,5 +1,5 @@
 /* global Element */
-import React, { memo } from 'react';
+import { forwardRef, memo } from 'react';
 import PropTypes from 'prop-types';
 
 const Panel = ({
@@ -35,7 +35,7 @@ Panel.defaultProps = {
 
 const MemoizedPanel = memo(Panel);
 
-export default React.forwardRef((props, ref) => (
+export default forwardRef((props, ref) => (
   <MemoizedPanel
     innerRef={ref}
     {...props}

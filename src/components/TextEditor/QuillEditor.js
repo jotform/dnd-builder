@@ -1,4 +1,4 @@
-import React from 'react';
+import { useEffect, useRef, useCallback } from 'react';
 import ReactQuill from 'react-quill';
 import PropTypes from 'prop-types';
 import withClickOutside from '../withClickOutside';
@@ -16,7 +16,7 @@ const QuillEditor = ({
   placeholder,
   setIsTextEditorOpen,
 }) => {
-  const quill = React.useRef(null);
+  const quill = useRef(null);
   const saveAndQuit = () => {
     if (quill.current === null) return;
     const editor = quill.current.getEditor();
@@ -25,7 +25,7 @@ const QuillEditor = ({
     setIsTextEditorOpen(false);
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (quill.current !== null) {
       const editor = quill.current.getEditor();
       editor.setSelection(0, content.length);
@@ -33,7 +33,7 @@ const QuillEditor = ({
     return saveAndQuit;
   }, []);
 
-  const handleKeyDown = React.useCallback(e => {
+  const handleKeyDown = useCallback(e => {
     e.stopPropagation();
     if (e.keyCode === 27) {
       saveAndQuit();

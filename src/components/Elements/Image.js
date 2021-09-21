@@ -1,5 +1,5 @@
 /* eslint max-len: ["error", { "code": 120 }] */
-import React, { memo, useState, useEffect } from 'react';
+import { memo, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 const ITEM_TYPE = 'image';

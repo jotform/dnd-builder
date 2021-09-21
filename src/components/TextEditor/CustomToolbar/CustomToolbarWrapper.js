@@ -1,4 +1,4 @@
-import React from 'react';
+import { memo } from 'react';
 import PropTypes from 'prop-types';
 import CustomToolbar from './CustomToolbar';
 
@@ -30,4 +30,4 @@ CustomToolbarWrapper.defaultProps = {
   itemWidth: 0,
 };
 
-export default React.memo(CustomToolbarWrapper);
+export default memo(CustomToolbarWrapper);

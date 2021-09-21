@@ -1,4 +1,4 @@
-import React, { Fragment, memo, useCallback } from 'react';
+import { Fragment, memo, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { useBuilderContext } from '../../../utils/builderContext';
 import { usePropContext } from '../../../utils/propContext';

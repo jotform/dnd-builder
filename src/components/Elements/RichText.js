@@ -1,4 +1,6 @@
-import React, { memo, useEffect, useRef } from 'react';
+import {
+  memo, useEffect, useRef, useCallback,
+} from 'react';
 import PropTypes from 'prop-types';
 import TextEditor from '../TextEditor';
 import { fontTypes } from '../../constants/fonts';
@@ -48,7 +50,7 @@ export const RichTextElement = ({
     opacity,
   };
 
-  const handleSave = React.useCallback(newValue => {
+  const handleSave = useCallback(newValue => {
     onItemChange(
       { id },
       { value: newValue },

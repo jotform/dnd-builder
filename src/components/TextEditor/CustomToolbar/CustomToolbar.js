@@ -1,4 +1,6 @@
-import React from 'react';
+import {
+  useState, useCallback, useLayoutEffect, useRef,
+} from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { fontSizes } from '../../../constants/fonts';
@@ -9,15 +11,15 @@ const BAR_WIDTH = SELECT_WIDTH + (BUTTON_WIDTH * 8);
 
 const CustomToolbar = ({ itemWidth }) => {
   const overflow = BAR_WIDTH > itemWidth;
-  const [isOpened, setIsOpened] = React.useState(overflow ? false : true);
-  const onClickMore = React.useCallback(() => setIsOpened(true), []);
-  const wrapper = React.useRef();
+  const [isOpened, setIsOpened] = useState(overflow ? false : true);
+  const onClickMore = useCallback(() => setIsOpened(true), []);
+  const wrapper = useRef();
 
   function getVisibleClass(limit) {
     return overflow && itemWidth < limit ? ' hiddenVisibility' : '';
   }
 
-  React.useLayoutEffect(() => {
+  useLayoutEffect(() => {
     if (!isOpened || wrapper.current === null) return;
     Array.from(wrapper.current.children).forEach(el => el.classList.remove('hiddenVisibility'));
   }, [isOpened]);
