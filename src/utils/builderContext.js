@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 export const BuilderContext = createContext({
   activeElement: null,
-  activeTab: 0,
+  activeTab: { left: 0, right: 0 },
   contextMenuProps: false,
   editedElement: 'l_layout',
   isAllSlidesPanelOpen: false,
@@ -87,8 +87,9 @@ export class BuilderProvider extends React.Component {
     });
   }
 
-  setActiveTab = tabIndex => {
-    this.setState({ activeTab: tabIndex });
+  setActiveTab = (panel, tabIndex) => {
+    const { activeTab } = this.state;
+    this.setState({ activeTab: { ...activeTab, [panel]: tabIndex } });
   };
 
   setContextMenuProps = status => {
@@ -159,7 +160,7 @@ export class BuilderProvider extends React.Component {
 
 BuilderProvider.propTypes = {
   activeElement: PropTypes.string,
-  activeTab: PropTypes.number,
+  activeTab: PropTypes.shape({}),
   children: PropTypes.any,
   contextMenuProps: PropTypes.shape({}),
   editedElement: PropTypes.string,
@@ -171,7 +172,7 @@ BuilderProvider.propTypes = {
 
 BuilderProvider.defaultProps = {
   activeElement: null,
-  activeTab: 0,
+  activeTab: { left: 0, right: 0 },
   children: null,
   contextMenuProps: null,
   editedElement: 'l_layout',

@@ -23,7 +23,7 @@ const Settings = ({
         key={index.toString()}
         className={classNames(
           'toolItem-tabContent',
-          { hidden: index !== activeTab },
+          { hidden: index !== activeTab.right },
           { hasInnerScroll: tabKey === 'My Images' },
         )}
       >

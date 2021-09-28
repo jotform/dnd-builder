@@ -101,6 +101,15 @@ export const getTabsWithSettings = (element, selectedItem, itemAccessor) => {
   }, {});
 };
 
+export const getTabsWithElements = leftPanelConfig => {
+  return leftPanelConfig.reduce((tabsWithSettings, config) => {
+    const _tabsWithSettings = tabsWithSettings;
+    const settingSection = config.section || 'General';
+    _tabsWithSettings[settingSection] = config;
+    return _tabsWithSettings;
+  }, {});
+};
+
 export const calculateGuidePositions = (dimensions, axis, zoom = 1) => {
   const isItem = dimensions && dimensions.id;
   if (axis === 'x') {

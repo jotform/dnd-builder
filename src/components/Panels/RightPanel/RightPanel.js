@@ -16,7 +16,7 @@ import { useTranslatedTexts } from '../../../utils/hooks';
 import {
   REPORT_SETTINGS_ITEM_TYPE, PAGE_SETTINGS_ITEM_TYPE,
 } from '../../../constants/itemTypes';
-import SettingTabs from './SettingTabs';
+import Tabs from '../../Builder/Tabs';
 import Settings from './Settings';
 import RightPanelToggler from './RightPanelToggler';
 import { capitalize } from '../../../utils/string';
@@ -136,10 +136,10 @@ const RightPanel = ({
   const tabs = Object.keys(tabsWithSettings);
 
   useEffect(() => {
-    const currentTab = tabs[activeTab];
+    const currentTab = tabs[activeTab.right];
     if (!tabsWithSettings[currentTab]) {
       // This is due to conditionaly hiding tabs
-      setActiveTab(0);
+      setActiveTab('right', 0);
     }
   }, [activeTab, tabs]);
 
@@ -181,7 +181,10 @@ const RightPanel = ({
         <RightPanelToggler />
         <div className="toolItemWrapper f-height d-flex dir-col">
           <Section title={title}>
-            <SettingTabs tabs={tabs} />
+            <Tabs
+              panel="right"
+              tabs={tabs}
+            />
             <Settings
               key={selectedItem.id}
               element={element}
