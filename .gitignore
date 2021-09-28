@@ -21,3 +21,4 @@ lib/
 build/
 .docz
 storybook-static/
+syncAll
