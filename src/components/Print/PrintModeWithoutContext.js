@@ -13,6 +13,7 @@ const PrintModeWithoutContext = ({
   mode,
   pages,
   settings,
+  theme,
 }) => {
   const [manipulatePageSize, setManipulatePageSize] = useState(false);
   const reportLayout = settings.reportLayout ? settings.reportLayout : 'A4 Landscape';
@@ -34,6 +35,7 @@ const PrintModeWithoutContext = ({
       )}
       <ReportWrapper
         mode="print"
+        theme={theme}
       >
         <StaticScene
           additionalPageItems={additionalPageItems}
@@ -61,6 +63,7 @@ PrintModeWithoutContext.propTypes = {
     reportLayoutHeight: PropTypes.string,
     reportLayoutWidth: PropTypes.string,
   }),
+  theme: PropTypes.string,
 };
 
 PrintModeWithoutContext.defaultProps = {
@@ -70,6 +73,7 @@ PrintModeWithoutContext.defaultProps = {
   mode: 'print',
   pages: [],
   settings: {},
+  theme: 'lightMode',
 };
 
 export default PrintModeWithoutContext;

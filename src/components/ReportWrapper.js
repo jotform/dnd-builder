@@ -11,6 +11,7 @@ const ReportWrapper = ({
   children,
   mode,
   pageCount,
+  theme,
 }) => {
   const {
     isAllSlidesPanelOpen,
@@ -59,6 +60,7 @@ const ReportWrapper = ({
     isRightPanelOpen === true || isSlidesPanelOpen === true ? 'rightPaneIsActive' : '',
     isSlidesPanelOpen === true ? 'slidesPaneIsActive' : '',
     isAllSlidesPanelOpen === true ? 'allSlidesPaneIsActive' : '',
+    theme,
   );
   return (
     <div
@@ -73,6 +75,7 @@ ReportWrapper.propTypes = {
   children: PropTypes.any,
   mode: PropTypes.string,
   pageCount: PropTypes.number,
+  theme: PropTypes.string.isRequired,
 };
 
 ReportWrapper.defaultProps = {

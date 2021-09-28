@@ -18,6 +18,7 @@ const Presentation = ({
   pages,
   presentationBarActions,
   settings,
+  theme,
   useFixedPresentationBar,
   ...otherProps
 }) => {
@@ -35,6 +36,7 @@ const Presentation = ({
         <BuilderProvider>
           <ReportWrapper
             mode="presentation"
+            theme={theme}
           >
             <PresentationWrapper
               presentationBarActions={presentationBarActions}
@@ -82,6 +84,8 @@ Presentation.propTypes = {
   presentationBarActions: PropTypes.arrayOf(PropTypes.shape({})),
   /** General report settings such as layout size and background color */
   settings: PropTypes.shape({}),
+  /** Theme */
+  theme: PropTypes.string,
   /** Flag for fixed action bar */
   useFixedPresentationBar: PropTypes.bool,
 };
@@ -94,6 +98,7 @@ Presentation.defaultProps = {
   pages: [],
   presentationBarActions: [],
   settings: {},
+  theme: 'lightMode',
   useFixedPresentationBar: false,
 };
 

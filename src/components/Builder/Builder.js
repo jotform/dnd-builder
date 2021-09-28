@@ -37,6 +37,7 @@ const Builder = ({
   onSettingChange,
   pages,
   settings,
+  theme,
   useExperimentalFeatures,
   ...otherProps
 }) => {
@@ -55,6 +56,7 @@ const Builder = ({
           <ReportWrapper
             mode="customize"
             pageCount={pages.length}
+            theme={theme}
           >
             <DndWrapper>
               <LeftPanel
@@ -157,6 +159,8 @@ Builder.propTypes = {
   ),
   /** General report settings such as layout size and background color */
   settings: PropTypes.shape({}),
+  /** Theme */
+  theme: PropTypes.string,
   useExperimentalFeatures: PropTypes.bool,
 };
 
@@ -182,6 +186,7 @@ Builder.defaultProps = {
   onSettingChange: () => {},
   pages: [],
   settings: {},
+  theme: 'lightMode',
   useExperimentalFeatures: false,
 };
 

@@ -13,6 +13,7 @@ const Preview = ({
   onAnEventTrigger,
   pages,
   settings,
+  theme,
   ...otherProps
 }) => {
 /* eslint-disable no-unused-vars */
@@ -47,6 +48,7 @@ const Preview = ({
       >
         <ReportWrapper
           mode="preview"
+          theme={theme}
         >
           <StaticScene
             additionalPageItems={additionalPageItems}
@@ -77,6 +79,8 @@ Preview.propTypes = {
   ),
   /** General report settings such as layout size and background color */
   settings: PropTypes.shape({}),
+  /** Theme */
+  theme: PropTypes.string,
 };
 
 Preview.defaultProps = {
@@ -87,6 +91,7 @@ Preview.defaultProps = {
   onAnEventTrigger: () => {},
   pages: [],
   settings: {},
+  theme: 'lightMode',
 };
 
 export default Preview;
