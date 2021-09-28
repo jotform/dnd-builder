@@ -5,8 +5,10 @@ import LeftPanelCloser from '../../../../components/Panels/LeftPanel/LeftPanelCl
 import {
   RichText, Image, Chart,
 } from '../../../../index';
-import SectionWithSearch from '../../../../components/Builder/SectionWithSearch';
+import Section from '../../../../components/Builder/Section';
 import Element from '../../../../components/Builder/Element';
+import Tabs from '../../../../components/Builder/Tabs';
+import { BuilderProvider } from '../../../../utils/builderContext';
 
 describe('Elements', () => {
   it('Should Always Render LeftPanelCloser', () => {
@@ -19,9 +21,11 @@ describe('Elements', () => {
 
   it('Should Not Render SectionWithSearch & Elements If LeftPanelConfig is Empty', () => {
     const elementsWrapper = shallow(
-      <Elements {...Elements.defaultProps} />,
+      <BuilderProvider>
+        <Elements {...Elements.defaultProps} />
+      </BuilderProvider>
     );
-    expect(elementsWrapper.find(SectionWithSearch)).toHaveLength(0);
+    expect(elementsWrapper.find(Section)).toHaveLength(0);
     expect(elementsWrapper.find(Element)).toHaveLength(0);
   });
 
@@ -42,6 +46,7 @@ describe('Elements', () => {
           },
         ],
         title: 'Report Elements',
+        section: 'Report Elements',
       }, {
         elements: [
           {
@@ -56,6 +61,7 @@ describe('Elements', () => {
           },
         ],
         title: 'Form Elements',
+        section: 'Form Elements',
       },
       ],
     };
@@ -65,7 +71,8 @@ describe('Elements', () => {
         <Elements {...props} />
       </DndWrapper>,
     );
-    expect(elementsWrapper.find(SectionWithSearch)).toHaveLength(2);
-    expect(elementsWrapper.find(Element)).toHaveLength(4);
+    expect(elementsWrapper.find(Section)).toHaveLength(1);
+    expect(elementsWrapper.find(Tabs)).toHaveLength(1);
+    expect(elementsWrapper.find(Element)).toHaveLength(2); // tabbed structure
   });
 });

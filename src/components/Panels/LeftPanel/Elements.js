@@ -26,7 +26,18 @@ const Elements = ({
   const tabDetails = getTabsWithElements(leftPanelConfig);
   const tabs = Object.keys(tabDetails);
 
-  const { elements: tabsWithElements, hasSearch, searchKeys } = tabDetails[tabs[activeTab.left]];
+  let tabsWithElements = [];
+  let hasSearch = false;
+  let searchKeys = [];
+
+  if (tabs.length > 0) {
+    const {
+      elements: _elements,
+      hasSearch: _hasSearch,
+      searchKeys: _searchKeys,
+    } = tabDetails[tabs[activeTab.left]];
+    [tabsWithElements, hasSearch, searchKeys] = [_elements, _hasSearch, _searchKeys];
+  }
 
   const WrapperSection = hasSearch ? SectionWithSearch : Section;
   const wrapperProps = hasSearch ? {
