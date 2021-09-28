@@ -11,7 +11,7 @@ const LeftPanelToggler = () => {
         onClick={() => { setIsLeftPanelOpen(false); }}
         type="button"
       >
-        <icons.arrowLeft className="jfReportSVG" />
+        <icons.close className="jfReportSVG" />
       </button>
     </>
   );
