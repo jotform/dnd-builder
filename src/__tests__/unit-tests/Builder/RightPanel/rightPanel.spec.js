@@ -3,7 +3,7 @@ import RightPanel from '../../../../components/Panels/RightPanel';
 import Panel from '../../../../components/Builder/Panel';
 import RightPanelToggler from '../../../../components/Panels/RightPanel/RightPanelToggler';
 import Section from '../../../../components/Builder/Section';
-import SettingTabs from '.../../../../components/Panels/RightPanel/SettingTabs';
+import Tabs from '.../../../../components/Builder/Tabs';
 import Settings from '../../../../components/Panels/RightPanel/Settings';
 import { BuilderProvider } from '../../../../utils/builderContext';
 
@@ -24,9 +24,9 @@ describe('RightPanel Component', () => {
     expect(rightPanelWrapper.find(Section)).toHaveLength(1);
   });
 
-  it('Should Always Render SettingTabs in RightPanel', () => {
+  it('Should Always Render Tabs in RightPanel', () => {
     const rightPanelWrapper = shallow(<RightPanel />);
-    expect(rightPanelWrapper.find(SettingTabs)).toHaveLength(1);
+    expect(rightPanelWrapper.find(Tabs)).toHaveLength(1);
   });
 
   it('Should Always Render Settings in RightPanel', () => {
@@ -34,9 +34,9 @@ describe('RightPanel Component', () => {
     expect(rightPanelWrapper.find(Settings)).toHaveLength(1);
   });
 
-  it('Section contains SettingTabs & Settings', () => {
+  it('Section contains Tabs & Settings', () => {
     const rightPanelWrapper = shallow(<RightPanel />);
-    expect(rightPanelWrapper.find(SettingTabs).parent().is(Section)).toEqual(true);
+    expect(rightPanelWrapper.find(Tabs).parent().is(Section)).toEqual(true);
     expect(rightPanelWrapper.find(Settings).parent().is(Section)).toEqual(true);
   });
 
