@@ -8,6 +8,7 @@ import LeftPanelCloser from './LeftPanelCloser';
 import { useBuilderContext } from '../../../utils/builderContext';
 import Tabs from '../../Builder/Tabs';
 import { getTabsWithElements } from '../../../utils/functions';
+import { useTranslatedTexts } from '../../../utils/hooks';
 
 const Elements = ({
   acceptedItems,
@@ -21,6 +22,7 @@ const Elements = ({
     setIsRightPanelOpen,
     zoom,
   } = useBuilderContext();
+  const { ADD_ELEMENT } = useTranslatedTexts();
 
   // Tabs
   const tabDetails = getTabsWithElements(leftPanelConfig);
@@ -75,7 +77,7 @@ const Elements = ({
     <div className="toolItemWrapper f-height d-flex dir-col o-auto p-relative">
       <LeftPanelCloser />
       <WrapperSection
-        title="Add Element"
+        title={ADD_ELEMENT}
         {...wrapperProps}
       >
         {!hasSearch ? getElements() : getElements}
