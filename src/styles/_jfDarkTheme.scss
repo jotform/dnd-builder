@@ -1,0 +1,342 @@
+.darkMode {
+  .jfReport-toolbox, .jfPresentation-toolbox {
+    background-color: #565F6E;
+  }
+
+  .jfReport-pane {
+    ::-webkit-scrollbar-thumb {
+      background: #000;
+    }
+
+    .paneClose {
+      background-color: #565F6E;
+
+      .jfReportSVG {
+        fill: $white;
+      }
+
+      &:hover {
+        .jfReportSVG {
+          fill: rgba($white, .7);
+        }
+      }
+    }
+
+    .toolItem-tabs {
+      background-color: #394049;
+    }
+
+    .toolItem:not(.toolSection) {
+      border-bottom: 1px solid #4C5360;
+    }
+
+    &.jfReport-toolbox .toolItem .jfReportSVG {
+      fill: $white;
+      color: $white;
+    }
+
+    .toolItem.toolTitle {
+      color: $white;
+    }
+
+    .toolToggle {
+
+      .toolToggle-custom {
+        background-color: #B3B5C6;
+
+        &:before {
+          background: #fff;
+        }
+      }
+
+      &.toggled .toolToggle-custom {
+        background-color: $ctaGreen;
+      }
+
+      label {
+        color: rgba(#fff,.6);
+
+        &.forUnchecked {
+          color: #fff;
+
+          &:after {
+            background: #fff;
+          }
+        }
+      }
+
+      &-input {
+        display: none;
+
+        &:checked ~ {
+          .jfReportToggle-custom {
+            background: #4C7FF4;
+          }
+
+          .jfReportToggle-label {
+
+            &.forChecked {
+              color: #fff;
+            }
+
+            &.forUnchecked {
+              color: rgba(#fff,.6);
+            }
+          }
+        }
+      }
+    }
+
+    .toolTabs label {
+      background-color: #394049;
+      color: $white;
+      border-bottom: 1px solid #4C5360;
+
+      &:hover {
+        color: rgba($white, .7);
+      }
+    }
+
+    .toolTabs-indicator {
+      background-color: $blue;
+    }
+
+    .jfReport-searchContainer {
+      background-color: #394049;
+      border-bottom: 1px solid #4C5360;
+    }
+
+    .section-search-button {
+      &:before {
+        background: #394049;
+        background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(#394049,1) 100%);
+      }
+    }
+
+    .section-search-input {
+      background-color: #394049;
+      border: 1px solid hsl(219, 12%, 34%);
+      color: $white;
+
+      &::placeholder {
+        color: #AEB0B8;
+      }
+
+      &:focus {
+        border-color: #4277FF;
+      }
+    }
+
+    .no-search-result-text {
+      color: rgba($white, .7);
+    }
+
+    &.jfReport-toolbox .toolTitle {
+      background-color: #565F6E;
+    }
+
+    .previewPanel {
+      background-color: #EFEFF6;
+    }
+
+    .toolSection.forAspect {
+      border-bottom: 1px solid $inputGrayBorder;
+    }
+
+    .toolSection + hr {
+      border-top: 1px solid #4C5360;
+    }
+
+    .toolSection-notifier {
+      background-color: #f8f8f8;
+    }
+
+    .rangeSlider .rangeSlider-bar {
+      outline: 1px solid $white;
+    }
+
+    .rangeSlider:after {
+      background-color: $lightGray;
+    }
+
+    .rangeSlider-bar::-moz-range-track {
+      outline: 1px solid $white;
+    }
+
+    .rangeSlider-bar::-webkit-slider-thumb {
+      background: $white;
+      border: 3px solid $green;
+    }
+
+    .rangeSlider-bar::-moz-range-thumb {
+      background: $white;
+      border: 3px solid $green;
+
+      &:hover {
+        background-color: opacify($green, .1);
+      }
+    }
+
+    .rangeSlider-indicator {
+      background-color: $green;
+    }
+
+    .rangeSlider-bar::-ms-fill-lower {
+      background: #01bd6f;
+    }
+
+    .rangeSlider-bar::-ms-fill-upper {
+      background: #cccdd9;
+    }
+
+    .rangeSlider-bar::-ms-thumb {
+      border: 3px solid #01bd6f;
+      background: #fff;
+    }
+
+    .rangeSlider-bar:focus::-ms-fill-lower {
+      background: #01bd6f;
+    }
+
+    .rangeSlider-bar:focus::-ms-fill-upper {
+      background: #cccdd9;
+    }
+
+    .imageUpload-wrapper {
+      @include inputDefault;
+
+      &.imageUpload-info span:first-child {
+        color: #abadc1;
+      }
+    }
+
+    .dropArea.isDragging {
+      background: $white;
+      border: 1px dashed $green;
+    }
+
+    .uploadInfo {
+      color: $infoGray;
+    }
+
+    .userUploads-image {
+      border: 1px solid $inputGrayBorder;
+    }
+
+    .colorPicker-wrapper {
+      background-color: $inputGray;
+      border: 1px solid #ccc;
+    }
+
+    .hasUnit:after {
+      color: $infoGray;
+    }
+
+    .toolSection-dropdownWrapper {
+      &:after {
+        background-image: url("data:image/svg+xml, %3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 16 9'%3E%3Cpath fill-rule='evenodd' d='M242.656854,19.2928932 C243.047379,18.9023689 243.680544,18.9023689 244.071068,19.2928932 C244.461592,19.6834175 244.461592,20.3165825 244.071068,20.7071068 L238.414214,26.363961 L244.071068,32.0208153 C244.461592,32.4113396 244.461592,33.0445046 244.071068,33.4350288 C243.680544,33.8255531 243.047379,33.8255531 242.656854,33.4350288 L236.292893,27.0710678 C235.902369,26.6805435 235.902369,26.0473785 236.292893,25.6568542 L242.656854,19.2928932 Z' transform='rotate(-90 113.182 131.364)'/%3E%3C/svg%3E%0A");
+      }
+
+      &.isDark {
+        .toolSection-dropdown {
+          background-color: #2E354A;
+          color: #fff;
+        }
+
+        &:after {
+          background-image: url("data:image/svg+xml, %3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 16 9'%3E%3Cpath fill-rule='evenodd' fill='%23A8AABF' d='M242.656854,19.2928932 C243.047379,18.9023689 243.680544,18.9023689 244.071068,19.2928932 C244.461592,19.6834175 244.461592,20.3165825 244.071068,20.7071068 L238.414214,26.363961 L244.071068,32.0208153 C244.461592,32.4113396 244.461592,33.0445046 244.071068,33.4350288 C243.680544,33.8255531 243.047379,33.8255531 242.656854,33.4350288 L236.292893,27.0710678 C235.902369,26.6805435 235.902369,26.0473785 236.292893,25.6568542 L242.656854,19.2928932 Z' transform='rotate(-90 113.182 131.364)'/%3E%3C/svg%3E%0A");
+          background-color: #2E354A;
+        }
+
+        &:hover {
+          .toolSection-dropdown, &:after {
+            background-color: lighten(#2E354A, 5);
+          }
+
+          &:after {
+            background-image: url("data:image/svg+xml, %3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 16 9'%3E%3Cpath fill-rule='evenodd' fill='%23FFF' d='M242.656854,19.2928932 C243.047379,18.9023689 243.680544,18.9023689 244.071068,19.2928932 C244.461592,19.6834175 244.461592,20.3165825 244.071068,20.7071068 L238.414214,26.363961 L244.071068,32.0208153 C244.461592,32.4113396 244.461592,33.0445046 244.071068,33.4350288 C243.680544,33.8255531 243.047379,33.8255531 242.656854,33.4350288 L236.292893,27.0710678 C235.902369,26.6805435 235.902369,26.0473785 236.292893,25.6568542 L242.656854,19.2928932 Z' transform='rotate(-90 113.182 131.364)'/%3E%3C/svg%3E%0A");
+          }
+        }
+      }
+    }
+  }
+
+  .forAllSlides:not(.jfReport-toolbox) .paneClose .jfReportSVG {
+    fill: #fff;
+  }
+
+  .forSettings:not(.jfReport-toolbox) .toolSection .toolSection-listItem {
+    .jfReportSVG {
+      fill: #8382a9;
+    }
+
+    &:hover {
+      background-color: rgba(179, 181, 199, 0.1);
+    }
+
+    &.isSelected {
+      background-color: $ctaGreen;
+      color: $white;
+
+      svg {
+        fill: $white;
+      }
+    }
+  }
+
+  .forSettings .toolSection-list.forChart {
+    .isSelected {
+      path {
+        fill: $white;
+      }
+    }
+  }
+
+  .forSlides .paneToggler {
+    background-color: #2E354A;
+  }
+
+
+  &.forAllSlides:not(.jfReport-toolbox) {
+    background-color: #EDEDF4;
+
+    .paneClose {
+      background-color: #2E354A;
+
+      &:hover {
+        background: lighten(#2E354A, 5);
+      }
+    }
+  }
+
+  .jfReport-pane:not(.jfReport-settings) {
+    .toolItem:not(.toolTitle) {
+      background-color: #565F6E;
+
+      .toolItem-icon {
+        background-color: #394049;
+      }
+
+      .toolItem-name {
+        color: $white;
+      }
+
+      &:hover {
+        background-color: #3A69ED;
+
+        .toolItem-icon {
+          background-color: $blue;
+          color: $white;
+
+          .jfReportSVG {
+            fill: $white;
+          }
+
+          .icon-bar path {
+            fill: $white;
+          }
+        }
+      }
+    }
+  }
+}

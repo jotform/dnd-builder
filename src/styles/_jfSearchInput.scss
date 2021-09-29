@@ -26,8 +26,6 @@
         left: -15px;
         width: 15px;
         height: 100%;
-        background: rgb(255,255,255);
-        background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(#FAFAFC,1) 100%);
         pointer-events: none;
       }
 
@@ -60,8 +58,6 @@
     }
 
     .section-search-input {
-      background-color: #FAFAFC;
-      border: 1px solid #CCCDDA;
       width: 100%;
       box-shadow: none;
       padding: 5px 30px 5px 12px;
@@ -70,7 +66,6 @@
       border-radius: 15px;
       transition: all .3s ease-in-out;
       height: 32px;
-      color: #2C3345;
 
       &::placeholder {
         color: $additionalGray;

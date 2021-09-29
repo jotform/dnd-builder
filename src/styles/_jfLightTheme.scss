@@ -26,6 +26,10 @@
       border-bottom: 1px solid #dde0ea;
     }
 
+    &.jfReport-toolbox .toolItem .jfReportSVG {
+      fill: $additionalGray;
+    }
+
     .toolToggle {
 
       .toolToggle-custom {
@@ -76,19 +80,11 @@
 
     .toolTabs label {
       background-color: $white;
-      color: #bcbecf;
+      color: #2a3244;
       border-bottom: 1px solid #e1e1e6;
 
       &:hover {
-        color: inherit;
-        background-color: $white;
-      }
-    }
-
-    .toolTabs-tab {
-      &:checked + label {
-        color: #2a3244;
-        background-color: $white;
+        color: rgba(#2a3244, .7);
       }
     }
 
@@ -99,6 +95,19 @@
     .jfReport-searchContainer {
       background-color: $white;
       border-bottom: 1px solid #dde0ea;
+    }
+
+    .section-search-button {
+      &:before {
+        background: rgb(255,255,255);
+        background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(#FAFAFC,1) 100%);
+      }
+    }
+
+    .section-search-input {
+      background-color: #FAFAFC;
+      border: 1px solid #CCCDDA;
+      color: #2C3345;
     }
 
     .no-search-result-text {
