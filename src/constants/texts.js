@@ -1,7 +1,7 @@
 const ALL_TEXTS = {
   ADD_ELEMENT: 'Add Element',
   ADD_LINK: 'Add Link',
-  ADD_NEW_PAGE: 'Add New Page',
+  ADD_NEW_PAGE: 'Add Slide',
   BACKGROUND_COLOR: 'Background Color',
   DELETE: 'Delete',
   DELETE_ITEM: 'Delete Item',
@@ -27,7 +27,7 @@ const ALL_TEXTS = {
   ORIGINAL_SIZE: 'Original Size',
   PAGE_SETTINGS: 'Page Settings',
   PAGE_STYLE: 'Page Style',
-  REMOVE_PAGE: 'Remove Page',
+  REMOVE_PAGE: 'Remove Slide',
   SEARCH: 'Search',
   SETTINGS: 'Settings',
   SHOW_ALL: 'Show All',

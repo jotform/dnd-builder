@@ -83,20 +83,30 @@
   }
 }
 
+.jfReport .forSlides {
+  .jfReport-pane-footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 10px 20px;
+    width: 100%;
+    border-top: 1px solid #4C5360;
+  }
+}
+
 .jfReport .forSlides .pageAdder {
-  position: absolute;
-  bottom: 0;
-  left: 0;
   display: flex;
-  padding: 11px;
-  background-color: #fff;
+  padding: 10px 20px 10px 16px;
+  background-color: #0099FF;
   border-top: 1px solid #DDE0EA;
+  border-radius: 4px;
   box-shadow: 0 -5px 0 rgba(#6A6E8F, 0.05);
-  color: $blue;
+  color: #ffffff;
   transition: $transition;
+  text-transform: uppercase;
 
   .icon-plus {
-    fill: $blue;
+    fill: #ffffff;
   }
 
   span {
@@ -104,10 +114,10 @@
   }
 
   &:hover {
-    background-color: #DDE0EA;
+    background-color: #0099FF;
 
     .jfReportSVG {
-      fill: $blue;
+      fill: #fff;
     }
   }
 }

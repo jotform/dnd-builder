@@ -104,10 +104,12 @@ const ListWrapper = ({
           )}
         </ResponsiveContent>
       </ResponsiveContainer>
-      <PageAdder
-        onPageAdd={onPageAdd}
-        pageCount={pageCount}
-      />
+      <div className="jfReport-pane-footer">
+        <PageAdder
+          onPageAdd={onPageAdd}
+          pageCount={pageCount}
+        />
+      </div>
     </>
   );
 };

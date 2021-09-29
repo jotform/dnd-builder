@@ -96,7 +96,7 @@ const PageActions = ({
             <icons.duplicate className="jfReportSVG icon-duplicateLine" />
           </button>
           <button
-            key="Remove Page"
+            key="Remove Slide"
             className="controllerItem isDanger js-removePage"
             disabled={disableInteraction.indexOf('remove') > -1}
             onClick={onPageRemoveClick}
@@ -128,7 +128,7 @@ const PageActions = ({
         </div>
         <div className="floatingController-container">
           <button
-            key="Add New Page"
+            key="Add Slide"
             className="js-addNewPage controllerItem"
             disabled={disableInteraction.indexOf('add') > -1}
             onClick={onPageAddClick}

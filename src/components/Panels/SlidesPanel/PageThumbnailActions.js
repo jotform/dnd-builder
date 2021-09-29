@@ -49,7 +49,7 @@ const PageThumbnailActions = ({
             <icons.duplicate className="jfReportSVG icon-duplicateLine" />
           </button>
           <button
-            key="Remove Page"
+            key="Remove Slide"
             className="controllerItem isDanger"
             data-order={order}
             disabled={disableInteraction.indexOf('remove') > -1}
@@ -60,7 +60,7 @@ const PageThumbnailActions = ({
             <icons.trash className="jfReportSVG icon-trashLine" />
           </button>
           <button
-            key="Add New Page"
+            key="Add Slide"
             className="controllerItem"
             data-order={nextPageIndex}
             disabled={disableInteraction.indexOf('add') > -1}

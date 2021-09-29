@@ -43,19 +43,19 @@ const PageThumbnailActions = ({
             <icons.duplicate className="jfReportSVG icon-duplicateLine" />
           </button>
           <button
-            key="Remove Page"
+            key="Remove Slide"
             className="controllerItem isDanger"
             onClick={onPageRemoveClick}
-            title="Remove Page"
+            title="Remove Slide"
             type="button"
           >
             <icons.trash className="jfReportSVG icon-trashLine" />
           </button>
           <button
-            key="Add New Page"
+            key="Add Slide"
             className="controllerItem"
             onClick={onPageAddClick}
-            title="Add New Page"
+            title="Add Slide"
             type="button"
           >
             <icons.plus className="jfReportSVG icon-plus" />

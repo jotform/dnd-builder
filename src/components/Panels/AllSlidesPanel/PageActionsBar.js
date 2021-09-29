@@ -66,10 +66,10 @@ const PageActionsBar = ({
               <span>Duplicate</span>
             </button>
             <button
-              key="Remove Page"
+              key="Remove Slide"
               className="jfReportButton isDanger"
           // onClick={onPageRemoveClick}
-              title="Remove Page"
+              title="Remove Slide"
               type="button"
             >
               <icons.trash className="jfReportSVG icon-trashLine" />
