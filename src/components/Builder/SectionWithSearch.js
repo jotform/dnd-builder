@@ -11,31 +11,30 @@ const SectionWithSearch = ({
   title,
 }) => {
   const [_elements, setElements] = useState(elements);
+  const hasSearchCx = hasSearch ? ' hasSearch' : '';
   const { NO_RESULT } = useTranslatedTexts();
 
   return (
     <>
       <div
-        className="js-title toolItem toolTitle d-flex a-center t-medium"
+        className={`js-title toolItem toolTitle d-flex a-center t-medium${hasSearchCx}`}
       >
         <div>
           {title}
         </div>
+        {hasSearch && (
+          <SearchInput
+            elements={elements}
+            searchKeys={searchKeys}
+            setElements={setElements}
+          />
+        )}
       </div>
-      {children(_elements,
-        hasSearch
-          ? (
-            <>
-              <SearchInput
-                elements={elements}
-                searchKeys={searchKeys}
-                setElements={setElements}
-              />
-              {_elements === 'noResult' && (
-                <div className="no-search-result-text">{NO_RESULT}</div>
-              )}
-            </>
-          ) : null)}
+      {_elements === 'noResult' ? (
+        <div className="no-search-result-text">{NO_RESULT}</div>
+      ) : (
+        children(_elements)
+      )}
     </>
   );
 };

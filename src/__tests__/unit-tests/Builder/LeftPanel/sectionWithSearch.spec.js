@@ -10,7 +10,7 @@ describe('SectionWithSearch', () => {
     expect(sectionWithSearchWrapper.find('.hasSearch')).toHaveLength(0);
   });
 
-  it.skip('Should Render SearchInput', () => { // TODO: this test needs to update
+  it('Should Render SearchInput', () => { // TODO: this test needs to update
     const props = {
       ...SectionWithSearch.defaultProps,
       hasSearch: true,
