@@ -24,6 +24,22 @@
 
 // Mixins //
 
+// Functions //
+
+@function em($pxval, $base: $baseSize) {
+  @if (unitless($pxval)) {
+    $pxval: $pxval * 1px;
+  }
+
+  @if (unitless($base)) {
+    $base: $base * 1px;
+  }
+
+  @return $pxval / $base * 1em;
+}
+
+// Functions //
+
 // Helpers //
 
 .jfReport, .jfPresentation, .jfReportModal, .pageThumbnailHelper {

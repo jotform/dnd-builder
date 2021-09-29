@@ -32,6 +32,8 @@ const ALL_TEXTS = {
   SETTINGS: 'Settings',
   SHOW_ALL: 'Show All',
   SLIDES: 'Slides',
+  TOGGLE_OFF: 'OFF',
+  TOGGLE_ON: 'ON',
   UNLOCK_ITEM: 'Unlock Item',
   WIDTH: 'Width',
   ZOOM_IN: 'Zoom In',

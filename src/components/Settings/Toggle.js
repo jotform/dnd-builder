@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import { useTranslatedTexts } from '../../utils/hooks';
 
 const Toggle = ({
   config,
@@ -15,22 +15,23 @@ const Toggle = ({
       { [config.key]: status },
     );
   };
+
+  const { TOGGLE_OFF, TOGGLE_ON } = useTranslatedTexts();
+
   return (
     <label
-      className={classNames(
-        'toolToggle',
-        { toggled: value === 'on' },
-      )}
+      className="reportToolToggle"
       htmlFor={config.key}
     >
       <input
         checked={value === 'on'}
-        className="toolToggle-input"
         id={config.key}
         onChange={onChange}
         type="checkbox"
       />
-      <span className="toolToggle-custom" />
+      <span className="reportToolToggle-knob" />
+      <span className="reportToolToggle-on reportToolToggle-text">{TOGGLE_ON}</span>
+      <span className="reportToolToggle-off reportToolToggle-text">{TOGGLE_OFF}</span>
     </label>
   );
 };
