@@ -89,15 +89,15 @@ const ColorPicker = ({
         onClick={setPickerVisibility(!isPickerVisible)}
         onKeyPress={() => {}}
       >
-        <div
-          className="colorPicker-preview"
-          style={{ backgroundColor: colorValue }}
-        />
         <Textbox
           config={config}
           item={item}
           onItemChange={handleInputChange}
           value={colorValue}
+        />
+        <div
+          className="colorPicker-preview"
+          style={{ backgroundColor: colorValue }}
         />
       </div>
       {isPickerVisible
