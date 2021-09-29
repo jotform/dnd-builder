@@ -23,14 +23,16 @@ describe('SettingTabs', () => {
     expect(settingTabWrapper.find(selectors.toolTabsTab)).toHaveLength(0);
   });
 
-  it.skip('Should Change Tabs Properly', () => { // TODO: this test needs to update
+  it('Should Change Tabs Properly', () => {
     const props = {
       ...Tabs.defaultProps,
       tabs: ['Header', 'Line', 'Subheader'],
       panel: 'right',
     };
     const settingTabWrapper = mount(
-      <BuilderProvider>
+      <BuilderProvider
+        isRightPanelOpen={true}
+      >
         <Tabs {...props} />
       </BuilderProvider>,
     );
