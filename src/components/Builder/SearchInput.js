@@ -72,16 +72,21 @@ const SearchInput = ({
           value={searchValue}
         />
         <button
-          className={`section-search-button${searchValue ? ' showDelete' : ''}`}
+          className="section-search-button search-icon"
           onClick={onSearchButtonClick}
           type="button"
         >
-          {searchValue ? (
-            <CrossIcon className="section-search-icon delete" />
-          ) : (
-            <SearchIcon className="section-search-icon" />
-          )}
+          <SearchIcon className="section-search-icon" />
         </button>
+        {searchValue && (
+          <button
+            className="section-search-button search-delete"
+            onClick={onSearchButtonClick}
+            type="button"
+          >
+            <CrossIcon className="section-search-icon delete" />
+          </button>
+        )}
       </div>
     </div>
   );

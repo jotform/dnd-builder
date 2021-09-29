@@ -61,20 +61,22 @@ const Elements = ({
             setElements={setSearchElements}
           />
         ) }
-        { (searchElements === 'noResult' && hasSearch)
-          && <div className="no-search-result-text">{NO_RESULT}</div>}
-        {Array.isArray(elementWillBeUsed) && elementWillBeUsed.map((element, index) => (
-          <Element
-            key={index.toString()}
-            acceptedItems={acceptedItems}
-            onAnEventTrigger={onAnEventTrigger}
-            onItemAdd={onItemAdd}
-            setActiveElement={setActiveElement}
-            setIsRightPanelOpen={setIsRightPanelOpen}
-            zoom={zoom}
-            {...element}
-          />
-        ))}
+        <div className="toolItem-tabContent">
+          { (searchElements === 'noResult' && hasSearch)
+            && <div className="no-search-result-text">{NO_RESULT}</div>}
+          {Array.isArray(elementWillBeUsed) && elementWillBeUsed.map((element, index) => (
+            <Element
+              key={index.toString()}
+              acceptedItems={acceptedItems}
+              onAnEventTrigger={onAnEventTrigger}
+              onItemAdd={onItemAdd}
+              setActiveElement={setActiveElement}
+              setIsRightPanelOpen={setIsRightPanelOpen}
+              zoom={zoom}
+              {...element}
+            />
+          ))}
+        </div>
       </Section>
     </div>
   );

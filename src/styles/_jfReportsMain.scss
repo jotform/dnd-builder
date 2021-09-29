@@ -22,13 +22,11 @@ body {
   &-toolbox {
     border-right: 1px solid #B1B2C3;
     box-shadow: 5px 0 0 0 rgba(106, 110, 143, 0.1);
-    background-color: #f1f1f5;
   }
 
   &-settings {
     border-left: 1px solid #B1B2C3;
     box-shadow: -3px 0 0 0 rgba(106, 110, 143, 0.1);
-    background-color: $white;
   }
 
   &-pane {

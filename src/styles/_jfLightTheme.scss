@@ -1,5 +1,5 @@
 .lightMode {
-  .jfReport-toolbox, .jfPresentation-toolbox {
+  .jfReport-pane, .jfPresentation-pane {
     background-color: #f1f1f5;
   }
 
@@ -97,7 +97,7 @@
       border-bottom: 1px solid #dde0ea;
     }
 
-    .section-search-button {
+    .section-search-button.search-icon {
       &:before {
         background: rgb(255,255,255);
         background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(#FAFAFC,1) 100%);
@@ -108,6 +108,10 @@
       background-color: #FAFAFC;
       border: 1px solid #CCCDDA;
       color: #2C3345;
+    }
+
+    .section-search-button.search-delete:hover .delete {
+      fill: rgba(#8586A6, .7);
     }
 
     .no-search-result-text {

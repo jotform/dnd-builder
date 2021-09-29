@@ -31,7 +31,7 @@ $pane-width: 260px;
       }
 
       &.toolTitle {
-        font-size: 1rem;
+        font-size: 1.125rem;
         font-weight: 500;
         padding: 0 20px;
 
@@ -82,7 +82,6 @@ $pane-width: 260px;
 
       &-tabContent {
         height: 100%;
-        padding: 30px 10px 0;
         overflow-y: auto;
 
         &.hasInnerScroll {
@@ -435,6 +434,10 @@ $pane-width: 260px;
 
     .toolScrollableContent {
       flex-grow: 1;
+    }
+
+    &.forSettings .toolItem-tabContent {
+      padding: 30px 10px 0;
     }
 
     // Panel Open & Hide Actions //
