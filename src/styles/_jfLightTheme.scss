@@ -26,6 +26,10 @@
       border-bottom: 1px solid #dde0ea;
     }
 
+    &.jfReport-settings .iconFor-slides .jfReportSVG {
+      fill: #2C3345;
+    }
+
     &.jfReport-toolbox .toolItem .jfReportSVG {
       fill: $additionalGray;
     }
@@ -245,6 +249,15 @@
           }
         }
       }
+    }
+  }
+
+  .forAllSlides .pageActionsBar {
+    background-color: $white;
+
+    .forPageActionsBar {
+      background-color: #EDEDF4;
+      color: $additionalGray;
     }
   }
 

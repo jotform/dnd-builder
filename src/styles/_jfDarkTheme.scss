@@ -1,16 +1,20 @@
 .darkMode {
-  .jfReport-pane, .jfPresentation-pane {
+  .jfReport-toolbox, .jfPresentation-toolbox {
     background-color: #565F6E;
   }
 
+
   .jfReport-pane {
+    .toolSection-dropdown, .toolSection-input {
+      background-color: #555F6E;
+      border-color: #303339;
+    }
+
     ::-webkit-scrollbar-thumb {
       background: #394049;
     }
 
     .paneClose {
-      background-color: #565F6E;
-
       .jfReportSVG {
         fill: $white;
       }
@@ -30,12 +34,20 @@
       border-bottom: 1px solid #4C5360;
     }
 
+    &.jfReport-settings .iconFor-slides .jfReportSVG {
+      fill: $white;
+    }
+
     &.jfReport-toolbox .toolItem .jfReportSVG {
       fill: $white;
       color: $white;
     }
 
     .toolItem.toolTitle {
+      color: $white;
+    }
+
+    .toolSection-title {
       color: $white;
     }
 
@@ -94,6 +106,14 @@
 
       &:hover {
         color: rgba($white, .7);
+      }
+    }
+
+    &.jfReport-settings {
+      background-color: #404651;
+
+      .toolTabs label {
+        background-color: #303339;
       }
     }
 
@@ -265,8 +285,19 @@
     }
   }
 
+  .forAllSlides .pageActionsBar {
+    background-color: #404651;
+    color: $white;
+
+    .forPageActionsBar {
+      background-color: #EDEDF4;
+      color: $additionalGray;
+    }
+  }
+
   .forAllSlides:not(.jfReport-toolbox) .paneClose .jfReportSVG {
-    fill: #fff;
+    width: 16px;
+    height: 16px;
   }
 
   .forSettings:not(.jfReport-toolbox) .toolSection .toolSection-listItem {

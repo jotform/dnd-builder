@@ -31,7 +31,6 @@ body {
 
   &-pane {
     position: absolute;
-    width: 260px;
     transition: all .5s ease-in-out;
     z-index: 2;
 
@@ -63,24 +62,24 @@ body {
 
 .leftPaneIsActive {
   .jfReport-pages {
-    margin-left: 260px;
+    margin-left: $left-pane-width;
   }
 }
 
 .rightPaneIsActive {
   .jfReport-pages {
-    margin-right: 260px;
+    margin-right: $right-pane-width;
   }
 
   .jfReport-pane.otherOpened:not(.jfReport-toolbox).forSlides .paneToggler {
     top: 15px;
-    right: 277px;
+    right: calc(#{$right-pane-width} + 15px);
   }
 }
 
 .slidesPaneIsActive {
   .jfReport-pane.otherOpened:not(.jfReport-toolbox).forSettings .js-openRightPanel {
-    right: 277px;
+    right: calc(#{$right-pane-width} + 15px);
   }
 }
 

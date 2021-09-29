@@ -43,7 +43,9 @@ const Tabs = ({ panel, tabs }) => {
                 className="t-medium js-tabLabel"
                 htmlFor={tab}
               >
-                {tab}
+                <span>
+                  {tab}
+                </span>
               </label>
             </Fragment>
           );
