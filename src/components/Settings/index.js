@@ -16,6 +16,7 @@ import Textbox from './Textbox';
 import Toggle from './Toggle';
 import LayoutSizeSettings from './LayoutSizeSettings';
 import IconSelectBox from './IconSelectBox';
+import Switch from './Switch';
 
 export default {
   checkboxGroup: CheckboxGroup,
@@ -34,6 +35,7 @@ export default {
   selectBox: SelectBox,
   sizeSettings: SizeSettings,
   slider: Slider,
+  switch: Switch,
   textbox: Textbox,
   toggle: Toggle,
 };
