@@ -49,7 +49,7 @@ const Tabs = ({ panel, tabs }) => {
           );
         })}
         <div
-          className="toolTabs-indicator p-absolute bg-blue"
+          className="toolTabs-indicator p-absolute"
           data-tab={tabs.length}
         />
       </div>

@@ -60,27 +60,29 @@ const SearchInput = ({
   }, [elements]);
 
   return (
-    <div className="jfReport-searchContainer p-relative">
-      <input
-        ref={searchInputRef}
-        className="js-searchInput section-search-input"
-        onChange={onSearchChange}
-        onKeyDown={handleKeyDown}
-        placeholder="Search"
-        type="text"
-        value={searchValue}
-      />
-      <button
-        className={`section-search-button${searchValue ? ' showDelete' : ''}`}
-        onClick={onSearchButtonClick}
-        type="button"
-      >
-        {searchValue ? (
-          <CrossIcon className="section-search-icon delete" />
-        ) : (
-          <SearchIcon className="section-search-icon" />
-        )}
-      </button>
+    <div className="jfReport-searchContainer">
+      <div className="jfReport-search p-relative">
+        <input
+          ref={searchInputRef}
+          className="js-searchInput section-search-input"
+          onChange={onSearchChange}
+          onKeyDown={handleKeyDown}
+          placeholder="Search"
+          type="text"
+          value={searchValue}
+        />
+        <button
+          className={`section-search-button${searchValue ? ' showDelete' : ''}`}
+          onClick={onSearchButtonClick}
+          type="button"
+        >
+          {searchValue ? (
+            <CrossIcon className="section-search-icon delete" />
+          ) : (
+            <SearchIcon className="section-search-icon" />
+          )}
+        </button>
+      </div>
     </div>
   );
 };

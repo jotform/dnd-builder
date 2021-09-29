@@ -1,0 +1,315 @@
+.lightMode {
+  .jfReport-toolbox, .jfPresentation-toolbox {
+    background-color: #f1f1f5;
+  }
+
+  .jfReport-pane {
+    .paneClose {
+      background-color: $white;
+
+      .jfReportSVG {
+        fill: #B3B5C5;
+      }
+
+      &:hover {
+        .jfReportSVG {
+          fill: rgba(#B3B5C5, .7);
+        }
+      }
+    }
+
+    .toolItem-tabs {
+      background-color: $white;
+    }
+
+    &:not(.toolSection) {
+      border-bottom: 1px solid #dde0ea;
+    }
+
+    .toolToggle {
+
+      .toolToggle-custom {
+        background-color: #B3B5C6;
+
+        &:before {
+          background: #fff;
+        }
+      }
+
+      &.toggled .toolToggle-custom {
+        background-color: $ctaGreen;
+      }
+
+      label {
+        color: rgba(#fff,.6);
+
+        &.forUnchecked {
+          color: #fff;
+
+          &:after {
+            background: #fff;
+          }
+        }
+      }
+
+      &-input {
+        display: none;
+
+        &:checked ~ {
+          .jfReportToggle-custom {
+            background: #4C7FF4;
+          }
+
+          .jfReportToggle-label {
+
+            &.forChecked {
+              color: #fff;
+            }
+
+            &.forUnchecked {
+              color: rgba(#fff,.6);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .jfReport-pane .toolTabs label {
+    background-color: $white;
+    color: #bcbecf;
+    border-bottom: 1px solid #e1e1e6;
+
+    &:hover {
+      background-color: $white;
+    }
+  }
+
+  .jfReport-pane .toolTabs-tab {
+    &:checked + label {
+      color: #2a3244;
+      background-color: $white;
+    }
+  }
+
+  .jfReport-pane .toolTabs-indicator {
+    background-color: $blue;
+  }
+
+  .jfReport-searchContainer {
+    background-color: $white;
+    border-bottom: 1px solid #dde0ea;
+  }
+
+  .no-search-result-text {
+    color: #8586A6;
+  }
+
+  .jfReport-toolbox .toolTitle {
+    background-color: $white;
+  }
+
+  .jfReport-pane .previewPanel {
+    background-color: #EFEFF6;
+  }
+
+  .jfReport-pane .toolSection.forAspect {
+    border-bottom: 1px solid $inputGrayBorder;
+  }
+
+  .jfReport-pane .toolSection + hr {
+    border-top: 1px solid #efeff6;
+  }
+
+  .jfReport-pane .toolSection-notifier {
+    background-color: #f8f8f8;
+  }
+
+  .jfReport-pane .rangeSlider .rangeSlider-bar {
+    outline: 1px solid $white;
+  }
+
+  .jfReport-pane .rangeSlider:after {
+    background-color: $lightGray;
+  }
+
+  .jfReport-pane .rangeSlider-bar::-moz-range-track {
+    outline: 1px solid $white;
+  }
+
+  .jfReport-pane .rangeSlider-bar::-webkit-slider-thumb {
+    background: $white;
+    border: 3px solid $green;
+  }
+
+  .jfReport-pane .rangeSlider-bar::-moz-range-thumb {
+    background: $white;
+    border: 3px solid $green;
+
+    &:hover {
+      background-color: opacify($green, .1);
+    }
+  }
+
+  .jfReport-pane .rangeSlider-indicator {
+    background-color: $green;
+  }
+
+  .jfReport-pane .rangeSlider-bar::-ms-fill-lower {
+    background: #01bd6f;
+  }
+
+  .jfReport-pane .rangeSlider-bar::-ms-fill-upper {
+    background: #cccdd9;
+  }
+
+  .jfReport-pane .rangeSlider-bar::-ms-thumb {
+    border: 3px solid #01bd6f;
+    background: #fff;
+  }
+
+  .jfReport-pane .rangeSlider-bar:focus::-ms-fill-lower {
+    background: #01bd6f;
+  }
+
+  .jfReport-pane .rangeSlider-bar:focus::-ms-fill-upper {
+    background: #cccdd9;
+  }
+
+  .jfReport-pane .imageUpload-wrapper {
+    @include inputDefault;
+
+    &.imageUpload-info span:first-child {
+      color: #abadc1;
+    }
+  }
+
+  .jfReport-pane .dropArea.isDragging {
+    background: $white;
+    border: 1px dashed $green;
+  }
+
+  .jfReport-pane .uploadInfo {
+    color: $infoGray;
+  }
+
+  .jfReport-pane .userUploads-image {
+    border: 1px solid $inputGrayBorder;
+  }
+
+  .jfReport-pane .colorPicker-wrapper {
+    background-color: $inputGray;
+    border: 1px solid #ccc;
+  }
+
+  .jfReport-pane .hasUnit:after {
+    color: $infoGray;
+  }
+
+  .jfReport-pane .toolSection-dropdownWrapper {
+    &:after {
+      background-image: url("data:image/svg+xml, %3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 16 9'%3E%3Cpath fill-rule='evenodd' d='M242.656854,19.2928932 C243.047379,18.9023689 243.680544,18.9023689 244.071068,19.2928932 C244.461592,19.6834175 244.461592,20.3165825 244.071068,20.7071068 L238.414214,26.363961 L244.071068,32.0208153 C244.461592,32.4113396 244.461592,33.0445046 244.071068,33.4350288 C243.680544,33.8255531 243.047379,33.8255531 242.656854,33.4350288 L236.292893,27.0710678 C235.902369,26.6805435 235.902369,26.0473785 236.292893,25.6568542 L242.656854,19.2928932 Z' transform='rotate(-90 113.182 131.364)'/%3E%3C/svg%3E%0A");
+    }
+
+    &.isDark {
+      .toolSection-dropdown {
+        background-color: #2E354A;
+        color: #fff;
+      }
+
+      &:after {
+        background-image: url("data:image/svg+xml, %3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 16 9'%3E%3Cpath fill-rule='evenodd' fill='%23A8AABF' d='M242.656854,19.2928932 C243.047379,18.9023689 243.680544,18.9023689 244.071068,19.2928932 C244.461592,19.6834175 244.461592,20.3165825 244.071068,20.7071068 L238.414214,26.363961 L244.071068,32.0208153 C244.461592,32.4113396 244.461592,33.0445046 244.071068,33.4350288 C243.680544,33.8255531 243.047379,33.8255531 242.656854,33.4350288 L236.292893,27.0710678 C235.902369,26.6805435 235.902369,26.0473785 236.292893,25.6568542 L242.656854,19.2928932 Z' transform='rotate(-90 113.182 131.364)'/%3E%3C/svg%3E%0A");
+        background-color: #2E354A;
+      }
+
+      &:hover {
+        .toolSection-dropdown, &:after {
+          background-color: lighten(#2E354A, 5);
+        }
+
+        &:after {
+          background-image: url("data:image/svg+xml, %3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 16 9'%3E%3Cpath fill-rule='evenodd' fill='%23FFF' d='M242.656854,19.2928932 C243.047379,18.9023689 243.680544,18.9023689 244.071068,19.2928932 C244.461592,19.6834175 244.461592,20.3165825 244.071068,20.7071068 L238.414214,26.363961 L244.071068,32.0208153 C244.461592,32.4113396 244.461592,33.0445046 244.071068,33.4350288 C243.680544,33.8255531 243.047379,33.8255531 242.656854,33.4350288 L236.292893,27.0710678 C235.902369,26.6805435 235.902369,26.0473785 236.292893,25.6568542 L242.656854,19.2928932 Z' transform='rotate(-90 113.182 131.364)'/%3E%3C/svg%3E%0A");
+        }
+      }
+    }
+  }
+
+  .forAllSlides:not(.jfReport-toolbox) .paneClose .jfReportSVG {
+    fill: #fff;
+  }
+
+  .forSettings:not(.jfReport-toolbox) .toolSection .toolSection-listItem {
+    .jfReportSVG {
+      fill: #8382a9;
+    }
+
+    &:hover {
+      background-color: rgba(179, 181, 199, 0.1);
+    }
+
+    &.isSelected {
+      background-color: $ctaGreen;
+      color: $white;
+
+      svg {
+        fill: $white;
+      }
+    }
+  }
+
+  .forSettings .toolSection-list.forChart {
+    .isSelected {
+      path {
+        fill: $white;
+      }
+    }
+  }
+
+  .forSlides .paneToggler {
+    background-color: #2E354A;
+  }
+
+
+  &.forAllSlides:not(.jfReport-toolbox) {
+    background-color: #EDEDF4;
+
+    .paneClose {
+      background-color: #2E354A;
+
+      &:hover {
+        background: lighten(#2E354A, 5);
+      }
+    }
+  }
+
+  .jfReport-pane:not(.jfReport-settings) {
+    .toolItem:not(.toolTitle) {
+      background-color: #fafafc;
+
+      .toolItem-icon {
+        background-color: $white;
+      }
+
+      &:hover {
+        background-color: #3A69ED;
+
+        .toolItem-icon {
+          background-color: $blue;
+          color: $white;
+
+          .jfReportSVG {
+            fill: $white;
+          }
+
+          .icon-bar path {
+            fill: $white;
+          }
+        }
+
+        .toolItem-name {
+          color: $white;
+        }
+      }
+    }
+  }
+}

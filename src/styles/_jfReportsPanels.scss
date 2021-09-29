@@ -24,7 +24,6 @@ $pane-width: 260px;
       &:not(.toolSection) {
         height: 54px;
         padding: 0;
-        border-bottom: 1px solid #dde0ea;
       }
 
       &.toolSection {
@@ -77,7 +76,6 @@ $pane-width: 260px;
 
       &-tabs {
         max-width: $pane-width;
-        background-color: $white;
         z-index: 1;
         flex-shrink: 0;
       }
@@ -115,12 +113,10 @@ $pane-width: 260px;
         padding: 20px 30px;
         border-radius: 2px;
         border-bottom: none;
-        background-color: #EFEFF6;
       }
     }
 
     .no-search-result-text {
-      color: #8586A6;
       text-align: center;
       margin-top: 20px;
     }
@@ -134,7 +130,6 @@ $pane-width: 260px;
 
       & + hr {
         border: none;
-        border-top: 1px solid #efeff6;
         margin: 30px -10px 0;
 
         & + .toolSection {
@@ -193,7 +188,6 @@ $pane-width: 260px;
           position: absolute;
           bottom: 6px;
           width: 4px;
-          border-bottom: 1px solid $inputGrayBorder;
         }
         &:before {
           left: 0;
@@ -225,27 +219,15 @@ $pane-width: 260px;
       label {
         flex: 1 1;
         padding: 13px 8px;
-        color: #bcbecf;
-        background-color: #efeff6;
-        border-bottom: 1px solid #e1e1e6;
         text-align: center;
         user-select: none;
         cursor: pointer;
         transition: .3s ease-in-out;
         @include text-ellipsis;
-
-        &:hover {
-          background-color: $white;
-        }
       }
 
       &-tab {
         display: none;
-
-        &:checked + label {
-          color: #2a3244;
-          background-color: $white;
-        }
       }
 
       &[data-tab="2"] {
@@ -304,14 +286,7 @@ $pane-width: 260px;
       .jfReportSVG {
         width: 14px;
         height: 14px;
-        fill: #B3B5C5;
         transition: .3s fill;
-      }
-
-      &:hover {
-        svg {
-          fill: $blue;
-        }
       }
     }
 
@@ -329,7 +304,6 @@ $pane-width: 260px;
       .paneClose {
         top: 15px;
         padding: 5px;
-        background-color: $white;
         border-radius: 3px;
       }
 
@@ -339,18 +313,12 @@ $pane-width: 260px;
       }
     }
 
-    &.forAllSlides:not(.jfReport-toolbox) .paneClose .jfReportSVG {
-      fill: #fff;
-    }
-
     &:not(.jfReport-settings) {
       .toolItem:not(.toolTitle) {
-        background-color: #fafafc;
         transition: .3s ease-in-out;
 
         .toolItem-icon {
           height: 53px;
-          background-color: $white;
           transition: .3s ease-in-out;
         }
 
@@ -361,27 +329,6 @@ $pane-width: 260px;
 
           .toolSection-title {
             margin-bottom: 0;
-          }
-        }
-
-        &:hover {
-          background-color: #3A69ED;
-
-          .toolItem-icon {
-            background-color: $blue;
-            color: $white;
-
-            .jfReportSVG {
-              fill: $white;
-            }
-
-            .icon-bar path {
-              fill: $white;
-            }
-          }
-
-          .toolItem-name {
-            color: $white;
           }
         }
       }
@@ -404,7 +351,6 @@ $pane-width: 260px;
     &.forSlides {
       .paneToggler {
         top: 59px;
-        background-color: #2E354A;
       }
     }
 
@@ -465,7 +411,6 @@ $pane-width: 260px;
       top: 0;
       left: 0;
       max-width: none;
-      background-color: #EDEDF4;
       opacity: 1;
       z-index: 11;
       animation: .5s ease-in-out openAllSlide forwards;
@@ -485,11 +430,6 @@ $pane-width: 260px;
         left: 15px;
         padding: 11px 13px;
         border-radius: 4px;
-        background-color: #2E354A;
-
-        &:hover {
-          background: lighten(#2E354A, 5);
-        }
       }
     }
 
@@ -517,12 +457,6 @@ $pane-width: 260px;
       @media screen and (max-width: 828px) {
         padding: 35px 35px 70px;
       }
-    }
-  }
-
-  &-toolbox {
-    .toolTitle {
-      background-color: $white;
     }
   }
 }

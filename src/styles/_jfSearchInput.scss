@@ -5,10 +5,12 @@
 
 .jfReport {
   &-searchContainer {
-    width: 100%;
+    padding: 10px 15px;
+  }
+
+  &-search {
     display: flex;
     align-items: center;
-    margin-top: 10px;
 
     .section-search-button {
       position: absolute;
