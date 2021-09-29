@@ -30,7 +30,7 @@ describe('SearchInput', () => {
 
     const searchInputWrapper = shallow(<SearchInput setElements={mockEvent} />);
     searchInputWrapper.find('input').simulate('change', { target: { value: 'Value' } });
-    searchInputWrapper.find('button').simulate('click');
+    searchInputWrapper.find(selectors.showDelete).simulate('click');
 
     expect(mockEvent).toHaveBeenCalled();
     expect(searchInputWrapper.find('input').props().value).toBe('');
@@ -44,7 +44,7 @@ describe('SearchInput', () => {
     searchInputWrapper.find('input').simulate('change', { target: { value: 'value' } });
     expect(searchInputWrapper.find(selectors.showDelete)).toHaveLength(1);
     expect(searchInputWrapper.find(CrossIcon)).toHaveLength(1);
-    expect(searchInputWrapper.find(SearchIcon)).toHaveLength(0);
+    expect(searchInputWrapper.find(SearchIcon)).toHaveLength(1);
   });
 
   it('Should Render SearchIcon Only if There is a Search Value', () => {

@@ -16,7 +16,7 @@ export const selectors = {
   reportCanvas: '.jfReport-canvas',
   rightPanelClose: '.js-closeRightPanel',
   rightPanelOpen: '.js-openRightPanel',
-  showDelete: '.showDelete',
+  showDelete: '.search-delete',
   tabLabel: '.js-tabLabel',
   titleIcon: '.titleIcon',
   titleName: '.js-titleName',
