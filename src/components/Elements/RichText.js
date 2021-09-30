@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import TextEditor from '../TextEditor';
 import { fontTypes } from '../../constants/fonts';
 import { useBuilderContext } from '../../utils/builderContext';
+import { divider } from '../../utils/staticSettings';
 
 const ITEM_TYPE = 'text';
 
@@ -15,6 +16,9 @@ const settings = [
     options: fontTypes.fonts,
     section: 'General',
     type: 'dropdown',
+  },
+  {
+    ...divider('General'),
   },
   {
     key: 'opacity',
