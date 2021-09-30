@@ -504,10 +504,25 @@
   }
 
   .userUploads-actions {
+    flex-direction: row-reverse;
 
     .jfReportButton {
-      width: 105px;
+      width: 150px;
+      height: 40px;
       padding: 6px;
+
+      text-transform: uppercase;
+      border-radius: 2px;
+      border: none;
+      color: $white;
+      font-weight: 500;
+
+      &.isSuccess {
+        background-color: #0099FF;
+      }
+      &.isDanger {
+        background-color: #FF6100;
+      }
     }
   }
 
