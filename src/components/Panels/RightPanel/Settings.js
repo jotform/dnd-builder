@@ -24,7 +24,7 @@ const Settings = ({
         className={classNames(
           'toolItem-tabContent',
           { hidden: index !== activeTab.right },
-          { hasInnerScroll: tabKey === 'My Images' },
+          { hasInnerScroll: tabKey === 'MY IMAGES' },
         )}
       >
         {settings[tabKey].map((setting, itemIndex) => {

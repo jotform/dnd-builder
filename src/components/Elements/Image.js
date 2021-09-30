@@ -33,7 +33,7 @@ const settings = [
       },
     },
     key: 'url',
-    label: 'Image Upload',
+    label: 'IMAGE UPLOAD',
     section: 'General',
     type: 'imageThumbnailWithDelete',
   },
@@ -73,8 +73,7 @@ const settings = [
   },
   {
     key: 'url',
-    label: 'Enter URL',
-    section: 'Enter URL',
+    section: 'ENTER URL',
     showWhen: { url: '' },
     type: 'enterImageURL',
     useImageSizeUpdate: true,

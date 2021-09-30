@@ -525,7 +525,6 @@
       height: 40px;
       padding: 6px;
 
-      text-transform: uppercase;
       border-radius: 2px;
       border: none;
       color: $white;
@@ -542,6 +541,21 @@
 
   .fileUploader-url {
     margin-top: 10px;
+
+    .jfReportButton {
+      width: 150px;
+      height: 40px;
+      padding: 6px;
+
+      border-radius: 2px;
+      border: none;
+      color: $white;
+      font-weight: 500;
+
+      &.isSuccess {
+        background-color: #0099FF;
+      }
+    }
 
     .toolSection-input {
       margin-bottom: 10px;

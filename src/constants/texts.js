@@ -1,6 +1,6 @@
 const ALL_TEXTS = {
   ADD_ELEMENT: 'Add Element',
-  ADD_LINK: 'Add Link',
+  ADD_LINK: 'ADD LINK',
   ADD_NEW_PAGE: 'Add Slide',
   BACKGROUND_COLOR: 'Background Color',
   DELETE: 'Delete',
