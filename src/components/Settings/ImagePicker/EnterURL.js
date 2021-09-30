@@ -11,7 +11,9 @@ const EnterURL = ({ item, onItemChange }) => {
   const { ADD_LINK } = useTranslatedTexts();
 
   const onURLChange = (_, v) => {
-    setIsErrored(false);
+    if (isErrored) {
+      setIsErrored(false);
+    }
     setUrl(v.url);
   };
 
