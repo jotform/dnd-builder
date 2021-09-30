@@ -2,6 +2,7 @@
 *   this file includes dnd list styles for reports in settings pane.
 *   @giraykarasinir
 */
+/* stylelint-disable no-descending-specificity */
 
 // Sortable List //
 
@@ -166,6 +167,12 @@
 
   & + .jfReportSelectOption {
     margin-top: 20px;
+  }
+
+  .forChart & {
+    & + .jfReportSelectOption {
+      margin-top: 10px;
+    }
   }
 
   &.forHelper {

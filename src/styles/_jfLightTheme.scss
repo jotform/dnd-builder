@@ -284,25 +284,6 @@
     fill: #fff;
   }
 
-  .forSettings:not(.jfReport-toolbox) .toolSection .toolSection-listItem {
-    .jfReportSVG {
-      fill: #8382a9;
-    }
-
-    &:hover {
-      background-color: rgba(179, 181, 199, 0.1);
-    }
-
-    &.isSelected {
-      background-color: $ctaGreen;
-      color: $white;
-
-      svg {
-        fill: $white;
-      }
-    }
-  }
-
   .forSettings .toolSection-list.forChart {
     .isSelected {
       path {
@@ -354,6 +335,48 @@
 
         .toolItem-name {
           color: $white;
+        }
+      }
+    }
+  }
+
+  .toolSection-list:not(.bigList) {
+    border: 1px solid #d3d4de;
+
+    .toolSection-listItem:not(:last-child) {
+      border-right: 1px solid #d3d4de;
+    }
+  }
+
+
+  .toolSection .toolSection-listItem {
+    .jfReportSVG {
+      fill: #8382a9;
+    }
+
+    &:hover {
+      background-color: rgba(179, 181, 199, 0.1);
+    }
+
+    &.isSelected {
+      background-color: $ctaGreen;
+      color: $white;
+
+      svg {
+        fill: $white;
+      }
+    }
+  }
+
+  .bigList {
+    .toolSection-listItem {
+      & > span:first-child {
+        background-color: #8382a9;
+      }
+
+      &.isSelected {
+        & > span:first-child {
+          background-color: $ctaGreen;
         }
       }
     }

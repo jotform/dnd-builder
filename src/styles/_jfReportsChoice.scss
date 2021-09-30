@@ -64,7 +64,7 @@
       }
 
       &:hover:before {
-        border-color: $green;
+        border-color: #0099FF;
       }
     }
   }
@@ -94,19 +94,19 @@
     &:checked + .jfReportChoice-labelIcon {
       .jfReportChoice-label:before {
         background-image: $jfReportChoice-checkIcon;
-        background-color: $green;
-        border-color: $green;
+        background-color: #0099FF;
+        border-color: #0099FF;
       }
       .jfReportChoice-label.radio:before {
         background-image: none;
         background-color: transparent;
-        border-color: $green;
+        border-color: #0099FF;
       }
       .jfReportChoice-label.radio:after {
         position: absolute;
         left: 4px;
         top: 4px;
-        background-color: $green;
+        background-color: #0099FF;
         border-radius: 50%;
         width: 10px;
         height: 10px;

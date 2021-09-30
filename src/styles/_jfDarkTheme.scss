@@ -341,33 +341,6 @@
     height: 16px;
   }
 
-  .forSettings:not(.jfReport-toolbox) .toolSection .toolSection-listItem {
-    .jfReportSVG {
-      fill: #8382a9;
-    }
-
-    &:hover {
-      background-color: rgba(179, 181, 199, 0.1);
-    }
-
-    &.isSelected {
-      background-color: $ctaGreen;
-      color: $white;
-
-      svg {
-        fill: $white;
-      }
-    }
-  }
-
-  .forSettings .toolSection-list.forChart {
-    .isSelected {
-      path {
-        fill: $white;
-      }
-    }
-  }
-
   .forSlides .paneToggler {
     background-color: #2E354A;
   }
@@ -411,6 +384,53 @@
           .icon-bar path {
             fill: $white;
           }
+        }
+      }
+    }
+  }
+
+  .toolSection-list:not(.bigList) {
+    border: 1px solid #303339;
+    background-color: #555F6E;
+
+    .toolSection-listItem:not(:last-child) {
+      border-right: 1px solid #303339;
+    }
+  }
+
+  .toolSection-list:not(.forChart) .toolSection-listItem {
+    .jfReportSVG path, .jfReportSVG circle {
+      fill: $white;
+    }
+  }
+
+  .toolSection .toolSection-listItem {
+    &:hover {
+      background-color: rgba(179, 181, 199, 0.1);
+    }
+
+    &.isSelected {
+      background-color: #0099FF;
+      color: $white;
+
+      svg {
+        fill: $white;
+      }
+    }
+  }
+
+  .bigList {
+    .toolSection-listItem {
+      & > span:first-child {
+        background-color: #fff;
+      }
+      & > span:last-child {
+        color: $white;
+      }
+
+      &.isSelected {
+        & > span:first-child {
+          background-color: #0099FF;
         }
       }
     }
