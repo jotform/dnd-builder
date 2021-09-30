@@ -1,3 +1,5 @@
+import { divider } from '../utils/staticSettings';
+
 const onChange = (id, { reportCustomLayout }, updater) => {
   const [reportLayoutWidth, reportLayoutHeight] = reportCustomLayout.split('x');
   updater(id, {
@@ -145,5 +147,8 @@ export default [
     type: 'layoutSizeSettings',
     uniqueId: 'reportCustomLayout_2',
     value,
+  },
+  {
+    ...divider('General'),
   },
 ];

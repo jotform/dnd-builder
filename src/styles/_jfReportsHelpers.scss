@@ -14,7 +14,7 @@
 @mixin inputDefault {
   background-color: $inputGray;
   border: 1px solid $inputGrayBorder;
-  border-radius: 4px;
+  border-radius: 2px;
   transition: .3s ease-in-out;
 
   &:hover {

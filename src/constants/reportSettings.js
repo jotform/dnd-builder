@@ -41,9 +41,6 @@ export const reportSettings = {
       type: 'colorPicker',
     },
     {
-      ...divider('General'),
-    },
-    {
       ...divider('Style'),
     },
   ],

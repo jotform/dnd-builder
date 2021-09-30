@@ -8,7 +8,7 @@
   position: absolute;
 
   &-pane {
-    font-size: 0.875rem;
+    font-size: 0.938rem;
 
     // Panel Layout //
 
@@ -126,10 +126,10 @@
 
       & + hr {
         border: none;
-        margin: 30px -10px 0;
+        margin: 20px -10px 0;
 
         & + .toolSection {
-          margin-top: 30px;
+          margin-top: 20px;
         }
 
         & + hr {
@@ -449,7 +449,7 @@
     }
 
     &.forSettings .toolItem-tabContent {
-      padding: 30px 10px 0;
+      padding: 25px 10px 0;
     }
 
     // Panel Open & Hide Actions //
