@@ -216,7 +216,7 @@
       outline: none;
 
       &.isSmall {
-        width: 56px;
+        width: 99px;
       }
 
       &[type="number"] {
@@ -624,6 +624,7 @@
 
   .hasUnit {
     position: relative;
+    display: flex;
 
     .toolSection-input {
       padding-right: 15px;
@@ -632,9 +633,14 @@
     &:after {
       content: "";
       position: absolute;
-      top: 10px;
-      right: 6px;
-      font-size: .675rem;
+      display: flex;
+      height: 38px;
+      right: 0;
+      font-size: 15px;
+      border-left: 1px solid #303339;
+      align-items: center;
+      width: 38px;
+      justify-content: center;
     }
 
     &.isPercentage {
