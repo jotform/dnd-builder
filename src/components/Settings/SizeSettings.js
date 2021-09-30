@@ -158,7 +158,7 @@ const SizeSettings = ({ item, onItemChange }) => {
         && (
           <div className="toolSection-wrapper">
             <button
-              className="jfReportButton isOutline forDimension f-width"
+              className="jfReportButton forOptions forDimension f-width"
               onClick={setOriginalSizes}
               type="button"
             >

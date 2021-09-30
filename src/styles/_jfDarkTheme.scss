@@ -24,7 +24,7 @@
       .tabMenu {
         background-color: #303339;
         &-link {
-          padding: 12px;
+          padding: 9px;
           &:hover:not(.is-active) {
             background-color: #303339;
           }
@@ -251,7 +251,7 @@
     }
 
     .rangeSlider .rangeSlider-bar {
-      outline: 1px solid $white;
+      outline: 1px solid #404651;
     }
 
     .rangeSlider:after {
@@ -264,24 +264,28 @@
 
     .rangeSlider-bar::-webkit-slider-thumb {
       background: $white;
-      border: 3px solid $green;
+      border: 3px solid #0099FF;
+
+      &:hover {
+        background-color: opacify(#0099FF, .1);
+      }
     }
 
     .rangeSlider-bar::-moz-range-thumb {
       background: $white;
-      border: 3px solid $green;
+      border: 3px solid #0099FF;
 
       &:hover {
-        background-color: opacify($green, .1);
+        background-color: #0099FF;
       }
     }
 
     .rangeSlider-indicator {
-      background-color: $green;
+      background-color: #0099FF;
     }
 
     .rangeSlider-bar::-ms-fill-lower {
-      background: #01bd6f;
+      background: #0099FF;
     }
 
     .rangeSlider-bar::-ms-fill-upper {
@@ -289,12 +293,12 @@
     }
 
     .rangeSlider-bar::-ms-thumb {
-      border: 3px solid #01bd6f;
+      border: 3px solid #0099FF;
       background: #fff;
     }
 
     .rangeSlider-bar:focus::-ms-fill-lower {
-      background: #01bd6f;
+      background: #0099FF;
     }
 
     .rangeSlider-bar:focus::-ms-fill-upper {
@@ -438,7 +442,7 @@
     }
   }
 
-  .toolSection-list:not(.forChart) .toolSection-listItem {
+  .toolSection-list:not(.forChart):not(.forShapes) .toolSection-listItem {
     .jfReportSVG path, .jfReportSVG circle {
       fill: $white;
     }
@@ -454,6 +458,30 @@
       color: $white;
 
       svg {
+        fill: $white;
+      }
+    }
+  }
+
+  .toolSection .jfReportChoice-label {
+    color: $white;
+  }
+
+  &.jfReport .forOptions.forDimension {
+    background-color: #7C7F87;
+
+    &:hover {
+      background-color: lighten(#7C7F87, 5);
+    }
+  }
+
+  .toolSection-list.forShapes {
+    .jfReportSVG {
+      fill: #565F6E;
+    }
+
+    .toolSection-listItem.isSelected {
+      .jfReportSVG {
         fill: $white;
       }
     }

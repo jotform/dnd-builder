@@ -20,7 +20,7 @@ const SelectBox = ({
   const { options } = config;
 
   return (
-    <div className="toolSection-list withIcons">
+    <div className="toolSection-list withIcons bigList forShapes d-flex dir-row f-wrap">
       {options.map(option => {
         const OptionIcon = option.icon
           ? option.icon

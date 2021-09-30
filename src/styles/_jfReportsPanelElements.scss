@@ -73,6 +73,10 @@
         padding: 10px 5px;
       }
 
+      &.forSegments {
+        height: 40px;
+      }
+
       &:not(.forSegments) .toolSection-listItem {
         .jfReportSVG {
           width: 14px;
@@ -113,6 +117,7 @@
           flex-direction: column;
           padding: 0;
           flex: 0;
+          margin-bottom: 10px;
 
           &.isSelected {
             background-color: transparent;
@@ -129,15 +134,28 @@
             padding: 0;
           }
 
-          .jfReportSVG {
-            width: 40px;
-            height: 40px;
+          &:hover {
+            background-color: transparent;
           }
         }
 
         .isSelected {
           .jfReportSVG path {
             fill: $white;
+          }
+        }
+
+        &.forChart {
+          .jfReportSVG {
+            width: 40px;
+            height: 40px;
+          }
+        }
+
+        &.forShapes {
+          .jfReportSVG {
+            width: 24px;
+            height: 24px;
           }
         }
       }
@@ -286,10 +304,6 @@
       border-radius: 50%;
       cursor: pointer;
       transition: .3s ease-in-out;
-
-      &:hover {
-        background-color: opacify($green, .1);
-      }
     }
 
     .rangeSlider-bar::-moz-range-thumb {

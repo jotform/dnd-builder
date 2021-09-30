@@ -40,7 +40,7 @@ const Tabs = ({ panel, tabs }) => {
                 type="radio"
               />
               <label
-                className="t-normal js-tabLabel t-uppercase"
+                className="t-normal js-tabLabel"
                 htmlFor={tab}
               >
                 <span>

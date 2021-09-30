@@ -168,6 +168,10 @@
     .rangeSlider-bar::-webkit-slider-thumb {
       background: $white;
       border: 3px solid $green;
+
+      &:hover {
+        background-color: opacify($green, .1);
+      }
     }
 
     .rangeSlider-bar::-moz-range-thumb {
