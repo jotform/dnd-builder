@@ -306,8 +306,9 @@
     }
 
     .imageUpload-wrapper {
-      &.imageUpload-info span:first-child {
-        color: #abadc1;
+      .imageUpload-info {
+        span { color: $white; }
+        .isDanger { color: #FF6100; }
       }
     }
 
