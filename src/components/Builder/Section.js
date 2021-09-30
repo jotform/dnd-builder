@@ -11,7 +11,7 @@ const Section = ({
     <>
       <div
         className={classNames(
-          'js-toolTitle toolItem toolTitle d-flex a-center t-medium',
+          'js-toolTitle toolItem toolTitle d-flex a-center t-normal',
           { hasAdditional: additionalComponent },
         )}
       >

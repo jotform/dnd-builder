@@ -351,6 +351,26 @@
   .imageUpload-wrapper {
     padding: 15px 10px;
 
+    background-color: transparent;
+    border: 2px dashed rgba(227, 229, 245, 0.5);
+
+    label[for="fileUploader"] {
+      .jfReportButton {
+        text-transform: uppercase;
+        background-color: #0099FF;
+        color: $white;
+        border: none;
+        font-size: 16px;
+        font-weight: 500;
+
+        height: 52px;
+
+        svg.jfReportSVG {
+          fill: $white;
+        }
+      }
+    }
+
     img {
       max-width: 80px;
     }
@@ -381,7 +401,7 @@
       justify-content: center;
       align-items: center;
       flex-direction: column;
-      height: 138px;
+      height: 156px;
       white-space: nowrap;
 
       &.isError {
@@ -408,6 +428,7 @@
 
       .uploadInfo {
         margin-top: 10px;
+        color: #F3F3FE;
 
         &.isError {
           color: $danger;

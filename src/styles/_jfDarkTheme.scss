@@ -260,8 +260,6 @@
     }
 
     .imageUpload-wrapper {
-      @include inputDefault;
-
       &.imageUpload-info span:first-child {
         color: #abadc1;
       }
