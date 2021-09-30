@@ -870,3 +870,26 @@
     background-color: $ctaGreen;
   }
 }
+
+.imageUpload-wrapper:not(.dropArea) {
+  background-color: #555F6E;
+  border: 1px solid #303339;
+  border-radius: 2px;
+  padding: 11px;
+  img {
+    border-radius: 4px;
+  }
+
+  .imageUpload-info {
+    position: relative;
+
+    span {
+      font-size: 16px;
+    }
+
+    button {
+      position: absolute;
+      bottom: 0;
+    }
+  }
+}

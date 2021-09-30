@@ -9,7 +9,7 @@ const ImageSettings = ({
   onItemChange,
 }) => {
   return (
-    <div className="imageUpload-wrapper d-flex a-center">
+    <div className="imageUpload-wrapper d-flex">
       <img
         alt="Thumbnail"
         src={item.url}
