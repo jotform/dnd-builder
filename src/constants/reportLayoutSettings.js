@@ -117,6 +117,9 @@ export default [
     },
   },
   {
+    ...divider('General'),
+  },
+  {
     key: 'reportCustomLayout',
     label: 'Web Resolution',
     onChange,

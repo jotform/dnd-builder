@@ -35,6 +35,9 @@ export const reportSettings = {
       type: 'dropdown',
     },
     {
+      ...divider('General'),
+    },
+    {
       key: 'reportBackgroundColor',
       label: 'Background Color',
       section: 'Style',
