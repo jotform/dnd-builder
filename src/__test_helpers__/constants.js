@@ -73,29 +73,27 @@ export const settings = {
     ],
   },
   imageSettings: {
-    'Enter URL': [
+    'ENTER URL': [
       {
         key: 'url',
-        label: 'Enter URL',
-        section: 'Enter URL',
+        section: 'ENTER URL',
         type: 'enterImageURL',
         useImageSizeUpdate: true,
       },
     ],
-    'My Images': [
+    'MY IMAGES': [
       {
         key: 'url',
-        label: 'Pick an image',
-        section: 'My Images',
+        section: 'MY IMAGES',
         useImageSizeUpdate: true,
       },
     ],
-    Upload: [
+    UPLOAD: [
       {
         accept: 'image/*',
         key: 'url',
-        label: 'Image Upload',
-        section: 'Upload',
+        label: 'IMAGE UPLOAD',
+        section: 'UPLOAD',
         useImageSizeUpdate: true,
       },
     ],

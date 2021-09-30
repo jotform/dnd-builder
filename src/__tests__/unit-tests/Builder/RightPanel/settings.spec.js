@@ -20,7 +20,7 @@ describe('Settings', () => {
     const props = {
       ...Settings.defaultProps,
       settings: settings.imageSettings,
-      tabs: ['Enter URL', 'My Images', 'Upload'],
+      tabs: ['ENTER URL', 'MY IMAGES', 'UPLOAD'],
     };
 
     const settingsWrapper = shallow(<Settings {...props} />);
