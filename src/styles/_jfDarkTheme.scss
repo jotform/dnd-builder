@@ -9,6 +9,48 @@
     .toolSection-dropdown, .toolSection-input {
       background-color: #555F6E;
     }
+
+    /* stylelint-disable selector-max-class */
+    .toolSection-list.forIcons {
+      font-size: 0.938rem;
+      background-color: #555F6E;
+      border: 1px solid #303339;
+      border-radius: 2px;
+
+      svg {
+        fill: #fff;
+      }
+
+      .tabMenu {
+        background-color: #303339;
+        &-link {
+          padding: 12px;
+          &:hover:not(.is-active) {
+            background-color: #303339;
+          }
+        }
+        &-link.is-active svg {
+          fill: #303339;
+        }
+      }
+
+      .iconSelector-item.isSelected {
+        .iconSelector-label {
+          background-color: $blue;
+        }
+      }
+
+      .jfReportInput {
+        background: #404651;
+        border: 1px solid #303339;
+        border-radius: 2px;
+
+        &:focus {
+          color: #879AAD;
+        }
+      }
+    }
+
     .toolSection-dropdown, .toolSection-input, .colorPicker-wrapper {
       border-color: #303339;
       color: $white;
