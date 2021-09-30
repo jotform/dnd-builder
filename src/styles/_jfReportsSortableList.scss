@@ -23,7 +23,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 10px;
+    width: 14px;
     height: 100%;
     transition: .3s ease-in-out;
 
@@ -50,6 +50,11 @@
 
     &.forReset {
       right: 24px;
+    }
+
+    .icon-color {
+      width: 10px;
+      height: 14px;
     }
   }
 
@@ -86,14 +91,15 @@
   &-name {
     width: calc(100% - 28px);
     background-color: $lightGrayHover;
-    border-radius: 5px;
-    padding: 6px 12px;
+    border-radius: 4px;
+    padding: 9px 12px;
     display: flex;
     align-items: center;
     flex-wrap: wrap;
     position: relative;
     user-select: none;
     flex: 1;
+    font-size: 1rem;
     cursor: pointer;
     opacity: .4;
     transition: $transition;
@@ -159,7 +165,7 @@
   }
 
   & + .jfReportSelectOption {
-    margin-top: 10px;
+    margin-top: 20px;
   }
 
   &.forHelper {
@@ -264,19 +270,19 @@
 
       &.withDelete {
         .jfReportSelectOption-name {
-          padding-right: 52px;
+          padding-right: 58px;
         }
 
         .jfReportSelectOption-delete {
-          right: 26px;
+          right: 32px;
           opacity: 0;
           padding: 0;
           color: #2c3345;
           transition: .3s ease-in-out;
 
           .icon-trash {
-            width: 12px;
-            height: 12px;
+            width: 10px;
+            height: 14px;
           }
         }
       }

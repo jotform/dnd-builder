@@ -21,9 +21,11 @@
     .forSubWrapper {
       background-color: #303339;
       color: #B4B9BE;
+      border: none;
 
       .icon-arrow {
         height: 12px;
+        fill: #B4B9BE;
       }
 
       &:hover {

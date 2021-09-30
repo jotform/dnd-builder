@@ -96,7 +96,7 @@ const SlidesPanel = ({
           <Section
             additionalComponent={useExperimentalFeatures ? (
               <Button
-                classNames="jfReportButton isAccent"
+                classNames="jfReportButton isAccent showAll"
                 icon="allSlides"
                 onClick={() => setIsAllSlidesPanelOpen(true)}
                 title="Show All"
