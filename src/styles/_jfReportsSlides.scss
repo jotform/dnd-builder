@@ -8,6 +8,7 @@
   font-size: 0.875rem;
   color: $additionalGray;
   transition: $transition;
+  pointer-events: none;
 }
 
 .thumbnailFrame {

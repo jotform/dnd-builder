@@ -500,4 +500,35 @@
       }
     }
   }
+
+  .jfReport-pane.forSlides {
+    .pageAdder {
+      border-top: 0;
+    }
+    .thumbnailWrapper {
+      svg {
+        fill: #B4B9BE;
+      }
+
+      .thumbnailOrder {
+        color: #fff;
+      }
+
+      &:hover {
+        .thumbnailOrder {
+          color: #fff;
+        }
+      }
+
+      &.isSelected {
+        background-color: #303339;
+        border-left-color: #0099FF;
+        &:hover {
+          .thumbnailOrder {
+            color: #fff;
+          }
+        }
+      }
+    }
+  }
 }
