@@ -417,6 +417,7 @@
       flex-direction: column;
       height: 156px;
       white-space: nowrap;
+      border-radius: 4px;
 
       &.isError {
         border-color: $danger;
@@ -718,8 +719,15 @@
   margin-right: 20px;
 
   &:after {
-    width: 22px;
-    background-size: 9px;
+    display: none;
+  }
+
+  &:before {
+    right: 7px;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 6px solid $white;
+    top: calc(50% - 3px);
   }
 
   .toolSection-dropdown {
@@ -727,6 +735,7 @@
     height: 24px;
     font-size: 0.675rem;
     padding-left: 10px;
+    color: $white;
   }
 }
 
