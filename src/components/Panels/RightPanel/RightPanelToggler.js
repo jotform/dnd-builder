@@ -13,7 +13,7 @@ const RightPanelToggler = () => {
   return (
     <>
       <button
-        className="paneToggler js-openRightPanel"
+        className="paneToggler js-openRightPanel settingsToggle"
         onClick={() => {
           setActiveElement(null);
           setIsRightPanelOpen(true);
@@ -21,7 +21,7 @@ const RightPanelToggler = () => {
         title={LAYOUT_SETTINGS}
         type="button"
       >
-        <icons.settings className="jfReportSVG isWhite isTick" />
+        <icons.settingsToggle className="jfReportSVG isTick" />
       </button>
       <button
         className="paneClose p-absolute js-closeRightPanel"

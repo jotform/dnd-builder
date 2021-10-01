@@ -13,7 +13,7 @@ const SlidesPanelToggler = ({ onClosePanel }) => {
   return (
     <>
       <button
-        className="paneToggler"
+        className="paneToggler settingsToggle"
         onClick={() => {
           setActiveElement(null);
           setIsSlidesPanelOpen(true);

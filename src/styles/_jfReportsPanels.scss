@@ -263,6 +263,21 @@
 
     // Panel Open & Hide Actions //
 
+
+    .paneClose {
+      top: 18px;
+      right: 17px;
+      padding: 0;
+      z-index: 2;
+      transition: .5s ease-in-out;
+
+      .jfReportSVG {
+        width: 20px;
+        height: 20px;
+        transition: .3s fill;
+      }
+    }
+
     .paneToggler {
       position: absolute;
       top: 15px;
@@ -299,19 +314,18 @@
           font-size: 15px;
         }
       }
-    }
 
-    .paneClose {
-      top: 18px;
-      right: 17px;
-      padding: 0;
-      z-index: 2;
-      transition: .5s ease-in-out;
+      &.settingsToggle {
+        background-color: #FFFFFF;
+        border-radius: 100px;
+        padding: 11px;
+        width: 54px;
+        height: 54px;
 
-      .jfReportSVG {
-        width: 20px;
-        height: 20px;
-        transition: .3s fill;
+        .jfReportSVG {
+          width: 24px;
+          height: 23px;
+        }
       }
     }
 
@@ -383,7 +397,7 @@
 
     &.forSlides {
       .paneToggler {
-        top: 59px;
+        top: 85px;
       }
     }
 
