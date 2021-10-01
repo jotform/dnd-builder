@@ -283,6 +283,22 @@
         width: 16px;
         height: 16px;
       }
+
+      &.addElementToggle {
+        width: 160px;
+        background-color: #303339;
+        height: 54px;
+        border-radius: 0;
+        border-top-right-radius: 100px;
+        border-bottom-right-radius: 100px;
+        justify-content: space-between;
+        padding: 19px 18px;
+
+        span {
+          color: #ffffff;
+          font-size: 15px;
+        }
+      }
     }
 
     .paneClose {
@@ -390,6 +406,10 @@
 
       .paneToggler {
         left: calc(100% + 15px);
+
+        &.addElementToggle {
+          left: 100%;
+        }
       }
     }
 

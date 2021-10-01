@@ -9,11 +9,12 @@ const LeftPanelToggler = () => {
   return (
     <>
       <button
-        className="paneToggler"
+        className="paneToggler addElementToggle"
         onClick={() => { setIsLeftPanelOpen(true); }}
         title={ADD_ELEMENT}
         type="button"
       >
+        <span>{ADD_ELEMENT}</span>
         <icons.plus className="jfReportSVG isWhite" />
       </button>
     </>
