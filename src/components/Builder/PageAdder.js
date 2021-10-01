@@ -16,7 +16,7 @@ const PageAdder = ({
   const { ADD_NEW_PAGE } = useTranslatedTexts();
   return (
     <button
-      className="pageAdder"
+      className="pageAdder forOptions"
       onClick={onPageAddClick}
       type="button"
     >
