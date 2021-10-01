@@ -457,17 +457,17 @@
 
   .userUploads {
     position: relative;
-    margin: 0 -16px 8px;
-    padding: 0 10px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 74px);
+    justify-content: space-between;
 
     &-image {
-      width: 74px;
+      position: relative;
       height: 60px;
       border-radius: 4px;
-      margin: 6px;
-      padding: 0;
-      position: relative;
+      background-color: $white;
       overflow: hidden;
+      margin-bottom: 8px;
 
       img {
         display: block;
@@ -491,6 +491,7 @@
         bottom: 0;
         left: 0;
         background-color: rgba(66, 119, 255, 0.5);
+        border: 3px solid #0099FF;
         z-index: 1;
       }
 
@@ -507,8 +508,6 @@
       }
 
       &:hover, &.selected {
-        border: 3px solid #0099FF;
-
         &:before, &:after {
           transform: translateY(0);
           opacity: 1;
@@ -520,6 +519,7 @@
 
   .userUploads-actions {
     flex-direction: row-reverse;
+    margin-top: 12px;
 
     .jfReportButton {
       width: 150px;

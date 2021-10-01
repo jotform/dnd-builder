@@ -2,6 +2,7 @@
 *   this file includes pane styles.
 *   @giraykarasinir
 */
+/* stylelint-disable no-descending-specificity */
 
 .jfReport {
   display: flex;
@@ -81,7 +82,7 @@
         overflow-y: auto;
 
         &.hasInnerScroll {
-          padding-bottom: 30px;
+          padding: 25px 10px;
 
           .toolItem {
             display: flex;
@@ -487,7 +488,7 @@
       flex-grow: 1;
     }
 
-    &.forSettings .toolItem-tabContent {
+    &.forSettings .toolItem-tabContent:not(.hasInnerScroll) {
       padding: 25px 10px 0;
     }
 
