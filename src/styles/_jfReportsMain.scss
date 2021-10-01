@@ -80,17 +80,3 @@ body {
     right: calc(#{$right-pane-width} + 15px);
   }
 }
-
-.jfReport:not(.black) {
-  &:before {
-    position: absolute;
-    left: 0;
-    right: 0;
-    content: "";
-    height: 5px;
-    z-index: 3;
-    pointer-events: none;
-    user-select: none;
-    background-color: rgba(106, 110, 143, 0.1);
-  }
-}
