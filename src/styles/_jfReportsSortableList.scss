@@ -28,9 +28,12 @@
     height: 100%;
     transition: .3s ease-in-out;
 
-    .icon-drag, .icon-down, .icon-arrow, .icon-color, .icon-trash {
+    .icon-down, .icon-arrow, .icon-color, .icon-trash {
       fill: #2c3345;
       color: #2c3345;
+    }
+    .icon-drag {
+      fill: #999FA8;
     }
   }
 
@@ -85,14 +88,14 @@
     svg {
       display: block;
       width: 12px;
-      fill: #8483A9;
+      fill: #ffffff;
     }
   }
 
   &-name {
     width: calc(100% - 28px);
-    background-color: $lightGrayHover;
-    border-radius: 4px;
+    background-color: #555F6E;
+    border-radius: 2px;
     padding: 9px 12px;
     display: flex;
     align-items: center;
@@ -152,6 +155,7 @@
 
   &-text {
     flex: 1;
+    color: #ffffff;
     @include text-ellipsis;
 
     &.jSheetEditable {
@@ -257,7 +261,7 @@
 
     &.forPageLayer {
       .jfReportSelectOption-name {
-        border: 1px solid $inputGrayBorder;
+        border: 1px solid #303339;
       }
     }
 

@@ -4,9 +4,6 @@ import { PAGE_SETTINGS_ITEM_TYPE } from './itemTypes';
 export const pageSettings = {
   settings: [
     {
-      ...fieldSet('General', 'Page Style'),
-    },
-    {
       key: 'backgroundColor',
       label: 'Background Color',
       section: 'General',
@@ -16,11 +13,11 @@ export const pageSettings = {
       ...divider('General'),
     },
     {
-      ...fieldSet('General', 'Elements'),
+      ...fieldSet('General', 'Page Elements'),
     },
     {
       key: 'pageLayer',
-      label: 'Layers',
+      label: '',
       section: 'General',
       type: 'pageLayer',
       value: (_, { items }) => JSON.stringify(items),
