@@ -904,6 +904,12 @@
 }
 
 .jfReportPalette-item {
+  .colorHolder {
+    .countMore {
+      justify-content: center;
+    }
+  }
+
   .colorHolder.fewColor {
     .color:not(:first-child) {
       margin-left: 8px;
