@@ -29,7 +29,7 @@ export const selectors = {
 
 export const settings = {
   headerSettings: {
-    Header: [
+    HEADER: [
       {
         key: 'headerFontFamily',
         label: 'Font Family',
@@ -47,7 +47,7 @@ export const settings = {
         wrapperClass: 'isHalf',
       },
     ],
-    Line: [
+    LINE: [
       {
         key: 'headerLineShow',
         label: 'Show Line',
@@ -62,7 +62,7 @@ export const settings = {
         type: 'divider',
       },
     ],
-    Subheader: [
+    SUBHEADER: [
       {
         key: 'subHeaderShow',
         label: 'Show Subheader',
@@ -99,7 +99,7 @@ export const settings = {
     ],
   },
   layoutSettings: {
-    General: [
+    GENERAL: [
       {
         key: 'shapeTypeFieldSet',
         label: 'SIZE',

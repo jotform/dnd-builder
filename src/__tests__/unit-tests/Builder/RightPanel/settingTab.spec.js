@@ -7,7 +7,7 @@ describe('SettingTabs', () => {
   it('Should Render Tab Sections If `tabs` Prop Contains More Than 1 Element', () => {
     const props = {
       ...Tabs.defaultProps,
-      tabs: ['Header', 'Line', 'Subheader'],
+      tabs: ['HEADER', 'LINE', 'SUBHEADER'],
     };
     const settingTabWrapper = shallow(<Tabs {...props} />);
     expect(settingTabWrapper.find(selectors.toolTabsTab)).toHaveLength(props.tabs.length);
@@ -26,7 +26,7 @@ describe('SettingTabs', () => {
   it('Should Change Tabs Properly', () => {
     const props = {
       ...Tabs.defaultProps,
-      tabs: ['Header', 'Line', 'Subheader'],
+      tabs: ['HEADER', 'LINE', 'SUBHEADER'],
       panel: 'right',
     };
     const settingTabWrapper = mount(
@@ -45,7 +45,7 @@ describe('SettingTabs', () => {
     const eventMock = jest.fn();
     const props = {
       ...Tabs.defaultProps,
-      tabs: ['Header', 'Line', 'Subheader'],
+      tabs: ['HEADER', 'LINE', 'SUBHEADER'],
     };
     const settingTabWrapper = mount(
       <BuilderProvider>
@@ -61,7 +61,7 @@ describe('SettingTabs', () => {
   it('Should Pass `tabs` Prop Values as Tab Label', () => {
     const props = {
       ...Tabs.defaultProps,
-      tabs: ['Header', 'Line', 'Subheader'],
+      tabs: ['HEADER', 'LINE', 'SUBHEADER'],
     };
     const settingTabWrapper = shallow(<Tabs {...props} />);
     const tabs = settingTabWrapper.find(selectors.tabLabel);

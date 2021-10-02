@@ -8,7 +8,7 @@ describe('Settings', () => {
     const props = {
       ...Settings.defaultProps,
       settings: settings.headerSettings,
-      tabs: ['Header', 'Line', 'Subheader'],
+      tabs: ['HEADER', 'LINE', 'SUBHEADER'],
     };
 
     const settingsWrapper = shallow(<Settings {...props} />);
@@ -46,7 +46,7 @@ describe('Settings', () => {
     const props = {
       ...Settings.defaultProps,
       settings: settings.headerSettings,
-      tabs: ['Header', 'Line', 'Subheader'],
+      tabs: ['HEADER', 'LINE', 'SUBHEADER'],
     };
     const settingsWrapper = shallow(<Settings {...props} />);
     const totalLength = (
