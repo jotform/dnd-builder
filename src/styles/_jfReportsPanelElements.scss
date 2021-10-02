@@ -902,3 +902,14 @@
     }
   }
 }
+
+.jfReportPalette-item {
+  .colorHolder.fewColor {
+    .color:not(:first-child) {
+      margin-left: 8px;
+    }
+    .arrowContainer {
+      margin-left: auto;
+    }
+  }
+}
