@@ -165,7 +165,7 @@
     }
 
     .jfReportAccordion label {
-      background-color: #394049;
+      background-color: #303339;
       border-bottom-color: #4C5360;
       color: $white;
 
@@ -535,7 +535,14 @@
       }
     }
   }
-}
-.jfReport-pane-footer {
-  background-color: #404651;
+
+  .jfReportPalette {
+    label.toolSectionTitle {
+      color: $white;
+    }
+  }
+
+  .jfReport-pane-footer {
+    background-color: #404651;
+  }
 }
