@@ -1,8 +1,16 @@
 /* eslint max-len: ["error", { "code": 120 }] */
 import { memo, useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
+import {
+  func,
+  number,
+  oneOfType,
+  shape,
+  string,
+} from 'prop-types';
 
 const ITEM_TYPE = 'image';
+
+const DEFAULT_LOGO_SRC = 'https://www.jotform.com/resources/assets/icon/jotform-logomark-transparent-400x400.png';
 
 const imageWrapperStyle = {
   height: 'inherit',
@@ -79,16 +87,18 @@ const settings = [
   },
 ];
 
-export const ImageElement = ({
-  item: {
-    defaultURL,
+export const ImageElement = ({ item, itemAccessor }) => {
+  const [isLoading, setIsLoading] = useState(true);
+  const [isErrored, setIsErrored] = useState(false);
+
+  const {
     opacity,
     roundedCorners,
     url,
-  },
-}) => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [isErrored, setIsErrored] = useState(false);
+  } = item;
+
+  const additionalProps = itemAccessor(item);
+  const defaultURL = additionalProps?.defaultURL || DEFAULT_LOGO_SRC;
 
   useEffect(() => {
     setIsLoading(true);
@@ -138,37 +148,38 @@ export const ImageElement = ({
 };
 
 ImageElement.propTypes = {
-  item: PropTypes.shape({
-    defaultURL: PropTypes.string,
-    height: PropTypes.oneOfType([
-      PropTypes.number,
-      PropTypes.string,
+  item: shape({
+    defaultURL: string,
+    height: oneOfType([
+      number,
+      string,
     ]),
-    id: PropTypes.string,
-    opacity: PropTypes.oneOfType([
-      PropTypes.number,
-      PropTypes.string,
+    id: string,
+    opacity: oneOfType([
+      number,
+      string,
     ]),
-    roundedCorners: PropTypes.oneOfType([
-      PropTypes.number,
-      PropTypes.string,
+    roundedCorners: oneOfType([
+      number,
+      string,
     ]),
-    url: PropTypes.string,
-    width: PropTypes.oneOfType([
-      PropTypes.number,
-      PropTypes.string,
+    url: string,
+    width: oneOfType([
+      number,
+      string,
     ]),
   }),
+  itemAccessor: func,
 };
 
 ImageElement.defaultProps = {
   item: {
     opacity: 1,
   },
+  itemAccessor: () => {},
 };
 
 const details = {
-  defaultURL: 'https://www.jotform.com/resources/assets/icon/jotform-logomark-transparent-400x400.png',
   height: 400,
   itemType: ITEM_TYPE,
   opacity: 1,
