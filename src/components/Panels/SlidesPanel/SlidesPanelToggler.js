@@ -21,7 +21,7 @@ const SlidesPanelToggler = ({ onClosePanel }) => {
         title={SLIDES}
         type="button"
       >
-        <icons.slides className="jfReportSVG isWhite isTick" />
+        <icons.slides className="jfReportSVG isTick" />
       </button>
       <button
         className="paneClose p-absolute"
