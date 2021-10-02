@@ -40,7 +40,6 @@ const settings = [
       },
     },
     key: 'url',
-    label: 'IMAGE UPLOAD',
     section: 'General',
     type: 'imageThumbnailWithDelete',
   },
@@ -80,6 +79,7 @@ const settings = [
   },
   {
     key: 'url',
+    label: 'Enter Url',
     section: 'ENTER URL',
     showWhen: { url: '' },
     type: 'enterImageURL',
