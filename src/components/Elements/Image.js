@@ -3,7 +3,6 @@ import { memo, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 const ITEM_TYPE = 'image';
-const defaultURL = 'https://www.jotform.com/resources/assets/icon/jotform-logomark-transparent-400x400.png';
 
 const imageWrapperStyle = {
   height: 'inherit',
@@ -82,6 +81,7 @@ const settings = [
 
 export const ImageElement = ({
   item: {
+    defaultURL,
     opacity,
     roundedCorners,
     url,
@@ -139,6 +139,7 @@ export const ImageElement = ({
 
 ImageElement.propTypes = {
   item: PropTypes.shape({
+    defaultURL: PropTypes.string,
     height: PropTypes.oneOfType([
       PropTypes.number,
       PropTypes.string,
@@ -167,6 +168,7 @@ ImageElement.defaultProps = {
 };
 
 const details = {
+  defaultURL: 'https://www.jotform.com/resources/assets/icon/jotform-logomark-transparent-400x400.png',
   height: 400,
   itemType: ITEM_TYPE,
   opacity: 1,
