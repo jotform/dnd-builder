@@ -1,9 +1,11 @@
-import PropTypes from 'prop-types';
+import { func, number, string } from 'prop-types';
+import classNames from 'classnames';
 import { scrollToTarget } from '../../utils/functions';
 import * as icons from '../../utils/icons';
 import { useTranslatedTexts } from '../../utils/hooks';
 
 const PageAdder = ({
+  additionalClass,
   onPageAdd,
   pageCount,
 }) => {
@@ -16,7 +18,7 @@ const PageAdder = ({
   const { ADD_NEW_PAGE } = useTranslatedTexts();
   return (
     <button
-      className="pageAdder forOptions"
+      className={classNames('pageAdder', additionalClass)}
       onClick={onPageAddClick}
       type="button"
     >
@@ -27,11 +29,13 @@ const PageAdder = ({
 };
 
 PageAdder.propTypes = {
-  onPageAdd: PropTypes.func,
-  pageCount: PropTypes.number,
+  additionalClass: string,
+  onPageAdd: func,
+  pageCount: number,
 };
 
 PageAdder.defaultProps = {
+  additionalClass: '',
   onPageAdd: () => {},
   pageCount: 1,
 };
