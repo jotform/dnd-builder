@@ -31,20 +31,20 @@ export const reportSettings = {
           value: 'scaleAndFade',
         },
       ],
-      section: 'General',
+      section: 'GENERAL',
       type: 'dropdown',
     },
     {
-      ...divider('General'),
+      ...divider('GENERAL'),
     },
     {
       key: 'reportBackgroundColor',
       label: 'Background Color',
-      section: 'Style',
+      section: 'STYLE',
       type: 'colorPicker',
     },
     {
-      ...divider('Style'),
+      ...divider('STYLE'),
     },
   ],
 };

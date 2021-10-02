@@ -1,7 +1,7 @@
 const ALL_TEXTS = {
   ADD_ELEMENT: 'Add Element',
   ADD_LINK: 'ADD LINK',
-  ADD_NEW_PAGE: 'Add Slide',
+  ADD_NEW_PAGE: 'ADD SLIDE',
   BACKGROUND_COLOR: 'Background Color',
   DELETE: 'Delete',
   DELETE_ITEM: 'Delete Item',
@@ -10,7 +10,7 @@ const ALL_TEXTS = {
   ELEMENTS: 'Elements',
   FIT_TO_PAGE: 'Fit to Page',
   FIT_TO_SCENE: 'Fit to Screen',
-  GENERAL: 'General',
+  GENERAL: 'GENERAL',
   HEIGHT: 'Height',
   ITEM_SETTINGS: 'Item Settings',
   LAYERS: 'Layers',

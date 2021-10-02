@@ -79,11 +79,11 @@ const settings = [
         title: 'Star',
       },
     ],
-    section: 'General',
+    section: 'GENERAL',
     type: 'selectBox',
   },
   {
-    ...divider('General'),
+    ...divider('GENERAL'),
   },
   {
     key: 'lineType',
@@ -93,7 +93,7 @@ const settings = [
       { label: 'Dashed', value: 'dashed' },
       { label: 'Dotted', value: 'dotted' },
     ],
-    section: 'General',
+    section: 'GENERAL',
     showWhen: {
       shapeType: 'line',
     },
@@ -107,7 +107,7 @@ const settings = [
       { label: 'Medium', value: 'medium' },
       { label: 'Thick', value: 'thick' },
     ],
-    section: 'General',
+    section: 'GENERAL',
     showWhen: {
       shapeType: 'line',
     },
@@ -142,7 +142,7 @@ const settings = [
       { label: 'Horizontal', value: 'horizontal' },
       { label: 'Vertical', value: 'vertical' },
     ],
-    section: 'General',
+    section: 'GENERAL',
     showWhen: {
       shapeType: 'line',
     },
@@ -163,14 +163,14 @@ const settings = [
     },
     key: 'shapeFillShow',
     label: 'Fill',
-    section: 'General',
+    section: 'GENERAL',
     type: 'toggle',
     wrapperClass: 'isOneLine',
   },
   {
     key: 'shapeFillColor',
     label: 'Color',
-    section: 'General',
+    section: 'GENERAL',
     showWhen: {
       shapeType: 'line',
     },
@@ -179,7 +179,7 @@ const settings = [
   {
     key: 'shapeFillColor',
     label: 'Fill Color',
-    section: 'General',
+    section: 'GENERAL',
     showWhen: {
       shapeFillShow: 'on',
     },
@@ -189,7 +189,7 @@ const settings = [
     key: 'opacity',
     label: 'Opacity',
     range: [0, 100],
-    section: 'General',
+    section: 'GENERAL',
     showWhen: {
       shapeType: 'line',
     },
@@ -199,14 +199,14 @@ const settings = [
     key: 'opacity',
     label: 'Fill Opacity',
     range: [0, 100],
-    section: 'General',
+    section: 'GENERAL',
     showWhen: {
       shapeFillShow: 'on',
     },
     type: 'slider',
   },
   {
-    ...divider('General'),
+    ...divider('GENERAL'),
   },
   {
     hideWhen: {
@@ -222,14 +222,14 @@ const settings = [
     },
     key: 'shapeBorderShow',
     label: 'Border',
-    section: 'General',
+    section: 'GENERAL',
     type: 'toggle',
     wrapperClass: 'isOneLine',
   },
   {
     key: 'shapeBorderColor',
     label: 'Border Color',
-    section: 'General',
+    section: 'GENERAL',
     showWhen: {
       shapeBorderShow: 'on',
     },
@@ -243,20 +243,20 @@ const settings = [
       { label: 'Medium', value: '4px' },
       { label: 'Thick', value: '6px' },
     ],
-    section: 'General',
+    section: 'GENERAL',
     showWhen: {
       shapeBorderShow: 'on',
     },
     type: 'dropdown',
   },
   {
-    ...divider('General'),
+    ...divider('GENERAL'),
   },
   {
     key: 'roundedCorners',
     label: 'Rounded Corners',
     range: [0, 30],
-    section: 'General',
+    section: 'GENERAL',
     showWhen: {
       shapeType: 'rectangle',
     },
@@ -269,7 +269,7 @@ const settings = [
     },
     key: 'sizeSettings',
     label: 'Size',
-    section: 'General',
+    section: 'GENERAL',
     type: 'sizeSettings',
     value: (_, { height, width }) => `${width}x${height}`,
   },

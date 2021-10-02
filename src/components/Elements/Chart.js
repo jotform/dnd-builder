@@ -85,7 +85,7 @@ const settings = [
         title: 'Column Chart',
       },
     ],
-    section: 'General',
+    section: 'GENERAL',
     type: 'selectBox',
   },
 ];

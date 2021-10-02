@@ -23,7 +23,6 @@
     }
 
     &.fieldset {
-      text-transform: uppercase;
       font-weight: 700;
     }
 
@@ -370,7 +369,6 @@
 
     label[for="fileUploader"] {
       .jfReportButton {
-        text-transform: uppercase;
         background-color: #0099FF;
         color: $white;
         border: none;

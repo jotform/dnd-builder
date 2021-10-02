@@ -19,7 +19,7 @@ import { Meta, Story } from '@storybook/addon-docs/blocks';
 |-----------|--------|----------|-----------|-----------------------------------------------------------------|
 | key       | string | yes      |           | Identifier (e.g. to be used as propPath to save values)         |
 | label     | string | no       | ''        | Label to render on the right panel before component             |
-| section   | string | no       | 'General' | On which Tab to render the setting ittem                        |
+| section   | string | no       | 'GENERAL' | On which Tab to render the setting ittem                        |
 | type      | string | no       | 'text'    | identifier for how the setting will be rendered (details below) |
 | component | React  | no       |           | Custom React Component to render the setting item               |
 
@@ -30,7 +30,7 @@ config = {
   key: 'fontFamily',
   label: 'Font Family',
   options: ['Abril Fatface', 'Arial', 'Arial Black'],
-  section: 'General',
+  section: 'GENERAL',
   type: 'dropdown',
 };
 ```
@@ -48,7 +48,7 @@ config = {
   label: 'Super Custom Setting',
   myCustomArray: ['arrayItem1', 'arrayItem2'],
   myCustomMap: { item1: 'custom1', item2: 'custom2' },
-  section: 'Custom Tab',
+  section: 'CUSTOM TAB',
   component: MyCustomSettingRenderer
 }
 ```

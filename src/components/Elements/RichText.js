@@ -14,17 +14,17 @@ const settings = [
     key: 'fontFamily',
     label: 'Font Family',
     options: fontTypes.fonts,
-    section: 'General',
+    section: 'GENERAL',
     type: 'dropdown',
   },
   {
-    ...divider('General'),
+    ...divider('GENERAL'),
   },
   {
     key: 'opacity',
     label: 'Opacity',
     range: [0, 100],
-    section: 'General',
+    section: 'GENERAL',
     type: 'slider',
   },
 ];

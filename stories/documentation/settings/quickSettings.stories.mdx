@@ -17,7 +17,7 @@ The following is a simple example.
   {
     key: 'fillColor', # required
     label: 'Fill Color', # optional
-    section: 'Style', # optional
+    section: 'STYLE', # optional
     type: 'colorPicker', # required for ready-to-use setting
     component: ReactComponent # required for custom setting
     # `type` or `component` must be found for a setting
@@ -31,7 +31,7 @@ The following is a simple example.
 |-----------------------------------|----------|---------|-----------------------------------------------------------------------------|
 | key                               |    yes   |         | It must be and unique. When item related value changed, onItemChange method return with this key.|
 | label                             |    no    |         | Information text on the setting.                                            |
-| section                           |    no    |'General'| Section name for tab-based panel.                                           |
+| section                           |    no    |'GENERAL'| Section name for tab-based panel.                                           |
 | type                              |          |         | It is necessary for using ready-to-use settings.                            |
 | component                         |          |         | If you use your custom setting component, you have to add React component.  |
 | value                             |    no    |         | ...                                                                         |
@@ -53,7 +53,7 @@ The following is a advanced example.
   {
     key: 'details', # required
     label: 'Show Detail', # optional
-    section: 'General', # optional
+    section: 'GENERAL', # optional
     type: 'toggle', # required for ready-to-use setting
     showWhen: { # optional 
       shapeType: 'line',

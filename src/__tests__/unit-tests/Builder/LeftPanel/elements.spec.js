@@ -45,8 +45,8 @@ describe('Elements', () => {
             title: 'Image',
           },
         ],
-        title: 'Report Elements',
-        section: 'Report Elements',
+        title: 'REPORT ELEMENTS',
+        section: 'REPORT ELEMENTS',
       }, {
         elements: [
           {
@@ -60,8 +60,8 @@ describe('Elements', () => {
             title: 'Your Name',
           },
         ],
-        title: 'Form Elements',
-        section: 'Form Elements',
+        title: 'FORM FIELDS',
+        section: 'FORM FIELDS',
       },
       ],
     };

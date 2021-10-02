@@ -94,7 +94,7 @@ export default [
         value: 'Custom',
       },
     ],
-    section: 'General',
+    section: 'GENERAL',
     type: 'dropdown',
     value: val => {
       if (val === 'custom') {
@@ -117,7 +117,7 @@ export default [
     },
   },
   {
-    ...divider('General'),
+    ...divider('GENERAL'),
   },
   {
     key: 'reportCustomLayout',
@@ -131,7 +131,7 @@ export default [
       { label: '1280 x 720', value: '1280x720' },
       { label: '1024 x 768', value: '1024x768' },
     ],
-    section: 'General',
+    section: 'GENERAL',
     showWhen: {
       reportLayout: 'Web',
     },
@@ -143,7 +143,7 @@ export default [
     key: 'reportCustomLayout',
     label: 'Enter Dimensions',
     onChange,
-    section: 'General',
+    section: 'GENERAL',
     showWhen: {
       reportLayout: 'Custom',
     },
@@ -152,6 +152,6 @@ export default [
     value,
   },
   {
-    ...divider('General'),
+    ...divider('GENERAL'),
   },
 ];

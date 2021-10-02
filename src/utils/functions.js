@@ -91,7 +91,7 @@ export const getTabsWithSettings = (element, selectedItem, itemAccessor) => {
     const defaultItem = element.defaultItem || {};
     const item = { ...defaultItem, ...selectedItem };
     if (hideOrShowWhen(item, setting, itemAccessor)) {
-      const settingSection = setting.section || 'General';
+      const settingSection = setting.section || 'GENERAL';
       if (!_tabsWithSettings[settingSection]) {
         _tabsWithSettings[settingSection] = [];
       }
@@ -104,7 +104,7 @@ export const getTabsWithSettings = (element, selectedItem, itemAccessor) => {
 export const getTabsWithElements = leftPanelConfig => {
   return leftPanelConfig.reduce((tabsWithSettings, config) => {
     const _tabsWithSettings = tabsWithSettings;
-    const settingSection = config.section || 'General';
+    const settingSection = config.section || 'GENERAL';
     _tabsWithSettings[settingSection] = config;
     return _tabsWithSettings;
   }, {});

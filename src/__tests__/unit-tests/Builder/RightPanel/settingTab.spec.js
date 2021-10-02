@@ -16,7 +16,7 @@ describe('SettingTabs', () => {
   it('Should Not Render Tab Sections If `tabs` Prop Contains Less Than 2 Element', () => {
     const props = {
       ...Tabs.defaultProps,
-      tabs: ['General'],
+      tabs: ['GENERAL'],
     };
     const settingTabWrapper = shallow(<Tabs {...props} />);
     expect(settingTabWrapper.find(selectors.tabLabel)).toHaveLength(0);

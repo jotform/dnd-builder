@@ -40,7 +40,7 @@ const settings = [
       },
     },
     key: 'url',
-    section: 'General',
+    section: 'GENERAL',
     type: 'imageThumbnailWithDelete',
   },
   {
@@ -49,7 +49,7 @@ const settings = [
     },
     key: 'sizeSettings',
     label: 'Size',
-    section: 'General',
+    section: 'GENERAL',
     type: 'sizeSettings',
     value: (_, { height, width }) => `${width}x${height}`,
   },
@@ -60,7 +60,7 @@ const settings = [
     key: 'roundedCorners',
     label: 'Rounded Corners',
     range: [0, 30],
-    section: 'General',
+    section: 'GENERAL',
     showWhen: {
       shapeType: 'rectangle',
     },
@@ -74,7 +74,7 @@ const settings = [
     key: 'opacity',
     label: 'Opacity',
     range: [0, 100],
-    section: 'General',
+    section: 'GENERAL',
     type: 'slider',
   },
   {

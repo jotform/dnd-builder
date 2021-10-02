@@ -6,19 +6,19 @@ export const pageSettings = {
     {
       key: 'backgroundColor',
       label: 'Background Color',
-      section: 'General',
+      section: 'GENERAL',
       type: 'colorPicker',
     },
     {
-      ...divider('General'),
+      ...divider('GENERAL'),
     },
     {
-      ...fieldSet('General', 'Page Elements'),
+      ...fieldSet('GENERAL', 'Page Elements'),
     },
     {
       key: 'pageLayer',
       label: '',
-      section: 'General',
+      section: 'GENERAL',
       type: 'pageLayer',
       value: (_, { items }) => JSON.stringify(items),
     },

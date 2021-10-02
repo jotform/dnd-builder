@@ -32,7 +32,7 @@ describe('Settings', () => {
     const props = {
       ...Settings.defaultProps,
       settings: settings.layoutSettings,
-      tabs: ['General'],
+      tabs: ['GENERAL'],
     };
     const settingsWrapper = shallow(<Settings {...props} />);
 

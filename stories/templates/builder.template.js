@@ -1,4 +1,4 @@
-import React, { useState, useReducer } from 'react';
+import { useState, useReducer } from 'react';
 import { Builder } from '../../src/index';
 import {
   defaultSettings,
@@ -53,7 +53,7 @@ export const Counter = {
     {
       key: 'inside',
       label: 'Inside Value',
-      section: 'General',
+      section: 'GENERAL',
       type: 'textbox',
     },
   ],

@@ -66,7 +66,7 @@ const Logo = {
         },
       ],
       optionsDisplay: ['icon'],
-      section: 'General',
+      section: 'GENERAL',
       type: 'segmentControl',
     },
   ],
