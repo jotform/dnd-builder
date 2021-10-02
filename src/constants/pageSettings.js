@@ -13,7 +13,7 @@ export const pageSettings = {
       ...divider('GENERAL'),
     },
     {
-      ...fieldSet('GENERAL', 'Page Elements'),
+      ...fieldSet('GENERAL', 'Slide Elements'),
     },
     {
       key: 'pageLayer',

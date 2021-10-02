@@ -77,7 +77,7 @@ const PageActions = ({
       <div className="floatingController forPageAction">
         <div className="floatingController-container hasGroup">
           <button
-            key="Page Settings"
+            key="Slide Settings"
             className="controllerItem pageSettingSideBtn js-pageSetting"
             onClick={pageSettings}
             title={PAGE_SETTINGS}
