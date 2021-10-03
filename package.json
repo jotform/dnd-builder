@@ -1,6 +1,6 @@
 {
   "name": "@jotforminc/dnd-builder",
-  "version": "1.0.2",
+  "version": "2.0.0-beta.0",
   "files": [
     "lib"
   ],
@@ -113,6 +113,6 @@
     "lint:js:fix": "eslint src --fix --ignore-pattern 'src/__tests__'",
     "storybook": "start-storybook",
     "lint-staged": "lint-staged",
-    "release": "standard-version"
+    "release": "standard-version --prerelease beta --release-as major"
   }
 }
