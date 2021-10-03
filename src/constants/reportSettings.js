@@ -36,6 +36,7 @@ export const reportSettings = {
     },
     {
       ...divider('GENERAL'),
+      experimental: true,
     },
     {
       key: 'reportBackgroundColor',
