@@ -192,13 +192,13 @@
   }
 
   .icon-infoRow {
-    width: 36px;
-    height: 14px;
+    max-width: 46px;
+    max-height: 18px;
   }
 
   .icon-infoCol {
-    width: 18px;
-    height: 22px;
+    max-width: 24px;
+    max-height: 30px;
   }
 
   // Left Pane //
@@ -259,24 +259,24 @@
     fill: $additionalGray;
   }
 
-  .forSegments .jfReportSVG {
-    rect, circle {
-      fill: #8483A9;
-    }
+  // .forSegments .jfReportSVG {
+  //   rect, circle {
+  //     fill: #8483A9;
+  //   }
 
-    rect {
-      opacity: .7;
-    }
-    circle {
-      opacity: .3;
-    }
-  }
+  //   rect {
+  //     opacity: .7;
+  //   }
+  //   circle {
+  //     opacity: .3;
+  //   }
+  // }
 
-  .forSegments .isSelected .jfReportSVG {
-    rect, circle {
-      fill: #fff;
-    }
-  }
+  // .forSegments .isSelected .jfReportSVG {
+  //   rect, circle {
+  //     fill: #fff;
+  //   }
+  // }
 
   .forZoom .controllerItem .jfReportSVG:not(.icon-fit) {
     width: 12px;

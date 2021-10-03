@@ -73,7 +73,8 @@
       }
 
       &.forSegments {
-        height: 40px;
+        height: 54px;
+        border-radius: 4px;
       }
 
       &:not(.forSegments) .toolSection-listItem {

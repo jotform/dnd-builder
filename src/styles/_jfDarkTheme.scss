@@ -506,6 +506,12 @@
   }
 
   .jfReport-pane.forSlides {
+    .controllerItem:hover {
+      svg {
+        fill: $white;
+      }
+    }
+
     .pageAdder {
       border-top: 0;
     }
@@ -519,6 +525,8 @@
       }
 
       &:hover {
+        background-color: rgba(48, 51, 57, 0.5);
+
         .thumbnailOrder {
           color: #fff;
         }

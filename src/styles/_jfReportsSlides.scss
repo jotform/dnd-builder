@@ -236,3 +236,14 @@
     justify-content: center;
   }
 }
+
+.jfReport .thumbnailWrapper .thumbnailActions {
+  .floatingController-container {
+    height: 90px;
+    justify-content: space-between;
+
+    button.controllerItem {
+      padding: 0;
+    }
+  }
+}
