@@ -26,7 +26,7 @@ const PresentationActions = ({
             <button
               key={action.key}
               aria-label={action.key}
-              className={`jfReportButton ${action.className} ${action.icon}`}
+              className={`jfReportButton ${action.className}`}
               onClick={action.handler}
               title={action.title ? action.title : null}
               type="button"
