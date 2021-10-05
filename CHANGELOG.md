@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0-beta.4](https://github.com/jotform/dnd-builder/compare/v2.0.0-beta.3...v2.0.0-beta.4) (2021-10-05)
+
+
+### Features
+
+* **printmode:** support custom dimensions in print mode ([10680f3](https://github.com/jotform/dnd-builder/commit/10680f38820340d270b5ee9638dc45bfa3e48d45))
+
 ## [2.0.0-beta.3](https://github.com/jotform/dnd-builder/compare/v2.0.0-beta.2...v2.0.0-beta.3) (2021-10-04)
 
 
