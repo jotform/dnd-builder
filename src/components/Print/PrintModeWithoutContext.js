@@ -4,7 +4,7 @@ import ReportWrapper from '../ReportWrapper';
 import StaticScene from '../Preview/StaticScene';
 import { pageSize } from '../../utils/print';
 
-const availableFormats = ['A4', 'A5'];
+const availableFormats = ['A4', 'A5', 'Custom', 'Web'];
 
 const PrintModeWithoutContext = ({
   additionalPageItems,
