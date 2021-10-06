@@ -8,6 +8,7 @@ module.exports = function createConfig(api) {
       [require.resolve('@babel/plugin-proposal-object-rest-spread')],
       [require.resolve('@babel/plugin-proposal-optional-chaining')],
       [require.resolve('@babel/plugin-syntax-dynamic-import')],
+      [require.resolve('@babel/plugin-proposal-private-methods')],
     ],
     presets: [],
   };
