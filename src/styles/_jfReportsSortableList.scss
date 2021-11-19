@@ -32,9 +32,6 @@
       fill: #2c3345;
       color: #2c3345;
     }
-    .icon-drag {
-      fill: #999FA8;
-    }
   }
 
   &-drag {
@@ -88,14 +85,13 @@
     svg {
       display: block;
       width: 12px;
-      fill: #ffffff;
     }
   }
 
   &-name {
     width: calc(100% - 28px);
     background-color: #555F6E;
-    border-radius: 2px;
+    border-radius: 4px;
     padding: 9px 12px;
     display: flex;
     align-items: center;
@@ -108,6 +104,21 @@
     opacity: .4;
     transition: $transition;
     min-width: 0;
+
+    &:not(.isDark) {
+      .jfReportSelectOption-text {
+        color: #2b3245;
+      }
+
+      .jfReportSelectOption-icon {
+        fill: #8483A9;
+        color: #8483A9;
+      }
+    }
+
+    .forPin:hover {
+      opacity: 1;
+    }
 
     &.isDark {
       color: #f2f2f2;
@@ -170,7 +181,7 @@
   }
 
   & + .jfReportSelectOption {
-    margin-top: 20px;
+    margin-top: 10px;
   }
 
   .forChart & {
@@ -259,10 +270,6 @@
       }
     }
 
-    .jfReportSelectOption-name {
-      border: 1px solid #303339;
-    }
-
     &.withColorSelect {
       .jfReportSelectOption-name {
         padding-right: 26px;
@@ -306,10 +313,6 @@
           right: 26px;
         }
       }
-    }
-
-    &.forPageLayer .jfReportSelectOption-name:hover {
-      border-color: $inputGrayBorderHover;
     }
 
     &.withDelete .jfReportSelectOption-name:hover .jfReportSelectOption-delete {

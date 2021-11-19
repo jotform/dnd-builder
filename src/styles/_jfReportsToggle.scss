@@ -52,7 +52,7 @@
     transition: .3s;
   }
 
-  & > input:checked ~ &-text:before { background-color: $blue; }
+  & > input:checked ~ &-text:before { background-color: $ctaBlue; }
 
   & > input:checked ~ &-on {
     opacity: 1;

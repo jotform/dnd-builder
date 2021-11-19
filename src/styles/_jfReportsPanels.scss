@@ -9,8 +9,6 @@
   position: absolute;
 
   &-pane {
-    font-size: 0.938rem;
-
     // Panel Layout //
 
     .toolItem {
@@ -198,6 +196,7 @@
 
     .toolTabs {
       flex-shrink: 0;
+      font-size: 0.875rem;
 
       &-indicator {
         left: 0;

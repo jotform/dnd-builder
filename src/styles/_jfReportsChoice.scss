@@ -19,17 +19,17 @@
     background: 0;
 
     &:not(.forPin):before {
+      content: "";
       width: 16px;
       height: 16px;
+      display: inline-block;
+      vertical-align: middle;
       transition: 0.3s;
-      content: "";
       margin-right: 10px;
       border-radius: 3px;
       background-repeat: no-repeat;
       background-position: center;
       background-size: 10px;
-      display: inline-block;
-      vertical-align: top;
       @include inputDefault;
     }
 
@@ -64,16 +64,17 @@
       }
 
       &:hover:before {
-        border-color: #0099FF;
+        border-color: $ctaBlue;
       }
     }
   }
 
   &.hasNotText {
+    display: block;
+
     .jfReportChoice-label {
       &:before {
         margin-right: 0;
-        vertical-align: text-top;
       }
     }
   }
@@ -94,19 +95,19 @@
     &:checked + .jfReportChoice-labelIcon {
       .jfReportChoice-label:before {
         background-image: $jfReportChoice-checkIcon;
-        background-color: #0099FF;
-        border-color: #0099FF;
+        background-color: $ctaBlue;
+        border-color: $ctaBlue;
       }
       .jfReportChoice-label.radio:before {
         background-image: none;
         background-color: transparent;
-        border-color: #0099FF;
+        border-color: $ctaBlue;
       }
       .jfReportChoice-label.radio:after {
         position: absolute;
         left: 4px;
         top: 4px;
-        background-color: #0099FF;
+        background-color: $ctaBlue;
         border-radius: 50%;
         width: 10px;
         height: 10px;

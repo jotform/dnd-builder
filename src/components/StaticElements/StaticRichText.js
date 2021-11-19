@@ -45,7 +45,7 @@ const details = {
 };
 
 const defaultItem = {
-  fontFamily: 'Circular Std',
+  fontFamily: 'Circular',
   opacity: 1,
   value: '',
 };

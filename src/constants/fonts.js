@@ -37,7 +37,7 @@ export const fontTypes = {
     'PT Serif',
   ],
   licencedFonts: [
-    'Circular Std',
+    'Circular',
   ],
   systemDisplayFonts: [
     'Comic Sans MS',

@@ -6,7 +6,7 @@ const fontFallbackMap = {
   'Abril Fatface': '"Abril Fatface", "Palatino Linotype", serif',
   Bevan: '"Bevan", Georgia, serif',
   Bitter: '"Bitter", Georgia, serif',
-  'Circular Std': '"Circular Std", Verdana, sans-serif',
+  Circular: '"Circular", Verdana, sans-serif',
   Diplomata: '"Diplomata", Georgia, serif',
   'Fredoka One': '"Fredoka One", Verdana, sans-serif',
   Galada: '"Galada", Georgia, serif',
@@ -18,7 +18,7 @@ const fontFallbackMap = {
   Roboto: '"Roboto", "Franklin Gothic Medium", Tahoma, sans-serif',
   Sail: '"Sail", Verdana, sans-serif',
   Ubuntu: '"Ubuntu", Arial, sans-serif',
-  default: '"Circular Std", Verdana, sans-serif',
+  default: '"Circular", Verdana, sans-serif',
 };
 
 export default fontFallbackMap;

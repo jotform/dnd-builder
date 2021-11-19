@@ -97,7 +97,7 @@
 .jfReport .forSlides .pageAdder {
   display: flex;
   padding: 10px 20px 10px 16px;
-  background-color: #0099FF;
+  background-color: $ctaBlue;
   border-top: 1px solid #DDE0EA;
   border-radius: 4px;
   box-shadow: 0 -5px 0 rgba(#6A6E8F, 0.05);
@@ -113,7 +113,7 @@
   }
 
   &:hover {
-    background-color: #0099FF;
+    background-color: $ctaBlue;
 
     .jfReportSVG {
       fill: #fff;
