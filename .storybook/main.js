@@ -3,10 +3,8 @@
 module.exports = {
   stories: ['../stories/**/*.stories.@(js|mdx)'],
   addons: [
-    '@storybook/addon-docs',
+    '@storybook/addon-essentials',
     '@storybook/addon-links',
-    '@storybook/addon-actions',
-    '@storybook/addon-controls',
     '@storybook/preset-scss'
   ],
   webpackFinal: async config => {
