@@ -53,11 +53,13 @@ Report.propTypes = {
    New texts are set when you pass again.
   */
   reportsAppTexts: PropTypes.shape({}),
+  theme: PropTypes.oneOf(['lightMode', 'darkMode']),
 };
 
 Report.defaultProps = {
   mode: 'customize',
   reportsAppTexts,
+  theme: 'lightMode',
 };
 
 export default Report;

@@ -85,7 +85,7 @@ Presentation.propTypes = {
   /** General report settings such as layout size and background color */
   settings: PropTypes.shape({}),
   /** Theme */
-  theme: PropTypes.string,
+  theme: PropTypes.oneOf(['lightMode', 'darkMode']),
   /** Flag for fixed action bar */
   useFixedPresentationBar: PropTypes.bool,
 };

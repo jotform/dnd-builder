@@ -75,7 +75,7 @@ ReportWrapper.propTypes = {
   children: PropTypes.any,
   mode: PropTypes.string,
   pageCount: PropTypes.number,
-  theme: PropTypes.string.isRequired,
+  theme: PropTypes.oneOf(['lightMode', 'darkMode']).isRequired,
 };
 
 ReportWrapper.defaultProps = {
