@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0](https://github.com/jotform/dnd-builder/compare/v2.0.0-beta.3...v2.0.0) (2021-11-29)
+
+
+### Features
+
+* **printmode:** support custom dimensions in print mode ([10680f3](https://github.com/jotform/dnd-builder/commit/10680f38820340d270b5ee9638dc45bfa3e48d45))
+* **storybook:** dark&light mode addons ([3977621](https://github.com/jotform/dnd-builder/commit/3977621902019931da7a1a04218e3c78dcb648d8))
+
+
+### Bug Fixes
+
+* **theme:** dark&light mode major fix ([2c03387](https://github.com/jotform/dnd-builder/commit/2c033878290949108e0aa2092045697e905b9dc2))
+* **theme:** toolItem icon fill fix ([0c50632](https://github.com/jotform/dnd-builder/commit/0c506324a405251815c30604656a7fc185b2ef8c))
+
 ## [2.0.0-beta.4](https://github.com/jotform/dnd-builder/compare/v2.0.0-beta.3...v2.0.0-beta.4) (2021-10-05)
 
 
