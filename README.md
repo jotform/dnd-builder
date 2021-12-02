@@ -1,7 +1,7 @@
 <p align="center">
-  <img src="/.storybook/assets/logo.png" alt="react beautiful dnd logo" />
+  <img src="https://cdn.jotfor.ms/assets/img/logo2021/jotform-logo-dnd.png" alt="Jotform DND Builder" style="max-height: 50px;" />
 </p>
-<h1 align="center">JotForm - React Page Builder <small></small></h1>
+<h1 align="center">Jotform - React Page Builder <small></small></h1>
 
 <div align="center">
 
@@ -40,13 +40,11 @@ $npm install @jotforminc/dnd-builder --save
 ```
 
 
-## Documentation & API Reference📖
+## Documentation & API Reference 📖
 
 [Stories & Documentation](https://www.jotform.com/open-source/dnd-builder/)
 
-## Features
-
-## Core characteristics
+## Features & Core characteristics
 
 - Ready to use 🎁 💈
 - Draggable Elements 🧤
@@ -62,4 +60,4 @@ $npm install @jotforminc/dnd-builder --save
 
 ## License
 
-Code copyright 2021 JotForm. Code released under [the MIT license](https://github.com/jotform/dnd-builder/blob/master/LICENSE.md).
+Code copyright 2021 Jotform. Code released under [the MIT license](https://github.com/jotform/dnd-builder/blob/master/LICENSE.md).

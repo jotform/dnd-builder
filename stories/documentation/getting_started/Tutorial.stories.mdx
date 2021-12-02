@@ -71,7 +71,7 @@ render(<DNDApplication />, document.getElementById('app'));
 
 #### 5. Make your items in use to by adding left sidebar.
 
-If you want to list your accepted items to left sidebar to make it in use the `leftPanelConfig` structure should be like this, 
+If you want to list your accepted items to left sidebar to make it in use the `leftPanelConfig` structure should be like this,
 
 ```jsx
 const leftPanelConfig = [{
@@ -144,7 +144,7 @@ const leftPanelConfig = [{
 }];
 
 const DNDApplication = () => {
-  return <Builder 
+  return <Builder
     acceptedItems={acceptedItems}
     leftPanelConfig={leftPanelConfig}
   />;
@@ -204,7 +204,7 @@ const pages = [
 ];
 
 const DNDApplication = () => {
-  return <Builder 
+  return <Builder
     acceptedItems={acceptedItems}
     leftPanelConfig={leftPanelConfig}
     pages={pages}
@@ -269,7 +269,7 @@ const onItemAdd = item => {
 };
 
 const DNDApplication = () => {
-  return <Builder 
+  return <Builder
     acceptedItems={acceptedItems}
     leftPanelConfig={leftPanelConfig}
     pages={pages}
@@ -347,7 +347,7 @@ const pagesReducer = (state, action) => {
 const DNDApplication = () => {
   const [pages, dispatch] = useReducer(pagesReducer, initialPages());
 
-  return <Builder 
+  return <Builder
     acceptedItems={acceptedItems}
     leftPanelConfig={leftPanelConfig}
     pages={pages}
@@ -360,4 +360,4 @@ render(<DNDApplication />, document.getElementById('app'));
 
 ## Next Steps
 
-Congratulations! You’ve created your first drag and drop application with JotForm DND Builder. To view more advanced examples, visit <LinkTo kind="examples-all-in-one--full-controlled">here.</LinkTo>.
+Congratulations! You’ve created your first drag and drop application with Jotform DND Builder. To view more advanced examples, visit <LinkTo kind="examples-all-in-one--full-controlled">here.</LinkTo>.

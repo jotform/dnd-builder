@@ -1,6 +1,6 @@
-# Contributing to JotForm DND Builder
+# Contributing to Jotform DND Builder
 
-We'd love for you to contribute to our source code and to make JotForm DND Builder even better than it is today! Here are the guidelines we'd like you to follow:
+We'd love for you to contribute to our source code and to make Jotform DND Builder even better than it is today! Here are the guidelines we'd like you to follow:
 
 + [Issues and Bugs](#issues)
 + [Pull Requests](#pr)
@@ -51,4 +51,4 @@ However, there are still some styles that the linter cannot pick up.
 
 ## <a name="license"></a>License
 
-By contributing to JotForm DND Builder, you agree that your contributions will be licensed under its MIT license.
+By contributing to Jotform DND Builder, you agree that your contributions will be licensed under its MIT license.

@@ -6,7 +6,7 @@ import logo from './assets/logo.png';
 const theme = create({
   base: 'light',
   brandImage: logo,
-  brandTitle: 'JotForm DND Builder',
+  brandTitle: 'Jotform DND Builder',
   brandUrl: 'https://github.com/jotform/dnd-builder',
 
   appBg: '#DFE7F2',

@@ -73,21 +73,27 @@ Working Example:
   {(() => {
     const [counter, setCounter] = useState(0);
     const itemAccessor = () => counter;
- 
     return (
       <div>
-        <button onClick={() => {setCounter(counter + 1)}}>Increase Outside Value</button>
-        <CustomBuilder
-          acceptedItems={{ [Counter.itemType]: Counter }}
-          leftPanelConfig={[{
-            elements: [{
-              itemType: Counter.itemType,
-              title: 'Counter'
-            }]
-          }]}
-          itemAccessor={itemAccessor}
-          counter={counter}
-        />
+        <button
+          onClick={() => {setCounter(counter + 1)}}
+          style={{ backgroundColor: '#cdcdcd', border: 'none', borderRadius: '4px', cursor: 'pointer', padding: '7px' }}
+        >
+            Increase Outside Value +
+        </button>
+        <div style={{ display: 'block', height: '250px', marginTop: '10px' }}>
+          <CustomBuilder
+            acceptedItems={{ [Counter.itemType]: Counter }}
+            leftPanelConfig={[{
+              elements: [{
+                itemType: Counter.itemType,
+                title: 'Counter'
+              }]
+            }]}
+            itemAccessor={itemAccessor}
+            counter={counter}
+          />
+        </div>
       </div>
     )
   })()}

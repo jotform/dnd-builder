@@ -1,8 +1,8 @@
 # About
-What is JotForm DND Builder
+What is Jotform DND Builder
 
-    It is ready to use report - page - cv - infographics vs. builder. In short you can 
-    build what ever you warnt. 
+    It is ready to use report - page - cv - infographics vs. builder. In short you can
+    build what ever you warnt.
 # Getting Started
 - Installation
 >npm and yarn commands
@@ -14,7 +14,7 @@ What is JotForm DND Builder
     - Presentation
     - Print
     - Report
-        
+
 
 # Components
     This section should include Components abilities.

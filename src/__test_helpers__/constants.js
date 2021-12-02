@@ -1,7 +1,7 @@
 export const selectors = {
   controllerIndicator: '.controllerIndicator',
   controllerItem: '.controllerItem',
-  disabled: '.disabled', 
+  disabled: '.disabled',
   forSlide: '.forSlide',
   hasAdditional: '.hasAdditional',
   hasInnerScroll: '.hasInnerScroll',
@@ -116,7 +116,7 @@ export const settings = {
       },
       {
         key: 'showBranding',
-        label: 'Show JotForm Branding',
+        label: 'Show Jotform Branding',
         section: 'GENERAL',
         wrapperClass: 'isOneLine',
       },
