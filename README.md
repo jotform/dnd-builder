@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://cdn.jotfor.ms/assets/img/logo2021/jotform-logo-dnd.png" alt="Jotform DND Builder" style="max-height: 50px;" />
+  <img src="https://cdn.jotfor.ms/assets/img/logo2021/jotform-logo-dnd.png" alt="Jotform DND Builder" height="50px" />
 </p>
 <h1 align="center">Jotform - React Page Builder <small></small></h1>
 
