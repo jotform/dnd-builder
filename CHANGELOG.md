@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.0.2](https://github.com/jotform/dnd-builder/compare/v2.0.0...v2.0.2) (2021-12-02)
+
+
+### Bug Fixes
+
+* **assets:** logo & readme gif has added ([6385694](https://github.com/jotform/dnd-builder/commit/6385694f86d9bad8ddd27d51b45b620973f07f8a))
+* **storybook:** new branding updates ([f2d28f2](https://github.com/jotform/dnd-builder/commit/f2d28f221c1b6debd9ba71a9bdf0a5c418a12e56))
+* **storybook:** theme added ([f22e8bc](https://github.com/jotform/dnd-builder/commit/f22e8bcdf12709635f9d26a4bf794be7d373a0be))
+
 ## [2.0.0](https://github.com/jotform/dnd-builder/compare/v2.0.0-beta.3...v2.0.0) (2021-11-29)
 
 
