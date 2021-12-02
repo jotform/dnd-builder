@@ -3,6 +3,7 @@ import { Meta, Story, ArgsTable, Canvas } from '@storybook/addon-docs/blocks';
 import DndWrapper from '../../../src/components/Builder/DndWrapper.js';
 import { BuilderProvider } from '../../../src/utils/builderContext.js';
 import { Builder } from '../../../src/index';
+import ReportWrapper from '../../../src/components/ReportWrapper';
 import LeftPanel from '../../../src/components/Panels/LeftPanel';
 
 <Meta title="Documentation/Items/Ready to Use Items" />
@@ -51,7 +52,9 @@ export const leftPanelConfig = [
     <div className="jfReport">
       <DndWrapper>
         <BuilderProvider isLeftPanelOpen>
-          <LeftPanel leftPanelConfig={leftPanelConfig} />
+          <ReportWrapper>
+            <LeftPanel leftPanelConfig={leftPanelConfig} />
+          </ReportWrapper>
         </BuilderProvider>
       </DndWrapper>
     </div>

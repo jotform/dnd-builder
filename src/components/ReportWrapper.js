@@ -75,13 +75,14 @@ ReportWrapper.propTypes = {
   children: PropTypes.any,
   mode: PropTypes.string,
   pageCount: PropTypes.number,
-  theme: PropTypes.oneOf(['lightMode', 'darkMode']).isRequired,
+  theme: PropTypes.oneOf(['lightMode', 'darkMode']),
 };
 
 ReportWrapper.defaultProps = {
   children: null,
   mode: '',
   pageCount: 0,
+  theme: 'lightMode',
 };
 
 export default memo(ReportWrapper);

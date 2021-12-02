@@ -4,6 +4,7 @@ import LinkTo from '@storybook/addon-links/react';
 import DndWrapper from '../../../src/components/Builder/DndWrapper.js';
 import { BuilderProvider } from '../../../src/utils/builderContext.js';
 import { Builder } from '../../../src/index';
+import ReportWrapper from '../../../src/components/ReportWrapper';
 import LeftPanel from '../../../src/components/Panels/LeftPanel';
 
 <Meta title="Documentation/Components/Builder" />
@@ -122,28 +123,30 @@ const leftPanelConfig = [
   ...
 ];
 ```
-<div style={{ display: 'block', height: '150px' }}>
-  <div className="jfReport" style={{ height: '150px' }}>
+<Canvas>
     <DndWrapper>
       <BuilderProvider isLeftPanelOpen>
-        <LeftPanel
-          leftPanelConfig={[
-            {
-              elements: [
+        <div className="jfReport" style={{ height: '200px' }}>
+          <ReportWrapper>
+            <LeftPanel
+              leftPanelConfig={[
                 {
-                  iconType: 'image',
-                  itemType: 'logo',
-                  title: 'Podo Switcher',
+                  elements: [
+                    {
+                      iconType: 'image',
+                      itemType: 'logo',
+                      title: 'Podo Switcher',
+                    },
+                  ],
+                  title: 'Items',
                 },
-              ],
-              title: 'Items',
-            },
-          ]}
-        />
+              ]}
+            />
+          </ReportWrapper>
+        </div>
       </BuilderProvider>
     </DndWrapper>
-  </div>
-</div>
+</Canvas>
 
 If you want to provide search ability in your sections, you should provide `hasSearch` boolean and `searchKeys` prop which will be used in fuzzy search.
 
@@ -169,33 +172,35 @@ const leftPanelConfig = [
   ...
 ];
 ```
-<div style={{ display: 'block', height: '200px' }}>
-  <div className="jfReport" style={{ height: '200px' }}>
+<Canvas>
     <DndWrapper>
-      <BuilderProvider isLeftPanelOpen>
-        <LeftPanel
-          leftPanelConfig={[
-            {
-              elements: [
+      <div className="jfReport" style={{ height: '220px' }}>
+        <BuilderProvider isLeftPanelOpen>
+          <ReportWrapper>
+            <LeftPanel
+              leftPanelConfig={[
                 {
-                  iconType: 'image',
-                  itemType: 'logo',
-                  title: 'Podo Switcher',
+                  elements: [
+                    {
+                      iconType: 'image',
+                      itemType: 'logo',
+                      title: 'Podo Switcher',
+                    },
+                  ],
+                  title: 'Items',
+                  hasSearch: true,
+                  searchKeys: [
+                    { name: 'title', weight: 0.7 },
+                    { name: 'myCustomSearchKey', weight: 0.3 },
+                  ]
                 },
-              ],
-              title: 'Items',
-              hasSearch: true,
-              searchKeys: [
-                { name: 'title', weight: 0.7 },
-                { name: 'myCustomSearchKey', weight: 0.3 },
-              ]
-            },
-          ]}
-        />
-      </BuilderProvider>
+              ]}
+            />
+          </ReportWrapper>
+        </BuilderProvider>
+      </div>
     </DndWrapper>
-  </div>
-</div>
+</Canvas>
 
 
 

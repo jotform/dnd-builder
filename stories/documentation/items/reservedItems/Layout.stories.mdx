@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Meta, Canvas } from '@storybook/addon-docs/blocks';
 import { BuilderProvider } from '../../../../src/utils/builderContext.js';
 import { PropProvider } from '../../../../src/utils/propContext.js';
+import ReportWrapper from '../../../../src/components/ReportWrapper';
 import RightPanel from '../../../../src/components/Panels/RightPanel';
 
 <Meta title="Documentation/Items/Reserved Items/Layout" />
@@ -13,7 +14,6 @@ This item is reserved for the general layout settings.
 its item type is  `__layout__`. and you should not use this keyword for other items.
 
 <Canvas>
-  <div  style={{ display: 'block', height: '350px' }}>
     <BuilderProvider>
       {(() => {
         const [_layout, editLayout] = useState({
@@ -23,15 +23,18 @@ its item type is  `__layout__`. and you should not use this keyword for other it
           reportLayoutWidth: '800',
         });
         return (
-          <div className="jfReport">
-            <PropProvider settings={_layout}>
-              <BuilderProvider isRightPanelOpen>
-                <RightPanel onSettingChange={(id, setting) => {editLayout({ ..._layout, ...setting})}} />
-              </BuilderProvider>
-            </PropProvider>
+          <div  style={{ display: 'block', height: '350px' }}>
+            <div className="jfReport">
+              <PropProvider settings={_layout}>
+                <BuilderProvider isRightPanelOpen>
+                  <ReportWrapper>
+                    <RightPanel onSettingChange={(id, setting) => {editLayout({ ..._layout, ...setting})}} />
+                  </ReportWrapper>
+                </BuilderProvider>
+              </PropProvider>
+            </div>
           </div>
         )
       })()}
     </BuilderProvider>
-  </div>
 </Canvas>
