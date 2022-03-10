@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 import QuillEditor from './QuillEditor';
 import { useBuilderContext } from '../../utils/builderContext';
@@ -10,6 +10,8 @@ const TextEditor = ({
   isSelected,
   placeholder,
 }) => {
+  const [_content, setContent] = useState(content);
+
   const { isTextEditorOpen, setIsTextEditorOpen } = useBuilderContext();
 
   const onClick = useCallback(() => {
@@ -20,29 +22,23 @@ const TextEditor = ({
 
   const isNotEmpty = useMemo(() => {
     const el = document.createElement('div');
-    el.innerHTML = content;
+    el.innerHTML = _content;
     return !!el.innerText;
-  }, [content]);
-
-  const onClickOutside = useCallback(() => {
-    setTimeout(() => setIsTextEditorOpen(false), 1000);
-  }, [isTextEditorOpen]);
+  }, [_content]);
 
   return isSelected && isTextEditorOpen ? (
     <QuillEditor
-      content={content}
-      exceptionalClasses={['ql-toolbar']}
+      content={_content}
       handleSave={handleSave}
-      onClickOutside={onClickOutside}
       placeholder={placeholder}
+      setContent={setContent}
       setIsTextEditorOpen={setIsTextEditorOpen}
-      withClickOutsideWrapperClass="textEditorWrapper f-all"
     />
   ) : (
     <div
       className={`f-all ql-editor${isNotEmpty ? '' : ' isEmptyTextElement'}`}
       dangerouslySetInnerHTML={{
-        __html: isNotEmpty ? content : placeholder,
+        __html: isNotEmpty ? _content : placeholder,
       }}
       onClick={onClick}
       onKeyDown={() => {}}
