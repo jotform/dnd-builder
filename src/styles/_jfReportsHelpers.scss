@@ -5,6 +5,8 @@
 
 // Mixins //
 
+@use "sass:math";
+
 @mixin text-ellipsis {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -35,7 +37,7 @@
     $base: $base * 1px;
   }
 
-  @return $pxval / $base * 1em;
+  @return math.div($pxval, $base) * 1em;
 }
 
 // Functions //
