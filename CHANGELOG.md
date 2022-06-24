@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.2.1](https://github.com/jotform/dnd-builder/compare/v2.0.2...v2.2.1) (2022-06-24)
+
+
+### Bug Fixes
+
+* changed withclickoutside logic ([5b0cac3](https://github.com/jotform/dnd-builder/commit/5b0cac338e740ede76de9bfe04eebe13bfb135ef))
+* **readme:** readme img height fix ([18cf8cb](https://github.com/jotform/dnd-builder/commit/18cf8cbf2c653caebc7d7a6f6a17e8a3b2c4dc20))
+* **TextEditor:** fix for content ([f0a8327](https://github.com/jotform/dnd-builder/commit/f0a83275905ec98ff200c34237e6f88793cdde22))
+
 ## [2.2.0](https://github.com/jotform/dnd-builder/compare/v2.0.3...v2.2.0) (2022-06-14)
 
 ### [2.0.3](https://github.com/jotform/dnd-builder/compare/v2.0.2...v2.0.3) (2022-03-10)
