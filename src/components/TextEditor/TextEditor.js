@@ -1,5 +1,6 @@
 import { useCallback, useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
+import domPurify from 'dompurify';
 import QuillEditor from './QuillEditor';
 import { useBuilderContext } from '../../utils/builderContext';
 
@@ -22,7 +23,7 @@ const TextEditor = ({
 
   const isNotEmpty = useMemo(() => {
     const el = document.createElement('div');
-    el.innerHTML = _content;
+    el.innerHTML = domPurify.sanitize(_content);
     return !!el.innerText;
   }, [_content]);
 
