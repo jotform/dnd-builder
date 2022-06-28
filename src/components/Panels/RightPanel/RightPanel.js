@@ -178,7 +178,7 @@ const RightPanel = ({
         ref={panelRef}
         additionalClassName={panelAdditionalClassName}
       >
-        <RightPanelToggler />
+        {(isSlidesPanelOpen || isRightPanelOpen) ? null : <RightPanelToggler />}
         <div className="toolItemWrapper f-height d-flex dir-col">
           <Section title={title}>
             <Tabs
@@ -212,10 +212,10 @@ RightPanel.propTypes = {
 };
 
 RightPanel.defaultProps = {
-  itemAccessor: () => {},
-  onItemChange: () => {},
-  onPageChange: () => {},
-  onSettingChange: () => {},
+  itemAccessor: () => { },
+  onItemChange: () => { },
+  onPageChange: () => { },
+  onSettingChange: () => { },
   pages: [],
 };
 
