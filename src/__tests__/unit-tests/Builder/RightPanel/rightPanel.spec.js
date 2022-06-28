@@ -89,4 +89,31 @@ describe('RightPanel Component', () => {
     builderWrapper.setState({ isSlidesPanelOpen: true });
     expect(builderWrapper.find(Panel).props().additionalClassName).toMatch('otherOpened');
   });
+
+  it('Should Not Render `RightPanelToggler` If `isRightPanelOpen` is `true`', () => {
+    const props = {
+      ...BuilderProvider.defaultProps,
+      isRightPanelOpen: true
+    };
+    const builderWrapper = mount(
+      <BuilderProvider {...props}>
+        <RightPanel />
+      </BuilderProvider>,
+    );
+    expect(builderWrapper.find(RightPanelToggler)).toHaveLength(0);
+  });
+
+  it('Should Not Render `RightPanelToggler` If `isSlidesPanelOpen` is `true`', () => {
+    const props = {
+      ...BuilderProvider.defaultProps,
+      isSlidesPanelOpen: true
+    };
+    const builderWrapper = mount(
+      <BuilderProvider {...props}>
+        <RightPanel />
+      </BuilderProvider>,
+    );
+    expect(builderWrapper.find(Panel).props().additionalClassName).toMatch('isIdle');
+    expect(builderWrapper.find(RightPanelToggler)).toHaveLength(0);
+  });
 });

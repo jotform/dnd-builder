@@ -70,4 +70,30 @@ describe('RightPanelToggler', () => {
     rightPanelCloseButton.simulate('click');
     expect(rightPanelTogglerWrapper.state().isRightPanelOpen).toBe(false);
   });
+
+  it('It Should Call `onRightPanelsToggled` Callback With `false` Once click Close Button', () => {
+    const onRightPanelsToggled = jest.fn();
+    const rightPanelTogglerWrapper = mount(
+      <BuilderProvider onRightPanelsToggled={onRightPanelsToggled}>
+        <RightPanelToggler />
+      </BuilderProvider>,
+    );
+    rightPanelTogglerWrapper.setState({ isRightPanelOpen: true });
+    const rightPanelCloseButton = rightPanelTogglerWrapper.find(selectors.rightPanelClose);
+    rightPanelCloseButton.simulate('click');
+    expect(onRightPanelsToggled).toHaveBeenCalledWith(false);
+  });
+
+  it('It Should Call `onRightPanelsToggled` Callback With `true` Once click Open Button', () => {
+    const onRightPanelsToggled = jest.fn();
+    const rightPanelTogglerWrapper = mount(
+      <BuilderProvider onRightPanelsToggled={onRightPanelsToggled}>
+        <RightPanelToggler />
+      </BuilderProvider>,
+    );
+    rightPanelTogglerWrapper.setState({ isRightPanelOpen: true });
+    const rightPanelOpenButton = rightPanelTogglerWrapper.find(selectors.rightPanelOpen);
+    rightPanelOpenButton.simulate('click');
+    expect(onRightPanelsToggled).toHaveBeenCalledWith(true);
+  });
 });
