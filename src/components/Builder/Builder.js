@@ -34,6 +34,7 @@ const Builder = ({
   onPageDuplicate,
   onPageOrdersChange,
   onPageRemove,
+  onRightPanelsToggled,
   onSettingChange,
   pages,
   settings,
@@ -45,7 +46,7 @@ const Builder = ({
 
   return (
     <StrictMode>
-      <BuilderProvider>
+      <BuilderProvider onRightPanelsToggled={onRightPanelsToggled}>
         <PropProvider
           acceptedItems={acceptedItems}
           disableInteraction={disableInteraction}
@@ -151,6 +152,11 @@ Builder.propTypes = {
   onPageOrdersChange: PropTypes.func,
   /** Function called upon removing a page */
   onPageRemove: PropTypes.func,
+  /** Function called when the slides or the right panel is
+   * toggled takes a boolean value to indicate whether or
+   * not the panel is toggled open.
+   */
+  onRightPanelsToggled: PropTypes.func,
   /** Function called upon editing a general report setting */
   onSettingChange: PropTypes.func,
   /** Array of pages with their settings and items */
@@ -168,22 +174,23 @@ Builder.defaultProps = {
   acceptedItems: {},
   additionalPageItems: [],
   disableInteraction: [],
-  itemAccessor: () => {},
+  itemAccessor: () => { },
   lastScrollPosition: 0,
   leftPanelConfig: [],
-  onAnEventTrigger: () => {},
-  onItemAdd: () => {},
-  onItemChange: () => {},
-  onItemMove: () => {},
-  onItemRemove: () => {},
-  onItemResize: () => {},
-  onItemsMove: () => {},
-  onPageAdd: () => {},
-  onPageChange: () => {},
-  onPageDuplicate: () => {},
-  onPageOrdersChange: () => {},
-  onPageRemove: () => {},
-  onSettingChange: () => {},
+  onAnEventTrigger: () => { },
+  onItemAdd: () => { },
+  onItemChange: () => { },
+  onItemMove: () => { },
+  onItemRemove: () => { },
+  onItemResize: () => { },
+  onItemsMove: () => { },
+  onPageAdd: () => { },
+  onPageChange: () => { },
+  onPageDuplicate: () => { },
+  onPageOrdersChange: () => { },
+  onPageRemove: () => { },
+  onRightPanelsToggled: () => { },
+  onSettingChange: () => { },
   pages: [],
   settings: {},
   theme: 'lightMode',
