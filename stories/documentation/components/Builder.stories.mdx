@@ -300,3 +300,17 @@ function onPageRemove(pageID) {
   ...
 }
 ```
+
+### onRightPanelsToggled
+
+This callback is called when either the Right Panel or the Slides Panel are toggled (open or close).
+
+```javascript
+function onRightPanelsToggled(state) {
+  if (state) {
+    console.log('Panel opened!');
+  } else (state) {
+    console.log('Panel closed!');
+  }
+}
+```
