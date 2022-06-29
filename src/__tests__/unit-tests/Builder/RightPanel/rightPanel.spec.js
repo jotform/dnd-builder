@@ -90,7 +90,7 @@ describe('RightPanel Component', () => {
     expect(builderWrapper.find(Panel).props().additionalClassName).toMatch('otherOpened');
   });
 
-  it('Should Not Render `RightPanelToggler` If `isRightPanelOpen` is `true`', () => {
+  it('Should Render `RightPanelToggler` with `paneClose` class name If `isRightPanelOpen` is `true`', () => {
     const props = {
       ...BuilderProvider.defaultProps,
       isRightPanelOpen: true
@@ -100,7 +100,7 @@ describe('RightPanel Component', () => {
         <RightPanel />
       </BuilderProvider>,
     );
-    expect(builderWrapper.find(RightPanelToggler)).toHaveLength(0);
+    expect(builderWrapper.find('.paneClose')).toHaveLength(1);
   });
 
   it('Should Not Render `RightPanelToggler` If `isSlidesPanelOpen` is `true`', () => {

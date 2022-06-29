@@ -90,7 +90,7 @@ const SlidesPanel = ({
       additionalClassName={panelAdditionalClassName}
       onAnimationEnd={onAnimationEnd}
     >
-      {(isSlidesPanelOpen || isRightPanelOpen)
+      {isRightPanelOpen
         ? null
         : <SlidesPanelToggler onClosePanel={onClosePanel} />}
       {(isSlidesPanelOpen || (!isSlidesPanelOpen && !animationEnd)) && (
