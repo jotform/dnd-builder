@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactQuill from 'react-quill';
+import domPurify from 'dompurify';
 import PropTypes from 'prop-types';
 import { formats, modules } from './textEditorConstants';
 import { fontSizes } from '../../constants/fonts';
@@ -41,12 +42,13 @@ class QuillEditor extends React.PureComponent {
     }
   }
 
+  handleSetContent = value => {
+    const { setContent } = this.props;
+    setContent(domPurify.sanitize(value));
+  }
+
   render() {
-    const {
-      content,
-      placeholder,
-      setContent,
-    } = this.props;
+    const { content, placeholder } = this.props;
 
     return (
       <div
@@ -57,7 +59,7 @@ class QuillEditor extends React.PureComponent {
           ref={this.quill}
           formats={QuillEditor.formats}
           modules={QuillEditor.modules}
-          onChange={setContent}
+          onChange={this.handleSetContent}
           placeholder={placeholder}
           preserveWhitespace
           value={content}

@@ -11,7 +11,7 @@ const TextEditor = ({
   isSelected,
   placeholder,
 }) => {
-  const [_content, setContent] = useState(content);
+  const [_content, setContent] = useState(domPurify.sanitize(content));
 
   const { isTextEditorOpen, setIsTextEditorOpen } = useBuilderContext();
 
@@ -23,7 +23,7 @@ const TextEditor = ({
 
   const isNotEmpty = useMemo(() => {
     const el = document.createElement('div');
-    el.innerHTML = domPurify.sanitize(_content);
+    el.innerHTML = _content;
     return !!el.innerText;
   }, [_content]);
 
