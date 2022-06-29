@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.4.1](https://github.com/jotform/dnd-builder/compare/v2.4.0...v2.4.1) (2022-06-29)
+
+
+### Bug Fixes
+
+* **panels:** return close button ([9094afe](https://github.com/jotform/dnd-builder/commit/9094afe680b32720441e51949665b24b550d96eb))
+
 ## [2.4.0](https://github.com/jotform/dnd-builder/compare/v2.2.1...v2.4.0) (2022-06-29)
 
 
