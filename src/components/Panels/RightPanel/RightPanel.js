@@ -178,7 +178,7 @@ const RightPanel = ({
         ref={panelRef}
         additionalClassName={panelAdditionalClassName}
       >
-        {(isSlidesPanelOpen || isRightPanelOpen) ? null : <RightPanelToggler />}
+        {isSlidesPanelOpen ? null : <RightPanelToggler />}
         <div className="toolItemWrapper f-height d-flex dir-col">
           <Section title={title}>
             <Tabs
