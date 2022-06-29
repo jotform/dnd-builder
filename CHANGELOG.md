@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.4.0](https://github.com/jotform/dnd-builder/compare/v2.2.1...v2.4.0) (2022-06-29)
+
+
+### Features
+
+* **buildercontext:** add callback for right panel ([1dde660](https://github.com/jotform/dnd-builder/commit/1dde66089df4846ff973fcc99620cec6f3cf6e82))
+
+
+### Bug Fixes
+
+* hide toggle panel buttons when panel is open ([3081e80](https://github.com/jotform/dnd-builder/commit/3081e8000613acb68d42837fb99b5bfd8d8ec2b2))
+* **TextEditor:** purify about content ([0fcad20](https://github.com/jotform/dnd-builder/commit/0fcad2075116cf5365fc42facbd5aa6adae25db8))
+
 ### [2.3.0](https://github.com/jotform/dnd-builder/compare/v2.2.1...v2.3.0) (2022-06-24)
 
 
