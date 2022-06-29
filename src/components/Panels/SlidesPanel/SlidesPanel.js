@@ -90,7 +90,9 @@ const SlidesPanel = ({
       additionalClassName={panelAdditionalClassName}
       onAnimationEnd={onAnimationEnd}
     >
-      <SlidesPanelToggler onClosePanel={onClosePanel} />
+      {(isSlidesPanelOpen || isRightPanelOpen)
+        ? null
+        : <SlidesPanelToggler onClosePanel={onClosePanel} />}
       {(isSlidesPanelOpen || (!isSlidesPanelOpen && !animationEnd)) && (
         <div className="toolItemWrapper f-height d-flex dir-col">
           <Section
@@ -146,11 +148,11 @@ SlidesPanel.propTypes = {
 SlidesPanel.defaultProps = {
   additionalPageItems: [],
   hashCode: '',
-  itemAccessor: () => {},
-  onPageAdd: () => {},
-  onPageDuplicate: () => {},
-  onPageOrdersChange: () => {},
-  onPageRemove: () => {},
+  itemAccessor: () => { },
+  onPageAdd: () => { },
+  onPageDuplicate: () => { },
+  onPageOrdersChange: () => { },
+  onPageRemove: () => { },
   pages: [],
 };
 

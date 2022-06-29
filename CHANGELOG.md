@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.3.0](https://github.com/jotform/dnd-builder/compare/v2.2.1...v2.3.0) (2022-06-24)
+
+
+### Bug Fixes
+
+* **RightPanel**: hide the right panel toggle when a panel is already open
+* **SlidesPanel**: hide the slides panel when the panel is already open
+
 ### [2.2.1](https://github.com/jotform/dnd-builder/compare/v2.0.2...v2.2.1) (2022-06-24)
 
 

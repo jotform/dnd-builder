@@ -12,16 +12,16 @@ export const BuilderContext = createContext({
   isRightPanelOpen: false,
   isSlidesPanelOpen: false,
   isTextEditorOpen: false,
-  setActiveElement: () => {},
-  setActiveTab: () => {},
-  setContextMenuProps: () => {},
-  setEditedElement: () => {},
-  setIsAllSlidesPanelOpen: () => {},
-  setIsLeftPanelOpen: () => {},
-  setIsRightPanelOpen: () => {},
-  setIsSlidesPanelOpen: () => {},
-  setIsTextEditorOpen: () => {},
-  setZoom: () => {},
+  setActiveElement: () => { },
+  setActiveTab: () => { },
+  setContextMenuProps: () => { },
+  setEditedElement: () => { },
+  setIsAllSlidesPanelOpen: () => { },
+  setIsLeftPanelOpen: () => { },
+  setIsRightPanelOpen: () => { },
+  setIsSlidesPanelOpen: () => { },
+  setIsTextEditorOpen: () => { },
+  setZoom: () => { },
   zoom: 1,
 });
 
@@ -45,6 +45,7 @@ export class BuilderProvider extends React.Component {
       isLeftPanelOpen: props.isLeftPanelOpen,
       isRightPanelOpen: props.isRightPanelOpen,
       isSlidesPanelOpen: props.isSlidesPanelOpen,
+      onRightPanelsToggled: props.onRightPanelsToggled,
       setActiveElement: this.setActiveElement,
       setActiveTab: this.setActiveTab,
       setContextMenuProps: this.setContextMenuProps,
@@ -97,21 +98,23 @@ export class BuilderProvider extends React.Component {
   }
 
   setIsRightPanelOpen = status => {
-    const { isEnoughCanvasSize } = this.state;
+    const { isEnoughCanvasSize, onRightPanelsToggled } = this.state;
     this.setState({
       isRightPanelOpen: status,
       ...status && !isEnoughCanvasSize && { isLeftPanelOpen: false },
       ...status && { isSlidesPanelOpen: false },
     });
+    onRightPanelsToggled(status);
   };
 
   setIsSlidesPanelOpen = status => {
-    const { isEnoughCanvasSize } = this.state;
+    const { isEnoughCanvasSize, onRightPanelsToggled } = this.state;
     this.setState({
       isSlidesPanelOpen: status,
       ...status && !isEnoughCanvasSize && { isLeftPanelOpen: false },
       ...status && { isRightPanelOpen: false },
     });
+    onRightPanelsToggled(status);
   };
 
   setIsAllSlidesPanelOpen = status => {
@@ -168,6 +171,11 @@ BuilderProvider.propTypes = {
   isLeftPanelOpen: PropTypes.bool,
   isRightPanelOpen: PropTypes.bool,
   isSlidesPanelOpen: PropTypes.bool,
+  /** Function called when a slides or right panel is toggled
+   * takes a boolean value to indicate whether or not the panel
+   * is toggled open.
+   */
+  onRightPanelsToggled: PropTypes.func,
 };
 
 BuilderProvider.defaultProps = {
@@ -180,6 +188,7 @@ BuilderProvider.defaultProps = {
   isLeftPanelOpen: false,
   isRightPanelOpen: false,
   isSlidesPanelOpen: false,
+  onRightPanelsToggled: () => { },
 };
 
 export const BuilderConsumer = BuilderContext.Consumer;
