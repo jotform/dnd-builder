@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.4.2](https://github.com/jotform/dnd-builder/compare/v2.4.1...v2.4.2) (2022-07-20)
+
+
+### Bug Fixes
+
+* **context-menu:** fix context menu spacing ([e802453](https://github.com/jotform/dnd-builder/commit/e802453919842cf4d9f4a9ec928b093a287c0f3b))
+
 ### [2.4.1](https://github.com/jotform/dnd-builder/compare/v2.4.0...v2.4.1) (2022-06-29)
 
 
