@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.4.3](https://github.com/jotform/dnd-builder/compare/v2.4.2...v2.4.3) (2022-08-04)
+
+
+### Bug Fixes
+
+* **elements:** page actions hover fix ([e471646](https://github.com/jotform/dnd-builder/commit/e4716467b7e59f6af27fde46233b06f4718bf1d5))
+* style lint ([66fcc51](https://github.com/jotform/dnd-builder/commit/66fcc51a6262d7202afb46ea0c135894d0263a2a))
+
 ### [2.4.2](https://github.com/jotform/dnd-builder/compare/v2.4.1...v2.4.2) (2022-07-20)
 
 
