@@ -256,6 +256,7 @@
       .controllerItem {
         width: 20px;
         height: 20px;
+        &:hover { background-color: #F3F3FE; }
       }
 
       &.hasGroup {
@@ -264,7 +265,6 @@
           border-radius: 3px;
           padding: 0;
           margin-top: 4px;
-          &:hover { background-color: #F3F3FE; }
           &:first-child { margin-top: 0; }
         }
         .isDanger:hover { background-color: rgba(235, 63, 63, 0.1); }
