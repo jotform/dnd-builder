@@ -55,9 +55,9 @@ const ZoomControls = ({
 
   return (
     <div className={`floatingController forZoom${!showZoom ? ' hidden' : ''}`}>
-      <div className="floatingController-container">
+      <div className="floatingController-container isGray">
         <button
-          className="controllerItem isGray"
+          className="controllerItem isWhite"
           onClick={increaseZoom}
           title={ZOOM_IN}
           type="button"
@@ -69,7 +69,7 @@ const ZoomControls = ({
           %
         </div>
         <button
-          className="controllerItem isGray"
+          className="controllerItem isWhite"
           onClick={decreaseZoom}
           title={ZOOM_OUT}
           type="button"

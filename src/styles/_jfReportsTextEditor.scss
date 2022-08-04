@@ -54,6 +54,20 @@
   .ql-toolbar.ql-snow {
     padding: 0;
     border: none;
+
+    .ql-picker {
+      border-radius: 3px;
+      &:hover {
+        background-color: #F3F3FE;
+      }
+    }
+
+    .ql-button,
+    .ql-icon-picker,
+    .ql-color-picker,
+    .ql-color + .ql-divider {
+      margin-left: 8px;
+    }
   }
 
   .ql-toolbar {
@@ -69,6 +83,8 @@
       border-radius: 3px;
       max-width: 100%;
       padding: 4px;
+      right: 0;
+      box-shadow: 0px 2px 4px 0px rgba(#0A1551, 0.04); 
 
       &.isOpened {
         width: auto;
@@ -76,11 +92,11 @@
     }
 
     .ql-button {
-      width: 22px;
+      width: 20px;
       flex-shrink: 0;
 
       svg {
-        width: 18px;
+        width: 16px;
       }
 
       &.hiddenVisibility {
@@ -88,21 +104,21 @@
       }
 
       .ql-stroke {
-        stroke: #8D8FA8;
+        stroke: #6F76A7;
       }
 
       .ql-fill {
-        fill: #8D8FA8;
+        fill: #6F76A7;
         stroke-width: 0;
       }
 
       &.ql-active {
         .ql-stroke {
-          stroke: #8D8FA8;
+          stroke: #6F76A7;
         }
 
         .ql-fill {
-          fill: #8D8FA8;
+          fill: #6F76A7;
         }
       }
     }
@@ -111,11 +127,11 @@
       display: inline-flex;
       justify-content: center;
       align-items: center;
-      height: 22px;
+      height: 20px;
       padding: 0;
-      border-radius: 2px;
+      border-radius: 3px;
       border: none;
-      margin-left: 4px;
+      color: #6F76A7;
 
       &:hover {
         stroke: $blue;
@@ -124,13 +140,13 @@
       &.ql-active {
         color: #8D8FA8;
         background-color: rgba($inputGrayBorder, .3);
-        border-radius: 2px;
+        border-radius: 3px;
       }
     }
 
 
     .qlMore {
-      height: 22px;
+      height: 20px;
       color: #8D8FA8;
       position: absolute;
       right: 0;
@@ -143,7 +159,7 @@
     }
 
     .ql-picker.ql-size {
-      width: 60px;
+      width: 52px;
 
       .ql-picker-label {
         justify-content: flex-start;
@@ -154,7 +170,7 @@
 
     .ql-select {
       width: auto;
-      height: 22px;
+      height: 20px;
       flex-shrink: 0;
       font-size: .75rem;
 
@@ -170,7 +186,8 @@
     }
 
     .ql-select:not(.ql-size) .ql-picker-label {
-      width: 22px;
+      width: 20px;
+      margin-left: 0;
     }
 
     .ql-divider {
@@ -189,7 +206,7 @@
     }
 
     .ql-color svg, .ql-align .ql-picker-label svg {
-      width: 20px;
+      width: 16px;
     }
 
     .ql-align .ql-picker-options {
@@ -208,23 +225,27 @@
     /* stylelint-disable-next-line declaration-no-important */
     left: auto !important;
     align-items: center;
-    height: 32px;
-    transform: translate(100%, 150%);
+    height: 30px;
+    transform: translate(100%, 170%);
     background-color: $inputGray;
     border: 1px solid $inputGrayBorder;
     border-radius: 3px;
     box-shadow: none;
     font-size: .75rem;
     font-weight: 500;
-    margin-left: -156px;
-    padding: 4px;
+    margin-left: -207px;
+    padding: 4px 4px 4px 8px;
     color: #8483A9;
 
     input[type="text"] {
       border-radius: 3px;
-      height: 26px;
+      height: 20px;
       font-size: .75rem;
       padding: 0 5px;
+      background-color: #F3F3FE;
+      color: rgba(#6F76A7, 0.6);
+      border: 0;
+      width: 217px;
     }
 
     &:not(.ql-hidden) {
@@ -233,11 +254,12 @@
 
     a.ql-action {
       margin-left: 4px;
-      padding: 4px 10px;
+      padding: 2px 8px;
+      height: 20px;
       color: $white;
       background-color: $blue;
-      line-height: inherit;
-      border-radius: 2px;
+      line-height: 16px;
+      border-radius: 3px;
 
       &:after {
         margin: 0;
@@ -245,9 +267,35 @@
         border: none;
       }
     }
+
+    &.ql-editing {
+      background-color: $white;
+      box-shadow: 0 0 4px rgba(10, 21, 81, 0.06);
+    }
+
+    &[data-mode="link"]::before {
+      content: "Link";
+      color: #6F76A7;
+    }
   }
 
   .ql-editing {
     z-index: 100000;
   }
+
+  .reportItemMenu + .ql-toolbar.ql-snow {
+    .ql-stroke {
+      /* stylelint-disable-next-line declaration-no-important */
+      stroke: #6F76A7!important;
+    }
+
+    .ql-fill {
+      /* stylelint-disable-next-line declaration-no-important */
+      fill: #6F76A7!important;
+    }
+  }
+}
+
+.reportItemMenu + .ql-toolbar.ql-snow .ql-button:hover {
+  background-color: #F3F3FE;
 }

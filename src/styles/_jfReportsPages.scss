@@ -35,9 +35,11 @@
       width: 40px;
       padding: 3px;
       font-size: 0.875rem;
+      font-weight: 500;
       background-color: $white;
       border-radius: 3px;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 0 4px rgba(10, 21, 81, 0.06);
+      color: #0A1551;
     }
   }
 }

@@ -221,7 +221,7 @@
     top: 0;
     right: -24px;
     background-color: $blue;
-    border-radius: 3px;
+    border-radius: 4px;
     text-align: center;
     pointer-events: all;
     animation: .2s fadeRight forwards;
@@ -238,20 +238,34 @@
         transition: .3s ease-in-out;
         transform: translateZ(0);
       }
-
-      &:hover svg {
-        opacity: .7;
-      }
     }
 
     &:not(.forLocked) {
+      padding: 0 4px;
       .reportItemMenu-item {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 20px;
+        height: 20px;
+        padding: 0;
+        border-radius: 3px;
+        transition: 0.3s ease-in;
+
+        + .reportItemMenu-item {
+          margin-top: 4px;
+        }
+    
         &:first-child {
-          margin-top: 6px;
+          margin-top: 4px;
         }
 
         &:last-child {
-          margin-bottom: 6px;
+          margin-bottom: 4px;
+        }
+
+        &:hover  {
+          background-color: rgba(255, 255, 255, 0.2);
         }
       }
     }

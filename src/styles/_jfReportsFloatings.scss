@@ -15,13 +15,18 @@
     display: flex;
     flex-direction: column;
     background-color: $white;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 0 4px rgba(10, 21, 81, 0.06);
+    border-radius: 4px;
 
     .controllerItem {
       transition: $transition;
 
       &.isGray {
         background-color: $inputGray;
+      }
+
+      &.isWhite {
+        background-color: $white;
       }
 
       &.isSingle {
@@ -31,7 +36,6 @@
       &:hover .jfReportSVG:not(.icon-trashLine) {
         fill: $blue;
       }
-
       &:hover .jfReportSVG.icon-trashLine {
         fill: $danger;
       }
@@ -39,12 +43,14 @@
 
     .controllerIndicator {
       font-size: 0.75rem;
+      font-weight: 500;
       margin: 15px auto;
       text-align: center;
+      color: #0A1551;
     }
 
     & + .floatingController-container {
-      margin-top: 10px;
+      margin-top: 8px;
     }
   }
 
@@ -187,6 +193,7 @@
 
     .floatingController-container {
       border-radius: 6px;
+      background-color: $inputGray;
 
       & > .controllerItem:not(.isSingle) {
         padding: 8px 6px;
@@ -219,9 +226,10 @@
 
   &.forSlides, &.forPageAction {
     .floatingController-container:not(.hasGroup) {
+      padding: 4px;
       .controllerItem {
-        padding: 7px 6px;
-        border-radius: 6px;
+        padding: 0;
+        border-radius: 3px;
       }
     }
   }
@@ -233,12 +241,22 @@
 
     .floatingController-container {
       border-radius: 3px;
+
+      .controllerItem {
+        width: 20px;
+        height: 20px;
+        &:not(.isDanger):hover { background-color: #F3F3FE; }
+      }
     }
 
     .floatingController-container.hasGroup {
-      padding: 6px 0;
+      padding: 4px;
       .controllerItem {
-        padding: 6px 5px;
+        border-radius: 3px;
+        padding: 0;
+
+        &.isDanger:hover { background-color: rgba(235, 63, 63, 0.1); }
+        + .controllerItem { margin-top: 4px; }
       }
     }
   }

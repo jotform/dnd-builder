@@ -30,7 +30,7 @@ const CustomToolbar = ({ itemWidth }) => {
       className={classNames('toolbarWrapper p-absolute d-flex', { isOpened })}
       style={{
         maxWidth: isOpened ? 'none' : '100%',
-        minWidth: `${itemWidth}px`,
+        // minWidth: `${itemWidth}px`,
       }}
     >
       <select
