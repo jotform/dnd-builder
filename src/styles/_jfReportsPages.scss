@@ -185,6 +185,8 @@
       height: 14px;
       fill: $blue;
       stroke: $blue;
+
+      > path { fill: $blue; }
     }
   }
 

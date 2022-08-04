@@ -717,7 +717,7 @@
 }
 
 .floatingController.forBar .toolSection-dropdownWrapper {
-  margin-right: 20px;
+  margin-right: 12px;
 
   &:after {
     display: none;
@@ -725,18 +725,22 @@
 
   &:before {
     right: 7px;
-    border-left: 4px solid transparent;
-    border-right: 4px solid transparent;
-    border-top: 6px solid $white;
-    top: calc(50% - 3px);
+    top: calc(50% - 2px);
+    background-repeat: no-repeat;
+    background-image: url("data:image/svg+xml,%3Csvg width=%276%27 height=%274%27 viewBox=%270 0 6 4%27 fill=%27none%27 xmlns=%27http://www.w3.org/2000/svg%27%3E%3Cpath d=%27M5.00506 0.413817C5.23825 0.191095 5.60551 0.195263 5.83143 0.427641C6.0582 0.660893 6.05369 1.03103 5.8167 1.2733L3.40473 3.58782C3.17841 3.80363 2.82568 3.80438 2.5933 3.58747C2.29148 3.29771 2.29148 3.29771 1.38603 2.42839C0.482784 1.56125 0.482784 1.56125 0.16829 1.25885C-0.0560968 1.02805 -0.0560968 0.65844 0.16829 0.427641C0.393201 0.196305 0.757388 0.191435 0.995763 0.413283L2.99983 2.33753L5.00506 0.413817Z%27 fill=%27white%27/%3E%3C/svg%3E%0A");
+    background-size: contain;
+    width: 8px;
+    height: 5px;
+    border: 0;
   }
 
   .toolSection-dropdown {
-    width: 60px;
-    height: 24px;
+    width: 58px;
+    height: 28px;
     font-size: 0.675rem;
-    padding-left: 10px;
+    padding-left: 6px;
     color: $white;
+    appearance: none;
   }
 }
 

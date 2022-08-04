@@ -60,18 +60,17 @@
 
   &.forBar {
     height: 50px;
-    background: #404651;
+    background: #252D5B;
     border-radius: 6px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     max-width: 436px;
-    min-width: 280px;
-    padding: 13px 15px;
+    padding: 12px;
     text-align: center;
 
     .divider {
       width: 1px;
-      height: 30px;
-      background: #272D3D;
+      height: 20px;
+      background: rgba(#FFFFFF, 0.1);
     }
 
     .select-zoom {
@@ -86,46 +85,58 @@
     }
 
     .forSlide {
-      margin: 0 20px;
+      margin: 0 12px;
     }
 
     .jfReportButton, .controllerItem {
-      height: 24px;
-      width: 24px;
+      height: 28px;
+      width: 28px;
       padding: 0 4px;
     }
 
     .jfReportButton {
       &.download {
+        background-color: rgba(120, 187, 7, 0.2);
+        &:hover { background-color: rgba(120, 187, 7, 0.6); }
         .icon-download {
           width: 8px;
           height: 10px;
         }
       }
       &.print {
-        border: 1px solid #A8AABF;
+        border: 1px solid #6F76A7;
+        background-color: rgba(111, 118, 167, 0.2);
+        &:hover { background-color: rgba(111, 118, 167, 0.6); }
         .icon-print {
-          width: 10px;
-          height: 10px;
-          fill: #A8AABF;
+          width: 12px;
+          height: 12px;
+          fill: #FFF;
         }
       }
-      &.download, &.print {
-        background-color: rgba(1, 189, 111, 0.1);
-        &:hover {
-          background-color: #2e525c;
+      &.isSuccess {
+        border: 1px solid #78BB07;
+        background-color: rgba(120, 187, 7, 0.2);
+        &:hover { background-color: rgba(120, 187, 7, 0.6); }
+        .icon-download {
+          width: 11px;
+          height: 14px;
+          fill: #fff;
         }
+      }
+      &.forAction {
+        .icon-close { fill: rgba(200, 206, 237, 0.6); }
+        &:hover .icon-close { fill: #fff; }
       }
       .icon-fullscreen {
-        width: 14px;
-        height: 14px;
+        width: 12px;
+        height: 12px;
       }
     }
 
     .action-container {
-      margin-left: 20px;
+      margin-left: 12px;
       .jfReportButton + .jfReportButton:not(.close) {
-        margin-left: 10px;
+        margin-left: 8px;
       }
       .close {
         margin-left: 15px;
@@ -141,13 +152,13 @@
     }
 
     .controllerItem {
-      background: #303339;
+      background: #343C6A;
       border-radius: 3px;
       border: none;
       transition: $transition;
 
       &:hover {
-        background: lighten(#2E354A, 5);
+        background: rgba(111, 118, 167, 0.6);
       }
     }
 
@@ -177,7 +188,7 @@
       letter-spacing: .7px;
       font-size: 0.875rem;
       line-height: 28px;
-      min-width: 65px;
+      min-width: 57px;
       padding: 0 5px;
 
       span {
