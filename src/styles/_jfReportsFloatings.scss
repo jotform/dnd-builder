@@ -245,18 +245,18 @@
       .controllerItem {
         width: 20px;
         height: 20px;
-        &:not(.isDanger):hover { background-color: #F3F3FE; }
       }
-    }
 
-    .floatingController-container.hasGroup {
-      padding: 4px;
-      .controllerItem {
-        border-radius: 3px;
-        padding: 0;
-
-        &.isDanger:hover { background-color: rgba(235, 63, 63, 0.1); }
-        + .controllerItem { margin-top: 4px; }
+      &.hasGroup {
+        padding: 4px;
+        .controllerItem {
+          border-radius: 3px;
+          padding: 0;
+          margin-top: 4px;
+          &:hover { background-color: #F3F3FE; }
+          &:first-child { margin-top: 0; }
+        }
+        .isDanger:hover { background-color: rgba(235, 63, 63, 0.1); }
       }
     }
   }

@@ -51,25 +51,6 @@
     }
   }
 
-  .ql-toolbar.ql-snow {
-    padding: 0;
-    border: none;
-
-    .ql-picker {
-      border-radius: 3px;
-      &:hover {
-        background-color: #F3F3FE;
-      }
-    }
-
-    .ql-button,
-    .ql-icon-picker,
-    .ql-color-picker,
-    .ql-color + .ql-divider {
-      margin-left: 8px;
-    }
-  }
-
   .ql-toolbar {
     font-family: inherit;
     font-size: .75rem;
@@ -84,7 +65,7 @@
       max-width: 100%;
       padding: 4px;
       right: 0;
-      box-shadow: 0px 2px 4px 0px rgba(#0A1551, 0.04); 
+      box-shadow: 0 2px 4px 0 rgba(#0A1551, 0.04);
 
       &.isOpened {
         width: auto;
@@ -143,7 +124,6 @@
         border-radius: 3px;
       }
     }
-
 
     .qlMore {
       height: 20px;
@@ -273,7 +253,7 @@
       box-shadow: 0 0 4px rgba(10, 21, 81, 0.06);
     }
 
-    &[data-mode="link"]::before {
+    &[data-mode="link"]:before {
       content: "Link";
       color: #6F76A7;
     }
@@ -283,15 +263,34 @@
     z-index: 100000;
   }
 
+  .ql-toolbar.ql-snow {
+    padding: 0;
+    border: none;
+
+    .ql-picker {
+      border-radius: 3px;
+      &:hover {
+        background-color: #F3F3FE;
+      }
+    }
+
+    .ql-button,
+    .ql-icon-picker,
+    .ql-color-picker,
+    .ql-color + .ql-divider {
+      margin-left: 8px;
+    }
+  }
+
   .reportItemMenu + .ql-toolbar.ql-snow {
     .ql-stroke {
       /* stylelint-disable-next-line declaration-no-important */
-      stroke: #6F76A7!important;
+      stroke: #6F76A7 !important;
     }
 
     .ql-fill {
       /* stylelint-disable-next-line declaration-no-important */
-      fill: #6F76A7!important;
+      fill: #6F76A7 !important;
     }
   }
 }
