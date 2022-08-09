@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.4.4](https://github.com/jotform/dnd-builder/compare/v2.4.3...v2.4.4) (2022-08-09)
+
+
+### Bug Fixes
+
+* **report-item:** fix report item outline for zoom levels ([4f7fa52](https://github.com/jotform/dnd-builder/commit/4f7fa52ae33e77eb01aff7b09977bea84832c71b))
+* **text-editor:** url input visibility issue fixed ([4a76028](https://github.com/jotform/dnd-builder/commit/4a76028fdb384c7219f701ad677e437c90a4ffbf))
+
 ### [2.4.3](https://github.com/jotform/dnd-builder/compare/v2.4.2...v2.4.3) (2022-08-04)
 
 
