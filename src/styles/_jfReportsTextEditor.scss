@@ -56,6 +56,7 @@
     font-size: .75rem;
     margin-top: 10px;
     width: 100%;
+    background-color: transparent;
 
     .toolbarWrapper {
       flex-wrap: nowrap;
@@ -199,23 +200,26 @@
   }
 
   .ql-tooltip {
-    position: fixed;
     /* stylelint-disable-next-line declaration-no-important */
-    top: auto !important;
-    /* stylelint-disable-next-line declaration-no-important */
-    left: auto !important;
+    position: static !important;
     align-items: center;
     height: 30px;
-    transform: translate(100%, 170%);
+    /* stylelint-disable-next-line declaration-no-important */
+    margin-top: 38px !important;
+    /* stylelint-disable-next-line declaration-no-important */
+    transform: none !important;
     background-color: $inputGray;
     border: 1px solid $inputGrayBorder;
     border-radius: 3px;
     box-shadow: none;
     font-size: .75rem;
     font-weight: 500;
-    margin-left: -207px;
     padding: 4px 4px 4px 8px;
     color: #8483A9;
+    width: 100%;
+    max-width: 394px;
+    min-width: 325px;
+    margin-left: auto;
 
     input[type="text"] {
       border-radius: 3px;
@@ -225,7 +229,7 @@
       background-color: #F3F3FE;
       color: rgba(#6F76A7, 0.6);
       border: 0;
-      width: 217px;
+      width: 100%;
     }
 
     &:not(.ql-hidden) {
