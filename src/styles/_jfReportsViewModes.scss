@@ -55,6 +55,12 @@
     outline-offset: -1px;
   }
 
+  [data-zoom="0.5"] .reportItem,
+  [data-zoom="0.6"] .reportItem,
+  [data-zoom="0.7"] .reportItem {
+    outline-width: 2px;
+  }
+
   .reportItemWrapper.isSelected:hover .isLocked {
     pointer-events: none;
   }
