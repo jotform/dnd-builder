@@ -24,7 +24,7 @@ const ALL_TEXTS = {
   MOVE_TO_BACK: 'Move to Back',
   MOVE_TO_FRONT: 'Move to Front',
   NO_ELEMENT_IN_PAGE: 'There is no element on this slide. You can add a new element from side menu.',
-  NO_RESULT: 'No result was not found',
+  NO_RESULT: 'No result was found',
   ORIGINAL_SIZE: 'Original Size',
   PAGE_SETTINGS: 'Slide Settings',
   PAGE_STYLE: 'Slide Style',
