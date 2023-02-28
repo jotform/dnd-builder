@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.5.0](https://github.com/jotform/dnd-builder/compare/v2.4.6...v2.5.0) (2023-02-28)
+
+
+### Features
+
+* **static-scene:** zoom-pan-pinch feature is supported now by dnd-builder ([55644e9](https://github.com/jotform/dnd-builder/commit/55644e9aead43ca2655906e0beab984a756b4d28))
+
+
+### Bug Fixes
+
+* **presentation-wrapper:** gesture should work for only fit case ([f1c2cc2](https://github.com/jotform/dnd-builder/commit/f1c2cc2d38a0bfc0352a7ea4f65852ae8e827cf0))
+* **presentation-wrapper:** when isFullScreen is set, fitToScreen should recalculate  ([055c746](https://github.com/jotform/dnd-builder/commit/055c74665706742d134bc6a988af282656cea714))
+
 ### [2.4.6](https://github.com/jotform/dnd-builder/compare/v2.4.4...v2.4.6) (2023-02-27)
 
 ### [2.4.5](https://github.com/jotform/dnd-builder/compare/v2.4.4...v2.4.5) (2023-02-01)
