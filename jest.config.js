@@ -5,7 +5,7 @@ module.exports = {
   setupFiles: [
     require.resolve('./scripts/enzymeSetup.js'),
   ],
-  setupFilesAfterEnv: [],
+  setupFilesAfterEnv: ['<rootDir>./src/__test_helpers__/setup-jest.js'],
   transform: {
     '^.+\\.(js|jsx|mjs|cjs|ts|tsx)$': require.resolve('babel-jest'),
     '^.+\\.(css|scss|sass|less)$': require.resolve('./scripts/cssTransform.js'),
