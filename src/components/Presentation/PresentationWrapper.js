@@ -1,7 +1,6 @@
 import {
   useCallback,
   useEffect,
-  useState,
 } from 'react';
 import PropTypes from 'prop-types';
 import Modal from 'react-modal';
@@ -28,16 +27,17 @@ const PresentationWrapper = ({
   const { onAnEventTrigger, settings } = usePropContext();
   const {
     currentPage,
+    fittedZoom,
     isFullscreen,
     pageCount,
     setCurrentPage,
+    setFittedZoom,
     setIsFullscreen,
     setShowControlsInFullScreen,
     showControlsInFullScreen,
   } = usePresentationContext();
 
   const { setZoom, zoom } = useBuilderContext();
-  const [fittedZoom, setFittedZoom] = useState(1);
 
   const fitToScreen = useCallback((delay = 0) => setTimeout(() => {
     const newZoom = zoomHandler({

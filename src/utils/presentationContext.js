@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 export const PresentationContext = createContext({
   currentPage: 1,
+  fittedZoom: 1,
   isFullscreen: false,
   pageCount: 0,
   showZoomInFullScreen: false,
@@ -38,6 +39,7 @@ export class PresentationProvider extends React.Component {
       isFullscreen: props.isFullscreen,
       pageCount: props.pageCount,
       setCurrentPage: this.setCurrentPage,
+      setFittedZoom: this.setFittedZoom,
       setIsFullscreen: this.setIsFullscreen,
       setShowControlsInFullScreen: this.setShowControlsInFullScreen,
     };
@@ -53,6 +55,10 @@ export class PresentationProvider extends React.Component {
 
   setShowControlsInFullScreen = showControlsInFullScreen => {
     this.setState({ showControlsInFullScreen });
+  }
+
+  setFittedZoom = fittedZoom => {
+    this.setState({ fittedZoom });
   }
 
   render() {
