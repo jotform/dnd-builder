@@ -97,11 +97,13 @@ const PresentationWrapper = ({
       axis, direction: [v], distance, event,
     }) => {
       event.preventDefault();
-      const { clientWidth } = event.target;
-      if (axis === 'x'
-      && window.innerWidth / 4 < distance
-      && clientWidth * zoom < window.innerWidth) {
-        return v < 0 ? pageChanger(1)() : pageChanger(-1)();
+      if (fittedZoom === zoom) {
+        const { clientWidth } = event.target;
+        if (axis === 'x'
+        && window.innerWidth / 4 < distance
+        && clientWidth * zoom < window.innerWidth) {
+          return v < 0 ? pageChanger(1)() : pageChanger(-1)();
+        }
       }
     },
     // onPinchEnd: ({ movement: [d] }) => {
