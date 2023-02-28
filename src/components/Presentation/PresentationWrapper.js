@@ -52,7 +52,7 @@ const PresentationWrapper = ({
     setFittedZoom(newZoom);
   }, delay), [settings, isFullscreen, useFixedPresentationBar, pageCount]);
 
-  useEffect(() => { fitToScreen(); }, []);
+  useEffect(() => { fitToScreen(100); }, [isFullscreen]);
 
   useEffect(() => {
     if (isFullscreen) {
