@@ -31,6 +31,7 @@
     "react-sortable-hoc": "2.0.0",
     "react-use-gesture": "9.0.4",
     "react-window": "1.8.6",
+    "react-zoom-pan-pinch": "^3.0.1",
     "recharts": "2.0.7",
     "regenerator-runtime": "0.13.7"
   },
