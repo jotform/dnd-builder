@@ -41,12 +41,6 @@ const StaticScene = ({
   const height = parseInt(reportLayoutHeight, 10);
 
   useEffect(() => {
-    if (mode === 'print') {
-      setZoom(1);
-    }
-  }, [mode]);
-
-  useEffect(() => {
     if (viewPortRef.current) {
       viewPortRef.current.scrollTop = lastScrollPosition;
     }
@@ -74,10 +68,14 @@ const StaticScene = ({
   useEffect(() => {
     if (transformRefs.current.length > 0) {
       for (let i = 0; i < pages.length; i++) {
-        transformRefs.current[i].centerView(zoom);
+        if (mode !== 'print') {
+          transformRefs.current[i].centerView(zoom);
+        } else {
+          transformRefs.current[i].setTransform(0, 0, 1);
+        }
       }
     }
-  }, [pages.length, zoom, isFullscreen]);
+  }, [pages.length, zoom, isFullscreen, mode]);
 
   return (
     <main
