@@ -4,16 +4,13 @@ import {
 import PropTypes from 'prop-types';
 import cNames from 'classnames';
 import * as classNames from '../../constants/classNames';
-import StaticPage from './StaticPage';
+import { StaticPageWithZoomPanPinch } from './StaticPage';
 import { usePropContext } from '../../utils/propContext';
 import { useBuilderContext } from '../../utils/builderContext';
 import { slugify } from '../../utils/string';
 import { usePageTransition } from '../../utils/hooks';
 import { usePresentationContext } from '../../utils/presentationContext';
 import ZoomControls from '../Builder/ZoomControls';
-import withZoomPanPinchHOC from '../Presentation/TransformHOC';
-
-const StaticPageWithZoomPanPinch = withZoomPanPinchHOC(StaticPage);
 
 const StaticScene = ({
   additionalPageItems,

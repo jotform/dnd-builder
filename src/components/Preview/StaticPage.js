@@ -4,6 +4,7 @@ import * as classNames from '../../constants/classNames';
 import ReportItemRenderer from '../Builder/ReportItemRenderer';
 import StaticItem from './StaticItem';
 import getMergedItem from '../../utils/getMergedItem';
+import withZoomPanPinchHOC from '../withZoomPanPinchHOC';
 
 const StaticPage = ({
   acceptedItems,
@@ -67,3 +68,4 @@ StaticPage.defaultProps = {
 };
 
 export default memo(StaticPage);
+export const StaticPageWithZoomPanPinch = withZoomPanPinchHOC(StaticPage);

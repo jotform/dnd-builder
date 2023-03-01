@@ -1,7 +1,7 @@
 import React from 'react';
 import { PresentationProvider } from '../../../utils/presentationContext';
 import { selectors } from '../../../__test_helpers__/constants';
-import StaticPage from '../../../components/Preview/StaticPage';
+import {StaticPageWithZoomPanPinch} from '../../../components/Preview/StaticPage';
 import StaticScene from '../../../components/Preview/StaticScene';
 import ZoomControls from '../../../components/Builder/ZoomControls';
 
@@ -23,7 +23,7 @@ describe('StaticScene Component Tree', () => {
 
   it('Should Not Render StaticPage If Pages Prop Not Defined', () => {
     const staticSceneShallow = shallow(<StaticScene {...StaticScene.defaultProps} />);
-    expect(staticSceneShallow.find(StaticPage).exists()).toBeFalsy();
+    expect(staticSceneShallow.find(StaticPageWithZoomPanPinch).exists()).toBeFalsy();
   });
 
   it('Should Render StaticPage According Pages Prop', () => {
@@ -43,7 +43,7 @@ describe('StaticScene Component Tree', () => {
       ],
     };
     const staticSceneShallow = shallow(<StaticScene {...props} />);
-    expect(staticSceneShallow.find(StaticPage)).toHaveLength(2);
+    expect(staticSceneShallow.find(StaticPageWithZoomPanPinch)).toHaveLength(2);
   });
 
   it('Should Render ZoomControl If isFullscreen Prop Value is False', () => {
