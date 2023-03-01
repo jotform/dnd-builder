@@ -3,7 +3,6 @@ import {
 } from 'react';
 import PropTypes from 'prop-types';
 import cNames from 'classnames';
-import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 import * as classNames from '../../constants/classNames';
 import StaticPage from './StaticPage';
 import { usePropContext } from '../../utils/propContext';
@@ -12,6 +11,9 @@ import { slugify } from '../../utils/string';
 import { usePageTransition } from '../../utils/hooks';
 import { usePresentationContext } from '../../utils/presentationContext';
 import ZoomControls from '../Builder/ZoomControls';
+import withZoomPanPinchHOC from '../Presentation/TransformHOC';
+
+const StaticPageWithZoomPanPinch = withZoomPanPinchHOC(StaticPage);
 
 const StaticScene = ({
   additionalPageItems,
@@ -24,7 +26,7 @@ const StaticScene = ({
   pages,
   presentationPage,
 }) => {
-  const { fittedZoom, isFullscreen, showControlsInFullScreen } = usePresentationContext();
+  const { isFullscreen, showControlsInFullScreen } = usePresentationContext();
   const { acceptedItems, settings } = usePropContext();
   const { setZoom, zoom } = useBuilderContext();
   const viewPortRef = useRef({});
@@ -48,7 +50,7 @@ const StaticScene = ({
 
   useEffect(() => {
     transformRefs.current = transformRefs.current.slice(0, pages.length);
-  }, [pages]);
+  }, [pages.length]);
 
   const pageContainerStyles = useMemo(() => ({
     height,
@@ -68,11 +70,7 @@ const StaticScene = ({
   useEffect(() => {
     if (transformRefs.current.length > 0) {
       for (let i = 0; i < pages.length; i++) {
-        if (mode !== 'print') {
-          transformRefs.current[i].centerView(zoom);
-        } else {
-          transformRefs.current[i].setTransform(0, 0, 1);
-        }
+        transformRefs.current[i].centerView(zoom);
       }
     }
   }, [pages.length, zoom, isFullscreen, mode]);
@@ -105,38 +103,17 @@ const StaticScene = ({
                   activePage: index === presentationPage,
                 })}
               >
-                <TransformWrapper
-                  ref={element => { transformRefs.current[index] = element; }}
-                  centerOnInit={true}
-                  centerZoomedOut={true}
-                  disablePadding={true}
-                  doubleClick={{
-                    step: 0.2,
-                  }}
-                  initialScale={zoom}
-                  maxScale={2}
-                  minScale={0.5}
-                  onZoom={handleZoom}
-                  panning={{
-                    disabled: zoom <= fittedZoom,
-                  }}
-                  pinch={{
-                    step: 1,
-                  }}
-                >
-                  <TransformComponent
-                    wrapperStyle={{ height: '100%', width: '100%' }}
-                  >
-                    <StaticPage
-                      acceptedItems={acceptedItems}
-                      additionalPageItems={additionalPageItems}
-                      hashCode={hashCode}
-                      itemAccessor={itemAccessor}
-                      items={page.items}
-                      style={style}
-                    />
-                  </TransformComponent>
-                </TransformWrapper>
+                <StaticPageWithZoomPanPinch
+                  acceptedItems={acceptedItems}
+                  additionalPageItems={additionalPageItems}
+                  handleZoom={handleZoom}
+                  hashCode={hashCode}
+                  itemAccessor={itemAccessor}
+                  items={page.items}
+                  mode={mode}
+                  refSetter={element => { transformRefs.current[index] = element; }}
+                  style={style}
+                />
               </div>
             );
           })}
