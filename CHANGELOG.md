@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.5.1](https://github.com/jotform/dnd-builder/compare/v2.5.0...v2.5.1) (2023-03-01)
+
+
+### Bug Fixes
+
+* **static-scene:** fix transform values for print mode  ([931dae7](https://github.com/jotform/dnd-builder/commit/931dae759392d6c700be969ab6f8ae0edfe39816))
+
 ## [2.5.0](https://github.com/jotform/dnd-builder/compare/v2.4.6...v2.5.0) (2023-02-28)
 
 
