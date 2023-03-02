@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.5.2](https://github.com/jotform/dnd-builder/compare/v2.5.1...v2.5.2) (2023-03-02)
+
+
+### Bug Fixes
+
+* **static-scene:** use hoc for pan pinch zoom ([708a3a9](https://github.com/jotform/dnd-builder/commit/708a3a9abc28cafed950a917a9cf2f3a87a3563d))
+* **withZoomPanPinchHOC:** renaming & test fix ([f70566e](https://github.com/jotform/dnd-builder/commit/f70566ec1bfce45330914dca725281d22b08fa4f))
+
 ### [2.5.1](https://github.com/jotform/dnd-builder/compare/v2.5.0...v2.5.1) (2023-03-01)
 
 
