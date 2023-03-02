@@ -5,7 +5,7 @@ import {
 import PropTypes from 'prop-types';
 import Modal from 'react-modal';
 import classNames from 'classnames';
-import { useGesture } from 'react-use-gesture';
+import { useDrag } from '@use-gesture/react';
 import PresentationBar from './PresentationBar';
 import ProgressBar from './ProgressBar';
 import { useBuilderContext } from '../../utils/builderContext';
@@ -92,28 +92,16 @@ const PresentationWrapper = ({
   useEventListener('gesturechange', e => e.preventDefault());
   useFullscreenChange(isFullscreen, setIsFullscreen, fitToScreen);
 
-  const gesture = useGesture({
-    onDragEnd: ({
-      axis, direction: [v], distance, event,
-    }) => {
-      event.preventDefault();
-      if (fittedZoom === zoom) {
-        const { clientWidth } = event.target;
-        if (axis === 'x'
-        && window.innerWidth / 4 < distance
-        && clientWidth * zoom < window.innerWidth) {
-          return v < 0 ? pageChanger(1)() : pageChanger(-1)();
-        }
+  const gesture = useDrag(({
+    active, movement: [mx], direction: [xDir], cancel,
+  }) => {
+    if (fittedZoom === zoom) {
+      if (active && Math.abs(mx) > window.innerWidth / 2) {
+        const direction = xDir < 0 ? 1 : -1;
+        cancel();
+        pageChanger(direction)();
       }
-    },
-    // onPinchEnd: ({ movement: [d] }) => {
-    //   const zoomStep = Number(parseFloat(d / 1000).toFixed(1));
-    //   const newZoomValue = Number(((Math.round((zoom + zoomStep) * 10)) / 10).toFixed(2));
-    //   if (zoom !== newZoomValue && newZoomValue <= ZOOM_MAX) {
-    //     const minZoom = Math.min(fittedZoom, ZOOM_MIN);
-    //     setZoom(Math.max(newZoomValue, minZoom));
-    //   }
-    // },
+    }
   });
 
   return (
