@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.5.4](https://github.com/jotform/dnd-builder/compare/v2.5.3...v2.5.4) (2023-03-03)
+
+
+### Bug Fixes
+
+* **static-scene:** mode prop is passed correctly & zoom feature is set only for presentation ([6c045f5](https://github.com/jotform/dnd-builder/commit/6c045f5e2307ca442c1b2f3271fdf531c3c3240b))
+
 ### [2.5.3](https://github.com/jotform/dnd-builder/compare/v2.5.2...v2.5.3) (2023-03-02)
 
 ### [2.5.2](https://github.com/jotform/dnd-builder/compare/v2.5.1...v2.5.2) (2023-03-02)
