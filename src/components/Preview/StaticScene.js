@@ -131,7 +131,7 @@ StaticScene.propTypes = {
   hideZoom: PropTypes.bool,
   itemAccessor: PropTypes.func,
   lastScrollPosition: PropTypes.number,
-  mode: PropTypes.string,
+  mode: PropTypes.string.isRequired,
   pages: PropTypes.arrayOf(PropTypes.shape({})),
   presentationPage: PropTypes.number,
 };
@@ -143,7 +143,6 @@ StaticScene.defaultProps = {
   hideZoom: false,
   itemAccessor: () => {},
   lastScrollPosition: 0,
-  mode: 'preview',
   pages: [],
   presentationPage: 0,
 };

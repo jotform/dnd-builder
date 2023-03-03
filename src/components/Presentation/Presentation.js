@@ -49,6 +49,7 @@ const Presentation = ({
                   hashCode={hashCode}
                   hideZoom={true}
                   itemAccessor={itemAccessor}
+                  mode="presentation"
                   pages={pages}
                   presentationPage={presentationPage}
                 />

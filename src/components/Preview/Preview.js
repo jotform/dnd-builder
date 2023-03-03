@@ -56,6 +56,7 @@ const Preview = ({
             isExistsZoom
             itemAccessor={itemAccessor}
             lastScrollPosition={lastScrollPosition}
+            mode="preview"
             pages={pages}
           />
         </ReportWrapper>

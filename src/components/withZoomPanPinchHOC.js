@@ -12,7 +12,7 @@ const withZoomPanPinchHOC = WrappedComponent => {
     const { zoom } = useBuilderContext();
     const { fittedZoom } = usePresentationContext();
 
-    if (mode === 'print') {
+    if (mode !== 'presentation') {
       return <WrappedComponent {...props} />;
     }
 

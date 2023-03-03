@@ -10,7 +10,6 @@ const PrintModeWithoutContext = ({
   additionalPageItems,
   hashCode,
   itemAccessor,
-  mode,
   pages,
   settings,
   theme,
@@ -42,7 +41,7 @@ const PrintModeWithoutContext = ({
           hashCode={hashCode}
           hideZoom={true}
           itemAccessor={itemAccessor}
-          mode={mode}
+          mode="print"
           pages={pages}
         />
       </ReportWrapper>
@@ -54,7 +53,6 @@ PrintModeWithoutContext.propTypes = {
   additionalPageItems: PropTypes.arrayOf(PropTypes.node),
   hashCode: PropTypes.string,
   itemAccessor: PropTypes.func,
-  mode: PropTypes.string,
   pages: PropTypes.arrayOf(
     PropTypes.shape({}),
   ),
@@ -70,7 +68,6 @@ PrintModeWithoutContext.defaultProps = {
   additionalPageItems: [],
   hashCode: '',
   itemAccessor: () => {},
-  mode: 'print',
   pages: [],
   settings: {},
   theme: 'lightMode',
