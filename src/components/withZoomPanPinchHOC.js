@@ -35,6 +35,9 @@ const withZoomPanPinchHOC = WrappedComponent => {
         pinch={{
           step: 1,
         }}
+        wheel={{
+          wheelDisabled: true,
+        }}
       >
         <TransformComponent
           wrapperStyle={{ height: '100%', width: '100%' }}
