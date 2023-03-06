@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.5.5](https://github.com/jotform/dnd-builder/compare/v2.5.4...v2.5.5) (2023-03-06)
+
+
+### Bug Fixes
+
+* **zoom-pan-pinch:** disable mouse wheel zooming func ([fed16bf](https://github.com/jotform/dnd-builder/commit/fed16bf9afd99a1451f5c0a06168837a268e1203))
+
 ### [2.5.4](https://github.com/jotform/dnd-builder/compare/v2.5.3...v2.5.4) (2023-03-03)
 
 
