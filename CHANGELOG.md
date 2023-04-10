@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.5.6](https://github.com/jotform/dnd-builder/compare/v2.5.5...v2.5.6) (2023-04-10)
+
+
+### Bug Fixes
+
+* **dnd-builder:** fix padding issue on report builder ([845f9ff](https://github.com/jotform/dnd-builder/commit/845f9ff6b619c1d43b4e6ff9c5bcf2a9bdd1451f))
+
 ### [2.5.5](https://github.com/jotform/dnd-builder/compare/v2.5.4...v2.5.5) (2023-03-06)
 
 
