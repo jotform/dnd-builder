@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.5.7](https://github.com/jotform/dnd-builder/compare/v2.5.6...v2.5.7) (2023-05-08)
+
+
+### Bug Fixes
+
+* **dnd-builder:** replace images with cdn ([f7d1e4c](https://github.com/jotform/dnd-builder/commit/f7d1e4c1e1f2c9dd76f19528a9a7dc2b5bf24e74))
+
 ### [2.5.6](https://github.com/jotform/dnd-builder/compare/v2.5.5...v2.5.6) (2023-04-10)
 
 
