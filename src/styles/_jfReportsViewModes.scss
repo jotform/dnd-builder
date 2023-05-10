@@ -1,4 +1,5 @@
-.jfReport.previewMode {
+.jfReport.previewMode,
+.jefReport.responsiveMode {
   .jfReport-canvas {
     padding: 0 40px;
   }
@@ -8,7 +9,9 @@
   }
 }
 
-.jfPresentation, .jfReport.previewMode {
+.jfPresentation,
+.jfReport.previewMode,
+.jfReport.responsiveMode {
   .recharts-surface {
     pointer-events: all;
   }

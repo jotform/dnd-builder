@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import isEqual from 'lodash.isequal';
 import cn from 'classnames';
 import * as classNames from '../../constants/classNames';
-import { getStyles } from '../../utils/functions';
+import { calculateHeight, getStyles } from '../../utils/functions';
 import ItemPositioner from '../ItemPositioner';
 import ErrorBoundary from '../ErrorBoundary';
 
@@ -14,7 +14,9 @@ const elementStyle = {
 
 const StaticItem = ({
   children,
+  containerStyle,
   item,
+  mode,
 }) => {
   const {
     height,
@@ -27,7 +29,8 @@ const StaticItem = ({
       <ItemPositioner
         style={{
           ...getStyles(left, top, false),
-          height,
+          height: calculateHeight(height, width, containerStyle.width, mode),
+          maxWidth: '100%',
           width,
         }}
       >
@@ -51,6 +54,10 @@ const StaticItem = ({
 
 StaticItem.propTypes = {
   children: PropTypes.any,
+  containerStyle: PropTypes.shape({
+    height: PropTypes.number,
+    width: PropTypes.number,
+  }),
   item: PropTypes.shape({
     height: PropTypes.oneOfType([
       PropTypes.number,
@@ -72,11 +79,14 @@ StaticItem.propTypes = {
       PropTypes.string,
     ]),
   }),
+  mode: PropTypes.string,
 };
 
 StaticItem.defaultProps = {
   children: null,
+  containerStyle: {},
   item: {},
+  mode: 'customize',
 };
 
 const areEqual = (prevProps, nextProps) => {

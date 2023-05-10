@@ -765,3 +765,17 @@ export const scrollToTarget = (id, timeout = 0, options = { behavior: 'smooth' }
     }
   }, timeout);
 };
+
+export const calculateHeight = (originalHeight, originalWidth, canvasWidth, mode) => {
+  if (mode !== 'responsive') {
+    return originalHeight;
+  }
+  let calculatedWidth = originalWidth;
+
+  const ratio = originalHeight / originalWidth;
+
+  if (originalWidth > (canvasWidth - 32)) {
+    calculatedWidth = canvasWidth;
+  }
+  return ratio * (calculatedWidth);
+};
