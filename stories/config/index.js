@@ -13,6 +13,18 @@ export const defaultSettings = {
   reportSize: '16:9',
 };
 
+export const responsiveSettings = {
+  reportAlignment: 'left',
+  reportBackgroundColor: '#FFFFFF',
+  reportFontColor: '#000000',
+  reportFontFamily: 'Roboto',
+  reportFontSize: '14',
+  reportFontStyle: '[]',
+  reportLayout: 'responsive',
+  reportLayoutHeight: 896,
+  reportLayoutWidth: 414,
+};
+
 export const leftPanelConfig = [{
   elements: [
     {
