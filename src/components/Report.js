@@ -5,6 +5,7 @@ import Presentation from './Presentation/Presentation';
 import Preview from './Preview';
 import Print from './Print';
 import reportsAppTexts, { SharingTextsModule } from '../constants/texts';
+import Responsive from './Responsive';
 
 const Report = ({
   leftPanelConfig,
@@ -32,6 +33,9 @@ const Report = ({
     case 'preview': {
       return <Preview {...customProps} />;
     }
+    case 'responsive': {
+      return <Responsive {...customProps} />;
+    }
     case 'presentation': {
       return <Presentation {...props} />;
     }
@@ -47,7 +51,7 @@ const Report = ({
 
 Report.propTypes = {
   /** Conditionally rendering different modes  */
-  mode: PropTypes.oneOf(['customize', 'preview', 'print', 'presentation']),
+  mode: PropTypes.oneOf(['customize', 'preview', 'print', 'presentation', 'responsive']),
   /**
    It can be changed static texts or translated which use in the library.
    New texts are set when you pass again.
