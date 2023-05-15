@@ -1,46 +1,41 @@
 name: Publish
 on:
-  # manual trigger
-  workflow_dispatch:
-  # on release creation
+  # on release
   release:
-    types: [created]
+    types: [released, prereleased]
+
 jobs:
-  build-test-publish:
+  build-test:
+    uses: ./.github/workflows/build-test.yml
+  publish:
+    needs: build-test
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          registry-url: https://registry.yarnpkg.com/
 
-    # Setup .npmrc file to publish to npm
-    - uses: actions/setup-node@v2
-      with:
-        node-version: '14.x'
-        registry-url: 'https://registry.npmjs.org'
+      - name: Cache
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
 
-    - name: Get yarn cache directory path
-      id: yarn-cache-dir-path
-      run: echo "::set-output name=dir::$(yarn cache dir)"
+      - name: Build package
+        run: yarn build
 
-    - uses: actions/cache@v2
-      with:
-        path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-        key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-yarn-
+      - name: Publish package
+        if: github.event_name == 'release' && github.event.release.draft == false
+        run: |
+          if [[ ${{ github.event.release.prerelease }} == true || ${{ github.event.release.tag_name }} =~ -alpha|-beta|-rc ]]; then
+            yarn publish --tag next
+          else
+            yarn publish --tag latest
+          fi
 
-    - name: Install dependencies
-      run: yarn --frozen-lockfile
-
-    - name: Run linter
-      run: yarn lint
-
-    - name: Build package
-      run: yarn build
-
-    - name: Run tests
-      run: yarn test
-
-    - name: Publish package
-      run: yarn is-published || yarn publish
-      env:
-        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

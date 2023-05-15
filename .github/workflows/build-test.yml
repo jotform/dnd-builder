@@ -1,0 +1,42 @@
+name: Build and Test
+on:
+  # manual trigger
+  workflow_dispatch:
+  # reuse workflow run
+  workflow_call:
+  # on pull request
+  pull_request:
+  # on push to master branch
+  push:
+    branches:
+      - 'master'
+      - 'responsive-preview'
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    steps:
+        - uses: actions/checkout@v3
+        - uses: actions/setup-node@v3
+          with:
+            node-version: 16
+            registry-url: https://registry.npmjs.org/
+
+        - name: Cache
+          uses: actions/cache@v3
+          with:
+            path: node_modules
+            key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+            restore-keys: |
+                ${{ runner.os }}-yarn-
+
+        - name: Install dependencies
+          run: yarn --frozen-lockfile
+
+        - name: Run linter
+          run: yarn lint
+
+        - name: Build package
+          run: yarn build
+
+        - name: Run tests
+          run: yarn test
