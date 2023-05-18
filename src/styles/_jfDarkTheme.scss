@@ -1,6 +1,7 @@
 /* stylelint-disable no-descending-specificity */
 
-.darkMode {
+.darkMode,
+.supernovaMode {
   .jfReport-toolbox, .jfPresentation-toolbox {
     background-color: #565F6E;
   }

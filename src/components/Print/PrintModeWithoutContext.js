@@ -61,7 +61,7 @@ PrintModeWithoutContext.propTypes = {
     reportLayoutHeight: PropTypes.string,
     reportLayoutWidth: PropTypes.string,
   }),
-  theme: PropTypes.oneOf(['lightMode', 'darkMode']),
+  theme: PropTypes.oneOf(['lightMode', 'darkMode', 'supernovaMode']),
 };
 
 PrintModeWithoutContext.defaultProps = {

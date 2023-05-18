@@ -78,7 +78,7 @@ Responsive.propTypes = {
   /** General report settings such as layout size and background color */
   settings: PropTypes.shape({}),
   /** Theme */
-  theme: PropTypes.oneOf(['lightMode', 'darkMode']),
+  theme: PropTypes.oneOf(['lightMode', 'darkMode', 'supernovaMode']),
 };
 
 Responsive.defaultProps = {
