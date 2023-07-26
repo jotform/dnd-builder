@@ -19,7 +19,6 @@ import {
 import Tabs from '../../Builder/Tabs';
 import Settings from './Settings';
 import RightPanelToggler from './RightPanelToggler';
-import { capitalize } from '../../../utils/string';
 
 const exceptionalClasses = [
   'pageSettingSideBtn', 'paneClose', 'paneToggler', 'forZoom', 'jSheetContextMenu',
@@ -43,7 +42,7 @@ const RightPanel = ({
   } = useBuilderContext();
   const { acceptedItems, settings: layoutSettings } = usePropContext();
   const panelRef = useRef(null);
-  const { LAYOUT_SETTINGS, PAGE_SETTINGS, SETTINGS } = useTranslatedTexts();
+  const translatedTexts = useTranslatedTexts();
   const settingMap = {
     i_: {
       details: id => {
@@ -54,7 +53,8 @@ const RightPanel = ({
         return acceptedItems[item.itemType];
       },
       title: item => {
-        return `${capitalize(acceptedItems[item.itemType].title || item.itemType)} ${SETTINGS}`;
+        // eslint-disable-next-line max-len
+        return translatedTexts[`${(acceptedItems[item.itemType].title || item.itemType).toLocaleUpperCase()}_SETTINGS`];
       },
       updater: onItemChange,
     },
@@ -69,7 +69,7 @@ const RightPanel = ({
       settings: () => {
         return acceptedItems[REPORT_SETTINGS_ITEM_TYPE] || Layout;
       },
-      title: () => LAYOUT_SETTINGS,
+      title: () => translatedTexts.LAYOUT_SETTINGS,
       updater: onSettingChange,
     },
     p_: {
@@ -92,7 +92,7 @@ const RightPanel = ({
           }) || Page.settings,
         };
       },
-      title: () => PAGE_SETTINGS,
+      title: () => translatedTexts.PAGE_SETTINGS,
       updater: onPageChange,
     },
   };

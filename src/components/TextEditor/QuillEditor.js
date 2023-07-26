@@ -75,7 +75,7 @@ QuillEditor.formats = formats;
 QuillEditor.propTypes = {
   content: PropTypes.string,
   handleSave: PropTypes.func,
-  placeholder: PropTypes.string,
+  placeholder: PropTypes.string.isRequired,
   setContent: PropTypes.func,
   setIsTextEditorOpen: PropTypes.func,
 };
@@ -83,7 +83,6 @@ QuillEditor.propTypes = {
 QuillEditor.defaultProps = {
   content: '',
   handleSave: () => {},
-  placeholder: 'Click to edit text',
   setContent: () => {},
   setIsTextEditorOpen: () => {},
 };

@@ -52,7 +52,7 @@ TextEditor.propTypes = {
   handleSave: PropTypes.func,
   isLocked: PropTypes.bool,
   isSelected: PropTypes.bool,
-  placeholder: PropTypes.string,
+  placeholder: PropTypes.string.isRequired,
 };
 
 TextEditor.defaultProps = {
@@ -60,7 +60,6 @@ TextEditor.defaultProps = {
   handleSave: () => {},
   isLocked: false,
   isSelected: false,
-  placeholder: 'Click to edit text',
 };
 
 export default TextEditor;

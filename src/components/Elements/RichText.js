@@ -6,6 +6,7 @@ import TextEditor from '../TextEditor';
 import { fontTypes } from '../../constants/fonts';
 import { useBuilderContext } from '../../utils/builderContext';
 import { divider } from '../../utils/staticSettings';
+import { useTranslatedTexts } from '../../utils/hooks';
 
 const ITEM_TYPE = 'text';
 
@@ -48,6 +49,7 @@ export const RichTextElement = ({
 }) => {
   const reportItem = useRef({});
   const { isTextEditorOpen } = useBuilderContext();
+  const { CLICK_TO_EDIT_TEXT } = useTranslatedTexts();
 
   const textStyle = {
     fontFamily,
@@ -83,7 +85,7 @@ export const RichTextElement = ({
         handleSave={handleSave}
         isLocked={isLocked}
         isSelected={isSelected}
-        placeholder="Click to edit text"
+        placeholder={CLICK_TO_EDIT_TEXT}
       />
     </div>
   );

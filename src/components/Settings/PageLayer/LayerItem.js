@@ -3,6 +3,7 @@ import { sortableElement, sortableHandle } from 'react-sortable-hoc';
 import classNames from 'classnames';
 import { capitalize, stripHTML } from '../../../utils/string';
 import * as icons from '../../../utils/icons';
+import { useTranslatedTexts } from '../../../utils/hooks';
 
 const DragHandle = sortableHandle(() => (
   <span className="jfReportSelectOption-drag">
@@ -19,24 +20,32 @@ const LayerItem = sortableElement(({
 }) => {
   const { id, isVisible } = item;
   const isVisib = isVisible !== undefined ? isVisible : true;
+  const {
+    CHART_ELEMENT,
+    CLICK_TO_EDIT_TEXT,
+    CLIK_TO_EDIT_HEADER,
+    PAGE_ELEMENT,
+    RECTANGLE,
+  } = useTranslatedTexts();
+
   const handleItemLock = useCallback(({ target }) => {
     onItemChange({ id }, { isVisible: target.checked });
   }, [id]);
 
   const itemText = passedItem => {
     if (passedItem.itemType === 'shapes') {
-      return capitalize(passedItem.shapeType || 'Rectangle');
+      return capitalize(passedItem.shapeType || RECTANGLE);
     }
     if (passedItem.itemType === 'chart') {
-      return passedItem.text || 'Chart Element';
+      return passedItem.text || CHART_ELEMENT;
     }
     if (passedItem.itemType === 'header') {
-      return passedItem.headerText || 'Click to edit header';
+      return passedItem.headerText || CLIK_TO_EDIT_HEADER;
     }
     if (passedItem.itemType === 'text') {
-      return passedItem.value ? stripHTML(passedItem.value) : 'Click to edit text';
+      return passedItem.value ? stripHTML(passedItem.value) : CLICK_TO_EDIT_TEXT;
     }
-    return capitalize(passedItem.itemType || 'Page Element');
+    return capitalize(passedItem.itemType || PAGE_ELEMENT);
   };
   const content = (
     <div className="jfReportSelectOption">
