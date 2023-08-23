@@ -9,12 +9,14 @@ import PropTypes from 'prop-types';
 import Fuse from 'fuse.js/dist/fuse.common';
 import SearchIcon from '../../assets/search.svg';
 import CrossIcon from '../../assets/svg/close.svg';
+import { useTranslatedTexts } from '../../utils/hooks';
 
 const SearchInput = ({
   elements,
   searchKeys,
   setElements,
 }) => {
+  const { SEARCH } = useTranslatedTexts();
   const searchInputRef = useRef(null);
   const [searchValue, setSearchValue] = useState('');
 
@@ -67,7 +69,7 @@ const SearchInput = ({
           className="js-searchInput section-search-input"
           onChange={onSearchChange}
           onKeyDown={handleKeyDown}
-          placeholder="Search"
+          placeholder={SEARCH}
           type="text"
           value={searchValue}
         />

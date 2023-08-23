@@ -79,7 +79,7 @@ const settings = [
   },
   {
     key: 'url',
-    label: 'Enter Url',
+    label: 'Enter URL',
     section: 'ENTER URL',
     showWhen: { url: '' },
     type: 'enterImageURL',
