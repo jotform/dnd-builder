@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.5.9](https://github.com/jotform/dnd-builder/compare/v2.5.6...v2.5.9) (2023-08-23)
+
+
+### Bug Fixes
+
+* **dnd-builder:** missing translations ([54d8fef](https://github.com/jotform/dnd-builder/commit/54d8feff7ad433504e7b6841ccb5c2e3eeefbb4c))
+* **dnd-builder:** missing translations and search bar icon spacing ([c6a44b7](https://github.com/jotform/dnd-builder/commit/c6a44b79ce89758fcba239688202a4ba0ad1857b))
+* **dnd-builder:** replace images with cdn ([4ac3bb3](https://github.com/jotform/dnd-builder/commit/4ac3bb35ca283ff50a42f8a9e6ce86fd45ca4259))
+* **dnd-builder:** replace images with cdn ([f7d1e4c](https://github.com/jotform/dnd-builder/commit/f7d1e4c1e1f2c9dd76f19528a9a7dc2b5bf24e74))
+
 ### [2.5.8](https://github.com/jotform/dnd-builder/compare/v2.5.6...v2.5.8) (2023-07-26)
 
 
