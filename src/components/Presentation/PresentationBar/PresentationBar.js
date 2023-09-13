@@ -1,3 +1,4 @@
+import { useLayoutEffect } from 'react';
 import PropTypes from 'prop-types';
 import PageNavigation from './PageNavigation';
 import PresentationActions from './PresentationActions';
@@ -51,6 +52,23 @@ const PresentationBar = ({
     currentPage,
     pageCount,
     setCurrentPage,
+  });
+
+  useLayoutEffect(() => {
+    // Hi, this is a horrible solution to a horrible Chromium bug.
+    // It is temporary, and once chromium crew solves the
+    // https://bugs.chromium.org/p/chromium/issues/detail?id=1440024
+    // we will be able to remove it, the idea itself comes from
+    // them, btw https://bugs.chromium.org/p/chromium/issues/detail?id=1440024#c3
+    if (window.chrome) {
+      // Detaching and re-attaching to dom likely forces a re-draw
+      // of the svg.
+      document.querySelectorAll('svg.recharts-surface').forEach(domNode => {
+        const parent = domNode.parentElement;
+        parent.removeChild(domNode);
+        parent.appendChild(domNode);
+      });
+    }
   });
 
   const handleZoomChange = e => {
