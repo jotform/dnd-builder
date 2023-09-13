@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.5.10](https://github.com/jotform/dnd-builder/compare/v2.5.9...v2.5.10) (2023-09-13)
+
+
+### Bug Fixes
+
+* **dnd-builder:** temporary fix for chromium svg rendering issue ([8d3b566](https://github.com/jotform/dnd-builder/commit/8d3b56612a423d1e786692dbd0f686d5546a9bd8))
+
 ### [2.5.9](https://github.com/jotform/dnd-builder/compare/v2.5.6...v2.5.9) (2023-08-23)
 
 
