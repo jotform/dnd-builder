@@ -37,6 +37,7 @@ const exceptionalClasses = [
   'forZoom',
   'ql-toolbar',
   'jSheetContextMenu',
+  'reset-default-contextMenu',
 ];
 
 const PageItemResizer = ({
