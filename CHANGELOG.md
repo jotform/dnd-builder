@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.6.0](https://github.com/jotform/dnd-builder/compare/v2.5.10...v2.6.0) (2023-10-03)
+
+
+### Features
+
+* exceptionalClass update for contextMenu in pageItemResizer ([5b8e161](https://github.com/jotform/dnd-builder/commit/5b8e161df9adfb1b701b67346f91872f326dbbac))
+
 ### [2.5.10](https://github.com/jotform/dnd-builder/compare/v2.5.9...v2.5.10) (2023-09-13)
 
 
