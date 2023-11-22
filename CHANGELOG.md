@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.7.1](https://github.com/jotform/dnd-builder/compare/v2.7.0...v2.7.1) (2023-11-22)
+
+
+### Bug Fixes
+
+* **panel-elements:** size settings lock button alignment ([e221915](https://github.com/jotform/dnd-builder/commit/e22191523a06ba1b6c5616299e4de6eefe20f665))
+
 ## [2.7.0](https://github.com/jotform/dnd-builder/compare/v2.6.1...v2.7.0) (2023-10-03)
 
 
