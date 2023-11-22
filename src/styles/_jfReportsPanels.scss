@@ -177,10 +177,13 @@
       }
 
       .forAspect {
+        width: 24px;
+        padding: 12px 0;
         &:before, &:after {
           content: "";
           position: absolute;
-          bottom: 6px;
+          top: 50%;
+          transform: translateY(-50%);
           width: 4px;
 
           border-bottom: 1px solid #303339;
