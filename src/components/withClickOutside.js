@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 
 const IGNORED_ROLES = [
-  "dialog"
+  'dialog',
 ];
 
 function getDisplayName(WrappedComponent) {
