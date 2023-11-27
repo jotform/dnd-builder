@@ -1,6 +1,10 @@
 import { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 
+const IGNORED_ROLES = [
+  'dialog',
+];
+
 function getDisplayName(WrappedComponent) {
   return WrappedComponent.displayName || WrappedComponent.name || 'Component';
 }
@@ -23,6 +27,7 @@ function withClickOutside(WrappedComponent) {
           classList.contains(exceptionalClasses)
           || Array.from(classList).some(xClass => exceptionalClasses.includes(xClass))
           || exceptionalClasses.some(item => event.target.closest(`.${item}`))
+          || IGNORED_ROLES.some(role => event.target.closest(`[role=${role}]`))
         )
       ) {
         return;
