@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.8.0](https://github.com/jotform/dnd-builder/compare/v2.7.1...v2.8.0) (2023-11-27)
+
+
+### Features
+
+* **dnd-builder:** enforce role-based ignores in click outside ([fce52a3](https://github.com/jotform/dnd-builder/commit/fce52a3d8517b0b66ec5524bd2f3ae27037733aa))
+
 ### [2.7.1](https://github.com/jotform/dnd-builder/compare/v2.7.0...v2.7.1) (2023-11-22)
 
 
