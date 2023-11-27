@@ -361,7 +361,7 @@ const Scene = ({
     const shouldPaste = itemToPaste && e.key === 'v' && e.metaKey;
 
     if (shouldSuppressKeyboardEvent(e)) {
-      return; 
+      return;
     }
 
     if (activeElement && !shouldPaste) {
