@@ -33,6 +33,7 @@ import {
 import { useEventListener } from '../../utils/hooks';
 import DraggableItemLayer from '../DraggableItem/DraggableItemLayer';
 import generateId from '../../utils/generateId';
+import { EVENT_IGNORED_ROLES } from '../../constants/eventIgnoredRoles';
 
 const Scene = ({
   additionalPageItems,
@@ -352,8 +353,16 @@ const Scene = ({
     }
   };
 
+  const shouldSuppressKeyboardEvent = e => (
+    EVENT_IGNORED_ROLES.some(role => e.target.closest(`[role=${role}]`))
+  );
+
   const handleKeyboardEvent = e => {
     const shouldPaste = itemToPaste && e.key === 'v' && e.metaKey;
+
+    if (shouldSuppressKeyboardEvent(e)) {
+      return;
+    }
 
     if (activeElement && !shouldPaste) {
       const arrowKeyCodes = ['ArrowLeft', 'ArrowUp', 'ArrowDown', 'ArrowBottom'];
