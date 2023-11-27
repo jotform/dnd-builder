@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.8.1](https://github.com/jotform/dnd-builder/compare/v2.8.0...v2.8.1) (2023-11-27)
+
+
+### Bug Fixes
+
+* **dnd-builder:** escape escape key ([a4c95e1](https://github.com/jotform/dnd-builder/commit/a4c95e18f41ed546f1cb6fa291a91912fc430537))
+* **dnd-builder:** lint ([7bed875](https://github.com/jotform/dnd-builder/commit/7bed87572c51d0d16cfdf4f8018f9297d744f161))
+* **dnd-builder:** lint ([11b993d](https://github.com/jotform/dnd-builder/commit/11b993d529f9aaee41fa0bf2a25845cf76b3c6eb))
+
 ## [2.8.0](https://github.com/jotform/dnd-builder/compare/v2.7.1...v2.8.0) (2023-11-27)
 
 
