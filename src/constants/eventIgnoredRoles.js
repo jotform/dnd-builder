@@ -4,5 +4,5 @@
  * should be ignored by event handlers.
  */
 export const EVENT_IGNORED_ROLES = [
-  'dialog'
+  'dialog',
 ];

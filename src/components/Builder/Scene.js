@@ -360,8 +360,7 @@ const Scene = ({
   const handleKeyboardEvent = e => {
     const shouldPaste = itemToPaste && e.key === 'v' && e.metaKey;
 
-    if (shouldSuppressKeyboardEvent(e))
-    {
+    if (shouldSuppressKeyboardEvent(e)) {
       return; 
     }
 
