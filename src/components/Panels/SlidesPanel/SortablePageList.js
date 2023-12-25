@@ -40,7 +40,6 @@ const SortablePageList = Component => {
       super(props);
 
       this.sortablePageListRef = createRef();
-      this.sortableOuterRef = createRef();
     }
 
     get itemData() {
@@ -86,7 +85,6 @@ const SortablePageList = Component => {
           itemCount={pageCount}
           itemData={this.itemData}
           itemSize={127}
-          outerRef={this.sortableOuterRef}
           width={width}
         >
           {SortablePageItemRenderer}

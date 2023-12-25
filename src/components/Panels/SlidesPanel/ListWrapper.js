@@ -10,6 +10,7 @@ import { usePageVisibility } from '../../../utils/hooks';
 
 const ListWrapper = ({
   component: Component,
+  onPageAdd,
   onSortEnd,
   pageCount,
   reportSettings,
@@ -37,11 +38,19 @@ const ListWrapper = ({
     width: width,
   }), [reportSettings]);
 
-  const _onSortEnd = (sortEvent, nativeEvent) => {
+  const _onSortEnd = useCallback((sortEvent, nativeEvent) => {
     if (onSortEnd) {
       onSortEnd(sortEvent, nativeEvent, outerRef.current);
     }
-  };
+  }, [onSortEnd]);
+
+  useEffect(() => {
+    if (selectedPageIndex !== -1) {
+      const instance = outerRef.current.getWrappedInstance();
+      const list = instance.sortablePageListRef.current;
+      list.scrollToItem(selectedPageIndex);
+    }
+  }, [selectedPageIndex]);
 
   useEffect(() => { // for page thumbnails actions
     if (!scrollTracking) {
@@ -52,16 +61,7 @@ const ListWrapper = ({
 
   usePageVisibility(index => {
     if (scrollTracking && index !== selectedPageIndex && !Number.isNaN(index)) {
-      const instance = outerRef.current.getWrappedInstance();
-      const list = instance.sortableOuterRef.current;
       setSelectedPageIndex(index);
-      if (selectedPageIndex === -1 && index !== 1) {
-        setTimeout(() => {
-          list.scrollTo({ behavior: 'smooth', top: ((index - 1) * 120) + 7 });
-        }, 300);
-      } else {
-        list.scrollTo({ behavior: 'smooth', top: ((index - 1) * 120) + 7 });
-      }
     } else if (!scrollTracking && index === selectedPageIndex) {
       setScrollTracking(true);
     }
@@ -74,13 +74,13 @@ const ListWrapper = ({
     if (!e.target.classList.contains('controllerItem')) { // for page thumbnails actions
       scrollToTarget(`pageActions-id-${order}`);
     }
-  }, [selectedPageIndex]);
+  }, []);
 
-  const onPageAdd = index => {
+  const handlePageAdd = useCallback(index => {
     setScrollTracking(false);
     setSelectedPageIndex(index);
-    otherProps.onPageAdd(index);
-  };
+    onPageAdd(index);
+  }, [onPageAdd]);
 
   return (
     <>
@@ -107,7 +107,7 @@ const ListWrapper = ({
       <div className="jfReport-pane-footer">
         <PageAdder
           additionalClass="forOptions"
-          onPageAdd={onPageAdd}
+          onPageAdd={handlePageAdd}
           pageCount={pageCount}
         />
       </div>
@@ -117,6 +117,7 @@ const ListWrapper = ({
 
 ListWrapper.propTypes = {
   component: PropTypes.any,
+  onPageAdd: PropTypes.func,
   onSortEnd: PropTypes.func,
   pageCount: PropTypes.number,
   reportSettings: PropTypes.shape({
@@ -128,6 +129,7 @@ ListWrapper.propTypes = {
 
 ListWrapper.defaultProps = {
   component: null,
+  onPageAdd: () => {},
   onSortEnd: () => {},
   pageCount: 0,
   reportSettings: {},
