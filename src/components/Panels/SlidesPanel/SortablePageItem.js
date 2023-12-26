@@ -37,6 +37,7 @@ const SortablePageItem = SortableElement(({
           acceptedItems={acceptedItems}
           additionalPageItems={additionalPageItems}
           hashCode={hashCode}
+          isThumbnail
           itemAccessor={itemAccessor}
           items={page.items}
           style={pageContainerStyle}

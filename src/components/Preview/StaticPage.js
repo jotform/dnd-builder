@@ -10,6 +10,7 @@ const StaticPage = ({
   acceptedItems,
   additionalPageItems,
   hashCode,
+  isThumbnail,
   itemAccessor,
   items,
   style,
@@ -36,6 +37,7 @@ const StaticPage = ({
             >
               {ReportItem => (
                 <ReportItem
+                  isThumbnail={isThumbnail}
                   item={mergedItem}
                   itemAccessor={itemAccessor}
                 />
@@ -53,6 +55,7 @@ StaticPage.propTypes = {
   acceptedItems: PropTypes.shape({}),
   additionalPageItems: PropTypes.arrayOf(PropTypes.node),
   hashCode: PropTypes.string,
+  isThumbnail: PropTypes.bool,
   itemAccessor: PropTypes.func,
   items: PropTypes.arrayOf(PropTypes.shape({})),
   style: PropTypes.shape({}),
@@ -62,6 +65,7 @@ StaticPage.defaultProps = {
   acceptedItems: {},
   additionalPageItems: [],
   hashCode: '',
+  isThumbnail: false,
   itemAccessor: () => {},
   items: [],
   style: {},
