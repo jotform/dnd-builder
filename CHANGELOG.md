@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.9.0](https://github.com/jotform/dnd-builder/compare/v2.8.2...v2.9.0) (2023-12-26)
+
+
+### Features
+
+* **slides-panel:** isThumbnail prop is added for slides panel item ([be0418a](https://github.com/jotform/dnd-builder/commit/be0418a74179e9c885afc17c0a399ed15e7ecff6))
+
 ### [2.8.2](https://github.com/jotform/dnd-builder/compare/v2.8.1...v2.8.2) (2023-12-25)
 
 ### [2.8.1](https://github.com/jotform/dnd-builder/compare/v2.8.0...v2.8.1) (2023-11-27)
