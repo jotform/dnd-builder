@@ -93,6 +93,7 @@ const ListWrapper = ({
               height={containerHeight}
               helperClass="pageThumbnailHelper"
               lockAxis="y"
+              onPageAdd={handlePageAdd}
               onPageClick={onPageClick}
               onSortEnd={_onSortEnd}
               pageContainerStyle={pageContainerStyles}
