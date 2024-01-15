@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.9.1](https://github.com/CemTunaKoc/dnd-builder/compare/v2.9.0...v2.9.1) (2024-01-15)
+
+
+### Bug Fixes
+
+* **dnd-builder:** onPageAdd prop added ([8e44a13](https://github.com/CemTunaKoc/dnd-builder/commit/8e44a130297379a394999fd38618e3846537bbb9))
+
 ## [2.9.0](https://github.com/jotform/dnd-builder/compare/v2.8.2...v2.9.0) (2023-12-26)
 
 
