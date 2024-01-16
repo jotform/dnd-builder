@@ -42,10 +42,7 @@ const SlidesPanel = ({
     return pages[index];
   }, [pages]);
 
-  const onPageSort = useCallback(({ newIndex, oldIndex }, nativeEvent, ref) => {
-    const instance = ref.getWrappedInstance();
-    const list = instance.sortablePageListRef.current;
-
+  const onPageSort = useCallback(({ newIndex, oldIndex }, nativeEvent, list) => {
     const newPageOrders = arrayMove(pages, oldIndex, newIndex).reduce((acc, page, index) => {
       acc[page.id] = { order: index + 1 };
       return acc;

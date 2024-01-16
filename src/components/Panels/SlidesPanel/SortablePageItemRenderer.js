@@ -5,7 +5,7 @@ import SortablePageItem from './SortablePageItem';
 
 const SortablePageItemRenderer = ({ data, index, style }) => {
   const {
-    pageContainerStyle, pageGetter, selectedPageIndex, ...otherData
+    pageContainerStyle, pageGetter, ...otherData
   } = data;
   const page = pageGetter(index);
   const pageContainerLastStyle = {
@@ -16,7 +16,6 @@ const SortablePageItemRenderer = ({ data, index, style }) => {
     <SortablePageItem
       key={`page-${index}-${page.id}`}
       index={index}
-      isSelected={selectedPageIndex === page.order}
       order={page.order}
       page={page}
       pageContainerStyle={pageContainerLastStyle}

@@ -78,7 +78,7 @@ export const useFitZoom = ({
   }, [settings.reportLayout]);
 };
 
-export const usePageVisibility = (callback, scrollTracking, pageCount, selectedPageIndex) => {
+export const usePageVisibility = (callback, pageCount, selectedPageIndex) => {
   const ratio = useRef({});
   const pageRefs = useRef([]);
   const observer = new window.IntersectionObserver(entries => {
@@ -108,16 +108,18 @@ export const usePageVisibility = (callback, scrollTracking, pageCount, selectedP
   }, [pageCount]);
 
   useEffect(() => {
-    pageRefs.current.forEach(page => {
-      observer.observe(page);
-    });
+    if (selectedPageIndex === -1) {
+      pageRefs.current.forEach(page => {
+        observer.observe(page);
+      });
+    }
 
     return () => {
       pageRefs.current.forEach(page => {
         observer.unobserve(page);
       });
     };
-  }, [pageRefs.current, scrollTracking, selectedPageIndex]);
+  }, [selectedPageIndex]);
 };
 
 export const useFullscreenChange = (isFullscreen, setIsFullscreen, fitToScreen) => {

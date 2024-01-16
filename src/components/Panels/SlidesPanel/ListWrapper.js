@@ -16,9 +16,8 @@ const ListWrapper = ({
   reportSettings,
   ...otherProps
 }) => {
-  const outerRef = useRef(null);
+  const listRef = useRef(null);
   const [selectedPageIndex, setSelectedPageIndex] = useState(-1);
-  const [scrollTracking, setScrollTracking] = useState(true);
   const {
     reportBackgroundColor,
     reportLayoutHeight = 794,
@@ -40,47 +39,61 @@ const ListWrapper = ({
 
   const _onSortEnd = useCallback((sortEvent, nativeEvent) => {
     if (onSortEnd) {
-      onSortEnd(sortEvent, nativeEvent, outerRef.current);
+      onSortEnd(sortEvent, nativeEvent, listRef.current);
     }
   }, [onSortEnd]);
 
-  useEffect(() => {
-    if (selectedPageIndex !== -1) {
-      const instance = outerRef.current.getWrappedInstance();
-      const list = instance.sortablePageListRef.current;
-      list.scrollToItem(selectedPageIndex);
+  const refSetter = useCallback(outerRef => {
+    if (outerRef) {
+      const instance = outerRef.getWrappedInstance();
+      if (instance) {
+        listRef.current = instance.sortablePageListRef.current;
+      }
     }
-  }, [selectedPageIndex]);
-
-  useEffect(() => { // for page thumbnails actions
-    if (!scrollTracking) {
-      scrollToTarget(`pageActions-id-${selectedPageIndex}`, 0, {});
-      setScrollTracking(true);
-    }
-  }, [pageCount]);
+  }, []);
 
   usePageVisibility(index => {
-    if (scrollTracking && index !== selectedPageIndex && !Number.isNaN(index)) {
-      setSelectedPageIndex(index);
-    } else if (!scrollTracking && index === selectedPageIndex) {
-      setScrollTracking(true);
+    if (index && !Number.isNaN(index)) {
+      listRef.current?.scrollToItem(index, 'center');
+
+      const prevSelectedThumbnail = document.querySelector('.thumbnailWrapper.isSelected');
+      if (prevSelectedThumbnail) {
+        prevSelectedThumbnail.classList.remove('isSelected');
+      }
+
+      const nextSelectedThumbnail = document
+        .querySelector(`.thumbnailWrapper[data-order="${index}"]`);
+      if (nextSelectedThumbnail) {
+        nextSelectedThumbnail.classList.add('isSelected');
+      }
     }
-  }, scrollTracking, pageCount, selectedPageIndex);
+  }, pageCount, selectedPageIndex);
+
+  // TODO: could be better than now. scrollend listener is a choice for some cases
+  const resetSelectedPageIndex = useCallback(() => {
+    setTimeout(() => {
+      setSelectedPageIndex(-1);
+    }, 1000);
+  }, []);
 
   const onPageClick = useCallback(e => {
     const order = e.target.getAttribute('data-order');
-    setScrollTracking(false);
     setSelectedPageIndex(parseInt(order, 10));
     if (!e.target.classList.contains('controllerItem')) { // for page thumbnails actions
       scrollToTarget(`pageActions-id-${order}`);
     }
+    resetSelectedPageIndex();
   }, []);
 
   const handlePageAdd = useCallback(index => {
-    setScrollTracking(false);
     setSelectedPageIndex(index);
     onPageAdd(index);
   }, [onPageAdd]);
+
+  useEffect(() => { // after new page added
+    scrollToTarget(`pageActions-id-${selectedPageIndex}`, 0, {});
+    resetSelectedPageIndex();
+  }, [pageCount]);
 
   return (
     <>
@@ -88,7 +101,7 @@ const ListWrapper = ({
         <ResponsiveContent>
           {(containerWidth, containerHeight) => (
             <Component
-              ref={outerRef}
+              ref={refSetter}
               distance={50}
               height={containerHeight}
               helperClass="pageThumbnailHelper"
@@ -98,7 +111,6 @@ const ListWrapper = ({
               onSortEnd={_onSortEnd}
               pageContainerStyle={pageContainerStyles}
               pageCount={pageCount}
-              selectedPageIndex={selectedPageIndex}
               width={containerWidth}
               {...otherProps}
             />

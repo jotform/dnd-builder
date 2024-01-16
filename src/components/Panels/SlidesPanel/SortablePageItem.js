@@ -1,6 +1,5 @@
 import { memo } from 'react';
 import { SortableElement } from 'react-sortable-hoc';
-import classNames from 'classnames';
 import StaticPage from '../../Preview/StaticPage';
 import PageThumbnailActions from './PageThumbnailActions';
 
@@ -9,7 +8,6 @@ const SortablePageItem = SortableElement(({
   additionalPageItems,
   disableInteraction,
   hashCode,
-  isSelected,
   itemAccessor,
   onAnEventTrigger,
   onPageAdd,
@@ -24,7 +22,7 @@ const SortablePageItem = SortableElement(({
   const onKeyDown = f => f;
   return (
     <div
-      className={classNames('thumbnailWrapper d-flex a-center j-between', { isSelected })}
+      className="thumbnailWrapper d-flex a-center j-between"
       data-id={page.id}
       data-order={order}
       onClick={onPageClick}
