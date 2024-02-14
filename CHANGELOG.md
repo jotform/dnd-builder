@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.9.3](https://github.com/jotform/dnd-builder/compare/v2.9.2...v2.9.3) (2024-02-14)
+
+
+### Bug Fixes
+
+* **dnd-builder:** fixes for lint ([2ea65b8](https://github.com/jotform/dnd-builder/commit/2ea65b8660fe87d8295bf7cd2149f55ed39e5272))
+* **dnd-builder:** lint fixes ([6790b7c](https://github.com/jotform/dnd-builder/commit/6790b7c9f3d81318770c9e7ad8a04e6761b36f28))
+* **dnd-builder:** text element height update on edit mode ([1ce5e95](https://github.com/jotform/dnd-builder/commit/1ce5e95b20b671deaea4330f00f5de40ea27826b))
+
 ### [2.9.2](https://github.com/jotform/dnd-builder/compare/v2.9.1...v2.9.2) (2024-01-16)
 
 ### [2.9.1](https://github.com/CemTunaKoc/dnd-builder/compare/v2.9.0...v2.9.1) (2024-01-15)
