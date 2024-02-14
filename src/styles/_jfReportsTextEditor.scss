@@ -22,6 +22,11 @@
     font-style: inherit;
     overflow-y: visible;
     &[contentEditable="true"] {
+
+      /* In the edit mode Text element height and scrollable area for quill editor
+      * And calculation applied for tolerance, banner height etc. in each report item
+      */
+      max-height: calc(100% - 2.5rem);
       cursor: text;
     }
 
