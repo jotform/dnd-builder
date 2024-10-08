@@ -4,6 +4,15 @@
 */
 
 .jfReportModal {
+  position: relative;
+  width: 94%;
+  margin-top: 40px;
+  max-width: 700px;
+  background-color: $white;
+  border-radius: 4px;
+  transition: $transition;
+  opacity: 0;
+  box-shadow: 0 2px 7px 0 rgba(#000000,.5);
 
   &-overlay {
     position: fixed;
@@ -29,15 +38,6 @@
     }
   }
 
-  position: relative;
-  width: 94%;
-  margin-top: 40px;
-  max-width: 700px;
-  background-color: $white;
-  border-radius: 4px;
-  transition: $transition;
-  opacity: 0;
-  box-shadow: 0 2px 7px 0 rgba(#000000,.5);
 
   button.jfReportModal-close {
     position: absolute;
