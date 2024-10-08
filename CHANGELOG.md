@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.9.4](https://github.com/jotform/dnd-builder/compare/v2.9.3...v2.9.4) (2024-10-08)
+
+
+### Bug Fixes
+
+* **dnd-builder:** sass warning fixes ([bd22dd0](https://github.com/jotform/dnd-builder/commit/bd22dd0b7c997859c06acf02adc925af0b80567a))
+
 ### [2.9.3](https://github.com/jotform/dnd-builder/compare/v2.9.2...v2.9.3) (2024-02-14)
 
 
