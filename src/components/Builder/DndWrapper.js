@@ -28,6 +28,7 @@ const DndWrapper = ({ children }) => {
   return (
     <DndProvider
       backend={MultiBackend}
+      context={window}
       options={HTML5toTouch}
     >
       {children}
