@@ -11,7 +11,7 @@
     "@use-gesture/react": "10.2.24",
     "classnames": "2.2.6",
     "core-js": "3.9.0",
-    "dompurify": "2.2.8",
+    "dompurify": "3.2.3",
     "fuse.js": "5.2.3",
     "intersection-observer": "0.12.0",
     "lodash.isequal": "4.5.0",
