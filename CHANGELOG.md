@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.9.6](https://github.com/jotform/dnd-builder/compare/v2.9.5...v2.9.6) (2024-12-18)
+
+
+### Bug Fixes
+
+* **dnd-builder:** fix same time multi backends error ([082ee11](https://github.com/jotform/dnd-builder/commit/082ee11cd9e0a23551d01786fe0dde6427038837))
+
 ### [2.9.5](https://github.com/jotform/dnd-builder/compare/v2.9.4...v2.9.5) (2024-11-12)
 
 ### [2.9.4](https://github.com/jotform/dnd-builder/compare/v2.9.3...v2.9.4) (2024-10-08)
