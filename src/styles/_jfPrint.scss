@@ -21,6 +21,10 @@
   height: 100vh !important;
 }
 .jfReport.printMode .jfReport-viewport {
+  * {
+    overflow: hidden !important;
+  }
+
   display: block;
 }
 .jfReport.printMode .jfReport-col {
