@@ -5,7 +5,7 @@ import { roundForDecimalPart } from '../../utils/functions';
 import { useTranslatedTexts } from '../../utils/hooks';
 
 const LayoutSizeSettings = ({ config, item, onItemChange }) => {
-  const [aspectLock, setAspectLock] = useState(true);
+  const [aspectLock, setAspectLock] = useState(false);
   const { HEIGHT, WIDTH } = useTranslatedTexts();
 
   const { reportLayoutHeight: layoutHeight, reportLayoutWidth: layoutWidth } = item;
