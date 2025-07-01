@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import {
   useState,
   useRef,
@@ -97,8 +98,34 @@ const Page = ({
     hover: onHover,
   });
 
-  const { reportBackgroundColor } = settings;
+  const {
+    reportBackgroundColor,
+    reportBackgroundGradientDirection,
+    reportBackgroundGradientEnabled,
+    reportBackgroundGradientEndColor,
+    reportBackgroundGradientStartColor,
+  } = settings;
   const { backgroundColor } = page;
+
+  const createGradientBackground = () => {
+    if (!reportBackgroundGradientEnabled
+        || !reportBackgroundGradientStartColor
+        || !reportBackgroundGradientEndColor) {
+      return null;
+    }
+
+    const direction = reportBackgroundGradientDirection || 'to right';
+    const startColor = reportBackgroundGradientStartColor;
+    const endColor = reportBackgroundGradientEndColor;
+
+    if (direction === 'radial') {
+      return `radial-gradient(circle, ${startColor}, ${endColor})`;
+    }
+
+    return `linear-gradient(${direction}, ${startColor}, ${endColor})`;
+  };
+
+  const gradientBackground = createGradientBackground();
   const bgColor = backgroundColor ? backgroundColor : reportBackgroundColor || '#fff';
 
   return (
@@ -107,7 +134,7 @@ const Page = ({
         ref={drop}
         className={classNames.pageContainer}
         style={{
-          backgroundColor: bgColor,
+          background: (gradientBackground && reportBackgroundGradientEnabled === 'on') ? gradientBackground : bgColor,
           ...style,
         }}
       >

@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { memo } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
@@ -37,6 +38,9 @@ const Settings = ({
             ? item[setting.key] : defaultItem[setting.key] || null;
           const computedValue = setting.value ? setting.value(value, item, itemAccessor) : value;
           const newItem = { ...defaultItem, ...item };
+          if (setting.dependencies && (!item[setting.dependencies] || item[setting.dependencies] === 'off')) {
+            return null;
+          }
           return (
             <SettingsItemRenderer
               key={`${itemIndex.toString()}_${item.id}_${setting.key}_${setting.uniqueId}`}
