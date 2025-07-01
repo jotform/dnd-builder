@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable react/jsx-sort-props */
 import {
   useCallback, useEffect, useMemo, useState,
@@ -30,6 +31,10 @@ const TextEditor = ({
   }, [_content]);
 
   useEffect(() => {
+    setContent(domPurify.sanitize(content));
+  }, [content]);
+
+  useEffect(() => {
     if (isTextEditorOpen && !isSelected) {
       handleSave(_content);
       setIsTextEditorOpen(false);
@@ -56,6 +61,9 @@ const TextEditor = ({
             handleSave(_content);
           }
           setIsTextEditorOpen(false);
+        }
+        if ((e.key === 'Backspace' || e.key === 'ArrowLeft' || e.key === 'ArrowRight') && isTextEditorOpen && isSelected && !isLocked) {
+          e.stopPropagation();
         }
         setContent(domPurify.sanitize(e.target.innerHTML));
       }}

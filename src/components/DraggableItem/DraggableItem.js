@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { useEffect, useState, memo } from 'react';
 import PropTypes from 'prop-types';
 import { useDrag } from 'react-dnd-cjs';
@@ -19,7 +20,7 @@ import {
 } from '../../utils/scrollZoneFunctions';
 
 const exceptionalClassesForClickOutside = [
-  'contextMenu-itemLabel', 'contextMenu-item', 'text-toolbar', 'image-toolbar', 'page-toolbar',
+  'contextMenu-itemLabel', 'contextMenu-item', 'text-toolbar', 'image-toolbar', 'page-toolbar', 'text-toolbar-button', 'image-toolbar-button',
 ];
 const reportItemStyle = {
   height: '100%',

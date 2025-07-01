@@ -64,6 +64,7 @@ const TextToolbar = ({ activePageItem, onItemChange }) => {
       }}
     >
       <button
+        className="text-toolbar-button"
         onClick={handleBold}
         style={{
           backgroundColor: isBold() ? '#007bff' : 'transparent',
@@ -79,6 +80,7 @@ const TextToolbar = ({ activePageItem, onItemChange }) => {
         B
       </button>
       <button
+        className="text-toolbar-button"
         onClick={handleItalic}
         style={{
           backgroundColor: isItalic() ? '#007bff' : 'transparent',
