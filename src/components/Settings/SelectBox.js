@@ -30,9 +30,6 @@ const SelectBox = ({
           <button
             key={option.name}
             className={classNames(
-              'toolSection-listItem',
-              'd-flex a-center',
-              'f-width',
               { isSelected: option.name === value },
             )}
             onClick={handleSelection(option.name)}

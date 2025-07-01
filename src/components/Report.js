@@ -12,7 +12,6 @@ const Report = ({
   reportsAppTexts: newReportsAppTexts,
   ...props
 }) => {
-  console.log('report rendered test');
   const [viewMode, setViewMode] = useState(mode);
   const [lastScrollPosition, setLastScrollPosition] = useState(0);
 
