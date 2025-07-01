@@ -1,5 +1,5 @@
 export const mainWrapper = 'jfReport-col jfReport-pages p-relative';
-export const viewport = 'jfReport-viewport d-flex f-all o-auto p-absolute';
+export const viewport = 'jfReport-viewport d-flex f-all o-auto p-absolute mt-16';
 export const canvas = 'jfReport-canvas p-relative';
 export const page = 'jfReport-page js-reportPage';
 export const pageContainer = 'jfReport-pageContainer';
