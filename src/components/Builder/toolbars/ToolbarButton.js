@@ -8,6 +8,8 @@ import {
   IconTextCenter,
   IconListBullets,
   IconListNumbers,
+  IconBgImage,
+  IconBgScale,
 } from './icons';
 
 const getIcon = icon => {
@@ -26,6 +28,10 @@ const getIcon = icon => {
       return IconListBullets;
     case 'list-numbers':
       return IconListNumbers;
+    case 'bg-image':
+      return IconBgImage;
+    case 'bg-scale':
+      return IconBgScale;
     default:
       return null;
   }

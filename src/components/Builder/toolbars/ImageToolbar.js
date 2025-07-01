@@ -1,27 +1,28 @@
 /* eslint-disable sort-keys */
 import PropTypes from 'prop-types';
+import ToolbarButton from './ToolbarButton';
 
 const ImageToolbar = ({ activePageItem }) => {
   console.log('activePageItem', activePageItem);
 
   return (
-    <div
-      className="image-toolbar"
-      style={{
-        backgroundColor: 'yellow',
-        color: 'black',
-        display: 'flex',
-        justifyContent: 'space-between',
-        margin: '0 auto',
-        padding: '10px',
-        width: '70%',
-        position: 'relative',
-        zIndex: 1000,
-      }}
-    >
-      <div>ImageToolbar 1</div>
-      <div>ImageToolbar 2</div>
-      <div>ImageToolbar 3</div>
+    <div className="flex items-center justify-center">
+      <div className="relative z-4 flex items-center px-3 py-2 bg-white radius">
+        <button
+          className="w-8 h-8 flex items-center justify-center"
+          type="button"
+        >
+          <div className="w-4 h-4 bg-white radius border border-navy-100" />
+        </button>
+        <ToolbarButton
+          icon="bg-image"
+          onClick={console.log('bg image')}
+        />
+        <ToolbarButton
+          icon="bg-scale"
+          onClick={console.log('scale')}
+        />
+      </div>
     </div>
   );
 };
