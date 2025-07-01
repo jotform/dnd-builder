@@ -11,7 +11,6 @@ import {
 import PropTypes from 'prop-types';
 import * as classNames from '../../constants/classNames';
 import ContextMenu from './ContextMenu';
-import PageActions from './PageActions';
 import ZoomControls from './ZoomControls';
 import { useBuilderContext } from '../../utils/builderContext';
 import { usePropContext } from '../../utils/propContext';
@@ -46,14 +45,9 @@ const Scene = ({
   onItemRemove,
   onItemResize,
   onItemsMove,
-  onPageAdd,
   onPageChange,
-  onPageDuplicate,
-  onPageOrdersChange,
-  onPageRemove,
   pages,
 }) => {
-  const pageCount = pages.length;
   /* Builder Context */
   const {
     activeElement,
@@ -61,13 +55,11 @@ const Scene = ({
     isRightPanelOpen,
     setActiveElement,
     setContextMenuProps,
-    setEditedElement,
     setIsRightPanelOpen,
     zoom,
   } = useBuilderContext();
   const {
     acceptedItems,
-    disableInteraction,
     onAnEventTrigger,
     settings,
   } = usePropContext();
@@ -422,20 +414,6 @@ const Scene = ({
           {pages.map((page, index) => (
             // TODO: This part can be moved into a different component
             <Fragment key={page.id}>
-              <PageActions
-                disableInteraction={disableInteraction}
-                onAnEventTrigger={onAnEventTrigger}
-                onPageAdd={onPageAdd}
-                onPageDuplicate={onPageDuplicate}
-                onPageOrdersChange={onPageOrdersChange}
-                onPageRemove={onPageRemove}
-                order={page.order}
-                pageCount={pageCount}
-                pageID={page.id}
-                pages={pages}
-                setEditedElement={setEditedElement}
-                setIsRightPanelOpen={setIsRightPanelOpen}
-              />
               <div
                 key={`page_${page.id}`}
                 ref={refs[page.id]}
@@ -502,11 +480,7 @@ Scene.propTypes = {
   onItemRemove: PropTypes.func,
   onItemResize: PropTypes.func,
   onItemsMove: PropTypes.func,
-  onPageAdd: PropTypes.func,
   onPageChange: PropTypes.func,
-  onPageDuplicate: PropTypes.func,
-  onPageOrdersChange: PropTypes.func,
-  onPageRemove: PropTypes.func,
   pages: PropTypes.arrayOf(
     PropTypes.shape({}),
   ),
@@ -523,11 +497,7 @@ Scene.defaultProps = {
   onItemRemove: () => {},
   onItemResize: () => {},
   onItemsMove: () => {},
-  onPageAdd: () => {},
   onPageChange: () => {},
-  onPageDuplicate: () => {},
-  onPageOrdersChange: () => {},
-  onPageRemove: () => {},
   pages: [],
 };
 

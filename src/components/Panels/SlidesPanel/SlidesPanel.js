@@ -8,7 +8,6 @@ import Section from '../../Builder/Section';
 import { useBuilderContext } from '../../../utils/builderContext';
 import { usePropContext } from '../../../utils/propContext';
 import { arrayMove } from '../../../utils/functions';
-import SlidesPanelToggler from './SlidesPanelToggler';
 import ListWrapper from './ListWrapper';
 import Button from '../../Settings/Button';
 import { useClickOutsideListener, useTranslatedTexts } from '../../../utils/hooks';
@@ -87,9 +86,6 @@ const SlidesPanel = ({
       additionalClassName={panelAdditionalClassName}
       onAnimationEnd={onAnimationEnd}
     >
-      {isRightPanelOpen
-        ? null
-        : <SlidesPanelToggler onClosePanel={onClosePanel} />}
       {(isSlidesPanelOpen || (!isSlidesPanelOpen && !animationEnd)) && (
         <div className="toolItemWrapper f-height d-flex dir-col">
           <Section

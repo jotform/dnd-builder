@@ -20,7 +20,7 @@ import {
 } from '../../utils/scrollZoneFunctions';
 
 const exceptionalClassesForClickOutside = [
-  'contextMenu-itemLabel', 'contextMenu-item', 'text-toolbar', 'image-toolbar', 'page-toolbar', 'text-toolbar-button', 'image-toolbar-button', 'toolbar-button',
+  'contextMenu-itemLabel', 'contextMenu-item', 'text-toolbar', 'image-toolbar', 'page-toolbar', 'text-toolbar-button', 'image-toolbar-button', 'toolbar-button', 'toolbar-dropdown', 'toolbar-input',
 ];
 const reportItemStyle = {
   height: '100%',
@@ -226,14 +226,27 @@ const DraggableItem = ({
     }
   };
 
+  // Helper function to check if element or any parent has exceptional classes
+  const hasExceptionalClass = element => {
+    let currentElement = element;
+    while (currentElement && currentElement !== document.body) {
+      if (currentElement.classList) {
+        const hasClass = Array.from(currentElement.classList)
+          .some(xClass => exceptionalClassesForClickOutside.includes(xClass));
+        if (hasClass) return true;
+      }
+      currentElement = currentElement.parentElement;
+    }
+    return false;
+  };
+
   const onClickOutside = event => {
     // clickoutside should not work for scrollbar
     const viewPort = document.querySelector('.jfReport-viewport');
     const { clientHeight, offsetHeight } = viewPort;
     const headerHeight = window.innerHeight - offsetHeight;
     if (event.clientY - headerHeight >= clientHeight
-        || Array.from(event.target.classList)
-          .some(xClass => exceptionalClassesForClickOutside.includes(xClass))) {
+        || hasExceptionalClass(event.target)) {
       return;
     }
     setIsRightPanelOpen(false);

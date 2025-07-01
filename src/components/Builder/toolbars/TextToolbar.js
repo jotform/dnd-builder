@@ -1,11 +1,69 @@
+/* eslint-disable max-len */
 /* eslint-disable sort-keys */
 import PropTypes from 'prop-types';
-import ToolbarDropdown from './ToolbarDropdown';
+import { useState, useEffect } from 'react';
 import ToolbarButton from './ToolbarButton';
-import ToolbarInput from './ToolbarInput';
+import ToolbarDropdown from './ToolbarDropdown';
+
+const FONT_FAMILY_OPTIONS = [
+  'Abril Fatface',
+  'Arial',
+  'Arial Black',
+  'Bevan',
+  'Bitter',
+  'Circular',
+  'Comic Sans MS',
+  'Courier New',
+  'Diplomata',
+  'Fredoka One',
+  'Galada',
+  'Georgia',
+  'Helvetica',
+  'Impact',
+  'Lobster',
+  'Montserrat',
+  'Open Sans',
+  'PT Serif',
+  'Playball',
+  'Roboto',
+  'Sail',
+  'Tahoma',
+  'Times New Roman',
+  'Trebuchet MS',
+  'Ubuntu',
+  'Verdana',
+];
 
 const TextToolbar = ({ activePageItem, onItemChange }) => {
   const textValue = activePageItem?.value || activePageItem?.content || '';
+
+  const [fontSize, setFontSize] = useState(16);
+
+  // Parse font-size from HTML
+  const getFontSizeFromHTML = htmlString => {
+    const fontSizeMatch = htmlString.match(/font-size:\s*(\d+)px/);
+    return fontSizeMatch ? parseInt(fontSizeMatch[1], 10) : 22;
+  };
+
+  const setFontSizeInHTML = (htmlString, newFontSize) => {
+    const cleanedHTML = htmlString.replace(/style="[^"]*font-size:[^;"]*;?[^"]*"/g, match => {
+      return match.replace(/font-size:[^;"]*;?/g, '').replace(/style=""/g, '');
+    });
+
+    if (!cleanedHTML.includes('style=')) {
+      return `<span style="font-size: ${newFontSize}px">${cleanedHTML}</span>`;
+    }
+
+    const newHTML = cleanedHTML.replace(/style="([^"]*)"/, `style="$1; font-size: ${newFontSize}px"`);
+    return newHTML;
+  };
+
+  useEffect(() => {
+    if (activePageItem && textValue) {
+      const currentFontSize = getFontSizeFromHTML(textValue);
+      setFontSize(currentFontSize);
+    }
+  }, [activePageItem]);
 
   const isBold = () => {
     return textValue.includes('<strong>') || textValue.includes('<b>');
@@ -16,17 +74,12 @@ const TextToolbar = ({ activePageItem, onItemChange }) => {
   };
 
   const handleBold = () => {
-    console.log('bold clicked', textValue);
     let newValue;
     if (isBold()) {
-      // Remove bold tags
       newValue = textValue.replace(/<\/?strong>/g, '');
     } else {
-      // Add bold tags
       newValue = `<strong>${textValue}</strong>`;
     }
-
-    console.log('newValue', newValue);
 
     onItemChange(
       { id: activePageItem.id },
@@ -37,10 +90,8 @@ const TextToolbar = ({ activePageItem, onItemChange }) => {
   const handleItalic = () => {
     let newValue;
     if (isItalic()) {
-      // Remove italic tags
       newValue = textValue.replace(/<\/?em>/g, '');
     } else {
-      // Add italic tags
       newValue = `<em>${textValue}</em>`;
     }
 
@@ -50,15 +101,46 @@ const TextToolbar = ({ activePageItem, onItemChange }) => {
     );
   };
 
+  const handleUnderline = () => {
+    // console.log('underline clicked', textValue);
+  };
+
+  const handleFontsizeChange = value => {
+    const newFontSize = parseInt(value, 10);
+    setFontSize(newFontSize);
+    if (!Number.isNaN(newFontSize) && newFontSize > 0) {
+      const newValue = setFontSizeInHTML(textValue, newFontSize);
+      onItemChange(
+        { id: activePageItem.id },
+        { value: newValue },
+      );
+    }
+  };
+
+  const handleFontFamilyChange = value => {
+    onItemChange(
+      { id: activePageItem.id },
+      { fontFamily: value },
+    );
+  };
+
   return (
     <div className="mt-4 flex items-center justify-center">
       <div
         className="relative z-4 flex items-center gap-3 px-2 py-2 bg-white  border border-navy-50
        radius"
       >
-        <ToolbarDropdown />
+        <ToolbarDropdown
+          onChange={handleFontFamilyChange}
+          options={FONT_FAMILY_OPTIONS}
+          value={activePageItem?.fontFamily || 'Circular'}
+        />
         <div className="h-6 w-px bg-navy-50" />
-        <ToolbarInput />
+        <ToolbarDropdown
+          onChange={handleFontsizeChange}
+          options={['12', '14', '16', '18', '20', '22', '24', '26', '28', '30']}
+          value={fontSize}
+        />
         <div className="h-6 w-px bg-navy-50" />
         <div className="flex items-center justify-center">
           <ToolbarButton
@@ -71,7 +153,7 @@ const TextToolbar = ({ activePageItem, onItemChange }) => {
           />
           <ToolbarButton
             icon="underline"
-            onClick={console.log('underline')}
+            onClick={handleUnderline}
           />
         </div>
         <div className="h-6 w-px bg-navy-50" />
@@ -95,6 +177,7 @@ TextToolbar.propTypes = {
   activePageItem: PropTypes.shape({
     content: PropTypes.string,
     id: PropTypes.string,
+    fontFamily: PropTypes.string,
     value: PropTypes.string,
   }),
   onItemChange: PropTypes.func,

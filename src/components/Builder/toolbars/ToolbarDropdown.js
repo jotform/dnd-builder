@@ -1,13 +1,22 @@
 /* eslint-disable max-len */
-const ToolbarDropdown = () => {
+import PropTypes from 'prop-types';
+
+const ToolbarDropdown = ({ onChange, options, value }) => {
   return (
-    <div className="flex border radius outline-2 outline-offset-0 hover:duration-300 focus:duration-300 duration-all-colors color-navy-700 bg-white hover:shadow-xs border-navy-100 focus-within:border-blue-500 outline-transparent hover:border-navy-300 focus-within:outline-blue-200 focus-within:outline-opacity-50 magnet-select-container relative h-8">
-      <select className="appearance-none bg-transparent grow-1 outline-0 w-full focus-visible-none border-0 text-sm radius placeholder-navy-200 magnet-select truncate pl-3 pr-11 z-1 relative">
-        <option value="heading">Heading</option>
-        <option value="paragraph">Paragraph</option>
-        <option value="list">List</option>
-        <option value="link">Link</option>
-        <option value="image">Image</option>
+    <div className="flex border radius outline-2 outline-offset-0 hover:duration-300 focus:duration-300 duration-all-colors color-navy-700 bg-white hover:shadow-xs border-navy-100 focus-within:border-blue-500 outline-transparent hover:border-navy-300 focus-within:outline-blue-200 focus-within:outline-opacity-50 magnet-select-container relative h-8 toolbar-dropdown">
+      <select
+        className="appearance-none bg-transparent grow-1 outline-0 w-full focus-visible-none border-0 text-sm radius placeholder-navy-200 magnet-select truncate pl-3 pr-11 z-1 relative"
+        onChange={e => onChange(e.target.value)}
+        value={value}
+      >
+        {options.map(option => (
+          <option
+            key={option}
+            value={option}
+          >
+            {option}
+          </option>
+        ))}
       </select>
       <span className="absolute right-0 top-0 h-full flex shrink-0 items-center gap-3 text-sm radius-r color-navy-300 pr-3">
         <svg
@@ -25,6 +34,12 @@ const ToolbarDropdown = () => {
       </span>
     </div>
   );
+};
+
+ToolbarDropdown.propTypes = {
+  onChange: PropTypes.func.isRequired,
+  options: PropTypes.array.isRequired,
+  value: PropTypes.string.isRequired,
 };
 
 export default ToolbarDropdown;

@@ -1,11 +1,10 @@
 /* eslint-disable max-len */
 /* eslint-disable react/jsx-sort-props */
 import {
-  useCallback, useEffect, useMemo, useState,
+  useCallback, useEffect, useMemo, useRef, useState,
 } from 'react';
 import PropTypes from 'prop-types';
 import domPurify from 'dompurify';
-import { useBuilderContext } from '../../utils/builderContext';
 
 const TextEditor = ({
   content,
@@ -14,9 +13,10 @@ const TextEditor = ({
   isSelected,
   placeholder,
 }) => {
+  const textEditorRef = useRef(null);
   const [_content, setContent] = useState(domPurify.sanitize(content));
 
-  const { isTextEditorOpen, setIsTextEditorOpen } = useBuilderContext();
+  const [isTextEditorOpen, setIsTextEditorOpen] = useState(false);
 
   const onClick = useCallback(() => {
     if (isSelected && !isLocked) {
@@ -36,13 +36,17 @@ const TextEditor = ({
 
   useEffect(() => {
     if (isTextEditorOpen && !isSelected) {
-      handleSave(_content);
+      if (textEditorRef.current) {
+        const textEditorContent = textEditorRef.current.innerHTML;
+        handleSave(textEditorContent);
+      }
       setIsTextEditorOpen(false);
     }
   }, [isSelected, isTextEditorOpen]);
 
   return (
     <div
+      ref={textEditorRef}
       dangerouslySetInnerHTML={{
         __html: isNotEmpty ? _content : placeholder,
       }}
@@ -58,8 +62,8 @@ const TextEditor = ({
         }
         if (e.key === 'Enter') {
           if (handleSave) {
-            setContent(domPurify.sanitize(e.target.innerHTML));
-            handleSave(domPurify.sanitize(e.target.innerHTML));
+            const textEditorContent = textEditorRef.current.innerHTML;
+            handleSave(textEditorContent);
             setIsTextEditorOpen(false);
           }
           setIsTextEditorOpen(false);
@@ -67,7 +71,6 @@ const TextEditor = ({
         if ((e.key === 'Backspace' || e.key === 'ArrowLeft' || e.key === 'ArrowRight') && isTextEditorOpen && isSelected && !isLocked) {
           e.stopPropagation();
         }
-        // setContent(domPurify.sanitize(e.target.innerHTML));
       }}
     />
   );

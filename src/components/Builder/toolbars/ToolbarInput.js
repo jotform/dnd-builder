@@ -1,12 +1,15 @@
 /* eslint-disable max-len */
-const ToolbarInput = () => {
+import PropTypes from 'prop-types';
+
+const ToolbarInput = ({ onChange, value }) => {
   return (
-    <div className="flex border radius outline-2 outline-offset-0 hover:duration-300 focus:duration-300 duration-all-colors color-navy-700 bg-white hover:shadow-xs border-navy-100 focus-within:border-blue-500 outline-transparent hover:border-navy-300 focus-within:outline-blue-200 focus-within:outline-opacity-50 magnet-input-container h-8 max-w-24">
+    <div className="flex border radius outline-2 outline-offset-0 hover:duration-300 focus:duration-300 duration-all-colors color-navy-700 bg-white hover:shadow-xs border-navy-100 focus-within:border-blue-500 outline-transparent hover:border-navy-300 focus-within:outline-blue-200 focus-within:outline-opacity-50 magnet-input-container h-8 max-w-24 toolbar-input">
       <input
         className="appearance-none bg-transparent grow-1 outline-0 w-full focus-visible-none border-0 text-sm radius placeholder-navy-200 magnet-input h-full color-current px-3"
+        onChange={onChange}
         step="1"
         type="number"
-        value=""
+        value={value}
       />
       <div className="flex flex-col w-8 radius-r overflow-hidden">
         <button
@@ -51,6 +54,11 @@ const ToolbarInput = () => {
     </div>
 
   );
+};
+
+ToolbarInput.propTypes = {
+  onChange: PropTypes.func.isRequired,
+  value: PropTypes.string.isRequired,
 };
 
 export default ToolbarInput;
