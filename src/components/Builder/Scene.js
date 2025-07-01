@@ -33,6 +33,7 @@ import DraggableItemLayer from '../DraggableItem/DraggableItemLayer';
 import generateId from '../../utils/generateId';
 import { EVENT_IGNORED_ROLES } from '../../constants/eventIgnoredRoles';
 import ToolbarRenderer from './toolbars';
+import BottomToolbar from './toolbars/BottomToolbar';
 
 const Scene = ({
   additionalPageItems,
@@ -46,6 +47,8 @@ const Scene = ({
   onItemResize,
   onItemsMove,
   onPageChange,
+  onAIGenerate,
+  isAiGenerationLoading,
   pages,
 }) => {
   /* Builder Context */
@@ -443,6 +446,7 @@ const Scene = ({
               </div>
             </Fragment>
           ))}
+          <BottomToolbar onAIGenerate={onAIGenerate} isAiGenerationLoading={isAiGenerationLoading} />
         </div>
       </div>
       <ZoomControls
@@ -489,15 +493,15 @@ Scene.propTypes = {
 Scene.defaultProps = {
   additionalPageItems: [],
   hashCode: '',
-  itemAccessor: () => {},
+  itemAccessor: () => { },
   lastScrollPosition: 0,
-  onItemAdd: () => {},
-  onItemChange: () => {},
-  onItemMove: () => {},
-  onItemRemove: () => {},
-  onItemResize: () => {},
-  onItemsMove: () => {},
-  onPageChange: () => {},
+  onItemAdd: () => { },
+  onItemChange: () => { },
+  onItemMove: () => { },
+  onItemRemove: () => { },
+  onItemResize: () => { },
+  onItemsMove: () => { },
+  onPageChange: () => { },
   pages: [],
 };
 

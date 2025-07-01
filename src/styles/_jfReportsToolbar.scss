@@ -1,0 +1,123 @@
+.freeCanvas {
+  &-bottomToolbar {
+    position: fixed;
+    bottom: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    display: flex;
+    gap: 12px;
+    background-color: #fff;
+    padding: 8px 12px;
+    border: 1px solid #E3E3F5;
+    border-radius: 8px;
+    box-shadow: 0px 2px 8px 0px #252D5B0A;
+    box-shadow: 0px 16px 24px 0px #545F6F29;
+
+    &Item {
+      border-radius: 4px;
+      color: #0A1551;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 4px;
+      min-width: 28px;
+      height: 28px;
+      border: none;
+      background: none;
+      cursor: pointer;
+      transition: all 0.2s;
+      max-width: 28px;
+      max-height: 28px;
+
+      svg {
+        width: 20px;
+        height: 20px;
+      }
+
+      &FormFields {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        gap: 4px;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 16px;
+
+        svg {
+          width: 20px;
+          height: 20px;
+        }
+      }
+    }
+
+    &ItemSelected {
+      background-color: #0075E3 !important;
+      box-shadow: 0 0 0 2px rgba(0, 117, 227, 0.5);
+      color: #fff;
+    }
+  }
+
+  // &-aiPanel {
+  // }
+
+  &-aiInput {
+    flex: 1;
+    gap: 4px;
+    padding: 8px;
+    background-color: #F3F3FE;
+    border-radius: 4px;
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 400;
+    outline: none;
+    min-width: 258px;
+    padding-left: 32px;
+    background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 14 14' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4.50977 4.44146C4.71891 4.51885 4.71891 4.81465 4.50977 4.89203L4.20197 5.00593C3.76362 5.16814 3.41801 5.51374 3.25581 5.95209L3.14191 6.2599C3.06453 6.46903 2.76873 6.46903 2.69134 6.2599L2.57744 5.95209C2.41524 5.51374 2.06963 5.16814 1.63129 5.00593L1.32348 4.89203C1.11434 4.81465 1.11434 4.51885 1.32348 4.44146L1.63129 4.32756C2.06963 4.16536 2.41524 3.81975 2.57744 3.38141L2.69134 3.0736C2.76873 2.86446 3.06453 2.86446 3.14191 3.0736L3.25581 3.38141C3.41801 3.81975 3.76362 4.16536 4.20197 4.32756L4.50977 4.44146Z' fill='%230099FF'/%3E%3Cpath d='M10.1863 8.88268C10.6046 9.03745 10.6046 9.62905 10.1863 9.78383L9.57068 10.0116C8.69399 10.336 8.00278 11.0272 7.67837 11.9039L7.45057 12.5195C7.2958 12.9378 6.7042 12.9378 6.54943 12.5195L6.32163 11.9039C5.99722 11.0272 5.30601 10.336 4.42932 10.0116L3.8137 9.78383C3.39543 9.62905 3.39543 9.03745 3.8137 8.88268L4.42932 8.65488C5.30601 8.33048 5.99722 7.63926 6.32163 6.76257L6.54943 6.14696C6.7042 5.72868 7.2958 5.72868 7.45057 6.14696L7.67837 6.76257C8.00278 7.63926 8.69399 8.33048 9.57068 8.65488L10.1863 8.88268Z' fill='%23FF6100'/%3E%3Cpath d='M10.1996 1.37588C10.3028 1.09704 10.6972 1.09704 10.8003 1.37588L10.9522 1.7863C11.1685 2.37075 11.6293 2.83156 12.2137 3.04783L12.6242 3.1997C12.903 3.30288 12.903 3.69728 12.6242 3.80046L12.2137 3.95233C11.6293 4.1686 11.1685 4.62941 10.9522 5.21387L10.8003 5.62428C10.6972 5.90313 10.3028 5.90313 10.1996 5.62428L10.0477 5.21387C9.83144 4.62941 9.37063 4.1686 8.78617 3.95233L8.37576 3.80046C8.09691 3.69728 8.09691 3.30288 8.37576 3.1997L8.78617 3.04783C9.37063 2.83156 9.83144 2.37075 10.0477 1.7863L10.1996 1.37588Z' fill='%23FFB629'/%3E%3C/svg%3E%0A");
+    background-repeat: no-repeat;
+    background-position: 8px center;
+
+    &:focus {
+      border-color: #0075E3;
+      box-shadow: 0 0 0 2px rgba(0, 117, 227, 0.1);
+    }
+
+    &:disabled {
+      background-color: #f5f5f5;
+      cursor: not-allowed;
+    }
+
+    &::placeholder {
+      color: #6C73A8;
+    }
+  }
+
+  &-aiButton {
+    padding: 8px 16px;
+    background-color: #7923DD !important;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 500;
+    transition: background-color 0.2s;
+
+    &:hover:not(:disabled) {
+      background-color: #7923DD;
+    }
+
+    &:disabled {
+      background-color: #ccc !important;
+      cursor: not-allowed;
+      opacity: 0.6;
+    }
+  }
+
+  &-aiLoadingText {
+    margin-top: 8px;
+    color: #666;
+    font-size: 14px;
+    text-align: center;
+  }
+}

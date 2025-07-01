@@ -36,6 +36,8 @@ const Builder = ({
   onPageRemove,
   onRightPanelsToggled,
   onSettingChange,
+  onAIGenerate,
+  isAiGenerationLoading,
   pages,
   settings,
   theme,
@@ -43,6 +45,8 @@ const Builder = ({
   ...otherProps
 }) => {
   const hashCode = objectHash(otherProps);
+
+  console.log('leftPanelConfig :>> ', leftPanelConfig);
 
   return (
     <StrictMode>
@@ -80,6 +84,8 @@ const Builder = ({
                 onPageDuplicate={onPageDuplicate}
                 onPageOrdersChange={onPageOrdersChange}
                 onPageRemove={onPageRemove}
+                onAIGenerate={onAIGenerate}
+                isAiGenerationLoading={isAiGenerationLoading}
                 pages={pages}
               />
             </DndWrapper>
