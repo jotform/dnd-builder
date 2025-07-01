@@ -38,7 +38,7 @@ const ToolbarButton = ({ icon = 'bold' }) => {
       className="magnet-button inline-flex shrink-0 justify-center items-center font-medium duration-300 outline-2 outline-transparent outline-offset-0 focus:outline-opacity-50 h-8 px-2.5 radius border-0 cursor-pointer bg-transparent color-navy-500 hover:bg-navy-25 focus:outline-navy-50 toolbar-button"
       type="button"
     >
-      {IconComponent}
+      {IconComponent && <IconComponent />}
     </button>
   );
 };
