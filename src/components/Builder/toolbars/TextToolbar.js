@@ -1,5 +1,8 @@
 /* eslint-disable sort-keys */
 import PropTypes from 'prop-types';
+import ToolbarDropdown from './ToolbarDropdown';
+import ToolbarButton from './ToolbarButton';
+import ToolbarInput from './ToolbarInput';
 
 const TextToolbar = ({ activePageItem, onItemChange }) => {
   const textValue = activePageItem?.value || activePageItem?.content || '';
@@ -48,53 +51,30 @@ const TextToolbar = ({ activePageItem, onItemChange }) => {
   };
 
   return (
-    <div
-      className="text-toolbar"
-      style={{
-        backgroundColor: '#f5f5f5',
-        border: '1px solid #ddd',
-        borderRadius: '4px',
-        display: 'flex',
-        gap: '8px',
-        margin: '0 auto',
-        padding: '8px',
-        width: 'fit-content',
-        position: 'relative',
-        zIndex: 1000,
-      }}
-    >
-      <button
-        className="text-toolbar-button"
-        onClick={handleBold}
-        style={{
-          backgroundColor: isBold() ? '#007bff' : 'transparent',
-          border: '1px solid #ccc',
-          borderRadius: '3px',
-          color: isBold() ? 'white' : '#333',
-          cursor: 'pointer',
-          fontWeight: 'bold',
-          padding: '6px 12px',
-        }}
-        type="button"
-      >
-        B
-      </button>
-      <button
-        className="text-toolbar-button"
-        onClick={handleItalic}
-        style={{
-          backgroundColor: isItalic() ? '#007bff' : 'transparent',
-          border: '1px solid #ccc',
-          borderRadius: '3px',
-          color: isItalic() ? 'white' : '#333',
-          cursor: 'pointer',
-          fontStyle: 'italic',
-          padding: '6px 12px',
-        }}
-        type="button"
-      >
-        I
-      </button>
+    <div className="flex items-center justify-center">
+      <div className="relative z-4 flex items-center gap-3 p-3 bg-white radius">
+        <ToolbarDropdown />
+        <div className="h-6 w-px bg-navy-50" />
+        <ToolbarInput />
+        <div className="h-6 w-px bg-navy-50" />
+        <div className="flex items-center justify-center">
+          <ToolbarButton icon="bold" onClick={handleBold} />
+          <ToolbarButton icon="italic" onClick={handleItalic} />
+          <ToolbarButton icon="underline" onClick={console.log('underline')} />
+        </div>
+        <div className="h-6 w-px bg-navy-50" />
+        {/* link */}
+        <div>
+          <ToolbarButton icon="link" />
+        </div>
+        <div className="h-6 w-px bg-navy-50" />
+        <div>
+          <ToolbarButton icon="text-center" />
+        </div>
+        <div className="h-6 w-px bg-navy-50" />
+        <ToolbarButton icon="list-bullets" />
+        <ToolbarButton icon="list-numbers" />
+      </div>
     </div>
   );
 };
