@@ -5,7 +5,7 @@ const PageToolbar = ({ page }) => {
 
   return (
     <div
-      className="toooolbar"
+      className="page-toolbar"
       style={{
         backgroundColor: 'red',
         display: 'flex',

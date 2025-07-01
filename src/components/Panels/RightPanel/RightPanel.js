@@ -22,6 +22,7 @@ import RightPanelToggler from './RightPanelToggler';
 
 const exceptionalClasses = [
   'pageSettingSideBtn', 'paneClose', 'paneToggler', 'forZoom', 'jSheetContextMenu',
+  'text-toolbar', 'image-toolbar',
 ];
 
 const RightPanel = ({

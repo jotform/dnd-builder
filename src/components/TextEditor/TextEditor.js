@@ -1,7 +1,9 @@
-import { useCallback, useMemo, useState } from 'react';
+/* eslint-disable react/jsx-sort-props */
+import {
+  useCallback, useEffect, useMemo, useState,
+} from 'react';
 import PropTypes from 'prop-types';
 import domPurify from 'dompurify';
-import QuillEditor from './QuillEditor';
 import { useBuilderContext } from '../../utils/builderContext';
 
 const TextEditor = ({
@@ -27,22 +29,36 @@ const TextEditor = ({
     return !!el.innerText;
   }, [_content]);
 
-  return isSelected && isTextEditorOpen ? (
-    <QuillEditor
-      content={_content}
-      handleSave={handleSave}
-      placeholder={placeholder}
-      setContent={setContent}
-      setIsTextEditorOpen={setIsTextEditorOpen}
-    />
-  ) : (
+  useEffect(() => {
+    if (isTextEditorOpen && !isSelected) {
+      handleSave(_content);
+      setIsTextEditorOpen(false);
+    }
+  }, [isSelected, isTextEditorOpen]);
+
+  return (
     <div
-      className={`f-all ql-editor${isNotEmpty ? '' : ' isEmptyTextElement'}`}
       dangerouslySetInnerHTML={{
         __html: isNotEmpty ? _content : placeholder,
       }}
+      className={`f-all ql-editor${isNotEmpty ? '' : ' isEmptyTextElement'}`}
+      style={{
+        minHeight: '20px',
+      }}
+      contentEditable={isTextEditorOpen && isSelected && !isLocked}
       onClick={onClick}
-      onKeyDown={() => {}}
+      onKeyDown={e => {
+        if (e.key === 'Escape') {
+          setIsTextEditorOpen(false);
+        }
+        if (e.key === 'Enter' && e.ctrlKey) {
+          if (handleSave) {
+            handleSave(_content);
+          }
+          setIsTextEditorOpen(false);
+        }
+        setContent(domPurify.sanitize(e.target.innerHTML));
+      }}
     />
   );
 };

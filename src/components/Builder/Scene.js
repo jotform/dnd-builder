@@ -407,6 +407,7 @@ const Scene = ({
         pages={pages}
       />
       <ToolbarRenderer
+        onItemChange={onItemChange}
         pages={pages}
       />
       <div

@@ -18,7 +18,9 @@ import {
   removeEventListenerForSidebar,
 } from '../../utils/scrollZoneFunctions';
 
-const exceptionalClassesForClickOutside = ['contextMenu-itemLabel', 'contextMenu-item'];
+const exceptionalClassesForClickOutside = [
+  'contextMenu-itemLabel', 'contextMenu-item', 'text-toolbar', 'image-toolbar', 'page-toolbar',
+];
 const reportItemStyle = {
   height: '100%',
   width: '100%',

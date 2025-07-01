@@ -1,3 +1,4 @@
+/* eslint-disable sort-keys */
 import PropTypes from 'prop-types';
 
 const ImageToolbar = ({ activePageItem }) => {
@@ -5,7 +6,7 @@ const ImageToolbar = ({ activePageItem }) => {
 
   return (
     <div
-      className="toooolbar"
+      className="image-toolbar"
       style={{
         backgroundColor: 'yellow',
         color: 'black',
@@ -14,6 +15,8 @@ const ImageToolbar = ({ activePageItem }) => {
         margin: '0 auto',
         padding: '10px',
         width: '70%',
+        position: 'relative',
+        zIndex: 1000,
       }}
     >
       <div>ImageToolbar 1</div>

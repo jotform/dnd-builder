@@ -4,7 +4,7 @@ import PageToolbar from './PageToolbar';
 import TextToolbar from './TextToolbar';
 import ImageToolbar from './ImageToolbar';
 
-const ToolbarRenderer = ({ pages }) => {
+const ToolbarRenderer = ({ onItemChange, pages }) => {
   const {
     activeElement,
   } = useBuilderContext();
@@ -26,19 +26,31 @@ const ToolbarRenderer = ({ pages }) => {
 
   switch (true) {
     case activePageItemType === 'text':
-      return <TextToolbar activePageItem={activePageItem} />;
+      return (
+        <TextToolbar
+          activePageItem={activePageItem}
+          onItemChange={onItemChange}
+        />
+      );
     case activePageItemType === 'image':
-      return <ImageToolbar activePageItem={activePageItem} />;
+      return (
+        <ImageToolbar
+          activePageItem={activePageItem}
+          onItemChange={onItemChange}
+        />
+      );
     default:
       return <PageToolbar page={page} />;
   }
 };
 
 ToolbarRenderer.propTypes = {
+  onItemChange: PropTypes.func,
   pages: PropTypes.arrayOf(PropTypes.shape({})),
 };
 
 ToolbarRenderer.defaultProps = {
+  onItemChange: () => {},
   pages: [],
 };
 
