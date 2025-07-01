@@ -71,9 +71,6 @@ const PageActions = ({
       className="jfReport-pageInfo d-flex j-center"
       id={`pageActions-id-${order}`}
     >
-      <div className="pageCounter p-relative d-flex">
-        {`${order}`}
-      </div>
       <div className="floatingController forPageAction">
         <div className="floatingController-container hasGroup">
           <button

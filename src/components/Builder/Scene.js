@@ -12,7 +12,6 @@ import PropTypes from 'prop-types';
 import * as classNames from '../../constants/classNames';
 import ContextMenu from './ContextMenu';
 import PageActions from './PageActions';
-import PageAdder from './PageAdder';
 import ZoomControls from './ZoomControls';
 import { useBuilderContext } from '../../utils/builderContext';
 import { usePropContext } from '../../utils/propContext';
@@ -34,6 +33,7 @@ import { useEventListener } from '../../utils/hooks';
 import DraggableItemLayer from '../DraggableItem/DraggableItemLayer';
 import generateId from '../../utils/generateId';
 import { EVENT_IGNORED_ROLES } from '../../constants/eventIgnoredRoles';
+import ToolbarRenderer from './toolbars';
 
 const Scene = ({
   additionalPageItems,
@@ -406,7 +406,9 @@ const Scene = ({
         pageRefs={refs}
         pages={pages}
       />
-
+      <ToolbarRenderer
+        pages={pages}
+      />
       <div
         ref={viewPortRef}
         className={classNames.viewport}
@@ -462,10 +464,6 @@ const Scene = ({
               </div>
             </Fragment>
           ))}
-          <PageAdder
-            onPageAdd={onPageAdd}
-            pageCount={pageCount}
-          />
         </div>
       </div>
       <ZoomControls
