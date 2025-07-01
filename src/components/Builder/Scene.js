@@ -406,10 +406,6 @@ const Scene = ({
         pageRefs={refs}
         pages={pages}
       />
-      <ToolbarRenderer
-        onItemChange={onItemChange}
-        pages={pages}
-      />
       <div
         ref={viewPortRef}
         className={classNames.viewport}
@@ -419,6 +415,10 @@ const Scene = ({
         <div
           className={classNames.canvas}
         >
+          <ToolbarRenderer
+            onItemChange={onItemChange}
+            pages={pages}
+          />
           {pages.map((page, index) => (
             // TODO: This part can be moved into a different component
             <Fragment key={page.id}>

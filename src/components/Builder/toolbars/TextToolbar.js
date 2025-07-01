@@ -51,7 +51,7 @@ const TextToolbar = ({ activePageItem, onItemChange }) => {
   };
 
   return (
-    <div className="flex items-center justify-center">
+    <div className="mt-4 flex items-center justify-center">
       <div className="relative z-4 flex items-center gap-3 px-2 py-2 bg-white radius">
         <ToolbarDropdown />
         <div className="h-6 w-px bg-navy-50" />
