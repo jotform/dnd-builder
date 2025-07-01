@@ -10,6 +10,8 @@ import {
   IconListNumbers,
   IconBgImage,
   IconBgScale,
+  IconDuplicate,
+  IconPlus,
 } from './icons';
 
 const getIcon = icon => {
@@ -32,6 +34,10 @@ const getIcon = icon => {
       return IconBgImage;
     case 'bg-scale':
       return IconBgScale;
+    case 'duplicate':
+      return IconDuplicate;
+    case 'plus':
+      return IconPlus;
     default:
       return null;
   }
