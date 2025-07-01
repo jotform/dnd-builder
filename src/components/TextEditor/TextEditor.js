@@ -56,16 +56,18 @@ const TextEditor = ({
         if (e.key === 'Escape') {
           setIsTextEditorOpen(false);
         }
-        if (e.key === 'Enter' && e.ctrlKey) {
+        if (e.key === 'Enter') {
           if (handleSave) {
-            handleSave(_content);
+            setContent(domPurify.sanitize(e.target.innerHTML));
+            handleSave(domPurify.sanitize(e.target.innerHTML));
+            setIsTextEditorOpen(false);
           }
           setIsTextEditorOpen(false);
         }
         if ((e.key === 'Backspace' || e.key === 'ArrowLeft' || e.key === 'ArrowRight') && isTextEditorOpen && isSelected && !isLocked) {
           e.stopPropagation();
         }
-        setContent(domPurify.sanitize(e.target.innerHTML));
+        // setContent(domPurify.sanitize(e.target.innerHTML));
       }}
     />
   );
