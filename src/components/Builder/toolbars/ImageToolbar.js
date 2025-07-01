@@ -6,8 +6,11 @@ const ImageToolbar = ({ activePageItem }) => {
   console.log('activePageItem', activePageItem);
 
   return (
-    <div className="flex items-center justify-center">
-      <div className="relative z-4 flex items-center px-3 py-2 bg-white radius">
+    <div className="mt-4 flex items-center justify-center">
+      <div
+        className="relative z-4 flex items-center px-3 py-2 bg-white border border-navy-50
+      radius"
+      >
         <button
           className="w-8 h-8 flex items-center justify-center"
           type="button"

@@ -52,15 +52,27 @@ const TextToolbar = ({ activePageItem, onItemChange }) => {
 
   return (
     <div className="mt-4 flex items-center justify-center">
-      <div className="relative z-4 flex items-center gap-3 px-2 py-2 bg-white radius">
+      <div
+        className="relative z-4 flex items-center gap-3 px-2 py-2 bg-white  border border-navy-50
+       radius"
+      >
         <ToolbarDropdown />
         <div className="h-6 w-px bg-navy-50" />
         <ToolbarInput />
         <div className="h-6 w-px bg-navy-50" />
         <div className="flex items-center justify-center">
-          <ToolbarButton icon="bold" onClick={handleBold} />
-          <ToolbarButton icon="italic" onClick={handleItalic} />
-          <ToolbarButton icon="underline" onClick={console.log('underline')} />
+          <ToolbarButton
+            icon="bold"
+            onClick={handleBold}
+          />
+          <ToolbarButton
+            icon="italic"
+            onClick={handleItalic}
+          />
+          <ToolbarButton
+            icon="underline"
+            onClick={console.log('underline')}
+          />
         </div>
         <div className="h-6 w-px bg-navy-50" />
         {/* link */}
