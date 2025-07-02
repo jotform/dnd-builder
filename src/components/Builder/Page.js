@@ -17,7 +17,8 @@ import {
   getCorrectDroppedOffsetValue,
 } from '../../utils/functions';
 import * as classNames from '../../constants/classNames';
-import animationVideoSrc from '../../assets/animation-hack.mp4';
+import LoaderStars from '../LoaderStars';
+import ProcessMessage from '../ProcessMessage';
 
 const emptyObject = {};
 
@@ -137,17 +138,18 @@ const Page = ({
         className={classNames.pageContainer}
         style={{
           background: (gradientBackground && reportBackgroundGradientEnabled === 'on') ? gradientBackground : bgColor,
+          overflow: 'hidden',
           ...style,
         }}
       >
         {isAiGenerationLoading ? (
-          <div className="flex justify-center items-center w-full h-full">
-            <video
-              autoPlay
-              loop
-              muted
-              src={animationVideoSrc}
-            />
+          <div className="ai-loading-shimmer-wave flex justify-center items-center w-full h-full bg-white overflow-hidden">
+            <div className="flex-1 flex flex-col justify-center items-center gap-36">
+              <div className="shrink-0">
+                <LoaderStars />
+              </div>
+              <ProcessMessage />
+            </div>
           </div>
         ) : (
 
