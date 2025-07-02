@@ -6,7 +6,7 @@ import ToolbarTextInput from './ToolbarTextInput';
 const DocumentResizeModal = ({
   buttonRef, onClose, onSettingChange, settings,
 }) => {
-  const [position, setPosition] = useState({ left: 0, top: 0, width: 0 });
+  const [position, setPosition] = useState({ top: 0, width: 0 });
   const modalRef = useRef(null);
   const [width, setWidth] = useState(settings.reportLayoutWidth);
   const [height, setHeight] = useState(settings.reportLayoutHeight);
@@ -20,8 +20,6 @@ const DocumentResizeModal = ({
         const buttonRect = button.getBoundingClientRect();
 
         setPosition({
-          left: -8,
-          right: -8,
           top: buttonRect.bottom - containerRect.top + 8,
         });
       } else {
@@ -67,9 +65,9 @@ const DocumentResizeModal = ({
       className="absolute bg-white border border-navy-50 outline outline-offset-0 outline-blue-500
       radius"
       style={{
-        left: position.left,
+        left: '-50%',
+        right: '-50%',
         minWidth: '400px',
-        right: position.right,
         top: position.top,
       }}
     >
