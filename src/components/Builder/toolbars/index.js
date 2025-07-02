@@ -3,6 +3,7 @@ import { useBuilderContext } from '../../../utils/builderContext';
 import PageToolbar from './PageToolbar';
 import TextToolbar from './TextToolbar';
 import ImageToolbar from './ImageToolbar';
+import ShapeToolbar from './ShapeToolbar';
 
 const ToolbarRenderer = ({
   onItemChange, onSettingChange, pages, settings,
@@ -32,6 +33,13 @@ const ToolbarRenderer = ({
     case activePageItemType === 'image':
       return (
         <ImageToolbar
+          activePageItem={activePageItem}
+          onItemChange={onItemChange}
+        />
+      );
+    case activePageItemType === 'shapes':
+      return (
+        <ShapeToolbar
           activePageItem={activePageItem}
           onItemChange={onItemChange}
         />
