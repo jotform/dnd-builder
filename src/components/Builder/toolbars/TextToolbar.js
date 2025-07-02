@@ -138,7 +138,7 @@ const TextToolbar = ({ activePageItem, onItemChange }) => {
         <div className="h-6 w-px bg-navy-50" />
         <ToolbarDropdown
           onChange={handleFontsizeChange}
-          options={['12', '14', '16', '18', '20', '22', '24', '26', '28', '30']}
+          options={['12', '14', '16', '18', '20', '22', '24', '26', '28', '30', '32', '34', '36', '38', '40', '42', '44', '46', '48', '50']}
           value={fontSize}
         />
         <div className="h-6 w-px bg-navy-50" />
