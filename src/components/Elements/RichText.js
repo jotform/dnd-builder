@@ -1,10 +1,10 @@
 import {
-  memo, useEffect, useRef, useCallback,
+  memo, useRef, useCallback,
 } from 'react';
 import PropTypes from 'prop-types';
 import TextEditor from '../TextEditor';
 import { fontTypes } from '../../constants/fonts';
-import { useBuilderContext } from '../../utils/builderContext';
+// import { useBuilderContext } from '../../utils/builderContext';
 import { divider } from '../../utils/staticSettings';
 import { useTranslatedTexts } from '../../utils/hooks';
 
@@ -48,7 +48,7 @@ export const RichTextElement = ({
   onItemChange,
 }) => {
   const reportItem = useRef({});
-  const { isTextEditorOpen } = useBuilderContext();
+  // const { isTextEditorOpen } = useBuilderContext();
   const { CLICK_TO_EDIT_TEXT } = useTranslatedTexts();
 
   const textStyle = {
@@ -63,21 +63,21 @@ export const RichTextElement = ({
     );
   }, [id]);
 
-  const onFocus = e => {
+  /* const onFocus = e => {
     e.currentTarget.parentElement.setAttribute('draggable', false);
-  };
+  }; */
 
-  useEffect(() => {
+  /*  useEffect(() => {
     if (!isTextEditorOpen) {
       reportItem.current.parentElement.setAttribute('draggable', true);
     }
-  }, [isTextEditorOpen]);
+  }, [isTextEditorOpen]); */
 
   return (
     <div
       ref={reportItem}
       className="reportItemInner f-height"
-      onFocus={onFocus}
+      // onFocus={onFocus}
       style={textStyle}
     >
       <TextEditor
