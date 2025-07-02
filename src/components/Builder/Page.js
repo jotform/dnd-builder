@@ -17,7 +17,7 @@ import {
   getCorrectDroppedOffsetValue,
 } from '../../utils/functions';
 import * as classNames from '../../constants/classNames';
-import animationVideoSrc from '../../assets/animation-hack.mov';
+import animationVideoSrc from '../../assets/animation-hack.mp4';
 
 const emptyObject = {};
 
