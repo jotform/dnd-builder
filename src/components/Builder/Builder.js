@@ -1,3 +1,4 @@
+/* eslint-disable sort-keys */
 import { StrictMode } from 'react';
 import PropTypes from 'prop-types';
 import objectHash from 'object-hash';
@@ -6,7 +7,6 @@ import { BuilderProvider } from '../../utils/builderContext';
 import { PropProvider } from '../../utils/propContext';
 import ReportWrapper from '../ReportWrapper';
 import Scene from './Scene';
-import RightPanel from '../Panels/RightPanel';
 import LeftPanel from '../Panels/LeftPanel';
 import SlidesPanel from '../Panels/SlidesPanel';
 import AllSlidesPanel from '../Panels/AllSlidesPanel';
@@ -19,9 +19,11 @@ const Builder = ({
   acceptedItems,
   additionalPageItems,
   disableInteraction,
+  isAiGenerationLoading,
   itemAccessor,
   lastScrollPosition,
   leftPanelConfig,
+  onAIGenerate,
   onAnEventTrigger,
   onItemAdd,
   onItemChange,
@@ -36,8 +38,6 @@ const Builder = ({
   onPageRemove,
   onRightPanelsToggled,
   onSettingChange,
-  onAIGenerate,
-  isAiGenerationLoading,
   pages,
   settings,
   theme,
@@ -45,8 +45,6 @@ const Builder = ({
   ...otherProps
 }) => {
   const hashCode = objectHash(otherProps);
-
-  console.log('leftPanelConfig :>> ', leftPanelConfig);
 
   return (
     <StrictMode>
@@ -71,8 +69,10 @@ const Builder = ({
               <Scene
                 additionalPageItems={additionalPageItems}
                 hashCode={hashCode}
+                isAiGenerationLoading={isAiGenerationLoading}
                 itemAccessor={itemAccessor}
                 lastScrollPosition={lastScrollPosition}
+                onAIGenerate={onAIGenerate}
                 onItemAdd={onItemAdd}
                 onItemChange={onItemChange}
                 onItemMove={onItemMove}
@@ -84,18 +84,11 @@ const Builder = ({
                 onPageDuplicate={onPageDuplicate}
                 onPageOrdersChange={onPageOrdersChange}
                 onPageRemove={onPageRemove}
-                onAIGenerate={onAIGenerate}
-                isAiGenerationLoading={isAiGenerationLoading}
+                onSettingChange={onSettingChange}
                 pages={pages}
+                settings={settings}
               />
             </DndWrapper>
-            <RightPanel
-              itemAccessor={itemAccessor}
-              onItemChange={onItemChange}
-              onPageChange={onPageChange}
-              onSettingChange={onSettingChange}
-              pages={pages}
-            />
             <SlidesPanel
               additionalPageItems={additionalPageItems}
               hashCode={hashCode}
@@ -174,6 +167,8 @@ Builder.propTypes = {
   /** Theme */
   theme: PropTypes.oneOf(['lightMode', 'darkMode']),
   useExperimentalFeatures: PropTypes.bool,
+  onAIGenerate: PropTypes.func,
+  isAiGenerationLoading: PropTypes.bool,
 };
 
 Builder.defaultProps = {
@@ -201,6 +196,8 @@ Builder.defaultProps = {
   settings: {},
   theme: 'lightMode',
   useExperimentalFeatures: false,
+  onAIGenerate: () => { },
+  isAiGenerationLoading: false,
 };
 
 export default Builder;

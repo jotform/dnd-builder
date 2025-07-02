@@ -4,7 +4,9 @@ import PageToolbar from './PageToolbar';
 import TextToolbar from './TextToolbar';
 import ImageToolbar from './ImageToolbar';
 
-const ToolbarRenderer = ({ onItemChange, pages }) => {
+const ToolbarRenderer = ({
+  onItemChange, onSettingChange, pages, settings,
+}) => {
   const {
     activeElement,
   } = useBuilderContext();
@@ -16,11 +18,6 @@ const ToolbarRenderer = ({ onItemChange, pages }) => {
     return items.find(item => item.id === activeElement[0]);
   };
 
-  const getPage = () => {
-    return pages && Array.isArray(pages) && pages[0];
-  };
-
-  const page = getPage();
   const activePageItem = getActivePageItem();
   const activePageItemType = activePageItem && activePageItem?.itemType;
 
@@ -40,18 +37,27 @@ const ToolbarRenderer = ({ onItemChange, pages }) => {
         />
       );
     default:
-      return <PageToolbar page={page} />;
+      return (
+        <PageToolbar
+          onSettingChange={onSettingChange}
+          settings={settings}
+        />
+      );
   }
 };
 
 ToolbarRenderer.propTypes = {
   onItemChange: PropTypes.func,
+  onSettingChange: PropTypes.func,
   pages: PropTypes.arrayOf(PropTypes.shape({})),
+  settings: PropTypes.shape({}),
 };
 
 ToolbarRenderer.defaultProps = {
   onItemChange: () => {},
+  onSettingChange: () => {},
   pages: [],
+  settings: {},
 };
 
 export default ToolbarRenderer;

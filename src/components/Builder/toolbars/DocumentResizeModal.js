@@ -1,10 +1,15 @@
+/* eslint-disable sort-keys */
 import PropTypes from 'prop-types';
 import { useEffect, useState, useRef } from 'react';
 import ToolbarTextInput from './ToolbarTextInput';
 
-const DocumentResizeModal = ({ buttonRef, onClose }) => {
+const DocumentResizeModal = ({
+  buttonRef, onClose, onSettingChange, settings,
+}) => {
   const [position, setPosition] = useState({ left: 0, top: 0, width: 0 });
   const modalRef = useRef(null);
+  const [width, setWidth] = useState(settings.reportLayoutWidth);
+  const [height, setHeight] = useState(settings.reportLayoutHeight);
 
   useEffect(() => {
     if (buttonRef?.current) {
@@ -45,6 +50,10 @@ const DocumentResizeModal = ({ buttonRef, onClose }) => {
   }, [onClose, buttonRef]);
 
   const handleSave = () => {
+    onSettingChange({ id: '__layout__' }, {
+      reportLayoutHeight: height,
+      reportLayoutWidth: width,
+    });
     onClose();
   };
 
@@ -59,7 +68,7 @@ const DocumentResizeModal = ({ buttonRef, onClose }) => {
       radius"
       style={{
         left: position.left,
-        minWidth: '238px',
+        minWidth: '400px',
         right: position.right,
         top: position.top,
       }}
@@ -70,12 +79,16 @@ const DocumentResizeModal = ({ buttonRef, onClose }) => {
         </div>
         <div className="flex justify-between gap-2">
           <ToolbarTextInput
+            onChange={value => setWidth(value)}
             prefix="W"
             suffix="px"
+            value={width}
           />
           <ToolbarTextInput
+            onChange={value => setHeight(value)}
             prefix="H"
             suffix="px"
+            value={height}
           />
         </div>
       </div>
@@ -101,11 +114,18 @@ const DocumentResizeModal = ({ buttonRef, onClose }) => {
 
 DocumentResizeModal.defaultProps = {
   buttonRef: null,
+  onSettingChange: () => { },
+  settings: {},
 };
 
 DocumentResizeModal.propTypes = {
   buttonRef: PropTypes.object,
   onClose: PropTypes.func.isRequired,
+  settings: PropTypes.shape({
+    reportLayoutHeight: PropTypes.number,
+    reportLayoutWidth: PropTypes.number,
+  }),
+  onSettingChange: PropTypes.func,
 };
 
 export default DocumentResizeModal;
