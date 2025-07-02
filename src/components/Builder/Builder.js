@@ -7,7 +7,6 @@ import { BuilderProvider } from '../../utils/builderContext';
 import { PropProvider } from '../../utils/propContext';
 import ReportWrapper from '../ReportWrapper';
 import Scene from './Scene';
-import LeftPanel from '../Panels/LeftPanel';
 import SlidesPanel from '../Panels/SlidesPanel';
 import AllSlidesPanel from '../Panels/AllSlidesPanel';
 import { leftPanelConfigPropType } from '../../constants/propTypes';
@@ -62,10 +61,6 @@ const Builder = ({
             theme={theme}
           >
             <DndWrapper>
-              <LeftPanel
-                leftPanelConfig={leftPanelConfig}
-                onItemAdd={onItemAdd}
-              />
               <Scene
                 additionalPageItems={additionalPageItems}
                 hashCode={hashCode}

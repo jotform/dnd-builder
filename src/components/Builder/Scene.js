@@ -453,6 +453,7 @@ const Scene = ({
           <BottomToolbar
             isAiGenerationLoading={isAiGenerationLoading}
             onAIGenerate={onAIGenerate}
+            onItemAdd={onItemAdd}
           />
         </div>
       </div>

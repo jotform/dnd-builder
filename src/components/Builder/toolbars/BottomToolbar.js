@@ -1,13 +1,25 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
-import IconAiColor from '../../../assets/svg/freecanvas/ai-color.svg'
-import IconArrowPointerSimpleFilled from '../../../assets/svg/freecanvas/arrow-pointer-filled.svg'
-import IconImageFilled from '../../../assets/svg/freecanvas/image-filled.svg'
-import IconLinkDiagonal from '../../../assets/svg/freecanvas/link-diagonal.svg'
-import IconSquare from '../../../assets/svg/freecanvas/square.svg'
-import IconType from '../../../assets/svg/freecanvas/type.svg'
-import IconLoading from '../../../assets/svg/freecanvas/ai-generation-loading.svg'
+/* eslint-disable sort-keys */
+/* eslint-disable max-len */
+import PropTypes from 'prop-types';
+import {
+  useCallback, useEffect, useRef, useState,
+} from 'react';
+import IconAiColor from '../../../assets/svg/freecanvas/ai-color.svg';
+import IconArrowPointerSimpleFilled from '../../../assets/svg/freecanvas/arrow-pointer-filled.svg';
+import IconImageFilled from '../../../assets/svg/freecanvas/image-filled.svg';
+import IconLinkDiagonal from '../../../assets/svg/freecanvas/link-diagonal.svg';
+import IconSquare from '../../../assets/svg/freecanvas/square.svg';
+import IconType from '../../../assets/svg/freecanvas/type.svg';
+import generateId from '../../../utils/generateId';
+import { useBuilderContext } from '../../../utils/builderContext';
+import IconLoading from '../../../assets/svg/freecanvas/ai-generation-loading.svg';
 
-const BottomToolbar = ({ onAIGenerate, isAiGenerationLoading }) => {
+const BottomToolbar = ({
+  isAiGenerationLoading,
+  onAIGenerate,
+  onItemAdd,
+}) => {
+  const { setActiveElement } = useBuilderContext();
   const [isAIPanelOpen, setIsAIPanelOpen] = useState(false);
   const [selectedTool, setSelectedTool] = useState('pointer');
   const [aiPrompt, setAiPrompt] = useState('');
@@ -19,12 +31,19 @@ const BottomToolbar = ({ onAIGenerate, isAiGenerationLoading }) => {
         setIsAIPanelOpen(false);
         setSelectedTool('pointer');
       }
-    }
-    document.addEventListener("mousedown", handleClickOutside);
+    };
+    document.addEventListener('mousedown', handleClickOutside);
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [bottomToolbarRef]);
+
+  /* useEffect(() => {
+    if (!areArraysEqual(previousActiveElement.current, activeElement)) {
+      setSelectedTool('pointer');
+    }
+    previousActiveElement.current = activeElement;
+  }, [activeElement]); */
 
   const handleAIButtonClick = () => {
     if (isAIPanelOpen) {
@@ -37,6 +56,55 @@ const BottomToolbar = ({ onAIGenerate, isAiGenerationLoading }) => {
   };
 
   const handleToolSelect = toolName => {
+    setSelectedTool('text');
+    if (toolName === 'text') {
+      const itemID = generateId();
+      onItemAdd({
+        id: generateId(),
+        itemType: 'text',
+        left: 0,
+        pageID: '1',
+        top: 0,
+        height: 65,
+        width: 350,
+      });
+      setActiveElement(itemID);
+      return;
+    }
+
+    if (toolName === 'image') {
+      const itemID = generateId();
+      onItemAdd({
+        id: generateId(),
+        itemType: 'image',
+        left: 0,
+        pageID: '1',
+        top: 0,
+        height: 400,
+        width: 400,
+        opacity: 1,
+        roundedCorners: 0,
+        url: '',
+      });
+      setActiveElement(itemID);
+      return;
+    }
+
+    if (toolName === 'shapes') {
+      const itemID = generateId();
+      onItemAdd({
+        id: itemID,
+        itemType: 'shapes',
+        left: 100,
+        pageID: '1',
+        top: 100,
+        height: 200,
+        width: 200,
+      });
+      setActiveElement(itemID);
+      return;
+    }
+
     setSelectedTool(toolName);
     if (toolName !== 'ai') {
       setIsAIPanelOpen(false);
@@ -66,20 +134,23 @@ const BottomToolbar = ({ onAIGenerate, isAiGenerationLoading }) => {
     <>
       {/* AI Generation Panel */}
       {isAIPanelOpen && (
-        <div className="freeCanvas-aiPanel freeCanvas-bottomToolbar" ref={bottomToolbarRef}>
+        <div
+          ref={bottomToolbarRef}
+          className="freeCanvas-aiPanel freeCanvas-bottomToolbar"
+        >
           <input
-            type="text"
-            value={aiPrompt}
+            className="freeCanvas-aiInput"
             onChange={handleAIPromptChange}
             onKeyPress={handleAIPromptKeyPress}
             placeholder="AI Creator"
-            className="freeCanvas-aiInput"
+            type="text"
+            value={aiPrompt}
           />
           <button
-            type="button"
-            onClick={handleAIGenerate}
-            disabled={isAiGenerationLoading || !aiPrompt.trim()}
             className="freeCanvas-aiButton"
+            disabled={isAiGenerationLoading || !aiPrompt.trim()}
+            onClick={handleAIGenerate}
+            type="button"
           >
             <span className={isAiGenerationLoading ? 'freeCanvas-aiButtonLoading' : ''}>
               {isAiGenerationLoading ? <IconLoading /> : 'Generate'}
@@ -90,46 +161,46 @@ const BottomToolbar = ({ onAIGenerate, isAiGenerationLoading }) => {
 
       {/* Bottom Toolbar */}
       {!isAIPanelOpen && (
-        <div className='freeCanvas-bottomToolbar'>
+        <div className="freeCanvas-bottomToolbar">
           <button
-            type='button'
-            onClick={handleAIButtonClick}
             className={`freeCanvas-bottomToolbarItem ${selectedTool === 'ai' ? 'freeCanvas-bottomToolbarItemSelected' : ''}`}
+            onClick={handleAIButtonClick}
+            type="button"
           >
             <IconAiColor />
           </button>
           <button
-            type='button'
-            onClick={() => handleToolSelect('pointer')}
             className={`freeCanvas-bottomToolbarItem ${selectedTool === 'pointer' ? 'freeCanvas-bottomToolbarItemSelected' : ''}`}
+            onClick={() => handleToolSelect('pointer')}
+            type="button"
           >
             <IconArrowPointerSimpleFilled />
           </button>
           <button
-            type='button'
-            onClick={() => handleToolSelect('text')}
             className={`freeCanvas-bottomToolbarItem ${selectedTool === 'text' ? 'freeCanvas-bottomToolbarItemSelected' : ''}`}
+            onClick={() => handleToolSelect('text')}
+            type="button"
           >
             <IconType />
           </button>
           <button
-            type='button'
-            onClick={() => handleToolSelect('shape')}
-            className={`freeCanvas-bottomToolbarItem ${selectedTool === 'shape' ? 'freeCanvas-bottomToolbarItemSelected' : ''}`}
+            className={`freeCanvas-bottomToolbarItem ${selectedTool === 'shapes' ? 'freeCanvas-bottomToolbarItemSelected' : ''}`}
+            onClick={() => handleToolSelect('shapes')}
+            type="button"
           >
             <IconSquare />
           </button>
           <button
-            type='button'
-            onClick={() => handleToolSelect('image')}
             className={`freeCanvas-bottomToolbarItem ${selectedTool === 'image' ? 'freeCanvas-bottomToolbarItemSelected' : ''}`}
+            onClick={() => handleToolSelect('image')}
+            type="button"
           >
             <IconImageFilled />
           </button>
           <button
-            type='button'
-            onClick={() => handleToolSelect('form-field')}
             className={`freeCanvas-bottomToolbarItemFormFields ${selectedTool === 'form-field' ? 'freeCanvas-bottomToolbarItemSelected' : ''}`}
+            onClick={() => handleToolSelect('form-field')}
+            type="button"
           >
             <IconLinkDiagonal />
             <span>Form Field</span>
@@ -138,6 +209,18 @@ const BottomToolbar = ({ onAIGenerate, isAiGenerationLoading }) => {
       )}
     </>
   );
+};
+
+BottomToolbar.propTypes = {
+  isAiGenerationLoading: PropTypes.bool,
+  onAIGenerate: PropTypes.func,
+  onItemAdd: PropTypes.func,
+};
+
+BottomToolbar.defaultProps = {
+  isAiGenerationLoading: false,
+  onAIGenerate: () => {},
+  onItemAdd: () => {},
 };
 
 export default BottomToolbar;

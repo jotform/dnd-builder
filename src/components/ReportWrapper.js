@@ -16,7 +16,6 @@ const ReportWrapper = ({
   const {
     isAllSlidesPanelOpen,
     isLeftPanelOpen,
-    isRightPanelOpen,
     isSlidesPanelOpen,
     setIsLeftPanelOpen,
     setIsSlidesPanelOpen,
@@ -56,8 +55,6 @@ const ReportWrapper = ({
     'f-height',
     'd-flex',
     getModeClass(mode),
-    isLeftPanelOpen === true ? 'leftPaneIsActive' : '',
-    isRightPanelOpen === true || isSlidesPanelOpen === true ? 'rightPaneIsActive' : '',
     isSlidesPanelOpen === true ? 'slidesPaneIsActive' : '',
     isAllSlidesPanelOpen === true ? 'allSlidesPaneIsActive' : '',
     theme,
