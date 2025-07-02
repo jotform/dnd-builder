@@ -140,7 +140,7 @@ const Page = ({
           ...style,
         }}
       >
-        {isAiGenerationLoading && (
+        {isAiGenerationLoading ? (
           <div className="flex justify-center items-center w-full h-full">
             <video
               autoPlay
@@ -149,50 +149,51 @@ const Page = ({
               src={animationVideoSrc}
             />
           </div>
-        )}
+        ) : (
 
-        <div className="jfReport-hider o-hidden f-all p-relative">
-          <ReportItemsWrapper
-            acceptedItems={acceptedItems}
-            activeElement={activeElement}
-            guides={guides}
-            hashCode={hashCode}
-            isAiGenerationLoading={isAiGenerationLoading}
-            isResize={isResize}
-            isRightPanelOpen={isRightPanelOpen}
-            isTextEditorOpen={isTextEditorOpen}
+          <div className="jfReport-hider o-hidden f-all p-relative">
+            <ReportItemsWrapper
+              acceptedItems={acceptedItems}
+              activeElement={activeElement}
+              guides={guides}
+              hashCode={hashCode}
+              isAiGenerationLoading={isAiGenerationLoading}
+              isResize={isResize}
+              isRightPanelOpen={isRightPanelOpen}
+              isTextEditorOpen={isTextEditorOpen}
           // if we send matches all the time, DraggableItems are also rendered on dragging
-            itemAccessor={itemAccessor}
-            items={items}
-            matches={isResize ? matches : emptyObject}
-            onAnEventTrigger={onAnEventTrigger}
-            onItemAdd={onItemAdd}
-            onItemChange={onItemChange}
-            onItemRemove={onItemRemove}
-            onItemResize={onItemResize}
-            setActiveElement={setActiveElement}
-            setContextMenuProps={setContextMenuProps}
-            setIsResize={setIsResize}
-            setIsRightPanelOpen={setIsRightPanelOpen}
-            setMatches={setMatches}
-            zoom={zoom}
-          />
-          {additionalPageItems}
-          <AlignmentGuides
-            axis="x"
-            guides={guides}
-            matches={matches}
-            show={(isOver || isResize)}
-            zoom={zoom}
-          />
-          <AlignmentGuides
-            axis="y"
-            guides={guides}
-            matches={matches}
-            show={(isOver || isResize)}
-            zoom={zoom}
-          />
-        </div>
+              itemAccessor={itemAccessor}
+              items={items}
+              matches={isResize ? matches : emptyObject}
+              onAnEventTrigger={onAnEventTrigger}
+              onItemAdd={onItemAdd}
+              onItemChange={onItemChange}
+              onItemRemove={onItemRemove}
+              onItemResize={onItemResize}
+              setActiveElement={setActiveElement}
+              setContextMenuProps={setContextMenuProps}
+              setIsResize={setIsResize}
+              setIsRightPanelOpen={setIsRightPanelOpen}
+              setMatches={setMatches}
+              zoom={zoom}
+            />
+            {additionalPageItems}
+            <AlignmentGuides
+              axis="x"
+              guides={guides}
+              matches={matches}
+              show={(isOver || isResize)}
+              zoom={zoom}
+            />
+            <AlignmentGuides
+              axis="y"
+              guides={guides}
+              matches={matches}
+              show={(isOver || isResize)}
+              zoom={zoom}
+            />
+          </div>
+        )}
       </div>
     </>
   );
