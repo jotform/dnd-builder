@@ -1,3 +1,4 @@
+/* eslint-disable sort-keys */
 /* eslint-disable max-len */
 /* eslint-disable react/jsx-sort-props */
 import {
@@ -52,7 +53,7 @@ const TextEditor = ({
       }}
       className={`f-all ql-editor${isNotEmpty ? '' : ' isEmptyTextElement'}`}
       style={{
-        minHeight: '24px',
+        minHeight: '60px',
       }}
       contentEditable={isTextEditorOpen && isSelected && !isLocked}
       onClick={onClick}
