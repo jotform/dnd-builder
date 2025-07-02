@@ -8,13 +8,14 @@ import IconAiColor from '../../../assets/svg/freecanvas/ai-color.svg';
 import IconArrowPointerSimpleFilled from '../../../assets/svg/freecanvas/arrow-pointer-filled.svg';
 import IconImageFilled from '../../../assets/svg/freecanvas/image-filled.svg';
 import IconLinkDiagonal from '../../../assets/svg/freecanvas/link-diagonal.svg';
-import IconSquare from '../../../assets/svg/freecanvas/square.svg';
+import IconShape from '../../../assets/svg/freecanvas/shape.svg';
 import IconType from '../../../assets/svg/freecanvas/type.svg';
 import generateId from '../../../utils/generateId';
 import { useBuilderContext } from '../../../utils/builderContext';
 import IconLoading from '../../../assets/svg/freecanvas/ai-generation-loading.svg';
 
 const BottomToolbar = ({
+  activeElement,
   isAiGenerationLoading,
   onAIGenerate,
   onItemAdd,
@@ -38,12 +39,11 @@ const BottomToolbar = ({
     };
   }, [bottomToolbarRef]);
 
-  /* useEffect(() => {
-    if (!areArraysEqual(previousActiveElement.current, activeElement)) {
+  useEffect(() => {
+    if (!activeElement) {
       setSelectedTool('pointer');
     }
-    previousActiveElement.current = activeElement;
-  }, [activeElement]); */
+  }, [activeElement]);
 
   const handleAIButtonClick = () => {
     if (isAIPanelOpen) {
@@ -56,7 +56,7 @@ const BottomToolbar = ({
   };
 
   const handleToolSelect = toolName => {
-    setSelectedTool('text');
+    setSelectedTool(toolName);
     if (toolName === 'text') {
       const itemID = generateId();
       onItemAdd({
@@ -95,9 +95,9 @@ const BottomToolbar = ({
       onItemAdd({
         id: itemID,
         itemType: 'shapes',
-        left: 100,
+        left: 0,
         pageID: '1',
-        top: 100,
+        top: 0,
         height: 200,
         width: 200,
       });
@@ -188,7 +188,7 @@ const BottomToolbar = ({
             onClick={() => handleToolSelect('shapes')}
             type="button"
           >
-            <IconSquare />
+            <IconShape />
           </button>
           <button
             className={`freeCanvas-bottomToolbarItem ${selectedTool === 'image' ? 'freeCanvas-bottomToolbarItemSelected' : ''}`}
@@ -212,12 +212,14 @@ const BottomToolbar = ({
 };
 
 BottomToolbar.propTypes = {
+  activeElement: PropTypes.shape({}),
   isAiGenerationLoading: PropTypes.bool,
   onAIGenerate: PropTypes.func,
   onItemAdd: PropTypes.func,
 };
 
 BottomToolbar.defaultProps = {
+  activeElement: null,
   isAiGenerationLoading: false,
   onAIGenerate: () => {},
   onItemAdd: () => {},

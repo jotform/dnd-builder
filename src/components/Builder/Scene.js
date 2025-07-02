@@ -452,6 +452,7 @@ const Scene = ({
             </Fragment>
           ))}
           <BottomToolbar
+            activeElement={activeElement}
             isAiGenerationLoading={isAiGenerationLoading}
             onAIGenerate={onAIGenerate}
             onItemAdd={onItemAdd}
