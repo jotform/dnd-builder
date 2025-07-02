@@ -168,3 +168,14 @@
     color: #343C6A;
   }
 }
+
+.toolbar-button {
+  width: 28px;
+  height: 28px;
+
+  svg {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+  }
+}
