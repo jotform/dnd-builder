@@ -1,5 +1,6 @@
 /* eslint-disable max-len */
 import PropTypes from 'prop-types';
+import { forwardRef } from 'react';
 import {
   IconBold,
   IconItalic,
@@ -43,10 +44,11 @@ const getIcon = icon => {
   }
 };
 
-const ToolbarButton = ({ icon = 'bold', onClick }) => {
+const ToolbarButton = forwardRef(({ icon = 'bold', onClick }, ref) => {
   const IconComponent = getIcon(icon);
   return (
     <button
+      ref={ref}
       className="magnet-button inline-flex shrink-0 justify-center items-center font-medium duration-300 outline-2 outline-transparent outline-offset-0 focus:outline-opacity-50 h-8 px-2 radius border-0 cursor-pointer bg-transparent color-navy-500 hover:bg-navy-25 focus:outline-navy-50 toolbar-button"
       onClick={onClick}
       type="button"
@@ -54,7 +56,7 @@ const ToolbarButton = ({ icon = 'bold', onClick }) => {
       {IconComponent && <IconComponent />}
     </button>
   );
-};
+});
 
 export default ToolbarButton;
 

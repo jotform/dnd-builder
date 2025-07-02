@@ -2,9 +2,9 @@
 *   this file includes button styles for reports.
 *   @giraykarasinir
 */
-
+/* stylelint-disable */
 .jfReport, .jfPresentation, .jfReportModal {
-  button {
+  button:not(.magnet-btn) {
     display: inline-flex;
     justify-content: center;
     align-items: center;

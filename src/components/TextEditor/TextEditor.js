@@ -52,7 +52,7 @@ const TextEditor = ({
       }}
       className={`f-all ql-editor${isNotEmpty ? '' : ' isEmptyTextElement'}`}
       style={{
-        minHeight: '20px',
+        minHeight: '24px',
       }}
       contentEditable={isTextEditorOpen && isSelected && !isLocked}
       onClick={onClick}

@@ -1,3 +1,5 @@
+/* stylelint-disable */
+
 .freeCanvas {
   &-bottomToolbar {
     position: fixed;
@@ -119,5 +121,30 @@
     color: #666;
     font-size: 14px;
     text-align: center;
+  }
+}
+
+.magnet-btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 80px;
+  padding: 0 8px;
+  height: 32px;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &-primary {
+    background-color: #0075E3;
+    color: #fff;
+  }
+
+  &-secondary {
+    background-color: #DADEF3;
+    color: #343C6A;
   }
 }
