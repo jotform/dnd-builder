@@ -4,7 +4,7 @@ import {
   useCallback, useEffect, useMemo, useRef, useState,
 } from 'react';
 import PropTypes from 'prop-types';
-import domPurify from 'dompurify';
+// import domPurify from 'dompurify';
 
 const TextEditor = ({
   content,
@@ -14,7 +14,7 @@ const TextEditor = ({
   placeholder,
 }) => {
   const textEditorRef = useRef(null);
-  const [_content, setContent] = useState(domPurify.sanitize(content));
+  const [_content, setContent] = useState(content);
 
   const [isTextEditorOpen, setIsTextEditorOpen] = useState(false);
 
@@ -31,13 +31,13 @@ const TextEditor = ({
   }, [_content]);
 
   useEffect(() => {
-    setContent(domPurify.sanitize(content));
+    setContent(content);
   }, [content]);
 
   useEffect(() => {
     if (isTextEditorOpen && !isSelected) {
       if (textEditorRef.current) {
-        const textEditorContent = textEditorRef.current.innerHTML;
+        const textEditorContent = textEditorRef.current.innerText;
         handleSave(textEditorContent);
       }
       setIsTextEditorOpen(false);
@@ -62,7 +62,7 @@ const TextEditor = ({
         }
         if (e.key === 'Enter') {
           if (handleSave) {
-            const textEditorContent = textEditorRef.current.innerHTML;
+            const textEditorContent = textEditorRef.current.innerText;
             handleSave(textEditorContent);
             setIsTextEditorOpen(false);
           }
