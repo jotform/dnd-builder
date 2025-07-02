@@ -9,12 +9,10 @@ const DraggableItemActions = ({
   duplicateItem,
   isLocked,
   isMultipleItemSelected,
-  openSettings,
 }) => {
   const {
     DELETE_ITEM,
     DUPLICATE_ITEM,
-    ITEM_SETTINGS,
     LOCK_ITEM,
   } = useTranslatedTexts();
 
@@ -37,14 +35,6 @@ const DraggableItemActions = ({
   }
   return (
     <div className="reportItemMenu d-flex dir-col a-center">
-      <button
-        className="reportItemMenu-item js-itemSettings"
-        onClick={openSettings}
-        title={ITEM_SETTINGS}
-        type="button"
-      >
-        <icons.settings className="jfReportSVG icon-settings isWhite" />
-      </button>
       <button
         className="reportItemMenu-item js-duplicateItem"
         onClick={duplicateItem}
@@ -81,7 +71,6 @@ DraggableItemActions.propTypes = {
   duplicateItem: PropTypes.func,
   isLocked: PropTypes.bool,
   isMultipleItemSelected: PropTypes.bool,
-  openSettings: PropTypes.func,
 };
 
 DraggableItemActions.defaultProps = {
@@ -90,7 +79,6 @@ DraggableItemActions.defaultProps = {
   duplicateItem: () => {},
   isLocked: false,
   isMultipleItemSelected: false,
-  openSettings: () => {},
 };
 
 export default memo(DraggableItemActions);

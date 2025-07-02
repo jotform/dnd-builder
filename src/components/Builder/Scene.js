@@ -1,3 +1,4 @@
+/* eslint-disable sort-keys */
 /* eslint-disable complexity */
 import {
   useCallback,
@@ -38,8 +39,10 @@ import BottomToolbar from './toolbars/BottomToolbar';
 const Scene = ({
   additionalPageItems,
   hashCode,
+  isAiGenerationLoading,
   itemAccessor,
   lastScrollPosition,
+  onAIGenerate,
   onItemAdd,
   onItemChange,
   onItemMove,
@@ -47,8 +50,7 @@ const Scene = ({
   onItemResize,
   onItemsMove,
   onPageChange,
-  onAIGenerate,
-  isAiGenerationLoading,
+  onSettingChange,
   pages,
 }) => {
   /* Builder Context */
@@ -403,7 +405,9 @@ const Scene = ({
       />
       <ToolbarRenderer
         onItemChange={onItemChange}
+        onSettingChange={onSettingChange}
         pages={pages}
+        settings={settings}
       />
       <div
         ref={viewPortRef}
@@ -446,7 +450,10 @@ const Scene = ({
               </div>
             </Fragment>
           ))}
-          <BottomToolbar onAIGenerate={onAIGenerate} isAiGenerationLoading={isAiGenerationLoading} />
+          <BottomToolbar
+            isAiGenerationLoading={isAiGenerationLoading}
+            onAIGenerate={onAIGenerate}
+          />
         </div>
       </div>
       <ZoomControls
@@ -478,6 +485,8 @@ Scene.propTypes = {
   hashCode: PropTypes.string,
   itemAccessor: PropTypes.func,
   lastScrollPosition: PropTypes.number,
+  onAIGenerate: PropTypes.func,
+  isAiGenerationLoading: PropTypes.bool,
   onItemAdd: PropTypes.func,
   onItemChange: PropTypes.func,
   onItemMove: PropTypes.func,
@@ -488,6 +497,8 @@ Scene.propTypes = {
   pages: PropTypes.arrayOf(
     PropTypes.shape({}),
   ),
+  onSettingChange: PropTypes.func,
+  settings: PropTypes.shape({}),
 };
 
 Scene.defaultProps = {
@@ -495,6 +506,8 @@ Scene.defaultProps = {
   hashCode: '',
   itemAccessor: () => { },
   lastScrollPosition: 0,
+  onAIGenerate: () => { },
+  isAiGenerationLoading: false,
   onItemAdd: () => { },
   onItemChange: () => { },
   onItemMove: () => { },
@@ -502,7 +515,9 @@ Scene.defaultProps = {
   onItemResize: () => { },
   onItemsMove: () => { },
   onPageChange: () => { },
+  onSettingChange: () => { },
   pages: [],
+  settings: {},
 };
 
 export default memo(Scene);

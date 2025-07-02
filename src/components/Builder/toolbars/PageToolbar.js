@@ -3,8 +3,7 @@ import { useState, useRef } from 'react';
 import ToolbarButton from './ToolbarButton';
 import DocumentResizeModal from './DocumentResizeModal';
 
-const PageToolbar = ({ page }) => {
-  console.log('page', page);
+const PageToolbar = ({ onSettingChange, settings }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const bgScaleButtonRef = useRef(null);
 
@@ -49,6 +48,11 @@ const PageToolbar = ({ page }) => {
           <DocumentResizeModal
             buttonRef={bgScaleButtonRef}
             onClose={handleCloseModal}
+            onSettingChange={onSettingChange}
+            settings={{
+              reportLayoutHeight: settings.reportLayoutHeight || 1080,
+              reportLayoutWidth: settings.reportLayoutWidth || 1920,
+            }}
           />
         )}
       </div>
@@ -57,11 +61,18 @@ const PageToolbar = ({ page }) => {
 };
 
 PageToolbar.propTypes = {
+  onSettingChange: PropTypes.func,
   page: PropTypes.shape({}),
+  settings: PropTypes.shape({
+    reportLayoutHeight: PropTypes.number,
+    reportLayoutWidth: PropTypes.number,
+  }),
 };
 
 PageToolbar.defaultProps = {
+  onSettingChange: () => { },
   page: {},
+  settings: {},
 };
 
 export default PageToolbar;
