@@ -24,8 +24,11 @@ const PageToolbar = ({ onSettingChange, settings }) => {
   };
 
   const handleColorChange = ({ hex }) => {
-    console.log('hex', hex);
     setBackgroundColor(hex);
+    onSettingChange({ id: '__layout__' }, {
+      reportBackgroundColor: hex,
+      reportBackgroundGradientEnabled: 'off',
+    });
   };
 
   const handleColorPickerClose = () => {
