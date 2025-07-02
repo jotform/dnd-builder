@@ -5,6 +5,7 @@ import IconImageFilled from '../../../assets/svg/freecanvas/image-filled.svg'
 import IconLinkDiagonal from '../../../assets/svg/freecanvas/link-diagonal.svg'
 import IconSquare from '../../../assets/svg/freecanvas/square.svg'
 import IconType from '../../../assets/svg/freecanvas/type.svg'
+import IconLoading from '../../../assets/svg/freecanvas/ai-generation-loading.svg'
 
 const BottomToolbar = ({ onAIGenerate, isAiGenerationLoading }) => {
   const [isAIPanelOpen, setIsAIPanelOpen] = useState(false);
@@ -73,7 +74,6 @@ const BottomToolbar = ({ onAIGenerate, isAiGenerationLoading }) => {
             onKeyPress={handleAIPromptKeyPress}
             placeholder="AI Creator"
             className="freeCanvas-aiInput"
-            disabled={isAiGenerationLoading}
           />
           <button
             type="button"
@@ -81,7 +81,9 @@ const BottomToolbar = ({ onAIGenerate, isAiGenerationLoading }) => {
             disabled={isAiGenerationLoading || !aiPrompt.trim()}
             className="freeCanvas-aiButton"
           >
-            Generate
+            <span className={isAiGenerationLoading ? 'freeCanvas-aiButtonLoading' : ''}>
+              {isAiGenerationLoading ? <IconLoading /> : 'Generate'}
+            </span>
           </button>
         </div>
       )}

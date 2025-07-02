@@ -104,15 +104,35 @@
     font-size: 12px;
     font-weight: 500;
     transition: background-color 0.2s;
+    min-width: 84px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1 !important;
 
     &:hover:not(:disabled) {
       background-color: #7923DD;
     }
 
     &:disabled {
-      background-color: #ccc !important;
       cursor: not-allowed;
-      opacity: 0.6;
+    }
+
+    &Loading {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+
+      svg {
+        width: 12px;
+        height: 12px;
+        -webkit-mask-composite: destination-in;
+        mask-composite: intersect;
+        animation: l5 1s infinite;
+      }
+
+      @keyframes l5 {to{transform: rotate(.5turn)}}
     }
   }
 
