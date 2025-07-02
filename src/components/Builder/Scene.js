@@ -434,9 +434,10 @@ const Scene = ({
                   additionalPageItems={additionalPageItems}
                   guides={guides[page.id]}
                   hashCode={hashCode}
+                  isAiGenerationLoading={isAiGenerationLoading}
                   itemAccessor={itemAccessor}
-                  items={page.items}
                   // TODO: dont use inline functions
+                  items={page.items}
                   onDrop={(item, monitor) => dropped(page.id, item, monitor, refs[page.id])}
                   onItemAdd={onItemAdd}
                   onItemChange={onItemChange}

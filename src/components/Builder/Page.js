@@ -17,6 +17,7 @@ import {
   getCorrectDroppedOffsetValue,
 } from '../../utils/functions';
 import * as classNames from '../../constants/classNames';
+import animationVideoSrc from '../../assets/animation-hack.mov';
 
 const emptyObject = {};
 
@@ -25,6 +26,7 @@ const Page = ({
   additionalPageItems,
   guides,
   hashCode,
+  isAiGenerationLoading,
   itemAccessor,
   items,
   onDrop,
@@ -138,17 +140,29 @@ const Page = ({
           ...style,
         }}
       >
+        {isAiGenerationLoading && (
+          <div className="flex justify-center items-center w-full h-full">
+            <video
+              autoPlay
+              loop
+              muted
+              src={animationVideoSrc}
+            />
+          </div>
+        )}
+
         <div className="jfReport-hider o-hidden f-all p-relative">
           <ReportItemsWrapper
             acceptedItems={acceptedItems}
             activeElement={activeElement}
             guides={guides}
             hashCode={hashCode}
+            isAiGenerationLoading={isAiGenerationLoading}
             isResize={isResize}
             isRightPanelOpen={isRightPanelOpen}
             isTextEditorOpen={isTextEditorOpen}
-            itemAccessor={itemAccessor}
           // if we send matches all the time, DraggableItems are also rendered on dragging
+            itemAccessor={itemAccessor}
             items={items}
             matches={isResize ? matches : emptyObject}
             onAnEventTrigger={onAnEventTrigger}
@@ -189,6 +203,8 @@ Page.propTypes = {
   additionalPageItems: PropTypes.arrayOf(PropTypes.node),
   guides: PropTypes.shape({}),
   hashCode: PropTypes.string,
+  isAiGenerationLoading: PropTypes.bool,
+
   itemAccessor: PropTypes.func,
   items: PropTypes.arrayOf(
     PropTypes.shape({}),
@@ -212,6 +228,7 @@ Page.defaultProps = {
   additionalPageItems: [],
   guides: {},
   hashCode: '',
+  isAiGenerationLoading: false,
   itemAccessor: () => {},
   items: [],
   onDrop: () => {},
