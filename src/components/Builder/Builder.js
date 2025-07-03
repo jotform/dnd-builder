@@ -9,6 +9,7 @@ import ReportWrapper from '../ReportWrapper';
 import Scene from './Scene';
 import SlidesPanel from '../Panels/SlidesPanel';
 import AllSlidesPanel from '../Panels/AllSlidesPanel';
+import NewLeftPanel from './NewLeftPanel';
 import { leftPanelConfigPropType } from '../../constants/propTypes';
 
 import 'intersection-observer';
@@ -60,6 +61,10 @@ const Builder = ({
             pageCount={pages.length}
             theme={theme}
           >
+            <NewLeftPanel
+              onItemAdd={onItemAdd}
+              onSettingChange={onSettingChange}
+            />
             <DndWrapper>
               <Scene
                 additionalPageItems={additionalPageItems}
