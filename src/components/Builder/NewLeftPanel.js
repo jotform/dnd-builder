@@ -176,48 +176,81 @@ const NewLeftPanel = ({
       content: () => (
         <div className="new-left-panel-content">
           <div className="new-left-panel-section">
-            <h3>Templates</h3>
-            <div className="template-grid">
-              <div className="template-item">
-                <div className="template-item-image">
-                  <IconTemplate1 />
+            <Searchbox type="template" />
+            <div className="flex flex-col gap-2">
+              <div>
+                <ShowMoreLabel title="Business" />
+                <div className="template-grid">
+                  <div className="template-item">
+                    <div className="template-item-image">
+                      <IconTemplate1 />
+                    </div>
+                  </div>
+                  <div className="template-item">
+                    <div className="template-item-image">
+                      <IconTemplate2 />
+                    </div>
+                  </div>
+                  <div className="template-item">
+                    <div className="template-item-image">
+                      <IconTemplate3 />
+                    </div>
+                  </div>
+                  <div className="template-item">
+                    <div className="template-item-image">
+                      <IconTemplate4 />
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div className="template-item">
-                <div className="template-item-image">
-                  <IconTemplate2 />
+              <div>
+                <ShowMoreLabel title="Photo" />
+                <div className="template-grid">
+                  <div className="template-item">
+                    <div className="template-item-image">
+                      <IconTemplate5 />
+                    </div>
+                  </div>
+                  <div className="template-item">
+                    <div className="template-item-image">
+                      <IconTemplate6 />
+                    </div>
+                  </div>
+                  <div className="template-item">
+                    <div className="template-item-image">
+                      <IconTemplate7 />
+                    </div>
+                  </div>
+                  <div className="template-item">
+                    <div className="template-item-image">
+                      <IconTemplate8 />
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div className="template-item">
-                <div className="template-item-image">
-                  <IconTemplate3 />
-                </div>
-              </div>
-              <div className="template-item">
-                <div className="template-item-image">
-                  <IconTemplate4 />
-                </div>
-              </div>
-            </div>
-            <div className="template-grid">
-              <div className="template-item">
-                <div className="template-item-image">
-                  <IconTemplate5 />
-                </div>
-              </div>
-              <div className="template-item">
-                <div className="template-item-image">
-                  <IconTemplate6 />
-                </div>
-              </div>
-              <div className="template-item">
-                <div className="template-item-image">
-                  <IconTemplate7 />
-                </div>
-              </div>
-              <div className="template-item">
-                <div className="template-item-image">
-                  <IconTemplate8 />
+              <div>
+                <ShowMoreLabel title="Summer" />
+                <div className="template-grid">
+                  <div className="template-item">
+                    <div className="template-item-image">
+                      <IconTemplate5 />
+                    </div>
+                  </div>
+                  <div className="template-item">
+                    <div className="template-item-image">
+                      <IconTemplate6 />
+                    </div>
+                  </div>
+                  <div className="template-item">
+                    <div className="template-item-image">
+                      <IconTemplate7 />
+                    </div>
+                  </div>
+                  <div className="template-item">
+                    <div className="template-item-image">
+                      <IconTemplate8 />
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
