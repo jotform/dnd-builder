@@ -35,6 +35,7 @@
 
 .new-left-panel-tab {
   display: flex;
+  justify-content: center;
   flex-direction: column;
   align-items: center;
   padding: 12px 8px;
@@ -60,6 +61,7 @@
     fill: #A0A6B6;
     width: 24px;
     height: 24px;
+    margin-right: 0 !important;
   }
 
   .tab-name {
@@ -109,10 +111,10 @@
   padding: 4px;
   border-radius: 4px;
   transition: all 0.2s ease;
+  fill: #ffffff;
 
   &:hover {
-    background: #4a5568;
-    color: #ffffff;
+    fill: #F1F1F4;
   }
 
   .jfReportSVG {
@@ -667,8 +669,8 @@
   }
 
   .new-left-panel-tab {
-
     display: flex;
+    justify-content: center;
     flex-direction: column;
     gap: 4px;
     width: 64px;

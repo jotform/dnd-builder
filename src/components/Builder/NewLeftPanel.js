@@ -16,6 +16,7 @@ import IconTemplates from '../../assets/svg/freecanvas/templates.svg';
 import IconBgColor from '../../assets/svg/freecanvas/ai-bgColor.svg';
 import IconText from '../../assets/svg/freecanvas/type.svg';
 import IconImage from '../../assets/svg/freecanvas/image-filled.svg';
+import IconForm from '../../assets/svg/freecanvas/form-filled.svg';
 import IconStyle from '../../assets/svg/aiStyle.svg';
 import IconLoading from '../../assets/svg/freecanvas/ai-generation-loading.svg';
 import generateId from '../../utils/generateId';
@@ -46,6 +47,7 @@ import ShapeCircle from '../../assets/svg/freecanvas/shapecircle.svg';
 import ShapeTriangle from '../../assets/svg/freecanvas/shapetriangle.svg';
 import ShapeStar from '../../assets/svg/freecanvas/shapestar.svg';
 import ShapeRectangle from '../../assets/svg/freecanvas/shaperectangle.svg';
+import FormField from './left-panel-elements/FormField';
 
 const NewLeftPanel = ({
   isAiGenerationLoading,
@@ -111,6 +113,11 @@ const NewLeftPanel = ({
       roundedCorners: 0,
       url: '',
     });
+    setActiveElement(itemID);
+  };
+
+  const handleAddFieldsClick = () => {
+    const itemID = generateId();
     setActiveElement(itemID);
   };
 
@@ -734,6 +741,20 @@ const NewLeftPanel = ({
       id: 'Image',
       name: 'Image',
       label: 'Image',
+    },
+    {
+      content: () => (
+        <div className="new-left-panel-content">
+          <div className="new-left-panel-section">
+            <Searchbox type="field" />
+            <FormField />
+          </div>
+        </div>
+      ),
+      icon: <IconForm className="w-6 h-6" />,
+      id: 'Fields',
+      name: 'Fields',
+      label: 'Fields',
     },
     {
       content: () => (
