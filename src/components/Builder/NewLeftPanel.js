@@ -28,6 +28,7 @@ import IconTemplate5 from '../../assets/svg/freecanvas/template-5.svg';
 import IconTemplate6 from '../../assets/svg/freecanvas/template-6.svg';
 import IconTemplate7 from '../../assets/svg/freecanvas/template-7.svg';
 import IconTemplate8 from '../../assets/svg/freecanvas/template-8.svg';
+import Searchbox from './left-panel-elements/Searchbox';
 
 const NewLeftPanel = ({
   isAiGenerationLoading,
@@ -231,6 +232,7 @@ const NewLeftPanel = ({
       content: () => (
         <div className="new-left-panel-content">
           <div className="new-left-panel-section">
+            <Searchbox type="shape" />
             <h3>Basic Shapes</h3>
             <div className="shapes-grid">
               <div
@@ -270,7 +272,7 @@ const NewLeftPanel = ({
       icon: <IconShape className="w-6 h-6" />,
       id: 'Shapes',
       name: 'Shapes',
-      label: 'Shapes',
+      label: 'Shape Tools',
     },
     {
       content: () => (
@@ -684,9 +686,9 @@ NewLeftPanel.propTypes = {
 
 NewLeftPanel.defaultProps = {
   isAiGenerationLoading: false,
-  onAIGenerate: () => {},
-  onItemAdd: () => {},
-  onSettingChange: () => {},
+  onAIGenerate: () => { },
+  onItemAdd: () => { },
+  onSettingChange: () => { },
 };
 
 export default memo(NewLeftPanel);
