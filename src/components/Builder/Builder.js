@@ -75,7 +75,6 @@ const Builder = ({
                 isAiGenerationLoading={isAiGenerationLoading}
                 itemAccessor={itemAccessor}
                 lastScrollPosition={lastScrollPosition}
-                onAIGenerate={onAIGenerate}
                 onItemAdd={onItemAdd}
                 onItemChange={onItemChange}
                 onItemMove={onItemMove}

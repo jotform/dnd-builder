@@ -34,7 +34,6 @@ import DraggableItemLayer from '../DraggableItem/DraggableItemLayer';
 import generateId from '../../utils/generateId';
 import { EVENT_IGNORED_ROLES } from '../../constants/eventIgnoredRoles';
 import ToolbarRenderer from './toolbars';
-import BottomToolbar from './toolbars/BottomToolbar';
 
 const Scene = ({
   additionalPageItems,
@@ -42,7 +41,6 @@ const Scene = ({
   isAiGenerationLoading,
   itemAccessor,
   lastScrollPosition,
-  onAIGenerate,
   onItemAdd,
   onItemChange,
   onItemMove,
@@ -451,12 +449,6 @@ const Scene = ({
               </div>
             </Fragment>
           ))}
-          <BottomToolbar
-            activeElement={activeElement}
-            isAiGenerationLoading={isAiGenerationLoading}
-            onAIGenerate={onAIGenerate}
-            onItemAdd={onItemAdd}
-          />
         </div>
       </div>
       <ZoomControls
@@ -488,7 +480,6 @@ Scene.propTypes = {
   hashCode: PropTypes.string,
   itemAccessor: PropTypes.func,
   lastScrollPosition: PropTypes.number,
-  onAIGenerate: PropTypes.func,
   isAiGenerationLoading: PropTypes.bool,
   onItemAdd: PropTypes.func,
   onItemChange: PropTypes.func,
@@ -509,7 +500,6 @@ Scene.defaultProps = {
   hashCode: '',
   itemAccessor: () => { },
   lastScrollPosition: 0,
-  onAIGenerate: () => { },
   isAiGenerationLoading: false,
   onItemAdd: () => { },
   onItemChange: () => { },
