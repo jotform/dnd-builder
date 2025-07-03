@@ -172,6 +172,7 @@
 .toolbar-button {
   width: 28px;
   height: 28px;
+  transition: 0.1s background-color ease-in;
 
   svg {
     width: 20px;
@@ -182,5 +183,9 @@
   &.bgColor {
     width: 32px;
     height: 32px;
+  }
+
+  &:hover {
+    background-color: #E3E5F5 !important;
   }
 }
