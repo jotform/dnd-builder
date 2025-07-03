@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 const ProcessingAnimation = () => {
   const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
   const [isVisible, setIsVisible] = useState(true);
+  const [isComplete, setIsComplete] = useState(false);
 
   const messages = [
     { id: 1, text: 'Creating the perfect layout for your document...' },
@@ -13,22 +14,31 @@ const ProcessingAnimation = () => {
   ];
 
   useEffect(() => {
+    if (isComplete) return;
+
     const interval = setInterval(() => {
       setIsVisible(false);
 
       setTimeout(() => {
-        setCurrentMessageIndex(prevIndex => (prevIndex === messages.length - 1 ? 0
-          : prevIndex + 1));
+        const nextIndex = currentMessageIndex + 1;
+
+        if (nextIndex >= messages.length) {
+          setIsComplete(true);
+          clearInterval(interval);
+          return;
+        }
+
+        setCurrentMessageIndex(nextIndex);
         setIsVisible(true);
       }, 300);
     }, 2000);
 
     return () => clearInterval(interval);
-  }, [messages.length]);
+  }, [currentMessageIndex, messages.length, isComplete]);
 
   return (
     <div className="">
-      <div className="processing-container">
+      <div className="processing-container processing-animation">
         <div
           className={`font-circular color-navy-700 text-lg line-height-xl 
             font-bold processing-message 

@@ -120,14 +120,15 @@
 }
 
 .processing-message {
-  animation: messageFade 4s ease-in-out infinite;
+  animation-iteration-count: 1;
+  animation: messageFade 5s ease-in-out;
 }
 
 @keyframes messageFade {
   0%,
   20% {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateX(0);
   }
 
   25%,
@@ -165,8 +166,8 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(337deg, transparent 9%, rgba(0, 153, 255, 0.1) 10%, rgba(0, 153, 255, 0.3) 12%, rgba(0, 153, 255, 0.1) 29%, transparent 100%);
-    animation: shimmerWave 3s ease-in-out infinite;
+    background: linear-gradient(360deg, transparent 9%, rgba(0, 153, 255, 0.1) 10%, rgba(0, 153, 255, 0.2) 12%, rgba(0, 153, 255, 0.1) 29%, transparent 100%);
+    animation: shimmerWave 5s ease-in-out infinite;
     pointer-events: none;
   }
 }

@@ -143,12 +143,12 @@ const Page = ({
         }}
       >
         {isAiGenerationLoading ? (
-          <div className="ai-loading-shimmer-wave flex justify-center items-center w-full h-full bg-white overflow-hidden">
-            <div className="flex-1 flex flex-col justify-center items-center gap-36">
+          <div className="fixed ai-loading-shimmer-wave flex justify-center items-center w-full h-full bg-white overflow-hidden">
+            <div className="flex-1 shrink-0 flex flex-col justify-center items-center gap-36">
               <div className="shrink-0">
                 <LoaderStars />
               </div>
-              <ProcessMessage />
+              <ProcessMessage className="h-4" />
             </div>
           </div>
         ) : (
