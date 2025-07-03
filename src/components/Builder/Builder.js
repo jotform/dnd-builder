@@ -66,7 +66,6 @@ const Builder = ({
               onAIGenerate={onAIGenerate}
               onItemAdd={onItemAdd}
               onSettingChange={onSettingChange}
-              settings={settings}
             />
             <DndWrapper>
               <Scene

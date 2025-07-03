@@ -25,12 +25,10 @@ const NewLeftPanel = ({
   onAIGenerate,
   onItemAdd,
   onSettingChange,
-  settings,
 }) => {
   const {
     setActiveElement,
   } = useBuilderContext();
-  console.log('settings', settings);
   const [activeTab, setActiveTab] = useState('Background');
   const [isOpen, setIsOpen] = useState(false);
   const [backgroundSubTab, setBackgroundSubTab] = useState('Colors');
