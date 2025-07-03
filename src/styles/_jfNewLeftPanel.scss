@@ -142,7 +142,6 @@
 }
 
 .new-left-panel-section {
-  margin-bottom: 24px;
 
   h3 {
     color: #ffffff;
@@ -614,6 +613,15 @@
   
   &:active {
     background: #4A147C;
+  }
+
+  &.secondary {
+    background: #DADEF3 !important;
+    color: #343C6A !important;
+
+    &:hover {
+      background: #C8CEED !important;
+    }
   }
 }
 
