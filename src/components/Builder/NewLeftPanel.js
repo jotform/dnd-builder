@@ -29,6 +29,7 @@ import IconTemplate6 from '../../assets/svg/freecanvas/template-6.svg';
 import IconTemplate7 from '../../assets/svg/freecanvas/template-7.svg';
 import IconTemplate8 from '../../assets/svg/freecanvas/template-8.svg';
 import Searchbox from './left-panel-elements/Searchbox';
+import ShowMoreLabel from './left-panel-elements/ShowMoreLabel';
 
 const NewLeftPanel = ({
   isAiGenerationLoading,
@@ -233,6 +234,7 @@ const NewLeftPanel = ({
         <div className="new-left-panel-content">
           <div className="new-left-panel-section">
             <Searchbox type="shape" />
+            <ShowMoreLabel title="Shapes" />
             <h3>Basic Shapes</h3>
             <div className="shapes-grid">
               <div
