@@ -462,7 +462,7 @@ const NewLeftPanel = ({
                 <div className="color-picker-section">
                   <div className="color-picker-gradient">
                     <div className="color-gradient" />
-                    <div className="color-slider" />
+                    {/* <div className="color-slider" /> */}
                   </div>
                   <div className="color-input-section">
                     <input
@@ -560,19 +560,31 @@ const NewLeftPanel = ({
                   <div className="gradient-color-grid">
                     <div
                       className="gradient-color gradient-blue"
-                      onClick={() => handleBackgroundColorChange({ type: 'gradient', reportBackgroundGradientStartColor: '#4A90E2', reportBackgroundGradientEndColor: '#50E3C2' })}
+                      onClick={() => handleBackgroundColorChange({ type: 'gradient', reportBackgroundGradientStartColor: '#4A90E2', reportBackgroundGradientEndColor: '#3E62C8' })}
                     />
                     <div
                       className="gradient-color gradient-purple"
-                      onClick={() => handleBackgroundColorChange({ type: 'gradient', reportBackgroundGradientStartColor: '#BD10E0', reportBackgroundGradientEndColor: '#9013FE' })}
+                      onClick={() => handleBackgroundColorChange({ type: 'gradient', reportBackgroundGradientStartColor: '#BD10E0', reportBackgroundGradientEndColor: '#441664' })}
                     />
                     <div
                       className="gradient-color gradient-green"
-                      onClick={() => handleBackgroundColorChange({ type: 'gradient', reportBackgroundGradientStartColor: '#7ED321', reportBackgroundGradientEndColor: '#417505' })}
+                      onClick={() => handleBackgroundColorChange({ type: 'gradient', reportBackgroundGradientStartColor: '#7ED321', reportBackgroundGradientEndColor: '#365007' })}
                     />
                     <div
                       className="gradient-color gradient-orange"
-                      onClick={() => handleBackgroundColorChange({ type: 'gradient', reportBackgroundGradientStartColor: '#F5A623', reportBackgroundGradientEndColor: '#8B572A' })}
+                      onClick={() => handleBackgroundColorChange({ type: 'gradient', reportBackgroundGradientStartColor: '#F5A623', reportBackgroundGradientEndColor: '#993A00' })}
+                    />
+                    <div
+                      className="gradient-color gradient-teal"
+                      onClick={() => handleBackgroundColorChange({ type: 'gradient', reportBackgroundGradientStartColor: '#007862', reportBackgroundGradientEndColor: '#00DEB5' })}
+                    />
+                    <div
+                      className="gradient-color gradient-blue-teal"
+                      onClick={() => handleBackgroundColorChange({ type: 'gradient', reportBackgroundGradientStartColor: '#0075E3', reportBackgroundGradientEndColor: '#00407D' })}
+                    />
+                    <div
+                      className="gradient-color gradient-red"
+                      onClick={() => handleBackgroundColorChange({ type: 'gradient', reportBackgroundGradientStartColor: '#C90909', reportBackgroundGradientEndColor: '#630404' })}
                     />
                   </div>
                 </div>
@@ -580,41 +592,21 @@ const NewLeftPanel = ({
                   <h4>Style</h4>
                   <div className="style-grid">
                     <div
-                      className="style-item"
+                      className="style-item linear-gradient"
                       onClick={() => handleBackgroundColorChange({ type: 'gradient', reportBackgroundGradientDirection: 'to right' })}
-                    >
-                      to right
-                    </div>
+                    />
                     <div
-                      className="style-item"
-                      onClick={() => handleBackgroundColorChange({ type: 'gradient', reportBackgroundGradientDirection: 'to bottom' })}
-                    >
-                      to bottom
-                    </div>
-                    <div
-                      className="style-item"
-                      onClick={() => handleBackgroundColorChange({ type: 'gradient', reportBackgroundGradientDirection: 'to top' })}
-                    >
-                      to top
-                    </div>
-                    <div
-                      className="style-item"
-                      onClick={() => handleBackgroundColorChange({ type: 'gradient', reportBackgroundGradientDirection: 'to bottom right' })}
-                    >
-                      to bottom right
-                    </div>
-                    <div
-                      className="style-item"
-                      onClick={() => handleBackgroundColorChange({ type: 'gradient', reportBackgroundGradientDirection: 'to bottom left' })}
-                    >
-                      to bottom left
-                    </div>
-                    <div
-                      className="style-item"
+                      className="style-item radial-gradient"
                       onClick={() => handleBackgroundColorChange({ type: 'gradient', reportBackgroundGradientDirection: 'radial' })}
-                    >
-                      radial
-                    </div>
+                    />
+                    <div
+                      className="style-item conic-gradient"
+                      onClick={() => handleBackgroundColorChange({ type: 'gradient', reportBackgroundGradientDirection: 'to top' })}
+                    />
+                    <div
+                      className="style-item diamond-gradient"
+                      onClick={() => handleBackgroundColorChange({ type: 'gradient', reportBackgroundGradientDirection: 'to bottom center' })}
+                    />
                   </div>
                 </div>
               </div>
