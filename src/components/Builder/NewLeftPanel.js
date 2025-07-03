@@ -20,6 +20,14 @@ import IconStyle from '../../assets/svg/aiStyle.svg';
 import IconLoading from '../../assets/svg/freecanvas/ai-generation-loading.svg';
 import generateId from '../../utils/generateId';
 import { useBuilderContext } from '../../utils/builderContext';
+import IconTemplate1 from '../../assets/svg/freecanvas/template-1.svg';
+import IconTemplate2 from '../../assets/svg/freecanvas/template-2.svg';
+import IconTemplate3 from '../../assets/svg/freecanvas/template-3.svg';
+import IconTemplate4 from '../../assets/svg/freecanvas/template-4.svg';
+import IconTemplate5 from '../../assets/svg/freecanvas/template-5.svg';
+import IconTemplate6 from '../../assets/svg/freecanvas/template-6.svg';
+import IconTemplate7 from '../../assets/svg/freecanvas/template-7.svg';
+import IconTemplate8 from '../../assets/svg/freecanvas/template-8.svg';
 
 const NewLeftPanel = ({
   isAiGenerationLoading,
@@ -168,10 +176,48 @@ const NewLeftPanel = ({
           <div className="new-left-panel-section">
             <h3>Templates</h3>
             <div className="template-grid">
-              <div className="template-item">Basic</div>
-              <div className="template-item">Modern</div>
-              <div className="template-item">Classic</div>
-              <div className="template-item">Minimal</div>
+              <div className="template-item">
+                <div className="template-item-image">
+                  <IconTemplate1 />
+                </div>
+              </div>
+              <div className="template-item">
+                <div className="template-item-image">
+                  <IconTemplate2 />
+                </div>
+              </div>
+              <div className="template-item">
+                <div className="template-item-image">
+                  <IconTemplate3 />
+                </div>
+              </div>
+              <div className="template-item">
+                <div className="template-item-image">
+                  <IconTemplate4 />
+                </div>
+              </div>
+            </div>
+            <div className="template-grid">
+              <div className="template-item">
+                <div className="template-item-image">
+                  <IconTemplate5 />
+                </div>
+              </div>
+              <div className="template-item">
+                <div className="template-item-image">
+                  <IconTemplate6 />
+                </div>
+              </div>
+              <div className="template-item">
+                <div className="template-item-image">
+                  <IconTemplate7 />
+                </div>
+              </div>
+              <div className="template-item">
+                <div className="template-item-image">
+                  <IconTemplate8 />
+                </div>
+              </div>
             </div>
           </div>
         </div>
