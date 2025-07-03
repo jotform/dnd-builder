@@ -1,4 +1,7 @@
 /* stylelint-disable */
+* {
+  box-sizing: border-box;
+}
 
 .new-left-panel {
   position: relative;
@@ -195,15 +198,16 @@
 
 .bg-tab {
   flex: 1;
-  padding: 8px 12px;
+  padding: 16px;
   background: transparent;
   border: none;
-  color: #a0aec0;
+  color: #BFC3CE;
   cursor: pointer;
   font-size: 14px;
   font-weight: 400;
   transition: all 0.2s ease;
   border-bottom: 4px solid transparent;
+  height: 48px;
 
   &:hover {
     color: #ffffff;
@@ -211,6 +215,7 @@
 
   &.active {
    border-bottom: 4px solid #3E62C8 !important;
+   color: #ffffff;
   }
 }
 
@@ -552,8 +557,6 @@
 }
 
 .background-content {
-  padding-top: 8px;
-
   h4 {
     font-family: Circular !important;
     color: #A0A6B6 !important;

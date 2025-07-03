@@ -48,6 +48,14 @@ import ShapeTriangle from '../../assets/svg/freecanvas/shapetriangle.svg';
 import ShapeStar from '../../assets/svg/freecanvas/shapestar.svg';
 import ShapeRectangle from '../../assets/svg/freecanvas/shaperectangle.svg';
 import FormField from './left-panel-elements/FormField';
+import IconBackground1 from '../../assets/svg/freecanvas/templateBg1.svg';
+import IconBackground2 from '../../assets/svg/freecanvas/templatebg2.svg';
+import IconBackground3 from '../../assets/svg/freecanvas/templateBg3.svg';
+import IconBackground4 from '../../assets/svg/freecanvas/templateBg4.svg';
+import IconBackground5 from '../../assets/svg/freecanvas/templateBg5.svg';
+import IconBackground6 from '../../assets/svg/freecanvas/templateBg6.svg';
+import IconBackground7 from '../../assets/svg/freecanvas/templateBg7.svg';
+import IconBackground8 from '../../assets/svg/freecanvas/templateBg8.svg';
 
 const NewLeftPanel = ({
   isAiGenerationLoading,
@@ -389,33 +397,49 @@ const NewLeftPanel = ({
 
             {backgroundSubTab === 'Photos' && (
               <div className="background-content">
-                <div className="file-upload-section">
-                  <div className="file-upload-area">
-                    <div className="file-upload-icon">📷</div>
-                    <h4>Upload Photos</h4>
-                    <p>Drag and drop your images here, or click to browse</p>
-                    <button
-                      className="file-upload-button"
-                      type="button"
-                    >
-                      Choose Files
-                    </button>
+                <Searchbox type="background" />
+                <div className="template-grid">
+                  <div className="template-item">
+                    <div className="template-item-image">
+                      <IconBackground1 />
+                    </div>
                   </div>
-                </div>
-                <div className="recent-photos">
-                  <h4>Recent Photos</h4>
-                  <div className="photo-grid">
-                    <div className="photo-item">
-                      <div className="photo-placeholder">📸</div>
+                  <div className="template-item">
+                    <div className="template-item-image">
+                      <IconBackground1 />
                     </div>
-                    <div className="photo-item">
-                      <div className="photo-placeholder">📸</div>
+                  </div>
+                  <div className="template-item">
+                    <div className="template-item-image">
+                      <IconBackground2 />
                     </div>
-                    <div className="photo-item">
-                      <div className="photo-placeholder">📸</div>
+                  </div>
+                  <div className="template-item">
+                    <IconBackground3 />
+                  </div>
+                  <div className="template-item">
+                    <div className="template-item-image">
+                      <IconBackground4 />
                     </div>
-                    <div className="photo-item">
-                      <div className="photo-placeholder">📸</div>
+                  </div>
+                  <div className="template-item">
+                    <div className="template-item-image">
+                      <IconBackground5 />
+                    </div>
+                  </div>
+                  <div className="template-item">
+                    <div className="template-item-image">
+                      <IconBackground6 />
+                    </div>
+                  </div>
+                  <div className="template-item">
+                    <div className="template-item-image">
+                      <IconBackground7 />
+                    </div>
+                  </div>
+                  <div className="template-item">
+                    <div className="template-item-image">
+                      <IconBackground8 />
                     </div>
                   </div>
                 </div>
