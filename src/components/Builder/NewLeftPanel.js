@@ -56,6 +56,8 @@ import IconBackground5 from '../../assets/svg/freecanvas/templateBg5.svg';
 import IconBackground6 from '../../assets/svg/freecanvas/templateBg6.svg';
 import IconBackground7 from '../../assets/svg/freecanvas/templateBg7.svg';
 import IconBackground8 from '../../assets/svg/freecanvas/templateBg8.svg';
+import IconSummer1 from '../../assets/svg/freecanvas/summer1.svg';
+import IconSummer2 from '../../assets/svg/freecanvas/summer2.svg';
 
 const NewLeftPanel = ({
   isAiGenerationLoading,
@@ -706,6 +708,21 @@ const NewLeftPanel = ({
                   <div className="template-item">
                     <div className="template-item-image">
                       <IconTextPhoto4 />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="new-left-panel-section">
+                <ShowMoreLabel title="Summer" />
+                <div className="template-grid">
+                  <div className="template-item">
+                    <div className="template-item-image">
+                      <IconSummer1 />
+                    </div>
+                  </div>
+                  <div className="template-item">
+                    <div className="template-item-image">
+                      <IconSummer2 />
                     </div>
                   </div>
                 </div>
