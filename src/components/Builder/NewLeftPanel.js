@@ -15,6 +15,7 @@ import IconAiStars from '../../assets/svg/freecanvas/ai-stars.svg';
 import IconTemplates from '../../assets/svg/freecanvas/templates.svg';
 import IconBgColor from '../../assets/svg/freecanvas/ai-bgColor.svg';
 import IconText from '../../assets/svg/freecanvas/type.svg';
+import IconImage from '../../assets/svg/freecanvas/image-filled.svg';
 import IconStyle from '../../assets/svg/aiStyle.svg';
 import IconLoading from '../../assets/svg/freecanvas/ai-generation-loading.svg';
 import generateId from '../../utils/generateId';
@@ -50,7 +51,7 @@ const NewLeftPanel = ({
       pageID: '1',
       shapeType: shape,
       top: 0,
-      height: 200,
+      height: shape === 'line' ? 30 : 200,
       width: 200,
     });
     setActiveElement(itemID);
@@ -66,6 +67,23 @@ const NewLeftPanel = ({
       top: 0,
       height: 65,
       width: 350,
+    });
+    setActiveElement(itemID);
+  };
+
+  const handleAddImageClick = () => {
+    const itemID = generateId();
+    onItemAdd({
+      id: itemID,
+      itemType: 'image',
+      left: 0,
+      pageID: '1',
+      top: 0,
+      height: 400,
+      width: 400,
+      opacity: 1,
+      roundedCorners: 0,
+      url: '',
     });
     setActiveElement(itemID);
   };
@@ -496,6 +514,27 @@ const NewLeftPanel = ({
       id: 'Text',
       name: 'Text',
       label: 'Text',
+    },
+    {
+      content: () => (
+        <div className="new-left-panel-content">
+          <div className="new-left-panel-section">
+            <button
+              className="ai-generate-button"
+              onClick={() => handleAddImageClick()}
+              type="button"
+            >
+              <span>
+                + Add a New Image
+              </span>
+            </button>
+          </div>
+        </div>
+      ),
+      icon: <IconImage className="w-6 h-6" />,
+      id: 'Image',
+      name: 'Image',
+      label: 'Image',
     },
     {
       content: () => (
