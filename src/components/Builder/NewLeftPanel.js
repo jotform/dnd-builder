@@ -627,12 +627,26 @@ const NewLeftPanel = ({
             <div className="new-left-panel-section">
               <Searchbox type="font style" />
               <button
-                className="ai-generate-button secondary"
+                className="ai-generate-button secondary inline-flex gap-2"
                 onClick={() => handleAddTextClick()}
                 type="button"
               >
-                <span>
-                  + Add a New Text
+                <svg
+                  fill="none"
+                  height="20"
+                  viewBox="0 0 21 20"
+                  width="21"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    clipRule="evenodd"
+                    d="M11.3333 4.16683C11.3333 3.70659 10.9602 3.3335 10.4999 3.3335C10.0397 3.3335 9.66658 3.70659 9.66658 4.16683V9.16683H4.66659C4.20635 9.16683 3.83325 9.53993 3.83325 10.0002C3.83325 10.4604 4.20635 10.8335 4.66659 10.8335H9.66658V15.8335C9.66658 16.2937 10.0397 16.6668 10.4999 16.6668C10.9602 16.6668 11.3333 16.2937 11.3333 15.8335V10.8335H16.3333C16.7935 10.8335 17.1666 10.4604 17.1666 10.0002C17.1666 9.53993 16.7935 9.16683 16.3333 9.16683H11.3333V4.16683Z"
+                    fill="#343C6A"
+                    fillRule="evenodd"
+                  />
+                </svg>
+                <span className="font-circular">
+                  Add a New Text
                 </span>
               </button>
             </div>
@@ -691,12 +705,12 @@ const NewLeftPanel = ({
         <div className="new-left-panel-content">
           <div className="new-left-panel-section">
             <button
-              className="ai-generate-button"
+              className="ai-generate-button inline-flex gap-2"
               onClick={() => handleAddImageClick()}
               type="button"
             >
               <svg
-                fill="none"
+                fill="currentColor"
                 height="20"
                 viewBox="0 0 21 20"
                 width="21"
@@ -705,12 +719,11 @@ const NewLeftPanel = ({
                 <path
                   clipRule="evenodd"
                   d="M11.3333 4.16683C11.3333 3.70659 10.9602 3.3335 10.4999 3.3335C10.0397 3.3335 9.66658 3.70659 9.66658 4.16683V9.16683H4.66659C4.20635 9.16683 3.83325 9.53993 3.83325 10.0002C3.83325 10.4604 4.20635 10.8335 4.66659 10.8335H9.66658V15.8335C9.66658 16.2937 10.0397 16.6668 10.4999 16.6668C10.9602 16.6668 11.3333 16.2937 11.3333 15.8335V10.8335H16.3333C16.7935 10.8335 17.1666 10.4604 17.1666 10.0002C17.1666 9.53993 16.7935 9.16683 16.3333 9.16683H11.3333V4.16683Z"
-                  fill="#343C6A"
+                  fill="#fff"
                   fillRule="evenodd"
                 />
               </svg>
-
-              <span>
+              <span className="font-circular">
                 Add a New Image
               </span>
             </button>
