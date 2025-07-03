@@ -83,6 +83,12 @@
     opacity: 0;
     visibility: hidden;
   }
+
+  &:has(.background-tabs) {
+    .new-left-panel-content {
+      border-radius: 0 ;
+    }
+  }
 }
 
 .new-left-panel-header {
@@ -124,7 +130,7 @@
 .new-left-panel-content {
   border-top-left-radius: 16px;
   background-color: #292D3C;
-  padding: 20px;
+  padding: 16px;
   height: calc(100vh - 80px);
   overflow-y: auto;
   border-radius: 16px 0px 0px 0px;
@@ -187,10 +193,9 @@
 .background-tabs {
   display: flex;
   background: #292D3C;
-  border-radius: 6px;
-  padding: 4px;
-  margin-bottom: 16px;
+  border-radius: 16px 0px 0px 0px;
 }
+
 
 .bg-tab {
   flex: 1;
@@ -204,6 +209,7 @@
   transition: all 0.2s ease;
   border-bottom: 4px solid transparent !important;
   height: 48px;
+
 
   &:hover {
     color: #ffffff;

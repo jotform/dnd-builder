@@ -316,12 +316,6 @@ const NewLeftPanel = ({
                 className="shape-item rectangle"
                 onClick={() => handleShapeClick('rectangle')}
               />
-              {/* <div
-                className="shape-item line"
-                onClick={() => handleShapeClick('line')}
-              >
-                <ShapeCircle />
-              </div> */}
             </div>
             <ShowMoreLabel title="Photo" />
             <div className="template-grid mb-2">
@@ -369,274 +363,276 @@ const NewLeftPanel = ({
     },
     {
       content: () => (
-        <div className="new-left-panel-content">
-          <div className="new-left-panel-section">
-            <div className="background-tabs">
-              <button
-                className={classNames('bg-tab', { active: backgroundSubTab === 'Photos' })}
-                onClick={() => setBackgroundSubTab('Photos')}
-                type="button"
-              >
-                Photos
-              </button>
-              <button
-                className={classNames('bg-tab', { active: backgroundSubTab === 'Videos' })}
-                onClick={() => setBackgroundSubTab('Videos')}
-                type="button"
-              >
-                Videos
-              </button>
-              <button
-                className={classNames('bg-tab', { active: backgroundSubTab === 'Colors' })}
-                onClick={() => setBackgroundSubTab('Colors')}
-                type="button"
-              >
-                Colors
-              </button>
-            </div>
-
-            {backgroundSubTab === 'Photos' && (
-              <div className="background-content">
-                <Searchbox type="background" />
-                <div className="template-grid">
-                  <div className="template-item">
-                    <div className="template-item-image">
-                      <IconBackground1 />
-                    </div>
-                  </div>
-                  <div className="template-item">
-                    <div className="template-item-image">
-                      <IconBackground1 />
-                    </div>
-                  </div>
-                  <div className="template-item">
-                    <div className="template-item-image">
-                      <IconBackground2 />
-                    </div>
-                  </div>
-                  <div className="template-item">
-                    <IconBackground3 />
-                  </div>
-                  <div className="template-item">
-                    <div className="template-item-image">
-                      <IconBackground4 />
-                    </div>
-                  </div>
-                  <div className="template-item">
-                    <div className="template-item-image">
-                      <IconBackground5 />
-                    </div>
-                  </div>
-                  <div className="template-item">
-                    <div className="template-item-image">
-                      <IconBackground6 />
-                    </div>
-                  </div>
-                  <div className="template-item">
-                    <div className="template-item-image">
-                      <IconBackground7 />
-                    </div>
-                  </div>
-                  <div className="template-item">
-                    <div className="template-item-image">
-                      <IconBackground8 />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {backgroundSubTab === 'Videos' && (
-              <div className="background-content">
-                <div className="file-upload-section">
-                  <div className="file-upload-area">
-                    <div className="file-upload-icon">🎥</div>
-                    <h4>Upload Videos</h4>
-                    <p>Drag and drop your videos here, or click to browse</p>
-                    <button
-                      className="file-upload-button"
-                      type="button"
-                    >
-                      Choose Files
-                    </button>
-                  </div>
-                </div>
-                <div className="recent-videos">
-                  <h4>Recent Videos</h4>
-                  <div className="video-grid">
-                    <div className="video-item">
-                      <div className="video-placeholder">🎬</div>
-                    </div>
-                    <div className="video-item">
-                      <div className="video-placeholder">🎬</div>
-                    </div>
-                    <div className="video-item">
-                      <div className="video-placeholder">🎬</div>
-                    </div>
-                    <div className="video-item">
-                      <div className="video-placeholder">🎬</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {backgroundSubTab === 'Colors' && (
-              <div className="background-content">
-                <div className="color-picker-section">
-                  <div className="color-picker-gradient">
-                    <div className="color-gradient" />
-                    {/* <div className="color-slider" /> */}
-                  </div>
-                  <div className="color-input-section">
-                    <input
-                      className="color-input"
-                      type="text"
-                      value="#FFFFFF"
-                    />
-                    <div className="color-preview" />
-                  </div>
-                </div>
-                <div className="brand-colors">
-                  <h4>Brand kit</h4>
-                  <div className="brand-color-grid">
-                    <div
-                      className="brand-color orange"
-                      onClick={() => handleBackgroundColorChange({ type: 'solid', reportBackgroundColor: '#F5A623' })}
-                    />
-                    <div
-                      className="brand-color red"
-                      onClick={() => handleBackgroundColorChange({ type: 'solid', reportBackgroundColor: '#D0021B' })}
-                    />
-                    <div
-                      className="brand-color blue"
-                      onClick={() => handleBackgroundColorChange({ type: 'solid', reportBackgroundColor: '#4A90E2' })}
-                    />
-                    <div
-                      className="brand-color dark-blue"
-                      onClick={() => handleBackgroundColorChange({ type: 'solid', reportBackgroundColor: '#000000' })}
-                    />
-                  </div>
-                </div>
-                <div className="solid-colors">
-                  <h4>Solid colors</h4>
-                  <div className="solid-color-grid">
-                    <div
-                      className="solid-color red"
-                      onClick={() => handleBackgroundColorChange({ type: 'solid', reportBackgroundColor: '#D0021B' })}
-                    />
-                    <div
-                      className="solid-color orange"
-                      onClick={() => handleBackgroundColorChange({ type: 'solid', reportBackgroundColor: '#F5A623' })}
-                    />
-                    <div
-                      className="solid-color yellow"
-                      onClick={() => handleBackgroundColorChange({ type: 'solid', reportBackgroundColor: '#F8E71C' })}
-                    />
-                    <div
-                      className="solid-color brown"
-                      onClick={() => handleBackgroundColorChange({ type: 'solid', reportBackgroundColor: '#8B572A' })}
-                    />
-                    <div
-                      className="solid-color green"
-                      onClick={() => handleBackgroundColorChange({ type: 'solid', reportBackgroundColor: '#7ED321' })}
-                    />
-                    <div
-                      className="solid-color dark-green"
-                      onClick={() => handleBackgroundColorChange({ type: 'solid', reportBackgroundColor: '#417505' })}
-                    />
-                    <div
-                      className="solid-color purple"
-                      onClick={() => handleBackgroundColorChange({ type: 'solid', reportBackgroundColor: '#BD10E0' })}
-                    />
-                    <div
-                      className="solid-color blue"
-                      onClick={() => handleBackgroundColorChange({ type: 'solid', reportBackgroundColor: '#4A90E2' })}
-                    />
-                    <div
-                      className="solid-color teal"
-                      onClick={() => handleBackgroundColorChange({ type: 'solid', reportBackgroundColor: '#50E3C2' })}
-                    />
-                    <div
-                      className="solid-color lime"
-                      onClick={() => handleBackgroundColorChange({ type: 'solid', reportBackgroundColor: '#B8E986' })}
-                    />
-                    <div
-                      className="solid-color black"
-                      onClick={() => handleBackgroundColorChange({ type: 'solid', reportBackgroundColor: '#000000' })}
-                    />
-                    <div
-                      className="solid-color gray"
-                      onClick={() => handleBackgroundColorChange({ type: 'solid', reportBackgroundColor: '#4A4A4A' })}
-                    />
-                    <div
-                      className="solid-color light-gray"
-                      onClick={() => handleBackgroundColorChange({ type: 'solid', reportBackgroundColor: '#9B9B9B' })}
-                    />
-                    <div
-                      className="solid-color white"
-                      onClick={() => handleBackgroundColorChange({ type: 'solid', reportBackgroundColor: '#FFFFFF' })}
-                    />
-                  </div>
-                </div>
-                <div className="gradient-colors">
-                  <h4>Gradient colors</h4>
-                  <div className="gradient-color-grid">
-                    <div
-                      className="gradient-color gradient-blue"
-                      onClick={() => handleBackgroundColorChange({ type: 'gradient', reportBackgroundGradientStartColor: '#4A90E2', reportBackgroundGradientEndColor: '#3E62C8' })}
-                    />
-                    <div
-                      className="gradient-color gradient-purple"
-                      onClick={() => handleBackgroundColorChange({ type: 'gradient', reportBackgroundGradientStartColor: '#BD10E0', reportBackgroundGradientEndColor: '#441664' })}
-                    />
-                    <div
-                      className="gradient-color gradient-green"
-                      onClick={() => handleBackgroundColorChange({ type: 'gradient', reportBackgroundGradientStartColor: '#7ED321', reportBackgroundGradientEndColor: '#365007' })}
-                    />
-                    <div
-                      className="gradient-color gradient-orange"
-                      onClick={() => handleBackgroundColorChange({ type: 'gradient', reportBackgroundGradientStartColor: '#F5A623', reportBackgroundGradientEndColor: '#993A00' })}
-                    />
-                    <div
-                      className="gradient-color gradient-teal"
-                      onClick={() => handleBackgroundColorChange({ type: 'gradient', reportBackgroundGradientStartColor: '#007862', reportBackgroundGradientEndColor: '#00DEB5' })}
-                    />
-                    <div
-                      className="gradient-color gradient-blue-teal"
-                      onClick={() => handleBackgroundColorChange({ type: 'gradient', reportBackgroundGradientStartColor: '#0075E3', reportBackgroundGradientEndColor: '#00407D' })}
-                    />
-                    <div
-                      className="gradient-color gradient-red"
-                      onClick={() => handleBackgroundColorChange({ type: 'gradient', reportBackgroundGradientStartColor: '#C90909', reportBackgroundGradientEndColor: '#630404' })}
-                    />
-                  </div>
-                </div>
-                <div className="style-section">
-                  <h4>Style</h4>
-                  <div className="style-grid">
-                    <div
-                      className="style-item linear-gradient"
-                      onClick={() => handleBackgroundColorChange({ type: 'gradient', reportBackgroundGradientDirection: 'to right' })}
-                    />
-                    <div
-                      className="style-item radial-gradient"
-                      onClick={() => handleBackgroundColorChange({ type: 'gradient', reportBackgroundGradientDirection: 'radial' })}
-                    />
-                    <div
-                      className="style-item conic-gradient"
-                      onClick={() => handleBackgroundColorChange({ type: 'gradient', reportBackgroundGradientDirection: 'to top' })}
-                    />
-                    <div
-                      className="style-item diamond-gradient"
-                      onClick={() => handleBackgroundColorChange({ type: 'gradient', reportBackgroundGradientDirection: 'to bottom center' })}
-                    />
-                  </div>
-                </div>
-              </div>
-            )}
+        <>
+          <div className="background-tabs">
+            <button
+              className={classNames('bg-tab', { active: backgroundSubTab === 'Photos' })}
+              onClick={() => setBackgroundSubTab('Photos')}
+              type="button"
+            >
+              Photos
+            </button>
+            <button
+              className={classNames('bg-tab', { active: backgroundSubTab === 'Videos' })}
+              onClick={() => setBackgroundSubTab('Videos')}
+              type="button"
+            >
+              Videos
+            </button>
+            <button
+              className={classNames('bg-tab', { active: backgroundSubTab === 'Colors' })}
+              onClick={() => setBackgroundSubTab('Colors')}
+              type="button"
+            >
+              Colors
+            </button>
           </div>
-        </div>
+          <div className="new-left-panel-content">
+            <div className="new-left-panel-section">
+
+              {backgroundSubTab === 'Photos' && (
+                <div className="background-content">
+                  <Searchbox type="background" />
+                  <div className="template-grid">
+                    <div className="template-item">
+                      <div className="template-item-image">
+                        <IconBackground1 />
+                      </div>
+                    </div>
+                    <div className="template-item">
+                      <div className="template-item-image">
+                        <IconBackground1 />
+                      </div>
+                    </div>
+                    <div className="template-item">
+                      <div className="template-item-image">
+                        <IconBackground2 />
+                      </div>
+                    </div>
+                    <div className="template-item">
+                      <IconBackground3 />
+                    </div>
+                    <div className="template-item">
+                      <div className="template-item-image">
+                        <IconBackground4 />
+                      </div>
+                    </div>
+                    <div className="template-item">
+                      <div className="template-item-image">
+                        <IconBackground5 />
+                      </div>
+                    </div>
+                    <div className="template-item">
+                      <div className="template-item-image">
+                        <IconBackground6 />
+                      </div>
+                    </div>
+                    <div className="template-item">
+                      <div className="template-item-image">
+                        <IconBackground7 />
+                      </div>
+                    </div>
+                    <div className="template-item">
+                      <div className="template-item-image">
+                        <IconBackground8 />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {backgroundSubTab === 'Videos' && (
+                <div className="background-content">
+                  <div className="file-upload-section">
+                    <div className="file-upload-area">
+                      <div className="file-upload-icon">🎥</div>
+                      <h4>Upload Videos</h4>
+                      <p>Drag and drop your videos here, or click to browse</p>
+                      <button
+                        className="file-upload-button"
+                        type="button"
+                      >
+                        Choose Files
+                      </button>
+                    </div>
+                  </div>
+                  <div className="recent-videos">
+                    <h4>Recent Videos</h4>
+                    <div className="video-grid">
+                      <div className="video-item">
+                        <div className="video-placeholder">🎬</div>
+                      </div>
+                      <div className="video-item">
+                        <div className="video-placeholder">🎬</div>
+                      </div>
+                      <div className="video-item">
+                        <div className="video-placeholder">🎬</div>
+                      </div>
+                      <div className="video-item">
+                        <div className="video-placeholder">🎬</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {backgroundSubTab === 'Colors' && (
+                <div className="background-content">
+                  <div className="color-picker-section">
+                    <div className="color-picker-gradient">
+                      <div className="color-gradient" />
+                      {/* <div className="color-slider" /> */}
+                    </div>
+                    <div className="color-input-section">
+                      <input
+                        className="color-input"
+                        type="text"
+                        value="#FFFFFF"
+                      />
+                      <div className="color-preview" />
+                    </div>
+                  </div>
+                  <div className="brand-colors">
+                    <h4>Brand kit</h4>
+                    <div className="brand-color-grid">
+                      <div
+                        className="brand-color orange"
+                        onClick={() => handleBackgroundColorChange({ type: 'solid', reportBackgroundColor: '#F5A623' })}
+                      />
+                      <div
+                        className="brand-color red"
+                        onClick={() => handleBackgroundColorChange({ type: 'solid', reportBackgroundColor: '#D0021B' })}
+                      />
+                      <div
+                        className="brand-color blue"
+                        onClick={() => handleBackgroundColorChange({ type: 'solid', reportBackgroundColor: '#4A90E2' })}
+                      />
+                      <div
+                        className="brand-color dark-blue"
+                        onClick={() => handleBackgroundColorChange({ type: 'solid', reportBackgroundColor: '#000000' })}
+                      />
+                    </div>
+                  </div>
+                  <div className="solid-colors">
+                    <h4>Solid colors</h4>
+                    <div className="solid-color-grid">
+                      <div
+                        className="solid-color red"
+                        onClick={() => handleBackgroundColorChange({ type: 'solid', reportBackgroundColor: '#D0021B' })}
+                      />
+                      <div
+                        className="solid-color orange"
+                        onClick={() => handleBackgroundColorChange({ type: 'solid', reportBackgroundColor: '#F5A623' })}
+                      />
+                      <div
+                        className="solid-color yellow"
+                        onClick={() => handleBackgroundColorChange({ type: 'solid', reportBackgroundColor: '#F8E71C' })}
+                      />
+                      <div
+                        className="solid-color brown"
+                        onClick={() => handleBackgroundColorChange({ type: 'solid', reportBackgroundColor: '#8B572A' })}
+                      />
+                      <div
+                        className="solid-color green"
+                        onClick={() => handleBackgroundColorChange({ type: 'solid', reportBackgroundColor: '#7ED321' })}
+                      />
+                      <div
+                        className="solid-color dark-green"
+                        onClick={() => handleBackgroundColorChange({ type: 'solid', reportBackgroundColor: '#417505' })}
+                      />
+                      <div
+                        className="solid-color purple"
+                        onClick={() => handleBackgroundColorChange({ type: 'solid', reportBackgroundColor: '#BD10E0' })}
+                      />
+                      <div
+                        className="solid-color blue"
+                        onClick={() => handleBackgroundColorChange({ type: 'solid', reportBackgroundColor: '#4A90E2' })}
+                      />
+                      <div
+                        className="solid-color teal"
+                        onClick={() => handleBackgroundColorChange({ type: 'solid', reportBackgroundColor: '#50E3C2' })}
+                      />
+                      <div
+                        className="solid-color lime"
+                        onClick={() => handleBackgroundColorChange({ type: 'solid', reportBackgroundColor: '#B8E986' })}
+                      />
+                      <div
+                        className="solid-color black"
+                        onClick={() => handleBackgroundColorChange({ type: 'solid', reportBackgroundColor: '#000000' })}
+                      />
+                      <div
+                        className="solid-color gray"
+                        onClick={() => handleBackgroundColorChange({ type: 'solid', reportBackgroundColor: '#4A4A4A' })}
+                      />
+                      <div
+                        className="solid-color light-gray"
+                        onClick={() => handleBackgroundColorChange({ type: 'solid', reportBackgroundColor: '#9B9B9B' })}
+                      />
+                      <div
+                        className="solid-color white"
+                        onClick={() => handleBackgroundColorChange({ type: 'solid', reportBackgroundColor: '#FFFFFF' })}
+                      />
+                    </div>
+                  </div>
+                  <div className="gradient-colors">
+                    <h4>Gradient colors</h4>
+                    <div className="gradient-color-grid">
+                      <div
+                        className="gradient-color gradient-blue"
+                        onClick={() => handleBackgroundColorChange({ type: 'gradient', reportBackgroundGradientStartColor: '#4A90E2', reportBackgroundGradientEndColor: '#3E62C8' })}
+                      />
+                      <div
+                        className="gradient-color gradient-purple"
+                        onClick={() => handleBackgroundColorChange({ type: 'gradient', reportBackgroundGradientStartColor: '#BD10E0', reportBackgroundGradientEndColor: '#441664' })}
+                      />
+                      <div
+                        className="gradient-color gradient-green"
+                        onClick={() => handleBackgroundColorChange({ type: 'gradient', reportBackgroundGradientStartColor: '#7ED321', reportBackgroundGradientEndColor: '#365007' })}
+                      />
+                      <div
+                        className="gradient-color gradient-orange"
+                        onClick={() => handleBackgroundColorChange({ type: 'gradient', reportBackgroundGradientStartColor: '#F5A623', reportBackgroundGradientEndColor: '#993A00' })}
+                      />
+                      <div
+                        className="gradient-color gradient-teal"
+                        onClick={() => handleBackgroundColorChange({ type: 'gradient', reportBackgroundGradientStartColor: '#007862', reportBackgroundGradientEndColor: '#00DEB5' })}
+                      />
+                      <div
+                        className="gradient-color gradient-blue-teal"
+                        onClick={() => handleBackgroundColorChange({ type: 'gradient', reportBackgroundGradientStartColor: '#0075E3', reportBackgroundGradientEndColor: '#00407D' })}
+                      />
+                      <div
+                        className="gradient-color gradient-red"
+                        onClick={() => handleBackgroundColorChange({ type: 'gradient', reportBackgroundGradientStartColor: '#C90909', reportBackgroundGradientEndColor: '#630404' })}
+                      />
+                    </div>
+                  </div>
+                  <div className="style-section">
+                    <h4>Style</h4>
+                    <div className="style-grid">
+                      <div
+                        className="style-item linear-gradient"
+                        onClick={() => handleBackgroundColorChange({ type: 'gradient', reportBackgroundGradientDirection: 'to right' })}
+                      />
+                      <div
+                        className="style-item radial-gradient"
+                        onClick={() => handleBackgroundColorChange({ type: 'gradient', reportBackgroundGradientDirection: 'radial' })}
+                      />
+                      <div
+                        className="style-item conic-gradient"
+                        onClick={() => handleBackgroundColorChange({ type: 'gradient', reportBackgroundGradientDirection: 'to top' })}
+                      />
+                      <div
+                        className="style-item diamond-gradient"
+                        onClick={() => handleBackgroundColorChange({ type: 'gradient', reportBackgroundGradientDirection: 'to bottom center' })}
+                      />
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        </>
       ),
       icon: <IconBgColor className="w-6 h-6" />,
       id: 'Background',
