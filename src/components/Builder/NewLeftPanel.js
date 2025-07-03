@@ -9,6 +9,12 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import Panel from './Panel';
 import * as icons from '../../utils/icons';
+import IconShape from '../../assets/svg/freecanvas/shape.svg';
+import IconAiStars from '../../assets/svg/freecanvas/ai-stars.svg';
+import IconTemplates from '../../assets/svg/freecanvas/templates.svg';
+import IconBgColor from '../../assets/svg/freecanvas/ai-bgColor.svg';
+import IconText from '../../assets/svg/freecanvas/type.svg';
+import IconStyle from '../../assets/svg/aiStyle.svg';
 
 const NewLeftPanel = ({
   onItemAdd,
@@ -30,12 +36,13 @@ const NewLeftPanel = ({
       content: () => (
         <div className="new-left-panel-content">
           <div className="new-left-panel-section">
-            <div className="ai-input-section">
-              <textarea
-                className="ai-description-input"
-                placeholder="Describe your design"
-                rows={6}
-              />
+            <div className="ai-input-section flex flex-col gap-2">
+              <div className="h-40 flex border outline-2 outline-offset-0 hover:duration-300 focus:duration-300 duration-all-colors hover:shadow-xs color-white bg-gray-500 focus-within:border-blue-500 border-gray-500 outline-transparent hover:border-gray-300 focus-within:outline-blue-500 focus-within:outline-opacity-30 magnet-textarea-container flex-col resize-none radius">
+                <textarea
+                  className="appearance-none bg-transparent grow-1 outline-0 w-full focus-visible-none border-0 text-sm magnet-textarea resize-none p-3 radius"
+                  placeholder="Describe the design"
+                />
+              </div>
               <button
                 className="ai-generate-button"
                 onClick={() => {
@@ -91,7 +98,7 @@ const NewLeftPanel = ({
           </div>
         </div>
       ),
-      icon: '🤖',
+      icon: <IconAiStars className="w-6 h-6" />,
       id: 'AI',
       name: 'AI',
       label: 'Design with AI',
@@ -110,7 +117,7 @@ const NewLeftPanel = ({
           </div>
         </div>
       ),
-      icon: '📋',
+      icon: <IconTemplates className="w-6 h-6" />,
       id: 'Templates',
       name: 'Templates',
       label: 'Templates',
@@ -129,7 +136,7 @@ const NewLeftPanel = ({
           </div>
         </div>
       ),
-      icon: '🔺',
+      icon: <IconShape className="w-6 h-6" />,
       id: 'Shapes',
       name: 'Shapes',
       label: 'Shapes',
@@ -397,7 +404,7 @@ const NewLeftPanel = ({
           </div>
         </div>
       ),
-      icon: '🎨',
+      icon: <IconBgColor className="w-6 h-6" />,
       id: 'Background',
       name: 'Background',
       label: 'Background',
@@ -476,7 +483,7 @@ const NewLeftPanel = ({
           </div>
         </div>
       ),
-      icon: '📝',
+      icon: <IconText className="w-6 h-6" />,
       id: 'Text',
       name: 'Text',
       label: 'Text',
@@ -508,7 +515,7 @@ const NewLeftPanel = ({
           </div>
         </div>
       ),
-      icon: '🎭',
+      icon: <IconStyle className="w-6 h-6" />,
       id: 'Style',
       name: 'Style',
       label: 'Style',

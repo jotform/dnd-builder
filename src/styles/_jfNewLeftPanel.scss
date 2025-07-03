@@ -26,10 +26,9 @@
 .new-left-panel-tabs {
   display: flex;
   flex-direction: column;
-  background: #2d3748;
-  width: 72px;
+  gap: 8px;
+  padding: 16px 10px;
   height: 100vh;
-  border-right: 1px solid #4a5568;
   position: relative;
   z-index: 1001;
 }
@@ -53,33 +52,21 @@
   }
 
   &.active {
-    background: #4299e1;
+    background: #434A60;
     color: #ffffff;
-
-    &::after {
-      content: '';
-      position: absolute;
-      right: 0;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 0;
-      height: 0;
-      border-left: 8px solid #4299e1;
-      border-top: 8px solid transparent;
-      border-bottom: 8px solid transparent;
-    }
   }
   
   .tab-icon {
-    font-size: 20px;
-    margin-bottom: 4px;
+    fill: #A0A6B6;
+    width: 24px;
+    height: 24px;
   }
 
   .tab-name {
     font-size: 10px;
     text-align: center;
-    line-height: 1.2;
-    font-weight: 500;
+    line-height: 16px;
+    font-weight: 700;
   }
 }
 
@@ -138,6 +125,7 @@
   padding: 20px;
   height: calc(100vh - 80px);
   overflow-y: auto;
+  border-radius: 16px 0px 0px 0px;
 
   &::-webkit-scrollbar {
     width: 6px;
@@ -615,26 +603,28 @@
 }
 
 .ai-generate-button {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
   width: 100%;
-  padding: 16px 24px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 0 12px;
+  background: #7923DD !important;
   color: #ffffff;
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  font-size: 16px;
-  font-weight: 600;
+  font-size: 14px;
+  line-height: 16px;
+  font-weight: 700;
+  height: 40px;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
   
   &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+    background: #621CB1;
   }
   
   &:active {
-    transform: translateY(0);
-    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+    background: #4A147C;
   }
 }
 
@@ -680,26 +670,36 @@
 // Dark theme adjustments
 .jfReport.darkMode {
   .new-left-panel-tabs {
-    background: #1a202c;
+    background: #33384A;
     border-right-color: #2d3748;
   }
 
   .new-left-panel-tab {
-    color: #718096;
 
-    &:hover {
-      background: #2d3748;
-      color: #e2e8f0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    width: 64px;
+    height: 64px;
+    border-radius: 4px;
+    
+    &:hover, &.active {
+      background: #434A60;
+      color: #ffffff;
+
+      svg path {
+        fill: #fff;
     }
+  }
   }
   
   .new-left-panel-content-wrapper {
-    background: #0f1419;
+    background: #292D3C;
     border-right-color: #2d3748;
   }
   
   .new-left-panel-header {
-    background: #1a202c;
+    background: #33384A;
     border-bottom-color: #2d3748;
   }
   
@@ -713,7 +713,7 @@
     }
   }
 
-    .photo-item,
+  .photo-item,
   .video-item {
     background: #0f1419;
     border-color: #2d3748;
@@ -753,4 +753,4 @@
       border-color: #4299e1;
     }
   }
-} 
+}
