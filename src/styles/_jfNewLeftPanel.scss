@@ -73,9 +73,8 @@
 }
 
 .new-left-panel-content-wrapper {
+  background-color: #33384A;
   width: 320px;
-  background: #1a202c;
-  border-right: 1px solid #4a5568;
   position: relative;
   transition: all 0.3s ease;
   overflow: hidden;
@@ -124,6 +123,8 @@
 }
 
 .new-left-panel-content {
+  border-top-left-radius: 16px;
+  background-color: #292D3C;
   padding: 20px;
   height: calc(100vh - 80px);
   overflow-y: auto;
@@ -691,12 +692,6 @@
     }
   }
   }
-  
-  .new-left-panel-content-wrapper {
-    background: #292D3C;
-    border-right-color: #2d3748;
-  }
-  
   .new-left-panel-header {
     background: #33384A;
     border-bottom-color: #2d3748;
