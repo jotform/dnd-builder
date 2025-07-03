@@ -366,17 +366,12 @@
 }
 
 .shape-item {
-  padding: 16px;
-  background: #2d3748;
-  border: 1px solid #4a5568;
-  border-radius: 6px;
-  color: #ffffff;
-  text-align: center;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  transition: .2s border-color ease-in;
   cursor: pointer;
-  transition: all 0.2s ease;
 
   &:hover {
-    background: #4a5568;
     border-color: #4299e1;
   }
 }

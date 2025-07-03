@@ -36,6 +36,16 @@ import IconTextPhoto1 from '../../assets/svg/freecanvas/textstyle1-photo.svg';
 import IconTextPhoto2 from '../../assets/svg/freecanvas/textstyle2-photo.svg';
 import IconTextPhoto3 from '../../assets/svg/freecanvas/textstyle3-photo.svg';
 import IconTextPhoto4 from '../../assets/svg/freecanvas/textstyle4-photo.svg';
+import IconShapeTemplate1 from '../../assets/svg/freecanvas/shapetemplatephoto-1.svg';
+import IconShapeTemplate2 from '../../assets/svg/freecanvas/shapetemplatephoto-2.svg';
+import IconShapeTemplate3 from '../../assets/svg/freecanvas/shapetemplatephoto-3.svg';
+import IconShapeTemplate4 from '../../assets/svg/freecanvas/shapetemplatephoto-4.svg';
+import IconShapeTemplate5 from '../../assets/svg/freecanvas/shapetemplatephoto-5.svg';
+import IconShapeTemplate6 from '../../assets/svg/freecanvas/shapetemplatephoto-6.svg';
+import ShapeCircle from '../../assets/svg/freecanvas/shapecircle.svg';
+import ShapeTriangle from '../../assets/svg/freecanvas/shapetriangle.svg';
+import ShapeStar from '../../assets/svg/freecanvas/shapestar.svg';
+import ShapeRectangle from '../../assets/svg/freecanvas/shaperectangle.svg';
 
 const NewLeftPanel = ({
   isAiGenerationLoading,
@@ -274,37 +284,64 @@ const NewLeftPanel = ({
           <div className="new-left-panel-section">
             <Searchbox type="shape" />
             <ShowMoreLabel title="Shapes" />
-            <h3>Basic Shapes</h3>
-            <div className="shapes-grid">
-              <div
-                className="shape-item rectangle"
-                onClick={() => handleShapeClick('rectangle')}
-              >
-                Rectangle
-              </div>
-              <div
+            <div className="shapes-grid mb-2">
+              <ShapeCircle
                 className="shape-item circle"
                 onClick={() => handleShapeClick('circle')}
-              >
-                Circle
-              </div>
-              <div
+              />
+              <ShapeTriangle
                 className="shape-item triangle"
                 onClick={() => handleShapeClick('triangle')}
-              >
-                Triangle
-              </div>
-              <div
+              />
+              <ShapeStar
                 className="shape-item star"
                 onClick={() => handleShapeClick('star')}
-              >
-                Star
-              </div>
-              <div
+              />
+              <ShapeRectangle
+                className="shape-item rectangle"
+                onClick={() => handleShapeClick('rectangle')}
+              />
+              {/* <div
                 className="shape-item line"
                 onClick={() => handleShapeClick('line')}
               >
-                Line
+                <ShapeCircle />
+              </div> */}
+            </div>
+            <ShowMoreLabel title="Photo" />
+            <div className="template-grid mb-2">
+              <div className="template-item">
+                <div className="template-item-image">
+                  <IconShapeTemplate1 />
+                </div>
+              </div>
+              <div className="template-item">
+                <div className="template-item-image">
+                  <IconShapeTemplate2 />
+                </div>
+              </div>
+              <div className="template-item">
+                <div className="template-item-image">
+                  <IconShapeTemplate3 />
+                </div>
+              </div>
+              <div className="template-item">
+                <div className="template-item-image">
+                  <IconShapeTemplate4 />
+                </div>
+              </div>
+            </div>
+            <ShowMoreLabel title="Summer" />
+            <div className="template-grid">
+              <div className="template-item">
+                <div className="template-item-image">
+                  <IconShapeTemplate5 />
+                </div>
+              </div>
+              <div className="template-item">
+                <div className="template-item-image">
+                  <IconShapeTemplate6 />
+                </div>
               </div>
             </div>
           </div>
