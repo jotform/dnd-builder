@@ -1,8 +1,4 @@
 /* stylelint-disable */
-* {
-  box-sizing: border-box;
-}
-
 .new-left-panel {
   position: relative;
   display: flex;
@@ -206,7 +202,7 @@
   font-size: 14px;
   font-weight: 400;
   transition: all 0.2s ease;
-  border-bottom: 4px solid transparent;
+  border-bottom: 4px solid transparent !important;
   height: 48px;
 
   &:hover {
