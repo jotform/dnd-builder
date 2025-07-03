@@ -60,7 +60,7 @@ const BottomToolbar = ({
     if (toolName === 'text') {
       const itemID = generateId();
       onItemAdd({
-        id: generateId(),
+        id: itemID,
         itemType: 'text',
         left: 0,
         pageID: '1',
@@ -75,7 +75,7 @@ const BottomToolbar = ({
     if (toolName === 'image') {
       const itemID = generateId();
       onItemAdd({
-        id: generateId(),
+        id: itemID,
         itemType: 'image',
         left: 0,
         pageID: '1',

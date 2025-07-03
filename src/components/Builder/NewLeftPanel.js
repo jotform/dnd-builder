@@ -58,6 +58,20 @@ const NewLeftPanel = ({
     setActiveElement(itemID);
   };
 
+  const handleAddTextClick = () => {
+    const itemID = generateId();
+    onItemAdd({
+      id: itemID,
+      itemType: 'text',
+      left: 0,
+      pageID: '1',
+      top: 0,
+      height: 65,
+      width: 350,
+    });
+    setActiveElement(itemID);
+  };
+
   const tabs = [
     {
       content: () => (
@@ -468,73 +482,15 @@ const NewLeftPanel = ({
       content: () => (
         <div className="new-left-panel-content">
           <div className="new-left-panel-section">
-            <h3>Add Text</h3>
-            <div className="text-elements-grid">
-              <button
-                className="text-element-button"
-                onClick={() => {
-                  onItemAdd({
-                    itemType: 'text',
-                    text: 'Heading',
-                    fontSize: 32,
-                    fontWeight: 'bold',
-                  });
-                }}
-                type="button"
-              >
-                <div className="text-preview heading-preview">Aa</div>
-                <span>Add a heading</span>
-              </button>
-              <button
-                className="text-element-button"
-                onClick={() => {
-                  onItemAdd({
-                    itemType: 'text',
-                    text: 'Subheading',
-                    fontSize: 24,
-                    fontWeight: 'normal',
-                  });
-                }}
-                type="button"
-              >
-                <div className="text-preview subheading-preview">Aa</div>
-                <span>Add a subheading</span>
-              </button>
-              <button
-                className="text-element-button"
-                onClick={() => {
-                  onItemAdd({
-                    itemType: 'text',
-                    text: 'Body text',
-                    fontSize: 16,
-                    fontWeight: 'normal',
-                  });
-                }}
-                type="button"
-              >
-                <div className="text-preview body-preview">Aa</div>
-                <span>Add body text</span>
-              </button>
-              <button
-                className="text-element-button"
-                onClick={() => {
-                  onItemAdd({
-                    itemType: 'text',
-                    text: '• List item\n• List item\n• List item',
-                    fontSize: 16,
-                    fontWeight: 'normal',
-                  });
-                }}
-                type="button"
-              >
-                <div className="text-preview list-preview">
-                  <div>•</div>
-                  <div>•</div>
-                  <div>•</div>
-                </div>
-                <span>Add a list</span>
-              </button>
-            </div>
+            <button
+              className="ai-generate-button"
+              onClick={() => handleAddTextClick()}
+              type="button"
+            >
+              <span>
+                + Add a New Text
+              </span>
+            </button>
           </div>
         </div>
       ),
@@ -578,6 +534,8 @@ const NewLeftPanel = ({
   ];
 
   const handleTabClick = tabId => {
+    if (tabId === 'Style') return;
+
     if (activeTab === tabId && isOpen) {
       setIsOpen(false);
     } else {
