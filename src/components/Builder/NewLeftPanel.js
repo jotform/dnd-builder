@@ -30,25 +30,71 @@ const NewLeftPanel = ({
       content: () => (
         <div className="new-left-panel-content">
           <div className="new-left-panel-section">
-            <h3>AI Generation</h3>
-            <button
-              className="new-left-panel-button"
-              type="button"
-            >
-              Generate Layout
-            </button>
-            <button
-              className="new-left-panel-button"
-              type="button"
-            >
-              Auto Design
-            </button>
+            <div className="ai-input-section">
+              <textarea
+                className="ai-description-input"
+                placeholder="Describe your design"
+                rows={6}
+              />
+              <button
+                className="ai-generate-button"
+                onClick={() => {
+                  // AI generation logic would go here
+                  console.log('Generate AI design');
+                }}
+                type="button"
+              >
+                Generate
+              </button>
+            </div>
+            <div className="ai-suggestions">
+              <h4>Suggestions</h4>
+              <div className="suggestion-chips">
+                <button
+                  className="suggestion-chip"
+                  type="button"
+                >
+                  Modern business card
+                </button>
+                <button
+                  className="suggestion-chip"
+                  type="button"
+                >
+                  Social media post
+                </button>
+                <button
+                  className="suggestion-chip"
+                  type="button"
+                >
+                  Event flyer
+                </button>
+                <button
+                  className="suggestion-chip"
+                  type="button"
+                >
+                  Logo design
+                </button>
+                <button
+                  className="suggestion-chip"
+                  type="button"
+                >
+                  Newsletter template
+                </button>
+                <button
+                  className="suggestion-chip"
+                  type="button"
+                >
+                  Presentation slide
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       ),
       icon: '🤖',
       id: 'AI',
       name: 'AI',
+      label: 'Design with AI',
     },
     {
       content: () => (
@@ -67,6 +113,7 @@ const NewLeftPanel = ({
       icon: '📋',
       id: 'Templates',
       name: 'Templates',
+      label: 'Templates',
     },
     {
       content: () => (
@@ -85,6 +132,7 @@ const NewLeftPanel = ({
       icon: '🔺',
       id: 'Shapes',
       name: 'Shapes',
+      label: 'Shapes',
     },
     {
       content: () => (
@@ -352,36 +400,86 @@ const NewLeftPanel = ({
       icon: '🎨',
       id: 'Background',
       name: 'Background',
+      label: 'Background',
     },
     {
       content: () => (
         <div className="new-left-panel-content">
           <div className="new-left-panel-section">
-            <h3>Text Elements</h3>
-            <button
-              className="new-left-panel-button"
-              type="button"
-            >
-              Add Heading
-            </button>
-            <button
-              className="new-left-panel-button"
-              type="button"
-            >
-              Add Paragraph
-            </button>
-            <button
-              className="new-left-panel-button"
-              type="button"
-            >
-              Add List
-            </button>
+            <h3>Add Text</h3>
+            <div className="text-elements-grid">
+              <button
+                className="text-element-button"
+                onClick={() => {
+                  onItemAdd({
+                    itemType: 'text',
+                    text: 'Heading',
+                    fontSize: 32,
+                    fontWeight: 'bold',
+                  });
+                }}
+                type="button"
+              >
+                <div className="text-preview heading-preview">Aa</div>
+                <span>Add a heading</span>
+              </button>
+              <button
+                className="text-element-button"
+                onClick={() => {
+                  onItemAdd({
+                    itemType: 'text',
+                    text: 'Subheading',
+                    fontSize: 24,
+                    fontWeight: 'normal',
+                  });
+                }}
+                type="button"
+              >
+                <div className="text-preview subheading-preview">Aa</div>
+                <span>Add a subheading</span>
+              </button>
+              <button
+                className="text-element-button"
+                onClick={() => {
+                  onItemAdd({
+                    itemType: 'text',
+                    text: 'Body text',
+                    fontSize: 16,
+                    fontWeight: 'normal',
+                  });
+                }}
+                type="button"
+              >
+                <div className="text-preview body-preview">Aa</div>
+                <span>Add body text</span>
+              </button>
+              <button
+                className="text-element-button"
+                onClick={() => {
+                  onItemAdd({
+                    itemType: 'text',
+                    text: '• List item\n• List item\n• List item',
+                    fontSize: 16,
+                    fontWeight: 'normal',
+                  });
+                }}
+                type="button"
+              >
+                <div className="text-preview list-preview">
+                  <div>•</div>
+                  <div>•</div>
+                  <div>•</div>
+                </div>
+                <span>Add a list</span>
+              </button>
+            </div>
           </div>
         </div>
       ),
       icon: '📝',
       id: 'Text',
       name: 'Text',
+      label: 'Text',
     },
     {
       content: () => (
@@ -413,11 +511,11 @@ const NewLeftPanel = ({
       icon: '🎭',
       id: 'Style',
       name: 'Style',
+      label: 'Style',
     },
   ];
 
   const handleTabClick = tabId => {
-    console.log('tabId', tabId);
     if (activeTab === tabId && isOpen) {
       setIsOpen(false);
     } else {
@@ -459,7 +557,7 @@ const NewLeftPanel = ({
       {isOpen && activeTabData && (
         <Panel additionalClassName="new-left-panel-content-wrapper">
           <div className="new-left-panel-header">
-            <h2>{activeTabData.name}</h2>
+            <h2>{activeTabData.label}</h2>
             <button
               className="new-left-panel-close"
               onClick={() => setIsOpen(false)}

@@ -584,6 +584,99 @@
   padding-top: 8px;
 }
 
+// AI Generation Styles
+.ai-input-section {
+  margin-bottom: 24px;
+}
+
+.ai-description-input {
+  width: 100%;
+  min-height: 120px;
+  padding: 16px;
+  background: #2d3748;
+  border: 1px solid #4a5568;
+  border-radius: 8px;
+  color: #ffffff;
+  font-size: 14px;
+  font-family: inherit;
+  resize: vertical;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  
+  &::placeholder {
+    color: #718096;
+  }
+  
+  &:focus {
+    outline: none;
+    border-color: #4299e1;
+    background: #1a202c;
+  }
+}
+
+.ai-generate-button {
+  width: 100%;
+  padding: 16px 24px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+  }
+  
+  &:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+  }
+}
+
+.ai-suggestions {
+  h4 {
+    color: #e2e8f0;
+    font-size: 14px;
+    font-weight: 500;
+    margin: 0 0 12px 0;
+  }
+}
+
+.suggestion-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.suggestion-chip {
+  padding: 8px 12px;
+  background: #2d3748;
+  border: 1px solid #4a5568;
+  border-radius: 20px;
+  color: #e2e8f0;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  
+  &:hover {
+    background: #4a5568;
+    border-color: #4299e1;
+    color: #ffffff;
+    transform: translateY(-1px);
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
+}
+
 // Dark theme adjustments
 .jfReport.darkMode {
   .new-left-panel-tabs {
@@ -620,11 +713,41 @@
     }
   }
 
-  .photo-item,
+    .photo-item,
   .video-item {
     background: #0f1419;
     border-color: #2d3748;
-
+    
+    &:hover {
+      background: #1a202c;
+      border-color: #4299e1;
+    }
+  }
+  
+  .ai-description-input {
+    background: #0f1419;
+    border-color: #2d3748;
+    
+    &:focus {
+      background: #1a202c;
+      border-color: #4299e1;
+    }
+  }
+  
+  .suggestion-chip {
+    background: #0f1419;
+    border-color: #2d3748;
+    
+    &:hover {
+      background: #1a202c;
+      border-color: #4299e1;
+    }
+  }
+  
+  .text-element-button {
+    background: #0f1419;
+    border-color: #2d3748;
+    
     &:hover {
       background: #1a202c;
       border-color: #4299e1;
