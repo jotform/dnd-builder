@@ -41,33 +41,33 @@ const PageToolbar = ({ onSettingChange, settings }) => {
         className="relative z-4 flex items-center gap-3 px-3 py-2 bg-white border border-navy-50
     radius-lg"
       >
-        <button
+        <ToolbarButton
           ref={bgColorButtonRef}
-          className="w-8 h-8 flex items-center justify-center"
+          icon="bg-color"
           onClick={handleBgColorClick}
-          type="button"
-        >
-          <div
-            className="w-4 h-4 radius border border-navy-100"
-            style={{ backgroundColor }}
-          />
-        </button>
+          tooltip="Background Color"
+          iconProps={{ color: backgroundColor }}
+        />
         <ToolbarButton
           icon="bg-image"
           onClick={() => console.log('bg image')}
+          tooltip="Background Image"
         />
         <ToolbarButton
           ref={bgScaleButtonRef}
           icon="bg-scale"
           onClick={handleBgScaleClick}
+          tooltip="Page Size"
         />
         <ToolbarButton
           icon="duplicate"
           onClick={() => console.log('duplicate')}
+          tooltip="Duplicate Page"
         />
         <ToolbarButton
           icon="plus"
           onClick={() => console.log('plus')}
+          tooltip="Add New Page"
         />
         {isModalOpen && (
           <DocumentResizeModal
