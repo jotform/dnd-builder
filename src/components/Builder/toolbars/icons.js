@@ -221,6 +221,12 @@ const IconPlus = () => {
   );
 };
 
+const IconBgColor = ({ color = '#FFFFFF' }) => {
+  return (
+    <div className="w-4 h-4 radius border border-navy-100" style={{ backgroundColor: color }} />
+  );
+};
+
 export {
   IconBold,
   IconItalic,
@@ -233,4 +239,5 @@ export {
   IconBgImage,
   IconDuplicate,
   IconPlus,
+  IconBgColor,
 };

@@ -1,6 +1,7 @@
 /* eslint-disable max-len */
 import PropTypes from 'prop-types';
 import { forwardRef } from 'react';
+import Tooltip from './Tooltip';
 import {
   IconBold,
   IconItalic,
@@ -13,9 +14,10 @@ import {
   IconBgScale,
   IconDuplicate,
   IconPlus,
+  IconBgColor,
 } from './icons';
 
-const getIcon = icon => {
+const getIcon = (icon, iconProps = {}) => {
   switch (icon) {
     case 'bold':
       return IconBold;
@@ -39,23 +41,39 @@ const getIcon = icon => {
       return IconDuplicate;
     case 'plus':
       return IconPlus;
+    case 'bg-color':
+      return (props) => <IconBgColor {...iconProps} {...props} />;
     default:
       return null;
   }
 };
 
-const ToolbarButton = forwardRef(({ icon = 'bold', onClick }, ref) => {
-  const IconComponent = getIcon(icon);
-  return (
+const ToolbarButton = forwardRef(({ icon = 'bold', onClick, tooltip, tooltipPlacement = 'bottom', iconProps = {}, className }, ref) => {
+  const IconComponent = getIcon(icon, iconProps);
+
+  const button = (
     <button
       ref={ref}
-      className="magnet-button inline-flex shrink-0 justify-center items-center font-medium duration-300 outline-2 outline-transparent outline-offset-0 focus:outline-opacity-50 px-2 radius border-0 cursor-pointer bg-transparent color-navy-500 hover:bg-navy-25 focus:outline-navy-50 toolbar-button"
+      className={`magnet-button inline-flex shrink-0 justify-center items-center font-medium duration-300 outline-2 outline-transparent outline-offset-0 focus:outline-opacity-50 px-2 radius border-0 cursor-pointer bg-transparent color-navy-500 hover:bg-navy-25 focus:outline-navy-50 toolbar-button ${iconProps ? 'bgColor' : ''}`}
       onClick={onClick}
       type="button"
     >
       {IconComponent && <IconComponent />}
     </button>
   );
+
+  if (tooltip) {
+    return (
+      <Tooltip
+        content={tooltip}
+        placement={tooltipPlacement}
+      >
+        {button}
+      </Tooltip>
+    );
+  }
+
+  return button;
 });
 
 export default ToolbarButton;
@@ -63,8 +81,14 @@ export default ToolbarButton;
 ToolbarButton.propTypes = {
   icon: PropTypes.string.isRequired,
   onClick: PropTypes.func,
+  tooltip: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+  tooltipPlacement: PropTypes.oneOf(['top', 'bottom', 'left', 'right']),
+  iconProps: PropTypes.object,
 };
 
 ToolbarButton.defaultProps = {
-  onClick: () => {},
+  onClick: () => { },
+  tooltip: null,
+  tooltipPlacement: 'bottom',
+  iconProps: {},
 };
