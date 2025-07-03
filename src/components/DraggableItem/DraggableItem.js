@@ -20,7 +20,7 @@ import {
 } from '../../utils/scrollZoneFunctions';
 
 const exceptionalClassesForClickOutside = [
-  'contextMenu-itemLabel', 'contextMenu-item', 'text-toolbar', 'image-toolbar', 'page-toolbar', 'text-toolbar-button', 'image-toolbar-button', 'toolbar-button', 'toolbar-dropdown', 'toolbar-input',
+  'contextMenu-itemLabel', 'contextMenu-item', 'text-toolbar', 'image-toolbar', 'page-toolbar', 'text-toolbar-button', 'image-toolbar-button', 'toolbar-button', 'toolbar-dropdown', 'toolbar-input', 'toolbar-container',
 ];
 const reportItemStyle = {
   height: '100%',

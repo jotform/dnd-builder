@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable sort-keys */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable max-len */
@@ -15,20 +16,46 @@ import IconTemplates from '../../assets/svg/freecanvas/templates.svg';
 import IconBgColor from '../../assets/svg/freecanvas/ai-bgColor.svg';
 import IconText from '../../assets/svg/freecanvas/type.svg';
 import IconStyle from '../../assets/svg/aiStyle.svg';
+import IconLoading from '../../assets/svg/freecanvas/ai-generation-loading.svg';
+import generateId from '../../utils/generateId';
+import { useBuilderContext } from '../../utils/builderContext';
 
 const NewLeftPanel = ({
+  isAiGenerationLoading,
+  onAIGenerate,
   onItemAdd,
   onSettingChange,
+  settings,
 }) => {
+  const {
+    setActiveElement,
+  } = useBuilderContext();
+  console.log('settings', settings);
   const [activeTab, setActiveTab] = useState('Background');
   const [isOpen, setIsOpen] = useState(false);
   const [backgroundSubTab, setBackgroundSubTab] = useState('Colors');
+  const [aiGenerateDescription, setAiGenerateDescription] = useState('');
 
   const handleBackgroundColorChange = ({ type, ...rest }) => {
     onSettingChange({ id: '__layout__' }, {
       ...rest,
       reportBackgroundGradientEnabled: type === 'gradient' ? 'on' : 'off',
     });
+  };
+
+  const handleShapeClick = shape => {
+    const itemID = generateId();
+    onItemAdd({
+      id: itemID,
+      itemType: 'shapes',
+      left: 0,
+      pageID: '1',
+      shapeType: shape,
+      top: 0,
+      height: 200,
+      width: 200,
+    });
+    setActiveElement(itemID);
   };
 
   const tabs = [
@@ -40,18 +67,20 @@ const NewLeftPanel = ({
               <div className="h-40 flex border outline-2 outline-offset-0 hover:duration-300 focus:duration-300 duration-all-colors hover:shadow-xs color-white bg-gray-500 focus-within:border-blue-500 border-gray-500 outline-transparent hover:border-gray-300 focus-within:outline-blue-500 focus-within:outline-opacity-30 magnet-textarea-container flex-col resize-none radius">
                 <textarea
                   className="appearance-none bg-transparent grow-1 outline-0 w-full focus-visible-none border-0 text-sm magnet-textarea resize-none p-3 radius"
+                  onChange={e => setAiGenerateDescription(e.target.value)}
                   placeholder="Describe the design"
+                  rows={6}
+                  value={aiGenerateDescription}
                 />
               </div>
               <button
                 className="ai-generate-button"
-                onClick={() => {
-                  // AI generation logic would go here
-                  console.log('Generate AI design');
-                }}
+                onClick={() => onAIGenerate(aiGenerateDescription)}
                 type="button"
               >
-                Generate
+                <span className={isAiGenerationLoading ? 'freeCanvas-aiButtonLoading' : ''}>
+                  {isAiGenerationLoading ? <IconLoading /> : 'Generate'}
+                </span>
               </button>
             </div>
             <div className="ai-suggestions">
@@ -128,10 +157,36 @@ const NewLeftPanel = ({
           <div className="new-left-panel-section">
             <h3>Basic Shapes</h3>
             <div className="shapes-grid">
-              <div className="shape-item rectangle">Rectangle</div>
-              <div className="shape-item circle">Circle</div>
-              <div className="shape-item triangle">Triangle</div>
-              <div className="shape-item star">Star</div>
+              <div
+                className="shape-item rectangle"
+                onClick={() => handleShapeClick('rectangle')}
+              >
+                Rectangle
+              </div>
+              <div
+                className="shape-item circle"
+                onClick={() => handleShapeClick('circle')}
+              >
+                Circle
+              </div>
+              <div
+                className="shape-item triangle"
+                onClick={() => handleShapeClick('triangle')}
+              >
+                Triangle
+              </div>
+              <div
+                className="shape-item star"
+                onClick={() => handleShapeClick('star')}
+              >
+                Star
+              </div>
+              <div
+                className="shape-item line"
+                onClick={() => handleShapeClick('line')}
+              >
+                Line
+              </div>
             </div>
           </div>
         </div>
@@ -580,11 +635,15 @@ const NewLeftPanel = ({
 };
 
 NewLeftPanel.propTypes = {
+  isAiGenerationLoading: PropTypes.bool,
+  onAIGenerate: PropTypes.func,
   onItemAdd: PropTypes.func,
   onSettingChange: PropTypes.func,
 };
 
 NewLeftPanel.defaultProps = {
+  isAiGenerationLoading: false,
+  onAIGenerate: () => {},
   onItemAdd: () => {},
   onSettingChange: () => {},
 };

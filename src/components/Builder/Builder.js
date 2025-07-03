@@ -62,8 +62,11 @@ const Builder = ({
             theme={theme}
           >
             <NewLeftPanel
+              isAiGenerationLoading={isAiGenerationLoading}
+              onAIGenerate={onAIGenerate}
               onItemAdd={onItemAdd}
               onSettingChange={onSettingChange}
+              settings={settings}
             />
             <DndWrapper>
               <Scene

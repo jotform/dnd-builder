@@ -36,7 +36,7 @@ const PageToolbar = ({ onSettingChange, settings }) => {
   };
 
   return (
-    <div className="mt-4 flex items-center justify-center">
+    <div className="mt-4 flex items-center justify-center toolbar-container">
       <div
         className="relative z-4 flex items-center gap-3 px-3 py-2 bg-white border border-navy-50
     radius-lg"
