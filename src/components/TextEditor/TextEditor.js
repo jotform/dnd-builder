@@ -5,7 +5,12 @@ import {
   useCallback, useEffect, useMemo, useRef, useState,
 } from 'react';
 import PropTypes from 'prop-types';
-// import domPurify from 'dompurify';
+
+const decodeHtml = html => {
+  const txt = document.createElement('textarea');
+  txt.innerHTML = html;
+  return txt.value;
+};
 
 const TextEditor = ({
   content,
@@ -38,7 +43,8 @@ const TextEditor = ({
   useEffect(() => {
     if (isTextEditorOpen && !isSelected) {
       if (textEditorRef.current) {
-        const textEditorContent = textEditorRef.current.innerText;
+        let textEditorContent = textEditorRef.current.innerHTML;
+        textEditorContent = decodeHtml(textEditorContent);
         handleSave(textEditorContent);
       }
       setIsTextEditorOpen(false);
@@ -63,7 +69,7 @@ const TextEditor = ({
         }
         if (e.key === 'Enter') {
           if (handleSave) {
-            const textEditorContent = textEditorRef.current.innerText;
+            const textEditorContent = textEditorRef.current.innerHTML;
             handleSave(textEditorContent);
             setIsTextEditorOpen(false);
           }
