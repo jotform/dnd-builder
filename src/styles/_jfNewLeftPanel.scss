@@ -4,20 +4,19 @@
   display: flex;
   height: 100vh;
   z-index: 1000;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 1, 1);
 
-  &.new-left-panel-closed {
-    .new-left-panel-content-wrapper {
-      transform: translateX(-100%);
-      opacity: 0;
-      visibility: hidden;
-    }
-  }
 
   &.new-left-panel-open {
     .new-left-panel-content-wrapper {
       transform: translateX(0);
-      opacity: 1;
-      visibility: visible;
+    }
+  }
+
+
+  &.new-left-panel-closed {
+    .new-left-panel-content-wrapper {
+      transform: translateX(-100%);
     }
   }
 }

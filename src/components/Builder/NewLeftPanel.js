@@ -860,7 +860,7 @@ const NewLeftPanel = ({
       </div>
 
       {/* Panel Content */}
-      {isOpen && activeTabData && (
+      {activeTabData && (
         <Panel additionalClassName="new-left-panel-content-wrapper">
           <div className="new-left-panel-header">
             <h2>{activeTabData.label}</h2>
