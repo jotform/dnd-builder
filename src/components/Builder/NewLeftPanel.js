@@ -403,21 +403,16 @@ const NewLeftPanel = ({
                     </div>
                     <div className="template-item">
                       <div className="template-item-image">
-                        <IconBackground1 />
-                      </div>
-                    </div>
-                    <div className="template-item">
-                      <div className="template-item-image">
                         <IconBackground2 />
                       </div>
                     </div>
                     <div className="template-item">
-                      <IconBackground3 />
+                      <div className="template-item-image">
+                        <IconBackground3 />
+                      </div>
                     </div>
                     <div className="template-item">
-                      <div className="template-item-image">
-                        <IconBackground4 />
-                      </div>
+                      <IconBackground4 />
                     </div>
                     <div className="template-item">
                       <div className="template-item-image">
@@ -432,6 +427,11 @@ const NewLeftPanel = ({
                     <div className="template-item">
                       <div className="template-item-image">
                         <IconBackground7 />
+                      </div>
+                    </div>
+                    <div className="template-item">
+                      <div className="template-item-image">
+                        <IconBackground8 />
                       </div>
                     </div>
                     <div className="template-item">
@@ -740,8 +740,10 @@ const NewLeftPanel = ({
       content: () => (
         <div className="new-left-panel-content">
           <div className="new-left-panel-section">
+            <Searchbox type="background" />
+
             <button
-              className="ai-generate-button secondary inline-flex gap-2"
+              className="ai-generate-button secondary inline-flex gap-2 mb-4"
               onClick={() => handleAddImageClick()}
               type="button"
             >
@@ -763,6 +765,53 @@ const NewLeftPanel = ({
                 Add a New Image
               </span>
             </button>
+          </div>
+          <div className="background-content">
+            <div className="template-grid">
+              <div className="template-item">
+                <div className="template-item-image">
+                  <IconBackground1 />
+                </div>
+              </div>
+              <div className="template-item">
+                <div className="template-item-image">
+                  <IconBackground2 />
+                </div>
+              </div>
+              <div className="template-item">
+                <div className="template-item-image">
+                  <IconBackground3 />
+                </div>
+              </div>
+              <div className="template-item">
+                <IconBackground4 />
+              </div>
+              <div className="template-item">
+                <div className="template-item-image">
+                  <IconBackground5 />
+                </div>
+              </div>
+              <div className="template-item">
+                <div className="template-item-image">
+                  <IconBackground6 />
+                </div>
+              </div>
+              <div className="template-item">
+                <div className="template-item-image">
+                  <IconBackground7 />
+                </div>
+              </div>
+              <div className="template-item">
+                <div className="template-item-image">
+                  <IconBackground8 />
+                </div>
+              </div>
+              <div className="template-item">
+                <div className="template-item-image">
+                  <IconBackground5 />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       ),
