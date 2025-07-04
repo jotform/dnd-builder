@@ -144,8 +144,8 @@ const Page = ({
       >
         {isAiGenerationLoading ? (
           <div className="fixed ai-loading-shimmer-wave flex justify-center items-center w-full h-full bg-white overflow-hidden">
-            <div className="flex-1 shrink-0 flex flex-col justify-center items-center gap-36">
-              <div className="shrink-0">
+            <div className="flex-1 shrink-0 flex flex-col justify-center items-center gap-40">
+              <div className="shrink-0" style={{ height: '144px', width: '144px' }}>
                 <LoaderStars />
               </div>
               <ProcessMessage className="h-4" />
