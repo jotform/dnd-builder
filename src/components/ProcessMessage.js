@@ -40,7 +40,7 @@ const ProcessingAnimation = () => {
     <div className="">
       <div className="processing-container processing-animation">
         <div
-          className={`font-circular color-navy-700 text-lg line-height-xl 
+          className={`font-circular color-navy-700 text-2xl
             font-bold processing-message 
             ${isVisible ? 'visible' : 'hidden'}`}
         >
