@@ -42,9 +42,11 @@ class QuillEditor extends React.PureComponent {
     }
   }
 
-  handleSetContent = value => {
-    const { setContent } = this.props;
-    setContent(domPurify.sanitize(value));
+  handleSetContent = (value, delta, source) => {
+    if (source === 'user') {
+      const { setContent } = this.props;
+      setContent(domPurify.sanitize(value));
+    }
   }
 
   render() {
