@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.9.8](https://github.com/jotform/dnd-builder/compare/v2.9.7...v2.9.8) (2025-10-14)
+
+
+### Bug Fixes
+
+* **quilleditor:** content should be set if source is equal user ([8ac4058](https://github.com/jotform/dnd-builder/commit/8ac405844e0ba4c4c0678149ada5ab7d13ac02ff))
+
 ### [2.9.7](https://github.com/jotform/dnd-builder/compare/v2.9.6...v2.9.7) (2025-06-25)
 
 
