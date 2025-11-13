@@ -39,10 +39,13 @@ const ColorPicker = ({
   const pickerRef = useRef(null);
 
   const handleInputChange = (_item, _config) => {
-    const newValue = normalizeHexColor(_config[Object.keys(_config)[0]]);
-    if (isValidHexColor(newValue)) {
-      setColorValue(newValue);
+    const newValue = _config[Object.keys(_config)[0]];
+    const normalizedValue = normalizeHexColor(newValue);
+    if (isValidHexColor(normalizedValue)) {
+      setColorValue(normalizedValue);
       onItemChange(_item, _config);
+    } else {
+      setColorValue(newValue);
     }
   };
 
@@ -56,7 +59,7 @@ const ColorPicker = ({
   };
 
   const handleColorPick = ({ hex }) => {
-    if (hex !== value) {
+    if (hex !== value && isValidHexColor(hex)) {
       onItemChange(
         { id: item.id },
         { [config.key]: hex },
