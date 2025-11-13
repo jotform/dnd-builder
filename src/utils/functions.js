@@ -765,3 +765,13 @@ export const scrollToTarget = (id, timeout = 0, options = { behavior: 'smooth' }
     }
   }, timeout);
 };
+
+export function normalizeHexColor(value) {
+  let v = value.trim();
+  if (!v.startsWith('#')) v = `#${v}`;
+  return v;
+}
+
+export function isValidHexColor(value) {
+  return /^#(?:[0-9a-fA-F]{3}){1,2}$/.test(value);
+}

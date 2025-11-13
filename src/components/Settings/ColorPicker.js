@@ -4,6 +4,7 @@ import { SketchPicker } from 'react-color';
 import withClickOutside from '../withClickOutside';
 import { useEventListener } from '../../utils/hooks';
 import Textbox from './Textbox';
+import { isValidHexColor, normalizeHexColor } from '../../utils/functions';
 
 export const COLOR_PRESETS = [
   '#D0021B',
@@ -38,9 +39,11 @@ const ColorPicker = ({
   const pickerRef = useRef(null);
 
   const handleInputChange = (_item, _config) => {
-    const newValue = _config[Object.keys(_config)[0]];
-    setColorValue(newValue);
-    onItemChange(_item, _config);
+    const newValue = normalizeHexColor(_config[Object.keys(_config)[0]]);
+    if (isValidHexColor(newValue)) {
+      setColorValue(newValue);
+      onItemChange(_item, _config);
+    }
   };
 
   const checkPickerVisibility = () => isPickerVisible && setIsPickerVisible(false);
