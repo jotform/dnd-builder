@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.9.9](https://github.com/jotform/dnd-builder/compare/v2.9.8...v2.9.9) (2025-11-13)
+
+
+### Bug Fixes
+
+* **colorpicker:** validate hex color code ([215d1e7](https://github.com/jotform/dnd-builder/commit/215d1e712aaf9a1363c6f3b191288368bfbe16f4))
+
 ### [2.9.8](https://github.com/jotform/dnd-builder/compare/v2.9.7...v2.9.8) (2025-10-14)
 
 
