@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.9.10](https://github.com/jotform/dnd-builder/compare/v2.9.9...v2.9.10) (2025-11-13)
+
 ### [2.9.9](https://github.com/jotform/dnd-builder/compare/v2.9.8...v2.9.9) (2025-11-13)
 
 
