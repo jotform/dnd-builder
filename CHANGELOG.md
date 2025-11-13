@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.9.12](https://github.com/jotform/dnd-builder/compare/v2.9.11...v2.9.12) (2025-11-13)
+
+
+### Bug Fixes
+
+* **colorpicker:** normalizedValue should be saved ([1be990d](https://github.com/jotform/dnd-builder/commit/1be990df5d136ec3ea2fdf08d4e8059fc78b0d5f))
+
 ### [2.9.11](https://github.com/jotform/dnd-builder/compare/v2.9.10...v2.9.11) (2025-11-13)
 
 
