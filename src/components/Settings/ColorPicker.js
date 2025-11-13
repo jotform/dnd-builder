@@ -43,7 +43,7 @@ const ColorPicker = ({
     const normalizedValue = normalizeHexColor(newValue);
     if (isValidHexColor(normalizedValue)) {
       setColorValue(normalizedValue);
-      onItemChange(_item, _config);
+      onItemChange(_item, { [config.key]: normalizedValue });
     } else {
       setColorValue(newValue);
     }
