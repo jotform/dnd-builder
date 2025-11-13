@@ -12,7 +12,6 @@ import SlidesPanel from '../Panels/SlidesPanel';
 import AllSlidesPanel from '../Panels/AllSlidesPanel';
 import { leftPanelConfigPropType } from '../../constants/propTypes';
 
-import 'intersection-observer';
 import '../../styles/jfReportsBundle.scss';
 
 const Builder = ({
