@@ -439,6 +439,7 @@ const Scene = ({
                 className={classNames.page}
                 data-id={page.id}
                 data-order={page.order}
+                id={`presentation-page-${page.id.toString()}`}
                 style={pageStyles.current}
               >
                 <Page
