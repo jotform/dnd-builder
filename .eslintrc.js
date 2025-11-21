@@ -56,6 +56,7 @@ module.exports = {
     'max-len': ['error', { code: 100, tabWidth: 2 }],
     'max-lines': ['error', { max: 1000, skipComments: true }],
     'max-statements': ['error', 40, { ignoreTopLevelFunctions: true }],
+    'no-await-in-loop': 'error',
     'no-case-declarations': 0,
     'no-console': ['warn', { allow: ['warn', 'error'] }],
     'no-continue': 0,

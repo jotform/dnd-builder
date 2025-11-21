@@ -99,6 +99,7 @@ const StaticScene = ({
                   [slugify(reportLayout)]: true,
                   activePage: index === presentationPage,
                 })}
+                id={`presentation-page-${page.id.toString()}`}
               >
                 <StaticPageWithZoomPanPinch
                   acceptedItems={acceptedItems}
