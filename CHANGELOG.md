@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.9.15](https://github.com/jotform/dnd-builder/compare/v2.9.14...v2.9.15) (2025-12-02)
+
+
+### Bug Fixes
+
+* **Image:** update image URL handling to use additionalProps for dynamic source ([e65156c](https://github.com/jotform/dnd-builder/commit/e65156c431422eda6cb6f3797dfa4612f1f7b206))
+
 ### [2.9.14](https://github.com/jotform/dnd-builder/compare/v2.9.12...v2.9.14) (2025-12-02)
 
 
