@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.9.14](https://github.com/jotform/dnd-builder/compare/v2.9.12...v2.9.14) (2025-12-02)
+
+
+### Bug Fixes
+
+* **dnd-builder:** page element id added for selector usage ([6167a48](https://github.com/jotform/dnd-builder/commit/6167a4847f7685e8dc9b3af2670a51c161dfcc8e))
+
 ### [2.9.13](https://github.com/jotform/dnd-builder/compare/v2.9.12...v2.9.13) (2025-11-21)
 
 
