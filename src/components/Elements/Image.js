@@ -99,11 +99,12 @@ export const ImageElement = ({ item, itemAccessor }) => {
 
   const additionalProps = itemAccessor(item);
   const defaultURL = additionalProps?.defaultURL || DEFAULT_LOGO_SRC;
+  const imageUrl = additionalProps?.url || url;
 
   useEffect(() => {
     setIsLoading(true);
     setIsErrored(false);
-  }, [url, setIsLoading, setIsErrored]);
+  }, [imageUrl, setIsLoading, setIsErrored]);
 
   // TODO :: do we want to show a loading placeholder?
 
@@ -122,7 +123,7 @@ export const ImageElement = ({ item, itemAccessor }) => {
             setIsErrored(true);
           }}
           onLoad={() => setIsLoading(false)}
-          src={url || defaultURL}
+          src={imageUrl || defaultURL}
           style={{
             ...imageStyle,
             borderRadius: `${roundedCorners}px`,
