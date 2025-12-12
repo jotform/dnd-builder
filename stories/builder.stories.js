@@ -69,10 +69,10 @@ const Logo = {
           icon: <img
             alt="Logo1"
             height="20"
-            src="https://www.jotform.com/resources/assets/podo/podo_4.png"
+            src="https://cdn.jotfor.ms/assets/resources/podo/podo_4.png"
             width="20"
           />,
-          value: 'https://www.jotform.com/resources/assets/podo/podo_4.png',
+          value: 'https://cdn.jotfor.ms/assets/resources/podo/podo_4.png',
         },
         {
           icon: <img
@@ -210,7 +210,7 @@ const CustomSetting = ({
 }) => {
   const imageOptions = [
     'https://miro.medium.com/max/2100/1*khbx3PQVp4qttqDdHcdFng.jpeg',
-    'https://www.jotform.com/resources/assets/podo/podo_4.png',
+    'https://cdn.jotfor.ms/assets/resources/podo/podo_4.png',
     'https://cdn.jotfor.ms/assets/img/support-forum/dnd-podo.png',
   ];
   return (
