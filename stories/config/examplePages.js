@@ -97,7 +97,7 @@ export default [
         opacity: 1,
         pageID: '018r03',
         top: 103,
-        url: 'https://www.jotform.com/resources/assets/icon/jotform-logomark-transparent-400x400.png',
+        url: 'https://cdn.jotfor.ms/assets/resources/icon/jotform-logomark-transparent-400x400.png',
         width: 589,
       },
     ],

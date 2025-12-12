@@ -10,7 +10,7 @@ import {
 
 const ITEM_TYPE = 'image';
 
-const DEFAULT_LOGO_SRC = 'https://www.jotform.com/resources/assets/icon/jotform-logomark-transparent-400x400.png';
+const DEFAULT_LOGO_SRC = 'https://cdn.jotfor.ms/assets/resources/icon/jotform-logomark-transparent-400x400.png';
 
 const imageWrapperStyle = {
   height: 'inherit',

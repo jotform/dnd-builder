@@ -50,10 +50,10 @@ const Logo = {
           icon: <img
             alt="Logo1"
             height="20"
-            src="https://www.jotform.com/resources/assets/podo/podo_4.png"
+            src="https://cdn.jotfor.ms/assets/resources/podo/podo_4.png"
             width="20"
           />,
-          value: 'https://www.jotform.com/resources/assets/podo/podo_4.png',
+          value: 'https://cdn.jotfor.ms/assets/resources/podo/podo_4.png',
         },
         {
           icon: <img
