@@ -27,6 +27,18 @@
 
   display: block;
 }
+.jfReport.printMode [id*="presentation-page-"] {
+  width: 100% !important;
+  height: 100% !important;
+  page-break-after: always !important;
+  break-after: always !important;
+
+  &:last-child {
+    page-break-after: auto !important;
+    break-after: auto !important;
+  }
+}
+
 .jfReport.printMode .jfReport-col {
   display: block;
 }
