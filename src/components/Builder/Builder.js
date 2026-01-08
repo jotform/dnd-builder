@@ -11,34 +11,33 @@ import LeftPanel from '../Panels/LeftPanel';
 import SlidesPanel from '../Panels/SlidesPanel';
 import AllSlidesPanel from '../Panels/AllSlidesPanel';
 import { leftPanelConfigPropType } from '../../constants/propTypes';
-
 import '../../styles/jfReportsBundle.scss';
 
 const Builder = ({
-  acceptedItems,
-  additionalPageItems,
-  disableInteraction,
-  itemAccessor,
-  lastScrollPosition,
-  leftPanelConfig,
-  onAnEventTrigger,
-  onItemAdd,
-  onItemChange,
-  onItemMove,
-  onItemRemove,
-  onItemResize,
-  onItemsMove,
-  onPageAdd,
-  onPageChange,
-  onPageDuplicate,
-  onPageOrdersChange,
-  onPageRemove,
-  onRightPanelsToggled,
-  onSettingChange,
-  pages,
-  settings,
-  theme,
-  useExperimentalFeatures,
+  acceptedItems = {},
+  additionalPageItems = [],
+  disableInteraction = [],
+  itemAccessor = () => {},
+  lastScrollPosition = 0,
+  leftPanelConfig = [],
+  onAnEventTrigger = () => {},
+  onItemAdd = () => {},
+  onItemChange = () => {},
+  onItemMove = () => {},
+  onItemRemove = () => {},
+  onItemResize = () => {},
+  onItemsMove = () => {},
+  onPageAdd = () => {},
+  onPageChange = () => {},
+  onPageDuplicate = () => {},
+  onPageOrdersChange = () => {},
+  onPageRemove = () => {},
+  onRightPanelsToggled = () => {},
+  onSettingChange = () => {},
+  pages = [],
+  settings = {},
+  theme = 'lightMode',
+  useExperimentalFeatures = false,
   ...otherProps
 }) => {
   const hashCode = objectHash(otherProps);
@@ -120,80 +119,53 @@ const Builder = ({
 
 Builder.propTypes = {
   /** Items for to render in the report */
-  acceptedItems: PropTypes.shape({}),
+  acceptedItems: PropTypes.shape({}).isRequired,
   /** Array of React components to render statically on each page (eg. watermark) */
-  additionalPageItems: PropTypes.arrayOf(PropTypes.node),
-  disableInteraction: PropTypes.arrayOf(PropTypes.string),
+  additionalPageItems: PropTypes.arrayOf(PropTypes.node).isRequired,
+  disableInteraction: PropTypes.arrayOf(PropTypes.string).isRequired,
   /** To pass in extra props to items selectively */
-  itemAccessor: PropTypes.func,
-  lastScrollPosition: PropTypes.number,
-  leftPanelConfig: leftPanelConfigPropType,
+  itemAccessor: PropTypes.func.isRequired,
+  lastScrollPosition: PropTypes.number.isRequired,
+  leftPanelConfig: leftPanelConfigPropType.isRequired,
   /** To track and log user actions */
-  onAnEventTrigger: PropTypes.func,
+  onAnEventTrigger: PropTypes.func.isRequired,
   /** Function called upon adding an item */
-  onItemAdd: PropTypes.func,
+  onItemAdd: PropTypes.func.isRequired,
   /** Function called upon editing an item */
-  onItemChange: PropTypes.func,
+  onItemChange: PropTypes.func.isRequired,
   /** Function called upon moving an item */
-  onItemMove: PropTypes.func,
+  onItemMove: PropTypes.func.isRequired,
   /** Function called upon removing an item */
-  onItemRemove: PropTypes.func,
+  onItemRemove: PropTypes.func.isRequired,
   /** Function called upon resizing an item */
-  onItemResize: PropTypes.func,
-  onItemsMove: PropTypes.func,
+  onItemResize: PropTypes.func.isRequired,
+  onItemsMove: PropTypes.func.isRequired,
   /** Function called upon adding a page */
-  onPageAdd: PropTypes.func,
+  onPageAdd: PropTypes.func.isRequired,
   /** Function called upon editing a page */
-  onPageChange: PropTypes.func,
+  onPageChange: PropTypes.func.isRequired,
   /** Function called upon duplicating a page */
-  onPageDuplicate: PropTypes.func,
+  onPageDuplicate: PropTypes.func.isRequired,
   /** Function called upon reordering pages */
-  onPageOrdersChange: PropTypes.func,
+  onPageOrdersChange: PropTypes.func.isRequired,
   /** Function called upon removing a page */
-  onPageRemove: PropTypes.func,
+  onPageRemove: PropTypes.func.isRequired,
   /** Function called when the slides or the right panel is
    * toggled takes a boolean value to indicate whether or
    * not the panel is toggled open.
    */
-  onRightPanelsToggled: PropTypes.func,
+  onRightPanelsToggled: PropTypes.func.isRequired,
   /** Function called upon editing a general report setting */
-  onSettingChange: PropTypes.func,
+  onSettingChange: PropTypes.func.isRequired,
   /** Array of pages with their settings and items */
   pages: PropTypes.arrayOf(
     PropTypes.shape({}),
-  ),
+  ).isRequired,
   /** General report settings such as layout size and background color */
-  settings: PropTypes.shape({}),
+  settings: PropTypes.shape({}).isRequired,
   /** Theme */
-  theme: PropTypes.oneOf(['lightMode', 'darkMode']),
-  useExperimentalFeatures: PropTypes.bool,
-};
-
-Builder.defaultProps = {
-  acceptedItems: {},
-  additionalPageItems: [],
-  disableInteraction: [],
-  itemAccessor: () => { },
-  lastScrollPosition: 0,
-  leftPanelConfig: [],
-  onAnEventTrigger: () => { },
-  onItemAdd: () => { },
-  onItemChange: () => { },
-  onItemMove: () => { },
-  onItemRemove: () => { },
-  onItemResize: () => { },
-  onItemsMove: () => { },
-  onPageAdd: () => { },
-  onPageChange: () => { },
-  onPageDuplicate: () => { },
-  onPageOrdersChange: () => { },
-  onPageRemove: () => { },
-  onRightPanelsToggled: () => { },
-  onSettingChange: () => { },
-  pages: [],
-  settings: {},
-  theme: 'lightMode',
-  useExperimentalFeatures: false,
+  theme: PropTypes.oneOf(['lightMode', 'darkMode']).isRequired,
+  useExperimentalFeatures: PropTypes.bool.isRequired,
 };
 
 export default Builder;

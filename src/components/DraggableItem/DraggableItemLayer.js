@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import PropTypes from 'prop-types';
 import memoizeOne from 'memoize-one';
-import { useDragLayer } from 'react-dnd-cjs';
+import { useDragLayer } from 'react-dnd';
 import ReportItemRenderer from '../Builder/ReportItemRenderer';
 import { proximityListener, calculateGuidePositions } from '../../utils/functions';
 import ItemPositioner from '../ItemPositioner';

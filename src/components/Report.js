@@ -8,8 +8,8 @@ import reportsAppTexts, { SharingTextsModule } from '../constants/texts';
 
 const Report = ({
   leftPanelConfig,
-  mode,
-  reportsAppTexts: newReportsAppTexts,
+  mode = 'customize',
+  reportsAppTexts: newReportsAppTexts = reportsAppTexts,
   ...props
 }) => {
   const [viewMode, setViewMode] = useState(mode);
@@ -21,22 +21,34 @@ const Report = ({
 
   useEffect(() => {
     if (['customize', 'preview'].indexOf(viewMode) > -1) {
-      setLastScrollPosition(document.querySelector('.jfReport-viewport').scrollTop);
+      setLastScrollPosition(document.querySelector('.jfReport-viewport')?.scrollTop || 0);
     }
     setViewMode(mode);
-  }, [mode]);
+  }, [mode, viewMode]);
 
-  const customProps = { ...props, lastScrollPosition, leftPanelConfig };
+  const customProps = {
+    ...props,
+    lastScrollPosition,
+    leftPanelConfig,
+  };
 
   switch (viewMode) {
     case 'preview': {
       return <Preview {...customProps} />;
     }
     case 'presentation': {
-      return <Presentation {...props} />;
+      return (
+        <Presentation
+          {...props}
+        />
+      );
     }
     case 'print': {
-      return <Print {...props} />;
+      return (
+        <Print
+          {...props}
+        />
+      );
     }
     case 'customize':
     default: {
@@ -46,6 +58,7 @@ const Report = ({
 };
 
 Report.propTypes = {
+  leftPanelConfig: PropTypes.any,
   /** Conditionally rendering different modes  */
   mode: PropTypes.oneOf(['customize', 'preview', 'print', 'presentation']),
   /**
@@ -54,12 +67,6 @@ Report.propTypes = {
   */
   reportsAppTexts: PropTypes.shape({}),
   theme: PropTypes.oneOf(['lightMode', 'darkMode']),
-};
-
-Report.defaultProps = {
-  mode: 'customize',
-  reportsAppTexts,
-  theme: 'lightMode',
 };
 
 export default Report;

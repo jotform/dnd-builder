@@ -1,7 +1,7 @@
 import { useEffect, useState, memo } from 'react';
 import PropTypes from 'prop-types';
-import { useDrag } from 'react-dnd-cjs';
-import { getEmptyImage } from 'react-dnd-html5-backend-cjs';
+import { useDrag } from 'react-dnd';
+import { getEmptyImage } from 'react-dnd-html5-backend';
 import isEqual from 'lodash.isequal';
 import ItemPositioner from '../ItemPositioner';
 import { DRAGGABLE_ITEM_TYPE } from '../../constants/itemTypes';
@@ -71,30 +71,36 @@ const DraggableItem = ({
     }
   };
 
-  const [{ isDragging }, drag, preview] = useDrag({
-    begin: () => {
-      if (!isSelected) select();
-      addEventListenerForSidebar();
-    },
-    canDrag: (!item.isLocked && !isTextEditorOpen) ? true : false,
+  const canDrag = !item.isLocked && !isTextEditorOpen;
+
+  const [{ isDragging }, drag, preview] = useDrag(() => ({
+    canDrag: () => canDrag,
+
     collect: monitor => ({
       isDragging: monitor.isDragging(),
     }),
+
     end: () => {
       removeEventListenerForSidebar();
     },
-    isDragging: () => {
-      return (isMultipleItemSelected && isSelected) || (!isMultipleItemSelected && isSelected);
-    },
-    item: {
+
+    isDragging: () => (isMultipleItemSelected && isSelected)
+    || (!isMultipleItemSelected && isSelected),
+
+    item: () => ({
       height,
       id,
       left,
       top,
-      type: DRAGGABLE_ITEM_TYPE,
       width,
-    },
-  });
+    }),
+
+    type: DRAGGABLE_ITEM_TYPE,
+  }), [
+    canDrag,
+    height, id, left, top, width,
+    isMultipleItemSelected, isSelected,
+  ]);
 
   const [
     {
@@ -112,7 +118,19 @@ const DraggableItem = ({
   });
 
   useEffect(() => {
+    if (!isDragging) return;
+    if (!isSelected) select();
+    addEventListenerForSidebar();
+    return () => {
+      removeEventListenerForSidebar();
+    };
+  }, [isDragging, isSelected, select]);
+
+  useEffect(() => {
     preview(getEmptyImage(), { captureDraggingState: true });
+  }, [preview]);
+
+  useEffect(() => {
     if (width !== stateWidth || height !== stateHeight || left !== stateLeft || top !== stateTop) {
       setResizeSize({
         height,
@@ -121,7 +139,7 @@ const DraggableItem = ({
         width,
       });
     }
-  }, [width, height, left, top]);
+  }, [width, height, left, top, stateWidth, stateHeight, stateLeft, stateTop]);
 
   const onResizeStop = (deltaWidth, deltaHeight, direction) => {
     const activeItem = {
