@@ -1,7 +1,7 @@
 import { useEffect, memo } from 'react';
 import PropTypes from 'prop-types';
-import { useDrag } from 'react-dnd-cjs';
-import { getEmptyImage } from 'react-dnd-html5-backend-cjs';
+import { useDrag } from 'react-dnd';
+import { getEmptyImage } from 'react-dnd-html5-backend';
 import { DROPPABLE_ITEM_TYPE } from '../../constants/itemTypes';
 import {
   getMostVisiblePage, getExactIconType, getAvailableCoordinate,
@@ -22,20 +22,22 @@ const Element = ({
   zoom,
   ...additionalData
 }) => {
-  const [{ isDragging }, drag, preview] = useDrag({
+  const [{ isDragging }, drag, preview] = useDrag(() => ({
     collect: monitor => ({
       isDragging: monitor.isDragging(),
     }),
-    item: {
+
+    item: () => ({
       itemType,
-      type: DROPPABLE_ITEM_TYPE,
       ...additionalData,
-    },
-  });
+    }),
+
+    type: itemType ?? DROPPABLE_ITEM_TYPE,
+  }), [itemType, additionalData]);
 
   useEffect(() => {
     preview(getEmptyImage(), { captureDraggingState: true });
-  });
+  }, [preview]);
 
   const onElementClick = () => {
     const itemID = generateId();

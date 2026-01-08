@@ -94,6 +94,7 @@ module.exports = {
     'react/no-danger': 0,
     'react/prefer-stateless-function': 0,
     'react/react-in-jsx-scope': 'off',
+    'react/require-default-props': 0,
     'react-hooks/rules-of-hooks': 'error',
     // 'react-hooks/exhaustive-deps': 'warn',
 

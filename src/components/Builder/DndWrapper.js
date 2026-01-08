@@ -1,17 +1,19 @@
 import PropTypes from 'prop-types';
-import HTML5Backend from 'react-dnd-html5-backend-cjs';
-import { DndProvider } from 'react-dnd-cjs';
-import MultiBackend, { TouchTransition, MouseTransition } from 'react-dnd-multi-backend';
-import TouchBackend from 'react-dnd-touch-backend-cjs';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
+import { MouseTransition, TouchTransition, MultiBackend } from 'react-dnd-multi-backend';
+import { TouchBackend } from 'react-dnd-touch-backend';
 
-const HTML5toTouch = {
+const MultiBackendOptions = {
   backends: [
     {
       backend: HTML5Backend,
+      id: 'html5',
       transition: MouseTransition,
     },
     {
       backend: TouchBackend,
+      id: 'touch',
       options: {
         delayTouchStart: 135,
         enableMouseEvents: true,
@@ -28,8 +30,7 @@ const DndWrapper = ({ children }) => {
   return (
     <DndProvider
       backend={MultiBackend}
-      context={window}
-      options={HTML5toTouch}
+      options={MultiBackendOptions}
     >
       {children}
     </DndProvider>

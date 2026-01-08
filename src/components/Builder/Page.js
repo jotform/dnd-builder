@@ -2,9 +2,10 @@ import {
   useState,
   useRef,
   memo,
+  useMemo,
 } from 'react';
 import PropTypes from 'prop-types';
-import { useDrop } from 'react-dnd-cjs';
+import { useDrop } from 'react-dnd';
 import { ACCEPTED_TYPES } from '../../constants/itemTypes';
 import AlignmentGuides from '../AlignmentGuides';
 import ReportItemsWrapper from '../ReportItemsWrapper';
@@ -86,7 +87,7 @@ const Page = ({
     }
   };
 
-  const [{ isOver }, drop] = useDrop({
+  const dropConfig = useMemo(() => ({
     accept: ACCEPTED_TYPES,
     collect: monitor => {
       return {
@@ -95,7 +96,9 @@ const Page = ({
     },
     drop: onDrop,
     hover: onHover,
-  });
+  }), [onDrop, onHover]);
+
+  const [{ isOver }, drop] = useDrop(dropConfig);
 
   const { reportBackgroundColor } = settings;
   const { backgroundColor } = page;

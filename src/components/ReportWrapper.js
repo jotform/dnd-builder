@@ -8,10 +8,10 @@ import { usePropContext } from '../utils/propContext';
 const getModeClass = mode => `${mode}Mode`;
 
 const ReportWrapper = ({
-  children,
-  mode,
-  pageCount,
-  theme,
+  children = null,
+  mode = '',
+  pageCount = 0,
+  theme = 'lightMode',
 }) => {
   const {
     isAllSlidesPanelOpen,
@@ -49,7 +49,14 @@ const ReportWrapper = ({
     }
 
     decidedWhichPanelToOpen.current = true;
-  }, [mode, pageCount]);
+  }, [
+    mode,
+    pageCount,
+    isLeftPanelOpen,
+    isSlidesPanelOpen,
+    setIsLeftPanelOpen,
+    setIsSlidesPanelOpen,
+  ]);
 
   const wrapperClass = classNames(
     'jfReport',
@@ -72,17 +79,10 @@ const ReportWrapper = ({
 };
 
 ReportWrapper.propTypes = {
-  children: PropTypes.any,
+  children: PropTypes.node,
   mode: PropTypes.string,
   pageCount: PropTypes.number,
   theme: PropTypes.oneOf(['lightMode', 'darkMode']),
-};
-
-ReportWrapper.defaultProps = {
-  children: null,
-  mode: '',
-  pageCount: 0,
-  theme: 'lightMode',
 };
 
 export default memo(ReportWrapper);

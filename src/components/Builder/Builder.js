@@ -11,34 +11,33 @@ import LeftPanel from '../Panels/LeftPanel';
 import SlidesPanel from '../Panels/SlidesPanel';
 import AllSlidesPanel from '../Panels/AllSlidesPanel';
 import { leftPanelConfigPropType } from '../../constants/propTypes';
-
 import '../../styles/jfReportsBundle.scss';
 
 const Builder = ({
-  acceptedItems,
-  additionalPageItems,
-  disableInteraction,
-  itemAccessor,
-  lastScrollPosition,
-  leftPanelConfig,
-  onAnEventTrigger,
-  onItemAdd,
-  onItemChange,
-  onItemMove,
-  onItemRemove,
-  onItemResize,
-  onItemsMove,
-  onPageAdd,
-  onPageChange,
-  onPageDuplicate,
-  onPageOrdersChange,
-  onPageRemove,
-  onRightPanelsToggled,
-  onSettingChange,
-  pages,
-  settings,
-  theme,
-  useExperimentalFeatures,
+  acceptedItems = {},
+  additionalPageItems = [],
+  disableInteraction = [],
+  itemAccessor = () => {},
+  lastScrollPosition = 0,
+  leftPanelConfig = [],
+  onAnEventTrigger = () => {},
+  onItemAdd = () => {},
+  onItemChange = () => {},
+  onItemMove = () => {},
+  onItemRemove = () => {},
+  onItemResize = () => {},
+  onItemsMove = () => {},
+  onPageAdd = () => {},
+  onPageChange = () => {},
+  onPageDuplicate = () => {},
+  onPageOrdersChange = () => {},
+  onPageRemove = () => {},
+  onRightPanelsToggled = () => {},
+  onSettingChange = () => {},
+  pages = [],
+  settings = {},
+  theme = 'lightMode',
+  useExperimentalFeatures = false,
   ...otherProps
 }) => {
   const hashCode = objectHash(otherProps);
@@ -167,33 +166,6 @@ Builder.propTypes = {
   /** Theme */
   theme: PropTypes.oneOf(['lightMode', 'darkMode']),
   useExperimentalFeatures: PropTypes.bool,
-};
-
-Builder.defaultProps = {
-  acceptedItems: {},
-  additionalPageItems: [],
-  disableInteraction: [],
-  itemAccessor: () => { },
-  lastScrollPosition: 0,
-  leftPanelConfig: [],
-  onAnEventTrigger: () => { },
-  onItemAdd: () => { },
-  onItemChange: () => { },
-  onItemMove: () => { },
-  onItemRemove: () => { },
-  onItemResize: () => { },
-  onItemsMove: () => { },
-  onPageAdd: () => { },
-  onPageChange: () => { },
-  onPageDuplicate: () => { },
-  onPageOrdersChange: () => { },
-  onPageRemove: () => { },
-  onRightPanelsToggled: () => { },
-  onSettingChange: () => { },
-  pages: [],
-  settings: {},
-  theme: 'lightMode',
-  useExperimentalFeatures: false,
 };
 
 export default Builder;
