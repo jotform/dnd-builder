@@ -119,53 +119,53 @@ const Builder = ({
 
 Builder.propTypes = {
   /** Items for to render in the report */
-  acceptedItems: PropTypes.shape({}).isRequired,
+  acceptedItems: PropTypes.shape({}),
   /** Array of React components to render statically on each page (eg. watermark) */
-  additionalPageItems: PropTypes.arrayOf(PropTypes.node).isRequired,
-  disableInteraction: PropTypes.arrayOf(PropTypes.string).isRequired,
+  additionalPageItems: PropTypes.arrayOf(PropTypes.node),
+  disableInteraction: PropTypes.arrayOf(PropTypes.string),
   /** To pass in extra props to items selectively */
-  itemAccessor: PropTypes.func.isRequired,
-  lastScrollPosition: PropTypes.number.isRequired,
-  leftPanelConfig: leftPanelConfigPropType.isRequired,
+  itemAccessor: PropTypes.func,
+  lastScrollPosition: PropTypes.number,
+  leftPanelConfig: leftPanelConfigPropType,
   /** To track and log user actions */
-  onAnEventTrigger: PropTypes.func.isRequired,
+  onAnEventTrigger: PropTypes.func,
   /** Function called upon adding an item */
-  onItemAdd: PropTypes.func.isRequired,
+  onItemAdd: PropTypes.func,
   /** Function called upon editing an item */
-  onItemChange: PropTypes.func.isRequired,
+  onItemChange: PropTypes.func,
   /** Function called upon moving an item */
-  onItemMove: PropTypes.func.isRequired,
+  onItemMove: PropTypes.func,
   /** Function called upon removing an item */
-  onItemRemove: PropTypes.func.isRequired,
+  onItemRemove: PropTypes.func,
   /** Function called upon resizing an item */
-  onItemResize: PropTypes.func.isRequired,
-  onItemsMove: PropTypes.func.isRequired,
+  onItemResize: PropTypes.func,
+  onItemsMove: PropTypes.func,
   /** Function called upon adding a page */
-  onPageAdd: PropTypes.func.isRequired,
+  onPageAdd: PropTypes.func,
   /** Function called upon editing a page */
-  onPageChange: PropTypes.func.isRequired,
+  onPageChange: PropTypes.func,
   /** Function called upon duplicating a page */
-  onPageDuplicate: PropTypes.func.isRequired,
+  onPageDuplicate: PropTypes.func,
   /** Function called upon reordering pages */
-  onPageOrdersChange: PropTypes.func.isRequired,
+  onPageOrdersChange: PropTypes.func,
   /** Function called upon removing a page */
-  onPageRemove: PropTypes.func.isRequired,
+  onPageRemove: PropTypes.func,
   /** Function called when the slides or the right panel is
    * toggled takes a boolean value to indicate whether or
    * not the panel is toggled open.
    */
-  onRightPanelsToggled: PropTypes.func.isRequired,
+  onRightPanelsToggled: PropTypes.func,
   /** Function called upon editing a general report setting */
-  onSettingChange: PropTypes.func.isRequired,
+  onSettingChange: PropTypes.func,
   /** Array of pages with their settings and items */
   pages: PropTypes.arrayOf(
     PropTypes.shape({}),
-  ).isRequired,
+  ),
   /** General report settings such as layout size and background color */
-  settings: PropTypes.shape({}).isRequired,
+  settings: PropTypes.shape({}),
   /** Theme */
-  theme: PropTypes.oneOf(['lightMode', 'darkMode']).isRequired,
-  useExperimentalFeatures: PropTypes.bool.isRequired,
+  theme: PropTypes.oneOf(['lightMode', 'darkMode']),
+  useExperimentalFeatures: PropTypes.bool,
 };
 
 export default Builder;
