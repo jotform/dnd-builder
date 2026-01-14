@@ -1,7 +1,6 @@
 import { memo, useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { FixedSizeList } from 'react-window';
 import Panel from '../../Builder/Panel';
 import SortablePageList from './SortablePageList';
 import Section from '../../Builder/Section';
@@ -42,7 +41,7 @@ const SlidesPanel = ({
     return pages[index];
   }, [pages]);
 
-  const onPageSort = useCallback(({ newIndex, oldIndex }, nativeEvent, list) => {
+  const onPageSort = useCallback(({ newIndex, oldIndex }) => {
     const newPageOrders = arrayMove(pages, oldIndex, newIndex).reduce((acc, page, index) => {
       acc[page.id] = { order: index + 1 };
       return acc;
@@ -50,8 +49,6 @@ const SlidesPanel = ({
 
     onPageOrdersChange(newPageOrders);
     onAnEventTrigger('sortPageFromSlides');
-
-    list.forceUpdate();
   }, [pages]);
 
   // Panel className
@@ -108,7 +105,7 @@ const SlidesPanel = ({
               <ListWrapper
                 acceptedItems={acceptedItems}
                 additionalPageItems={additionalPageItems}
-                component={SortablePageList(FixedSizeList)}
+                component={SortablePageList()}
                 disableInteraction={disableInteraction}
                 hashCode={hashCode}
                 itemAccessor={itemAccessor}
@@ -119,6 +116,7 @@ const SlidesPanel = ({
                 onSortEnd={onPageSort}
                 pageCount={pages.length}
                 pageGetter={pageGetter}
+                pages={pages}
                 reportSettings={reportSettings}
               />
             </div>
