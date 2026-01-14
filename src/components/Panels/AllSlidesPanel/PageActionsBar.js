@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import * as icons from '../../../utils/icons';
 
 const PageActionsBar = ({
-  onPageDeselect,
-  onPageSelectAll,
-  pageCount,
-  selectedPagesCount,
+  onPageDeselect = () => {},
+  onPageSelectAll = () => {},
+  pageCount = 0,
+  selectedPagesCount = 0,
 }) => {
   // const onPageDuplicateClick = () => {
   //   onPageDuplicate(page);
@@ -92,18 +92,6 @@ PageActionsBar.propTypes = {
   page: PropTypes.shape({ id: PropTypes.string }),
   pageCount: PropTypes.number,
   selectedPagesCount: PropTypes.number,
-};
-
-PageActionsBar.defaultProps = {
-  // onAnEventTrigger: () => {},
-  // onPageDuplicate: () => {},
-  // onPageRemove: () => {},
-  // order: '',
-  onPageDeselect: () => {},
-  onPageSelectAll: () => {},
-  page: {},
-  pageCount: 0,
-  selectedPagesCount: 0,
 };
 
 export default memo(PageActionsBar);

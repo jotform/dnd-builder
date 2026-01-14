@@ -55,12 +55,4 @@ Print.propTypes = {
   settings: PropTypes.shape({}),
 };
 
-Print.defaultProps = {
-  acceptedItems: {},
-  additionalPageItems: [],
-  itemAccessor: () => {},
-  pages: [],
-  settings: {},
-};
-
 export default Print;

@@ -6,14 +6,14 @@ import { PropProvider } from '../../utils/propContext';
 import { BuilderProvider } from '../../utils/builderContext';
 
 const Preview = ({
-  acceptedItems,
-  additionalPageItems,
-  itemAccessor,
-  lastScrollPosition,
-  onAnEventTrigger,
-  pages,
-  settings,
-  theme,
+  acceptedItems = {},
+  additionalPageItems = [],
+  itemAccessor = () => {},
+  lastScrollPosition = 0,
+  onAnEventTrigger = () => {},
+  pages = [],
+  settings = {},
+  theme = 'lightMode',
   ...otherProps
 }) => {
 /* eslint-disable no-unused-vars */
@@ -82,17 +82,6 @@ Preview.propTypes = {
   settings: PropTypes.shape({}),
   /** Theme */
   theme: PropTypes.oneOf(['lightMode', 'darkMode']),
-};
-
-Preview.defaultProps = {
-  acceptedItems: {},
-  additionalPageItems: [],
-  itemAccessor: () => {},
-  lastScrollPosition: 0,
-  onAnEventTrigger: () => {},
-  pages: [],
-  settings: {},
-  theme: 'lightMode',
 };
 
 export default Preview;

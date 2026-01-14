@@ -55,7 +55,7 @@ const ChartPie = () => (
   </ResponsiveContainer>
 );
 
-const Chart = ({ item: { chartType } }) => (
+const Chart = ({ item: { chartType } = {} }) => (
   chartType === 'column' ? <ChartColumn /> : <ChartPie />
 );
 
@@ -63,10 +63,6 @@ Chart.propTypes = {
   item: PropTypes.shape({
     chartType: PropTypes.string,
   }),
-};
-
-Chart.defaultProps = {
-  item: {},
 };
 
 const settings = [

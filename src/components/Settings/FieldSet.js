@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import PropTypes from 'prop-types';
 
-const FieldSet = ({ config: { label } }) => {
+const FieldSet = ({ config: { label } = {} }) => {
   return (
     <div className="toolSection toolSection-title t-medium fieldset">
       {label}
@@ -13,10 +13,6 @@ FieldSet.propTypes = {
   config: PropTypes.shape({
     label: PropTypes.string,
   }),
-};
-
-FieldSet.defaultProps = {
-  config: {},
 };
 
 export default memo(FieldSet);

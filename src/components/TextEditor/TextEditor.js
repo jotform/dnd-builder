@@ -5,10 +5,10 @@ import QuillEditor from './QuillEditor';
 import { useBuilderContext } from '../../utils/builderContext';
 
 const TextEditor = ({
-  content,
-  handleSave,
-  isLocked,
-  isSelected,
+  content = '',
+  handleSave = () => {},
+  isLocked = false,
+  isSelected = false,
   placeholder,
 }) => {
   const [_content, setContent] = useState(domPurify.sanitize(content));
@@ -53,13 +53,6 @@ TextEditor.propTypes = {
   isLocked: PropTypes.bool,
   isSelected: PropTypes.bool,
   placeholder: PropTypes.string.isRequired,
-};
-
-TextEditor.defaultProps = {
-  content: '',
-  handleSave: () => {},
-  isLocked: false,
-  isSelected: false,
 };
 
 export default TextEditor;

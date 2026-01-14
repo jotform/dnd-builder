@@ -3,7 +3,10 @@ import { forwardRef, memo } from 'react';
 import PropTypes from 'prop-types';
 
 const Panel = ({
-  additionalClassName, children, innerRef, onAnimationEnd,
+  additionalClassName = '',
+  children = null,
+  innerRef = null,
+  onAnimationEnd = () => {},
 }) => {
   return (
     <aside
@@ -24,13 +27,6 @@ Panel.propTypes = {
     PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
   ]),
   onAnimationEnd: PropTypes.func,
-};
-
-Panel.defaultProps = {
-  additionalClassName: '',
-  children: null,
-  innerRef: null,
-  onAnimationEnd: () => {},
 };
 
 const MemoizedPanel = memo(Panel);

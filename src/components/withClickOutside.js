@@ -9,9 +9,9 @@ function getDisplayName(WrappedComponent) {
 function withClickOutside(WrappedComponent) {
   function WithClickOutside(props) {
     const {
-      exceptionalClasses,
+      exceptionalClasses = null,
       onClickOutside,
-      withClickOutsideWrapperClass,
+      withClickOutsideWrapperClass = null,
     } = props;
 
     const wrapper = useRef(null);
@@ -76,11 +76,6 @@ function withClickOutside(WrappedComponent) {
     ]),
     onClickOutside: PropTypes.func.isRequired,
     withClickOutsideWrapperClass: PropTypes.string,
-  };
-
-  WithClickOutside.defaultProps = {
-    exceptionalClasses: null,
-    withClickOutsideWrapperClass: null,
   };
 
   WithClickOutside.displayName = `inlineEdit(${getDisplayName(WrappedComponent)})`;

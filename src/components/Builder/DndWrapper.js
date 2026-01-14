@@ -24,7 +24,7 @@ const MultiBackendOptions = {
   ],
 };
 
-const DndWrapper = ({ children }) => {
+const DndWrapper = ({ children = null }) => {
   if (!children) return null;
 
   return (
@@ -39,10 +39,6 @@ const DndWrapper = ({ children }) => {
 
 DndWrapper.propTypes = {
   children: PropTypes.node,
-};
-
-DndWrapper.defaultProps = {
-  children: null,
 };
 
 export default DndWrapper;

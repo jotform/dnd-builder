@@ -4,10 +4,10 @@ import classNames from 'classnames';
 import * as icons from '../../utils/icons';
 
 const SelectBox = ({
-  config,
-  item,
-  onItemChange,
-  value,
+  config = [],
+  item = {},
+  onItemChange = () => {},
+  value = '',
 }) => {
   const handleSelection = newValue => () => {
     if (value !== newValue) {
@@ -61,13 +61,6 @@ SelectBox.propTypes = {
   }),
   onItemChange: PropTypes.func,
   value: PropTypes.string,
-};
-
-SelectBox.defaultProps = {
-  config: [],
-  item: {},
-  onItemChange: () => {},
-  value: '',
 };
 
 export default memo(SelectBox);

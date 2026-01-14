@@ -5,9 +5,9 @@ import * as icons from '../../utils/icons';
 import { useTranslatedTexts } from '../../utils/hooks';
 
 const PageAdder = ({
-  additionalClass,
-  onPageAdd,
-  pageCount,
+  additionalClass = '',
+  onPageAdd = () => {},
+  pageCount = 1,
 }) => {
   const onPageAddClick = () => {
     const newPageIndex = pageCount + 1;
@@ -32,12 +32,6 @@ PageAdder.propTypes = {
   additionalClass: string,
   onPageAdd: func,
   pageCount: number,
-};
-
-PageAdder.defaultProps = {
-  additionalClass: '',
-  onPageAdd: () => {},
-  pageCount: 1,
 };
 
 export default PageAdder;

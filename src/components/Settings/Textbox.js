@@ -2,12 +2,12 @@ import { memo } from 'react';
 import PropTypes from 'prop-types';
 
 const Textbox = ({
-  config,
-  item,
-  maxLength,
-  onItemChange,
-  placeholder,
-  value,
+  config = {},
+  item = {},
+  maxLength = false,
+  onItemChange = () => {},
+  placeholder = '',
+  value = '',
 }) => {
   const onChange = e => {
     const { value: newValue } = e.target;
@@ -55,15 +55,6 @@ Textbox.propTypes = {
     PropTypes.string,
     PropTypes.number,
   ]),
-};
-
-Textbox.defaultProps = {
-  config: [],
-  item: {},
-  maxLength: false,
-  onItemChange: () => {},
-  placeholder: '',
-  value: '',
 };
 
 export default memo(Textbox);

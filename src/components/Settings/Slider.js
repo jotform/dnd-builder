@@ -2,10 +2,10 @@ import { memo } from 'react';
 import PropTypes from 'prop-types';
 
 const Slider = ({
-  config,
-  item,
-  onItemChange,
-  value,
+  config = {},
+  item = {},
+  onItemChange = () => {},
+  value = '',
 }) => {
   const { range, simple } = config;
   const refValue = simple ? 1 : 100;
@@ -84,13 +84,6 @@ Slider.propTypes = {
   }),
   onItemChange: PropTypes.func,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-};
-
-Slider.defaultProps = {
-  config: {},
-  item: {},
-  onItemChange: () => {},
-  value: '',
 };
 
 export default memo(Slider);

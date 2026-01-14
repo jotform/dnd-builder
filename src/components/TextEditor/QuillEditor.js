@@ -82,11 +82,4 @@ QuillEditor.propTypes = {
   setIsTextEditorOpen: PropTypes.func,
 };
 
-QuillEditor.defaultProps = {
-  content: '',
-  handleSave: () => {},
-  setContent: () => {},
-  setIsTextEditorOpen: () => {},
-};
-
 export default QuillEditor;

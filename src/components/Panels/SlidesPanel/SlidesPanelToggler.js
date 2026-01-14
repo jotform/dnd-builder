@@ -3,7 +3,7 @@ import { useBuilderContext } from '../../../utils/builderContext';
 import * as icons from '../../../utils/icons';
 import { useTranslatedTexts } from '../../../utils/hooks';
 
-const SlidesPanelToggler = ({ onClosePanel }) => {
+const SlidesPanelToggler = ({ onClosePanel = () => {} }) => {
   const {
     setActiveElement,
     setIsSlidesPanelOpen,
@@ -36,10 +36,6 @@ const SlidesPanelToggler = ({ onClosePanel }) => {
 
 SlidesPanelToggler.propTypes = {
   onClosePanel: PropTypes.func,
-};
-
-SlidesPanelToggler.defaultProps = {
-  onClosePanel: () => {},
 };
 
 export default SlidesPanelToggler;

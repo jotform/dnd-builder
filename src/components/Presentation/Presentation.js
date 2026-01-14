@@ -11,15 +11,15 @@ import '../../styles/jfReportsBundle.scss';
 import Print from '../Print';
 
 const Presentation = ({
-  acceptedItems,
-  additionalPageItems,
-  itemAccessor,
-  onAnEventTrigger,
-  pages,
-  presentationBarActions,
-  settings,
-  theme,
-  useFixedPresentationBar,
+  acceptedItems = {},
+  additionalPageItems = [],
+  itemAccessor = () => {},
+  onAnEventTrigger = () => {},
+  pages = [],
+  presentationBarActions = [],
+  settings = {},
+  theme = 'lightMode',
+  useFixedPresentationBar = false,
   ...otherProps
 }) => {
   const hashCode = objectHash(otherProps);
@@ -89,18 +89,6 @@ Presentation.propTypes = {
   theme: PropTypes.oneOf(['lightMode', 'darkMode']),
   /** Flag for fixed action bar */
   useFixedPresentationBar: PropTypes.bool,
-};
-
-Presentation.defaultProps = {
-  acceptedItems: {},
-  additionalPageItems: [],
-  itemAccessor: () => {},
-  onAnEventTrigger: () => {},
-  pages: [],
-  presentationBarActions: [],
-  settings: {},
-  theme: 'lightMode',
-  useFixedPresentationBar: false,
 };
 
 export default Presentation;

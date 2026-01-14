@@ -2,10 +2,10 @@ import PropTypes from 'prop-types';
 import * as icons from '../../../utils/icons';
 
 const PageNavigation = ({
-  currentPage,
-  decrease,
-  increase,
-  pageCount,
+  currentPage = 1,
+  decrease = () => {},
+  increase = () => {},
+  pageCount = 1,
 }) => {
   return (
     <div className="forSlide">
@@ -47,13 +47,6 @@ PageNavigation.propTypes = {
   decrease: PropTypes.func,
   increase: PropTypes.func,
   pageCount: PropTypes.number,
-};
-
-PageNavigation.defaultProps = {
-  currentPage: 1,
-  decrease: () => {},
-  increase: () => {},
-  pageCount: 1,
 };
 
 export default PageNavigation;

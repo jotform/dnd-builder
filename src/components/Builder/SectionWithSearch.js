@@ -4,11 +4,11 @@ import SearchInput from './SearchInput';
 import { useTranslatedTexts } from '../../utils/hooks';
 
 const SectionWithSearch = ({
-  children,
-  elements,
-  hasSearch,
-  searchKeys,
-  title,
+  children = () => {},
+  elements = [],
+  hasSearch = false,
+  searchKeys = [],
+  title = '',
 }) => {
   const [_elements, setElements] = useState(elements);
   const hasSearchCx = hasSearch ? ' hasSearch' : '';
@@ -48,14 +48,6 @@ SectionWithSearch.propTypes = {
     weight: PropTypes.number,
   })),
   title: PropTypes.string,
-};
-
-SectionWithSearch.defaultProps = {
-  children: () => {},
-  elements: [],
-  hasSearch: false,
-  searchKeys: [],
-  title: '',
 };
 
 export default memo(SectionWithSearch);

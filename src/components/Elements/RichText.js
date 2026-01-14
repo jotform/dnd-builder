@@ -37,15 +37,15 @@ const defaultItem = {
 };
 
 export const RichTextElement = ({
-  isSelected,
+  isSelected = false,
   item: {
     fontFamily,
     id,
     isLocked,
     opacity,
     value,
-  },
-  onItemChange,
+  } = defaultItem,
+  onItemChange = () => {},
 }) => {
   const reportItem = useRef({});
   const { isTextEditorOpen } = useBuilderContext();
@@ -101,12 +101,6 @@ RichTextElement.propTypes = {
     value: PropTypes.string,
   }),
   onItemChange: PropTypes.func,
-};
-
-RichTextElement.defaultProps = {
-  isSelected: false,
-  item: {},
-  onItemChange: () => { },
 };
 
 const details = {

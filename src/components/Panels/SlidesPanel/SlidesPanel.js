@@ -14,14 +14,14 @@ import Button from '../../Settings/Button';
 import { useClickOutsideListener, useTranslatedTexts } from '../../../utils/hooks';
 
 const SlidesPanel = ({
-  additionalPageItems,
-  hashCode,
-  itemAccessor,
-  onPageAdd,
-  onPageDuplicate,
-  onPageOrdersChange,
-  onPageRemove,
-  pages,
+  additionalPageItems = [],
+  hashCode = '',
+  itemAccessor = () => {},
+  onPageAdd = () => {},
+  onPageDuplicate = () => {},
+  onPageOrdersChange = () => {},
+  onPageRemove = () => {},
+  pages = [],
 }) => {
   const {
     isRightPanelOpen,
@@ -140,17 +140,6 @@ SlidesPanel.propTypes = {
   pages: PropTypes.arrayOf(
     PropTypes.shape({}),
   ),
-};
-
-SlidesPanel.defaultProps = {
-  additionalPageItems: [],
-  hashCode: '',
-  itemAccessor: () => { },
-  onPageAdd: () => { },
-  onPageDuplicate: () => { },
-  onPageOrdersChange: () => { },
-  onPageRemove: () => { },
-  pages: [],
 };
 
 export default memo(SlidesPanel);

@@ -10,14 +10,14 @@ import PageList from './PageList';
 import PageActionsBar from './PageActionsBar';
 
 const AllSlidesPanel = ({
-  additionalPageItems,
-  hashCode,
-  itemAccessor,
-  onPageAdd,
-  onPageDuplicate,
-  onPageOrdersChange,
-  onPageRemove,
-  pages,
+  additionalPageItems = [],
+  hashCode = '',
+  itemAccessor = () => {},
+  onPageAdd = () => {},
+  onPageDuplicate = () => {},
+  onPageOrdersChange = () => {},
+  onPageRemove = () => {},
+  pages = [],
 }) => {
   const {
     isAllSlidesPanelOpen,
@@ -130,17 +130,6 @@ AllSlidesPanel.propTypes = {
   pages: PropTypes.arrayOf(
     PropTypes.shape({}),
   ),
-};
-
-AllSlidesPanel.defaultProps = {
-  additionalPageItems: [],
-  hashCode: '',
-  itemAccessor: () => {},
-  onPageAdd: () => {},
-  onPageDuplicate: () => {},
-  onPageOrdersChange: () => {},
-  onPageRemove: () => {},
-  pages: [],
 };
 
 export default memo(AllSlidesPanel);

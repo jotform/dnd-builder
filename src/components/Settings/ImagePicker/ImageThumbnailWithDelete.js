@@ -4,9 +4,9 @@ import {
 } from '../../../utils/functions';
 
 const ImageSettings = ({
-  config,
-  item,
-  onItemChange,
+  config = {},
+  item = {},
+  onItemChange = () => {},
 }) => {
   return (
     <div className="imageUpload-wrapper d-flex">
@@ -41,12 +41,6 @@ ImageSettings.propTypes = {
     url: PropTypes.string,
   }),
   onItemChange: PropTypes.func,
-};
-
-ImageSettings.defaultProps = {
-  config: [],
-  item: {},
-  onItemChange: () => {},
 };
 
 export default ImageSettings;

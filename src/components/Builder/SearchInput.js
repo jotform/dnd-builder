@@ -12,9 +12,9 @@ import CrossIcon from '../../assets/svg/close.svg';
 import { useTranslatedTexts } from '../../utils/hooks';
 
 const SearchInput = ({
-  elements,
-  searchKeys,
-  setElements,
+  elements = [],
+  searchKeys = [],
+  setElements = () => {},
 }) => {
   const { SEARCH } = useTranslatedTexts();
   const searchInputRef = useRef(null);
@@ -101,12 +101,6 @@ SearchInput.propTypes = {
     weight: PropTypes.number,
   })),
   setElements: PropTypes.func,
-};
-
-SearchInput.defaultProps = {
-  elements: [],
-  searchKeys: [],
-  setElements: f => f,
 };
 
 export default SearchInput;

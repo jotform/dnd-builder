@@ -5,7 +5,10 @@ import { useTranslatedTexts } from '../../../utils/hooks';
 
 const imageRegex = new RegExp('jpg|jpeg|png|gif', 'i');
 
-const EnterURL = ({ item, onItemChange }) => {
+const EnterURL = ({
+  item = '',
+  onItemChange = () => {},
+}) => {
   const [url, setUrl] = useState('');
   const [isErrored, setIsErrored] = useState(false);
   const { ADD_LINK } = useTranslatedTexts();
@@ -69,11 +72,6 @@ EnterURL.propTypes = {
     id: PropTypes.string,
   }),
   onItemChange: PropTypes.func,
-};
-
-EnterURL.defaultProps = {
-  item: '',
-  onItemChange: () => {},
 };
 
 export default EnterURL;

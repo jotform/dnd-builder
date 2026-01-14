@@ -9,8 +9,13 @@ const getItemComponent = settingType => {
 };
 
 const SettingsItemRenderer = ({
-  children,
-  setting,
+  children = () => {},
+  setting = {
+    label: '',
+    static: false,
+    type: '',
+    wrapperClass: '',
+  },
 }) => {
   const { label, wrapperClass } = setting;
   const component = setting.component ? setting.component : getItemComponent(setting.type);
@@ -40,16 +45,6 @@ SettingsItemRenderer.propTypes = {
     type: PropTypes.string,
     wrapperClass: PropTypes.string,
   }),
-};
-
-SettingsItemRenderer.defaultProps = {
-  children: () => {},
-  setting: {
-    label: '',
-    static: false,
-    type: '',
-    wrapperClass: '',
-  },
 };
 
 const areEqual = (prevProps, nextProps) => {

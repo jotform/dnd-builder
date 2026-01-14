@@ -36,22 +36,22 @@ import generateId from '../../utils/generateId';
 import { EVENT_IGNORED_ROLES } from '../../constants/eventIgnoredRoles';
 
 const Scene = ({
-  additionalPageItems,
-  hashCode,
-  itemAccessor,
-  lastScrollPosition,
-  onItemAdd,
-  onItemChange,
-  onItemMove,
-  onItemRemove,
-  onItemResize,
-  onItemsMove,
-  onPageAdd,
-  onPageChange,
-  onPageDuplicate,
-  onPageOrdersChange,
-  onPageRemove,
-  pages,
+  additionalPageItems = [],
+  hashCode = '',
+  itemAccessor = () => {},
+  lastScrollPosition = 0,
+  onItemAdd = () => {},
+  onItemChange = () => {},
+  onItemMove = () => {},
+  onItemRemove = () => {},
+  onItemResize = () => {},
+  onItemsMove = () => {},
+  onPageAdd = () => {},
+  onPageChange = () => {},
+  onPageDuplicate = () => {},
+  onPageOrdersChange = () => {},
+  onPageRemove = () => {},
+  pages = [],
 }) => {
   const pageCount = pages.length;
   /* Builder Context */
@@ -513,25 +513,6 @@ Scene.propTypes = {
   pages: PropTypes.arrayOf(
     PropTypes.shape({}),
   ),
-};
-
-Scene.defaultProps = {
-  additionalPageItems: [],
-  hashCode: '',
-  itemAccessor: () => {},
-  lastScrollPosition: 0,
-  onItemAdd: () => {},
-  onItemChange: () => {},
-  onItemMove: () => {},
-  onItemRemove: () => {},
-  onItemResize: () => {},
-  onItemsMove: () => {},
-  onPageAdd: () => {},
-  onPageChange: () => {},
-  onPageDuplicate: () => {},
-  onPageOrdersChange: () => {},
-  onPageRemove: () => {},
-  pages: [],
 };
 
 export default memo(Scene);

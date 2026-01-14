@@ -28,10 +28,10 @@ export const COLOR_PRESETS = [
 export const ColorPickerWithClickOutside = withClickOutside(SketchPicker);
 
 const ColorPicker = ({
-  config,
-  item,
-  onItemChange,
-  value,
+  config = [],
+  item = {},
+  onItemChange = () => {},
+  value = '',
 }) => {
   const { defaultValue = '#FFFFFF' } = config;
   const [isPickerVisible, setIsPickerVisible] = useState(false);
@@ -139,13 +139,6 @@ ColorPicker.propTypes = {
   }),
   onItemChange: PropTypes.func,
   value: PropTypes.string,
-};
-
-ColorPicker.defaultProps = {
-  config: [],
-  item: {},
-  onItemChange: () => {},
-  value: '',
 };
 
 export default memo(ColorPicker);

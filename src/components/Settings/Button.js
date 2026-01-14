@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import * as icons from '../../utils/icons';
 
 const Button = ({
-  classNames,
-  icon,
-  onClick,
-  title,
+  classNames = '',
+  icon = '',
+  onClick = '',
+  title = '',
 }) => {
   const Icon = icons[icon] || icons.settings;
 
@@ -27,13 +27,6 @@ Button.propTypes = {
   icon: PropTypes.string,
   onClick: PropTypes.any,
   title: PropTypes.any,
-};
-
-Button.defaultProps = {
-  classNames: '',
-  icon: '',
-  onClick: '',
-  title: '',
 };
 
 export default memo(Button);

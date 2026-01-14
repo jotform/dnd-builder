@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { areEqual } from 'react-window';
 import SortablePageItem from './SortablePageItem';
 
-const SortablePageItemRenderer = ({ data, index, style }) => {
+const SortablePageItemRenderer = ({ data = {}, index, style }) => {
   const {
     pageContainerStyle, pageGetter, ...otherData
   } = data;
@@ -37,10 +37,6 @@ SortablePageItemRenderer.propTypes = {
   style: PropTypes.shape({
     top: PropTypes.number,
   }).isRequired,
-};
-
-SortablePageItemRenderer.defaultProps = {
-  data: {},
 };
 
 export default memo(SortablePageItemRenderer, areEqual);

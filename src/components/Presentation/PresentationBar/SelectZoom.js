@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 
 const SelectZoom = ({
-  fittedZoom,
-  handleZoomChange,
-  zoom,
+  fittedZoom = 1,
+  handleZoomChange = f => f,
+  zoom = 1,
 }) => {
   return (
     <select
@@ -35,12 +35,6 @@ SelectZoom.propTypes = {
   fittedZoom: PropTypes.number,
   handleZoomChange: PropTypes.func,
   zoom: PropTypes.number,
-};
-
-SelectZoom.defaultProps = {
-  fittedZoom: 1,
-  handleZoomChange: f => f,
-  zoom: 1,
 };
 
 export default SelectZoom;

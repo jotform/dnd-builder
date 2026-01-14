@@ -2,9 +2,9 @@ import { memo } from 'react';
 import PropTypes from 'prop-types';
 
 const ItemPositioner = ({
-  children,
-  classNames,
-  style,
+  children = null,
+  classNames = '',
+  style = {},
 }) => {
   return (
     <div
@@ -20,12 +20,6 @@ ItemPositioner.propTypes = {
   children: PropTypes.any,
   classNames: PropTypes.string,
   style: PropTypes.shape({}),
-};
-
-ItemPositioner.defaultProps = {
-  children: null,
-  classNames: '',
-  style: {},
 };
 
 export default memo(ItemPositioner);

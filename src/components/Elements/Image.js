@@ -87,7 +87,10 @@ const settings = [
   },
 ];
 
-export const ImageElement = ({ item, itemAccessor }) => {
+export const ImageElement = ({
+  item = { opacity: 1 },
+  itemAccessor = () => {},
+}) => {
   const [isLoading, setIsLoading] = useState(true);
   const [isErrored, setIsErrored] = useState(false);
 
@@ -171,13 +174,6 @@ ImageElement.propTypes = {
     ]),
   }),
   itemAccessor: func,
-};
-
-ImageElement.defaultProps = {
-  item: {
-    opacity: 1,
-  },
-  itemAccessor: () => {},
 };
 
 const details = {

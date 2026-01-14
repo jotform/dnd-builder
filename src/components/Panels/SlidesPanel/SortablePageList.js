@@ -42,18 +42,18 @@ const SortablePageList = Component => {
 
     get itemData() {
       const {
-        acceptedItems,
-        additionalPageItems,
-        disableInteraction,
-        hashCode,
-        itemAccessor,
-        onAnEventTrigger,
-        onPageAdd,
-        onPageClick,
-        onPageDuplicate,
-        onPageRemove,
-        pageContainerStyle,
-        pageGetter,
+        acceptedItems = {},
+        additionalPageItems = [],
+        disableInteraction = [],
+        hashCode = '',
+        itemAccessor = () => {},
+        onAnEventTrigger = () => {},
+        onPageAdd = () => {},
+        onPageClick = () => {},
+        onPageDuplicate = () => {},
+        onPageRemove = () => {},
+        pageContainerStyle = {},
+        pageGetter = () => {},
       } = this.props;
       return createItemData(
         acceptedItems,
@@ -72,7 +72,7 @@ const SortablePageList = Component => {
     }
 
     render() {
-      const { height, pageCount, width } = this.props;
+      const { height = 0, pageCount = 0, width = 0 } = this.props;
 
       return (
         <Component
@@ -105,24 +105,6 @@ const SortablePageList = Component => {
     pageCount: PropTypes.number,
     pageGetter: PropTypes.func,
     width: PropTypes.number,
-  };
-
-  ReactWindowList.defaultProps = {
-    acceptedItems: {},
-    additionalPageItems: [],
-    disableInteraction: [],
-    hashCode: '',
-    height: 0,
-    itemAccessor: () => {},
-    onAnEventTrigger: () => {},
-    onPageAdd: () => {},
-    onPageClick: () => {},
-    onPageDuplicate: () => {},
-    onPageRemove: () => {},
-    pageContainerStyle: {},
-    pageCount: 0,
-    pageGetter: () => {},
-    width: 0,
   };
 
   return SortableContainer(ReactWindowList, { withRef: true });

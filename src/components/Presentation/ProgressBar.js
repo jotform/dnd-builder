@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 
 const ProgressBar = ({
-  currentPage,
-  pageCount,
+  currentPage = 1,
+  pageCount = 1,
 }) => pageCount > 2 && (
   <div
     className="jfPresentation-progressBar"
@@ -15,11 +15,6 @@ const ProgressBar = ({
 ProgressBar.propTypes = {
   currentPage: PropTypes.number,
   pageCount: PropTypes.number,
-};
-
-ProgressBar.defaultProps = {
-  currentPage: 1,
-  pageCount: 1,
 };
 
 export default ProgressBar;

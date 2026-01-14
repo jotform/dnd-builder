@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import { useTranslatedTexts } from '../../utils/hooks';
 
 const Toggle = ({
-  config,
-  item,
-  onItemChange,
-  value,
+  config = {},
+  item = {},
+  onItemChange = () => {},
+  value = '',
 }) => {
   const onChange = e => {
     const status = e.target.checked ? 'on' : 'off';
@@ -46,13 +46,6 @@ Toggle.propTypes = {
   }),
   onItemChange: PropTypes.func,
   value: PropTypes.string,
-};
-
-Toggle.defaultProps = {
-  config: {},
-  item: {},
-  onItemChange: () => {},
-  value: '',
 };
 
 export default memo(Toggle);

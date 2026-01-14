@@ -4,13 +4,13 @@ import * as icons from '../../../utils/icons';
 import { useTranslatedTexts } from '../../../utils/hooks';
 
 const PageThumbnailActions = ({
-  disableInteraction,
-  onAnEventTrigger,
-  onPageAdd,
-  onPageDuplicate,
-  onPageRemove,
-  order,
-  page,
+  disableInteraction = [],
+  onAnEventTrigger = () => {},
+  onPageAdd = () => {},
+  onPageDuplicate = () => {},
+  onPageRemove = () => {},
+  order = 0,
+  page = {},
 }) => {
   const nextPageIndex = order + 1;
 
@@ -86,16 +86,6 @@ PageThumbnailActions.propTypes = {
   page: PropTypes.shape({
     id: PropTypes.string,
   }),
-};
-
-PageThumbnailActions.defaultProps = {
-  disableInteraction: [],
-  onAnEventTrigger: () => {},
-  onPageAdd: () => {},
-  onPageDuplicate: () => {},
-  onPageRemove: () => {},
-  order: 0,
-  page: {},
 };
 
 export default memo(PageThumbnailActions);

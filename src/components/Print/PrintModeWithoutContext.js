@@ -7,12 +7,12 @@ import { pageSize } from '../../utils/print';
 const availableFormats = ['A4', 'A5', 'Custom', 'Web'];
 
 const PrintModeWithoutContext = ({
-  additionalPageItems,
-  hashCode,
-  itemAccessor,
-  pages,
-  settings,
-  theme,
+  additionalPageItems = [],
+  hashCode = '',
+  itemAccessor = () => {},
+  pages = [],
+  settings = {},
+  theme = 'lightMode',
 }) => {
   const [manipulatePageSize, setManipulatePageSize] = useState(false);
   const reportLayout = settings.reportLayout ? settings.reportLayout : 'A4 Landscape';
@@ -62,15 +62,6 @@ PrintModeWithoutContext.propTypes = {
     reportLayoutWidth: PropTypes.string,
   }),
   theme: PropTypes.oneOf(['lightMode', 'darkMode']),
-};
-
-PrintModeWithoutContext.defaultProps = {
-  additionalPageItems: [],
-  hashCode: '',
-  itemAccessor: () => {},
-  pages: [],
-  settings: {},
-  theme: 'lightMode',
 };
 
 export default PrintModeWithoutContext;

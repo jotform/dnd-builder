@@ -13,8 +13,8 @@ const elementStyle = {
 };
 
 const StaticItem = ({
-  children,
-  item,
+  children = null,
+  item = {},
 }) => {
   const {
     height,
@@ -72,11 +72,6 @@ StaticItem.propTypes = {
       PropTypes.string,
     ]),
   }),
-};
-
-StaticItem.defaultProps = {
-  children: null,
-  item: {},
 };
 
 const areEqual = (prevProps, nextProps) => {

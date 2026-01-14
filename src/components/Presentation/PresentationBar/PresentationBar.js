@@ -10,19 +10,19 @@ import {
 } from '../../../utils/functions';
 
 const PresentationBar = ({
-  currentPage,
-  fitToScreen,
-  fittedZoom,
-  isFullscreen,
-  isVisible,
-  onAnEventTrigger,
-  pageCount,
-  presentationBarActions,
-  setCurrentPage,
-  setIsFullscreen,
-  setZoom,
-  settings,
-  zoom,
+  currentPage = 1,
+  fitToScreen = () => {},
+  fittedZoom = 1,
+  isFullscreen = false,
+  isVisible = true,
+  onAnEventTrigger = () => {},
+  pageCount = 1,
+  presentationBarActions = [],
+  setCurrentPage = () => {},
+  setIsFullscreen = () => {},
+  setZoom = () => {},
+  settings = {},
+  zoom = 1,
 }) => {
   const { reportLayoutWidth = 1123 } = settings;
 
@@ -130,22 +130,6 @@ PresentationBar.propTypes = {
     reportLayoutWidth: PropTypes.string,
   }),
   zoom: PropTypes.number,
-};
-
-PresentationBar.defaultProps = {
-  currentPage: 1,
-  fitToScreen: f => f,
-  fittedZoom: 1,
-  isFullscreen: false,
-  isVisible: true,
-  onAnEventTrigger: f => f,
-  pageCount: 1,
-  presentationBarActions: [],
-  setCurrentPage: f => f,
-  setIsFullscreen: f => f,
-  setZoom: f => f,
-  settings: {},
-  zoom: 1,
 };
 
 export default PresentationBar;

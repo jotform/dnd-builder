@@ -12,8 +12,8 @@ import {
 import { useTranslatedTexts } from '../../utils/hooks';
 
 const ZoomControls = ({
-  mode,
-  showZoom,
+  mode = '',
+  showZoom = true,
 }) => {
   const { setZoom, zoom } = useBuilderContext();
   const {
@@ -94,11 +94,6 @@ const ZoomControls = ({
 ZoomControls.propTypes = {
   mode: PropTypes.string,
   showZoom: PropTypes.bool,
-};
-
-ZoomControls.defaultProps = {
-  mode: '',
-  showZoom: true,
 };
 
 export default ZoomControls;
