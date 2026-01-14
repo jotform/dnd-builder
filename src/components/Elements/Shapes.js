@@ -388,7 +388,7 @@ export const ShapeElement = ({
     shapeFillShow,
     shapeType,
     width,
-  },
+  } = defaultItem,
 }) => {
   if (shapeType === 'line') {
     return (
@@ -458,12 +458,6 @@ ShapeElement.propTypes = {
     shapeType: PropTypes.string,
     width: PropTypes.number,
   }),
-};
-
-ShapeElement.defaultProps = {
-  item: {
-    ...defaultItem,
-  },
 };
 
 const details = {

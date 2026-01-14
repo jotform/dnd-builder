@@ -7,13 +7,13 @@ import getMergedItem from '../../utils/getMergedItem';
 import withZoomPanPinchHOC from '../withZoomPanPinchHOC';
 
 const StaticPage = ({
-  acceptedItems,
-  additionalPageItems,
-  hashCode,
-  isThumbnail,
-  itemAccessor,
-  items,
-  style,
+  acceptedItems = {},
+  additionalPageItems = [],
+  hashCode = '',
+  isThumbnail = false,
+  itemAccessor = () => {},
+  items = [],
+  style = {},
 }) => (
   <div
     className={classNames.pageContainer}
@@ -59,16 +59,6 @@ StaticPage.propTypes = {
   itemAccessor: PropTypes.func,
   items: PropTypes.arrayOf(PropTypes.shape({})),
   style: PropTypes.shape({}),
-};
-
-StaticPage.defaultProps = {
-  acceptedItems: {},
-  additionalPageItems: [],
-  hashCode: '',
-  isThumbnail: false,
-  itemAccessor: () => {},
-  items: [],
-  style: {},
 };
 
 export default memo(StaticPage);

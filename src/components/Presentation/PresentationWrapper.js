@@ -20,9 +20,9 @@ import { usePropContext } from '../../utils/propContext';
 // import { ZOOM_MIN, ZOOM_MAX } from '../../constants/zoom';
 
 const PresentationWrapper = ({
-  children,
-  presentationBarActions,
-  useFixedPresentationBar,
+  children = () => {},
+  presentationBarActions = [],
+  useFixedPresentationBar = false,
 }) => {
   const { onAnEventTrigger, settings } = usePropContext();
   const {
@@ -150,12 +150,6 @@ PresentationWrapper.propTypes = {
   children: PropTypes.any,
   presentationBarActions: PropTypes.arrayOf(PropTypes.shape({})),
   useFixedPresentationBar: PropTypes.bool,
-};
-
-PresentationWrapper.defaultProps = {
-  children: () => {},
-  presentationBarActions: [],
-  useFixedPresentationBar: false,
 };
 
 export default PresentationWrapper;

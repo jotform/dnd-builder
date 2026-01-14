@@ -4,7 +4,10 @@ import classNames from 'classnames';
 import * as icons from '../../utils/icons';
 
 const Section = ({
-  additionalComponent, children, icon, title,
+  additionalComponent = null,
+  children = null,
+  icon = '',
+  title = '',
 }) => {
   const Icon = icons[icon] || icons.settings;
   return (
@@ -32,13 +35,6 @@ Section.propTypes = {
   children: PropTypes.any,
   icon: PropTypes.string,
   title: PropTypes.string,
-};
-
-Section.defaultProps = {
-  additionalComponent: null,
-  children: null,
-  icon: '',
-  title: '',
 };
 
 export default memo(Section);

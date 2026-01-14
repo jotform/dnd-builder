@@ -6,38 +6,6 @@ import { fontTypes } from '../../constants/fonts';
 
 const ITEM_TYPE = 'text';
 
-const StaticRichTextElement = ({
-  item: {
-    fontFamily,
-    opacity,
-    value,
-  },
-}) => (
-  <div
-    className="reportItemInner f-height"
-    style={{ fontFamily, opacity }}
-  >
-    <div
-      className="f-all ql-editor"
-      dangerouslySetInnerHTML={{ __html: domPurify.sanitize(value) }}
-    />
-  </div>
-);
-
-StaticRichTextElement.propTypes = {
-  item: PropTypes.shape({
-    fontFamily: PropTypes.string,
-    opacity: PropTypes.number,
-    value: PropTypes.string,
-  }),
-};
-
-StaticRichTextElement.defaultProps = {
-  item: {
-    value: '',
-  },
-};
-
 const details = {
   height: 65,
   itemType: ITEM_TYPE,
@@ -66,6 +34,32 @@ const settings = [
     type: 'slider',
   },
 ];
+
+const StaticRichTextElement = ({
+  item: {
+    fontFamily,
+    opacity,
+    value,
+  } = defaultItem,
+}) => (
+  <div
+    className="reportItemInner f-height"
+    style={{ fontFamily, opacity }}
+  >
+    <div
+      className="f-all ql-editor"
+      dangerouslySetInnerHTML={{ __html: domPurify.sanitize(value) }}
+    />
+  </div>
+);
+
+StaticRichTextElement.propTypes = {
+  item: PropTypes.shape({
+    fontFamily: PropTypes.string,
+    opacity: PropTypes.number,
+    value: PropTypes.string,
+  }),
+};
 
 export default {
   Component: memo(StaticRichTextElement),

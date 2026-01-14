@@ -46,7 +46,7 @@ export const IconElement = ({
     iconFillColor,
     iconType,
     opacity,
-  },
+  } = {},
 }) => {
   const Icon = icons[iconType];
   return (<Icon style={{ fill: iconFillColor, fillOpacity: opacity, ...iconStyle }} />);
@@ -60,10 +60,6 @@ IconElement.propTypes = {
     opacity: PropTypes.number,
     width: PropTypes.number,
   }),
-};
-
-IconElement.defaultProps = {
-  item: {},
 };
 
 const details = {

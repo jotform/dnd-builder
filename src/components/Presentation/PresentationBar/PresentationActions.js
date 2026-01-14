@@ -4,9 +4,9 @@ import { getDefaultPresentationActions } from '../../../utils/getDefaultPresenta
 import * as icons from '../../../utils/icons';
 
 const PresentationActions = ({
-  isFullscreen,
-  presentationBarActions,
-  toggleFullscreen,
+  isFullscreen = false,
+  presentationBarActions = [],
+  toggleFullscreen = () => {},
 }) => {
   const defaultPresentationActions = useMemo(() => getDefaultPresentationActions({
     isFullscreen,
@@ -62,12 +62,6 @@ PresentationActions.propTypes = {
   isFullscreen: PropTypes.bool,
   presentationBarActions: PropTypes.arrayOf(PropTypes.shape({})),
   toggleFullscreen: PropTypes.func,
-};
-
-PresentationActions.defaultProps = {
-  isFullscreen: false,
-  presentationBarActions: [],
-  toggleFullscreen: f => f,
 };
 
 export default PresentationActions;

@@ -13,10 +13,10 @@ import { useTranslatedTexts } from '../../../utils/hooks';
 import SearchInput from '../../Builder/SearchInput';
 
 const Elements = ({
-  acceptedItems,
-  leftPanelConfig,
-  onAnEventTrigger,
-  onItemAdd,
+  acceptedItems = {},
+  leftPanelConfig = [],
+  onAnEventTrigger = () => { },
+  onItemAdd = () => {},
 }) => {
   const {
     activeTab,
@@ -87,13 +87,6 @@ Elements.propTypes = {
   leftPanelConfig: leftPanelConfigPropType,
   onAnEventTrigger: PropTypes.func,
   onItemAdd: PropTypes.func,
-};
-
-Elements.defaultProps = {
-  acceptedItems: {},
-  leftPanelConfig: [],
-  onAnEventTrigger: () => { },
-  onItemAdd: () => {},
 };
 
 export default memo(Elements);

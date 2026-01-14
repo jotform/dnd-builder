@@ -4,7 +4,10 @@ import classNames from 'classnames';
 import { safeJSONParse } from '../../utils/functions';
 
 const Orientation = ({
-  config, item, onItemChange, value,
+  config = [],
+  item = {},
+  onItemChange = () => {},
+  value = '',
 }) => {
   const { multipleSelect, options, optionsDisplay } = config;
   const exactValue = !multipleSelect ? value : safeJSONParse(value, []);
@@ -78,13 +81,6 @@ Orientation.propTypes = {
   }),
   onItemChange: PropTypes.func,
   value: PropTypes.string,
-};
-
-Orientation.defaultProps = {
-  config: [],
-  item: {},
-  onItemChange: () => {},
-  value: '',
 };
 
 export default memo(Orientation);

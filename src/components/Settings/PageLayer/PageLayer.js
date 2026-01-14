@@ -18,9 +18,9 @@ const SortableContainer = sortableContainer(({ children, onScroll }) => {
 });
 
 const PageLayer = ({
-  config,
-  item: page,
-  onItemChange,
+  config = {},
+  item: page = {},
+  onItemChange = () => {},
 }) => {
   const onSortEnd = useCallback(({ newIndex, oldIndex }) => {
     const newItems = arrayMove([...page.items].reverse(), oldIndex, newIndex).map(i => i.id);
@@ -75,12 +75,6 @@ PageLayer.propTypes = {
     itemType: PropTypes.string,
   }),
   onItemChange: PropTypes.func,
-};
-
-PageLayer.defaultProps = {
-  config: {},
-  item: {},
-  onItemChange: () => {},
 };
 
 export default PageLayer;

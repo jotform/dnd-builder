@@ -16,16 +16,16 @@ import * as icons from '../../utils/icons';
 import withClickOutside from '../withClickOutside';
 
 const ContextMenu = ({
-  height,
-  item,
-  items,
-  onAnEventTrigger,
-  onClickOutside,
-  onItemChange,
-  onItemRemove,
-  onPageChange,
-  position,
-  width,
+  height = 1,
+  item = {},
+  items = [],
+  onAnEventTrigger = () => {},
+  onClickOutside = () => {},
+  onItemChange = () => {},
+  onItemRemove = () => {},
+  onPageChange = () => {},
+  position = {},
+  width = 1,
 }) => {
   const [positions, setPositions] = useState(position);
   const container = useRef(null);
@@ -216,19 +216,6 @@ ContextMenu.propTypes = {
   onPageChange: PropTypes.func,
   position: PropTypes.shape({}),
   width: PropTypes.number,
-};
-
-ContextMenu.defaultProps = {
-  height: 1,
-  item: {},
-  items: [],
-  onAnEventTrigger: () => {},
-  onClickOutside: () => {},
-  onItemChange: () => {},
-  onItemRemove: () => {},
-  onPageChange: () => {},
-  position: {},
-  width: 1,
 };
 
 const PortalContext = props => createPortal(<ContextMenu {...props} />, document.body);

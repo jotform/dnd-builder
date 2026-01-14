@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import * as icons from '../../../utils/icons';
 
 const PageThumbnailActions = ({
-  onAnEventTrigger,
-  onPageAdd,
-  onPageDuplicate,
-  onPageRemove,
-  order,
-  page,
+  onAnEventTrigger = () => {},
+  onPageAdd = () => {},
+  onPageDuplicate = () => {},
+  onPageRemove = () => {},
+  order = 0,
+  page = {},
 }) => {
   const onPageDuplicateClick = () => {
     onPageDuplicate(page);
@@ -75,15 +75,6 @@ PageThumbnailActions.propTypes = {
   page: PropTypes.shape({
     id: PropTypes.string,
   }),
-};
-
-PageThumbnailActions.defaultProps = {
-  onAnEventTrigger: () => {},
-  onPageAdd: () => {},
-  onPageDuplicate: () => {},
-  onPageRemove: () => {},
-  order: 0,
-  page: {},
 };
 
 export default memo(PageThumbnailActions);

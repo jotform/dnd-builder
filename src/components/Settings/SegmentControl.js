@@ -4,7 +4,10 @@ import classNames from 'classnames';
 import { safeJSONParse } from '../../utils/functions';
 
 const SegmentControl = ({
-  config, item, onItemChange, value,
+  config = [],
+  item = {},
+  onItemChange = () => {},
+  value = '',
 }) => {
   const { multipleSelect, options, optionsDisplay } = config;
   const exactValue = !multipleSelect ? value : safeJSONParse(value, []);
@@ -72,13 +75,6 @@ SegmentControl.propTypes = {
   }),
   onItemChange: PropTypes.func,
   value: PropTypes.string,
-};
-
-SegmentControl.defaultProps = {
-  config: [],
-  item: {},
-  onItemChange: () => {},
-  value: '',
 };
 
 export default memo(SegmentControl);

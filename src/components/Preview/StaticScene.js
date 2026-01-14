@@ -13,15 +13,15 @@ import { usePresentationContext } from '../../utils/presentationContext';
 import ZoomControls from '../Builder/ZoomControls';
 
 const StaticScene = ({
-  additionalPageItems,
-  gesture,
-  hashCode,
-  hideZoom,
-  itemAccessor,
-  lastScrollPosition,
-  mode,
-  pages,
-  presentationPage,
+  additionalPageItems = [],
+  gesture = () => {},
+  hashCode = '',
+  hideZoom = false,
+  itemAccessor = () => {},
+  lastScrollPosition = 0,
+  mode = '',
+  pages = [],
+  presentationPage = 0,
 }) => {
   const { isFullscreen, showControlsInFullScreen } = usePresentationContext();
   const { acceptedItems, settings } = usePropContext();
@@ -135,17 +135,6 @@ StaticScene.propTypes = {
   mode: PropTypes.string.isRequired,
   pages: PropTypes.arrayOf(PropTypes.shape({})),
   presentationPage: PropTypes.number,
-};
-
-StaticScene.defaultProps = {
-  additionalPageItems: [],
-  gesture: () => {},
-  hashCode: '',
-  hideZoom: false,
-  itemAccessor: () => {},
-  lastScrollPosition: 0,
-  pages: [],
-  presentationPage: 0,
 };
 
 export default StaticScene;

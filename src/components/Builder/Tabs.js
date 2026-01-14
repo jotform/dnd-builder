@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useBuilderContext } from '../../utils/builderContext';
 import { usePropContext } from '../../utils/propContext';
 
-const Tabs = ({ panel, tabs }) => {
+const Tabs = ({ panel, tabs = [] }) => {
   const {
     activeTab,
     isLeftPanelOpen,
@@ -62,10 +62,6 @@ const Tabs = ({ panel, tabs }) => {
 Tabs.propTypes = {
   panel: PropTypes.string.isRequired,
   tabs: PropTypes.arrayOf(PropTypes.string),
-};
-
-Tabs.defaultProps = {
-  tabs: [],
 };
 
 export default memo(Tabs);

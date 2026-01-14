@@ -9,11 +9,11 @@ import { getScaleForPageThumbnail, scrollToTarget } from '../../../utils/functio
 import { usePageVisibility } from '../../../utils/hooks';
 
 const ListWrapper = ({
-  component: Component,
-  onPageAdd,
-  onSortEnd,
-  pageCount,
-  reportSettings,
+  component: Component = null,
+  onPageAdd = () => {},
+  onSortEnd = () => {},
+  pageCount = 0,
+  reportSettings = {},
   ...otherProps
 }) => {
   const listRef = useRef(null);
@@ -138,14 +138,6 @@ ListWrapper.propTypes = {
     reportLayoutHeight: PropTypes.string,
     reportLayoutWidth: PropTypes.string,
   }),
-};
-
-ListWrapper.defaultProps = {
-  component: null,
-  onPageAdd: () => {},
-  onSortEnd: () => {},
-  pageCount: 0,
-  reportSettings: {},
 };
 
 export default memo(ListWrapper);

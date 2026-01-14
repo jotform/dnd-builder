@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import * as icons from '../../../utils/icons';
 
-const AllSlidesPanelToggler = ({ onClosePanel }) => (
+const AllSlidesPanelToggler = ({ onClosePanel = () => {} }) => (
   <button
     className="paneClose p-absolute"
     onClick={onClosePanel}
@@ -13,10 +13,6 @@ const AllSlidesPanelToggler = ({ onClosePanel }) => (
 
 AllSlidesPanelToggler.propTypes = {
   onClosePanel: PropTypes.func,
-};
-
-AllSlidesPanelToggler.defaultProps = {
-  onClosePanel: () => {},
 };
 
 export default AllSlidesPanelToggler;

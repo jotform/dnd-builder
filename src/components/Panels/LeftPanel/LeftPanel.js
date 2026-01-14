@@ -9,8 +9,8 @@ import LeftPanelOpener from './LeftPanelOpener';
 import { usePropContext } from '../../../utils/propContext';
 
 const LeftPanel = ({
-  leftPanelConfig,
-  onItemAdd,
+  leftPanelConfig = [],
+  onItemAdd = () => {},
 }) => {
   /*
     This context cause additional render but it only renders LeftPanel and Panel components
@@ -44,11 +44,6 @@ const LeftPanel = ({
 LeftPanel.propTypes = {
   leftPanelConfig: leftPanelConfigPropType,
   onItemAdd: PropTypes.func,
-};
-
-LeftPanel.defaultProps = {
-  leftPanelConfig: [],
-  onItemAdd: () => {},
 };
 
 export default memo(LeftPanel);

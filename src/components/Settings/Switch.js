@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 const Switch = ({
-  config,
-  item,
-  onItemChange,
-  value,
+  config = {},
+  item = {},
+  onItemChange = () => {},
+  value = '',
 }) => {
   const onChange = e => {
     const status = e.target.checked ? 'on' : 'off';
@@ -45,13 +45,6 @@ Switch.propTypes = {
   }),
   onItemChange: PropTypes.func,
   value: PropTypes.string,
-};
-
-Switch.defaultProps = {
-  config: {},
-  item: {},
-  onItemChange: () => {},
-  value: '',
 };
 
 export default memo(Switch);

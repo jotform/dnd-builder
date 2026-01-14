@@ -46,16 +46,16 @@ export class PropProvider extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      acceptedItems: props.acceptedItems,
-      disableInteraction: props.disableInteraction,
-      onAnEventTrigger: props.onAnEventTrigger,
-      settings: props.settings,
-      useExperimentalFeatures: props.useExperimentalFeatures,
+      acceptedItems: props.acceptedItems || {},
+      disableInteraction: props.disableInteraction || [],
+      onAnEventTrigger: props.onAnEventTrigger || (() => {}),
+      settings: props.settings || {},
+      useExperimentalFeatures: props.useExperimentalFeatures || false,
     };
   }
 
   render() {
-    const { children } = this.props;
+    const { children = null } = this.props;
     return (
       <PropContext.Provider value={this.state}>
         {children}
@@ -71,15 +71,6 @@ PropProvider.propTypes = {
   onAnEventTrigger: PropTypes.func,
   settings: PropTypes.shape({}),
   useExperimentalFeatures: PropTypes.bool,
-};
-
-PropProvider.defaultProps = {
-  acceptedItems: {},
-  children: null,
-  disableInteraction: [],
-  onAnEventTrigger: () => {},
-  settings: {},
-  useExperimentalFeatures: false,
 };
 
 export const PropConsumer = PropContext.Consumer;

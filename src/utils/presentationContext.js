@@ -35,9 +35,9 @@ export class PresentationProvider extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentPage: props.currentPage,
-      isFullscreen: props.isFullscreen,
-      pageCount: props.pageCount,
+      currentPage: props.currentPage || 1,
+      isFullscreen: props.isFullscreen || false,
+      pageCount: props.pageCount || 1,
       setCurrentPage: this.setCurrentPage,
       setFittedZoom: this.setFittedZoom,
       setIsFullscreen: this.setIsFullscreen,
@@ -62,7 +62,7 @@ export class PresentationProvider extends React.Component {
   }
 
   render() {
-    const { children } = this.props;
+    const { children = null } = this.props;
     return (
       <PresentationContext.Provider value={this.state}>
         {children}
@@ -76,13 +76,6 @@ PresentationProvider.propTypes = {
   currentPage: PropTypes.number,
   isFullscreen: PropTypes.bool,
   pageCount: PropTypes.number,
-};
-
-PresentationProvider.defaultProps = {
-  children: null,
-  currentPage: 1,
-  isFullscreen: false,
-  pageCount: 1,
 };
 
 export const PresentationConsumer = PresentationContext.Consumer;

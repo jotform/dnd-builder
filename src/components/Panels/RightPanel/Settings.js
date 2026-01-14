@@ -8,12 +8,12 @@ import { onChangeFunction } from '../../../utils/functions';
 import ErrorBoundary from '../../ErrorBoundary';
 
 const Settings = ({
-  element,
-  item,
-  itemAccessor,
-  onChange,
-  settings,
-  tabs,
+  element = {},
+  item = {},
+  onChange = () => {},
+  settings = {},
+  tabs = [],
+  itemAccessor = () => {},
 }) => {
   const { activeTab } = useBuilderContext();
   const { useExperimentalFeatures } = usePropContext();
@@ -72,17 +72,10 @@ const Settings = ({
 Settings.propTypes = {
   element: PropTypes.shape({}),
   item: PropTypes.shape({}),
+  itemAccessor: PropTypes.func,
   onChange: PropTypes.func,
   settings: PropTypes.shape({}),
   tabs: PropTypes.arrayOf(PropTypes.string),
-};
-
-Settings.defaultProps = {
-  element: {},
-  item: {},
-  onChange: () => {},
-  settings: {},
-  tabs: [],
 };
 
 export default memo(Settings);

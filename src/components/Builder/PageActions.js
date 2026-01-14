@@ -4,18 +4,18 @@ import { moveItemInArrayFromIndexToIndex, scrollToTarget } from '../../utils/fun
 import { useTranslatedTexts } from '../../utils/hooks';
 
 const PageActions = ({
-  disableInteraction,
-  onAnEventTrigger,
-  onPageAdd,
-  onPageDuplicate,
-  onPageOrdersChange,
-  onPageRemove,
-  order,
-  pageCount,
-  pageID,
-  pages,
-  setEditedElement,
-  setIsRightPanelOpen,
+  disableInteraction = [],
+  onAnEventTrigger = () => {},
+  onPageAdd = () => {},
+  onPageDuplicate = () => {},
+  onPageOrdersChange = () => {},
+  onPageRemove = () => {},
+  order = 0,
+  pageCount = 1,
+  pageID = '',
+  pages = [],
+  setEditedElement = () => {},
+  setIsRightPanelOpen = () => {},
 }) => {
   const pageSettings = () => {
     setEditedElement(`p_${pageID}`);
@@ -156,21 +156,6 @@ PageActions.propTypes = {
   pages: PropTypes.arrayOf(PropTypes.shape({})),
   setEditedElement: PropTypes.func,
   setIsRightPanelOpen: PropTypes.func,
-};
-
-PageActions.defaultProps = {
-  disableInteraction: [],
-  onAnEventTrigger: () => {},
-  onPageAdd: () => {},
-  onPageDuplicate: () => {},
-  onPageOrdersChange: () => {},
-  onPageRemove: () => {},
-  order: 0,
-  pageCount: 1,
-  pageID: '',
-  pages: [],
-  setEditedElement: () => {},
-  setIsRightPanelOpen: () => {},
 };
 
 export default PageActions;

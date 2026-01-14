@@ -37,15 +37,15 @@ export class BuilderProvider extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeElement: props.activeElement,
-      activeTab: props.activeTab,
-      contextMenuProps: props.contextMenuProps,
-      editedElement: props.editedElement,
-      isEnoughCanvasSize: props.isEnoughCanvasSize,
-      isLeftPanelOpen: props.isLeftPanelOpen,
-      isRightPanelOpen: props.isRightPanelOpen,
-      isSlidesPanelOpen: props.isSlidesPanelOpen,
-      onRightPanelsToggled: props.onRightPanelsToggled,
+      activeElement: props.activeElement || null,
+      activeTab: props.activeTab || { left: 0, right: 0 },
+      contextMenuProps: props.contextMenuProps || null,
+      editedElement: props.editedElement || 'l_layout',
+      isEnoughCanvasSize: props.isEnoughCanvasSize || false,
+      isLeftPanelOpen: props.isLeftPanelOpen || false,
+      isRightPanelOpen: props.isRightPanelOpen || false,
+      isSlidesPanelOpen: props.isSlidesPanelOpen || false,
+      onRightPanelsToggled: props.onRightPanelsToggled || (() => {}),
       setActiveElement: this.setActiveElement,
       setActiveTab: this.setActiveTab,
       setContextMenuProps: this.setContextMenuProps,
@@ -176,19 +176,6 @@ BuilderProvider.propTypes = {
    * is toggled open.
    */
   onRightPanelsToggled: PropTypes.func,
-};
-
-BuilderProvider.defaultProps = {
-  activeElement: null,
-  activeTab: { left: 0, right: 0 },
-  children: null,
-  contextMenuProps: null,
-  editedElement: 'l_layout',
-  isEnoughCanvasSize: false,
-  isLeftPanelOpen: false,
-  isRightPanelOpen: false,
-  isSlidesPanelOpen: false,
-  onRightPanelsToggled: () => { },
 };
 
 export const BuilderConsumer = BuilderContext.Consumer;

@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 
 const AlignmentGuides = ({
   axis,
-  guides,
-  matches,
-  show,
-  zoom,
+  guides = {},
+  matches = {},
+  show = false,
+  zoom = 1,
 }) => {
   if (Object.keys(matches).length === 0) return null;
   const styleKey = axis === 'x' ? 'left' : 'top';
@@ -42,13 +42,6 @@ AlignmentGuides.propTypes = {
   matches: PropTypes.shape({}),
   show: PropTypes.bool,
   zoom: PropTypes.number,
-};
-
-AlignmentGuides.defaultProps = {
-  guides: {},
-  matches: {},
-  show: false,
-  zoom: 1,
 };
 
 export default memo(AlignmentGuides);

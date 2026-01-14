@@ -4,7 +4,10 @@ import { getImageSizes, roundForDecimalPart } from '../../utils/functions';
 import { useTranslatedTexts } from '../../utils/hooks';
 import * as icons from '../../utils/icons';
 
-const SizeSettings = ({ item, onItemChange }) => {
+const SizeSettings = ({
+  item = {},
+  onItemChange = () => {},
+}) => {
   const initialAspect = useRef();
   const [stackSize, setStackSize] = useState({ height: item.height, width: item.width });
   const [aspectLock, setAspectLock] = useState(true);
@@ -179,11 +182,6 @@ SizeSettings.propTypes = {
     width: PropTypes.number,
   }),
   onItemChange: PropTypes.func,
-};
-
-SizeSettings.defaultProps = {
-  item: {},
-  onItemChange: () => {},
 };
 
 export default SizeSettings;

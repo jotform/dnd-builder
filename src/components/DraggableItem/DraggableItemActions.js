@@ -4,12 +4,12 @@ import * as icons from '../../utils/icons';
 import { useTranslatedTexts } from '../../utils/hooks';
 
 const DraggableItemActions = ({
-  changeLockStatus,
-  deleteItem,
-  duplicateItem,
-  isLocked,
-  isMultipleItemSelected,
-  openSettings,
+  changeLockStatus = () => {},
+  deleteItem = () => {},
+  duplicateItem = () => {},
+  isLocked = false,
+  isMultipleItemSelected = false,
+  openSettings = () => {},
 }) => {
   const {
     DELETE_ITEM,
@@ -82,15 +82,6 @@ DraggableItemActions.propTypes = {
   isLocked: PropTypes.bool,
   isMultipleItemSelected: PropTypes.bool,
   openSettings: PropTypes.func,
-};
-
-DraggableItemActions.defaultProps = {
-  changeLockStatus: () => {},
-  deleteItem: () => {},
-  duplicateItem: () => {},
-  isLocked: false,
-  isMultipleItemSelected: false,
-  openSettings: () => {},
 };
 
 export default memo(DraggableItemActions);

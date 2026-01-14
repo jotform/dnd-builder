@@ -10,16 +10,16 @@ import generateId from '../../utils/generateId';
 import * as icons from '../../utils/icons';
 
 const Element = ({
-  acceptedItems,
-  icon,
-  iconType,
-  itemType,
-  onAnEventTrigger,
-  onItemAdd,
-  setActiveElement,
-  setIsRightPanelOpen,
-  title,
-  zoom,
+  acceptedItems = {},
+  icon = null,
+  iconType = '',
+  itemType = '',
+  onAnEventTrigger = () => {},
+  onItemAdd = () => {},
+  setActiveElement = () => {},
+  setIsRightPanelOpen = () => {},
+  title = '',
+  zoom = 1,
   ...additionalData
 }) => {
   const [{ isDragging }, drag, preview] = useDrag(() => ({
@@ -98,19 +98,6 @@ Element.propTypes = {
   setIsRightPanelOpen: PropTypes.func,
   title: PropTypes.string,
   zoom: PropTypes.number,
-};
-
-Element.defaultProps = {
-  acceptedItems: {},
-  icon: null,
-  iconType: '',
-  itemType: '',
-  onAnEventTrigger: () => {},
-  onItemAdd: () => {},
-  setActiveElement: () => {},
-  setIsRightPanelOpen: () => {},
-  title: '',
-  zoom: 1,
 };
 
 export default memo(Element);

@@ -7,7 +7,7 @@ import { usePresentationContext } from '../utils/presentationContext';
 
 const withZoomPanPinchHOC = WrappedComponent => {
   const ZoomPanPinchHOC = props => {
-    const { handleZoom, mode, refSetter } = props;
+    const { handleZoom, mode = '', refSetter } = props;
 
     const { zoom } = useBuilderContext();
     const { fittedZoom } = usePresentationContext();
@@ -55,10 +55,6 @@ const withZoomPanPinchHOC = WrappedComponent => {
       func,
       shape({ current: any }),
     ]).isRequired,
-  };
-
-  ZoomPanPinchHOC.defaultProps = {
-    mode: '',
   };
 
   return ZoomPanPinchHOC;

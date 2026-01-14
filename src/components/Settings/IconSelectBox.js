@@ -3,7 +3,10 @@ import PropTypes from 'prop-types';
 import * as icons from '../../utils/iconSelector';
 
 const IconSelectBox = ({
-  config, item, onItemChange, value,
+  config =  {},
+  item = {},
+  onItemChange = () => {},
+  value = '',
 }) => {
   const handleIconSelect = e => {
     const newValue = e.target.value;
@@ -62,13 +65,6 @@ IconSelectBox.propTypes = {
   }),
   onItemChange: PropTypes.func,
   value: PropTypes.string,
-};
-
-IconSelectBox.defaultProps = {
-  config: {},
-  item: {},
-  onItemChange: () => {},
-  value: '',
 };
 
 export default IconSelectBox;

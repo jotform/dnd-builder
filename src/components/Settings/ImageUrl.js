@@ -5,10 +5,10 @@ const MAX_WIDTH = 700;
 const MAX_HEIGHT = 600;
 
 const ImageUrl = ({
-  config,
-  item,
-  onItemChange,
-  value,
+  config = [],
+  item = {},
+  onItemChange = () => {},
+  value = '',
 }) => {
   const onBlur = e => {
     if (e.target.value !== value) {
@@ -62,13 +62,6 @@ ImageUrl.propTypes = {
   }),
   onItemChange: PropTypes.func,
   value: PropTypes.string,
-};
-
-ImageUrl.defaultProps = {
-  config: [],
-  item: {},
-  onItemChange: () => {},
-  value: '',
 };
 
 export default memo(ImageUrl);

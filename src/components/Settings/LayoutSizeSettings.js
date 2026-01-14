@@ -4,7 +4,11 @@ import * as icons from '../../utils/icons';
 import { roundForDecimalPart } from '../../utils/functions';
 import { useTranslatedTexts } from '../../utils/hooks';
 
-const LayoutSizeSettings = ({ config, item, onItemChange }) => {
+const LayoutSizeSettings = ({
+  config,
+  item = {},
+  onItemChange = () => {},
+}) => {
   const [aspectLock, setAspectLock] = useState(true);
   const { HEIGHT, WIDTH } = useTranslatedTexts();
 
@@ -138,11 +142,6 @@ LayoutSizeSettings.propTypes = {
     width: PropTypes.number,
   }),
   onItemChange: PropTypes.func,
-};
-
-LayoutSizeSettings.defaultProps = {
-  item: {},
-  onItemChange: () => {},
 };
 
 export default LayoutSizeSettings;

@@ -21,20 +21,20 @@ import * as classNames from '../../constants/classNames';
 const emptyObject = {};
 
 const Page = ({
-  activeElement,
-  additionalPageItems,
-  guides,
-  hashCode,
-  itemAccessor,
-  items,
-  onDrop,
-  onItemAdd,
-  onItemChange,
-  onItemRemove,
-  onItemResize,
-  page,
-  pageRef,
-  style,
+  activeElement = null,
+  additionalPageItems = [],
+  guides = {},
+  hashCode = '',
+  itemAccessor = () => {},
+  items = [],
+  onDrop = () => {},
+  onItemAdd = () => {},
+  onItemChange = () => {},
+  onItemRemove = () => {},
+  onItemResize = () => {},
+  page = {},
+  pageRef = {},
+  style = {},
 }) => {
   const {
     isRightPanelOpen,
@@ -181,23 +181,6 @@ Page.propTypes = {
     current: PropTypes.any,
   }),
   style: PropTypes.shape({}),
-};
-
-Page.defaultProps = {
-  activeElement: null,
-  additionalPageItems: [],
-  guides: {},
-  hashCode: '',
-  itemAccessor: () => {},
-  items: [],
-  onDrop: () => {},
-  onItemAdd: () => {},
-  onItemChange: () => {},
-  onItemRemove: () => {},
-  onItemResize: () => {},
-  page: {},
-  pageRef: {},
-  style: {},
 };
 
 export default memo(Page);

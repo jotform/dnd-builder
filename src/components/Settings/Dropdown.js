@@ -2,10 +2,10 @@ import { memo } from 'react';
 import PropTypes from 'prop-types';
 
 const Dropdown = ({
-  config,
-  item,
-  onItemChange,
-  value,
+  config = { cast: 'string' },
+  item = {},
+  onItemChange = () => {},
+  value = '',
 }) => {
   const { options, unit } = config;
 
@@ -65,15 +65,6 @@ Dropdown.propTypes = {
     PropTypes.string,
     PropTypes.number,
   ]),
-};
-
-Dropdown.defaultProps = {
-  config: {
-    cast: 'string',
-  },
-  item: {},
-  onItemChange: () => {},
-  value: '',
 };
 
 export default memo(Dropdown);

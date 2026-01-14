@@ -102,7 +102,10 @@ function getItemStyles(initialOffset, currentOffset, ref, pageGuides, item, zoom
 }
 
 const DraggableItemLayer = ({
-  guides, itemAccessor, pageRefs, pages,
+  guides = {},
+  itemAccessor = () => {},
+  pageRefs = {},
+  pages = [],
 }) => {
   const {
     currentOffset,
@@ -239,13 +242,6 @@ DraggableItemLayer.propTypes = {
   pages: PropTypes.arrayOf(
     PropTypes.shape({}),
   ),
-};
-
-DraggableItemLayer.defaultProps = {
-  guides: {},
-  itemAccessor: () => {},
-  pageRefs: {},
-  pages: [],
 };
 
 export default memo(DraggableItemLayer);

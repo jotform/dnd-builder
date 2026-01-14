@@ -2,10 +2,10 @@ import PropTypes from 'prop-types';
 import { safeJSONParse } from '../../utils/functions';
 
 const CheckboxGroup = ({
-  config,
-  item,
-  onItemChange,
-  value,
+  config = {},
+  item = {},
+  onItemChange = () => {},
+  value = [],
 }) => {
   const opts = config.options;
   const parsedValue = safeJSONParse(value, []);
@@ -71,13 +71,6 @@ CheckboxGroup.propTypes = {
   }),
   onItemChange: PropTypes.func,
   value: PropTypes.string,
-};
-
-CheckboxGroup.defaultProps = {
-  config: {},
-  item: {},
-  onItemChange: () => {},
-  value: [],
 };
 
 export default CheckboxGroup;

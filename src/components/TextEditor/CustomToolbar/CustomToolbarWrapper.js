@@ -5,8 +5,8 @@ import CustomToolbar from './CustomToolbar';
 // This wrapper is needed to prevent the re-render
 // of the toolbar id div since it breaks the editor
 const CustomToolbarWrapper = ({
-  isTextEditorOpen,
-  itemWidth,
+  isTextEditorOpen = false,
+  itemWidth = 0,
 }) => isTextEditorOpen && (
   <div
     id="toolbar"
@@ -23,11 +23,6 @@ const CustomToolbarWrapper = ({
 CustomToolbarWrapper.propTypes = {
   isTextEditorOpen: PropTypes.bool,
   itemWidth: PropTypes.number,
-};
-
-CustomToolbarWrapper.defaultProps = {
-  isTextEditorOpen: false,
-  itemWidth: 0,
 };
 
 export default memo(CustomToolbarWrapper);

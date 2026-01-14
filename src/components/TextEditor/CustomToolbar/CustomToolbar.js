@@ -9,7 +9,7 @@ const SELECT_WIDTH = 70;
 const BUTTON_WIDTH = 26;
 const BAR_WIDTH = SELECT_WIDTH + (BUTTON_WIDTH * 8);
 
-const CustomToolbar = ({ itemWidth }) => {
+const CustomToolbar = ({ itemWidth = 0 }) => {
   const overflow = BAR_WIDTH > itemWidth;
   const [isOpened, setIsOpened] = useState(overflow ? false : true);
   const onClickMore = useCallback(() => setIsOpened(true), []);
@@ -111,10 +111,6 @@ const CustomToolbar = ({ itemWidth }) => {
 
 CustomToolbar.propTypes = {
   itemWidth: PropTypes.number,
-};
-
-CustomToolbar.defaultProps = {
-  itemWidth: 0,
 };
 
 export default CustomToolbar;

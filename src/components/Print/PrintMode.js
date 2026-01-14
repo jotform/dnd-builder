@@ -6,11 +6,11 @@ import PrintModeWithoutContext from './PrintModeWithoutContext';
 import '../../styles/jfReportsBundle.scss';
 
 const PrintMode = ({
-  acceptedItems,
-  additionalPageItems,
-  itemAccessor,
-  pages,
-  settings,
+  acceptedItems = {},
+  additionalPageItems = [],
+  itemAccessor = () => {},
+  pages = [],
+  settings = {},
   ...otherProps
 }) => {
   const hashCode = objectHash(otherProps);
@@ -39,14 +39,6 @@ PrintMode.propTypes = {
     PropTypes.shape({}),
   ),
   settings: PropTypes.shape({}),
-};
-
-PrintMode.defaultProps = {
-  acceptedItems: {},
-  additionalPageItems: [],
-  itemAccessor: () => {},
-  pages: [],
-  settings: {},
 };
 
 export default PrintMode;

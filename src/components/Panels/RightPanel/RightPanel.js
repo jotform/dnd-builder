@@ -25,11 +25,11 @@ const exceptionalClasses = [
 ];
 
 const RightPanel = ({
-  itemAccessor,
-  onItemChange,
-  onPageChange,
-  onSettingChange,
-  pages,
+  itemAccessor = () => {},
+  onItemChange = () => {},
+  onPageChange = () => {},
+  onSettingChange = () => {},
+  pages = [],
 }) => {
   const {
     activeTab,
@@ -209,14 +209,6 @@ RightPanel.propTypes = {
   pages: PropTypes.arrayOf(
     PropTypes.shape({}),
   ),
-};
-
-RightPanel.defaultProps = {
-  itemAccessor: () => { },
-  onItemChange: () => { },
-  onPageChange: () => { },
-  onSettingChange: () => { },
-  pages: [],
 };
 
 export default memo(RightPanel);
