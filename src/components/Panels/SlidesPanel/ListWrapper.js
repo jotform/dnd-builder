@@ -2,8 +2,6 @@ import {
   memo, useCallback, useRef, useState, useMemo, useEffect,
 } from 'react';
 import PropTypes from 'prop-types';
-import { ResponsiveContainer } from 'recharts';
-import ResponsiveContent from '../../ResponsiveContent';
 import PageAdder from '../../Builder/PageAdder';
 import { getScaleForPageThumbnail, scrollToTarget } from '../../../utils/functions';
 import { usePageVisibility } from '../../../utils/hooks';
@@ -37,24 +35,23 @@ const ListWrapper = ({
     width: width,
   }), [reportSettings]);
 
-  const _onSortEnd = useCallback((sortEvent, nativeEvent) => {
+  const _onSortEnd = useCallback(({ newIndex, oldIndex }) => {
     if (onSortEnd) {
-      onSortEnd(sortEvent, nativeEvent, listRef.current);
+      onSortEnd({ newIndex, oldIndex }, null, listRef.current);
     }
   }, [onSortEnd]);
 
   const refSetter = useCallback(outerRef => {
     if (outerRef) {
-      const instance = outerRef.getWrappedInstance();
-      if (instance) {
-        listRef.current = instance.sortablePageListRef.current;
-      }
+      listRef.current = outerRef;
     }
   }, []);
 
   usePageVisibility(index => {
     if (index && !Number.isNaN(index)) {
-      listRef.current?.scrollToItem(index, 'center');
+      if (listRef.current?.scrollToIndex) {
+        listRef.current.scrollToIndex(index, 'center');
+      }
 
       const prevSelectedThumbnail = document.querySelector('.thumbnailWrapper.isSelected');
       if (prevSelectedThumbnail) {
@@ -97,26 +94,23 @@ const ListWrapper = ({
 
   return (
     <>
-      <ResponsiveContainer>
-        <ResponsiveContent>
-          {(containerWidth, containerHeight) => (
-            <Component
-              ref={refSetter}
-              distance={50}
-              height={containerHeight}
-              helperClass="pageThumbnailHelper"
-              lockAxis="y"
-              onPageAdd={handlePageAdd}
-              onPageClick={onPageClick}
-              onSortEnd={_onSortEnd}
-              pageContainerStyle={pageContainerStyles}
-              pageCount={pageCount}
-              width={containerWidth}
-              {...otherProps}
-            />
-          )}
-        </ResponsiveContent>
-      </ResponsiveContainer>
+      <div
+        style={{
+          height: '100%', margin: '25px 10px', position: 'relative', width: '100%',
+        }}
+      >
+        <Component
+          ref={refSetter}
+          height="100%"
+          onPageAdd={handlePageAdd}
+          onPageClick={onPageClick}
+          onSortEnd={_onSortEnd}
+          pageContainerStyle={pageContainerStyles}
+          pageCount={pageCount}
+          width="100%"
+          {...otherProps}
+        />
+      </div>
       <div className="jfReport-pane-footer">
         <PageAdder
           additionalClass="forOptions"

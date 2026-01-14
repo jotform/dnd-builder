@@ -1,8 +1,15 @@
-import { PureComponent, createRef } from 'react';
+import {
+  useRef, useMemo, useCallback, forwardRef, useImperativeHandle, useState,
+} from 'react';
 import PropTypes from 'prop-types';
-import { SortableContainer } from 'react-sortable-hoc';
+import {
+  DndContext, closestCenter, KeyboardSensor, PointerSensor, useSensor, useSensors,
+} from '@dnd-kit/core';
+import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
+import { Virtuoso } from 'react-virtuoso';
 import memoize from 'memoize-one';
 import SortablePageItemRenderer from './SortablePageItemRenderer';
+import SortableDragOverlay from './SortablePageItemDragOverlay';
 
 const createItemData = memoize((
   acceptedItems,
@@ -32,64 +39,172 @@ const createItemData = memoize((
   pageGetter,
 }));
 
-const SortablePageList = Component => {
-  class ReactWindowList extends PureComponent {
-    constructor(props) {
-      super(props);
+const SortablePageList = () => {
+  const VirtuosoList = forwardRef(({
+    acceptedItems = {},
+    additionalPageItems = [],
+    disableInteraction = [],
+    hashCode = '',
+    height,
+    itemAccessor = () => {},
+    onAnEventTrigger = () => {},
+    onPageAdd = () => {},
+    onPageClick = () => {},
+    onPageDuplicate = () => {},
+    onPageRemove = () => {},
+    onSortEnd = () => {},
+    pageContainerStyle = {},
+    pageCount = 0,
+    pageGetter = () => {},
+    pages = [],
+    width,
+  }, ref) => {
+    const sortablePageListRef = useRef(null);
+    const virtuosoRef = useRef(null);
+    const [activeId, setActiveId] = useState(null);
 
-      this.sortablePageListRef = createRef();
-    }
+    const sensors = useSensors(
+      useSensor(PointerSensor, {
+        activationConstraint: {
+          distance: 0,
+        },
+      }),
+      useSensor(KeyboardSensor),
+    );
 
-    get itemData() {
-      const {
-        acceptedItems = {},
-        additionalPageItems = [],
-        disableInteraction = [],
-        hashCode = '',
-        itemAccessor = () => {},
-        onAnEventTrigger = () => {},
-        onPageAdd = () => {},
-        onPageClick = () => {},
-        onPageDuplicate = () => {},
-        onPageRemove = () => {},
-        pageContainerStyle = {},
-        pageGetter = () => {},
-      } = this.props;
-      return createItemData(
-        acceptedItems,
-        additionalPageItems,
-        disableInteraction,
-        hashCode,
-        itemAccessor,
-        onAnEventTrigger,
-        onPageAdd,
-        onPageClick,
-        onPageDuplicate,
-        onPageRemove,
-        pageContainerStyle,
-        pageGetter,
-      );
-    }
+    const itemData = useMemo(() => createItemData(
+      acceptedItems,
+      additionalPageItems,
+      disableInteraction,
+      hashCode,
+      itemAccessor,
+      onAnEventTrigger,
+      onPageAdd,
+      onPageClick,
+      onPageDuplicate,
+      onPageRemove,
+      pageContainerStyle,
+      pageGetter,
+    ), [
+      acceptedItems,
+      additionalPageItems,
+      disableInteraction,
+      hashCode,
+      itemAccessor,
+      onAnEventTrigger,
+      onPageAdd,
+      onPageClick,
+      onPageDuplicate,
+      onPageRemove,
+      pageContainerStyle,
+      pageGetter,
+    ]);
 
-    render() {
-      const { height = 0, pageCount = 0, width = 0 } = this.props;
+    const scrollToIndex = useCallback((index, align = 'center') => {
+      if (virtuosoRef.current) {
+        virtuosoRef.current.scrollToIndex({ align, index });
+      }
+    }, []);
 
-      return (
-        <Component
-          ref={this.sortablePageListRef}
-          height={height}
-          itemCount={pageCount}
-          itemData={this.itemData}
-          itemSize={127}
-          width={width}
+    useImperativeHandle(ref, () => ({
+      scrollToIndex,
+      sortablePageListRef: sortablePageListRef.current,
+      virtuosoRef: virtuosoRef.current,
+    }), [scrollToIndex]);
+
+    const handleDragStart = useCallback(event => {
+      setActiveId(event.active.id);
+    }, []);
+
+    const handleDragEnd = useCallback(event => {
+      const { active, over } = event;
+      setActiveId(null);
+
+      if (over && active.id !== over.id) {
+        const oldIndex = parseInt(active.id, 10);
+        const newIndex = parseInt(over.id, 10);
+
+        onSortEnd({ newIndex, oldIndex });
+      }
+    }, [onSortEnd]);
+
+    const handleDragCancel = useCallback(() => {
+      setActiveId(null);
+    }, []);
+
+    const virtuosoStyle = useMemo(() => ({
+      height: `${pageCount * 127}px`,
+      scrollbarWidth: 'none',
+      width: '100%',
+    }), [pageCount]);
+
+    const items = useMemo(() => pages.map((page, index) => index.toString()), [pages]);
+
+    const activePageData = useMemo(() => {
+      if (!activeId) return null;
+      const activeIndex = parseInt(activeId, 10);
+      const activePage = pageGetter(activeIndex);
+      if (!activePage) return null;
+
+      return {
+        page: activePage,
+        pageContainerLastStyle: {
+          ...pageContainerStyle,
+          ...activePage.backgroundColor ? { backgroundColor: activePage.backgroundColor } : {},
+        },
+      };
+    }, [activeId, pageGetter, pageContainerStyle]);
+
+    return (
+      <div
+        ref={sortablePageListRef}
+        style={{ height, width }}
+      >
+        <DndContext
+          collisionDetection={closestCenter}
+          onDragCancel={handleDragCancel}
+          onDragEnd={handleDragEnd}
+          onDragStart={handleDragStart}
+          sensors={sensors}
         >
-          {SortablePageItemRenderer}
-        </Component>
-      );
-    }
-  }
+          <SortableContext
+            items={items}
+            strategy={verticalListSortingStrategy}
+          >
+            <Virtuoso
+              ref={virtuosoRef}
+              fixedItemHeight={127}
+              itemContent={index => {
+                const page = pageGetter(index);
+                if (!page) return null;
+                return (
+                  <SortablePageItemRenderer
+                    data={itemData}
+                    id={index.toString()}
+                    index={index}
+                    style={{ height: 127 }}
+                  />
+                );
+              }}
+              style={virtuosoStyle}
+              totalCount={pageCount}
+            />
+          </SortableContext>
+          <SortableDragOverlay
+            acceptedItems={acceptedItems}
+            activePageData={activePageData}
+            additionalPageItems={additionalPageItems}
+            hashCode={hashCode}
+            itemAccessor={itemAccessor}
+          />
+        </DndContext>
+      </div>
+    );
+  });
 
-  ReactWindowList.propTypes = {
+  VirtuosoList.displayName = 'VirtuosoList';
+
+  VirtuosoList.propTypes = {
     acceptedItems: PropTypes.shape({}),
     additionalPageItems: PropTypes.arrayOf(PropTypes.node),
     disableInteraction: PropTypes.arrayOf(PropTypes.string),
@@ -101,13 +216,15 @@ const SortablePageList = Component => {
     onPageClick: PropTypes.func,
     onPageDuplicate: PropTypes.func,
     onPageRemove: PropTypes.func,
+    onSortEnd: PropTypes.func,
     pageContainerStyle: PropTypes.shape({}),
     pageCount: PropTypes.number,
     pageGetter: PropTypes.func,
+    pages: PropTypes.arrayOf(PropTypes.shape({})),
     width: PropTypes.number,
   };
 
-  return SortableContainer(ReactWindowList, { withRef: true });
+  return VirtuosoList;
 };
 
 export default memoize(SortablePageList);
