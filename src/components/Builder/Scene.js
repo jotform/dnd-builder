@@ -119,7 +119,7 @@ const Scene = ({
   /* When an item dropped */
   const dropped = useCallback(
     (pageID, {
-      id, itemType, ...additionalData
+      id, itemType, type, ...additionalData
     }, monitor, ref) => {
       const pageClient = ref.current.getBoundingClientRect();
       const coords = getCorrectDroppedOffsetValue(
@@ -127,8 +127,8 @@ const Scene = ({
         pageClient,
         zoom,
       );
-      const type = monitor.getItemType();
-      switch (type) {
+      const _type = type || monitor.getItemType();
+      switch (_type) {
         case DROPPABLE_ITEM_TYPE: {
           const itemID = generateId();
           onItemAdd({

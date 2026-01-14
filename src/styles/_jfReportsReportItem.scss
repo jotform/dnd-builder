@@ -45,7 +45,7 @@
     &.isDraggingLayerElement {
       opacity: .8;
       transition: none;
-      cursor: pointer;
+      cursor: grabbing;
     }
 
     .jfReportEditable {

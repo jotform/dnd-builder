@@ -182,6 +182,7 @@ const DraggableItemLayer = ({
         classNames={`reportItem${isDragging ? ' isDraggingLayerElement' : ''}`}
         style={{
           ...layerStyles(itemStyle),
+          cursor: isDragging ? 'grabbing' : 'pointer',
           height: draggedItem.height,
           outlineColor: '#4277ff',
           transform: `scale(${zoom})`,
@@ -211,6 +212,7 @@ const DraggableItemLayer = ({
             classNames={`reportItem${isDragging ? ' isDraggingLayerElement' : ''}`}
             style={{
               ...layerStyles(__itemStyle),
+              cursor: isDragging ? 'grabbing' : 'pointer',
               height: ii.height,
               outlineColor: '#4277ff',
               transform: `scale(${zoom})`,
