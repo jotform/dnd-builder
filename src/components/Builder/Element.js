@@ -29,10 +29,11 @@ const Element = ({
 
     item: () => ({
       itemType,
+      type: DROPPABLE_ITEM_TYPE,
       ...additionalData,
     }),
 
-    type: itemType ?? DROPPABLE_ITEM_TYPE,
+    type: DROPPABLE_ITEM_TYPE,
   }), [itemType, additionalData]);
 
   useEffect(() => {
@@ -71,7 +72,7 @@ const Element = ({
         className="toolItem d-flex a-center js-toolItem"
         onClick={onElementClick}
         onKeyDown={onElementOtherActions}
-        style={{ opacity: isDragging ? 0.5 : 1 }}
+        style={{ cursor: isDragging ? 'grabbing' : 'pointer', opacity: isDragging ? 0.5 : 1 }}
         title={title}
       >
         <span className="toolItem-icon d-flex j-center a-center">
