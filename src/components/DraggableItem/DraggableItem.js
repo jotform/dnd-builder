@@ -56,6 +56,21 @@ const DraggableItem = ({
     width,
   } = item;
 
+  const [
+    {
+      height: stateHeight,
+      left: stateLeft,
+      top: stateTop,
+      width: stateWidth,
+    },
+    setResizeSize,
+  ] = useState({
+    height,
+    left,
+    top,
+    width,
+  });
+
   const select = event => {
     if (!isSelected) {
       if (!event || !event.metaKey) {
@@ -75,71 +90,62 @@ const DraggableItem = ({
 
   const [{ isDragging }, drag, preview] = useDrag(() => ({
     canDrag: () => canDrag,
-
     collect: monitor => ({
       isDragging: monitor.isDragging(),
     }),
-
-    end: () => {
+    end: (_item, monitor) => {
+      const dropResult = monitor.getDropResult();
+      if (dropResult && dropResult[id]) {
+        const { left: dropLeft, top: dropTop } = dropResult[id];
+        setResizeSize(prev => {
+          return {
+            height: prev.height,
+            left: dropLeft,
+            top: dropTop,
+            width: prev.width,
+          };
+        });
+      }
       removeEventListenerForSidebar();
     },
-
-    isDragging: () => (isMultipleItemSelected && isSelected)
-    || (!isMultipleItemSelected && isSelected),
-
-    item: () => ({
-      height,
-      id,
-      left,
-      top,
-      width,
-    }),
-
+    isDragging: () => (isMultipleItemSelected && isSelected) || (!isMultipleItemSelected && isSelected),
+    item: () => {
+      select();
+      addEventListenerForSidebar();
+      return item;
+    },
     type: DRAGGABLE_ITEM_TYPE,
   }), [
+    item,
     canDrag,
-    height, id, left, top, width,
-    isMultipleItemSelected, isSelected,
+    id,
+    isMultipleItemSelected,
+    isSelected,
   ]);
 
-  const [
-    {
-      height: stateHeight,
-      left: stateLeft,
-      top: stateTop,
-      width: stateWidth,
-    },
-    setResizeSize,
-  ] = useState({
-    height,
-    left,
-    top,
-    width,
-  });
-
   useEffect(() => {
-    if (!isDragging) return;
-    if (!isSelected) select();
-    addEventListenerForSidebar();
-    return () => {
-      removeEventListenerForSidebar();
-    };
-  }, [isDragging, isSelected, select]);
-
-  useEffect(() => {
-    preview(getEmptyImage(), { captureDraggingState: true });
+    if (preview) {
+      preview(getEmptyImage(), { captureDraggingState: true });
+    }
   }, [preview]);
 
   useEffect(() => {
-    if (width !== stateWidth || height !== stateHeight || left !== stateLeft || top !== stateTop) {
-      setResizeSize({
-        height,
-        left,
-        top,
-        width,
+    if (!isResize) {
+      setResizeSize(prev => {
+        if (prev.left !== left || prev.top !== top || prev.width !== width || prev.height !== height) {
+          return {
+            ...prev,
+            height,
+            left,
+            top,
+            width,
+          };
+        }
+
+        return prev;
       });
     }
-  }, [width, height, left, top, stateWidth, stateHeight, stateLeft, stateTop]);
+  }, [left, top, width, height, isResize]);
 
   const onResizeStop = (deltaWidth, deltaHeight, direction) => {
     const activeItem = {
@@ -325,11 +331,10 @@ const DraggableItem = ({
         <div
           ref={drag}
           className={`${classNames.reportItem}${isLocked ? ' isLocked' : ''}`}
-          onClick={select}
           onContextMenu={onContextMenuClick}
           onDoubleClick={onDoubleClick}
           onDragStart={duplicateWithAltKey}
-          onKeyDown={() => {}}
+          onMouseDown={select}
           style={reportItemStyle}
         >
           {children}

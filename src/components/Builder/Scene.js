@@ -1,6 +1,5 @@
 /* eslint-disable complexity */
 import {
-  useCallback,
   createRef,
   Fragment,
   useEffect,
@@ -16,17 +15,11 @@ import PageAdder from './PageAdder';
 import ZoomControls from './ZoomControls';
 import { useBuilderContext } from '../../utils/builderContext';
 import { usePropContext } from '../../utils/propContext';
-import {
-  DRAGGABLE_ITEM_TYPE,
-  DROPPABLE_ITEM_TYPE,
-} from '../../constants/itemTypes';
 import Page from './Page';
 import {
   calculateGuidePositions,
   findItemById,
   findItemsOnPage,
-  getCorrectDroppedOffsetValue,
-  getCorrectDroppedOffsetValueBySnap,
   getMostVisiblePage,
   getSelectedItems,
 } from '../../utils/functions';
@@ -66,7 +59,6 @@ const Scene = ({
     zoom,
   } = useBuilderContext();
   const {
-    acceptedItems,
     disableInteraction,
     onAnEventTrigger,
     settings,
@@ -116,67 +108,6 @@ const Scene = ({
     }, {});
     setGuides(_guides);
   }, [pages, zoom]);
-  /* When an item dropped */
-  const dropped = useCallback(
-    (pageID, {
-      id, itemType, type, ...additionalData
-    }, monitor, ref) => {
-      const pageClient = ref.current.getBoundingClientRect();
-      const coords = getCorrectDroppedOffsetValue(
-        monitor,
-        pageClient,
-        zoom,
-      );
-      const _type = type || monitor.getItemType();
-      switch (_type) {
-        case DROPPABLE_ITEM_TYPE: {
-          const itemID = generateId();
-          onItemAdd({
-            ...acceptedItems[itemType].details,
-            id: itemID,
-            pageID,
-            ...coords,
-            ...additionalData,
-          });
-          onAnEventTrigger('reportItemAdd', itemType);
-          setActiveElement(itemID);
-          setIsRightPanelOpen(true);
-          break;
-        }
-        case DRAGGABLE_ITEM_TYPE: {
-          const dragCoords = getCorrectDroppedOffsetValueBySnap(coords, guides, id, pages, zoom);
-          if (isMultipleItemSelected) {
-            const leftDifference = additionalData.left - dragCoords.left;
-            const topDifference = additionalData.top - dragCoords.top;
-            const items = activeElement.reduce((acc, curr) => {
-              const tempItem = findItemById(curr, pages);
-              acc[curr] = {
-                id: curr,
-                left: tempItem.left - leftDifference,
-                pageID,
-                top: tempItem.top - topDifference,
-              };
-              return acc;
-            }, {});
-            onItemsMove({
-              items,
-            });
-          } else {
-            onItemMove({
-              id,
-              pageID,
-              ...dragCoords,
-            });
-          }
-          break;
-        }
-        default: {
-          throw new Error('You have to be specify item type');
-        }
-      }
-    },
-    [pages, guides, zoom, activeElement],
-  );
 
   useEffect(() => {
     if (viewPortRef.current) {
@@ -446,19 +377,20 @@ const Scene = ({
                 <Page
                   activeElement={activeElement}
                   additionalPageItems={additionalPageItems}
-                  guides={guides[page.id]}
+                  guides={guides}
                   hashCode={hashCode}
                   itemAccessor={itemAccessor}
                   items={page.items}
-                  // TODO: dont use inline functions
-                  onDrop={(item, monitor) => dropped(page.id, item, monitor, refs[page.id])}
                   onItemAdd={onItemAdd}
                   onItemChange={onItemChange}
+                  onItemMove={onItemMove}
                   onItemRemove={onItemRemove}
                   onItemResize={onItemResize}
+                  onItemsMove={onItemsMove}
                   page={page}
                   pageIndex={index}
                   pageRef={refs[page.id]}
+                  pages={pages}
                   style={pageContainerStyles.current}
                 />
               </div>

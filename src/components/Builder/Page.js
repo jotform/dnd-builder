@@ -2,11 +2,14 @@ import {
   useState,
   useRef,
   memo,
-  useMemo,
 } from 'react';
 import PropTypes from 'prop-types';
 import { useDrop } from 'react-dnd';
-import { ACCEPTED_TYPES } from '../../constants/itemTypes';
+import {
+  ACCEPTED_TYPES,
+  DRAGGABLE_ITEM_TYPE,
+  DROPPABLE_ITEM_TYPE,
+} from '../../constants/itemTypes';
 import AlignmentGuides from '../AlignmentGuides';
 import ReportItemsWrapper from '../ReportItemsWrapper';
 import { useBuilderContext } from '../../utils/builderContext';
@@ -15,8 +18,11 @@ import {
   proximityListener,
   calculateGuidePositions,
   getCorrectDroppedOffsetValue,
+  getCorrectDroppedOffsetValueBySnap,
+  findItemById,
 } from '../../utils/functions';
 import * as classNames from '../../constants/classNames';
+import generateId from '../../utils/generateId';
 
 const emptyObject = {};
 
@@ -27,13 +33,15 @@ const Page = ({
   hashCode = '',
   itemAccessor = () => {},
   items = [],
-  onDrop = () => {},
   onItemAdd = () => {},
   onItemChange = () => {},
+  onItemMove = () => {},
   onItemRemove = () => {},
   onItemResize = () => {},
+  onItemsMove = () => {},
   page = {},
   pageRef = {},
+  pages = [],
   style = {},
 }) => {
   const {
@@ -65,9 +73,9 @@ const Page = ({
           ...item, ...coords,
         };
         const _guides = {
-          ...guides,
+          ...guides[item.pageID],
           [item.id]: {
-            ...guides[item.id],
+            ...guides[item.pageID][item.id],
             x: calculateGuidePositions(activeItem, 'x', zoom),
             y: calculateGuidePositions(activeItem, 'y', zoom),
           },
@@ -81,24 +89,80 @@ const Page = ({
     };
   };
 
+  const isMultipleItemSelected = activeElement !== null && activeElement.length > 1;
+
   const onHover = (item, monitor) => {
     if (!requestRef.current) {
       requestRef.current = global.requestAnimationFrame(drawAlignmentGuides(item, monitor));
     }
   };
 
-  const dropConfig = useMemo(() => ({
+  const [{ isOver }, drop] = useDrop({
     accept: ACCEPTED_TYPES,
     collect: monitor => {
       return {
         isOver: monitor.isOver(),
       };
     },
-    drop: onDrop,
-    hover: onHover,
-  }), [onDrop, onHover]);
+    drop: (item, monitor) => {
+      const pageClient = pageRef.current?.getBoundingClientRect();
+      const coords = getCorrectDroppedOffsetValue(
+        monitor,
+        pageClient,
+        zoom,
+      );
+      const type = monitor.getItemType();
+      const {
+        id, itemType, pageID, ...additionalData
+      } = item;
+      const newCoords = {};
+      if (type === DROPPABLE_ITEM_TYPE) {
+        const itemID = generateId();
+        onItemAdd({
+          ...acceptedItems[itemType].details,
+          id: itemID,
+          pageID: page.id,
+          ...coords,
+          ...additionalData,
+        });
+        onAnEventTrigger('reportItemAdd', itemType);
+        setActiveElement(itemID);
+        setIsRightPanelOpen(true);
+        newCoords[itemID] = coords;
+      } else if (type === DRAGGABLE_ITEM_TYPE) {
+        const dragCoords = getCorrectDroppedOffsetValueBySnap(coords, guides, id, pages, zoom);
+        if (isMultipleItemSelected) {
+          const leftDifference = additionalData.left - dragCoords.left;
+          const topDifference = additionalData.top - dragCoords.top;
+          const _items = activeElement.reduce((acc, curr) => {
+            const tempItem = findItemById(curr, pages);
+            acc[curr] = {
+              id: curr,
+              left: tempItem.left - leftDifference,
+              pageID: page.id,
+              top: tempItem.top - topDifference,
+            };
+            newCoords[curr] = {
+              left: tempItem.left - leftDifference,
+              top: tempItem.top - topDifference,
+            };
+            return acc;
+          }, {});
+          onItemsMove({ items: _items });
+        } else {
+          onItemMove({
+            id,
+            pageID: page.id,
+            ...dragCoords,
+          });
+          newCoords[id] = dragCoords;
+        }
+      }
 
-  const [{ isOver }, drop] = useDrop(dropConfig);
+      return newCoords;
+    },
+    hover: onHover,
+  });
 
   const { reportBackgroundColor } = settings;
   const { backgroundColor } = page;
@@ -118,7 +182,7 @@ const Page = ({
           <ReportItemsWrapper
             acceptedItems={acceptedItems}
             activeElement={activeElement}
-            guides={guides}
+            guides={guides[page.id]}
             hashCode={hashCode}
             isResize={isResize}
             isRightPanelOpen={isRightPanelOpen}
@@ -142,14 +206,14 @@ const Page = ({
           {additionalPageItems}
           <AlignmentGuides
             axis="x"
-            guides={guides}
+            guides={guides[page.id]}
             matches={matches}
             show={(isOver || isResize)}
             zoom={zoom}
           />
           <AlignmentGuides
             axis="y"
-            guides={guides}
+            guides={guides[page.id]}
             matches={matches}
             show={(isOver || isResize)}
             zoom={zoom}
@@ -169,17 +233,19 @@ Page.propTypes = {
   items: PropTypes.arrayOf(
     PropTypes.shape({}),
   ),
-  onDrop: PropTypes.func,
   onItemAdd: PropTypes.func,
   onItemChange: PropTypes.func,
+  onItemMove: PropTypes.func,
   onItemRemove: PropTypes.func,
   onItemResize: PropTypes.func,
+  onItemsMove: PropTypes.func,
   page: PropTypes.shape({
     backgroundColor: PropTypes.string,
   }),
   pageRef: PropTypes.shape({
     current: PropTypes.any,
   }),
+  pages: PropTypes.arrayOf(PropTypes.shape({})),
   style: PropTypes.shape({}),
 };
 

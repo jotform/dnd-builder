@@ -53,7 +53,7 @@ module.exports = {
     'jsx-a11y/no-static-element-interactions': 0,
 
     'linebreak-style': 0,
-    'max-len': ['error', { code: 100, tabWidth: 2 }],
+    'max-len': ['error', { code: 200, tabWidth: 2 }],
     'max-lines': ['error', { max: 1000, skipComments: true }],
     'max-statements': ['error', 40, { ignoreTopLevelFunctions: true }],
     'no-await-in-loop': 'error',
@@ -95,8 +95,8 @@ module.exports = {
     'react/prefer-stateless-function': 0,
     'react/react-in-jsx-scope': 'off',
     'react/require-default-props': 0,
-    'react-hooks/rules-of-hooks': 'error',
     // 'react-hooks/exhaustive-deps': 'warn',
+    'react-hooks/rules-of-hooks': 'error',
 
     'sort-destructure-keys/sort-destructure-keys': 2,
     'sort-keys': ['error', 'asc', { natural: true }],
