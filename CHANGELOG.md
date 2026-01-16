@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.9.19](https://github.com/jotform/dnd-builder/compare/v2.9.18...v2.9.19) (2026-01-16)
+
+
+### Bug Fixes
+
+* all of defaultProps are removed ([9165427](https://github.com/jotform/dnd-builder/commit/916542744cdeb3df4d08a14936f16036e2bae6e0))
+* dnd operations fix & refactor ([2ffb3be](https://github.com/jotform/dnd-builder/commit/2ffb3be0417618f8a4b64842c692d27ec712561e))
+* **dnd-builder:** replace onKeyDown handler with emptyFunction ([ff7fd93](https://github.com/jotform/dnd-builder/commit/ff7fd936222157f2dd4d110eab5ef5307e33b443))
+* **dnd-builder:** set item type droppable element ([9175d49](https://github.com/jotform/dnd-builder/commit/9175d494a85ad079759997e6df67c98f7fec0add))
+* revert version of eslint-plugin-react-hooks ([040e308](https://github.com/jotform/dnd-builder/commit/040e3081138a3e37c8b5e36eef17e676dc0f58e1))
+* yarn.lock ([e2ea5f5](https://github.com/jotform/dnd-builder/commit/e2ea5f562931e1d73b6c755b458f02ac42fdc6f0))
+
 ### [2.9.18](https://github.com/jotform/dnd-builder/compare/v2.9.17...v2.9.18) (2026-01-13)
 
 ### [2.9.16](https://github.com/jotform/dnd-builder/compare/v2.9.15...v2.9.16) (2026-01-09)
