@@ -4,6 +4,7 @@ import { CSS } from '@dnd-kit/utilities';
 import PropTypes from 'prop-types';
 import StaticPage from '../../Preview/StaticPage';
 import PageThumbnailActions from './PageThumbnailActions';
+import { emptyFunction } from '../../../utils/functions';
 
 const SortablePageItem = ({
   acceptedItems,
@@ -41,8 +42,6 @@ const SortablePageItem = ({
     return { ...baseStyle, ...style };
   }, [transform, transition, isDragging, style]);
 
-  const onKeyDown = f => f;
-
   return (
     <div
       ref={setNodeRef}
@@ -50,7 +49,7 @@ const SortablePageItem = ({
       data-id={page.id}
       data-order={order}
       onClick={onPageClick}
-      onKeyDown={onKeyDown}
+      onKeyDown={emptyFunction}
       style={dragStyle}
       {...attributes}
       {...listeners}
