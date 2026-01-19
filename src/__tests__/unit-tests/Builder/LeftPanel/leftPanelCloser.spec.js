@@ -13,7 +13,7 @@ describe('LeftPanelCloser', () => {
   it('Should Call setIsLeftPanelOpen Once Click Left Panel Close Button', () => {
     const eventMock = jest.fn();
     const leftPanelOpenerWrapper = mount(
-      <BuilderProvider {...BuilderProvider.defaultProps}>
+      <BuilderProvider>
         <LeftPanelCloser />
       </BuilderProvider>,
     );

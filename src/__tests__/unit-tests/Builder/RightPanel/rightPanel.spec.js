@@ -41,11 +41,8 @@ describe('RightPanel Component', () => {
   });
 
   it('Should Not Pass isIdle Class to Panel If `isRightPanelOpen` is `true`', () => {
-    const props = {
-      ...BuilderProvider.defaultProps,
-    };
     const builderWrapper = mount(
-      <BuilderProvider {...props}>
+      <BuilderProvider>
         <RightPanel />
       </BuilderProvider>,
     );
@@ -54,11 +51,8 @@ describe('RightPanel Component', () => {
   });
 
   it('Should Pass isIdle Class to Panel If `isRightPanelOpen` is `false`', () => {
-    const props = {
-      ...BuilderProvider.defaultProps,
-    };
     const builderWrapper = mount(
-      <BuilderProvider {...props}>
+      <BuilderProvider >
         <RightPanel />
       </BuilderProvider>,
     );
@@ -66,11 +60,8 @@ describe('RightPanel Component', () => {
   });
 
   it('Should Not Pass otherOpened Class to Panel If `isSlidesPanelOpen` is `false`', () => {
-    const props = {
-      ...BuilderProvider.defaultProps,
-    };
     const builderWrapper = mount(
-      <BuilderProvider {...props}>
+      <BuilderProvider>
         <RightPanel />
       </BuilderProvider>,
     );
@@ -78,11 +69,8 @@ describe('RightPanel Component', () => {
   });
 
   it('Should Pass otherOpened Class to Panel If `isSlidesPanelOpen` is `true`', () => {
-    const props = {
-      ...BuilderProvider.defaultProps,
-    };
     const builderWrapper = mount(
-      <BuilderProvider {...props}>
+      <BuilderProvider>
         <RightPanel />
       </BuilderProvider>,
     );
@@ -91,12 +79,8 @@ describe('RightPanel Component', () => {
   });
 
   it('Should Render `RightPanelToggler` with `paneClose` class name If `isRightPanelOpen` is `true`', () => {
-    const props = {
-      ...BuilderProvider.defaultProps,
-      isRightPanelOpen: true
-    };
     const builderWrapper = mount(
-      <BuilderProvider {...props}>
+      <BuilderProvider isRightPanelOpen={true}>
         <RightPanel />
       </BuilderProvider>,
     );
@@ -104,12 +88,8 @@ describe('RightPanel Component', () => {
   });
 
   it('Should Not Render `RightPanelToggler` If `isSlidesPanelOpen` is `true`', () => {
-    const props = {
-      ...BuilderProvider.defaultProps,
-      isSlidesPanelOpen: true
-    };
     const builderWrapper = mount(
-      <BuilderProvider {...props}>
+      <BuilderProvider isSlidesPanelOpen={true}>
         <RightPanel />
       </BuilderProvider>,
     );

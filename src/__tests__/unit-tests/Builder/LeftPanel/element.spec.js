@@ -10,7 +10,6 @@ describe('Element ', () => {
     const eventMock = jest.fn();
 
     const props = {
-      ...Element.defaultProps,
       acceptedItems: acceptedItems,
       itemType: 'text',
       onItemAdd: eventMock,

@@ -9,7 +9,7 @@ import { usePropContext } from '../../contexts/PropContext';
 import { useBuilderContext } from '../../contexts/BuilderContext';
 import { slugify } from '../../utils/string';
 import { usePageTransition } from '../../utils/hooks';
-import { usePresentationContext } from '../../contexts/PresentationContext';
+import { usePresentationStore } from '../../contexts/PresentationContext';
 import ZoomControls from '../Builder/ZoomControls';
 
 const StaticScene = ({
@@ -23,7 +23,8 @@ const StaticScene = ({
   pages = [],
   presentationPage = 0,
 }) => {
-  const { isFullscreen, showControlsInFullScreen } = usePresentationContext();
+  const isFullscreen = usePresentationStore(state => state.isFullscreen);
+  const showControlsInFullScreen = usePresentationStore(state => state.showControlsInFullScreen);
   const { acceptedItems, settings } = usePropContext();
   const { setZoom, zoom } = useBuilderContext();
   const viewPortRef = useRef({});

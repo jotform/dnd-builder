@@ -7,27 +7,24 @@ import LeftPanelOpener from '../../../../components/Panels/LeftPanel/LeftPanelOp
 
 describe('LeftPanel Component', () => {
   it('Should Always Render Panel in LeftPanel', () => {
-    const leftPanelWrapper = shallow(<LeftPanel {...LeftPanel.defaultProps} />);
+    const leftPanelWrapper = shallow(<LeftPanel />);
     expect(leftPanelWrapper.find(Panel)).toHaveLength(1);
   });
 
   it('Should Always Render LeftPanelOpener in LeftPanel', () => {
-    const leftPanelWrapper = shallow(<LeftPanel {...LeftPanel.defaultProps} />);
+    const leftPanelWrapper = shallow(<LeftPanel />);
     expect(leftPanelWrapper.find(LeftPanelOpener)).toHaveLength(1);
   });
 
   it('Should Always Render Elements in LeftPanel', () => {
-    const leftPanelWrapper = shallow(<LeftPanel {...LeftPanel.defaultProps} />);
+    const leftPanelWrapper = shallow(<LeftPanel />);
     expect(leftPanelWrapper.find(Elements)).toHaveLength(1);
   });
 
 
   it('Should Not Pass isIdle Class to Panel If `isLeftPanelOpen` is `true`', () => {
-    const props = {
-      ...BuilderProvider.defaultProps,
-    };
     const builderWrapper = mount(
-      <BuilderProvider {...props}>
+      <BuilderProvider>
         <LeftPanel />
       </BuilderProvider>,
     );
@@ -36,11 +33,8 @@ describe('LeftPanel Component', () => {
   });
 
   it('Should Pass isIdle Class to Panel If `isLeftPanelOpen` is `false`', () => {
-    const props = {
-      ...BuilderProvider.defaultProps,
-    };
     const builderWrapper = mount(
-      <BuilderProvider {...props}>
+      <BuilderProvider>
         <LeftPanel />
       </BuilderProvider>,
     );

@@ -7,28 +7,38 @@ import ZoomControls from '../../../components/Builder/ZoomControls';
 
 describe('StaticScene Component Tree', () => {
   it('Should Always Render Wrapper Div', () => {
-    const staticSceneShallow = shallow(<StaticScene {...StaticScene.defaultProps} />);
+    const staticSceneShallow = mount(
+      <PresentationProvider>
+      <StaticScene />
+    </PresentationProvider>
+    );
     expect(staticSceneShallow.find(selectors.reportCanvas)).toHaveLength(1);
   });
 
   it('Should Change Wrapper Transform Style Property Based on presentationPage prop', () => {
     const props = {
-      ...StaticScene.defaultProps,
       presentationPage: 3,
     };
-    const staticSceneShallow = shallow(<StaticScene {...props} />);
+    const staticSceneShallow = mount(
+      <PresentationProvider>
+        <StaticScene {...props} />
+      </PresentationProvider>
+    );
     const wrapperDiv = staticSceneShallow.find(selectors.reportCanvas).props().style.transform;
     expect(wrapperDiv).toEqual(`translateX(-${(props.presentationPage * 100)}%)`);
   });
 
   it('Should Not Render StaticPage If Pages Prop Not Defined', () => {
-    const staticSceneShallow = shallow(<StaticScene {...StaticScene.defaultProps} />);
+    const staticSceneShallow = shallow(
+      <PresentationProvider>
+        <StaticScene />
+      </PresentationProvider>
+    );
     expect(staticSceneShallow.find(StaticPageWithZoomPanPinch).exists()).toBeFalsy();
   });
 
   it('Should Render StaticPage According Pages Prop', () => {
     const props = {
-      ...StaticScene.defaultProps,
       pages: [
         {
           id: 'f270j8',
@@ -42,17 +52,17 @@ describe('StaticScene Component Tree', () => {
         },
       ],
     };
-    const staticSceneShallow = shallow(<StaticScene {...props} />);
+    const staticSceneShallow = mount(
+      <PresentationProvider pageCount={props.pages.length}>
+        <StaticScene {...props} />
+      </PresentationProvider>,
+    );
     expect(staticSceneShallow.find(StaticPageWithZoomPanPinch)).toHaveLength(2);
   });
 
   it('Should Render ZoomControl If isFullscreen Prop Value is False', () => {
-    const props = {
-      ...PresentationProvider.defaultProps,
-      isFullscreen: false,
-    };
     const presentationWrapper = mount(
-      <PresentationProvider {...props}>
+      <PresentationProvider isFullscreen={false}>
         <StaticScene />
       </PresentationProvider>,
     );
@@ -66,7 +76,6 @@ describe('StaticScene Component Tree', () => {
 
   // it('Should Not Render ZoomControl If isFullscreen Prop Value is True', () => {
   //   const props = {
-  //     ...PresentationProvider.defaultProps,
   //     isFullscreen: true,
   //   };
   //   const presentationWrapper = mount(

@@ -13,7 +13,7 @@ import { BuilderProvider } from '../../../../contexts/BuilderContext';
 describe('Elements', () => {
   it('Should Always Render LeftPanelCloser', () => {
     const elementsWrapper = shallow(
-      <Elements {...Elements.defaultProps} />,
+      <Elements />,
     );
 
     expect(elementsWrapper.find(LeftPanelCloser)).toHaveLength(1);
@@ -22,7 +22,7 @@ describe('Elements', () => {
   it('Should Not Render SectionWithSearch & Elements If LeftPanelConfig is Empty', () => {
     const elementsWrapper = shallow(
       <BuilderProvider>
-        <Elements {...Elements.defaultProps} />
+        <Elements />
       </BuilderProvider>
     );
     expect(elementsWrapper.find(Section)).toHaveLength(0);
@@ -31,7 +31,6 @@ describe('Elements', () => {
 
   it('Should Render SectionWithSearch & Elements Based on‘leftPanelConfig‘', () => {
     const props = {
-      ...Elements.defaultProps,
       leftPanelConfig: [{
         elements: [
           {

@@ -15,7 +15,7 @@ import {
   throttle,
   zoomHandler,
 } from '../../utils/functions';
-import { usePresentationContext } from '../../contexts/PresentationContext';
+import { usePresentationStore } from '../../contexts/PresentationContext';
 import { usePropContext } from '../../contexts/PropContext';
 // import { ZOOM_MIN, ZOOM_MAX } from '../../constants/zoom';
 
@@ -35,7 +35,7 @@ const PresentationWrapper = ({
     setIsFullscreen,
     setShowControlsInFullScreen,
     showControlsInFullScreen,
-  } = usePresentationContext();
+  } = usePresentationStore();
 
   const { setZoom, zoom } = useBuilderContext();
 

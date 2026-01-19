@@ -16,17 +16,20 @@ import {
 } from '../../../../stories/config';
 
 import examplePages from '../../../../stories/config/examplePages';
+import { PresentationProvider } from '../../../contexts/PresentationContext';
 
 describe('Preview Stories', () => {
   const props = {
-    ...Preview.defaultProps,
     acceptedItems: acceptedItems,
     pages: examplePages,
     settings: defaultSettings,
   };
 
-  const preview = mount(<Preview {...props} />);
-
+  const preview = mount(
+      <PresentationProvider>
+        <Preview {...props} />
+      </PresentationProvider>,
+    );
   it('Should Render Preview Component Tree According to Preview Story', () => {
     expect(preview.find(BuilderProvider)).toHaveLength(1);
     expect(preview.find(PropProvider)).toHaveLength(1);
