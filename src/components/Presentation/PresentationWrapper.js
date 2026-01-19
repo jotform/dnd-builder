@@ -8,7 +8,7 @@ import classNames from 'classnames';
 import { useDrag } from '@use-gesture/react';
 import PresentationBar from './PresentationBar';
 import ProgressBar from './ProgressBar';
-import { useBuilderContext } from '../../contexts/BuilderContext';
+import { useBuilderStore } from '../../contexts/BuilderContext';
 import { useEventListener, useFullscreenChange } from '../../utils/hooks';
 import {
   changePage,
@@ -25,19 +25,18 @@ const PresentationWrapper = ({
   useFixedPresentationBar = false,
 }) => {
   const { onAnEventTrigger, settings } = usePropContext();
-  const {
-    currentPage,
-    fittedZoom,
-    isFullscreen,
-    pageCount,
-    setCurrentPage,
-    setFittedZoom,
-    setIsFullscreen,
-    setShowControlsInFullScreen,
-    showControlsInFullScreen,
-  } = usePresentationStore();
+  const currentPage = usePresentationStore(state => state.currentPage);
+  const fittedZoom = usePresentationStore(state => state.fittedZoom);
+  const isFullscreen = usePresentationStore(state => state.isFullscreen);
+  const pageCount = usePresentationStore(state => state.pageCount);
+  const setCurrentPage = usePresentationStore(state => state.setCurrentPage);
+  const setFittedZoom = usePresentationStore(state => state.setFittedZoom);
+  const setIsFullscreen = usePresentationStore(state => state.setIsFullscreen);
+  const setShowControlsInFullScreen = usePresentationStore(state => state.setShowControlsInFullScreen);
+  const showControlsInFullScreen = usePresentationStore(state => state.showControlsInFullScreen);
 
-  const { setZoom, zoom } = useBuilderContext();
+  const setZoom = useBuilderStore(state => state.setZoom);
+  const zoom = useBuilderStore(state => state.zoom);
 
   const fitToScreen = useCallback((delay = 0) => setTimeout(() => {
     const newZoom = zoomHandler({
@@ -123,19 +122,11 @@ const PresentationWrapper = ({
       >
         {children(currentPage - 1, gesture)}
         <PresentationBar
-          currentPage={currentPage}
-          fittedZoom={fittedZoom}
           fitToScreen={fitToScreen}
-          isFullscreen={isFullscreen}
           isVisible={(!isFullscreen || (isFullscreen && showControlsInFullScreen))}
           onAnEventTrigger={onAnEventTrigger}
-          pageCount={pageCount}
           presentationBarActions={presentationBarActions}
-          setCurrentPage={setCurrentPage}
-          setIsFullscreen={setIsFullscreen}
           settings={settings}
-          setZoom={setZoom}
-          zoom={zoom}
         />
         <ProgressBar
           currentPage={currentPage}

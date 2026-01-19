@@ -1,10 +1,10 @@
 import { memo } from 'react';
-import { useBuilderContext } from '../../../contexts/BuilderContext';
+import { useBuilderStore } from '../../../contexts/BuilderContext';
 import * as icons from '../../../utils/icons';
 import { useTranslatedTexts } from '../../../utils/hooks';
 
 const LeftPanelToggler = () => {
-  const { setIsLeftPanelOpen } = useBuilderContext();
+  const setIsLeftPanelOpen = useBuilderStore(state => state.setIsLeftPanelOpen);
   const { ADD_ELEMENT } = useTranslatedTexts();
   return (
     <>

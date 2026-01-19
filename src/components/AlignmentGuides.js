@@ -1,13 +1,14 @@
 import { memo } from 'react';
 import PropTypes from 'prop-types';
+import { useBuilderStore } from '../contexts/BuilderContext';
 
 const AlignmentGuides = ({
   axis,
   guides = {},
   matches = {},
   show = false,
-  zoom = 1,
 }) => {
+  const zoom = useBuilderStore(state => state.zoom);
   if (Object.keys(matches).length === 0) return null;
   const styleKey = axis === 'x' ? 'left' : 'top';
 
@@ -41,7 +42,6 @@ AlignmentGuides.propTypes = {
   guides: PropTypes.shape({}),
   matches: PropTypes.shape({}),
   show: PropTypes.bool,
-  zoom: PropTypes.number,
 };
 
 export default memo(AlignmentGuides);

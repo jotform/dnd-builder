@@ -2,7 +2,7 @@ import { memo } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Panel from '../../Builder/Panel';
-import { useBuilderContext } from '../../../contexts/BuilderContext';
+import { useBuilderStore } from '../../../contexts/BuilderContext';
 import { leftPanelConfigPropType } from '../../../constants/propTypes';
 import Elements from './Elements';
 import LeftPanelOpener from './LeftPanelOpener';
@@ -19,7 +19,7 @@ const LeftPanel = ({
   */
   const { acceptedItems, onAnEventTrigger } = usePropContext();
 
-  const { isLeftPanelOpen } = useBuilderContext();
+  const isLeftPanelOpen = useBuilderStore(state => state.isLeftPanelOpen);
 
   const panelAdditionalClassName = classNames(
     'jfReport-toolbox f-height',

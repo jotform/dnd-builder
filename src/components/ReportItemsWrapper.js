@@ -2,20 +2,14 @@ import { memo } from 'react';
 import ReportItemRenderer from './Builder/ReportItemRenderer';
 import DraggableItem from './DraggableItem/DraggableItem';
 import getMergedItem from '../utils/getMergedItem';
-
-const isSelected = (id, activeElements) => {
-  if (activeElements === null) return id === activeElements;
-  return activeElements.indexOf(id) !== -1;
-};
+import { useBuilderStore } from '../contexts/BuilderContext';
+import { isSelected } from '../utils/functions';
 
 const ReportItemsWrapper = ({
   acceptedItems,
-  activeElement,
   guides,
   hashCode,
   isResize,
-  isRightPanelOpen,
-  isTextEditorOpen,
   itemAccessor,
   items,
   matches,
@@ -24,13 +18,11 @@ const ReportItemsWrapper = ({
   onItemChange,
   onItemRemove,
   onItemResize,
-  setActiveElement,
-  setContextMenuProps,
   setIsResize,
-  setIsRightPanelOpen,
   setMatches,
-  zoom,
 }) => {
+  const activeElement = useBuilderStore(state => state.activeElement);
+
   return items
     .filter(item => (
       item.isVisible !== undefined
@@ -47,9 +39,7 @@ const ReportItemsWrapper = ({
           index={index}
           isMultipleItemSelected={activeElement !== null && activeElement.length > 1}
           isResize={isResize}
-          isRightPanelOpen={isRightPanelOpen}
           isSelected={isSelected(item.id, activeElement)}
-          isTextEditorOpen={isTextEditorOpen}
           item={item}
           matches={matches}
           onAnEventTrigger={onAnEventTrigger}
@@ -57,12 +47,8 @@ const ReportItemsWrapper = ({
           onItemChange={onItemChange}
           onItemRemove={onItemRemove}
           onItemResize={onItemResize}
-          setActiveElement={setActiveElement}
-          setContextMenuProps={setContextMenuProps}
           setIsResize={setIsResize}
-          setIsRightPanelOpen={setIsRightPanelOpen}
           setMatches={setMatches}
-          zoom={zoom}
         >
           <ReportItemRenderer
             key={item.id}

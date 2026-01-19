@@ -5,7 +5,11 @@ import { BuilderProvider } from '../../../../contexts/BuilderContext';
 
 describe('LeftPanelCloser', () => {
   it('Should Always Render Left Panel Close Button', () => {
-    const leftPanelOpenerWrapper = shallow(<LeftPanelCloser />);
+    const leftPanelOpenerWrapper = mount(
+      <BuilderProvider>
+        <LeftPanelCloser />
+      </BuilderProvider>,
+    );
     const leftPanelOpenButton = leftPanelOpenerWrapper.find(selectors.paneClose);
     expect(leftPanelOpenButton).toHaveLength(1);
   });
@@ -13,11 +17,10 @@ describe('LeftPanelCloser', () => {
   it('Should Call setIsLeftPanelOpen Once Click Left Panel Close Button', () => {
     const eventMock = jest.fn();
     const leftPanelOpenerWrapper = mount(
-      <BuilderProvider>
+      <BuilderProvider setIsLeftPanelOpen={eventMock}>
         <LeftPanelCloser />
       </BuilderProvider>,
     );
-    leftPanelOpenerWrapper.setState({ setIsLeftPanelOpen: eventMock });
     const leftPanelOpenButton = leftPanelOpenerWrapper.find(selectors.paneClose);
     leftPanelOpenButton.simulate('click');
     expect(eventMock).toHaveBeenCalled();

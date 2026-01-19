@@ -12,7 +12,7 @@ import {
 } from '../../constants/itemTypes';
 import AlignmentGuides from '../AlignmentGuides';
 import ReportItemsWrapper from '../ReportItemsWrapper';
-import { useBuilderContext } from '../../contexts/BuilderContext';
+import { useBuilderStore } from '../../contexts/BuilderContext';
 import { usePropContext } from '../../contexts/PropContext';
 import {
   proximityListener,
@@ -27,7 +27,6 @@ import generateId from '../../utils/generateId';
 const emptyObject = {};
 
 const Page = ({
-  activeElement = null,
   additionalPageItems = [],
   guides = {},
   hashCode = '',
@@ -44,14 +43,10 @@ const Page = ({
   pages = [],
   style = {},
 }) => {
-  const {
-    isRightPanelOpen,
-    isTextEditorOpen,
-    setActiveElement,
-    setContextMenuProps,
-    setIsRightPanelOpen,
-    zoom,
-  } = useBuilderContext();
+  const activeElement = useBuilderStore(state => state.activeElement);
+  const setActiveElement = useBuilderStore(state => state.setActiveElement);
+  const setIsRightPanelOpen = useBuilderStore(state => state.setIsRightPanelOpen);
+  const zoom = useBuilderStore(state => state.zoom);
   const { acceptedItems, onAnEventTrigger, settings } = usePropContext();
   const [matches, setMatches] = useState({});
   const [isResize, setIsResize] = useState(false);
@@ -181,12 +176,9 @@ const Page = ({
         <div className="jfReport-hider o-hidden f-all p-relative">
           <ReportItemsWrapper
             acceptedItems={acceptedItems}
-            activeElement={activeElement}
             guides={guides[page.id]}
             hashCode={hashCode}
             isResize={isResize}
-            isRightPanelOpen={isRightPanelOpen}
-            isTextEditorOpen={isTextEditorOpen}
             itemAccessor={itemAccessor}
           // if we send matches all the time, DraggableItems are also rendered on dragging
             items={items}
@@ -196,12 +188,8 @@ const Page = ({
             onItemChange={onItemChange}
             onItemRemove={onItemRemove}
             onItemResize={onItemResize}
-            setActiveElement={setActiveElement}
-            setContextMenuProps={setContextMenuProps}
             setIsResize={setIsResize}
-            setIsRightPanelOpen={setIsRightPanelOpen}
             setMatches={setMatches}
-            zoom={zoom}
           />
           {additionalPageItems}
           <AlignmentGuides
@@ -209,14 +197,12 @@ const Page = ({
             guides={guides[page.id]}
             matches={matches}
             show={(isOver || isResize)}
-            zoom={zoom}
           />
           <AlignmentGuides
             axis="y"
             guides={guides[page.id]}
             matches={matches}
             show={(isOver || isResize)}
-            zoom={zoom}
           />
         </div>
       </div>
@@ -225,7 +211,6 @@ const Page = ({
 };
 
 Page.propTypes = {
-  activeElement: PropTypes.arrayOf(PropTypes.string),
   additionalPageItems: PropTypes.arrayOf(PropTypes.node),
   guides: PropTypes.shape({}),
   hashCode: PropTypes.string,

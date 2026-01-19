@@ -9,7 +9,7 @@ import Panel from '../../Builder/Panel';
 import Section from '../../Builder/Section';
 import Layout from '../../../constants/reportSettings';
 import Page from '../../../constants/pageSettings';
-import { useBuilderContext } from '../../../contexts/BuilderContext';
+import { useBuilderStore } from '../../../contexts/BuilderContext';
 import { usePropContext } from '../../../contexts/PropContext';
 import { findItemById, getTabsWithSettings } from '../../../utils/functions';
 import { useTranslatedTexts } from '../../../utils/hooks';
@@ -31,15 +31,13 @@ const RightPanel = ({
   onSettingChange = () => {},
   pages = [],
 }) => {
-  const {
-    activeTab,
-    editedElement,
-    isRightPanelOpen,
-    isSlidesPanelOpen,
-    setActiveElement,
-    setActiveTab,
-    setIsRightPanelOpen,
-  } = useBuilderContext();
+  const activeTab = useBuilderStore(state => state.activeTab);
+  const editedElement = useBuilderStore(state => state.editedElement);
+  const isRightPanelOpen = useBuilderStore(state => state.isRightPanelOpen);
+  const isSlidesPanelOpen = useBuilderStore(state => state.isSlidesPanelOpen);
+  const setActiveElement = useBuilderStore(state => state.setActiveElement);
+  const setActiveTab = useBuilderStore(state => state.setActiveTab);
+  const setIsRightPanelOpen = useBuilderStore(state => state.setIsRightPanelOpen);
   const { acceptedItems, settings: layoutSettings } = usePropContext();
   const panelRef = useRef(null);
   const translatedTexts = useTranslatedTexts();

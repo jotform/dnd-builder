@@ -2,14 +2,14 @@ import {
   string, func, any, oneOfType, shape,
 } from 'prop-types';
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
-import { useBuilderContext } from '../contexts/BuilderContext';
+import { useBuilderStore } from '../contexts/BuilderContext';
 import { usePresentationStore } from '../contexts/PresentationContext';
 
 const withZoomPanPinchHOC = WrappedComponent => {
   const ZoomPanPinchHOC = props => {
     const { handleZoom, mode = '', refSetter } = props;
 
-    const { zoom } = useBuilderContext();
+    const zoom = useBuilderStore(state => state.setZoom);
     const fittedZoom = usePresentationStore(state => state.fittedZoom);
 
     if (mode !== 'presentation') {

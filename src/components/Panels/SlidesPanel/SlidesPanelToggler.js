@@ -1,13 +1,11 @@
 import PropTypes from 'prop-types';
-import { useBuilderContext } from '../../../contexts/BuilderContext';
+import { useBuilderStore } from '../../../contexts/BuilderContext';
 import * as icons from '../../../utils/icons';
 import { useTranslatedTexts } from '../../../utils/hooks';
 
 const SlidesPanelToggler = ({ onClosePanel = () => {} }) => {
-  const {
-    setActiveElement,
-    setIsSlidesPanelOpen,
-  } = useBuilderContext();
+  const setActiveElement = useBuilderStore(state => state.setActiveElement);
+  const setIsSlidesPanelOpen = useBuilderStore(state => state.setIsSlidesPanelOpen);
   const { SLIDES } = useTranslatedTexts();
 
   return (

@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import * as icons from '../../utils/icons';
 import { moveItemInArrayFromIndexToIndex, scrollToTarget } from '../../utils/functions';
 import { useTranslatedTexts } from '../../utils/hooks';
+import { useBuilderStore } from '../../contexts/BuilderContext';
 
 const PageActions = ({
   disableInteraction = [],
@@ -14,9 +15,10 @@ const PageActions = ({
   pageCount = 1,
   pageID = '',
   pages = [],
-  setEditedElement = () => {},
-  setIsRightPanelOpen = () => {},
 }) => {
+  const setIsRightPanelOpen = useBuilderStore(state => state.setIsRightPanelOpen);
+  const setEditedElement = useBuilderStore(state => state.setEditedElement);
+
   const pageSettings = () => {
     setEditedElement(`p_${pageID}`);
     setIsRightPanelOpen(true);
@@ -154,8 +156,6 @@ PageActions.propTypes = {
   pageCount: PropTypes.number,
   pageID: PropTypes.string,
   pages: PropTypes.arrayOf(PropTypes.shape({})),
-  setEditedElement: PropTypes.func,
-  setIsRightPanelOpen: PropTypes.func,
 };
 
 export default PageActions;

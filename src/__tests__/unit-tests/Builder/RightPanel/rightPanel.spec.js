@@ -10,43 +10,66 @@ import { BuilderProvider } from '../../../../contexts/BuilderContext';
 
 describe('RightPanel Component', () => {
   it('Should Always Render Panel in RightPanel', () => {
-    const rightPanelWrapper = shallow(<RightPanel />);
+    const rightPanelWrapper = mount(
+      <BuilderProvider>
+        <RightPanel />
+      </BuilderProvider>,
+    );
     expect(rightPanelWrapper.find(Panel)).toHaveLength(1);
   });
 
   it('Should Always Render RightPanelToggler in RightPanel', () => {
-    const rightPanelWrapper = shallow(<RightPanel />);
+    const rightPanelWrapper = mount(
+      <BuilderProvider>
+        <RightPanel />
+      </BuilderProvider>,
+    );
     expect(rightPanelWrapper.find(RightPanelToggler)).toHaveLength(1);
   });
 
   it('Should Always Render Section in RightPanel', () => {
-    const rightPanelWrapper = shallow(<RightPanel />);
+    const rightPanelWrapper = mount(
+      <BuilderProvider>
+        <RightPanel />
+      </BuilderProvider>,
+    );
     expect(rightPanelWrapper.find(Section)).toHaveLength(1);
   });
 
   it('Should Always Render Tabs in RightPanel', () => {
-    const rightPanelWrapper = shallow(<RightPanel />);
+    const rightPanelWrapper = mount(
+      <BuilderProvider>
+        <RightPanel />
+      </BuilderProvider>,
+    );
     expect(rightPanelWrapper.find(Tabs)).toHaveLength(1);
   });
 
   it('Should Always Render Settings in RightPanel', () => {
-    const rightPanelWrapper = shallow(<RightPanel />);
+    const rightPanelWrapper = mount(
+      <BuilderProvider>
+        <RightPanel />
+      </BuilderProvider>,
+    );
     expect(rightPanelWrapper.find(Settings)).toHaveLength(1);
   });
 
   it('Section contains Tabs & Settings', () => {
-    const rightPanelWrapper = shallow(<RightPanel />);
+    const rightPanelWrapper = mount(
+      <BuilderProvider>
+        <RightPanel />
+      </BuilderProvider>,
+    );
     expect(rightPanelWrapper.find(Tabs).parent().is(Section)).toEqual(true);
     expect(rightPanelWrapper.find(Settings).parent().is(Section)).toEqual(true);
   });
 
   it('Should Not Pass isIdle Class to Panel If `isRightPanelOpen` is `true`', () => {
     const builderWrapper = mount(
-      <BuilderProvider>
+      <BuilderProvider isRightPanelOpen={true}>
         <RightPanel />
       </BuilderProvider>,
     );
-    builderWrapper.setState({ isRightPanelOpen: true });
     expect(builderWrapper.find(Panel).props().additionalClassName).not.toMatch('isIdle');
   });
 
@@ -70,11 +93,10 @@ describe('RightPanel Component', () => {
 
   it('Should Pass otherOpened Class to Panel If `isSlidesPanelOpen` is `true`', () => {
     const builderWrapper = mount(
-      <BuilderProvider>
+      <BuilderProvider isSlidesPanelOpen={true}>
         <RightPanel />
       </BuilderProvider>,
     );
-    builderWrapper.setState({ isSlidesPanelOpen: true });
     expect(builderWrapper.find(Panel).props().additionalClassName).toMatch('otherOpened');
   });
 

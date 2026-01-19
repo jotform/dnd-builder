@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import * as icons from '../../utils/icons';
-import { useBuilderContext } from '../../contexts/BuilderContext';
+import { useBuilderStore } from '../../contexts/BuilderContext';
 import { usePropContext } from '../../contexts/PropContext';
 import {
   ZOOM_STEP,
@@ -15,7 +15,9 @@ const ZoomControls = ({
   mode = '',
   showZoom = true,
 }) => {
-  const { setZoom, zoom } = useBuilderContext();
+  const setZoom = useBuilderStore(state => state.setZoom);
+  const zoom = useBuilderStore(state => state.zoom);
+
   const {
     onAnEventTrigger,
     settings,

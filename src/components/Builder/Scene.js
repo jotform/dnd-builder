@@ -13,7 +13,7 @@ import ContextMenu from './ContextMenu';
 import PageActions from './PageActions';
 import PageAdder from './PageAdder';
 import ZoomControls from './ZoomControls';
-import { useBuilderContext } from '../../contexts/BuilderContext';
+import { useBuilderStore } from '../../contexts/BuilderContext';
 import { usePropContext } from '../../contexts/PropContext';
 import Page from './Page';
 import {
@@ -32,7 +32,6 @@ const Scene = ({
   additionalPageItems = [],
   hashCode = '',
   itemAccessor = () => {},
-  lastScrollPosition = 0,
   onItemAdd = () => {},
   onItemChange = () => {},
   onItemMove = () => {},
@@ -47,23 +46,21 @@ const Scene = ({
   pages = [],
 }) => {
   const pageCount = pages.length;
-  /* Builder Context */
-  const {
-    activeElement,
-    contextMenuProps,
-    isRightPanelOpen,
-    setActiveElement,
-    setContextMenuProps,
-    setEditedElement,
-    setIsRightPanelOpen,
-    zoom,
-  } = useBuilderContext();
+  const activeElement = useBuilderStore(state => state.activeElement);
+  const contextMenuProps = useBuilderStore(state => state.contextMenuProps);
+  const isRightPanelOpen = useBuilderStore(state => state.isRightPanelOpen);
+  const setActiveElement = useBuilderStore(state => state.setActiveElement);
+  const setContextMenuProps = useBuilderStore(state => state.setContextMenuProps);
+  const setIsRightPanelOpen = useBuilderStore(state => state.setIsRightPanelOpen);
+  const zoom = useBuilderStore(state => state.zoom);
+
   const {
     disableInteraction,
     onAnEventTrigger,
     settings,
   } = usePropContext();
   const [itemToPaste, setItemToPaste] = useState(null);
+  const lastScrollPosition = useBuilderStore(state => state.lastScrollPosition);
   const isHeaderHidden = useRef(false);
 
   const pageStyles = useRef({});
@@ -362,8 +359,6 @@ const Scene = ({
                 pageCount={pageCount}
                 pageID={page.id}
                 pages={pages}
-                setEditedElement={setEditedElement}
-                setIsRightPanelOpen={setIsRightPanelOpen}
               />
               <div
                 key={`page_${page.id}`}
@@ -375,7 +370,6 @@ const Scene = ({
                 style={pageStyles.current}
               >
                 <Page
-                  activeElement={activeElement}
                   additionalPageItems={additionalPageItems}
                   guides={guides}
                   hashCode={hashCode}
@@ -430,7 +424,6 @@ Scene.propTypes = {
   additionalPageItems: PropTypes.arrayOf(PropTypes.node),
   hashCode: PropTypes.string,
   itemAccessor: PropTypes.func,
-  lastScrollPosition: PropTypes.number,
   onItemAdd: PropTypes.func,
   onItemChange: PropTypes.func,
   onItemMove: PropTypes.func,

@@ -31,7 +31,7 @@ export const getStyles = (left, top, isDragging) => {
   };
 };
 
-const isSelected = (id, activeElements) => {
+export const isSelected = (id, activeElements) => {
   if (activeElements === null) return id === activeElements;
   return activeElements.indexOf(id) !== -1;
 };

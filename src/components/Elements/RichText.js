@@ -4,7 +4,7 @@ import {
 import PropTypes from 'prop-types';
 import TextEditor from '../TextEditor';
 import { fontTypes } from '../../constants/fonts';
-import { useBuilderContext } from '../../contexts/BuilderContext';
+import { useBuilderStore } from '../../contexts/BuilderContext';
 import { divider } from '../../utils/staticSettings';
 import { useTranslatedTexts } from '../../utils/hooks';
 
@@ -48,7 +48,7 @@ export const RichTextElement = ({
   onItemChange = () => {},
 }) => {
   const reportItem = useRef({});
-  const { isTextEditorOpen } = useBuilderContext();
+  const isTextEditorOpen = useBuilderStore(state => state.isTextEditorOpen);
   const { CLICK_TO_EDIT_TEXT } = useTranslatedTexts();
 
   const textStyle = {

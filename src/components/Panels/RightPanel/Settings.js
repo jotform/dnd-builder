@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { useBuilderContext } from '../../../contexts/BuilderContext';
+import { useBuilderStore } from '../../../contexts/BuilderContext';
 import { usePropContext } from '../../../contexts/PropContext';
 import SettingsItemRenderer from '../../Settings/SettingsItemRenderer';
 import { onChangeFunction } from '../../../utils/functions';
@@ -15,7 +15,7 @@ const Settings = ({
   tabs = [],
   itemAccessor = () => {},
 }) => {
-  const { activeTab } = useBuilderContext();
+  const activeTab = useBuilderStore(state => state.activeTab);
   const { useExperimentalFeatures } = usePropContext();
   return (tabs.map((tabKey, index) => {
     return (

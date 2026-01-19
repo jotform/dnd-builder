@@ -9,7 +9,6 @@ const Preview = ({
   acceptedItems = {},
   additionalPageItems = [],
   itemAccessor = () => {},
-  lastScrollPosition = 0,
   onAnEventTrigger = () => {},
   pages = [],
   settings = {},
@@ -55,7 +54,6 @@ const Preview = ({
             hashCode={hashCode}
             isExistsZoom
             itemAccessor={itemAccessor}
-            lastScrollPosition={lastScrollPosition}
             mode="preview"
             pages={pages}
           />
@@ -72,7 +70,6 @@ Preview.propTypes = {
   additionalPageItems: PropTypes.arrayOf(PropTypes.node),
   /** To pass in extra props to items selectively */
   itemAccessor: PropTypes.func,
-  lastScrollPosition: PropTypes.number,
   onAnEventTrigger: PropTypes.func,
   /** Array of pages with their settings and items */
   pages: PropTypes.arrayOf(

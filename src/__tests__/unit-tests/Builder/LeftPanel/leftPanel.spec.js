@@ -7,28 +7,39 @@ import LeftPanelOpener from '../../../../components/Panels/LeftPanel/LeftPanelOp
 
 describe('LeftPanel Component', () => {
   it('Should Always Render Panel in LeftPanel', () => {
-    const leftPanelWrapper = shallow(<LeftPanel />);
+    const leftPanelWrapper = mount(
+      <BuilderProvider>
+        <LeftPanel />
+      </BuilderProvider>,
+    );
     expect(leftPanelWrapper.find(Panel)).toHaveLength(1);
   });
 
   it('Should Always Render LeftPanelOpener in LeftPanel', () => {
-    const leftPanelWrapper = shallow(<LeftPanel />);
+    const leftPanelWrapper = mount(
+      <BuilderProvider>
+        <LeftPanel />
+      </BuilderProvider>,
+    );
     expect(leftPanelWrapper.find(LeftPanelOpener)).toHaveLength(1);
   });
 
   it('Should Always Render Elements in LeftPanel', () => {
-    const leftPanelWrapper = shallow(<LeftPanel />);
+    const leftPanelWrapper = mount(
+      <BuilderProvider>
+        <LeftPanel />
+      </BuilderProvider>,
+    );
     expect(leftPanelWrapper.find(Elements)).toHaveLength(1);
   });
 
 
   it('Should Not Pass isIdle Class to Panel If `isLeftPanelOpen` is `true`', () => {
     const builderWrapper = mount(
-      <BuilderProvider>
+      <BuilderProvider isLeftPanelOpen={true}>
         <LeftPanel />
       </BuilderProvider>,
     );
-    builderWrapper.setState({ isLeftPanelOpen: true });
     expect(builderWrapper.find(Panel).props().additionalClassName).not.toMatch('isIdle');
   });
 

@@ -1,9 +1,9 @@
 import { memo } from 'react';
-import { useBuilderContext } from '../../../contexts/BuilderContext';
+import { useBuilderStore } from '../../../contexts/BuilderContext';
 import * as icons from '../../../utils/icons';
 
 const LeftPanelToggler = () => {
-  const { setIsLeftPanelOpen } = useBuilderContext();
+  const setIsLeftPanelOpen = useBuilderStore(state => state.setIsLeftPanelOpen);
   return (
     <>
       <button
