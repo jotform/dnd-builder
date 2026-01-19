@@ -1,5 +1,5 @@
 import React from 'react';
-import { PresentationProvider } from '../../../utils/presentationContext';
+import { PresentationProvider } from '../../../contexts/PresentationContext';
 import { selectors } from '../../../__test_helpers__/constants';
 import {StaticPageWithZoomPanPinch} from '../../../components/Preview/StaticPage';
 import StaticScene from '../../../components/Preview/StaticScene';

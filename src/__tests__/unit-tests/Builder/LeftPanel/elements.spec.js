@@ -8,7 +8,7 @@ import {
 import Section from '../../../../components/Builder/Section';
 import Element from '../../../../components/Builder/Element';
 import Tabs from '../../../../components/Builder/Tabs';
-import { BuilderProvider } from '../../../../utils/builderContext';
+import { BuilderProvider } from '../../../../contexts/BuilderContext';
 
 describe('Elements', () => {
   it('Should Always Render LeftPanelCloser', () => {

@@ -1,6 +1,6 @@
 import React from 'react';
 import LeftPanel from '../../../../components/Panels/LeftPanel';
-import { BuilderProvider } from '../../../../utils/builderContext';
+import { BuilderProvider } from '../../../../contexts/BuilderContext';
 import Panel from '../../../../components/Builder/Panel';
 import Elements from '../../../../components/Panels/LeftPanel/Elements';
 import LeftPanelOpener from '../../../../components/Panels/LeftPanel/LeftPanelOpener';

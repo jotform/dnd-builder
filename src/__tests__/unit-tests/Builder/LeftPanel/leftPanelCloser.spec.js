@@ -1,7 +1,7 @@
 import React from 'react';
 import { selectors } from '../../../../__test_helpers__/constants';
 import LeftPanelCloser from '../../../../components/Panels/LeftPanel/LeftPanelCloser';
-import { BuilderProvider } from '../../../../utils/builderContext';
+import { BuilderProvider } from '../../../../contexts/BuilderContext';
 
 describe('LeftPanelCloser', () => {
   it('Should Always Render Left Panel Close Button', () => {

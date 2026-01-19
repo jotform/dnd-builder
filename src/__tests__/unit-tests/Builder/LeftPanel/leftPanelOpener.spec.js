@@ -1,7 +1,7 @@
 import React from 'react';
 import { selectors } from '../../../../__test_helpers__/constants';
 import LeftPanelOpener from '../../../../components/Panels/LeftPanel/LeftPanelOpener';
-import { BuilderProvider } from '../../../../utils/builderContext';
+import { BuilderProvider } from '../../../../contexts/BuilderContext';
 
 describe('LeftPanelOpener', () => {
   it('Should Always Render Left Panel Open Button', () => {

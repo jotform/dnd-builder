@@ -1,7 +1,7 @@
 import React from 'react';
 import { selectors } from '../../../../__test_helpers__/constants';
 import Tabs from '../../../../components/Builder/Tabs';
-import { BuilderProvider } from '../../../../utils/builderContext';
+import { BuilderProvider } from '../../../../contexts/BuilderContext';
 
 describe('SettingTabs', () => {
   it('Should Render Tab Sections If `tabs` Prop Contains More Than 1 Element', () => {

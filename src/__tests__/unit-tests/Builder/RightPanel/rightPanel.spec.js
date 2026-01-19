@@ -5,7 +5,7 @@ import RightPanelToggler from '../../../../components/Panels/RightPanel/RightPan
 import Section from '../../../../components/Builder/Section';
 import Tabs from '.../../../../components/Builder/Tabs';
 import Settings from '../../../../components/Panels/RightPanel/Settings';
-import { BuilderProvider } from '../../../../utils/builderContext';
+import { BuilderProvider } from '../../../../contexts/BuilderContext';
 
 
 describe('RightPanel Component', () => {

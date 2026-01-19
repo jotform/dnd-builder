@@ -1,8 +1,8 @@
 import React from 'react';
 import DndWrapper from '../../../components/Builder/DndWrapper';
 import Builder from '../../../components/Builder';
-import { BuilderProvider } from '../../../utils/builderContext';
-import { PropProvider } from '../../../utils/propContext';
+import { BuilderProvider } from '../../../contexts/BuilderContext';
+import { PropProvider } from '../../../contexts/PropContext';
 import ReportWrapper from '../../../components/ReportWrapper';
 import LeftPanel from '../../../components/Panels/LeftPanel';
 import Scene from '../../../components/Builder/Scene';

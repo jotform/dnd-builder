@@ -16,9 +16,9 @@ import {
   acceptedItems,
   defaultSettings,
 } from '../../../../stories/config';
-import { BuilderProvider } from '../../../utils/builderContext';
-import { PresentationProvider } from '../../../utils/presentationContext';
-import { PropProvider } from '../../../utils/propContext';
+import { BuilderProvider } from '../../../contexts/BuilderContext';
+import { PresentationProvider } from '../../../contexts/PresentationContext';
+import { PropProvider } from '../../../contexts/PropContext';
 import { selectors } from '../../../__test_helpers__/constants';
 
 describe('Presentation Stories', () => {

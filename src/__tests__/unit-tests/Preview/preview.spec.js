@@ -1,7 +1,7 @@
 import React from 'react';
 import Preview from '../../../components/Preview';
-import { BuilderProvider } from '../../../utils/builderContext';
-import { PropProvider } from '../../../utils/propContext';
+import { BuilderProvider } from '../../../contexts/BuilderContext';
+import { PropProvider } from '../../../contexts/PropContext';
 import ReportWrapper from '../../../components/ReportWrapper';
 import StaticScene from '../../../components/Preview/StaticScene';
 

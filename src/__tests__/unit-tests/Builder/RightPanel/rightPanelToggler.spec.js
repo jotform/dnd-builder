@@ -1,7 +1,7 @@
 import React from 'react';
 import { selectors } from '../../../../__test_helpers__/constants';
 import RightPanelToggler from '../../../../components/Panels/RightPanel/RightPanelToggler';
-import { BuilderProvider } from '../../../../utils/builderContext';
+import { BuilderProvider } from '../../../../contexts/BuilderContext';
 
 describe('RightPanelToggler', () => {
   it('Should Always Render Right Panel Close and Open Buttons', () => {

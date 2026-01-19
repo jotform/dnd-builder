@@ -1,8 +1,8 @@
 import React from 'react';
 import Presentation from '../../../components/Presentation/Presentation';
-import { BuilderProvider } from '../../../utils/builderContext';
-import { PropProvider } from '../../../utils/propContext';
-import { PresentationProvider } from '../../../utils/presentationContext';
+import { BuilderProvider } from '../../../contexts/BuilderContext';
+import { PropProvider } from '../../../contexts/PropContext';
+import { PresentationProvider } from '../../../contexts/PresentationContext';
 import PresentationWrapper from '../../../components/Presentation/PresentationWrapper';
 import ReportWrapper from '../../../components/ReportWrapper';
 import Print from '../../../components/Print';

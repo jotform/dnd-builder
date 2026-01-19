@@ -1,7 +1,7 @@
 import React from 'react';
 import Modal from 'react-modal';
 import { selectors } from '../../../__test_helpers__/constants';
-import { PresentationProvider } from '../../../utils/presentationContext';
+import { PresentationProvider } from '../../../contexts/PresentationContext';
 import PresentationWrapper from '../../../components/Presentation/PresentationWrapper';
 
 describe('PresentationWrapper', () => {
