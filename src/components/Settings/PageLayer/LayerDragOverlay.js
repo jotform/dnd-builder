@@ -13,7 +13,7 @@ const DragHandle = () => (
 );
 
 const LayerDragOverlay = ({
-  activeItemData,
+  activeItemData = null,
 }) => {
   const {
     CHART_ELEMENT,
@@ -103,10 +103,6 @@ LayerDragOverlay.propTypes = {
       itemType: PropTypes.string,
     }),
   }),
-};
-
-LayerDragOverlay.defaultProps = {
-  activeItemData: null,
 };
 
 export default memo(LayerDragOverlay);
