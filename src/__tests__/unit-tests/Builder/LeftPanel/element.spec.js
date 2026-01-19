@@ -4,6 +4,7 @@ import { selectors } from '../../../../__test_helpers__/constants';
 import Element from '../../../../components/Builder/Element';
 
 import { acceptedItems } from '../../../../../stories/config';
+import { BuilderProvider } from '../../../../contexts/BuilderContext';
 
 describe('Element ', () => {
   it('Should Call onItemAdd Once Click an Element', () => {
@@ -16,9 +17,11 @@ describe('Element ', () => {
     };
 
     const elementWrapper = mount(
-      <DndWrapper>
-        <Element {...props} />
-      </DndWrapper>,
+      <BuilderProvider>
+        <DndWrapper>
+          <Element {...props} />
+        </DndWrapper>
+      </BuilderProvider>,
     );
 
     const toolItem = elementWrapper.find(selectors.toolItem);
@@ -29,9 +32,11 @@ describe('Element ', () => {
   it('Should Show Passing `title` Prop Value', () => {
     const title = 'Title';
     const elementWrapper = mount(
-      <DndWrapper>
-        <Element title={title} />
-      </DndWrapper>,
+      <BuilderProvider>
+        <DndWrapper>
+          <Element title={title} />
+        </DndWrapper>
+      </BuilderProvider>,
     );
     expect(elementWrapper.find(selectors.toolItemName).text()).toEqual(title);
   });

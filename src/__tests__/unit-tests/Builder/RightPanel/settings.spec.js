@@ -2,6 +2,7 @@ import React from 'react';
 import { selectors, settings } from '../../../../__test_helpers__/constants';
 import Settings from '../../../../components/Panels/RightPanel/Settings';
 import SettingsItemRenderer from '../../../../components/Settings/SettingsItemRenderer';
+import { BuilderProvider } from '../../../../contexts/BuilderContext';
 
 describe('Settings', () => {
   it('Unselected Tabs Should Contain `hidden` Class', () => {
@@ -10,7 +11,11 @@ describe('Settings', () => {
       tabs: ['HEADER', 'LINE', 'SUBHEADER'],
     };
 
-    const settingsWrapper = shallow(<Settings {...props} />);
+    const settingsWrapper = mount(
+      <BuilderProvider>
+        <Settings {...props} />
+      </BuilderProvider>,
+    );
     const unselectedTabs = settingsWrapper.find(selectors.hidden);
     expect(unselectedTabs).toHaveLength(props.tabs.length - 1);
   });
@@ -21,7 +26,11 @@ describe('Settings', () => {
       tabs: ['ENTER URL', 'MY IMAGES', 'UPLOAD'],
     };
 
-    const settingsWrapper = shallow(<Settings {...props} />);
+    const settingsWrapper = mount(
+      <BuilderProvider>
+        <Settings {...props} />
+      </BuilderProvider>,
+    );
     const tabHavingInnerScroll = settingsWrapper.find(selectors.hasInnerScroll);
     expect(tabHavingInnerScroll).toHaveLength(1);
   });
@@ -31,7 +40,11 @@ describe('Settings', () => {
       settings: settings.layoutSettings,
       tabs: ['GENERAL'],
     };
-    const settingsWrapper = shallow(<Settings {...props} />);
+    const settingsWrapper = mount(
+      <BuilderProvider>
+        <Settings {...props} />
+      </BuilderProvider>,
+    );
 
     const tabHavingInnerScroll = settingsWrapper.find(selectors.hasInnerScroll);
     expect(tabHavingInnerScroll).toHaveLength(0);
@@ -44,7 +57,11 @@ describe('Settings', () => {
       settings: settings.headerSettings,
       tabs: ['HEADER', 'LINE', 'SUBHEADER'],
     };
-    const settingsWrapper = shallow(<Settings {...props} />);
+    const settingsWrapper = mount(
+      <BuilderProvider>
+        <Settings {...props} />
+      </BuilderProvider>,
+    );
     const totalLength = (
       settings.headerSettings[props.tabs[0]].length
       + settings.headerSettings[props.tabs[1]].length

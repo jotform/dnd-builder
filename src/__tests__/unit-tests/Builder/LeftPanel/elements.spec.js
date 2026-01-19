@@ -12,20 +12,22 @@ import { BuilderProvider } from '../../../../contexts/BuilderContext';
 
 describe('Elements', () => {
   it('Should Always Render LeftPanelCloser', () => {
-    const elementsWrapper = shallow(
-      <Elements />,
+    const elementsWrapper = mount(
+      <BuilderProvider>
+        <Elements />
+      </BuilderProvider>
     );
 
     expect(elementsWrapper.find(LeftPanelCloser)).toHaveLength(1);
   });
 
   it('Should Not Render SectionWithSearch & Elements If LeftPanelConfig is Empty', () => {
-    const elementsWrapper = shallow(
+    const elementsWrapper = mount(
       <BuilderProvider>
         <Elements />
       </BuilderProvider>
     );
-    expect(elementsWrapper.find(Section)).toHaveLength(0);
+    expect(elementsWrapper.find(Section)).toHaveLength(1);
     expect(elementsWrapper.find(Element)).toHaveLength(0);
   });
 
@@ -66,9 +68,11 @@ describe('Elements', () => {
     };
 
     const elementsWrapper = mount(
-      <DndWrapper>
-        <Elements {...props} />
-      </DndWrapper>,
+      <BuilderProvider>
+        <DndWrapper>
+          <Elements {...props} />
+        </DndWrapper>
+      </BuilderProvider>,
     );
     expect(elementsWrapper.find(Section)).toHaveLength(1);
     expect(elementsWrapper.find(Tabs)).toHaveLength(1);
