@@ -2,11 +2,11 @@ import { memo } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Panel from '../../Builder/Panel';
-import { useBuilderContext } from '../../../utils/builderContext';
+import { useBuilderContext } from '../../../contexts/BuilderContext';
 import { leftPanelConfigPropType } from '../../../constants/propTypes';
 import Elements from './Elements';
 import LeftPanelOpener from './LeftPanelOpener';
-import { usePropContext } from '../../../utils/propContext';
+import { usePropContext } from '../../../contexts/PropContext';
 
 const LeftPanel = ({
   leftPanelConfig = [],

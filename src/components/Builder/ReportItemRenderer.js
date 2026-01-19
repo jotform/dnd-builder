@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import { usePropContext } from '../../utils/propContext';
+import { usePropContext } from '../../contexts/PropContext';
 
 const getItemComponent = (elementName, Elements) => {
   return Elements[elementName] && Elements[elementName].Component

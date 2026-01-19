@@ -8,15 +8,15 @@ import classNames from 'classnames';
 import { useDrag } from '@use-gesture/react';
 import PresentationBar from './PresentationBar';
 import ProgressBar from './ProgressBar';
-import { useBuilderContext } from '../../utils/builderContext';
+import { useBuilderContext } from '../../contexts/BuilderContext';
 import { useEventListener, useFullscreenChange } from '../../utils/hooks';
 import {
   changePage,
   throttle,
   zoomHandler,
 } from '../../utils/functions';
-import { usePresentationContext } from '../../utils/presentationContext';
-import { usePropContext } from '../../utils/propContext';
+import { usePresentationContext } from '../../contexts/PresentationContext';
+import { usePropContext } from '../../contexts/PropContext';
 // import { ZOOM_MIN, ZOOM_MAX } from '../../constants/zoom';
 
 const PresentationWrapper = ({

@@ -2,8 +2,8 @@ import {
   string, func, any, oneOfType, shape,
 } from 'prop-types';
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
-import { useBuilderContext } from '../utils/builderContext';
-import { usePresentationContext } from '../utils/presentationContext';
+import { useBuilderContext } from '../contexts/BuilderContext';
+import { usePresentationContext } from '../contexts/PresentationContext';
 
 const withZoomPanPinchHOC = WrappedComponent => {
   const ZoomPanPinchHOC = props => {

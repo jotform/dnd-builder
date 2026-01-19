@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import { useBuilderContext } from '../../../utils/builderContext';
+import { useBuilderContext } from '../../../contexts/BuilderContext';
 import * as icons from '../../../utils/icons';
 
 const LeftPanelToggler = () => {

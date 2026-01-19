@@ -9,8 +9,8 @@ import Panel from '../../Builder/Panel';
 import Section from '../../Builder/Section';
 import Layout from '../../../constants/reportSettings';
 import Page from '../../../constants/pageSettings';
-import { useBuilderContext } from '../../../utils/builderContext';
-import { usePropContext } from '../../../utils/propContext';
+import { useBuilderContext } from '../../../contexts/BuilderContext';
+import { usePropContext } from '../../../contexts/PropContext';
 import { findItemById, getTabsWithSettings } from '../../../utils/functions';
 import { useTranslatedTexts } from '../../../utils/hooks';
 import {

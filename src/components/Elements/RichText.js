@@ -4,7 +4,7 @@ import {
 import PropTypes from 'prop-types';
 import TextEditor from '../TextEditor';
 import { fontTypes } from '../../constants/fonts';
-import { useBuilderContext } from '../../utils/builderContext';
+import { useBuilderContext } from '../../contexts/BuilderContext';
 import { divider } from '../../utils/staticSettings';
 import { useTranslatedTexts } from '../../utils/hooks';
 

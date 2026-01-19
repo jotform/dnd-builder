@@ -2,7 +2,7 @@ import { useCallback, useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 import domPurify from 'dompurify';
 import QuillEditor from './QuillEditor';
-import { useBuilderContext } from '../../utils/builderContext';
+import { useBuilderContext } from '../../contexts/BuilderContext';
 
 const TextEditor = ({
   content = '',

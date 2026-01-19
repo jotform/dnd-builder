@@ -12,8 +12,8 @@ import {
 } from '../../constants/itemTypes';
 import AlignmentGuides from '../AlignmentGuides';
 import ReportItemsWrapper from '../ReportItemsWrapper';
-import { useBuilderContext } from '../../utils/builderContext';
-import { usePropContext } from '../../utils/propContext';
+import { useBuilderContext } from '../../contexts/BuilderContext';
+import { usePropContext } from '../../contexts/PropContext';
 import {
   proximityListener,
   calculateGuidePositions,

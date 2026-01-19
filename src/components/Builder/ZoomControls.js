@@ -1,8 +1,8 @@
 import { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import * as icons from '../../utils/icons';
-import { useBuilderContext } from '../../utils/builderContext';
-import { usePropContext } from '../../utils/propContext';
+import { useBuilderContext } from '../../contexts/BuilderContext';
+import { usePropContext } from '../../contexts/PropContext';
 import {
   ZOOM_STEP,
   ZOOM_MIN,

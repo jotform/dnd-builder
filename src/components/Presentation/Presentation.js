@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import objectHash from 'object-hash';
-import { PresentationProvider } from '../../utils/presentationContext';
-import { BuilderProvider } from '../../utils/builderContext';
-import { PropProvider } from '../../utils/propContext';
+import { PresentationProvider } from '../../contexts/PresentationContext';
+import { BuilderProvider } from '../../contexts/BuilderContext';
+import { PropProvider } from '../../contexts/PropContext';
 import StaticScene from '../Preview/StaticScene';
 import ReportWrapper from '../ReportWrapper';
 import PresentationWrapper from './PresentationWrapper';

@@ -1,8 +1,8 @@
 import { memo } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { useBuilderContext } from '../../../utils/builderContext';
-import { usePropContext } from '../../../utils/propContext';
+import { useBuilderContext } from '../../../contexts/BuilderContext';
+import { usePropContext } from '../../../contexts/PropContext';
 import SettingsItemRenderer from '../../Settings/SettingsItemRenderer';
 import { onChangeFunction } from '../../../utils/functions';
 import ErrorBoundary from '../../ErrorBoundary';

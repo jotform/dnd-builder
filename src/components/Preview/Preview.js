@@ -2,8 +2,8 @@ import PropTypes from 'prop-types';
 import objectHash from 'object-hash';
 import ReportWrapper from '../ReportWrapper';
 import StaticScene from './StaticScene';
-import { PropProvider } from '../../utils/propContext';
-import { BuilderProvider } from '../../utils/builderContext';
+import { PropProvider } from '../../contexts/PropContext';
+import { BuilderProvider } from '../../contexts/BuilderContext';
 
 const Preview = ({
   acceptedItems = {},

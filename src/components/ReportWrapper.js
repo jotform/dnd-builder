@@ -1,9 +1,9 @@
 import { memo, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { useBuilderContext } from '../utils/builderContext';
+import { useBuilderContext } from '../contexts/BuilderContext';
 import { useFitZoom } from '../utils/hooks';
-import { usePropContext } from '../utils/propContext';
+import { usePropContext } from '../contexts/PropContext';
 
 const getModeClass = mode => `${mode}Mode`;
 

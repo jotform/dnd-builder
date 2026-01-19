@@ -5,8 +5,8 @@ import { useDragLayer } from 'react-dnd';
 import ReportItemRenderer from '../Builder/ReportItemRenderer';
 import { proximityListener, calculateGuidePositions } from '../../utils/functions';
 import ItemPositioner from '../ItemPositioner';
-import { useBuilderContext } from '../../utils/builderContext';
-import { usePropContext } from '../../utils/propContext';
+import { useBuilderContext } from '../../contexts/BuilderContext';
+import { usePropContext } from '../../contexts/PropContext';
 import getMergedItem from '../../utils/getMergedItem';
 
 const layerStyles = ({ x, y }) => ({

@@ -5,11 +5,11 @@ import PropTypes from 'prop-types';
 import cNames from 'classnames';
 import * as classNames from '../../constants/classNames';
 import { StaticPageWithZoomPanPinch } from './StaticPage';
-import { usePropContext } from '../../utils/propContext';
-import { useBuilderContext } from '../../utils/builderContext';
+import { usePropContext } from '../../contexts/PropContext';
+import { useBuilderContext } from '../../contexts/BuilderContext';
 import { slugify } from '../../utils/string';
 import { usePageTransition } from '../../utils/hooks';
-import { usePresentationContext } from '../../utils/presentationContext';
+import { usePresentationContext } from '../../contexts/PresentationContext';
 import ZoomControls from '../Builder/ZoomControls';
 
 const StaticScene = ({

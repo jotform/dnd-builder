@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useBuilderContext } from '../../../utils/builderContext';
+import { useBuilderContext } from '../../../contexts/BuilderContext';
 import * as icons from '../../../utils/icons';
 import { useTranslatedTexts } from '../../../utils/hooks';
 

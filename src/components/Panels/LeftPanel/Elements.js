@@ -6,7 +6,7 @@ import Section from '../../Builder/Section';
 import Element from '../../Builder/Element';
 import { leftPanelConfigPropType } from '../../../constants/propTypes';
 import LeftPanelCloser from './LeftPanelCloser';
-import { useBuilderContext } from '../../../utils/builderContext';
+import { useBuilderContext } from '../../../contexts/BuilderContext';
 import Tabs from '../../Builder/Tabs';
 import { getTabsWithElements } from '../../../utils/functions';
 import { useTranslatedTexts } from '../../../utils/hooks';

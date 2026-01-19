@@ -13,8 +13,8 @@ import ContextMenu from './ContextMenu';
 import PageActions from './PageActions';
 import PageAdder from './PageAdder';
 import ZoomControls from './ZoomControls';
-import { useBuilderContext } from '../../utils/builderContext';
-import { usePropContext } from '../../utils/propContext';
+import { useBuilderContext } from '../../contexts/BuilderContext';
+import { usePropContext } from '../../contexts/PropContext';
 import Page from './Page';
 import {
   calculateGuidePositions,

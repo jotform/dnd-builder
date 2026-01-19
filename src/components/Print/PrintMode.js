@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import objectHash from 'object-hash';
-import { PropProvider } from '../../utils/propContext';
+import { PropProvider } from '../../contexts/PropContext';
 import PrintModeWithoutContext from './PrintModeWithoutContext';
 
 import '../../styles/jfReportsBundle.scss';
