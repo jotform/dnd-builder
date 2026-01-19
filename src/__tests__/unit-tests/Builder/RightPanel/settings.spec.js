@@ -6,7 +6,6 @@ import SettingsItemRenderer from '../../../../components/Settings/SettingsItemRe
 describe('Settings', () => {
   it('Unselected Tabs Should Contain `hidden` Class', () => {
     const props = {
-      ...Settings.defaultProps,
       settings: settings.headerSettings,
       tabs: ['HEADER', 'LINE', 'SUBHEADER'],
     };
@@ -18,7 +17,6 @@ describe('Settings', () => {
 
   it('Should Contain `hasInnerScroll`Class If `tabs` Prop Contain `My Image` Key', () => {
     const props = {
-      ...Settings.defaultProps,
       settings: settings.imageSettings,
       tabs: ['ENTER URL', 'MY IMAGES', 'UPLOAD'],
     };
@@ -30,7 +28,6 @@ describe('Settings', () => {
 
   it('Not Contain `hidden`&`hasInnerScroll` If`tabs` Not Contain `My Image` Key &Length <2', () => {
     const props = {
-      ...Settings.defaultProps,
       settings: settings.layoutSettings,
       tabs: ['GENERAL'],
     };
@@ -44,7 +41,6 @@ describe('Settings', () => {
 
   it('Should Render SettingsItemRenderer According To `settings` Prop', () => {
     const props = {
-      ...Settings.defaultProps,
       settings: settings.headerSettings,
       tabs: ['HEADER', 'LINE', 'SUBHEADER'],
     };

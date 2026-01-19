@@ -11,7 +11,7 @@ import SlidesPanel from '../../../components/Panels/SlidesPanel';
 import AllSlidesPanel from '../../../components/Panels/AllSlidesPanel';
 
 describe('Builder Component Tree', () => {
-  const builderWrapper = shallow(<Builder {...Builder.defaultProps} />);
+  const builderWrapper = shallow(<Builder />);
 
   it('Should Always Render BuilderProvider in Builder', () => {
     expect(builderWrapper.find(BuilderProvider)).toHaveLength(1);
@@ -58,7 +58,7 @@ describe('Builder Component Tree', () => {
     expect(builderWrapper.find(RightPanel).parent().is(DndWrapper)).toEqual(false);
     expect(builderWrapper.find(LeftPanel).parent().is(DndWrapper)).toEqual(true);
     expect(builderWrapper.find(SlidesPanel).parent().is(DndWrapper)).toEqual(false);
-    builderWrapper.setProps({ ...Builder.defaultProps, useExperimentalFeatures: true });
+    builderWrapper.setProps({ useExperimentalFeatures: true });
     expect(builderWrapper.find(AllSlidesPanel).parent().is(DndWrapper)).toEqual(false);
   });
 });

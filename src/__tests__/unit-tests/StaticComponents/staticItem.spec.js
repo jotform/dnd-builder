@@ -4,7 +4,7 @@ import ItemPositioner from '../../../components/ItemPositioner';
 
 describe('StaticItem Component Tree', () => {
   it('Should Render ItemPositioner', () => {
-    const staticItemShallow = shallow(<StaticItem {...StaticItem.defaultProps} />);
+    const staticItemShallow = shallow(<StaticItem />);
     expect(staticItemShallow.find(ItemPositioner)).toHaveLength(1);
   });
 });

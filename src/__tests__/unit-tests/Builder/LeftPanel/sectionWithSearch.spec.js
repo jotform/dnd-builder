@@ -11,11 +11,7 @@ describe('SectionWithSearch', () => {
   });
 
   it('Should Render SearchInput', () => { // TODO: this test needs to update
-    const props = {
-      ...SectionWithSearch.defaultProps,
-      hasSearch: true,
-    };
-    const sectionWithSearchWrapper = shallow(<SectionWithSearch {...props} />);
+    const sectionWithSearchWrapper = shallow(<SectionWithSearch hasSearch={true} />);
     expect(sectionWithSearchWrapper.find(SearchInput)).toHaveLength(1);
   });
 

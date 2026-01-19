@@ -8,7 +8,7 @@ import ReportWrapper from '../../../components/ReportWrapper';
 import Print from '../../../components/Print';
 
 describe('Presentation Component Tree', () => {
-  const presentation = shallow(<Presentation {...Presentation.defaultProps} />);
+  const presentation = shallow(<Presentation />);
   it('Should Always Render PresentationProvider in Presentation', () => {
     expect(presentation.find(PresentationProvider)).toHaveLength(1);
   });

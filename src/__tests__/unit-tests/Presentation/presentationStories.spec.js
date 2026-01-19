@@ -23,7 +23,6 @@ import { selectors } from '../../../__test_helpers__/constants';
 
 describe('Presentation Stories', () => {
   const props = {
-    ...Presentation.defaultProps,
     acceptedItems: acceptedItems,
     pages: examplePages,
     presentationBarActions: [
