@@ -45,7 +45,7 @@ export const PresentationConsumer = PresentationContext.Consumer;
 export const usePresentationStore = selector => {
   const context = useContext(PresentationContext);
   if (!context) {
-    throw new Error('PresentationContext must be used with PresentationProvider!');
+    throw new Error('usePresentationStore must be used with PresentationProvider!');
   }
   return useStore(context, selector);
 };

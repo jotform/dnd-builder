@@ -5,7 +5,7 @@ import { useDragLayer } from 'react-dnd';
 import ReportItemRenderer from '../Builder/ReportItemRenderer';
 import { proximityListener, calculateGuidePositions } from '../../utils/functions';
 import ItemPositioner from '../ItemPositioner';
-import { useBuilderContext } from '../../contexts/BuilderContext';
+import { useBuilderStore } from '../../contexts/BuilderContext';
 import { usePropContext } from '../../contexts/PropContext';
 import getMergedItem from '../../utils/getMergedItem';
 
@@ -120,8 +120,10 @@ const DraggableItemLayer = ({
     itemType: monitor.getItemType(),
   }));
 
+  const activeElement = useBuilderStore(state => state.activeElement);
+  const zoom = useBuilderStore(state => state.zoom);
+
   const { acceptedItems } = usePropContext();
-  const { activeElement, zoom } = useBuilderContext();
 
   if (!currentOffset || !isDragging) {
     return null;

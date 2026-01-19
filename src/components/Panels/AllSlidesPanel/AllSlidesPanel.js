@@ -2,7 +2,7 @@ import { memo, useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Panel from '../../Builder/Panel';
-import { useBuilderContext } from '../../../contexts/BuilderContext';
+import { useBuilderStore } from '../../../contexts/BuilderContext';
 import { usePropContext } from '../../../contexts/PropContext';
 import { arrayMove } from '../../../utils/functions';
 import AllSlidesPanelToggler from './AllSlidesPanelToggler';
@@ -19,10 +19,8 @@ const AllSlidesPanel = ({
   onPageRemove = () => {},
   pages = [],
 }) => {
-  const {
-    isAllSlidesPanelOpen,
-    setIsAllSlidesPanelOpen,
-  } = useBuilderContext();
+  const isAllSlidesPanelOpen = useBuilderStore(state => state.isAllSlidesPanelOpen);
+  const setIsAllSlidesPanelOpen = useBuilderStore(state => state.setIsAllSlidesPanelOpen);
   const {
     acceptedItems,
     onAnEventTrigger,

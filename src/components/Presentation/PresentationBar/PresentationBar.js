@@ -8,22 +8,25 @@ import {
   closeFullscreen,
   openFullscreenHelper,
 } from '../../../utils/functions';
+import { useBuilderStore } from '../../../contexts/BuilderContext';
+import { usePresentationStore } from '../../../contexts/PresentationContext';
 
 const PresentationBar = ({
-  currentPage = 1,
   fitToScreen = () => {},
-  fittedZoom = 1,
-  isFullscreen = false,
   isVisible = true,
   onAnEventTrigger = () => {},
-  pageCount = 1,
   presentationBarActions = [],
-  setCurrentPage = () => {},
-  setIsFullscreen = () => {},
-  setZoom = () => {},
   settings = {},
-  zoom = 1,
 }) => {
+  const currentPage = usePresentationStore(state => state.currentPage);
+  const setCurrentPage = usePresentationStore(state => state.setCurrentPage);
+  const isFullscreen = usePresentationStore(state => state.isFullscreen);
+  const setIsFullscreen = usePresentationStore(state => state.setIsFullscreen);
+  const fittedZoom = usePresentationStore(state => state.fittedZoom);
+  const pageCount = usePresentationStore(state => state.pageCount);
+  const setZoom = useBuilderStore(state => state.setZoom);
+  const zoom = useBuilderStore(state => state.zoom);
+
   const { reportLayoutWidth = 1123 } = settings;
 
   const toggleFullscreen = goFullscreen => () => {
@@ -115,21 +118,13 @@ const PresentationBar = ({
 };
 
 PresentationBar.propTypes = {
-  currentPage: PropTypes.number,
   fitToScreen: PropTypes.func,
-  fittedZoom: PropTypes.number,
-  isFullscreen: PropTypes.bool,
   isVisible: PropTypes.bool,
   onAnEventTrigger: PropTypes.func,
-  pageCount: PropTypes.number,
   presentationBarActions: PropTypes.arrayOf(PropTypes.shape({})),
-  setCurrentPage: PropTypes.func,
-  setIsFullscreen: PropTypes.func,
-  setZoom: PropTypes.func,
   settings: PropTypes.shape({
     reportLayoutWidth: PropTypes.string,
   }),
-  zoom: PropTypes.number,
 };
 
 export default PresentationBar;

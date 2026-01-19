@@ -1,7 +1,7 @@
 import { memo, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { useBuilderContext } from '../contexts/BuilderContext';
+import { useBuilderStore } from '../contexts/BuilderContext';
 import { useFitZoom } from '../utils/hooks';
 import { usePropContext } from '../contexts/PropContext';
 
@@ -13,15 +13,13 @@ const ReportWrapper = ({
   pageCount = 0,
   theme = 'lightMode',
 }) => {
-  const {
-    isAllSlidesPanelOpen,
-    isLeftPanelOpen,
-    isRightPanelOpen,
-    isSlidesPanelOpen,
-    setIsLeftPanelOpen,
-    setIsSlidesPanelOpen,
-    setZoom,
-  } = useBuilderContext();
+  const isAllSlidesPanelOpen = useBuilderStore(state => state.isAllSlidesPanelOpen);
+  const isLeftPanelOpen = useBuilderStore(state => state.isLeftPanelOpen);
+  const isRightPanelOpen = useBuilderStore(state => state.isRightPanelOpen);
+  const isSlidesPanelOpen = useBuilderStore(state => state.isSlidesPanelOpen);
+  const setIsLeftPanelOpen = useBuilderStore(state => state.setIsLeftPanelOpen);
+  const setIsSlidesPanelOpen = useBuilderStore(state => state.setIsSlidesPanelOpen);
+  const setZoom = useBuilderStore(state => state.setZoom);
   const { settings } = usePropContext();
   const decidedWhichPanelToOpen = useRef(false);
 

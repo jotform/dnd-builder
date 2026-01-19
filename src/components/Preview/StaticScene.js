@@ -6,7 +6,7 @@ import cNames from 'classnames';
 import * as classNames from '../../constants/classNames';
 import { StaticPageWithZoomPanPinch } from './StaticPage';
 import { usePropContext } from '../../contexts/PropContext';
-import { useBuilderContext } from '../../contexts/BuilderContext';
+import { useBuilderStore } from '../../contexts/BuilderContext';
 import { slugify } from '../../utils/string';
 import { usePageTransition } from '../../utils/hooks';
 import { usePresentationStore } from '../../contexts/PresentationContext';
@@ -18,15 +18,16 @@ const StaticScene = ({
   hashCode = '',
   hideZoom = false,
   itemAccessor = () => {},
-  lastScrollPosition = 0,
   mode = '',
   pages = [],
   presentationPage = 0,
 }) => {
+  const lastScrollPosition = useBuilderStore(state => state.lastScrollPosition);
+  const setZoom = useBuilderStore(state => state.setZoom);
+  const zoom = useBuilderStore(state => state.zoom);
   const isFullscreen = usePresentationStore(state => state.isFullscreen);
   const showControlsInFullScreen = usePresentationStore(state => state.showControlsInFullScreen);
   const { acceptedItems, settings } = usePropContext();
-  const { setZoom, zoom } = useBuilderContext();
   const viewPortRef = useRef({});
   const transformRefs = useRef([]);
 
@@ -132,7 +133,6 @@ StaticScene.propTypes = {
   hashCode: PropTypes.string,
   hideZoom: PropTypes.bool,
   itemAccessor: PropTypes.func,
-  lastScrollPosition: PropTypes.number,
   mode: PropTypes.string.isRequired,
   pages: PropTypes.arrayOf(PropTypes.shape({})),
   presentationPage: PropTypes.number,

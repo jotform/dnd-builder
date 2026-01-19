@@ -2,7 +2,7 @@ import { useCallback, useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 import domPurify from 'dompurify';
 import QuillEditor from './QuillEditor';
-import { useBuilderContext } from '../../contexts/BuilderContext';
+import { useBuilderStore } from '../../contexts/BuilderContext';
 
 const TextEditor = ({
   content = '',
@@ -13,7 +13,8 @@ const TextEditor = ({
 }) => {
   const [_content, setContent] = useState(domPurify.sanitize(content));
 
-  const { isTextEditorOpen, setIsTextEditorOpen } = useBuilderContext();
+  const isTextEditorOpen = useBuilderStore(state => state.isTextEditorOpen);
+  const setIsTextEditorOpen = useBuilderStore(state => state.setIsTextEditorOpen);
 
   const onClick = useCallback(() => {
     if (isSelected && !isLocked) {

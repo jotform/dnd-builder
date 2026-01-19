@@ -8,6 +8,7 @@ import {
 } from '../../utils/functions';
 import generateId from '../../utils/generateId';
 import * as icons from '../../utils/icons';
+import { useBuilderStore } from '../../contexts/BuilderContext';
 
 const Element = ({
   acceptedItems = {},
@@ -16,12 +17,13 @@ const Element = ({
   itemType = '',
   onAnEventTrigger = () => {},
   onItemAdd = () => {},
-  setActiveElement = () => {},
-  setIsRightPanelOpen = () => {},
   title = '',
-  zoom = 1,
   ...additionalData
 }) => {
+  const setActiveElement = useBuilderStore(state => state.setActiveElement);
+  const setIsRightPanelOpen = useBuilderStore(state => state.setIsRightPanelOpen);
+  const zoom = useBuilderStore(state => state.zoom);
+
   const [{ isDragging }, drag, preview] = useDrag(() => ({
     collect: monitor => ({
       isDragging: monitor.isDragging(),
@@ -95,10 +97,7 @@ Element.propTypes = {
   itemType: PropTypes.string,
   onAnEventTrigger: PropTypes.func,
   onItemAdd: PropTypes.func,
-  setActiveElement: PropTypes.func,
-  setIsRightPanelOpen: PropTypes.func,
   title: PropTypes.string,
-  zoom: PropTypes.number,
 };
 
 export default memo(Element);

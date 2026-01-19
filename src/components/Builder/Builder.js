@@ -18,7 +18,6 @@ const Builder = ({
   additionalPageItems = [],
   disableInteraction = [],
   itemAccessor = () => {},
-  lastScrollPosition = 0,
   leftPanelConfig = [],
   onAnEventTrigger = () => {},
   onItemAdd = () => {},
@@ -66,7 +65,6 @@ const Builder = ({
                 additionalPageItems={additionalPageItems}
                 hashCode={hashCode}
                 itemAccessor={itemAccessor}
-                lastScrollPosition={lastScrollPosition}
                 onItemAdd={onItemAdd}
                 onItemChange={onItemChange}
                 onItemMove={onItemMove}
@@ -125,7 +123,6 @@ Builder.propTypes = {
   disableInteraction: PropTypes.arrayOf(PropTypes.string),
   /** To pass in extra props to items selectively */
   itemAccessor: PropTypes.func,
-  lastScrollPosition: PropTypes.number,
   leftPanelConfig: leftPanelConfigPropType,
   /** To track and log user actions */
   onAnEventTrigger: PropTypes.func,

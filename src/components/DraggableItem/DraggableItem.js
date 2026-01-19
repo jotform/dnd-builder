@@ -17,6 +17,7 @@ import {
   addEventListenerForSidebar,
   removeEventListenerForSidebar,
 } from '../../utils/scrollZoneFunctions';
+import { useBuilderStore } from '../../contexts/BuilderContext';
 
 const exceptionalClassesForClickOutside = ['contextMenu-itemLabel', 'contextMenu-item'];
 const reportItemStyle = {
@@ -29,9 +30,7 @@ const DraggableItem = ({
   guides = {},
   isMultipleItemSelected = false,
   isResize = false,
-  isRightPanelOpen = false,
   isSelected = false,
-  isTextEditorOpen = false,
   item = {},
   matches = {},
   onAnEventTrigger = () => {},
@@ -39,12 +38,8 @@ const DraggableItem = ({
   onItemChange = () => {},
   onItemRemove = () => {},
   onItemResize = () => {},
-  setActiveElement = () => {},
-  setContextMenuProps = () => {},
   setIsResize = () => {},
-  setIsRightPanelOpen = () => {},
   setMatches = () => {},
-  zoom = 1,
 }) => {
   const {
     height,
@@ -70,6 +65,13 @@ const DraggableItem = ({
     top,
     width,
   });
+
+  const setActiveElement = useBuilderStore(state => state.setActiveElement);
+  const setContextMenuProps = useBuilderStore(state => state.setContextMenuProps);
+  const zoom = useBuilderStore(state => state.zoom);
+  const isTextEditorOpen = useBuilderStore(state => state.isTextEditorOpen);
+  const isRightPanelOpen = useBuilderStore(state => state.isRightPanelOpen);
+  const setIsRightPanelOpen = useBuilderStore(state => state.setIsRightPanelOpen);
 
   const select = event => {
     if (!isSelected) {
@@ -371,9 +373,7 @@ DraggableItem.propTypes = {
   guides: PropTypes.shape({}),
   isMultipleItemSelected: PropTypes.bool,
   isResize: PropTypes.bool,
-  isRightPanelOpen: PropTypes.bool,
   isSelected: PropTypes.bool,
-  isTextEditorOpen: PropTypes.bool,
   item: PropTypes.shape({
     height: PropTypes.oneOfType([
       PropTypes.number,
@@ -402,12 +402,8 @@ DraggableItem.propTypes = {
   onItemChange: PropTypes.func,
   onItemRemove: PropTypes.func,
   onItemResize: PropTypes.func,
-  setActiveElement: PropTypes.func,
-  setContextMenuProps: PropTypes.func,
   setIsResize: PropTypes.func,
-  setIsRightPanelOpen: PropTypes.func,
   setMatches: PropTypes.func,
-  zoom: PropTypes.number,
 };
 
 // avoid unnecessary renders while resizing

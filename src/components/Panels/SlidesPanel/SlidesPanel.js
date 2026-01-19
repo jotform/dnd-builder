@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import Panel from '../../Builder/Panel';
 import SortablePageList from './SortablePageList';
 import Section from '../../Builder/Section';
-import { useBuilderContext } from '../../../contexts/BuilderContext';
+import { useBuilderStore } from '../../../contexts/BuilderContext';
 import { usePropContext } from '../../../contexts/PropContext';
 import { arrayMove } from '../../../utils/functions';
 import SlidesPanelToggler from './SlidesPanelToggler';
@@ -22,12 +22,11 @@ const SlidesPanel = ({
   onPageRemove = () => {},
   pages = [],
 }) => {
-  const {
-    isRightPanelOpen,
-    isSlidesPanelOpen,
-    setIsAllSlidesPanelOpen,
-    setIsSlidesPanelOpen,
-  } = useBuilderContext();
+  const isRightPanelOpen = useBuilderStore(state => state.isRightPanelOpen);
+  const setIsAllSlidesPanelOpen = useBuilderStore(state => state.setIsAllSlidesPanelOpen);
+  const isSlidesPanelOpen = useBuilderStore(state => state.isSlidesPanelOpen);
+  const setIsSlidesPanelOpen = useBuilderStore(state => state.setIsSlidesPanelOpen);
+
   const {
     acceptedItems,
     disableInteraction,

@@ -6,7 +6,7 @@ import Section from '../../Builder/Section';
 import Element from '../../Builder/Element';
 import { leftPanelConfigPropType } from '../../../constants/propTypes';
 import LeftPanelCloser from './LeftPanelCloser';
-import { useBuilderContext } from '../../../contexts/BuilderContext';
+import { useBuilderStore } from '../../../contexts/BuilderContext';
 import Tabs from '../../Builder/Tabs';
 import { getTabsWithElements } from '../../../utils/functions';
 import { useTranslatedTexts } from '../../../utils/hooks';
@@ -18,12 +18,7 @@ const Elements = ({
   onAnEventTrigger = () => { },
   onItemAdd = () => {},
 }) => {
-  const {
-    activeTab,
-    setActiveElement,
-    setIsRightPanelOpen,
-    zoom,
-  } = useBuilderContext();
+  const activeTab = useBuilderStore(state => state.activeTab);
   const { ADD_ELEMENT, NO_RESULT } = useTranslatedTexts();
 
   // Tabs
@@ -70,9 +65,6 @@ const Elements = ({
               acceptedItems={acceptedItems}
               onAnEventTrigger={onAnEventTrigger}
               onItemAdd={onItemAdd}
-              setActiveElement={setActiveElement}
-              setIsRightPanelOpen={setIsRightPanelOpen}
-              zoom={zoom}
               {...element}
             />
           ))}
