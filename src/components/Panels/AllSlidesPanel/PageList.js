@@ -10,22 +10,16 @@ import PageItem from './PageItem';
 import PageItemDragOverlay from './PageItemDragOverlay';
 import { getScaleForPageThumbnailLarge } from '../../../utils/functions';
 import PageAdder from '../../Builder/PageAdder';
+import { usePropStore } from '../../../contexts/PropContext';
 
 const PageList = ({
-  acceptedItems,
-  additionalPageItems,
-  hashCode,
-  itemAccessor,
-  layoutSettings,
-  onAnEventTrigger,
-  onPageAdd,
   onPageClick,
-  onPageDuplicate,
-  onPageRemove,
   onSortEnd,
-  pages,
   selectedPages,
 }) => {
+  const layoutSettings = usePropStore(state => state.settings);
+  const pages = usePropStore(state => state.pages);
+
   const [activeId, setActiveId] = useState(null);
   const pageContainerStyles = useRef({});
   const {
@@ -120,18 +114,10 @@ const PageList = ({
             return (
               <PageItem
                 key={`item-${page.id}-${page.order}`}
-                acceptedItems={acceptedItems}
-                additionalPageItems={additionalPageItems}
-                hashCode={hashCode}
                 id={page.id}
                 index={page.order - 1}
                 isSelected={selectedPages.indexOf(page.id) > -1}
-                itemAccessor={itemAccessor}
-                onAnEventTrigger={onAnEventTrigger}
-                onPageAdd={onPageAdd}
                 onPageClick={onPageClick}
-                onPageDuplicate={onPageDuplicate}
-                onPageRemove={onPageRemove}
                 order={page.order}
                 page={page}
                 style={style}
@@ -139,10 +125,7 @@ const PageList = ({
             );
           })}
           <div className="thumbnailWrapper forPageAdder d-flex j-end dir-col">
-            <PageAdder
-              onPageAdd={onPageAdd}
-              pageCount={pages.length}
-            />
+            <PageAdder />
           </div>
           <div className="spacer" />
           <div className="spacer" />
@@ -150,11 +133,7 @@ const PageList = ({
         </ul>
       </SortableContext>
       <PageItemDragOverlay
-        acceptedItems={acceptedItems}
         activePageData={activePageData}
-        additionalPageItems={additionalPageItems}
-        hashCode={hashCode}
-        itemAccessor={itemAccessor}
       />
     </DndContext>
   );
@@ -162,21 +141,13 @@ const PageList = ({
 
 PageList.propTypes = {
   acceptedItems: PropTypes.shape({}),
-  additionalPageItems: PropTypes.arrayOf(PropTypes.node),
-  hashCode: PropTypes.string,
-  itemAccessor: PropTypes.func,
   layoutSettings: PropTypes.shape({
     reportBackgroundColor: PropTypes.string,
     reportLayoutHeight: PropTypes.string,
     reportLayoutWidth: PropTypes.string,
   }),
-  onAnEventTrigger: PropTypes.func,
-  onPageAdd: PropTypes.func,
   onPageClick: PropTypes.func,
-  onPageDuplicate: PropTypes.func,
-  onPageRemove: PropTypes.func,
   onSortEnd: PropTypes.func,
-  pages: PropTypes.arrayOf(PropTypes.shape({})),
   selectedPages: PropTypes.arrayOf(PropTypes.string),
 };
 

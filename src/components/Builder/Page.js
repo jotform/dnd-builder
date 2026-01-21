@@ -13,7 +13,7 @@ import {
 import AlignmentGuides from '../AlignmentGuides';
 import ReportItemsWrapper from '../ReportItemsWrapper';
 import { useBuilderStore } from '../../contexts/BuilderContext';
-import { usePropContext } from '../../contexts/PropContext';
+import { usePropStore } from '../../contexts/PropContext';
 import {
   proximityListener,
   calculateGuidePositions,
@@ -27,27 +27,26 @@ import generateId from '../../utils/generateId';
 const emptyObject = {};
 
 const Page = ({
-  additionalPageItems = [],
   guides = {},
-  hashCode = '',
-  itemAccessor = () => {},
   items = [],
-  onItemAdd = () => {},
-  onItemChange = () => {},
-  onItemMove = () => {},
-  onItemRemove = () => {},
-  onItemResize = () => {},
-  onItemsMove = () => {},
   page = {},
   pageRef = {},
-  pages = [],
   style = {},
 }) => {
   const activeElement = useBuilderStore(state => state.activeElement);
   const setActiveElement = useBuilderStore(state => state.setActiveElement);
   const setIsRightPanelOpen = useBuilderStore(state => state.setIsRightPanelOpen);
   const zoom = useBuilderStore(state => state.zoom);
-  const { acceptedItems, onAnEventTrigger, settings } = usePropContext();
+
+  const onItemAdd = usePropStore(state => state.onItemAdd);
+  const onItemMove = usePropStore(state => state.onItemMove);
+  const onItemsMove = usePropStore(state => state.onItemsMove);
+  const additionalPageItems = usePropStore(state => state.additionalPageItems);
+  const onAnEventTrigger = usePropStore(state => state.onAnEventTrigger);
+  const settings = usePropStore(state => state.settings);
+  const acceptedItems = usePropStore(state => state.acceptedItems);
+  const pages = usePropStore(state => state.pages);
+
   const [matches, setMatches] = useState({});
   const [isResize, setIsResize] = useState(false);
   const requestRef = useRef();
@@ -175,19 +174,11 @@ const Page = ({
       >
         <div className="jfReport-hider o-hidden f-all p-relative">
           <ReportItemsWrapper
-            acceptedItems={acceptedItems}
             guides={guides[page.id]}
-            hashCode={hashCode}
             isResize={isResize}
-            itemAccessor={itemAccessor}
-          // if we send matches all the time, DraggableItems are also rendered on dragging
+            // if we send matches all the time, DraggableItems are also rendered on dragging
             items={items}
             matches={isResize ? matches : emptyObject}
-            onAnEventTrigger={onAnEventTrigger}
-            onItemAdd={onItemAdd}
-            onItemChange={onItemChange}
-            onItemRemove={onItemRemove}
-            onItemResize={onItemResize}
             setIsResize={setIsResize}
             setMatches={setMatches}
           />
@@ -211,26 +202,16 @@ const Page = ({
 };
 
 Page.propTypes = {
-  additionalPageItems: PropTypes.arrayOf(PropTypes.node),
   guides: PropTypes.shape({}),
-  hashCode: PropTypes.string,
-  itemAccessor: PropTypes.func,
   items: PropTypes.arrayOf(
     PropTypes.shape({}),
   ),
-  onItemAdd: PropTypes.func,
-  onItemChange: PropTypes.func,
-  onItemMove: PropTypes.func,
-  onItemRemove: PropTypes.func,
-  onItemResize: PropTypes.func,
-  onItemsMove: PropTypes.func,
   page: PropTypes.shape({
     backgroundColor: PropTypes.string,
   }),
   pageRef: PropTypes.shape({
     current: PropTypes.any,
   }),
-  pages: PropTypes.arrayOf(PropTypes.shape({})),
   style: PropTypes.shape({}),
 };
 

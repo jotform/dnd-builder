@@ -1,63 +1,22 @@
 import PropTypes from 'prop-types';
-import objectHash from 'object-hash';
 import ReportWrapper from '../ReportWrapper';
 import StaticScene from './StaticScene';
 import { PropProvider } from '../../contexts/PropContext';
 import { BuilderProvider } from '../../contexts/BuilderContext';
+import { PresentationProvider } from '../../contexts/PresentationContext';
 
-const Preview = ({
-  acceptedItems = {},
-  additionalPageItems = [],
-  itemAccessor = () => {},
-  onAnEventTrigger = () => {},
-  pages = [],
-  settings = {},
-  theme = 'lightMode',
-  ...otherProps
-}) => {
-/* eslint-disable no-unused-vars */
-  const {
-    disableInteraction,
-    leftPanelConfig,
-    onItemAdd,
-    onItemChange,
-    onItemMove,
-    onItemRemove,
-    onItemResize,
-    onItemsMove,
-    onPageAdd,
-    onPageChange,
-    onPageDuplicate,
-    onPageOrdersChange,
-    onPageRemove,
-    onSettingChange,
-    useExperimentalFeatures,
-    ...hashProps
-  } = otherProps;
-  /* eslint-enable no-unused-vars */
-
-  const hashCode = objectHash(hashProps);
-
+const Preview = props => {
   return (
     <BuilderProvider>
-      <PropProvider
-        acceptedItems={acceptedItems}
-        onAnEventTrigger={onAnEventTrigger}
-        settings={settings}
-      >
-        <ReportWrapper
-          mode="preview"
-          theme={theme}
-        >
-          <StaticScene
-            additionalPageItems={additionalPageItems}
-            hashCode={hashCode}
-            isExistsZoom
-            itemAccessor={itemAccessor}
-            mode="preview"
-            pages={pages}
-          />
-        </ReportWrapper>
+      <PropProvider {...props}>
+        <PresentationProvider>
+          <ReportWrapper mode="preview">
+            <StaticScene
+              isExistsZoom
+              mode="preview"
+            />
+          </ReportWrapper>
+        </PresentationProvider>
       </PropProvider>
     </BuilderProvider>
   );

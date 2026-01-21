@@ -1,14 +1,15 @@
-import { func, number, string } from 'prop-types';
+import { string } from 'prop-types';
 import classNames from 'classnames';
 import { scrollToTarget } from '../../utils/functions';
 import * as icons from '../../utils/icons';
 import { useTranslatedTexts } from '../../utils/hooks';
+import { usePropStore } from '../../contexts/PropContext';
 
 const PageAdder = ({
   additionalClass = '',
-  onPageAdd = () => {},
-  pageCount = 1,
 }) => {
+  const pageCount = usePropStore(state => state.pages.length);
+  const onPageAdd = usePropStore(state => state.onPageAdd);
   const onPageAddClick = () => {
     const newPageIndex = pageCount + 1;
     onPageAdd(newPageIndex);
@@ -30,8 +31,6 @@ const PageAdder = ({
 
 PageAdder.propTypes = {
   additionalClass: string,
-  onPageAdd: func,
-  pageCount: number,
 };
 
 export default PageAdder;

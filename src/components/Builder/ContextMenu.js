@@ -14,19 +14,20 @@ import {
 import * as icons from '../../utils/icons';
 
 import withClickOutside from '../withClickOutside';
+import { usePropStore } from '../../contexts/PropContext';
 
 const ContextMenu = ({
   height = 1,
   item = {},
   items = [],
-  onAnEventTrigger = () => {},
   onClickOutside = () => {},
-  onItemChange = () => {},
-  onItemRemove = () => {},
-  onPageChange = () => {},
   position = {},
   width = 1,
 }) => {
+  const onAnEventTrigger = usePropStore(state => state.onAnEventTrigger);
+  const onItemChange = usePropStore(state => state.onItemChange);
+  const onItemRemove = usePropStore(state => state.onItemRemove);
+  const onPageChange = usePropStore(state => state.onPageChange);
   const [positions, setPositions] = useState(position);
   const container = useRef(null);
   const itemIndex = items.findIndex(_item => _item.id === item.id);
@@ -209,11 +210,7 @@ ContextMenu.propTypes = {
     top: PropTypes.number,
     width: PropTypes.number,
   })),
-  onAnEventTrigger: PropTypes.func,
   onClickOutside: PropTypes.func,
-  onItemChange: PropTypes.func,
-  onItemRemove: PropTypes.func,
-  onPageChange: PropTypes.func,
   position: PropTypes.shape({}),
   width: PropTypes.number,
 };

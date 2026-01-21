@@ -166,16 +166,16 @@ export const useClickOutsideListener = (classes, conditionValue, onClose) => {
 export const usePageTransition = (style, currentPage) => {
   const finalStyle = useMemo(() => {
     switch (style) {
-      case 'verticalSlide':
-        return { transform: `translateY(-${(currentPage * 100).toString()}%)` };
-      case 'scaleAndFade':
-        return {};
-      case 'rotate':
-        return { '-webkit-perspective': 1000 };
-      case 'scaleAndSlide':
-      case 'horizontalSlide':
-      default:
-        return { transform: `translateX(-${(currentPage * 100).toString()}%)` };
+    case 'verticalSlide':
+      return { transform: `translateY(-${(currentPage * 100).toString()}%)` };
+    case 'scaleAndFade':
+      return {};
+    case 'rotate':
+      return { '-webkit-perspective': 1000 };
+    case 'scaleAndSlide':
+    case 'horizontalSlide':
+    default:
+      return { transform: `translateX(-${(currentPage * 100).toString()}%)` };
     }
   }, [style, currentPage]);
 

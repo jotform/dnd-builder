@@ -5,15 +5,18 @@ import PropTypes from 'prop-types';
 import PageAdder from '../../Builder/PageAdder';
 import { getScaleForPageThumbnail, scrollToTarget } from '../../../utils/functions';
 import { usePageVisibility } from '../../../utils/hooks';
+import { usePropStore } from '../../../contexts/PropContext';
 
 const ListWrapper = ({
   component: Component = null,
-  onPageAdd = () => {},
   onSortEnd = () => {},
-  pageCount = 0,
-  reportSettings = {},
-  ...otherProps
+  pageGetter = () => {},
 }) => {
+  const pages = usePropStore(state => state.pages);
+  const pageCount = useMemo(() => pages.length, [pages]);
+  const onPageAdd = usePropStore(state => state.onPageAdd);
+  const reportSettings = usePropStore(state => state.settings);
+
   const listRef = useRef(null);
   const [selectedPageIndex, setSelectedPageIndex] = useState(-1);
   const {
@@ -107,16 +110,12 @@ const ListWrapper = ({
           onSortEnd={_onSortEnd}
           pageContainerStyle={pageContainerStyles}
           pageCount={pageCount}
+          pageGetter={pageGetter}
           width="100%"
-          {...otherProps}
         />
       </div>
       <div className="jfReport-pane-footer">
-        <PageAdder
-          additionalClass="forOptions"
-          onPageAdd={handlePageAdd}
-          pageCount={pageCount}
-        />
+        <PageAdder additionalClass="forOptions" />
       </div>
     </>
   );
@@ -124,14 +123,8 @@ const ListWrapper = ({
 
 ListWrapper.propTypes = {
   component: PropTypes.any,
-  onPageAdd: PropTypes.func,
   onSortEnd: PropTypes.func,
-  pageCount: PropTypes.number,
-  reportSettings: PropTypes.shape({
-    reportBackgroundColor: PropTypes.string,
-    reportLayoutHeight: PropTypes.string,
-    reportLayoutWidth: PropTypes.string,
-  }),
+  pageGetter: PropTypes.func,
 };
 
 export default memo(ListWrapper);

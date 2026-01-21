@@ -1,6 +1,5 @@
 import { StrictMode } from 'react';
 import PropTypes from 'prop-types';
-import objectHash from 'object-hash';
 import DndWrapper from './DndWrapper';
 import { BuilderProvider } from '../../contexts/BuilderContext';
 import { PropProvider } from '../../contexts/PropContext';
@@ -14,99 +13,23 @@ import { leftPanelConfigPropType } from '../../constants/propTypes';
 import '../../styles/jfReportsBundle.scss';
 
 const Builder = ({
-  acceptedItems = {},
-  additionalPageItems = [],
-  disableInteraction = [],
-  itemAccessor = () => {},
-  leftPanelConfig = [],
-  onAnEventTrigger = () => {},
-  onItemAdd = () => {},
-  onItemChange = () => {},
-  onItemMove = () => {},
-  onItemRemove = () => {},
-  onItemResize = () => {},
-  onItemsMove = () => {},
-  onPageAdd = () => {},
-  onPageChange = () => {},
-  onPageDuplicate = () => {},
-  onPageOrdersChange = () => {},
-  onPageRemove = () => {},
   onRightPanelsToggled = () => {},
-  onSettingChange = () => {},
-  pages = [],
-  settings = {},
-  theme = 'lightMode',
-  useExperimentalFeatures = false,
-  ...otherProps
+  ...props
 }) => {
-  const hashCode = objectHash(otherProps);
-
+  const { useExperimentalFeatures } = props;
   return (
     <StrictMode>
       <BuilderProvider onRightPanelsToggled={onRightPanelsToggled}>
-        <PropProvider
-          acceptedItems={acceptedItems}
-          disableInteraction={disableInteraction}
-          onAnEventTrigger={onAnEventTrigger}
-          settings={settings}
-          useExperimentalFeatures={useExperimentalFeatures}
-        >
-          <ReportWrapper
-            mode="customize"
-            pageCount={pages.length}
-            theme={theme}
-          >
+        <PropProvider {...props}>
+          <ReportWrapper mode="customize">
             <DndWrapper>
-              <LeftPanel
-                leftPanelConfig={leftPanelConfig}
-                onItemAdd={onItemAdd}
-              />
-              <Scene
-                additionalPageItems={additionalPageItems}
-                hashCode={hashCode}
-                itemAccessor={itemAccessor}
-                onItemAdd={onItemAdd}
-                onItemChange={onItemChange}
-                onItemMove={onItemMove}
-                onItemRemove={onItemRemove}
-                onItemResize={onItemResize}
-                onItemsMove={onItemsMove}
-                onPageAdd={onPageAdd}
-                onPageChange={onPageChange}
-                onPageDuplicate={onPageDuplicate}
-                onPageOrdersChange={onPageOrdersChange}
-                onPageRemove={onPageRemove}
-                pages={pages}
-              />
+              <LeftPanel />
+              <Scene />
             </DndWrapper>
-            <RightPanel
-              itemAccessor={itemAccessor}
-              onItemChange={onItemChange}
-              onPageChange={onPageChange}
-              onSettingChange={onSettingChange}
-              pages={pages}
-            />
-            <SlidesPanel
-              additionalPageItems={additionalPageItems}
-              hashCode={hashCode}
-              itemAccessor={itemAccessor}
-              onPageAdd={onPageAdd}
-              onPageDuplicate={onPageDuplicate}
-              onPageOrdersChange={onPageOrdersChange}
-              onPageRemove={onPageRemove}
-              pages={pages}
-            />
+            <RightPanel />
+            <SlidesPanel />
             {useExperimentalFeatures && (
-              <AllSlidesPanel
-                additionalPageItems={additionalPageItems}
-                hashCode={hashCode}
-                itemAccessor={itemAccessor}
-                onPageAdd={onPageAdd}
-                onPageDuplicate={onPageDuplicate}
-                onPageOrdersChange={onPageOrdersChange}
-                onPageRemove={onPageRemove}
-                pages={pages}
-              />
+              <AllSlidesPanel />
             )}
           </ReportWrapper>
         </PropProvider>

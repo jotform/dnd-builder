@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import Builder from './Builder';
 import Presentation from './Presentation/Presentation';
@@ -6,8 +6,14 @@ import Preview from './Preview';
 import Print from './Print';
 import reportsAppTexts, { SharingTextsModule } from '../constants/texts';
 
+const modeComponents = {
+  customize: Builder,
+  presentation: Presentation,
+  preview: Preview,
+  print: Print,
+};
+
 const Report = ({
-  leftPanelConfig,
   mode = 'customize',
   reportsAppTexts: newReportsAppTexts = reportsAppTexts,
   ...props
@@ -26,39 +32,21 @@ const Report = ({
     setViewMode(mode);
   }, [mode, viewMode]);
 
-  const customProps = {
-    ...props,
-    lastScrollPosition,
-    leftPanelConfig,
-  };
+  const Component = useMemo(() => modeComponents[viewMode], [viewMode]);
 
-  switch (viewMode) {
-    case 'preview': {
-      return <Preview {...customProps} />;
-    }
-    case 'presentation': {
-      return (
-        <Presentation
-          {...props}
-        />
-      );
-    }
-    case 'print': {
-      return (
-        <Print
-          {...props}
-        />
-      );
-    }
-    case 'customize':
-    default: {
-      return <Builder {...customProps} />;
-    }
+  if (!Component) {
+    return null;
   }
+
+  return (
+    <Component
+      {...props}
+      lastScrollPosition={lastScrollPosition}
+    />
+  );
 };
 
 Report.propTypes = {
-  leftPanelConfig: PropTypes.any,
   /** Conditionally rendering different modes  */
   mode: PropTypes.oneOf(['customize', 'preview', 'print', 'presentation']),
   /**
@@ -66,7 +54,6 @@ Report.propTypes = {
    New texts are set when you pass again.
   */
   reportsAppTexts: PropTypes.shape({}),
-  theme: PropTypes.oneOf(['lightMode', 'darkMode']),
 };
 
 export default Report;

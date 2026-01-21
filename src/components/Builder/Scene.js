@@ -5,16 +5,14 @@ import {
   useEffect,
   useRef,
   useState,
-  memo,
 } from 'react';
-import PropTypes from 'prop-types';
 import * as classNames from '../../constants/classNames';
 import ContextMenu from './ContextMenu';
 import PageActions from './PageActions';
 import PageAdder from './PageAdder';
 import ZoomControls from './ZoomControls';
 import { useBuilderStore } from '../../contexts/BuilderContext';
-import { usePropContext } from '../../contexts/PropContext';
+import { usePropStore } from '../../contexts/PropContext';
 import Page from './Page';
 import {
   calculateGuidePositions,
@@ -28,24 +26,14 @@ import DraggableItemLayer from '../DraggableItem/DraggableItemLayer';
 import generateId from '../../utils/generateId';
 import { EVENT_IGNORED_ROLES } from '../../constants/eventIgnoredRoles';
 
-const Scene = ({
-  additionalPageItems = [],
-  hashCode = '',
-  itemAccessor = () => {},
-  onItemAdd = () => {},
-  onItemChange = () => {},
-  onItemMove = () => {},
-  onItemRemove = () => {},
-  onItemResize = () => {},
-  onItemsMove = () => {},
-  onPageAdd = () => {},
-  onPageChange = () => {},
-  onPageDuplicate = () => {},
-  onPageOrdersChange = () => {},
-  onPageRemove = () => {},
-  pages = [],
-}) => {
-  const pageCount = pages.length;
+const Scene = () => {
+  const pages = usePropStore(state => state.pages);
+  const onItemAdd = usePropStore(state => state.onItemAdd);
+  const onItemRemove = usePropStore(state => state.onItemRemove);
+  const onAnEventTrigger = usePropStore(state => state.onAnEventTrigger);
+  const settings = usePropStore(state => state.settings);
+  const onItemChange = usePropStore(state => state.onItemChange);
+
   const activeElement = useBuilderStore(state => state.activeElement);
   const contextMenuProps = useBuilderStore(state => state.contextMenuProps);
   const isRightPanelOpen = useBuilderStore(state => state.isRightPanelOpen);
@@ -54,11 +42,6 @@ const Scene = ({
   const setIsRightPanelOpen = useBuilderStore(state => state.setIsRightPanelOpen);
   const zoom = useBuilderStore(state => state.zoom);
 
-  const {
-    disableInteraction,
-    onAnEventTrigger,
-    settings,
-  } = usePropContext();
   const [itemToPaste, setItemToPaste] = useState(null);
   const lastScrollPosition = useBuilderStore(state => state.lastScrollPosition);
   const isHeaderHidden = useRef(false);
@@ -257,15 +240,15 @@ const Scene = ({
 
     // Others
     switch (key) {
-      case 'Backspace': return onItemRemoveFromPage(event);
-      case 'Delete': return onItemRemoveFromPage(event);
-      case 'Escape': return setActiveElement(null);
-      case 'ArrowLeft': return moveItemWithKeyboard(event, 'left', -movementValue);
-      case 'ArrowUp': return moveItemWithKeyboard(event, 'top', -movementValue);
-      case 'ArrowRight': return moveItemWithKeyboard(event, 'left', movementValue);
-      case 'ArrowDown': return moveItemWithKeyboard(event, 'top', movementValue);
-      case 'Tab': return selectNextOrPrevElement(event);
-      default:
+    case 'Backspace': return onItemRemoveFromPage(event);
+    case 'Delete': return onItemRemoveFromPage(event);
+    case 'Escape': return setActiveElement(null);
+    case 'ArrowLeft': return moveItemWithKeyboard(event, 'left', -movementValue);
+    case 'ArrowUp': return moveItemWithKeyboard(event, 'top', -movementValue);
+    case 'ArrowRight': return moveItemWithKeyboard(event, 'left', movementValue);
+    case 'ArrowDown': return moveItemWithKeyboard(event, 'top', movementValue);
+    case 'Tab': return selectNextOrPrevElement(event);
+    default:
     }
   };
 
@@ -331,7 +314,6 @@ const Scene = ({
     >
       <DraggableItemLayer
         guides={guides}
-        itemAccessor={itemAccessor}
         pageRefs={refs}
         pages={pages}
       />
@@ -349,16 +331,8 @@ const Scene = ({
             // TODO: This part can be moved into a different component
             <Fragment key={page.id}>
               <PageActions
-                disableInteraction={disableInteraction}
-                onAnEventTrigger={onAnEventTrigger}
-                onPageAdd={onPageAdd}
-                onPageDuplicate={onPageDuplicate}
-                onPageOrdersChange={onPageOrdersChange}
-                onPageRemove={onPageRemove}
                 order={page.order}
-                pageCount={pageCount}
                 pageID={page.id}
-                pages={pages}
               />
               <div
                 key={`page_${page.id}`}
@@ -370,36 +344,20 @@ const Scene = ({
                 style={pageStyles.current}
               >
                 <Page
-                  additionalPageItems={additionalPageItems}
                   guides={guides}
-                  hashCode={hashCode}
-                  itemAccessor={itemAccessor}
                   items={page.items}
-                  onItemAdd={onItemAdd}
-                  onItemChange={onItemChange}
-                  onItemMove={onItemMove}
-                  onItemRemove={onItemRemove}
-                  onItemResize={onItemResize}
-                  onItemsMove={onItemsMove}
                   page={page}
                   pageIndex={index}
                   pageRef={refs[page.id]}
-                  pages={pages}
                   style={pageContainerStyles.current}
                 />
               </div>
             </Fragment>
           ))}
-          <PageAdder
-            onPageAdd={onPageAdd}
-            pageCount={pageCount}
-          />
+          <PageAdder />
         </div>
       </div>
-      <ZoomControls
-        mode="customize"
-        pages={pages}
-      />
+      <ZoomControls mode="customize" />
       {contextMenuProps
         && (
           <ContextMenu
@@ -407,11 +365,7 @@ const Scene = ({
             height={height}
             item={findItemById(contextMenuProps.id, pages)}
             items={findItemsOnPage(contextMenuProps.pageID, pages)}
-            onAnEventTrigger={onAnEventTrigger}
             onClickOutside={() => setContextMenuProps(null)}
-            onItemChange={onItemChange}
-            onItemRemove={onItemRemove}
-            onPageChange={onPageChange}
             position={contextMenuProps.position}
             width={width}
           />
@@ -420,24 +374,4 @@ const Scene = ({
   );
 };
 
-Scene.propTypes = {
-  additionalPageItems: PropTypes.arrayOf(PropTypes.node),
-  hashCode: PropTypes.string,
-  itemAccessor: PropTypes.func,
-  onItemAdd: PropTypes.func,
-  onItemChange: PropTypes.func,
-  onItemMove: PropTypes.func,
-  onItemRemove: PropTypes.func,
-  onItemResize: PropTypes.func,
-  onItemsMove: PropTypes.func,
-  onPageAdd: PropTypes.func,
-  onPageChange: PropTypes.func,
-  onPageDuplicate: PropTypes.func,
-  onPageOrdersChange: PropTypes.func,
-  onPageRemove: PropTypes.func,
-  pages: PropTypes.arrayOf(
-    PropTypes.shape({}),
-  ),
-};
-
-export default memo(Scene);
+export default Scene;

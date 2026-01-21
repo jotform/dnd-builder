@@ -1,16 +1,14 @@
 import { Fragment, memo, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { useBuilderStore } from '../../contexts/BuilderContext';
-import { usePropContext } from '../../contexts/PropContext';
+import { usePropStore } from '../../contexts/PropContext';
 
 const Tabs = ({ panel, tabs = [] }) => {
   const activeTab = useBuilderStore(state => state.activeTab);
   const isLeftPanelOpen = useBuilderStore(state => state.isLeftPanelOpen);
   const isRightPanelOpen = useBuilderStore(state => state.isRightPanelOpen);
   const setActiveTab = useBuilderStore(state => state.setActiveTab);
-  const {
-    onAnEventTrigger,
-  } = usePropContext();
+  const onAnEventTrigger = usePropStore(state => state.onAnEventTrigger);
 
   const setCurrentTab = useCallback((index, tab) => {
     setActiveTab(panel, index);

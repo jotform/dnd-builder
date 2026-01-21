@@ -1,24 +1,11 @@
 import { memo } from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Panel from '../../Builder/Panel';
 import { useBuilderStore } from '../../../contexts/BuilderContext';
-import { leftPanelConfigPropType } from '../../../constants/propTypes';
 import Elements from './Elements';
 import LeftPanelOpener from './LeftPanelOpener';
-import { usePropContext } from '../../../contexts/PropContext';
 
-const LeftPanel = ({
-  leftPanelConfig = [],
-  onItemAdd = () => {},
-}) => {
-  /*
-    This context cause additional render but it only renders LeftPanel and Panel components
-    If you see Elements Component is rendered unnecessary,
-      please get these propContext values from prop.
-  */
-  const { acceptedItems, onAnEventTrigger } = usePropContext();
-
+const LeftPanel = () => {
   const isLeftPanelOpen = useBuilderStore(state => state.isLeftPanelOpen);
 
   const panelAdditionalClassName = classNames(
@@ -31,19 +18,9 @@ const LeftPanel = ({
   return (
     <Panel additionalClassName={panelAdditionalClassName}>
       <LeftPanelOpener />
-      <Elements
-        acceptedItems={acceptedItems}
-        leftPanelConfig={leftPanelConfig}
-        onAnEventTrigger={onAnEventTrigger}
-        onItemAdd={onItemAdd}
-      />
+      <Elements />
     </Panel>
   );
-};
-
-LeftPanel.propTypes = {
-  leftPanelConfig: leftPanelConfigPropType,
-  onItemAdd: PropTypes.func,
 };
 
 export default memo(LeftPanel);

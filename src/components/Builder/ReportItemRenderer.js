@@ -1,5 +1,6 @@
 import { memo } from 'react';
-import { usePropContext } from '../../contexts/PropContext';
+import { usePropStore } from '../../contexts/PropContext';
+import getMergedItem from '../../utils/getMergedItem';
 
 const getItemComponent = (elementName, Elements) => {
   return Elements[elementName] && Elements[elementName].Component
@@ -11,8 +12,9 @@ const ReportItemRenderer = ({
   children,
   item,
 }) => {
-  const { acceptedItems } = usePropContext();
-  return children(getItemComponent(item.itemType, acceptedItems), item);
+  const acceptedItems = usePropStore(state => state.acceptedItems);
+  const mergedItem = getMergedItem(item, acceptedItems);
+  return children(getItemComponent(item.itemType, acceptedItems), mergedItem);
 };
 
 export default memo(ReportItemRenderer);

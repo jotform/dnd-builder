@@ -2,7 +2,7 @@ import { memo } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { useBuilderStore } from '../../../contexts/BuilderContext';
-import { usePropContext } from '../../../contexts/PropContext';
+import { usePropStore } from '../../../contexts/PropContext';
 import SettingsItemRenderer from '../../Settings/SettingsItemRenderer';
 import { onChangeFunction } from '../../../utils/functions';
 import ErrorBoundary from '../../ErrorBoundary';
@@ -13,10 +13,11 @@ const Settings = ({
   onChange = () => {},
   settings = {},
   tabs = [],
-  itemAccessor = () => {},
 }) => {
+  const itemAccessor = usePropStore(state => state.itemAccessor);
   const activeTab = useBuilderStore(state => state.activeTab);
-  const { useExperimentalFeatures } = usePropContext();
+  const useExperimentalFeatures = usePropStore(state => state.useExperimentalFeatures);
+
   return (tabs.map((tabKey, index) => {
     return (
       <div
@@ -72,7 +73,6 @@ const Settings = ({
 Settings.propTypes = {
   element: PropTypes.shape({}),
   item: PropTypes.shape({}),
-  itemAccessor: PropTypes.func,
   onChange: PropTypes.func,
   settings: PropTypes.shape({}),
   tabs: PropTypes.arrayOf(PropTypes.string),
