@@ -3,9 +3,14 @@ import {
 } from 'react';
 import PropTypes from 'prop-types';
 import {
-  DndContext, closestCenter, KeyboardSensor, PointerSensor, useSensor, useSensors,
+  DndContext,
+  closestCenter,
+  KeyboardSensor,
+  PointerSensor,
+  useSensor,
+  useSensors,
 } from '@dnd-kit/core';
-import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
+import { SortableContext, verticalListSortingStrategy, sortableKeyboardCoordinates } from '@dnd-kit/sortable';
 import { Virtuoso } from 'react-virtuoso';
 import memoize from 'memoize-one';
 import SortablePageItemRenderer from './SortablePageItemRenderer';
@@ -66,10 +71,13 @@ const SortablePageList = () => {
     const sensors = useSensors(
       useSensor(PointerSensor, {
         activationConstraint: {
+          delay: 200,
           distance: 0,
         },
       }),
-      useSensor(KeyboardSensor),
+      useSensor(KeyboardSensor, {
+        coordinateGetter: sortableKeyboardCoordinates,
+      }),
     );
 
     const itemData = useMemo(() => createItemData(
@@ -132,11 +140,14 @@ const SortablePageList = () => {
       setActiveId(null);
     }, []);
 
-    const virtuosoStyle = useMemo(() => ({
-      height: `${pageCount * 127}px`,
-      scrollbarWidth: 'none',
-      width: '100%',
-    }), [pageCount]);
+    const virtuosoStyle = useMemo(() => {
+      const outsideMargin = 75; // box-margin + top padding total value;
+      return {
+        height: `${(pageCount * 127) + outsideMargin}px`,
+        scrollbarWidth: 'none',
+        width: '100%',
+      };
+    }, [pageCount]);
 
     const items = useMemo(() => pages.map((page, index) => index.toString()), [pages]);
 
