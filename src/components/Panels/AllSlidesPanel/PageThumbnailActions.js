@@ -1,15 +1,17 @@
 import { memo } from 'react';
 import PropTypes from 'prop-types';
 import * as icons from '../../../utils/icons';
+import { usePropStore } from '../../../contexts/PropContext';
 
 const PageThumbnailActions = ({
-  onAnEventTrigger = () => {},
-  onPageAdd = () => {},
-  onPageDuplicate = () => {},
-  onPageRemove = () => {},
   order = 0,
   page = {},
 }) => {
+  const onPageAdd = usePropStore(state => state.onPageAdd);
+  const onPageDuplicate = usePropStore(state => state.onPageDuplicate);
+  const onPageRemove = usePropStore(state => state.onPageRemove);
+  const onAnEventTrigger = usePropStore(state => state.onAnEventTrigger);
+
   const onPageDuplicateClick = () => {
     onPageDuplicate(page);
     onAnEventTrigger('duplicatePage', order + 1);
@@ -67,10 +69,6 @@ const PageThumbnailActions = ({
 };
 
 PageThumbnailActions.propTypes = {
-  onAnEventTrigger: PropTypes.func,
-  onPageAdd: PropTypes.func,
-  onPageDuplicate: PropTypes.func,
-  onPageRemove: PropTypes.func,
   order: PropTypes.number,
   page: PropTypes.shape({
     id: PropTypes.string,

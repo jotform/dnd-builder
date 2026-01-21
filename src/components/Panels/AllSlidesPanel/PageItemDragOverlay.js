@@ -3,11 +3,7 @@ import PropTypes from 'prop-types';
 import StaticPage from '../../Preview/StaticPage';
 
 const PageItemDragOverlay = ({
-  acceptedItems,
   activePageData,
-  additionalPageItems,
-  hashCode,
-  itemAccessor,
 }) => {
   return (
     <DragOverlay
@@ -24,11 +20,7 @@ const PageItemDragOverlay = ({
           <div className="thumbnailOrder">{activePageData.page.order}</div>
           <div className="thumbnailFrame o-hidden">
             <StaticPage
-              acceptedItems={acceptedItems}
-              additionalPageItems={additionalPageItems}
-              hashCode={hashCode}
               isThumbnail
-              itemAccessor={itemAccessor}
               items={activePageData.page.items}
               style={activePageData.pageContainerLastStyle}
             />
@@ -41,7 +33,6 @@ const PageItemDragOverlay = ({
 };
 
 PageItemDragOverlay.propTypes = {
-  acceptedItems: PropTypes.shape({}),
   activePageData: PropTypes.shape({
     page: PropTypes.shape({
       items: PropTypes.arrayOf(PropTypes.shape({})),
@@ -49,9 +40,6 @@ PageItemDragOverlay.propTypes = {
     }),
     pageContainerLastStyle: PropTypes.shape({}),
   }),
-  additionalPageItems: PropTypes.arrayOf(PropTypes.node),
-  hashCode: PropTypes.string,
-  itemAccessor: PropTypes.func,
 };
 
 export default PageItemDragOverlay;

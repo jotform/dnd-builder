@@ -1,32 +1,22 @@
 import { memo, useCallback, useState } from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Panel from '../../Builder/Panel';
 import { useBuilderStore } from '../../../contexts/BuilderContext';
-import { usePropContext } from '../../../contexts/PropContext';
+import { usePropStore } from '../../../contexts/PropContext';
 import { arrayMove } from '../../../utils/functions';
 import AllSlidesPanelToggler from './AllSlidesPanelToggler';
 import PageList from './PageList';
 import PageActionsBar from './PageActionsBar';
 
-const AllSlidesPanel = ({
-  additionalPageItems = [],
-  hashCode = '',
-  itemAccessor = () => {},
-  onPageAdd = () => {},
-  onPageDuplicate = () => {},
-  onPageOrdersChange = () => {},
-  onPageRemove = () => {},
-  pages = [],
-}) => {
+const AllSlidesPanel = () => {
   const isAllSlidesPanelOpen = useBuilderStore(state => state.isAllSlidesPanelOpen);
   const setIsAllSlidesPanelOpen = useBuilderStore(state => state.setIsAllSlidesPanelOpen);
-  const {
-    acceptedItems,
-    onAnEventTrigger,
-    settings: layoutSettings,
-    useExperimentalFeatures,
-  } = usePropContext();
+
+  const useExperimentalFeatures = usePropStore(state => state.useExperimentalFeatures);
+  const onPageOrdersChange = usePropStore(state => state.onPageOrdersChange);
+  const pages = usePropStore(state => state.pages);
+  const onAnEventTrigger = usePropStore(state => state.onAnEventTrigger);
+
   const [selectedPages, setSelectedPages] = useState([]);
   const [animationEnd, setAnimationEnd] = useState(false);
 
@@ -87,19 +77,8 @@ const AllSlidesPanel = ({
         <div className="toolItemWrapper f-height d-flex">
           <div className="toolItem-tabContent f-width">
             <PageList
-              acceptedItems={acceptedItems}
-              additionalPageItems={additionalPageItems}
-              axis="xy"
-              hashCode={hashCode}
-              itemAccessor={itemAccessor}
-              layoutSettings={layoutSettings}
-              onAnEventTrigger={onAnEventTrigger}
-              onPageAdd={onPageAdd}
               onPageClick={onPageClick}
-              onPageDuplicate={onPageDuplicate}
-              onPageRemove={onPageRemove}
               onSortEnd={onPageSort}
-              pages={pages}
               selectedPages={selectedPages}
             />
             <PageActionsBar
@@ -113,19 +92,6 @@ const AllSlidesPanel = ({
       )}
     </Panel>
   );
-};
-
-AllSlidesPanel.propTypes = {
-  additionalPageItems: PropTypes.arrayOf(PropTypes.node),
-  hashCode: PropTypes.string,
-  itemAccessor: PropTypes.func,
-  onPageAdd: PropTypes.func,
-  onPageDuplicate: PropTypes.func,
-  onPageOrdersChange: PropTypes.func,
-  onPageRemove: PropTypes.func,
-  pages: PropTypes.arrayOf(
-    PropTypes.shape({}),
-  ),
 };
 
 export default memo(AllSlidesPanel);

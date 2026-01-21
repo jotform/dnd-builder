@@ -19,14 +19,16 @@ const SelectZoom = ({
         Fit
       </option>
       {Array.from({ length: 16 },
-        (v, k) => (k * 10) + 50).map(opt => (
+        (v, k) => (k * 10) + 50).map(opt => {
+        return (
           <option
             key={opt}
             value={opt}
           >
             {`${opt}%`}
           </option>
-      ))}
+        );
+      })}
     </select>
   );
 };

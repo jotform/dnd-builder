@@ -10,13 +10,11 @@ import {
 } from '../../../utils/functions';
 import { useBuilderStore } from '../../../contexts/BuilderContext';
 import { usePresentationStore } from '../../../contexts/PresentationContext';
+import { usePropStore } from '../../../contexts/PropContext';
 
 const PresentationBar = ({
   fitToScreen = () => {},
   isVisible = true,
-  onAnEventTrigger = () => {},
-  presentationBarActions = [],
-  settings = {},
 }) => {
   const currentPage = usePresentationStore(state => state.currentPage);
   const setCurrentPage = usePresentationStore(state => state.setCurrentPage);
@@ -26,6 +24,10 @@ const PresentationBar = ({
   const pageCount = usePresentationStore(state => state.pageCount);
   const setZoom = useBuilderStore(state => state.setZoom);
   const zoom = useBuilderStore(state => state.zoom);
+
+  const onAnEventTrigger = usePresentationStore(state => state.onAnEventTrigger);
+  const presentationBarActions = usePresentationStore(state => state.presentationBarActions);
+  const settings = usePropStore(state => state.settings);
 
   const { reportLayoutWidth = 1123 } = settings;
 
@@ -120,11 +122,6 @@ const PresentationBar = ({
 PresentationBar.propTypes = {
   fitToScreen: PropTypes.func,
   isVisible: PropTypes.bool,
-  onAnEventTrigger: PropTypes.func,
-  presentationBarActions: PropTypes.arrayOf(PropTypes.shape({})),
-  settings: PropTypes.shape({
-    reportLayoutWidth: PropTypes.string,
-  }),
 };
 
 export default PresentationBar;

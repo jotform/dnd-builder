@@ -1,6 +1,5 @@
 import { memo } from 'react';
 import PropTypes from 'prop-types';
-import isEqual from 'lodash.isequal';
 import cn from 'classnames';
 import * as classNames from '../../constants/classNames';
 import { getStyles } from '../../utils/functions';
@@ -74,10 +73,4 @@ StaticItem.propTypes = {
   }),
 };
 
-const areEqual = (prevProps, nextProps) => {
-  if (prevProps.hashCode !== nextProps.hashCode) return false;
-  if (!isEqual(prevProps.item, nextProps.item)) return false;
-  return true;
-};
-
-export default memo(StaticItem, areEqual);
+export default memo(StaticItem);

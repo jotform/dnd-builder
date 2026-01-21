@@ -3,19 +3,21 @@ import * as icons from '../../utils/icons';
 import { moveItemInArrayFromIndexToIndex, scrollToTarget } from '../../utils/functions';
 import { useTranslatedTexts } from '../../utils/hooks';
 import { useBuilderStore } from '../../contexts/BuilderContext';
+import { usePropStore } from '../../contexts/PropContext';
 
 const PageActions = ({
-  disableInteraction = [],
-  onAnEventTrigger = () => {},
-  onPageAdd = () => {},
-  onPageDuplicate = () => {},
-  onPageOrdersChange = () => {},
-  onPageRemove = () => {},
   order = 0,
-  pageCount = 1,
   pageID = '',
-  pages = [],
 }) => {
+  const pages = usePropStore(state => state.pages);
+  const pageCount = pages.length;
+  const onAnEventTrigger = usePropStore(state => state.onAnEventTrigger);
+  const onPageAdd = usePropStore(state => state.onPageAdd);
+  const onPageDuplicate = usePropStore(state => state.onPageDuplicate);
+  const onPageOrdersChange = usePropStore(state => state.onPageOrdersChange);
+  const onPageRemove = usePropStore(state => state.onPageRemove);
+  const disableInteraction = usePropStore(state => state.disableInteraction);
+
   const setIsRightPanelOpen = useBuilderStore(state => state.setIsRightPanelOpen);
   const setEditedElement = useBuilderStore(state => state.setEditedElement);
 
@@ -146,16 +148,8 @@ const PageActions = ({
 };
 
 PageActions.propTypes = {
-  disableInteraction: PropTypes.arrayOf(PropTypes.string),
-  onAnEventTrigger: PropTypes.func,
-  onPageAdd: PropTypes.func,
-  onPageDuplicate: PropTypes.func,
-  onPageOrdersChange: PropTypes.func,
-  onPageRemove: PropTypes.func,
   order: PropTypes.number,
-  pageCount: PropTypes.number,
   pageID: PropTypes.string,
-  pages: PropTypes.arrayOf(PropTypes.shape({})),
 };
 
 export default PageActions;

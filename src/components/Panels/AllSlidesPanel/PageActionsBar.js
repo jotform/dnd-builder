@@ -58,7 +58,7 @@ const PageActionsBar = ({
             <button
               key="Duplicate Page"
               className="jfReportButton forPageActionsBar forDuplicate"
-          // onClick={onPageDuplicateClick}
+              // onClick={onPageDuplicateClick}
               title="Duplicate Page"
               type="button"
             >
@@ -68,7 +68,7 @@ const PageActionsBar = ({
             <button
               key="Remove Slide"
               className="jfReportButton isDanger"
-          // onClick={onPageRemoveClick}
+              // onClick={onPageRemoveClick}
               title="Remove Slide"
               type="button"
             >

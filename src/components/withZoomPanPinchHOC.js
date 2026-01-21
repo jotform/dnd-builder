@@ -9,7 +9,7 @@ const withZoomPanPinchHOC = WrappedComponent => {
   const ZoomPanPinchHOC = props => {
     const { handleZoom, mode = '', refSetter } = props;
 
-    const zoom = useBuilderStore(state => state.setZoom);
+    const zoom = useBuilderStore(state => state.zoom);
     const fittedZoom = usePresentationStore(state => state.fittedZoom);
 
     if (mode !== 'presentation') {

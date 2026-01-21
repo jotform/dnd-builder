@@ -1,8 +1,7 @@
-import PropTypes from 'prop-types';
 import Modal from 'react-modal';
 import PrintModeWithoutContext from './PrintModeWithoutContext';
 
-const Print = props => {
+const Print = () => {
   return (
     <Modal
       appElement={document.getElementById('root')}
@@ -33,26 +32,9 @@ const Print = props => {
         },
       }}
     >
-      <PrintModeWithoutContext
-        {...props}
-      />
+      <PrintModeWithoutContext />
     </Modal>
   );
-};
-
-Print.propTypes = {
-  /** Items for to render in the report */
-  acceptedItems: PropTypes.shape({}),
-  /** Array of React components to render statically on each page (eg. watermark) */
-  additionalPageItems: PropTypes.arrayOf(PropTypes.node),
-  /** To pass in extra props to items selectively */
-  itemAccessor: PropTypes.func,
-  /** Array of pages with their settings and items */
-  pages: PropTypes.arrayOf(
-    PropTypes.shape({}),
-  ),
-  /** General report settings such as layout size and background color */
-  settings: PropTypes.shape({}),
 };
 
 export default Print;

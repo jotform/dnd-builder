@@ -1,76 +1,104 @@
-/* eslint-disable react/no-unused-state */
-import React, { createContext, useContext } from 'react';
+import {
+  createContext, useContext, useEffect, useRef,
+} from 'react';
 import PropTypes from 'prop-types';
+import { createStore, useStore } from 'zustand';
 
-export const PropContext = createContext({
-  acceptedItems: {},
-  onAnEventTrigger: () => {},
-  settings: {},
-  useExperimentalFeatures: false,
-});
+const fn = () => {};
 
-export const usePropContext = () => {
-  const context = useContext(PropContext);
-  if (!context) {
-    throw new Error('PropContext must be used with PropProvider!');
-  }
-  return context;
+const propStore = props => {
+  // eslint-disable-next-line complexity
+  return createStore(set => ({
+    acceptedItems: props.acceptedItems || {},
+    additionalPageItems: props.additionalPageItems || [],
+    disableInteraction: props.disableInteraction || [],
+    itemAccessor: props.itemAccessor || fn,
+    leftPanelConfig: props.leftPanelConfig || [],
+    onAnEventTrigger: props.onAnEventTrigger || (() => {}),
+    onItemAdd: props.onItemAdd || fn,
+    onItemChange: props.onItemChange || fn,
+    onItemMove: props.onItemMove || fn,
+    onItemRemove: props.onItemRemove || fn,
+    onItemResize: props.onItemResize || fn,
+    onItemsMove: props.onItemsMove || fn,
+    onPageAdd: props.onPageAdd || fn,
+    onPageChange: props.onPageChange || fn,
+    onPageDuplicate: props.onPageDuplicate || fn,
+    onPageOrdersChange: props.onPageOrdersChange || fn,
+    onPageRemove: props.onPageRemove || fn,
+    onSettingChange: props.onSettingChange || fn,
+    pages: props.pages || [],
+    setAcceptedItems: acceptedItems => { set({ acceptedItems }); },
+    setItemAccessor: itemAccessor => { set({ itemAccessor }); },
+    setPages: pages => { set({ pages }); },
+    setSettings: settings => { set({ settings }); },
+    settings: props.settings || {
+      reportLayout: 'A4 Landscape',
+    },
+    theme: props.theme || 'lightMode',
+    useExperimentalFeatures: props.useExperimentalFeatures || false,
+  }));
 };
 
-export class PropProvider extends React.Component {
-  static getDerivedStateFromProps(nextProps, prevState) {
-    const updates = {};
-    const {
-      acceptedItems,
-      disableInteraction,
-      settings,
-      useExperimentalFeatures,
-    } = prevState;
+const PropContext = createContext(null);
 
-    if (nextProps.acceptedItems !== acceptedItems) {
-      updates.acceptedItems = nextProps.acceptedItems;
-    }
-    if (nextProps.disableInteraction !== disableInteraction) {
-      updates.disableInteraction = nextProps.disableInteraction;
-    }
-    if (nextProps.settings !== settings) {
-      updates.settings = nextProps.settings;
-    }
-    if (nextProps.useExperimentalFeatures !== useExperimentalFeatures) {
-      updates.useExperimentalFeatures = nextProps.useExperimentalFeatures;
-    }
-
-    return updates;
+export const PropProvider = ({ children, ...props }) => {
+  const storeRef = useRef();
+  if (!storeRef.current) {
+    storeRef.current = propStore(props);
   }
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      acceptedItems: props.acceptedItems || {},
-      disableInteraction: props.disableInteraction || [],
-      onAnEventTrigger: props.onAnEventTrigger || (() => {}),
-      settings: props.settings || {},
-      useExperimentalFeatures: props.useExperimentalFeatures || false,
-    };
-  }
+  const {
+    acceptedItems, itemAccessor, pages, settings,
+  } = props;
 
-  render() {
-    const { children = null } = this.props;
-    return (
-      <PropContext.Provider value={this.state}>
-        {children}
-      </PropContext.Provider>
-    );
-  }
-}
+  useEffect(() => {
+    const { setPages } = storeRef.current.getState();
+    if (pages) {
+      setPages(pages);
+    }
+  }, [pages]);
+
+  useEffect(() => {
+    const { setItemAccessor } = storeRef.current.getState();
+    setItemAccessor(itemAccessor);
+  }, [itemAccessor]);
+
+  useEffect(() => {
+    const { setAcceptedItems } = storeRef.current.getState();
+    if (acceptedItems) {
+      setAcceptedItems(acceptedItems);
+    }
+  }, [acceptedItems]);
+
+  useEffect(() => {
+    const { setSettings } = storeRef.current.getState();
+    if (settings) {
+      setSettings(settings);
+    }
+  }, [settings]);
+
+  return (
+    <PropContext.Provider value={storeRef.current}>
+      {children}
+    </PropContext.Provider>
+  );
+};
 
 PropProvider.propTypes = {
   acceptedItems: PropTypes.shape({}),
   children: PropTypes.any,
-  disableInteraction: PropTypes.arrayOf(PropTypes.string),
-  onAnEventTrigger: PropTypes.func,
+  itemAccessor: PropTypes.func,
+  pages: PropTypes.arrayOf(PropTypes.object),
   settings: PropTypes.shape({}),
-  useExperimentalFeatures: PropTypes.bool,
 };
 
 export const PropConsumer = PropContext.Consumer;
+
+export const usePropStore = selector => {
+  const context = useContext(PropContext);
+  if (!context) {
+    throw new Error('usePropStore must be used with PropProvider!');
+  }
+  return useStore(context, selector);
+};

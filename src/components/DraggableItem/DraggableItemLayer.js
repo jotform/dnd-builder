@@ -6,7 +6,7 @@ import ReportItemRenderer from '../Builder/ReportItemRenderer';
 import { proximityListener, calculateGuidePositions } from '../../utils/functions';
 import ItemPositioner from '../ItemPositioner';
 import { useBuilderStore } from '../../contexts/BuilderContext';
-import { usePropContext } from '../../contexts/PropContext';
+import { usePropStore } from '../../contexts/PropContext';
 import getMergedItem from '../../utils/getMergedItem';
 
 const layerStyles = ({ x, y }) => ({
@@ -103,7 +103,6 @@ function getItemStyles(initialOffset, currentOffset, ref, pageGuides, item, zoom
 
 const DraggableItemLayer = ({
   guides = {},
-  itemAccessor = () => {},
   pageRefs = {},
   pages = [],
 }) => {
@@ -123,7 +122,8 @@ const DraggableItemLayer = ({
   const activeElement = useBuilderStore(state => state.activeElement);
   const zoom = useBuilderStore(state => state.zoom);
 
-  const { acceptedItems } = usePropContext();
+  const acceptedItems = usePropStore(state => state.acceptedItems);
+  const itemAccessor = usePropStore(state => state.itemAccessor);
 
   if (!currentOffset || !isDragging) {
     return null;
@@ -241,7 +241,6 @@ const DraggableItemLayer = ({
 
 DraggableItemLayer.propTypes = {
   guides: PropTypes.shape({}),
-  itemAccessor: PropTypes.func,
   pageRefs: PropTypes.shape({}),
   pages: PropTypes.arrayOf(
     PropTypes.shape({}),

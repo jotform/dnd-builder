@@ -4,24 +4,21 @@ import DraggableItem from './DraggableItem/DraggableItem';
 import getMergedItem from '../utils/getMergedItem';
 import { useBuilderStore } from '../contexts/BuilderContext';
 import { isSelected } from '../utils/functions';
+import { usePropStore } from '../contexts/PropContext';
 
 const ReportItemsWrapper = ({
-  acceptedItems,
   guides,
-  hashCode,
   isResize,
-  itemAccessor,
   items,
   matches,
-  onAnEventTrigger,
-  onItemAdd,
-  onItemChange,
-  onItemRemove,
-  onItemResize,
   setIsResize,
   setMatches,
 }) => {
+  const acceptedItems = usePropStore(state => state.acceptedItems);
   const activeElement = useBuilderStore(state => state.activeElement);
+  const itemAccessor = usePropStore(state => state.itemAccessor);
+  const onAnEventTrigger = usePropStore(state => state.onAnEventTrigger);
+  const onItemChange = usePropStore(state => state.onItemChange);
 
   return items
     .filter(item => (
@@ -35,18 +32,12 @@ const ReportItemsWrapper = ({
         <DraggableItem
           key={item.id}
           guides={guides}
-          hashCode={hashCode}
           index={index}
           isMultipleItemSelected={activeElement !== null && activeElement.length > 1}
           isResize={isResize}
           isSelected={isSelected(item.id, activeElement)}
           item={item}
           matches={matches}
-          onAnEventTrigger={onAnEventTrigger}
-          onItemAdd={onItemAdd}
-          onItemChange={onItemChange}
-          onItemRemove={onItemRemove}
-          onItemResize={onItemResize}
           setIsResize={setIsResize}
           setMatches={setMatches}
         >

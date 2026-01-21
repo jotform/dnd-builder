@@ -297,63 +297,63 @@ const
     //   outlineOffset: `-${shapeBorderWidth}`,
     // };
     switch (shapeType) {
-      case 'rectangle':
-      case 'square': {
-        return (
-          <rect
-            height="100%"
-            rx={`${roundedCorners || 0}px`}
-            ry={`${roundedCorners || 0}px`}
-            width="100%"
-            x="0"
-            y="0"
-            {...commonShapeProps}
-          />
-        );
-      }
-      case 'ellipse':
-      case 'circle': {
-        return (
-          <ellipse
-            cx="50%"
-            cy="50%"
-            rx="50%"
-            ry="50%"
-            x="0"
-            y="0"
-            {...commonShapeProps}
-          />
-        );
-      }
-      case 'star': {
-        return (
-          <path
-            d="M100.145,0.74 L131.042518,66.5812528 L200.145,77.1420881
+    case 'rectangle':
+    case 'square': {
+      return (
+        <rect
+          height="100%"
+          rx={`${roundedCorners || 0}px`}
+          ry={`${roundedCorners || 0}px`}
+          width="100%"
+          x="0"
+          y="0"
+          {...commonShapeProps}
+        />
+      );
+    }
+    case 'ellipse':
+    case 'circle': {
+      return (
+        <ellipse
+          cx="50%"
+          cy="50%"
+          rx="50%"
+          ry="50%"
+          x="0"
+          y="0"
+          {...commonShapeProps}
+        />
+      );
+    }
+    case 'star': {
+      return (
+        <path
+          d="M100.145,0.74 L131.042518,66.5812528 L200.145,77.1420881
              L150.151365,128.380209 L161.952766,200.74 L100.145,166.581253 L38.3372342,200.74
               L50.1386346,128.380209 L0.145,77.1420881 L69.2474825,66.5678678 L100.145,0.74 Z"
-            {...commonShapeProps}
-          />
-        );
-      }
-      case 'triangle': {
-        return (
-          <polygon
-            points="100,0 0,200 200,200"
-            {...commonShapeProps}
-          />
-        );
-      }
-      default: {
-        return (
-          <rect
-            height="100%"
-            width="100%"
-            x="0"
-            y="0"
-            {...commonShapeProps}
-          />
-        );
-      }
+          {...commonShapeProps}
+        />
+      );
+    }
+    case 'triangle': {
+      return (
+        <polygon
+          points="100,0 0,200 200,200"
+          {...commonShapeProps}
+        />
+      );
+    }
+    default: {
+      return (
+        <rect
+          height="100%"
+          width="100%"
+          x="0"
+          y="0"
+          {...commonShapeProps}
+        />
+      );
+    }
     }
   };
 

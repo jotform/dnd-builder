@@ -16,15 +16,13 @@ import {
   zoomHandler,
 } from '../../utils/functions';
 import { usePresentationStore } from '../../contexts/PresentationContext';
-import { usePropContext } from '../../contexts/PropContext';
+import { usePropStore } from '../../contexts/PropContext';
 // import { ZOOM_MIN, ZOOM_MAX } from '../../constants/zoom';
 
 const PresentationWrapper = ({
   children = () => {},
-  presentationBarActions = [],
-  useFixedPresentationBar = false,
 }) => {
-  const { onAnEventTrigger, settings } = usePropContext();
+  const settings = usePropStore(state => state.settings);
   const currentPage = usePresentationStore(state => state.currentPage);
   const fittedZoom = usePresentationStore(state => state.fittedZoom);
   const isFullscreen = usePresentationStore(state => state.isFullscreen);
@@ -34,6 +32,7 @@ const PresentationWrapper = ({
   const setIsFullscreen = usePresentationStore(state => state.setIsFullscreen);
   const setShowControlsInFullScreen = usePresentationStore(state => state.setShowControlsInFullScreen);
   const showControlsInFullScreen = usePresentationStore(state => state.showControlsInFullScreen);
+  const useFixedPresentationBar = usePresentationStore(state => state.useFixedPresentationBar);
 
   const setZoom = useBuilderStore(state => state.setZoom);
   const zoom = useBuilderStore(state => state.zoom);
@@ -124,9 +123,6 @@ const PresentationWrapper = ({
         <PresentationBar
           fitToScreen={fitToScreen}
           isVisible={(!isFullscreen || (isFullscreen && showControlsInFullScreen))}
-          onAnEventTrigger={onAnEventTrigger}
-          presentationBarActions={presentationBarActions}
-          settings={settings}
         />
         <ProgressBar
           currentPage={currentPage}
@@ -139,8 +135,6 @@ const PresentationWrapper = ({
 
 PresentationWrapper.propTypes = {
   children: PropTypes.any,
-  presentationBarActions: PropTypes.arrayOf(PropTypes.shape({})),
-  useFixedPresentationBar: PropTypes.bool,
 };
 
 export default PresentationWrapper;

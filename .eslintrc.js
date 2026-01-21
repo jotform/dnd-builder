@@ -41,7 +41,7 @@ module.exports = {
 
     'import/no-extraneous-dependencies': ['error', { devDependencies: ['stories/**'] }],
     'import/prefer-default-export': 0,
-
+    indent: ['error', 2],
     'jest/no-disabled-tests': 'warn',
     'jest/no-focused-tests': 'error',
     'jest/no-identical-title': 'error',

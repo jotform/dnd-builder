@@ -2,7 +2,6 @@ import { useEffect, useState, memo } from 'react';
 import PropTypes from 'prop-types';
 import { useDrag } from 'react-dnd';
 import { getEmptyImage } from 'react-dnd-html5-backend';
-import isEqual from 'lodash.isequal';
 import ItemPositioner from '../ItemPositioner';
 import { DRAGGABLE_ITEM_TYPE } from '../../constants/itemTypes';
 import {
@@ -18,6 +17,7 @@ import {
   removeEventListenerForSidebar,
 } from '../../utils/scrollZoneFunctions';
 import { useBuilderStore } from '../../contexts/BuilderContext';
+import { usePropStore } from '../../contexts/PropContext';
 
 const exceptionalClassesForClickOutside = ['contextMenu-itemLabel', 'contextMenu-item'];
 const reportItemStyle = {
@@ -33,11 +33,6 @@ const DraggableItem = ({
   isSelected = false,
   item = {},
   matches = {},
-  onAnEventTrigger = () => {},
-  onItemAdd = () => {},
-  onItemChange = () => {},
-  onItemRemove = () => {},
-  onItemResize = () => {},
   setIsResize = () => {},
   setMatches = () => {},
 }) => {
@@ -66,6 +61,11 @@ const DraggableItem = ({
     width,
   });
 
+  const onAnEventTrigger = usePropStore(state => state.onAnEventTrigger);
+  const onItemAdd = usePropStore(state => state.onItemAdd);
+  const onItemChange = usePropStore(state => state.onItemChange);
+  const onItemRemove = usePropStore(state => state.onItemRemove);
+  const onItemResize = usePropStore(state => state.onItemResize);
   const setActiveElement = useBuilderStore(state => state.setActiveElement);
   const setContextMenuProps = useBuilderStore(state => state.setContextMenuProps);
   const zoom = useBuilderStore(state => state.zoom);
@@ -397,26 +397,8 @@ DraggableItem.propTypes = {
     ]),
   }),
   matches: PropTypes.shape({}),
-  onAnEventTrigger: PropTypes.func,
-  onItemAdd: PropTypes.func,
-  onItemChange: PropTypes.func,
-  onItemRemove: PropTypes.func,
-  onItemResize: PropTypes.func,
   setIsResize: PropTypes.func,
   setMatches: PropTypes.func,
 };
 
-// avoid unnecessary renders while resizing
-const areEqual = (prevProps, nextProps) => {
-  if (prevProps.hashCode !== nextProps.hashCode) return false;
-  if (!isEqual(prevProps.item, nextProps.item)) return false;
-  if (prevProps.matches !== nextProps.matches) return false;
-  if (prevProps.isTextEditorOpen !== nextProps.isTextEditorOpen) return false;
-  if ((prevProps.isSelected && nextProps.isSelected) || prevProps.isResize !== nextProps.isResize) {
-    return false;
-  }
-  if (prevProps.isSelected !== nextProps.isSelected) return false;
-  return true;
-};
-
-export default memo(DraggableItem, areEqual);
+export default memo(DraggableItem);

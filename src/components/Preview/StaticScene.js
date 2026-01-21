@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import cNames from 'classnames';
 import * as classNames from '../../constants/classNames';
 import { StaticPageWithZoomPanPinch } from './StaticPage';
-import { usePropContext } from '../../contexts/PropContext';
+import { usePropStore } from '../../contexts/PropContext';
 import { useBuilderStore } from '../../contexts/BuilderContext';
 import { slugify } from '../../utils/string';
 import { usePageTransition } from '../../utils/hooks';
@@ -13,21 +13,21 @@ import { usePresentationStore } from '../../contexts/PresentationContext';
 import ZoomControls from '../Builder/ZoomControls';
 
 const StaticScene = ({
-  additionalPageItems = [],
   gesture = () => {},
-  hashCode = '',
   hideZoom = false,
-  itemAccessor = () => {},
   mode = '',
-  pages = [],
   presentationPage = 0,
 }) => {
   const lastScrollPosition = useBuilderStore(state => state.lastScrollPosition);
   const setZoom = useBuilderStore(state => state.setZoom);
   const zoom = useBuilderStore(state => state.zoom);
+
   const isFullscreen = usePresentationStore(state => state.isFullscreen);
   const showControlsInFullScreen = usePresentationStore(state => state.showControlsInFullScreen);
-  const { acceptedItems, settings } = usePropContext();
+
+  const settings = usePropStore(state => state.settings);
+  const pages = usePropStore(state => state.pages);
+
   const viewPortRef = useRef({});
   const transformRefs = useRef([]);
 
@@ -104,11 +104,7 @@ const StaticScene = ({
                 id={`presentation-page-${page.id.toString()}`}
               >
                 <StaticPageWithZoomPanPinch
-                  acceptedItems={acceptedItems}
-                  additionalPageItems={additionalPageItems}
                   handleZoom={handleZoom}
-                  hashCode={hashCode}
-                  itemAccessor={itemAccessor}
                   items={page.items}
                   mode={mode}
                   refSetter={element => { transformRefs.current[index] = element; }}
@@ -120,7 +116,6 @@ const StaticScene = ({
         </div>
       </div>
       <ZoomControls
-        pages={pages}
         showZoom={(!isFullscreen || (isFullscreen && showControlsInFullScreen)) && !hideZoom}
       />
     </main>
@@ -128,13 +123,9 @@ const StaticScene = ({
 };
 
 StaticScene.propTypes = {
-  additionalPageItems: PropTypes.arrayOf(PropTypes.node),
   gesture: PropTypes.func,
-  hashCode: PropTypes.string,
   hideZoom: PropTypes.bool,
-  itemAccessor: PropTypes.func,
   mode: PropTypes.string.isRequired,
-  pages: PropTypes.arrayOf(PropTypes.shape({})),
   presentationPage: PropTypes.number,
 };
 

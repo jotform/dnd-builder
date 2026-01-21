@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import * as icons from '../../utils/icons';
 import { useBuilderStore } from '../../contexts/BuilderContext';
-import { usePropContext } from '../../contexts/PropContext';
+import { usePropStore } from '../../contexts/PropContext';
 import {
   ZOOM_STEP,
   ZOOM_MIN,
@@ -18,10 +18,9 @@ const ZoomControls = ({
   const setZoom = useBuilderStore(state => state.setZoom);
   const zoom = useBuilderStore(state => state.zoom);
 
-  const {
-    onAnEventTrigger,
-    settings,
-  } = usePropContext();
+  const onAnEventTrigger = usePropStore(state => state.onAnEventTrigger);
+  const settings = usePropStore(state => state.settings);
+
   const { reportLayoutHeight = 794, reportLayoutWidth = 1123 } = settings;
   const isModeCustomize = mode === 'customize';
   const decreaseZoom = () => {

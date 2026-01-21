@@ -11,13 +11,10 @@ import Tabs from '../../Builder/Tabs';
 import { getTabsWithElements } from '../../../utils/functions';
 import { useTranslatedTexts } from '../../../utils/hooks';
 import SearchInput from '../../Builder/SearchInput';
+import { usePropStore } from '../../../contexts/PropContext';
 
-const Elements = ({
-  acceptedItems = {},
-  leftPanelConfig = [],
-  onAnEventTrigger = () => { },
-  onItemAdd = () => {},
-}) => {
+const Elements = () => {
+  const leftPanelConfig = usePropStore(state => state.leftPanelConfig);
   const activeTab = useBuilderStore(state => state.activeTab);
   const { ADD_ELEMENT, NO_RESULT } = useTranslatedTexts();
 
@@ -62,9 +59,6 @@ const Elements = ({
           {Array.isArray(elementWillBeUsed) && elementWillBeUsed.map((element, index) => (
             <Element
               key={index.toString()}
-              acceptedItems={acceptedItems}
-              onAnEventTrigger={onAnEventTrigger}
-              onItemAdd={onItemAdd}
               {...element}
             />
           ))}

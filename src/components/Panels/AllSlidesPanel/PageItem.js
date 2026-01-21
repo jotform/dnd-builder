@@ -7,17 +7,9 @@ import StaticPage from '../../Preview/StaticPage';
 import PageThumbnailActions from './PageThumbnailActions';
 
 const PageItem = ({
-  acceptedItems,
-  additionalPageItems,
-  hashCode,
   id,
   isSelected,
-  itemAccessor,
-  onAnEventTrigger,
-  onPageAdd,
   onPageClick,
-  onPageDuplicate,
-  onPageRemove,
   order,
   page,
   style,
@@ -59,19 +51,11 @@ const PageItem = ({
       <div className="thumbnailOrder">{order}</div>
       <div className="thumbnailFrame o-hidden">
         <StaticPage
-          acceptedItems={acceptedItems}
-          additionalPageItems={additionalPageItems}
-          hashCode={hashCode}
-          itemAccessor={itemAccessor}
           items={page.items}
           style={style}
         />
       </div>
       <PageThumbnailActions
-        onAnEventTrigger={onAnEventTrigger}
-        onPageAdd={onPageAdd}
-        onPageDuplicate={onPageDuplicate}
-        onPageRemove={onPageRemove}
         order={order}
         page={page}
       />
@@ -80,17 +64,9 @@ const PageItem = ({
 };
 
 PageItem.propTypes = {
-  acceptedItems: PropTypes.shape({}),
-  additionalPageItems: PropTypes.arrayOf(PropTypes.node),
-  hashCode: PropTypes.string,
   id: PropTypes.string.isRequired,
   isSelected: PropTypes.bool,
-  itemAccessor: PropTypes.func,
-  onAnEventTrigger: PropTypes.func,
-  onPageAdd: PropTypes.func,
   onPageClick: PropTypes.func,
-  onPageDuplicate: PropTypes.func,
-  onPageRemove: PropTypes.func,
   order: PropTypes.number,
   page: PropTypes.shape({
     id: PropTypes.string.isRequired,

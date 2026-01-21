@@ -3,60 +3,54 @@ import PropTypes from 'prop-types';
 import * as classNames from '../../constants/classNames';
 import ReportItemRenderer from '../Builder/ReportItemRenderer';
 import StaticItem from './StaticItem';
-import getMergedItem from '../../utils/getMergedItem';
 import withZoomPanPinchHOC from '../withZoomPanPinchHOC';
+import { usePropStore } from '../../contexts/PropContext';
 
 const StaticPage = ({
-  acceptedItems = {},
-  additionalPageItems = [],
-  hashCode = '',
   isThumbnail = false,
-  itemAccessor = () => {},
   items = [],
   style = {},
-}) => (
-  <div
-    className={classNames.pageContainer}
-    style={style}
-  >
-    <div className="jfReport-hider o-hidden f-all p-relative">
-      {items.filter(item => (
-        item.isVisible !== undefined
-          ? item.isVisible
-          : true
-      )).map(item => {
-        const mergedItem = getMergedItem(item, acceptedItems);
-        return (
-          <StaticItem
-            key={item.id}
-            hashCode={hashCode}
-            item={item}
-          >
-            <ReportItemRenderer
+}) => {
+  const itemAccessor = usePropStore(state => state.itemAccessor);
+  const additionalPageItems = usePropStore(state => state.additionalPageItems);
+  return (
+    <div
+      className={classNames.pageContainer}
+      style={style}
+    >
+      <div className="jfReport-hider o-hidden f-all p-relative">
+        {items.filter(item => (
+          item.isVisible !== undefined
+            ? item.isVisible
+            : true
+        )).map(item => {
+          return (
+            <StaticItem
+              key={item.id}
               item={item}
             >
-              {ReportItem => (
-                <ReportItem
-                  isThumbnail={isThumbnail}
-                  item={mergedItem}
-                  itemAccessor={itemAccessor}
-                />
-              )}
-            </ReportItemRenderer>
-          </StaticItem>
-        );
-      })}
-      {additionalPageItems}
+              <ReportItemRenderer
+                item={item}
+              >
+                {(ReportItem, mergedItem) => (
+                  <ReportItem
+                    isThumbnail={isThumbnail}
+                    item={mergedItem}
+                    itemAccessor={itemAccessor}
+                  />
+                )}
+              </ReportItemRenderer>
+            </StaticItem>
+          );
+        })}
+        {additionalPageItems}
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 StaticPage.propTypes = {
-  acceptedItems: PropTypes.shape({}),
-  additionalPageItems: PropTypes.arrayOf(PropTypes.node),
-  hashCode: PropTypes.string,
   isThumbnail: PropTypes.bool,
-  itemAccessor: PropTypes.func,
   items: PropTypes.arrayOf(PropTypes.shape({})),
   style: PropTypes.shape({}),
 };

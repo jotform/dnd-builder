@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types';
-import objectHash from 'object-hash';
 import { PresentationProvider } from '../../contexts/PresentationContext';
 import { BuilderProvider } from '../../contexts/BuilderContext';
 import { PropProvider } from '../../contexts/PropContext';
@@ -11,61 +10,33 @@ import '../../styles/jfReportsBundle.scss';
 import Print from '../Print';
 
 const Presentation = ({
-  acceptedItems = {},
-  additionalPageItems = [],
-  itemAccessor = () => {},
-  onAnEventTrigger = () => {},
-  pages = [],
   presentationBarActions = [],
-  settings = {},
-  theme = 'lightMode',
   useFixedPresentationBar = false,
-  ...otherProps
+  ...props
 }) => {
-  const hashCode = objectHash(otherProps);
-
   return (
-    <PresentationProvider
-      pageCount={pages.length}
-    >
-      <PropProvider
-        acceptedItems={acceptedItems}
-        onAnEventTrigger={onAnEventTrigger}
-        settings={settings}
-      >
-        <BuilderProvider>
-          <ReportWrapper
-            mode="presentation"
-            theme={theme}
-          >
-            <PresentationWrapper
-              presentationBarActions={presentationBarActions}
-              useFixedPresentationBar={useFixedPresentationBar}
-            >
+    <BuilderProvider>
+      <PropProvider {...props}>
+        <PresentationProvider
+          presentationBarActions={presentationBarActions}
+          useFixedPresentationBar={useFixedPresentationBar}
+        >
+          <ReportWrapper mode="presentation">
+            <PresentationWrapper>
               {(presentationPage, gesture) => (
                 <StaticScene
-                  additionalPageItems={additionalPageItems}
                   gesture={gesture}
-                  hashCode={hashCode}
                   hideZoom={true}
-                  itemAccessor={itemAccessor}
                   mode="presentation"
-                  pages={pages}
                   presentationPage={presentationPage}
                 />
               )}
             </PresentationWrapper>
-            <Print
-              additionalPageItems={additionalPageItems}
-              itemAccessor={itemAccessor}
-              pages={pages}
-              settings={settings}
-              {...otherProps}
-            />
+            <Print />
           </ReportWrapper>
-        </BuilderProvider>
+        </PresentationProvider>
       </PropProvider>
-    </PresentationProvider>
+    </BuilderProvider>
   );
 };
 

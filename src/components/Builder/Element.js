@@ -9,17 +9,18 @@ import {
 import generateId from '../../utils/generateId';
 import * as icons from '../../utils/icons';
 import { useBuilderStore } from '../../contexts/BuilderContext';
+import { usePropStore } from '../../contexts/PropContext';
 
 const Element = ({
-  acceptedItems = {},
   icon = null,
   iconType = '',
   itemType = '',
-  onAnEventTrigger = () => {},
-  onItemAdd = () => {},
   title = '',
   ...additionalData
 }) => {
+  const acceptedItems = usePropStore(state => state.acceptedItems);
+  const onAnEventTrigger = usePropStore(state => state.onAnEventTrigger);
+  const onItemAdd = usePropStore(state => state.onItemAdd);
   const setActiveElement = useBuilderStore(state => state.setActiveElement);
   const setIsRightPanelOpen = useBuilderStore(state => state.setIsRightPanelOpen);
   const zoom = useBuilderStore(state => state.zoom);
@@ -91,12 +92,9 @@ const Element = ({
 };
 
 Element.propTypes = {
-  acceptedItems: PropTypes.shape({}),
   icon: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
   iconType: PropTypes.string,
   itemType: PropTypes.string,
-  onAnEventTrigger: PropTypes.func,
-  onItemAdd: PropTypes.func,
   title: PropTypes.string,
 };
 

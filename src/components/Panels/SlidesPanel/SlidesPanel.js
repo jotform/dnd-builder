@@ -1,39 +1,27 @@
 import { memo, useCallback, useState } from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Panel from '../../Builder/Panel';
 import SortablePageList from './SortablePageList';
 import Section from '../../Builder/Section';
 import { useBuilderStore } from '../../../contexts/BuilderContext';
-import { usePropContext } from '../../../contexts/PropContext';
+import { usePropStore } from '../../../contexts/PropContext';
 import { arrayMove } from '../../../utils/functions';
 import SlidesPanelToggler from './SlidesPanelToggler';
 import ListWrapper from './ListWrapper';
 import Button from '../../Settings/Button';
 import { useClickOutsideListener, useTranslatedTexts } from '../../../utils/hooks';
 
-const SlidesPanel = ({
-  additionalPageItems = [],
-  hashCode = '',
-  itemAccessor = () => {},
-  onPageAdd = () => {},
-  onPageDuplicate = () => {},
-  onPageOrdersChange = () => {},
-  onPageRemove = () => {},
-  pages = [],
-}) => {
+const SlidesPanel = () => {
   const isRightPanelOpen = useBuilderStore(state => state.isRightPanelOpen);
   const setIsAllSlidesPanelOpen = useBuilderStore(state => state.setIsAllSlidesPanelOpen);
   const isSlidesPanelOpen = useBuilderStore(state => state.isSlidesPanelOpen);
   const setIsSlidesPanelOpen = useBuilderStore(state => state.setIsSlidesPanelOpen);
 
-  const {
-    acceptedItems,
-    disableInteraction,
-    onAnEventTrigger,
-    settings: reportSettings,
-    useExperimentalFeatures,
-  } = usePropContext();
+  const pages = usePropStore(state => state.pages);
+  const onPageOrdersChange = usePropStore(state => state.onPageOrdersChange);
+  const onAnEventTrigger = usePropStore(state => state.onAnEventTrigger);
+  const useExperimentalFeatures = usePropStore(state => state.useExperimentalFeatures);
+
   const [animationEnd, setAnimationEnd] = useState(true);
 
   const pageGetter = useCallback(index => {
@@ -102,21 +90,9 @@ const SlidesPanel = ({
           >
             <div className="toolItem-tabContent hasInnerScroll">
               <ListWrapper
-                acceptedItems={acceptedItems}
-                additionalPageItems={additionalPageItems}
                 component={SortablePageList()}
-                disableInteraction={disableInteraction}
-                hashCode={hashCode}
-                itemAccessor={itemAccessor}
-                onAnEventTrigger={onAnEventTrigger}
-                onPageAdd={onPageAdd}
-                onPageDuplicate={onPageDuplicate}
-                onPageRemove={onPageRemove}
                 onSortEnd={onPageSort}
-                pageCount={pages.length}
                 pageGetter={pageGetter}
-                pages={pages}
-                reportSettings={reportSettings}
               />
             </div>
           </Section>
@@ -124,19 +100,6 @@ const SlidesPanel = ({
       )}
     </Panel>
   );
-};
-
-SlidesPanel.propTypes = {
-  additionalPageItems: PropTypes.arrayOf(PropTypes.node),
-  hashCode: PropTypes.string,
-  itemAccessor: PropTypes.func,
-  onPageAdd: PropTypes.func,
-  onPageDuplicate: PropTypes.func,
-  onPageOrdersChange: PropTypes.func,
-  onPageRemove: PropTypes.func,
-  pages: PropTypes.arrayOf(
-    PropTypes.shape({}),
-  ),
 };
 
 export default memo(SlidesPanel);

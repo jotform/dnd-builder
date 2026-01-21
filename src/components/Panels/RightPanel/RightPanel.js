@@ -1,16 +1,17 @@
 import {
   memo,
+  useCallback,
   useEffect,
+  useMemo,
   useRef,
 } from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Panel from '../../Builder/Panel';
 import Section from '../../Builder/Section';
 import Layout from '../../../constants/reportSettings';
 import Page from '../../../constants/pageSettings';
 import { useBuilderStore } from '../../../contexts/BuilderContext';
-import { usePropContext } from '../../../contexts/PropContext';
+import { usePropStore } from '../../../contexts/PropContext';
 import { findItemById, getTabsWithSettings } from '../../../utils/functions';
 import { useTranslatedTexts } from '../../../utils/hooks';
 import {
@@ -24,13 +25,7 @@ const exceptionalClasses = [
   'pageSettingSideBtn', 'paneClose', 'paneToggler', 'forZoom', 'jSheetContextMenu',
 ];
 
-const RightPanel = ({
-  itemAccessor = () => {},
-  onItemChange = () => {},
-  onPageChange = () => {},
-  onSettingChange = () => {},
-  pages = [],
-}) => {
+const RightPanel = () => {
   const activeTab = useBuilderStore(state => state.activeTab);
   const editedElement = useBuilderStore(state => state.editedElement);
   const isRightPanelOpen = useBuilderStore(state => state.isRightPanelOpen);
@@ -38,10 +33,19 @@ const RightPanel = ({
   const setActiveElement = useBuilderStore(state => state.setActiveElement);
   const setActiveTab = useBuilderStore(state => state.setActiveTab);
   const setIsRightPanelOpen = useBuilderStore(state => state.setIsRightPanelOpen);
-  const { acceptedItems, settings: layoutSettings } = usePropContext();
+
+  const acceptedItems = usePropStore(state => state.acceptedItems);
+  const layoutSettings = usePropStore(state => state.settings);
+  const onItemChange = usePropStore(state => state.onItemChange);
+  const onPageChange = usePropStore(state => state.onPageChange);
+  const onSettingChange = usePropStore(state => state.onSettingChange);
+  const pages = usePropStore(state => state.pages);
+  const itemAccessor = usePropStore(state => state.itemAccessor);
+
   const panelRef = useRef(null);
   const translatedTexts = useTranslatedTexts();
-  const settingMap = {
+
+  const settingMap = useMemo(() => ({
     i_: {
       details: id => {
         const item = findItemById(id, pages);
@@ -51,7 +55,6 @@ const RightPanel = ({
         return acceptedItems[item.itemType];
       },
       title: item => {
-        // eslint-disable-next-line max-len
         return translatedTexts[`${(acceptedItems[item.itemType].title || item.itemType).toLocaleUpperCase()}_SETTINGS`];
       },
       updater: onItemChange,
@@ -93,41 +96,44 @@ const RightPanel = ({
       title: () => translatedTexts.PAGE_SETTINGS,
       updater: onPageChange,
     },
-  };
+  }), [
+    acceptedItems,
+    layoutSettings,
+    onItemChange,
+    onPageChange,
+    onSettingChange,
+    translatedTexts,
+    pages,
+    setActiveElement,
+  ]);
 
-  let editedEl;
-  let editedElId;
-  let selectedItem;
-  let element;
-  let updateFunc;
-  let title;
+  const editedEl = useMemo(() => {
+    return settingMap[editedElement.substr(0, 2)] || settingMap.l_;
+  }, [editedElement, settingMap]);
 
-  const panelConfig = () => {
-    selectedItem = editedEl.details(editedElId);
-    element = editedEl.settings(selectedItem);
-    updateFunc = editedEl.updater;
-    title = editedEl.title(selectedItem);
-  };
+  const {
+    element, selectedItem, title, updateFunc,
+  } = useMemo(() => {
+    const editedElId = editedElement.substr(2);
+    const _selectedItem = editedEl.details(editedElId);
 
-  const fallback = () => {
-    setActiveElement(null);
-    editedEl = settingMap.l_;
-    editedElId = editedElement.substr(2);
-    panelConfig();
-  };
-
-  try {
-    editedEl = settingMap[editedElement.substr(0, 2)];
-    editedElId = editedElement.substr(2);
-    const checkSelectedItem = editedEl.details(editedElId);
-    if (Object.keys(checkSelectedItem).length === 0) {
-      fallback();
-    } else {
-      panelConfig();
+    if (!_selectedItem) {
+      const fallbackEditedEl = settingMap.l_;
+      return {
+        element: fallbackEditedEl.settings(),
+        selectedItem: fallbackEditedEl.details(),
+        title: fallbackEditedEl.title(),
+        updateFunc: fallbackEditedEl.updater,
+      };
     }
-  } catch (e) {
-    fallback();
-  }
+
+    return {
+      element: editedEl.settings(_selectedItem),
+      selectedItem: _selectedItem,
+      title: editedEl.title(_selectedItem),
+      updateFunc: editedEl.updater,
+    };
+  }, [editedEl, editedElement]);
 
   // Tabs
   const tabsWithSettings = getTabsWithSettings(element, selectedItem, itemAccessor);
@@ -139,7 +145,7 @@ const RightPanel = ({
       // This is due to conditionaly hiding tabs
       setActiveTab('right', 0);
     }
-  }, [activeTab, tabs]);
+  }, [activeTab, tabs, tabsWithSettings, setActiveTab]);
 
   // Panel className
   const panelAdditionalClassName = classNames(
@@ -150,7 +156,7 @@ const RightPanel = ({
     },
   );
 
-  const onClickOutsideForPanel = e => {
+  const onClickOutsideForPanel = useCallback(e => {
     if (editedElement.substr(0, 2) === 'i_'
       || panelRef.current.contains(e.target)
       || panelRef.current.contains(document.activeElement)
@@ -161,14 +167,14 @@ const RightPanel = ({
     }
     setIsRightPanelOpen(false);
     setActiveElement(null);
-  };
+  }, [editedElement, panelRef, setIsRightPanelOpen, setActiveElement]);
 
   useEffect(() => {
     if (isRightPanelOpen) window.addEventListener('click', onClickOutsideForPanel, false);
     return () => {
       window.removeEventListener('click', onClickOutsideForPanel, false);
     };
-  }, [isRightPanelOpen]);
+  }, [isRightPanelOpen, onClickOutsideForPanel]);
 
   return (
     <>
@@ -187,7 +193,6 @@ const RightPanel = ({
               key={selectedItem.id}
               element={element}
               item={selectedItem}
-              itemAccessor={itemAccessor}
               onChange={updateFunc}
               settings={tabsWithSettings}
               tabs={tabs}
@@ -197,16 +202,6 @@ const RightPanel = ({
       </Panel>
     </>
   );
-};
-
-RightPanel.propTypes = {
-  itemAccessor: PropTypes.func,
-  onItemChange: PropTypes.func,
-  onPageChange: PropTypes.func,
-  onSettingChange: PropTypes.func,
-  pages: PropTypes.arrayOf(
-    PropTypes.shape({}),
-  ),
 };
 
 export default memo(RightPanel);
