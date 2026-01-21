@@ -15,6 +15,8 @@ const ListWrapper = ({
   const pages = usePropStore(state => state.pages);
   const pageCount = useMemo(() => pages.length, [pages]);
   const onPageAdd = usePropStore(state => state.onPageAdd);
+  const onPageDuplicate = usePropStore(state => state.onPageDuplicate);
+  const onPageRemove = usePropStore(state => state.onPageRemove);
   const reportSettings = usePropStore(state => state.settings);
 
   const listRef = useRef(null);
@@ -90,6 +92,16 @@ const ListWrapper = ({
     onPageAdd(index);
   }, [onPageAdd]);
 
+  const handlePageDuplicate = useCallback(index => {
+    setSelectedPageIndex(index);
+    onPageDuplicate(index);
+  }, [onPageDuplicate]);
+
+  const handlePageRemove = useCallback(index => {
+    setSelectedPageIndex(index);
+    onPageRemove(index);
+  }, [onPageRemove]);
+
   useEffect(() => { // after new page added
     scrollToTarget(`pageActions-id-${selectedPageIndex}`, 0, {});
     resetSelectedPageIndex();
@@ -107,6 +119,8 @@ const ListWrapper = ({
           height="100%"
           onPageAdd={handlePageAdd}
           onPageClick={onPageClick}
+          onPageDuplicate={handlePageDuplicate}
+          onPageRemove={handlePageRemove}
           onSortEnd={_onSortEnd}
           pageContainerStyle={pageContainerStyles}
           pageCount={pageCount}
