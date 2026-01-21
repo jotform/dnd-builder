@@ -67,35 +67,15 @@ describe('Presentation Stories', () => {
     expect(presentation.find(selectors.progressBar)).toHaveLength(0);
   });
 
-  it('`pageCount` prop passes to PresentationProvider correctly', () => {
-    const wrapper = presentation.find(PresentationProvider);
-    expect(wrapper.props().pageCount).toBe(props.pages.length);
-  });
-
   it('`acceptedItems` and `setting` props passes to PropProvider correctly', () => {
     const wrapper = presentation.find(PropProvider);
     expect(wrapper.props().acceptedItems).toBe(props.acceptedItems);
     expect(wrapper.props().settings).toBe(props.settings);
   });
 
-  it('`presentationBarActions` prop passes to PresentationWrapper correctly', () => {
-    const wrapper = presentation.find(PresentationWrapper);
-    expect(wrapper.props().presentationBarActions).toBe(props.presentationBarActions);
-  });
-
-  it('`pages` prop passes to StaticScene correctly', () => {
-    const wrapper = presentation.find(StaticScene).first();
+  it('pages prop passes to PropProvider correctly', () => {
+    const wrapper = presentation.find(PropProvider);
     expect(wrapper.props().pages).toBe(props.pages);
-  });
-
-  it('`pages` prop passes to Print correctly', () => {
-    const wrapper = presentation.find(Print);
-    expect(wrapper.props().pages).toBe(props.pages);
-  });
-
-  it('`pages` prop passes to ZoomControls', () => {
-    const wrapperZoomControls = presentation.find(ZoomControls);
-    expect(wrapperZoomControls.first().props().pages).toBe(props.pages);
   });
 
   it('`items` prop passes to StaticPage', () => {

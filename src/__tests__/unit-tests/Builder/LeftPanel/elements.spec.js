@@ -8,25 +8,17 @@ import {
 import Section from '../../../../components/Builder/Section';
 import Element from '../../../../components/Builder/Element';
 import Tabs from '../../../../components/Builder/Tabs';
-import { BuilderProvider } from '../../../../contexts/BuilderContext';
+import { mountWithProviders } from '../../../../__test_helpers__/utils';
 
 describe('Elements', () => {
   it('Should Always Render LeftPanelCloser', () => {
-    const elementsWrapper = mount(
-      <BuilderProvider>
-        <Elements />
-      </BuilderProvider>
-    );
+    const elementsWrapper = mountWithProviders(<Elements />);
 
     expect(elementsWrapper.find(LeftPanelCloser)).toHaveLength(1);
   });
 
   it('Should Not Render SectionWithSearch & Elements If LeftPanelConfig is Empty', () => {
-    const elementsWrapper = mount(
-      <BuilderProvider>
-        <Elements />
-      </BuilderProvider>
-    );
+    const elementsWrapper = mountWithProviders(<Elements />);
     expect(elementsWrapper.find(Section)).toHaveLength(1);
     expect(elementsWrapper.find(Element)).toHaveLength(0);
   });
@@ -67,12 +59,11 @@ describe('Elements', () => {
       ],
     };
 
-    const elementsWrapper = mount(
-      <BuilderProvider>
+    const elementsWrapper = mountWithProviders(
         <DndWrapper>
-          <Elements {...props} />
-        </DndWrapper>
-      </BuilderProvider>,
+          <Elements />
+        </DndWrapper>,
+        { propProps: { leftPanelConfig: props.leftPanelConfig } }
     );
     expect(elementsWrapper.find(Section)).toHaveLength(1);
     expect(elementsWrapper.find(Tabs)).toHaveLength(1);

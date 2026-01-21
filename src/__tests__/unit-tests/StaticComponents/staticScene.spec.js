@@ -1,20 +1,13 @@
 import React from 'react';
-import { PresentationProvider } from '../../../contexts/PresentationContext';
 import { selectors } from '../../../__test_helpers__/constants';
 import {StaticPageWithZoomPanPinch} from '../../../components/Preview/StaticPage';
 import StaticScene from '../../../components/Preview/StaticScene';
 import ZoomControls from '../../../components/Builder/ZoomControls';
-import { BuilderProvider } from '../../../contexts/BuilderContext';
+import { mountWithProviders } from '../../../__test_helpers__/utils';
 
 describe('StaticScene Component Tree', () => {
   it('Should Always Render Wrapper Div', () => {
-    const staticSceneShallow = mount(
-      <BuilderProvider>
-        <PresentationProvider>
-          <StaticScene />
-        </PresentationProvider>
-      </BuilderProvider>,
-    );
+    const staticSceneShallow = mountWithProviders(<StaticScene />);
     expect(staticSceneShallow.find(selectors.reportCanvas)).toHaveLength(1);
   });
 
@@ -22,25 +15,13 @@ describe('StaticScene Component Tree', () => {
     const props = {
       presentationPage: 3,
     };
-    const staticSceneShallow = mount(
-      <BuilderProvider>
-      <PresentationProvider>
-        <StaticScene {...props} />
-      </PresentationProvider>
-      </BuilderProvider>,
-    );
+    const staticSceneShallow = mountWithProviders(<StaticScene {...props} />);
     const wrapperDiv = staticSceneShallow.find(selectors.reportCanvas).props().style.transform;
     expect(wrapperDiv).toEqual(`translateX(-${(props.presentationPage * 100)}%)`);
   });
 
   it('Should Not Render StaticPage If Pages Prop Not Defined', () => {
-    const staticSceneShallow = mount(
-      <BuilderProvider>
-        <PresentationProvider>
-          <StaticScene />
-        </PresentationProvider>
-      </BuilderProvider>,
-    );
+    const staticSceneShallow = mountWithProviders(<StaticScene />);
     expect(staticSceneShallow.find(StaticPageWithZoomPanPinch).exists()).toBeFalsy();
   });
 
@@ -59,24 +40,15 @@ describe('StaticScene Component Tree', () => {
         },
       ],
     };
-    const staticSceneShallow = mount(
-      <BuilderProvider>
-        <PresentationProvider pageCount={props.pages.length}>
-          <StaticScene {...props} />
-        </PresentationProvider>
-      </BuilderProvider>,
-    );
+    const staticSceneShallow = mountWithProviders(<StaticScene {...props} />, {
+      presentationProps: { pageCount: props.pages.length },
+      propProps: { pages: props.pages }
+    });
     expect(staticSceneShallow.find(StaticPageWithZoomPanPinch)).toHaveLength(2);
   });
 
   it('Should Render ZoomControl If isFullscreen Prop Value is False', () => {
-    const presentationWrapper = mount(
-      <BuilderProvider>
-        <PresentationProvider isFullscreen={false}>
-          <StaticScene />
-        </PresentationProvider>
-      </BuilderProvider>,
-    );
+    const presentationWrapper = mountWithProviders(<StaticScene />, { presentationProps: { isFullscreen: false } });
     expect(presentationWrapper.find(ZoomControls)).toHaveLength(1);
   });
 
