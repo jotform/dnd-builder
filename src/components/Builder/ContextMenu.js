@@ -42,10 +42,13 @@ const ContextMenu = ({
   useEventListener('wheel', removeFunc);
 
   useLayoutEffect(() => {
-    const newPosition = getContainerPositions(container.current, positions);
-    setPositions({
-      x: newPosition.x,
-      y: newPosition.y,
+    setPositions(prev => {
+      const newPosition = getContainerPositions(container.current, prev);
+      return {
+        ...prev,
+        x: newPosition.x,
+        y: newPosition.y,
+      };
     });
   }, []);
 

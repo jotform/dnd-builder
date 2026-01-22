@@ -3,9 +3,13 @@ import {
   useRef,
   useState,
   useMemo,
+  useCallback,
 } from 'react';
-import { zoomHandler } from './functions';
+import { getZoomValue } from './functions';
 import { SharingTextsModule } from '../constants/texts';
+import { usePropStore } from '../contexts/PropContext';
+import { useBuilderStore } from '../contexts/BuilderContext';
+import { usePresentationStore } from '../contexts/PresentationContext';
 
 export const useStateWithCallback = (initialState, callback) => {
   const [state, setState] = useState(initialState);
@@ -62,26 +66,30 @@ export const usePrevious = value => {
   return ref.current;
 };
 
-export const useFitZoom = ({
-  handler,
-  isModeCustomize,
-  settings,
-}) => {
+export const useFitZoom = () => {
+  const settings = usePropStore(state => state.settings);
+  const setZoom = useBuilderStore(state => state.setZoom);
+
   useEffect(() => {
-    zoomHandler({
-      handler,
-      isModeCustomize,
+    const newZoom = getZoomValue({
       limitZoom: true,
-      onLoad: true, // while page is loading, some conditions should be not working in handler
-      settings,
+      settings: {
+        reportLayoutHeight: settings.reportLayoutHeight,
+        reportLayoutWidth: settings.reportLayoutWidth,
+      },
     });
-  }, [settings.reportLayout]);
+    setZoom(newZoom, settings.reportLayoutWidth);
+  }, [
+    settings.reportLayoutHeight,
+    settings.reportLayoutWidth,
+    setZoom,
+  ]);
 };
 
 export const usePageVisibility = (callback, pageCount, selectedPageIndex) => {
   const ratio = useRef({});
   const pageRefs = useRef([]);
-  const observer = new window.IntersectionObserver(entries => {
+  const observer = useMemo(() => new window.IntersectionObserver(entries => {
     entries.forEach(entry => {
       const order = entry.target.getAttribute('data-order');
       if (entry.intersectionRatio !== 0) {
@@ -100,7 +108,7 @@ export const usePageVisibility = (callback, pageCount, selectedPageIndex) => {
     delay: 100,
     root: document.querySelector('.jfReport-viewport'),
     threshold: [0, 0.5, 1],
-  });
+  }), [callback]);
 
   useEffect(() => {
     ratio.current = {};
@@ -119,25 +127,30 @@ export const usePageVisibility = (callback, pageCount, selectedPageIndex) => {
         observer.unobserve(page);
       });
     };
-  }, [selectedPageIndex]);
+  }, [selectedPageIndex, observer]);
 };
 
-export const useFullscreenChange = (isFullscreen, setIsFullscreen, fitToScreen) => {
+export const useFullscreenChange = (isFullscreen, fitToScreen) => {
   /**
    * All this is just to cover if the user exits fullscreen via ESC key :(
   */
-  const onFullscreenChange = () => {
+  const onAnEventTrigger = usePropStore(state => state.onAnEventTrigger);
+  const setIsFullscreen = usePresentationStore(state => state.setIsFullscreen);
+
+  const onFullscreenChange = useCallback(() => {
     if (!(
       document.fullScreen
       || document.mozFullScreen
       || document.webkitIsFullScreen
     )) {
-      if (isFullscreen) {
-        setIsFullscreen(false);
-        fitToScreen(600);
-      }
+      onAnEventTrigger('clickedFullscreen');
+      setIsFullscreen(false);
+      fitToScreen(500);
+    } else {
+      setIsFullscreen(true);
+      fitToScreen(600);
     }
-  };
+  }, [fitToScreen, setIsFullscreen, onAnEventTrigger]);
 
   useEventListener('fullscreenchange', onFullscreenChange);
   useEventListener('webkitfullscreenchange', onFullscreenChange);
@@ -146,21 +159,21 @@ export const useFullscreenChange = (isFullscreen, setIsFullscreen, fitToScreen) 
 };
 
 export const useTranslatedTexts = () => {
-  return useMemo(() => SharingTextsModule.Texts, [SharingTextsModule.Texts]);
+  return useMemo(() => SharingTextsModule.Texts, []);
 };
 
 export const useClickOutsideListener = (classes, conditionValue, onClose) => {
-  const onClickOutsideForPanel = ({ target: { classList } }) => {
+  const onClickOutsideForPanel = useCallback(({ target: { classList } }) => {
     const shouldClose = classes.some(c => classList.contains(c));
     if (shouldClose) {
       onClose();
     }
-  };
+  }, [classes, onClose]);
 
   useEffect(() => {
     if (conditionValue) window.addEventListener('click', onClickOutsideForPanel, false);
     return () => window.removeEventListener('click', onClickOutsideForPanel, false);
-  }, [conditionValue]);
+  }, [conditionValue, onClickOutsideForPanel]);
 };
 
 export const usePageTransition = (style, currentPage) => {

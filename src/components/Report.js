@@ -26,7 +26,7 @@ const Report = ({
   }, [newReportsAppTexts]);
 
   useEffect(() => {
-    if (['customize', 'preview'].indexOf(viewMode) > -1) {
+    if (viewMode === 'customize') {
       setLastScrollPosition(document.querySelector('.jfReport-viewport')?.scrollTop || 0);
     }
     setViewMode(mode);

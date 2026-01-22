@@ -2,11 +2,14 @@ import { PropProvider } from '../../contexts/PropContext';
 import PrintModeWithoutContext from './PrintModeWithoutContext';
 
 import '../../styles/jfReportsBundle.scss';
+import { PresentationProvider } from '../../contexts/PresentationContext';
 
 const PrintMode = props => {
   return (
     <PropProvider {...props}>
-      <PrintModeWithoutContext />
+      <PresentationProvider>
+        <PrintModeWithoutContext />
+      </PresentationProvider>
     </PropProvider>
   );
 };

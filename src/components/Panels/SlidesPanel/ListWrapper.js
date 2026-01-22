@@ -38,7 +38,7 @@ const ListWrapper = ({
     transform: `scale(${scale})`,
     transformOrigin: '0 0',
     width: width,
-  }), [reportSettings]);
+  }), [height, left, scale, top, width, reportBackgroundColor]);
 
   const _onSortEnd = useCallback(({ newIndex, oldIndex }) => {
     if (onSortEnd) {
@@ -85,7 +85,7 @@ const ListWrapper = ({
       scrollToTarget(`pageActions-id-${order}`);
     }
     resetSelectedPageIndex();
-  }, []);
+  }, [resetSelectedPageIndex]);
 
   const handlePageAdd = useCallback(index => {
     setSelectedPageIndex(index);
@@ -103,9 +103,9 @@ const ListWrapper = ({
   }, [onPageRemove]);
 
   useEffect(() => { // after new page added
-    scrollToTarget(`pageActions-id-${selectedPageIndex}`, 0, {});
+    scrollToTarget(`pageActions-id-${selectedPageIndex}`, 0, { behavior: 'smooth' });
     resetSelectedPageIndex();
-  }, [pageCount]);
+  }, [resetSelectedPageIndex, selectedPageIndex]);
 
   return (
     <>

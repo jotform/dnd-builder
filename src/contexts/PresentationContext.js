@@ -16,8 +16,10 @@ const presentationStore = props => {
     setFittedZoom: fittedZoom => set({ fittedZoom }),
     setIsFullscreen: isFullscreen => set({ isFullscreen }),
     setPageCount: pageCount => set({ pageCount }),
+    setPresentationBarActions: presentationBarActions => set({ presentationBarActions }),
     setShowControlsInFullScreen: showControlsInFullScreen => set({ showControlsInFullScreen }),
     setShowZoomInFullScreen: showZoomInFullScreen => set({ showZoomInFullScreen }),
+    setUseFixedPresentationBar: useFixedPresentationBar => set({ useFixedPresentationBar }),
     showControlsInFullScreen: false,
     showZoomInFullScreen: false,
     useFixedPresentationBar: props.useFixedPresentationBar || false,
@@ -39,6 +41,22 @@ export const PresentationProvider = ({ children, ...props }) => {
     setPageCount(pages.length);
   }, [pages]);
 
+  const { presentationBarActions } = props;
+  useEffect(() => {
+    const { setPresentationBarActions } = storeRef.current.getState();
+    if (presentationBarActions) {
+      setPresentationBarActions(presentationBarActions);
+    }
+  }, [presentationBarActions]);
+
+  const { useFixedPresentationBar } = props;
+  useEffect(() => {
+    const { setUseFixedPresentationBar } = storeRef.current.getState();
+    if (useFixedPresentationBar) {
+      setUseFixedPresentationBar(useFixedPresentationBar);
+    }
+  }, [useFixedPresentationBar]);
+
   return (
     <PresentationContext.Provider value={storeRef.current}>
       {children}
@@ -51,6 +69,8 @@ PresentationProvider.propTypes = {
   currentPage: PropTypes.number,
   isFullscreen: PropTypes.bool,
   pageCount: PropTypes.number,
+  presentationBarActions: PropTypes.array,
+  useFixedPresentationBar: PropTypes.bool,
 };
 
 export const PresentationConsumer = PresentationContext.Consumer;

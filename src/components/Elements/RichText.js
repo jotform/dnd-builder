@@ -61,7 +61,7 @@ export const RichTextElement = ({
       { id },
       { value: newValue },
     );
-  }, [id]);
+  }, [id, onItemChange]);
 
   const onFocus = e => {
     e.currentTarget.parentElement.setAttribute('draggable', false);

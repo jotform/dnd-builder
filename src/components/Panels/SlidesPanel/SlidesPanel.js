@@ -36,7 +36,7 @@ const SlidesPanel = () => {
 
     onPageOrdersChange(newPageOrders);
     onAnEventTrigger('sortPageFromSlides');
-  }, [pages]);
+  }, [pages, onPageOrdersChange, onAnEventTrigger]);
 
   // Panel className
   const panelAdditionalClassName = classNames(

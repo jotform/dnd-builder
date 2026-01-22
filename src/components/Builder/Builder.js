@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import DndWrapper from './DndWrapper';
 import { BuilderProvider } from '../../contexts/BuilderContext';
 import { PropProvider } from '../../contexts/PropContext';
-import ReportWrapper from '../ReportWrapper';
 import Scene from './Scene';
 import RightPanel from '../Panels/RightPanel';
 import LeftPanel from '../Panels/LeftPanel';
@@ -11,17 +10,22 @@ import SlidesPanel from '../Panels/SlidesPanel';
 import AllSlidesPanel from '../Panels/AllSlidesPanel';
 import { leftPanelConfigPropType } from '../../constants/propTypes';
 import '../../styles/jfReportsBundle.scss';
+import BuilderWrapper from './BuilderWrapper';
 
 const Builder = ({
   onRightPanelsToggled = () => {},
+  lastScrollPosition = 0,
   ...props
 }) => {
   const { useExperimentalFeatures } = props;
   return (
     <StrictMode>
-      <BuilderProvider onRightPanelsToggled={onRightPanelsToggled}>
+      <BuilderProvider
+        lastScrollPosition={lastScrollPosition}
+        onRightPanelsToggled={onRightPanelsToggled}
+      >
         <PropProvider {...props}>
-          <ReportWrapper mode="customize">
+          <BuilderWrapper>
             <DndWrapper>
               <LeftPanel />
               <Scene />
@@ -31,7 +35,7 @@ const Builder = ({
             {useExperimentalFeatures && (
               <AllSlidesPanel />
             )}
-          </ReportWrapper>
+          </BuilderWrapper>
         </PropProvider>
       </BuilderProvider>
     </StrictMode>
@@ -46,6 +50,8 @@ Builder.propTypes = {
   disableInteraction: PropTypes.arrayOf(PropTypes.string),
   /** To pass in extra props to items selectively */
   itemAccessor: PropTypes.func,
+  /** Last scroll position */
+  lastScrollPosition: PropTypes.number,
   leftPanelConfig: leftPanelConfigPropType,
   /** To track and log user actions */
   onAnEventTrigger: PropTypes.func,

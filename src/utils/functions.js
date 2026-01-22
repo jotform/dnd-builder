@@ -649,12 +649,9 @@ export const arrayMove = (array, from, to) => {
   return newArray;
 };
 
-export const zoomHandler = ({
-  handler,
+export const getZoomValue = ({
   isFullscreen,
-  isModeCustomize,
   limitZoom,
-  onLoad,
   settings,
   useFixedPresentationBar,
   useProgressBar,
@@ -690,8 +687,6 @@ export const zoomHandler = ({
 
   if (limitZoom && newZoom < 0.5) newZoom = 0.5;
   if (limitZoom && newZoom > 1) newZoom = 1;
-
-  handler(newZoom, isModeCustomize, reportLayoutWidth, onLoad);
 
   return newZoom;
 };

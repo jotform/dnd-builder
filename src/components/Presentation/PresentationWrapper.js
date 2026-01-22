@@ -12,8 +12,8 @@ import { useBuilderStore } from '../../contexts/BuilderContext';
 import { useEventListener, useFullscreenChange } from '../../utils/hooks';
 import {
   changePage,
+  getZoomValue,
   throttle,
-  zoomHandler,
 } from '../../utils/functions';
 import { usePresentationStore } from '../../contexts/PresentationContext';
 import { usePropStore } from '../../contexts/PropContext';
@@ -29,7 +29,6 @@ const PresentationWrapper = ({
   const pageCount = usePresentationStore(state => state.pageCount);
   const setCurrentPage = usePresentationStore(state => state.setCurrentPage);
   const setFittedZoom = usePresentationStore(state => state.setFittedZoom);
-  const setIsFullscreen = usePresentationStore(state => state.setIsFullscreen);
   const setShowControlsInFullScreen = usePresentationStore(state => state.setShowControlsInFullScreen);
   const showControlsInFullScreen = usePresentationStore(state => state.showControlsInFullScreen);
   const useFixedPresentationBar = usePresentationStore(state => state.useFixedPresentationBar);
@@ -38,33 +37,45 @@ const PresentationWrapper = ({
   const zoom = useBuilderStore(state => state.zoom);
 
   const fitToScreen = useCallback((delay = 0) => setTimeout(() => {
-    const newZoom = zoomHandler({
-      handler: setZoom,
+    const newZoom = getZoomValue({
       isFullscreen,
-      isModeCustomize: false,
       limitZoom: false,
-      settings,
+      settings: {
+        reportLayoutHeight: settings.reportLayoutHeight,
+        reportLayoutWidth: settings.reportLayoutWidth,
+      },
       useFixedPresentationBar,
       useProgressBar: pageCount > 2,
     });
+    setZoom(newZoom);
     setFittedZoom(newZoom);
-  }, delay), [settings, isFullscreen, useFixedPresentationBar, pageCount]);
+  }, delay), [
+    settings.reportLayoutHeight,
+    settings.reportLayoutWidth,
+    isFullscreen,
+    useFixedPresentationBar,
+    pageCount,
+    setZoom,
+    setFittedZoom,
+  ]);
 
-  useEffect(() => { fitToScreen(100); }, [isFullscreen]);
+  useEffect(() => {
+    fitToScreen(100);
+  }, [isFullscreen, fitToScreen]);
 
   useEffect(() => {
     if (isFullscreen) {
       setShowControlsInFullScreen(true);
       setTimeout(() => setShowControlsInFullScreen(false), 1500);
     }
-  }, [isFullscreen]);
+  }, [isFullscreen, setShowControlsInFullScreen]);
 
-  const pageChanger = action => changePage({
+  const pageChanger = useCallback(action => changePage({
     action,
     currentPage,
     pageCount,
     setCurrentPage,
-  });
+  }), [currentPage, pageCount, setCurrentPage]);
 
   const handleKeyboardEvent = useCallback(e => {
     if (e.keyCode === 39) {
@@ -72,7 +83,7 @@ const PresentationWrapper = ({
     } else if (e.keyCode === 37) {
       pageChanger(-1)();
     }
-  });
+  }, [pageChanger]);
 
   const setControlVisibility = e => {
     // TODO :: timeout in n out for better ux
@@ -88,7 +99,7 @@ const PresentationWrapper = ({
   useEventListener('mousemove', throttle(setControlVisibility, 150));
   useEventListener('gesturestart', e => e.preventDefault());
   useEventListener('gesturechange', e => e.preventDefault());
-  useFullscreenChange(isFullscreen, setIsFullscreen, fitToScreen);
+  useFullscreenChange(isFullscreen, fitToScreen);
 
   const gesture = useDrag(({
     active, movement: [mx], direction: [xDir], cancel,

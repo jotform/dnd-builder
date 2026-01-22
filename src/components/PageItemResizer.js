@@ -46,7 +46,6 @@ const PageItemResizer = ({
   duplicateItem,
   isDragging,
   isMultipleItemSelected,
-  isRightPanelOpen,
   isSelectedElement,
   isTextEditorOpen,
   item,
@@ -126,10 +125,8 @@ const PageItemResizer = ({
 
   const openSettings = useCallback(() => {
     setActiveElement(item.id);
-    if (!isRightPanelOpen) {
-      setIsRightPanelOpen(true);
-    }
-  }, [item.id, isRightPanelOpen, setIsRightPanelOpen]);
+    setIsRightPanelOpen(true);
+  }, [item.id, setIsRightPanelOpen, setActiveElement]);
 
   const { isLocked } = item;
 
