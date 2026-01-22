@@ -50,7 +50,7 @@ const ZoomControls = ({
 
   const zoomValue = useMemo(() => {
     return Number.isNaN(zoom) ? 100 : (zoom * ZOOM_MULTIPLIER).toFixed(0);
-  }, [zoom, ZOOM_MULTIPLIER]);
+  }, [zoom]);
 
   const { FIT_TO_SCENE, ZOOM_IN, ZOOM_OUT } = useTranslatedTexts();
 

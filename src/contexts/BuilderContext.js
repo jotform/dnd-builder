@@ -71,9 +71,9 @@ const builderStore = props => {
     setIsTextEditorOpen: status => {
       set({ isTextEditorOpen: status });
     },
-    setZoom: (zoom, isModeCustomize = false, layoutWidth, onLoad = false) => {
+    setZoom: (zoom, layoutWidth) => {
       set({ zoom });
-      if (isModeCustomize && !onLoad) {
+      if (layoutWidth) {
         const { clientWidth: paneWidth } = document.querySelector('.jfReport-pane .toolItemWrapper');
         const sceneWidth = parseInt(layoutWidth, 10) * zoom;
         if (window.innerWidth - sceneWidth + 100 > (paneWidth * 2)) {

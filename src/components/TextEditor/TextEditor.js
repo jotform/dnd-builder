@@ -20,7 +20,7 @@ const TextEditor = ({
     if (isSelected && !isLocked) {
       setIsTextEditorOpen(true);
     }
-  }, [isSelected, isLocked]);
+  }, [isSelected, isLocked, setIsTextEditorOpen]);
 
   const isNotEmpty = useMemo(() => {
     const el = document.createElement('div');

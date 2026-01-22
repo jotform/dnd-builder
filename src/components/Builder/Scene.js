@@ -3,6 +3,7 @@ import {
   createRef,
   Fragment,
   useEffect,
+  useMemo,
   useRef,
   useState,
 } from 'react';
@@ -51,21 +52,21 @@ const Scene = () => {
   const viewPortRef = useRef({});
 
   /* Page Refs */
-  const refs = pages.reduce((acc, curr) => {
+  const refs = useRef(pages.reduce((acc, curr) => {
     acc[curr.id] = createRef(null);
     return acc;
-  }, {});
+  }, {}));
 
   const isMultipleItemSelected = activeElement !== null && activeElement.length > 1;
 
   /* Calculate snap guides */
-  const [guides, setGuides] = useState({});
   const keyDownCount = useRef(null);
-  useEffect(() => {
-    const _guides = pages.reduce((acc, page) => {
+
+  const guides = useMemo(() => {
+    return pages.reduce((acc, page) => {
       const _pageGuides = {};
-      if (refs[page.id]) {
-        const pageRef = refs[page.id];
+      const pageRef = refs.current[page.id];
+      if (pageRef && pageRef.current) {
         const {
           height, left, top, width,
         } = pageRef.current.getBoundingClientRect();
@@ -86,14 +87,13 @@ const Scene = () => {
       acc[page.id] = _pageGuides;
       return acc;
     }, {});
-    setGuides(_guides);
   }, [pages, zoom]);
 
   useEffect(() => {
     if (viewPortRef.current) {
       viewPortRef.current.scrollTop = lastScrollPosition;
     }
-  }, []); // set last scroll position after changing mode
+  }, [lastScrollPosition]); // set last scroll position after changing mode
 
   useEffect(() => {
     if (document.body.classList.contains('hideHeader') && isHeaderHidden) {
@@ -314,7 +314,7 @@ const Scene = () => {
     >
       <DraggableItemLayer
         guides={guides}
-        pageRefs={refs}
+        pageRefs={refs.current}
         pages={pages}
       />
 
@@ -336,7 +336,7 @@ const Scene = () => {
               />
               <div
                 key={`page_${page.id}`}
-                ref={refs[page.id]}
+                ref={refs.current[page.id]}
                 className={classNames.page}
                 data-id={page.id}
                 data-order={page.order}
@@ -348,7 +348,7 @@ const Scene = () => {
                   items={page.items}
                   page={page}
                   pageIndex={index}
-                  pageRef={refs[page.id]}
+                  pageRef={refs.current[page.id]}
                   style={pageContainerStyles.current}
                 />
               </div>

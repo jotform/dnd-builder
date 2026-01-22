@@ -9,6 +9,7 @@ import Scene from '../../../components/Builder/Scene';
 import RightPanel from '../../../components/Panels/RightPanel';
 import SlidesPanel from '../../../components/Panels/SlidesPanel';
 import AllSlidesPanel from '../../../components/Panels/AllSlidesPanel';
+import BuilderWrapper from '../../../components/Builder/BuilderWrapper';
 
 describe('Builder Component Tree', () => {
   const builderWrapper = shallow(<Builder />);
@@ -22,7 +23,7 @@ describe('Builder Component Tree', () => {
   });
 
   it('Should Always Render ReportWrapper in Builder', () => {
-    expect(builderWrapper.find(ReportWrapper)).toHaveLength(1);
+    expect(builderWrapper.find(BuilderWrapper)).toHaveLength(1);
   });
 
   it('Should Always Render DndProvider in Builder', () => {
@@ -50,7 +51,7 @@ describe('Builder Component Tree', () => {
   });
 
   it('ReportWrapper contains DndProvider', () => {
-    expect(builderWrapper.find(DndWrapper).parent().is(ReportWrapper)).toEqual(true);
+    expect(builderWrapper.find(DndWrapper).parent().is(BuilderWrapper)).toEqual(true);
   });
 
   it('DndProvider contains Scene, RightPanel, LeftPanel, SlidesPanel', () => {

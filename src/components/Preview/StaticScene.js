@@ -18,7 +18,6 @@ const StaticScene = ({
   mode = '',
   presentationPage = 0,
 }) => {
-  const lastScrollPosition = useBuilderStore(state => state.lastScrollPosition);
   const setZoom = useBuilderStore(state => state.setZoom);
   const zoom = useBuilderStore(state => state.zoom);
 
@@ -42,12 +41,6 @@ const StaticScene = ({
   const height = parseInt(reportLayoutHeight, 10);
 
   useEffect(() => {
-    if (viewPortRef.current) {
-      viewPortRef.current.scrollTop = lastScrollPosition;
-    }
-  }, []); // set last scroll position after changing mode
-
-  useEffect(() => {
     transformRefs.current = transformRefs.current.slice(0, pages.length);
   }, [pages.length]);
 
@@ -64,7 +57,7 @@ const StaticScene = ({
     if (roundValue <= 2 && roundValue >= 0.5) {
       setZoom(roundValue);
     }
-  }, []);
+  }, [setZoom]);
 
   useEffect(() => {
     if (transformRefs.current.length > 0) {
@@ -72,7 +65,7 @@ const StaticScene = ({
         transformRefs.current[i].centerView(zoom);
       }
     }
-  }, [pages.length, zoom, isFullscreen, mode]);
+  }, [pages.length, zoom]);
 
   return (
     <main

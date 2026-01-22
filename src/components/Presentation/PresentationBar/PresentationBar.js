@@ -3,54 +3,24 @@ import PropTypes from 'prop-types';
 import PageNavigation from './PageNavigation';
 import PresentationActions from './PresentationActions';
 import SelectZoom from './SelectZoom';
-import {
-  changePage,
-  closeFullscreen,
-  openFullscreenHelper,
-} from '../../../utils/functions';
+import { changePage } from '../../../utils/functions';
 import { useBuilderStore } from '../../../contexts/BuilderContext';
 import { usePresentationStore } from '../../../contexts/PresentationContext';
 import { usePropStore } from '../../../contexts/PropContext';
 
 const PresentationBar = ({
-  fitToScreen = () => {},
   isVisible = true,
 }) => {
   const currentPage = usePresentationStore(state => state.currentPage);
   const setCurrentPage = usePresentationStore(state => state.setCurrentPage);
-  const isFullscreen = usePresentationStore(state => state.isFullscreen);
-  const setIsFullscreen = usePresentationStore(state => state.setIsFullscreen);
   const fittedZoom = usePresentationStore(state => state.fittedZoom);
   const pageCount = usePresentationStore(state => state.pageCount);
   const setZoom = useBuilderStore(state => state.setZoom);
   const zoom = useBuilderStore(state => state.zoom);
 
-  const onAnEventTrigger = usePresentationStore(state => state.onAnEventTrigger);
-  const presentationBarActions = usePresentationStore(state => state.presentationBarActions);
   const settings = usePropStore(state => state.settings);
 
   const { reportLayoutWidth = 1123 } = settings;
-
-  const toggleFullscreen = goFullscreen => () => {
-    if (goFullscreen) {
-      const openRequest = openFullscreenHelper();
-      if (openRequest && openRequest.then) {
-        openRequest.then(fitToScreen);
-      } else {
-        fitToScreen(500);
-      }
-    } else {
-      const closeRequest = closeFullscreen();
-      if (closeRequest && closeRequest.then) {
-        closeRequest.then(fitToScreen);
-      } else {
-        fitToScreen(600); // magic number for safari :(
-      }
-    }
-
-    onAnEventTrigger('clickedFullscreen');
-    setIsFullscreen(goFullscreen);
-  };
 
   const pageChanger = action => changePage({
     action,
@@ -109,18 +79,13 @@ const PresentationBar = ({
             <div className="divider" />
           </>
         )}
-        <PresentationActions
-          isFullscreen={isFullscreen}
-          presentationBarActions={presentationBarActions}
-          toggleFullscreen={toggleFullscreen}
-        />
+        <PresentationActions />
       </div>
     </div>
   );
 };
 
 PresentationBar.propTypes = {
-  fitToScreen: PropTypes.func,
   isVisible: PropTypes.bool,
 };
 

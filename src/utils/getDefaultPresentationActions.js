@@ -9,7 +9,7 @@ export const getDefaultPresentationActions = ({
       key="present"
       aria-label={isFullscreen ? 'Exit fullscreen' : 'Enter fullscreen'}
       className="jfReportButton isAccent"
-      onClick={toggleFullscreen(!isFullscreen)}
+      onClick={toggleFullscreen}
       type="button"
     >
       {isFullscreen ? (

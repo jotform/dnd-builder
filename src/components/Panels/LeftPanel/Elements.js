@@ -1,5 +1,6 @@
 import {
-  memo, useState, useEffect,
+  memo, useState,
+  useMemo,
 } from 'react';
 import PropTypes from 'prop-types';
 import Section from '../../Builder/Section';
@@ -20,20 +21,20 @@ const Elements = () => {
 
   // Tabs
   const tabDetails = getTabsWithElements(leftPanelConfig);
-  const tabs = Object.keys(tabDetails);
 
-  const [searchElements, setSearchElements] = useState([]);
-  const [currentTabInfo, setCurrentTabInfo] = useState({});
-
-  useEffect(() => {
-    setCurrentTabInfo(tabDetails[tabs[activeTab.left]]);
-  }, [activeTab.left]);
+  const tabs = useMemo(() => {
+    return Object.keys(tabDetails);
+  }, [tabDetails]);
 
   const {
     elements = {},
     hasSearch = false,
     searchKeys,
-  } = currentTabInfo || {};
+  } = useMemo(() => {
+    return tabDetails[tabs[activeTab.left]] || {};
+  }, [activeTab.left, tabDetails, tabs]);
+
+  const [searchElements, setSearchElements] = useState([]);
 
   const elementWillBeUsed = hasSearch ? searchElements : elements;
   return (

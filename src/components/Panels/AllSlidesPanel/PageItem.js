@@ -31,7 +31,7 @@ const PageItem = ({
       transform: CSS.Transform.toString(transform),
       transition: transitionValue,
     };
-  }, [transform, transition, isDragging, style]);
+  }, [transform, transition, isDragging]);
 
   const onKeyDown = f => f;
   return (

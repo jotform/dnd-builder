@@ -348,7 +348,6 @@ const DraggableItem = ({
         duplicateItem={duplicateItem}
         isDragging={isDragging}
         isMultipleItemSelected={isMultipleItemSelected}
-        isRightPanelOpen={isRightPanelOpen}
         isSelectedElement={isSelected}
         isTextEditorOpen={isTextEditorOpen}
         item={item}

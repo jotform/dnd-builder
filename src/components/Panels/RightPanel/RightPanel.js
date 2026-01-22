@@ -133,7 +133,7 @@ const RightPanel = () => {
       title: editedEl.title(_selectedItem),
       updateFunc: editedEl.updater,
     };
-  }, [editedEl, editedElement]);
+  }, [editedEl, editedElement, settingMap.l_]);
 
   // Tabs
   const tabsWithSettings = getTabsWithSettings(element, selectedItem, itemAccessor);

@@ -27,7 +27,7 @@ const AllSlidesPanel = () => {
     }, {});
     onPageOrdersChange(newPageOrders);
     onAnEventTrigger('sortPageFromAllSlides');
-  }, [pages]);
+  }, [pages, onPageOrdersChange, onAnEventTrigger]);
 
   const onPageClick = useCallback(e => {
     const pageID = e.target.getAttribute('data-id');

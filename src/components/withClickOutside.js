@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { EVENT_IGNORED_ROLES } from '../constants/eventIgnoredRoles';
 
@@ -16,7 +16,7 @@ function withClickOutside(WrappedComponent) {
 
     const wrapper = useRef(null);
 
-    const handleClickOutside = event => {
+    const handleClickOutside = useCallback(event => {
       const { classList } = event.target;
       if (
         exceptionalClasses
@@ -33,14 +33,14 @@ function withClickOutside(WrappedComponent) {
       if (wrapper.current && !wrapper.current.contains(event.target)) {
         onClickOutside(event);
       }
-    };
+    }, [exceptionalClasses, onClickOutside]);
 
     useEffect(() => {
       window.addEventListener('mousedown', handleClickOutside, true);
       return () => {
         window.removeEventListener('mousedown', handleClickOutside, true);
       };
-    }, []);
+    }, [handleClickOutside]);
 
     // should we memoize this?
     const propsToFilter = ['withClickOutsideWrapperClass', 'exceptionalClasses'];

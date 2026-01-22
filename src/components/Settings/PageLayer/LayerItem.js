@@ -76,7 +76,7 @@ const LayerItem = ({
         {itemText}
       </div>
     </div>
-  ), [Icon, itemText]);
+  ), [itemText]);
 
   return (
     <div
