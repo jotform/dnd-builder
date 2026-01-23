@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
-import * as icons from '../../utils/icons';
 import { roundForDecimalPart } from '../../utils/functions';
 import { useTranslatedTexts } from '../../utils/hooks';
+import { useIcons } from '../../hooks/useIcons';
 
 const LayoutSizeSettings = ({
   config,
@@ -11,6 +11,7 @@ const LayoutSizeSettings = ({
 }) => {
   const [aspectLock, setAspectLock] = useState(true);
   const { HEIGHT, WIDTH } = useTranslatedTexts();
+  const { lock: LockIcon, unlock: UnlockIcon } = useIcons();
 
   const { reportLayoutHeight: layoutHeight, reportLayoutWidth: layoutWidth } = item;
 
@@ -99,8 +100,8 @@ const LayoutSizeSettings = ({
             type="button"
           >
             {aspectLock
-              ? <icons.lock className="jfReportSVG icon-aspectLock" />
-              : <icons.unlock className="jfReportSVG icon-aspectUnlock" />}
+              ? <LockIcon className="jfReportSVG icon-aspectLock" />
+              : <UnlockIcon className="jfReportSVG icon-aspectUnlock" />}
           </button>
         </div>
         <div className="toolSection-subItem">

@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
-import * as icons from '../../utils/icons';
 import { moveItemInArrayFromIndexToIndex, scrollToTarget } from '../../utils/functions';
 import { useTranslatedTexts } from '../../utils/hooks';
 import { useBuilderStore } from '../../contexts/BuilderContext';
 import { usePropStore } from '../../contexts/PropContext';
+import { useIcons } from '../../hooks/useIcons';
 
 const PageActions = ({
   order = 0,
@@ -17,6 +17,14 @@ const PageActions = ({
   const onPageOrdersChange = usePropStore(state => state.onPageOrdersChange);
   const onPageRemove = usePropStore(state => state.onPageRemove);
   const disableInteraction = usePropStore(state => state.disableInteraction);
+  const {
+    arrowDown: ArrowDownIcon,
+    arrowUp: ArrowUpIcon,
+    duplicateLine: DuplicateLineIcon,
+    pageSettings: PageSettingsIcon,
+    plus: PlusIcon,
+    trashLine: TrashLineIcon,
+  } = useIcons();
 
   const setIsRightPanelOpen = useBuilderStore(state => state.setIsRightPanelOpen);
   const setEditedElement = useBuilderStore(state => state.setEditedElement);
@@ -87,7 +95,7 @@ const PageActions = ({
             title={PAGE_SETTINGS}
             type="button"
           >
-            <icons.pageSettings className="jfReportSVG icon-pageSettings" />
+            <PageSettingsIcon className="jfReportSVG icon-pageSettings" />
           </button>
           <button
             key="Duplicate Page"
@@ -97,7 +105,7 @@ const PageActions = ({
             title={DUPLICATE_PAGE}
             type="button"
           >
-            <icons.duplicate className="jfReportSVG icon-duplicateLine" />
+            <DuplicateLineIcon className="jfReportSVG icon-duplicateLine" />
           </button>
           <button
             key="Remove Slide"
@@ -107,7 +115,7 @@ const PageActions = ({
             title={REMOVE_PAGE}
             type="button"
           >
-            <icons.trash className="jfReportSVG icon-trashLine" />
+            <TrashLineIcon className="jfReportSVG icon-trashLine" />
           </button>
         </div>
         <div className="floatingController-container hasGroup">
@@ -118,7 +126,7 @@ const PageActions = ({
             title={MOVE_PAGE_UPWARDS}
             type="button"
           >
-            <icons.arrowUp className="jfReportSVG icon-arrow isTick" />
+            <ArrowUpIcon className="jfReportSVG icon-arrow isTick" />
           </button>
           <button
             key="Move Page Downwards"
@@ -127,7 +135,7 @@ const PageActions = ({
             title={MOVE_PAGE_DOWNWARDS}
             type="button"
           >
-            <icons.arrowDown className="jfReportSVG icon-arrow isTick" />
+            <ArrowDownIcon className="jfReportSVG icon-arrow isTick" />
           </button>
         </div>
         <div className="floatingController-container">
@@ -139,7 +147,7 @@ const PageActions = ({
             title={ADD_NEW_PAGE}
             type="button"
           >
-            <icons.plus className="jfReportSVG icon-plus" />
+            <PlusIcon className="jfReportSVG icon-plus" />
           </button>
         </div>
       </div>

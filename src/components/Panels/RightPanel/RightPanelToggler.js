@@ -1,12 +1,13 @@
 import { memo } from 'react';
 import { useBuilderStore } from '../../../contexts/BuilderContext';
-import * as icons from '../../../utils/icons';
+import { useIcons } from '../../../hooks/useIcons';
 import { useTranslatedTexts } from '../../../utils/hooks';
 
 const RightPanelToggler = () => {
   const setActiveElement = useBuilderStore(state => state.setActiveElement);
   const setIsRightPanelOpen = useBuilderStore(state => state.setIsRightPanelOpen);
   const { LAYOUT_SETTINGS } = useTranslatedTexts();
+  const { close: CloseIcon, settingsToggle: SettingsToggleIcon } = useIcons();
 
   return (
     <>
@@ -19,14 +20,14 @@ const RightPanelToggler = () => {
         title={LAYOUT_SETTINGS}
         type="button"
       >
-        <icons.settingsToggle className="jfReportSVG isTick" />
+        <SettingsToggleIcon className="jfReportSVG isTick" />
       </button>
       <button
         className="paneClose p-absolute js-closeRightPanel"
         onClick={() => setIsRightPanelOpen(false)}
         type="button"
       >
-        <icons.close className="jfReportSVG" />
+        <CloseIcon className="jfReportSVG" />
       </button>
     </>
   );

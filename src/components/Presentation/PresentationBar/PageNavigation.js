@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import * as icons from '../../../utils/icons';
+import { useIcons } from '../../../hooks/useIcons';
 
 const PageNavigation = ({
   currentPage = 1,
@@ -7,6 +7,7 @@ const PageNavigation = ({
   increase = () => {},
   pageCount = 1,
 }) => {
+  const { arrowLeft: ArrowLeftIcon } = useIcons();
   return (
     <div className="forSlide">
       <div className="navigation-container">
@@ -17,7 +18,7 @@ const PageNavigation = ({
             onClick={decrease}
             type="button"
           >
-            <icons.arrowLeft className="jfReportSVG icon-navs" />
+            <ArrowLeftIcon className="jfReportSVG icon-navs" />
           </button>
         )}
         <span className="controllerIndicator">
@@ -34,7 +35,7 @@ const PageNavigation = ({
             onClick={increase}
             type="button"
           >
-            <icons.arrowLeft className="jfReportSVG icon-navs" />
+            <ArrowLeftIcon className="jfReportSVG icon-navs" />
           </button>
         )}
       </div>

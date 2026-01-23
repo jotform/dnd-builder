@@ -1,6 +1,5 @@
 import { useMemo } from 'react';
 import PropTypes from 'prop-types';
-import * as icons from '../../utils/icons';
 import { useBuilderStore } from '../../contexts/BuilderContext';
 import { usePropStore } from '../../contexts/PropContext';
 import {
@@ -10,6 +9,7 @@ import {
   ZOOM_MULTIPLIER,
 } from '../../constants/zoom';
 import { useTranslatedTexts } from '../../utils/hooks';
+import { useIcons } from '../../hooks/useIcons';
 
 const ZoomControls = ({
   mode = '',
@@ -54,6 +54,8 @@ const ZoomControls = ({
 
   const { FIT_TO_SCENE, ZOOM_IN, ZOOM_OUT } = useTranslatedTexts();
 
+  const { fit: FitIcon, minus: MinusIcon, plus: PlusIcon } = useIcons();
+
   return (
     <div className={`floatingController forZoom${!showZoom ? ' hidden' : ''}`}>
       <div className="floatingController-container isGray">
@@ -63,7 +65,7 @@ const ZoomControls = ({
           title={ZOOM_IN}
           type="button"
         >
-          <icons.plus className="jfReportSVG controllerItem-icon" />
+          <PlusIcon className="jfReportSVG controllerItem-icon" />
         </button>
         <div className="controllerIndicator">
           {zoomValue}
@@ -75,7 +77,7 @@ const ZoomControls = ({
           title={ZOOM_OUT}
           type="button"
         >
-          <icons.minus className="jfReportSVG controllerItem-icon" />
+          <MinusIcon className="jfReportSVG controllerItem-icon" />
         </button>
       </div>
       <div className="floatingController-container">
@@ -85,7 +87,7 @@ const ZoomControls = ({
           title={FIT_TO_SCENE}
           type="button"
         >
-          <icons.fit className="jfReportSVG icon-fit" />
+          <FitIcon className="jfReportSVG icon-fit" />
         </button>
       </div>
     </div>

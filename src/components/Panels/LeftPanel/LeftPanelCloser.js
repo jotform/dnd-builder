@@ -1,9 +1,10 @@
 import { memo } from 'react';
 import { useBuilderStore } from '../../../contexts/BuilderContext';
-import * as icons from '../../../utils/icons';
+import { useIcons } from '../../../hooks/useIcons';
 
 const LeftPanelToggler = () => {
   const setIsLeftPanelOpen = useBuilderStore(state => state.setIsLeftPanelOpen);
+  const { close: CloseIcon } = useIcons();
   return (
     <>
       <button
@@ -11,7 +12,7 @@ const LeftPanelToggler = () => {
         onClick={() => { setIsLeftPanelOpen(false); }}
         type="button"
       >
-        <icons.close className="jfReportSVG" />
+        <CloseIcon className="jfReportSVG" />
       </button>
     </>
   );

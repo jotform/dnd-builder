@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import PropTypes from 'prop-types';
-import * as icons from '../../utils/icons';
+import { ICONS } from '../../utils/icons';
 import { divider } from '../../utils/staticSettings';
 
 const ITEM_TYPE = 'shapes';
@@ -54,27 +54,27 @@ const settings = [
     label: 'Shape Type',
     options: [
       {
-        icon: icons.rectangleIcon,
+        icon: ICONS.SHAPE_SETTINGS.rectangleIcon,
         name: 'rectangle',
         title: 'Rectangle',
       },
       {
-        icon: icons.ellipseIcon,
+        icon: ICONS.SHAPE_SETTINGS.ellipseIcon,
         name: 'ellipse',
         title: 'Ellipse',
       },
       {
-        icon: icons.lineIcon,
+        icon: ICONS.SHAPE_SETTINGS.lineIcon,
         name: 'line',
         title: 'Line',
       },
       {
-        icon: icons.triangleIcon,
+        icon: ICONS.SHAPE_SETTINGS.triangleIcon,
         name: 'triangle',
         title: 'Triangle',
       },
       {
-        icon: icons.starIcon,
+        icon: ICONS.SHAPE_SETTINGS.starIcon,
         name: 'star',
         title: 'Star',
       },

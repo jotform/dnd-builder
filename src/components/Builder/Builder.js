@@ -8,7 +8,7 @@ import RightPanel from '../Panels/RightPanel';
 import LeftPanel from '../Panels/LeftPanel';
 import SlidesPanel from '../Panels/SlidesPanel';
 import AllSlidesPanel from '../Panels/AllSlidesPanel';
-import { leftPanelConfigPropType } from '../../constants/propTypes';
+import { leftPanelConfigPropType, iconSetConfigPropType } from '../../constants/propTypes';
 import '../../styles/jfReportsBundle.scss';
 import BuilderWrapper from './BuilderWrapper';
 
@@ -49,6 +49,7 @@ Builder.propTypes = {
   additionalPageItems: PropTypes.arrayOf(PropTypes.node),
   disableInteraction: PropTypes.arrayOf(PropTypes.string),
   /** To pass in extra props to items selectively */
+  iconSetConfig: iconSetConfigPropType,
   itemAccessor: PropTypes.func,
   /** Last scroll position */
   lastScrollPosition: PropTypes.number,

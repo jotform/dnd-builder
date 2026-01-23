@@ -1,7 +1,7 @@
-import { useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
-import { getDefaultPresentationActions } from '../../../utils/getDefaultPresentationActions';
-import * as icons from '../../../utils/icons';
+import { useCallback } from 'react';
+import { useGetDefaultPresentationActions } from '../../../utils/getDefaultPresentationActions';
+import { useIcons } from '../../../hooks/useIcons';
 import { usePresentationStore } from '../../../contexts/PresentationContext';
 import { closeFullscreen, openFullscreenHelper } from '../../../utils/functions';
 
@@ -17,13 +17,12 @@ const PresentationActions = () => {
     }
   }, [isFullscreen]);
 
-  const defaultPresentationActions = useMemo(() => {
-    return getDefaultPresentationActions({
-      isFullscreen,
-      toggleFullscreen,
-    });
-  }, [isFullscreen, toggleFullscreen]);
+  const defaultPresentationActions = useGetDefaultPresentationActions({
+    isFullscreen,
+    toggleFullscreen,
+  });
 
+  const icons = useIcons();
   return (
     <div className="action-container d-flex">
       {presentationBarActions.map(action => {

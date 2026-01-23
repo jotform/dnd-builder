@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import PropTypes from 'prop-types';
-import * as icons from '../../utils/icons';
 import { useTranslatedTexts } from '../../utils/hooks';
+import { useIcons } from '../../hooks/useIcons';
 
 const DraggableItemActions = ({
   changeLockStatus = () => {},
@@ -18,6 +18,14 @@ const DraggableItemActions = ({
     LOCK_ITEM,
   } = useTranslatedTexts();
 
+  const {
+    duplicate: DuplicateIcon,
+    lock: LockIcon,
+    settings: SettingsIcon,
+    trash: TrashIcon,
+    unlock: UnlockIcon,
+  } = useIcons();
+
   if (isMultipleItemSelected) return null;
 
   if (isLocked) {
@@ -28,7 +36,7 @@ const DraggableItemActions = ({
           onClick={changeLockStatus}
           type="button"
         >
-          <icons.lock
+          <LockIcon
             className="jfReportSVG icon-lock isWhite"
           />
         </button>
@@ -43,7 +51,7 @@ const DraggableItemActions = ({
         title={ITEM_SETTINGS}
         type="button"
       >
-        <icons.settings className="jfReportSVG icon-settings isWhite" />
+        <SettingsIcon className="jfReportSVG icon-settings isWhite" />
       </button>
       <button
         className="reportItemMenu-item js-duplicateItem"
@@ -51,7 +59,7 @@ const DraggableItemActions = ({
         title={DUPLICATE_ITEM}
         type="button"
       >
-        <icons.duplicate className="jfReportSVG icon-duplicate isWhite" />
+        <DuplicateIcon className="jfReportSVG icon-duplicate isWhite" />
       </button>
       <button
         className="reportItemMenu-item js-lockItem"
@@ -59,7 +67,7 @@ const DraggableItemActions = ({
         title={LOCK_ITEM}
         type="button"
       >
-        <icons.unlock
+        <UnlockIcon
           className="jfReportSVG icon-lock isWhite"
         />
       </button>
@@ -69,7 +77,7 @@ const DraggableItemActions = ({
         title={DELETE_ITEM}
         type="button"
       >
-        <icons.trash className="jfReportSVG icon-trash isWhite" />
+        <TrashIcon className="jfReportSVG icon-trash isWhite" />
       </button>
     </div>
   );

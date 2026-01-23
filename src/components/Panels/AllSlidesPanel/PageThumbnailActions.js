@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import PropTypes from 'prop-types';
-import * as icons from '../../../utils/icons';
+import { useIcons } from '../../../hooks/useIcons';
 import { usePropStore } from '../../../contexts/PropContext';
 
 const PageThumbnailActions = ({
@@ -28,6 +28,8 @@ const PageThumbnailActions = ({
     onAnEventTrigger('addNewPageFromSlides', newPageIndex);
   };
 
+  const { duplicate: DuplicateIcon, plus: PlusIcon, trash: TrashIcon } = useIcons();
+
   return (
     <div
       className="thumbnailActions d-flex j-between f-width"
@@ -42,7 +44,7 @@ const PageThumbnailActions = ({
             title="Duplicate Page"
             type="button"
           >
-            <icons.duplicate className="jfReportSVG icon-duplicateLine" />
+            <DuplicateIcon className="jfReportSVG icon-duplicateLine" />
           </button>
           <button
             key="Remove Slide"
@@ -51,7 +53,7 @@ const PageThumbnailActions = ({
             title="Remove Slide"
             type="button"
           >
-            <icons.trash className="jfReportSVG icon-trashLine" />
+            <TrashIcon className="jfReportSVG icon-trashLine" />
           </button>
           <button
             key="Add Slide"
@@ -60,7 +62,7 @@ const PageThumbnailActions = ({
             title="Add Slide"
             type="button"
           >
-            <icons.plus className="jfReportSVG icon-plus" />
+            <PlusIcon className="jfReportSVG icon-plus" />
           </button>
         </div>
       </div>

@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import PropTypes from 'prop-types';
-import * as icons from '../../utils/icons';
+import { useIcons } from '../../hooks/useIcons';
 
 const Button = ({
   classNames = '',
@@ -8,6 +8,7 @@ const Button = ({
   onClick = '',
   title = '',
 }) => {
+  const icons = useIcons();
   const Icon = icons[icon] || icons.settings;
 
   return (

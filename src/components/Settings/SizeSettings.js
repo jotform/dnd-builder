@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { getImageSizes, roundForDecimalPart } from '../../utils/functions';
 import { useTranslatedTexts } from '../../utils/hooks';
-import * as icons from '../../utils/icons';
+import { useIcons } from '../../hooks/useIcons';
 
 const SizeSettings = ({
   item = {},
@@ -13,6 +13,7 @@ const SizeSettings = ({
   const [aspectLock, setAspectLock] = useState(true);
   const imageRefForMeta = useRef(null);
   const { HEIGHT, ORIGINAL_SIZE, WIDTH } = useTranslatedTexts();
+  const { lock: LockIcon, unlock: UnlockIcon } = useIcons();
 
   useEffect(() => {
     setStackSize({ height: item.height, width: item.width });
@@ -135,8 +136,8 @@ const SizeSettings = ({
             type="button"
           >
             {aspectLock
-              ? <icons.lock className="jfReportSVG icon-aspectLock" />
-              : <icons.unlock className="jfReportSVG icon-aspectUnlock" />}
+              ? <LockIcon className="jfReportSVG icon-aspectLock" />
+              : <UnlockIcon className="jfReportSVG icon-aspectUnlock" />}
           </button>
         </div>
         <div className="toolSection-subItem">

@@ -7,8 +7,8 @@ import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import { arrayMove } from '../../../utils/functions';
 import LayerItem from './LayerItem';
 import LayerDragOverlay from './LayerDragOverlay';
-import { elementIcons } from '../../../constants/elementIcons';
 import { useTranslatedTexts } from '../../../utils/hooks';
+import { useIcons } from '../../../hooks/useIcons';
 
 const PageLayer = ({
   config = {},
@@ -16,6 +16,7 @@ const PageLayer = ({
   onItemChange = () => {},
 }) => {
   const [activeId, setActiveId] = useState(null);
+  const icons = useIcons();
 
   const sensors = useSensors(
     useSensor(PointerSensor, {
@@ -66,9 +67,9 @@ const PageLayer = ({
     const activeItem = reversedItems.find(item => item.id === activeId);
     if (!activeItem) return null;
 
-    const icon = elementIcons[activeItem.itemType]
-      ? elementIcons[activeItem.itemType]
-      : elementIcons.default;
+    const icon = icons[activeItem.itemType]
+      ? icons[activeItem.itemType]
+      : icons.default;
 
     return {
       icon,
@@ -91,9 +92,9 @@ const PageLayer = ({
         >
           <ul className="jfReportSelectOption-list withDnd forPageLayer">
             {[...page.items].reverse().map((item, index) => {
-              const icon = elementIcons[item.itemType]
-                ? elementIcons[item.itemType]
-                : elementIcons.default;
+              const icon = icons[item.itemType]
+                ? icons[item.itemType]
+                : icons.default;
               return (
                 <LayerItem
                   key={item.id}

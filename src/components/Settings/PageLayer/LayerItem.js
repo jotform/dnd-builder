@@ -4,12 +4,12 @@ import { CSS } from '@dnd-kit/utilities';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { capitalize, stripHTML } from '../../../utils/string';
-import * as icons from '../../../utils/icons';
+import { useIcons } from '../../../hooks/useIcons';
 import { useTranslatedTexts } from '../../../utils/hooks';
 
-const DragHandle = () => (
+const DragHandle = DragIcon => (
   <span className="jfReportSelectOption-drag">
-    <icons.drag className="jfReportSVG icon-drag" />
+    <DragIcon className="jfReportSVG icon-drag" />
   </span>
 );
 
@@ -29,6 +29,8 @@ const LayerItem = ({
     transform,
     transition,
   } = useSortable({ id: itemId });
+
+  const { drag: DragIcon } = useIcons();
 
   const dragStyle = useMemo(() => ({
     opacity: isDragging ? 0.5 : 1,
@@ -112,7 +114,7 @@ const LayerItem = ({
         className="jfReportSelectOption-name"
         // style={{ backgroundColor: option.color }}
       >
-        <DragHandle />
+        <DragHandle DragIcon={DragIcon} />
         {content}
       </div>
     </div>

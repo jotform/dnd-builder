@@ -3,12 +3,12 @@ import { DragOverlay } from '@dnd-kit/core';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { capitalize, stripHTML } from '../../../utils/string';
-import * as icons from '../../../utils/icons';
+import { useIcons } from '../../../hooks/useIcons';
 import { useTranslatedTexts } from '../../../utils/hooks';
 
-const DragHandle = () => (
+const DragHandle = DragIcon => (
   <span className="jfReportSelectOption-drag">
-    <icons.drag className="jfReportSVG icon-drag" />
+    <DragIcon className="jfReportSVG icon-drag" />
   </span>
 );
 
@@ -22,6 +22,8 @@ const LayerDragOverlay = ({
     PAGE_ELEMENT,
     RECTANGLE,
   } = useTranslatedTexts();
+
+  const { drag: DragIcon } = useIcons();
 
   if (!activeItemData) return null;
 
@@ -86,7 +88,7 @@ const LayerDragOverlay = ({
           </label>
         </div>
         <div className="jfReportSelectOption-name">
-          <DragHandle />
+          <DragHandle DragIcon={DragIcon} />
           {content}
         </div>
       </div>

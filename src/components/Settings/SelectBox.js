@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import * as icons from '../../utils/icons';
+import { useIcons } from '../../hooks/useIcons';
 
 const SelectBox = ({
   config = [],
@@ -18,6 +18,7 @@ const SelectBox = ({
     }
   };
   const { options } = config;
+  const icons = useIcons();
 
   return (
     <div className="toolSection-list withIcons bigList forShapes d-flex dir-row f-wrap">

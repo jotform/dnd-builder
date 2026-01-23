@@ -1,9 +1,9 @@
 import { string } from 'prop-types';
 import classNames from 'classnames';
 import { scrollToTarget } from '../../utils/functions';
-import * as icons from '../../utils/icons';
 import { useTranslatedTexts } from '../../utils/hooks';
 import { usePropStore } from '../../contexts/PropContext';
+import { useIcons } from '../../hooks/useIcons';
 
 const PageAdder = ({
   additionalClass = '',
@@ -17,13 +17,14 @@ const PageAdder = ({
   };
 
   const { ADD_NEW_PAGE } = useTranslatedTexts();
+  const { plus: PlusIcon } = useIcons();
   return (
     <button
       className={classNames('pageAdder', additionalClass)}
       onClick={onPageAddClick}
       type="button"
     >
-      <icons.plus className="jfReportSVG icon-plus" />
+      <PlusIcon className="jfReportSVG icon-plus" />
       <span>{ADD_NEW_PAGE}</span>
     </button>
   );

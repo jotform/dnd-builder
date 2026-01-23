@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import PropTypes from 'prop-types';
-import * as icons from '../../../utils/icons';
+import { useIcons } from '../../../hooks/useIcons';
 
 const PageActionsBar = ({
   onPageDeselect = () => {},
@@ -17,6 +17,11 @@ const PageActionsBar = ({
   //   onPageRemove(page.id);
   //   onAnEventTrigger('removePageFromSlides', page.id);
   // };
+  const {
+    close: CloseIcon,
+    duplicate: DuplicateIcon,
+    trash: TrashIcon,
+  } = useIcons();
 
   return (
     <div
@@ -51,7 +56,7 @@ const PageActionsBar = ({
               <span>
                 Deselect
               </span>
-              <icons.close className="jfReportSVG icon-duplicateLine" />
+              <CloseIcon className="jfReportSVG icon-duplicateLine" />
             </button>
           </div>
           <div className="pageActionsBar-section">
@@ -62,7 +67,7 @@ const PageActionsBar = ({
               title="Duplicate Page"
               type="button"
             >
-              <icons.duplicate className="jfReportSVG icon-duplicateLine" />
+              <DuplicateIcon className="jfReportSVG icon-duplicateLine" />
               <span>Duplicate</span>
             </button>
             <button
@@ -72,7 +77,7 @@ const PageActionsBar = ({
               title="Remove Slide"
               type="button"
             >
-              <icons.trash className="jfReportSVG icon-trashLine" />
+              <TrashIcon className="jfReportSVG icon-trashLine" />
               <span>Delete</span>
             </button>
           </div>

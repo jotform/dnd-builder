@@ -7,9 +7,9 @@ import {
   getMostVisiblePage, getExactIconType, getAvailableCoordinate,
 } from '../../utils/functions';
 import generateId from '../../utils/generateId';
-import * as icons from '../../utils/icons';
 import { useBuilderStore } from '../../contexts/BuilderContext';
 import { usePropStore } from '../../contexts/PropContext';
+import { useIcons } from '../../hooks/useIcons';
 
 const Element = ({
   icon = null,
@@ -65,6 +65,7 @@ const Element = ({
   };
 
   const onElementOtherActions = () => {};
+  const icons = useIcons();
 
   const exactIconType = getExactIconType(iconType);
   const Icon = icons[exactIconType] ? icons[exactIconType] : icons.label;

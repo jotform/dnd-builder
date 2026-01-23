@@ -1,11 +1,12 @@
 import { memo } from 'react';
 import { useBuilderStore } from '../../../contexts/BuilderContext';
-import * as icons from '../../../utils/icons';
+import { useIcons } from '../../../hooks/useIcons';
 import { useTranslatedTexts } from '../../../utils/hooks';
 
 const LeftPanelToggler = () => {
   const setIsLeftPanelOpen = useBuilderStore(state => state.setIsLeftPanelOpen);
   const { ADD_ELEMENT } = useTranslatedTexts();
+  const { plus: PlusIcon } = useIcons();
   return (
     <>
       <button
@@ -15,7 +16,7 @@ const LeftPanelToggler = () => {
         type="button"
       >
         <span>{ADD_ELEMENT}</span>
-        <icons.plus className="jfReportSVG isWhite" />
+        <PlusIcon className="jfReportSVG isWhite" />
       </button>
     </>
   );

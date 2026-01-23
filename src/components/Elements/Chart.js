@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {
   BarChart, Bar, PieChart, Pie, XAxis, YAxis, Legend, ResponsiveContainer, Cell,
 } from 'recharts';
-import * as icons from '../../utils/icons';
+import { ICONS } from '../../utils/icons';
 
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 
@@ -71,12 +71,12 @@ const settings = [
     label: 'Chart Type',
     options: [
       {
-        icon: icons.pie,
+        icon: ICONS.CHART_SETTINGS.pie,
         name: 'pie',
         title: 'Pie Chart',
       },
       {
-        icon: icons.column,
+        icon: ICONS.CHART_SETTINGS.column,
         name: 'column',
         title: 'Column Chart',
       },

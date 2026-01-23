@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import PropTypes from 'prop-types';
-import * as icons from '../../../utils/icons';
+import { useIcons } from '../../../hooks/useIcons';
 import { useTranslatedTexts } from '../../../utils/hooks';
 
 const PageThumbnailActions = ({
@@ -30,6 +30,7 @@ const PageThumbnailActions = ({
   };
 
   const { ADD_NEW_PAGE, DUPLICATE_PAGE, REMOVE_PAGE } = useTranslatedTexts();
+  const { duplicateLine: DuplicateLineIcon, plus: PlusIcon, trashLine: TrashLineIcon } = useIcons();
   return (
     <div
       className="thumbnailActions d-flex dir-col f-height j-center"
@@ -46,7 +47,7 @@ const PageThumbnailActions = ({
             title={DUPLICATE_PAGE}
             type="button"
           >
-            <icons.duplicate className="jfReportSVG icon-duplicateLine" />
+            <DuplicateLineIcon className="jfReportSVG icon-duplicateLine" />
           </button>
           <button
             key="Remove Slide"
@@ -57,7 +58,7 @@ const PageThumbnailActions = ({
             title={REMOVE_PAGE}
             type="button"
           >
-            <icons.trash className="jfReportSVG icon-trashLine" />
+            <TrashLineIcon className="jfReportSVG icon-trashLine" />
           </button>
           <button
             key="Add Slide"
@@ -68,7 +69,7 @@ const PageThumbnailActions = ({
             title={ADD_NEW_PAGE}
             type="button"
           >
-            <icons.plus className="jfReportSVG icon-plus" />
+            <PlusIcon className="jfReportSVG icon-plus" />
           </button>
         </div>
       </div>

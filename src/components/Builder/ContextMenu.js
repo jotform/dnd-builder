@@ -11,10 +11,10 @@ import {
   getContainerPositions,
   moveArrayItem,
 } from '../../utils/functions';
-import * as icons from '../../utils/icons';
 
 import withClickOutside from '../withClickOutside';
 import { usePropStore } from '../../contexts/PropContext';
+import { useIcons } from '../../hooks/useIcons';
 
 const ContextMenu = ({
   height = 1,
@@ -143,25 +143,36 @@ const ContextMenu = ({
     MOVE_TO_BACK, MOVE_TO_FRONT, UNLOCK_ITEM,
   } = useTranslatedTexts();
 
+  const {
+    enterFullscreen: EnterFullscreenIcon,
+    lock: LockIcon,
+    moveToBack: MoveToBackIcon,
+    moveToBackward: MoveToBackwardIcon,
+    moveToForward: MoveToForwardIcon,
+    moveToFront: MoveToFrontIcon,
+    trash: TrashIcon,
+    unlock: UnlockIcon,
+  } = useIcons();
+
   const menuItems = [
-    { func: moveToFront, icon: <icons.moveToFront />, text: MOVE_TO_FRONT },
-    { func: moveForward, icon: <icons.moveToForward />, text: MOVE_FORWARDS },
-    { func: moveBackward, icon: <icons.moveToBackward />, text: MOVE_BACKWARDS },
-    { func: moveToBack, icon: <icons.moveToBack />, text: MOVE_TO_BACK },
+    { func: moveToFront, icon: <MoveToFrontIcon />, text: MOVE_TO_FRONT },
+    { func: moveForward, icon: <MoveToForwardIcon />, text: MOVE_FORWARDS },
+    { func: moveBackward, icon: <MoveToBackwardIcon />, text: MOVE_BACKWARDS },
+    { func: moveToBack, icon: <MoveToBackIcon />, text: MOVE_TO_BACK },
     {
       func: lockOrUnlockItem,
       icon: item.isLocked ? (
-        <icons.unlock className="icon-lock" />
+        <UnlockIcon className="icon-lock" />
       ) : (
-        <icons.lock className="icon-lock" />
+        <LockIcon className="icon-lock" />
       ),
       text: item.isLocked ? UNLOCK_ITEM : LOCK_ITEM,
     },
     {
-      func: fitToPage, icon: <icons.enterFullscreen className="icon-lock" />, text: FIT_TO_PAGE,
+      func: fitToPage, icon: <EnterFullscreenIcon className="icon-lock" />, text: FIT_TO_PAGE,
     },
     {
-      class: ' isDanger', func: deleteItem, icon: <icons.trash />, text: DELETE,
+      class: ' isDanger', func: deleteItem, icon: <TrashIcon />, text: DELETE,
     },
   ];
 

@@ -12,6 +12,7 @@ const propStore = props => {
     acceptedItems: props.acceptedItems || {},
     additionalPageItems: props.additionalPageItems || [],
     disableInteraction: props.disableInteraction || [],
+    iconSetConfig: props.iconSetConfig || {},
     itemAccessor: props.itemAccessor || fn,
     leftPanelConfig: props.leftPanelConfig || [],
     onAnEventTrigger: props.onAnEventTrigger || (() => {}),

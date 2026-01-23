@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import * as icons from '../../utils/icons';
+import { useIcons } from '../../hooks/useIcons';
 
 const Section = ({
   additionalComponent = null,
@@ -9,6 +9,7 @@ const Section = ({
   icon = '',
   title = '',
 }) => {
+  const icons = useIcons();
   const Icon = icons[icon] || icons.settings;
   return (
     <>
