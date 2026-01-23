@@ -3,8 +3,6 @@ import Presentation from '../../../components/Presentation/Presentation';
 import ReportWrapper from '../../../components/ReportWrapper';
 import PresentationWrapper from '../../../components/Presentation/PresentationWrapper';
 import PageNavigation from '../../../components/Presentation/PresentationBar/PageNavigation';
-import Print from '../../../components/Print';
-
 import StaticScene from '../../../components/Preview/StaticScene';
 import StaticPage from '../../../components/Preview/StaticPage';
 import StaticItem from '../../../components/Preview/StaticItem';
@@ -57,7 +55,7 @@ describe('Presentation Stories', () => {
     expect(presentation.find(PresentationWrapper)).toHaveLength(1);
     expect(presentation.find(PageNavigation)).toHaveLength(1);
     expect(presentation.find(StaticScene)).toHaveLength(2);
-    expect(presentation.find(ZoomControls)).toHaveLength(2);
+    expect(presentation.find(ZoomControls)).toHaveLength(0);
     expect(presentation.find(StaticPage)).toHaveLength(4);
     expect(presentation.find(StaticItem)).toHaveLength(12);
     expect(presentation.find(ItemPositioner)).toHaveLength(12);
