@@ -3,11 +3,7 @@ import PropTypes from 'prop-types';
 import StaticPage from '../../Preview/StaticPage';
 
 const SortablePageItemDragOverlay = ({
-  acceptedItems,
   activePageData,
-  additionalPageItems,
-  hashCode,
-  itemAccessor,
 }) => {
   return (
     <DragOverlay
@@ -23,11 +19,7 @@ const SortablePageItemDragOverlay = ({
           <div className="thumbnailOrder">{activePageData.page.order}</div>
           <div className="thumbnailFrame o-hidden">
             <StaticPage
-              acceptedItems={acceptedItems}
-              additionalPageItems={additionalPageItems}
-              hashCode={hashCode}
               isThumbnail
-              itemAccessor={itemAccessor}
               items={activePageData.page.items}
               style={activePageData.pageContainerLastStyle}
             />
@@ -40,7 +32,6 @@ const SortablePageItemDragOverlay = ({
 };
 
 SortablePageItemDragOverlay.propTypes = {
-  acceptedItems: PropTypes.shape({}),
   activePageData: PropTypes.shape({
     page: PropTypes.shape({
       items: PropTypes.arrayOf(PropTypes.shape({})),
@@ -48,9 +39,6 @@ SortablePageItemDragOverlay.propTypes = {
     }),
     pageContainerLastStyle: PropTypes.shape({}),
   }),
-  additionalPageItems: PropTypes.arrayOf(PropTypes.node),
-  hashCode: PropTypes.string,
-  itemAccessor: PropTypes.func,
 };
 
 export default SortablePageItemDragOverlay;
