@@ -1,39 +1,25 @@
-import Modal from 'react-modal';
-import PrintModeWithoutContext from './PrintModeWithoutContext';
+import PrintWrapper from './PrintWrapper';
+import Providers from '../../contexts/Providers';
+import ReportWrapper from '../ReportWrapper';
+import StaticScene from '../Preview/StaticScene';
 
-const Print = () => {
+import '../../styles/jfReportsBundle.scss';
+
+const Print = props => {
   return (
-    <Modal
-      appElement={document.getElementById('root')}
-      closeTimeoutMS={300}
-      contentLabel="modalA"
-      id="printModal"
-      isOpen={true}
-      portalClassName="ReportPrintPortal"
-      shouldCloseOnEsc={false}
-      style={{
-        content: {
-          backgroundColor: '#fff',
-          border: 'none',
-          borderRadius: 'none',
-          bottom: 0,
-          left: 0,
-          overflow: 'visible',
-          padding: 0,
-          position: 'absolute',
-          right: 0,
-          top: 0,
-        },
-        overlay: {
-          border: 'none',
-          height: 'auto',
-          position: 'absolute',
-          zIndex: '99999',
-        },
-      }}
+    <Providers
+      mode="print"
+      {...props}
     >
-      <PrintModeWithoutContext />
-    </Modal>
+      <PrintWrapper>
+        <ReportWrapper mode="print">
+          <StaticScene
+            hideZoom={true}
+            mode="print"
+          />
+        </ReportWrapper>
+      </PrintWrapper>
+    </Providers>
   );
 };
 

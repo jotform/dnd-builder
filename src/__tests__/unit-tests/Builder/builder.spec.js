@@ -1,25 +1,19 @@
 import React from 'react';
 import DndWrapper from '../../../components/Builder/DndWrapper';
 import Builder from '../../../components/Builder';
-import { BuilderProvider } from '../../../contexts/BuilderContext';
-import { PropProvider } from '../../../contexts/PropContext';
-import ReportWrapper from '../../../components/ReportWrapper';
 import LeftPanel from '../../../components/Panels/LeftPanel';
 import Scene from '../../../components/Builder/Scene';
 import RightPanel from '../../../components/Panels/RightPanel';
 import SlidesPanel from '../../../components/Panels/SlidesPanel';
 import AllSlidesPanel from '../../../components/Panels/AllSlidesPanel';
 import BuilderWrapper from '../../../components/Builder/BuilderWrapper';
+import Providers from '../../../contexts/Providers';
 
 describe('Builder Component Tree', () => {
   const builderWrapper = shallow(<Builder />);
 
-  it('Should Always Render BuilderProvider in Builder', () => {
-    expect(builderWrapper.find(BuilderProvider)).toHaveLength(1);
-  });
-
-  it('Should Always Render PropProvider in Builder', () => {
-    expect(builderWrapper.find(PropProvider)).toHaveLength(1);
+  it('Should Always Render Providers in Builder', () => {
+    expect(builderWrapper.find(Providers)).toHaveLength(1);
   });
 
   it('Should Always Render ReportWrapper in Builder', () => {

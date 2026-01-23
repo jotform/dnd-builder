@@ -1,5 +1,4 @@
-import React from 'react';
-import { PrintMode } from '../src/index';
+import { Print } from '../src/index';
 import {
   acceptedItems,
   leftPanelConfig,
@@ -8,7 +7,7 @@ import {
 import examplePages from './config/examplePages';
 
 export default {
-  component: PrintMode,
+  component: Print,
   parameters: {
     options: {
       showPanel: false,
@@ -17,7 +16,7 @@ export default {
   title: 'Examples/Print',
 };
 
-const Template = args => <PrintMode {...args} />;
+const Template = args => <Print {...args} />;
 
 // Each story then reuses that template
 export const Basic = Template.bind({});
