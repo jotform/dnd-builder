@@ -1,42 +1,32 @@
 import PropTypes from 'prop-types';
-import { PresentationProvider } from '../../contexts/PresentationContext';
-import { BuilderProvider } from '../../contexts/BuilderContext';
-import { PropProvider } from '../../contexts/PropContext';
 import StaticScene from '../Preview/StaticScene';
 import ReportWrapper from '../ReportWrapper';
 import PresentationWrapper from './PresentationWrapper';
 
 import '../../styles/jfReportsBundle.scss';
-import Print from '../Print';
+import Providers from '../../contexts/Providers';
+import PrintModal from '../Print/PrintModal';
 
-const Presentation = ({
-  presentationBarActions = [],
-  useFixedPresentationBar = false,
-  ...props
-}) => {
+const Presentation = props => {
   return (
-    <BuilderProvider>
-      <PropProvider {...props}>
-        <PresentationProvider
-          presentationBarActions={presentationBarActions}
-          useFixedPresentationBar={useFixedPresentationBar}
-        >
-          <ReportWrapper mode="presentation">
-            <PresentationWrapper>
-              {(presentationPage, gesture) => (
-                <StaticScene
-                  gesture={gesture}
-                  hideZoom={true}
-                  mode="presentation"
-                  presentationPage={presentationPage}
-                />
-              )}
-            </PresentationWrapper>
-            <Print />
-          </ReportWrapper>
-        </PresentationProvider>
-      </PropProvider>
-    </BuilderProvider>
+    <Providers
+      mode="presentation"
+      {...props}
+    >
+      <ReportWrapper mode="presentation">
+        <PresentationWrapper>
+          {(presentationPage, gesture) => (
+            <StaticScene
+              gesture={gesture}
+              hideZoom={true}
+              mode="presentation"
+              presentationPage={presentationPage}
+            />
+          )}
+        </PresentationWrapper>
+        <PrintModal />
+      </ReportWrapper>
+    </Providers>
   );
 };
 

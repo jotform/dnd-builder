@@ -4,7 +4,6 @@ import generateId from './utils/generateId';
 import Presentation from './components/Presentation/Presentation';
 import Preview from './components/Preview/Preview';
 import Print from './components/Print/Print';
-import PrintMode from './components/Print/PrintMode';
 import Report from './components/Report';
 import {
   RichText, Image, Shapes, Chart, Icon,
@@ -26,7 +25,6 @@ export {
   Presentation,
   Preview,
   Print,
-  PrintMode,
   Report,
   Shapes,
   StaticRichText,
