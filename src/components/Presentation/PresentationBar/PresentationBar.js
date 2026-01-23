@@ -6,7 +6,6 @@ import SelectZoom from './SelectZoom';
 import { changePage } from '../../../utils/functions';
 import { useBuilderStore } from '../../../contexts/BuilderContext';
 import { usePresentationStore } from '../../../contexts/PresentationContext';
-import { usePropStore } from '../../../contexts/PropContext';
 
 const PresentationBar = ({
   isVisible = true,
@@ -17,10 +16,6 @@ const PresentationBar = ({
   const pageCount = usePresentationStore(state => state.pageCount);
   const setZoom = useBuilderStore(state => state.setZoom);
   const zoom = useBuilderStore(state => state.zoom);
-
-  const settings = usePropStore(state => state.settings);
-
-  const { reportLayoutWidth = 1123 } = settings;
 
   const pageChanger = action => changePage({
     action,
@@ -47,7 +42,7 @@ const PresentationBar = ({
   });
 
   const handleZoomChange = e => {
-    setZoom(e.target.value / 100, false, reportLayoutWidth);
+    setZoom(e.target.value / 100);
     e.target.blur(); // prevent mixup with other keyboard shortcuts
   };
 
