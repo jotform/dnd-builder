@@ -2,10 +2,9 @@ import { memo } from 'react';
 import PropTypes from 'prop-types';
 import * as icons from '../../../utils/icons';
 import { useTranslatedTexts } from '../../../utils/hooks';
+import { usePropStore } from '../../../contexts/PropContext';
 
 const PageThumbnailActions = ({
-  disableInteraction = [],
-  onAnEventTrigger = () => {},
   onPageAdd = () => {},
   onPageDuplicate = () => {},
   onPageRemove = () => {},
@@ -13,6 +12,8 @@ const PageThumbnailActions = ({
   page = {},
 }) => {
   const nextPageIndex = order + 1;
+  const disableInteraction = usePropStore(state => state.disableInteraction);
+  const onAnEventTrigger = usePropStore(state => state.onAnEventTrigger);
 
   const onPageDuplicateClick = () => {
     onPageDuplicate(page);
@@ -77,8 +78,6 @@ const PageThumbnailActions = ({
 };
 
 PageThumbnailActions.propTypes = {
-  disableInteraction: PropTypes.arrayOf(PropTypes.string),
-  onAnEventTrigger: PropTypes.func,
   onPageAdd: PropTypes.func,
   onPageDuplicate: PropTypes.func,
   onPageRemove: PropTypes.func,

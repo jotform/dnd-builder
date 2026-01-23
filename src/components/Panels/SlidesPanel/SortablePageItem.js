@@ -7,13 +7,7 @@ import PageThumbnailActions from './PageThumbnailActions';
 import { emptyFunction } from '../../../utils/functions';
 
 const SortablePageItem = ({
-  acceptedItems,
-  additionalPageItems,
-  disableInteraction,
-  hashCode,
   id,
-  itemAccessor,
-  onAnEventTrigger,
   onPageAdd,
   onPageClick,
   onPageDuplicate,
@@ -57,18 +51,12 @@ const SortablePageItem = ({
       <div className="thumbnailOrder">{order}</div>
       <div className="thumbnailFrame o-hidden">
         <StaticPage
-          acceptedItems={acceptedItems}
-          additionalPageItems={additionalPageItems}
-          hashCode={hashCode}
           isThumbnail
-          itemAccessor={itemAccessor}
           items={page.items}
           style={pageContainerStyle}
         />
       </div>
       <PageThumbnailActions
-        disableInteraction={disableInteraction}
-        onAnEventTrigger={onAnEventTrigger}
         onPageAdd={onPageAdd}
         onPageDuplicate={onPageDuplicate}
         onPageRemove={onPageRemove}
@@ -80,13 +68,7 @@ const SortablePageItem = ({
 };
 
 SortablePageItem.propTypes = {
-  acceptedItems: PropTypes.shape({}),
-  additionalPageItems: PropTypes.arrayOf(PropTypes.node),
-  disableInteraction: PropTypes.arrayOf(PropTypes.string),
-  hashCode: PropTypes.string,
   id: PropTypes.string.isRequired,
-  itemAccessor: PropTypes.func,
-  onAnEventTrigger: PropTypes.func,
   onPageAdd: PropTypes.func,
   onPageClick: PropTypes.func,
   onPageDuplicate: PropTypes.func,
