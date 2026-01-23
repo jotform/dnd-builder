@@ -357,7 +357,7 @@ const Scene = () => {
           <PageAdder />
         </div>
       </div>
-      <ZoomControls mode="customize" />
+      <ZoomControls />
       {contextMenuProps
         && (
           <ContextMenu
