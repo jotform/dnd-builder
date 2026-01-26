@@ -1,6 +1,9 @@
 import {
-  memo, useState,
+  memo,
+  useState,
   useMemo,
+  useCallback,
+  useEffect,
 } from 'react';
 import PropTypes from 'prop-types';
 import Section from '../../Builder/Section';
@@ -21,7 +24,6 @@ const Elements = () => {
 
   // Tabs
   const tabDetails = getTabsWithElements(leftPanelConfig);
-
   const tabs = useMemo(() => {
     return Object.keys(tabDetails);
   }, [tabDetails]);
@@ -29,14 +31,29 @@ const Elements = () => {
   const {
     elements = {},
     hasSearch = false,
-    searchKeys,
   } = useMemo(() => {
     return tabDetails[tabs[activeTab.left]] || {};
   }, [activeTab.left, tabDetails, tabs]);
 
-  const [searchElements, setSearchElements] = useState([]);
+  const elementWillBeUsed = useMemo(() => {
+    return Array.isArray(elements) ? elements : [];
+  }, [elements]);
 
-  const elementWillBeUsed = hasSearch ? searchElements : elements;
+  const [searchElements, setSearchElements] = useState(elementWillBeUsed);
+
+  useEffect(() => {
+    setSearchElements(elementWillBeUsed);
+  }, [elementWillBeUsed]);
+
+  const filterElementsBySearch = useCallback(value => {
+    if (value === '') {
+      setSearchElements(elementWillBeUsed);
+      return;
+    }
+    const filteredElements = elementWillBeUsed?.filter(element => element.title.toLowerCase().includes(value.toLowerCase()));
+    setSearchElements(filteredElements);
+  }, [elementWillBeUsed]);
+
   return (
     <div className="toolItemWrapper f-height d-flex dir-col o-auto p-relative">
       <LeftPanelCloser />
@@ -48,21 +65,17 @@ const Elements = () => {
           tabs={tabs}
         />
         {hasSearch && (
-          <SearchInput
-            elements={elements}
-            searchKeys={searchKeys}
-            setElements={setSearchElements}
-          />
-        ) }
+          <SearchInput onSearch={filterElementsBySearch} />
+        )}
         <div className="toolItem-tabContent">
-          { (searchElements === 'noResult' && hasSearch)
-            && <div className="no-search-result-text">{NO_RESULT}</div>}
-          {Array.isArray(elementWillBeUsed) && elementWillBeUsed.map((element, index) => (
+          {searchElements.length > 0 ? searchElements.map((element, index) => (
             <Element
               key={index.toString()}
               {...element}
             />
-          ))}
+          )) : (
+            <div className="no-search-result-text">{NO_RESULT}</div>
+          )}
         </div>
       </Section>
     </div>

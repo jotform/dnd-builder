@@ -1,39 +1,26 @@
 import React from 'react';
 import Presentation from '../../../components/Presentation/Presentation';
-import { BuilderProvider } from '../../../contexts/BuilderContext';
-import { PropProvider } from '../../../contexts/PropContext';
-import { PresentationProvider } from '../../../contexts/PresentationContext';
 import PresentationWrapper from '../../../components/Presentation/PresentationWrapper';
 import ReportWrapper from '../../../components/ReportWrapper';
-import Print from '../../../components/Print';
+import PrintModal from '../../../components/Print/PrintModal';
+import Providers from '../../../contexts/Providers';
 
 describe('Presentation Component Tree', () => {
   const presentation = shallow(<Presentation />);
-  it('Should Always Render PresentationProvider in Presentation', () => {
-    expect(presentation.find(PresentationProvider)).toHaveLength(1);
+  it('Should Always Render Providers in Presentation', () => {
+    expect(presentation.find(Providers)).toHaveLength(1);
   });
 
-  it('Should Always Render PropProvider in Presentation', () => {
-    expect(presentation.find(PropProvider)).toHaveLength(1);
-  });
-
-  it('Should Always Render BuilderProvider in Presentation', () => {
-    expect(presentation.find(BuilderProvider)).toHaveLength(1);
-  });
   it('Should Always Render ReportWrapper in Presentation', () => {
     expect(presentation.find(ReportWrapper)).toHaveLength(1);
   });
 
-  it('Should Always Render PresentationWrapper in Presentation', () => {
-    expect(presentation.find(PresentationWrapper)).toHaveLength(1);
+  it('Should Always Render PrintModal in Presentation', () => {
+    expect(presentation.find(PrintModal)).toHaveLength(1);
   });
 
-  it('Should Always Render Print in Presentation', () => {
-    expect(presentation.find(Print)).toHaveLength(1);
-  });
-
-  it('ReportWrapper contains PresentationWrapper and Print', () => {
+  it('ReportWrapper contains PresentationWrapper and PrintModal', () => {
     expect(presentation.find(PresentationWrapper).parent().is(ReportWrapper)).toEqual(true);
-    expect(presentation.find(Print).parent().is(ReportWrapper)).toEqual(true);
+    expect(presentation.find(PrintModal).parent().is(ReportWrapper)).toEqual(true);
   });
 });

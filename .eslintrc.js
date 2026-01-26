@@ -95,7 +95,7 @@ module.exports = {
     'react/prefer-stateless-function': 0,
     'react/react-in-jsx-scope': 'off',
     'react/require-default-props': 0,
-    'react-hooks/exhaustive-deps': 'warn',
+    'react-hooks/exhaustive-deps': 'off',
     'react-hooks/rules-of-hooks': 'error',
 
     'sort-destructure-keys/sort-destructure-keys': 2,

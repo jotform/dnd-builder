@@ -67,6 +67,8 @@ const StaticScene = ({
     }
   }, [pages.length, zoom]);
 
+  const isEnabledZoomControls = (!isFullscreen || (isFullscreen && showControlsInFullScreen)) && !hideZoom;
+
   return (
     <main
       className={classNames.mainWrapper}
@@ -108,9 +110,7 @@ const StaticScene = ({
           })}
         </div>
       </div>
-      <ZoomControls
-        showZoom={(!isFullscreen || (isFullscreen && showControlsInFullScreen)) && !hideZoom}
-      />
+      {isEnabledZoomControls && <ZoomControls />}
     </main>
   );
 };

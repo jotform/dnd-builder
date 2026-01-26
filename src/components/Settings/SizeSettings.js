@@ -23,7 +23,7 @@ const SizeSettings = ({
     if (aspectLock) {
       initialAspect.current = stackSize.width / stackSize.height;
     }
-  }, [aspectLock, stackSize]);
+  }, [aspectLock]);
 
   const sizeSetter = ({ height, width }) => {
     const sizes = { height: Number(height), width: Number(width) };

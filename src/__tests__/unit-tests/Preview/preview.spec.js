@@ -1,19 +1,14 @@
 import React from 'react';
 import Preview from '../../../components/Preview';
-import { BuilderProvider } from '../../../contexts/BuilderContext';
-import { PropProvider } from '../../../contexts/PropContext';
 import ReportWrapper from '../../../components/ReportWrapper';
 import StaticScene from '../../../components/Preview/StaticScene';
+import Providers from '../../../contexts/Providers';
 
 describe('Preview Component Tree', () => {
   const preview = shallow(<Preview />);
 
-  it('Should Always Render BuilderProvider in Preview', () => {
-    expect(preview.find(BuilderProvider)).toHaveLength(1);
-  });
-
-  it('Should Always Render PropProvider in Preview', () => {
-    expect(preview.find(PropProvider)).toHaveLength(1);
+  it('Should Always Render Providers in Preview', () => {
+    expect(preview.find(Providers)).toHaveLength(1);
   });
 
   it('Should Always Render ReportWrapper in Preview', () => {

@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.0.0](https://github.com/jotform/dnd-builder/compare/v2.9.19...v3.0.0) (2026-01-23)
+
+
+### Bug Fixes
+
+* **dnd-builder:** add page and duplicate for page thumbnails ([82758d7](https://github.com/jotform/dnd-builder/commit/82758d7ba37a8134bc1dd17dabdbef9fc3e493ce))
+* do not force overflow hidden style for grid item ([9448109](https://github.com/jotform/dnd-builder/commit/9448109b87219605e87956438890711a7b45f4cb))
+* do not force overflow hidden style for grid item ([5e0e420](https://github.com/jotform/dnd-builder/commit/5e0e4206d2502c8aab8f6c92bcaacf17befc3a83))
+* react-hooks/exhaustive-deps rule is closed temporarily ([eb43fda](https://github.com/jotform/dnd-builder/commit/eb43fda2f3bc34c65eae11d28bc840f16c68c6c6))
+* **SizeSettings:** avoid change aspect ratio when stack size change ([b685219](https://github.com/jotform/dnd-builder/commit/b6852191f2ce00056f665daa22892170f54bf532))
+
 ### [2.9.19](https://github.com/jotform/dnd-builder/compare/v2.9.18...v2.9.19) (2026-01-16)
 
 

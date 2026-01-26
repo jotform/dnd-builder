@@ -8,7 +8,7 @@ describe('SearchInput', () => {
   it('Should Call setElements Once Search a Value', () => {
     const mockEvent = jest.fn();
 
-    const searchInputWrapper = shallow(<SearchInput setElements={mockEvent} />);
+    const searchInputWrapper = shallow(<SearchInput onSearch={mockEvent} />);
 
     searchInputWrapper.find('input').simulate('change', { target: { value: 'value' } });
     expect(mockEvent).toHaveBeenCalledTimes(1);
@@ -17,7 +17,7 @@ describe('SearchInput', () => {
   it('Should Call setElements & Remove Search Value Once Press Escape Key', () => {
     const mockEvent = jest.fn();
 
-    const searchInputWrapper = mount(<SearchInput setElements={mockEvent} />);
+    const searchInputWrapper = mount(<SearchInput onSearch={mockEvent} />);
     searchInputWrapper.find('input').simulate('change', { target: { value: 'Value' } });
     searchInputWrapper.find('input').simulate('keyDown', { key: 'Escape', stopPropagation() {} });
 
@@ -28,7 +28,7 @@ describe('SearchInput', () => {
   it('Should Call setElements & Remove Search Value Once Click Remove Search Button', () => {
     const mockEvent = jest.fn();
 
-    const searchInputWrapper = shallow(<SearchInput setElements={mockEvent} />);
+    const searchInputWrapper = shallow(<SearchInput onSearch={mockEvent} />);
     searchInputWrapper.find('input').simulate('change', { target: { value: 'Value' } });
     searchInputWrapper.find(selectors.showDelete).simulate('click');
 
@@ -39,7 +39,7 @@ describe('SearchInput', () => {
   it('Should Render CrossIcon Only and `showDelete` class if There is a Search Value', () => {
     const mockEvent = jest.fn();
 
-    const searchInputWrapper = shallow(<SearchInput setElements={mockEvent} />);
+    const searchInputWrapper = shallow(<SearchInput onSearch={mockEvent} />);
 
     searchInputWrapper.find('input').simulate('change', { target: { value: 'value' } });
     expect(searchInputWrapper.find(selectors.showDelete)).toHaveLength(1);
@@ -50,7 +50,7 @@ describe('SearchInput', () => {
   it('Should Render SearchIcon Only if There is a Search Value', () => {
     const mockEvent = jest.fn();
 
-    const component = shallow(<SearchInput setElements={mockEvent} />);
+    const component = shallow(<SearchInput onSearch={mockEvent} />);
 
     expect(component.find(SearchIcon)).toHaveLength(1);
     expect(component.find(CrossIcon)).toHaveLength(0);

@@ -1,8 +1,5 @@
-import { StrictMode } from 'react';
 import PropTypes from 'prop-types';
 import DndWrapper from './DndWrapper';
-import { BuilderProvider } from '../../contexts/BuilderContext';
-import { PropProvider } from '../../contexts/PropContext';
 import Scene from './Scene';
 import RightPanel from '../Panels/RightPanel';
 import LeftPanel from '../Panels/LeftPanel';
@@ -11,34 +8,28 @@ import AllSlidesPanel from '../Panels/AllSlidesPanel';
 import { leftPanelConfigPropType, iconSetConfigPropType } from '../../constants/propTypes';
 import '../../styles/jfReportsBundle.scss';
 import BuilderWrapper from './BuilderWrapper';
+import Providers from '../../contexts/Providers';
 
-const Builder = ({
-  onRightPanelsToggled = () => {},
-  lastScrollPosition = 0,
-  ...props
-}) => {
+const Builder = props => {
   const { useExperimentalFeatures } = props;
   return (
-    <StrictMode>
-      <BuilderProvider
-        lastScrollPosition={lastScrollPosition}
-        onRightPanelsToggled={onRightPanelsToggled}
-      >
-        <PropProvider {...props}>
-          <BuilderWrapper>
-            <DndWrapper>
-              <LeftPanel />
-              <Scene />
-            </DndWrapper>
-            <RightPanel />
-            <SlidesPanel />
-            {useExperimentalFeatures && (
-              <AllSlidesPanel />
-            )}
-          </BuilderWrapper>
-        </PropProvider>
-      </BuilderProvider>
-    </StrictMode>
+    <Providers
+      mode="customize"
+      {...props}
+    >
+      <BuilderWrapper>
+        <DndWrapper>
+          <LeftPanel />
+          <Scene />
+        </DndWrapper>
+        <RightPanel />
+        <SlidesPanel />
+        {useExperimentalFeatures && (
+          <AllSlidesPanel />
+        )}
+      </BuilderWrapper>
+    </Providers>
+
   );
 };
 

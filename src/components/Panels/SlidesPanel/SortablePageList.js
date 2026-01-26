@@ -17,12 +17,6 @@ import SortablePageItemRenderer from './SortablePageItemRenderer';
 import SortableDragOverlay from './SortablePageItemDragOverlay';
 
 const createItemData = memoize((
-  acceptedItems,
-  additionalPageItems,
-  disableInteraction,
-  hashCode,
-  itemAccessor,
-  onAnEventTrigger,
   onPageAdd,
   onPageClick,
   onPageDuplicate,
@@ -30,12 +24,6 @@ const createItemData = memoize((
   pageContainerStyle,
   pageGetter,
 ) => ({
-  acceptedItems,
-  additionalPageItems,
-  disableInteraction,
-  hashCode,
-  itemAccessor,
-  onAnEventTrigger,
   onPageAdd,
   onPageClick,
   onPageDuplicate,
@@ -46,13 +34,7 @@ const createItemData = memoize((
 
 const SortablePageList = () => {
   const VirtuosoList = forwardRef(({
-    acceptedItems = {},
-    additionalPageItems = [],
-    disableInteraction = [],
-    hashCode = '',
     height,
-    itemAccessor = () => {},
-    onAnEventTrigger = () => {},
     onPageAdd = () => {},
     onPageClick = () => {},
     onPageDuplicate = () => {},
@@ -81,12 +63,6 @@ const SortablePageList = () => {
     );
 
     const itemData = useMemo(() => createItemData(
-      acceptedItems,
-      additionalPageItems,
-      disableInteraction,
-      hashCode,
-      itemAccessor,
-      onAnEventTrigger,
       onPageAdd,
       onPageClick,
       onPageDuplicate,
@@ -94,12 +70,6 @@ const SortablePageList = () => {
       pageContainerStyle,
       pageGetter,
     ), [
-      acceptedItems,
-      additionalPageItems,
-      disableInteraction,
-      hashCode,
-      itemAccessor,
-      onAnEventTrigger,
       onPageAdd,
       onPageClick,
       onPageDuplicate,
@@ -191,7 +161,7 @@ const SortablePageList = () => {
                 return (
                   <SortablePageItemRenderer
                     data={itemData}
-                    id={index.toString()}
+                    id={page.id}
                     index={index}
                     style={{ height: 127 }}
                   />
@@ -202,11 +172,7 @@ const SortablePageList = () => {
             />
           </SortableContext>
           <SortableDragOverlay
-            acceptedItems={acceptedItems}
             activePageData={activePageData}
-            additionalPageItems={additionalPageItems}
-            hashCode={hashCode}
-            itemAccessor={itemAccessor}
           />
         </DndContext>
       </div>
@@ -216,13 +182,7 @@ const SortablePageList = () => {
   VirtuosoList.displayName = 'VirtuosoList';
 
   VirtuosoList.propTypes = {
-    acceptedItems: PropTypes.shape({}),
-    additionalPageItems: PropTypes.arrayOf(PropTypes.node),
-    disableInteraction: PropTypes.arrayOf(PropTypes.string),
-    hashCode: PropTypes.string,
     height: PropTypes.number,
-    itemAccessor: PropTypes.func,
-    onAnEventTrigger: PropTypes.func,
     onPageAdd: PropTypes.func,
     onPageClick: PropTypes.func,
     onPageDuplicate: PropTypes.func,

@@ -1,5 +1,4 @@
 import { useMemo } from 'react';
-import PropTypes from 'prop-types';
 import { useBuilderStore } from '../../contexts/BuilderContext';
 import { usePropStore } from '../../contexts/PropContext';
 import {
@@ -11,10 +10,7 @@ import {
 import { useTranslatedTexts } from '../../utils/hooks';
 import { useIcons } from '../../hooks/useIcons';
 
-const ZoomControls = ({
-  mode = '',
-  showZoom = true,
-}) => {
+const ZoomControls = () => {
   const setZoom = useBuilderStore(state => state.setZoom);
   const zoom = useBuilderStore(state => state.zoom);
 
@@ -22,17 +18,16 @@ const ZoomControls = ({
   const settings = usePropStore(state => state.settings);
 
   const { reportLayoutHeight = 794, reportLayoutWidth = 1123 } = settings;
-  const isModeCustomize = mode === 'customize';
   const decreaseZoom = () => {
     onAnEventTrigger('zoomOut', 'report');
     if (zoom > (ZOOM_STEP + ZOOM_MIN)) {
-      setZoom(parseFloat((zoom - ZOOM_STEP).toFixed(1)), isModeCustomize, reportLayoutWidth);
+      setZoom(parseFloat((zoom - ZOOM_STEP).toFixed(1)), reportLayoutWidth);
     }
   };
   const increaseZoom = () => {
     onAnEventTrigger('zoomIn', 'report');
     if (zoom < (ZOOM_MAX)) {
-      setZoom(parseFloat((zoom + ZOOM_STEP).toFixed(1)), isModeCustomize, reportLayoutWidth);
+      setZoom(parseFloat((zoom + ZOOM_STEP).toFixed(1)), reportLayoutWidth);
     }
   };
   const fitZoom = () => {
@@ -45,7 +40,7 @@ const ZoomControls = ({
     if (newZoom < 0.5) newZoom = 0.5;
     if (newZoom > 1) newZoom = 1;
     onAnEventTrigger('fitZoom', 'report');
-    setZoom(newZoom, isModeCustomize, reportLayoutWidth);
+    setZoom(newZoom, reportLayoutWidth);
   };
 
   const zoomValue = useMemo(() => {
@@ -57,7 +52,7 @@ const ZoomControls = ({
   const { fit: FitIcon, minus: MinusIcon, plus: PlusIcon } = useIcons();
 
   return (
-    <div className={`floatingController forZoom${!showZoom ? ' hidden' : ''}`}>
+    <div className="floatingController forZoom">
       <div className="floatingController-container isGray">
         <button
           className="controllerItem isWhite"
@@ -92,11 +87,6 @@ const ZoomControls = ({
       </div>
     </div>
   );
-};
-
-ZoomControls.propTypes = {
-  mode: PropTypes.string,
-  showZoom: PropTypes.bool,
 };
 
 export default ZoomControls;

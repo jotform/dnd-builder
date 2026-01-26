@@ -1,24 +1,21 @@
 import PropTypes from 'prop-types';
 import ReportWrapper from '../ReportWrapper';
 import StaticScene from './StaticScene';
-import { PropProvider } from '../../contexts/PropContext';
-import { BuilderProvider } from '../../contexts/BuilderContext';
-import { PresentationProvider } from '../../contexts/PresentationContext';
+import Providers from '../../contexts/Providers';
 
 const Preview = props => {
   return (
-    <BuilderProvider>
-      <PropProvider {...props}>
-        <PresentationProvider>
-          <ReportWrapper mode="preview">
-            <StaticScene
-              isExistsZoom
-              mode="preview"
-            />
-          </ReportWrapper>
-        </PresentationProvider>
-      </PropProvider>
-    </BuilderProvider>
+    <Providers
+      mode="preview"
+      {...props}
+    >
+      <ReportWrapper mode="preview">
+        <StaticScene
+          isExistsZoom
+          mode="preview"
+        />
+      </ReportWrapper>
+    </Providers>
   );
 };
 

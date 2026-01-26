@@ -1,4 +1,6 @@
-import { useState, useEffect, useMemo } from 'react';
+import {
+  useState, useEffect, useMemo, StrictMode,
+} from 'react';
 import PropTypes from 'prop-types';
 import Builder from './Builder';
 import Presentation from './Presentation/Presentation';
@@ -32,17 +34,19 @@ const Report = ({
     setViewMode(mode);
   }, [mode, viewMode]);
 
-  const Component = useMemo(() => modeComponents[viewMode], [viewMode]);
+  const ModeComponent = useMemo(() => modeComponents[viewMode], [viewMode]);
 
-  if (!Component) {
+  if (!ModeComponent) {
     return null;
   }
 
   return (
-    <Component
-      {...props}
-      lastScrollPosition={lastScrollPosition}
-    />
+    <StrictMode>
+      <ModeComponent
+        {...props}
+        lastScrollPosition={lastScrollPosition}
+      />
+    </StrictMode>
   );
 };
 
