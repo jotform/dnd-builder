@@ -13,6 +13,8 @@ import TextEditorToolbar from './TextEditor/CustomToolbar';
 import DraggableItemActions from './DraggableItem/DraggableItemActions';
 import ItemPositioner from './ItemPositioner';
 import withClickOutside from './withClickOutside';
+import { useBuilderStore } from '../contexts/BuilderContext';
+import { isSelectedItem } from '../utils/functions';
 
 const ResizableWithClickOutside = withClickOutside(Resizable);
 
@@ -45,22 +47,25 @@ const PageItemResizer = ({
   deleteItem,
   duplicateItem,
   isDragging,
-  isMultipleItemSelected,
-  isSelectedElement,
-  isTextEditorOpen,
   item,
   onClickOutside,
   onResize,
   onResizeStop,
   pageID,
-  setActiveElement,
-  setIsRightPanelOpen,
   stateHeight,
   stateLeft,
   stateTop,
   stateWidth,
-  zoom,
 }) => {
+  const zoom = useBuilderStore(state => state.zoom);
+  const setIsRightPanelOpen = useBuilderStore(state => state.setIsRightPanelOpen);
+  const setActiveElement = useBuilderStore(state => state.setActiveElement);
+  const activeElement = useBuilderStore(state => state.activeElement);
+  const isTextEditorOpen = useBuilderStore(state => state.isTextEditorOpen);
+
+  const isSelected = isSelectedItem(item.id, activeElement);
+  const isMultipleItemSelected = activeElement !== null && activeElement.length > 1;
+
   const requestRef = useRef();
   const [lockAspectRatio, setLockAspectRatio] = useState(false);
 
@@ -130,7 +135,7 @@ const PageItemResizer = ({
 
   const { isLocked } = item;
 
-  if (isDragging || !isSelectedElement) return null;
+  if (isDragging || !isSelected) return null;
   return createPortal(
     <ItemPositioner
       style={itemPositionerStyle}

@@ -2,6 +2,7 @@ import {
   useState,
   useRef,
   memo,
+  useCallback,
 } from 'react';
 import PropTypes from 'prop-types';
 import { useDrop } from 'react-dnd';
@@ -15,16 +16,14 @@ import ReportItemsWrapper from '../ReportItemsWrapper';
 import { useBuilderStore } from '../../contexts/BuilderContext';
 import { usePropStore } from '../../contexts/PropContext';
 import {
-  proximityListener,
-  calculateGuidePositions,
   getCorrectDroppedOffsetValue,
   getCorrectDroppedOffsetValueBySnap,
   findItemById,
+  getMatchesForItem,
+  getCoordinatesFromMatches,
 } from '../../utils/functions';
 import * as classNames from '../../constants/classNames';
 import generateId from '../../utils/generateId';
-
-const emptyObject = {};
 
 const Page = ({
   guides = {},
@@ -37,6 +36,7 @@ const Page = ({
   const setActiveElement = useBuilderStore(state => state.setActiveElement);
   const setIsRightPanelOpen = useBuilderStore(state => state.setIsRightPanelOpen);
   const zoom = useBuilderStore(state => state.zoom);
+  const isResize = useBuilderStore(state => state.isResize);
 
   const onItemAdd = usePropStore(state => state.onItemAdd);
   const onItemMove = usePropStore(state => state.onItemMove);
@@ -48,8 +48,12 @@ const Page = ({
   const pages = usePropStore(state => state.pages);
 
   const [matches, setMatches] = useState({});
-  const [isResize, setIsResize] = useState(false);
   const requestRef = useRef();
+
+  const handleMatches = useCallback(item => {
+    const newMatches = getMatchesForItem(item, guides, zoom);
+    setMatches(newMatches);
+  }, [guides, zoom]);
 
   const drawAlignmentGuides = (item, monitor) => {
     return () => {
@@ -66,16 +70,7 @@ const Page = ({
         const activeItem = {
           ...item, ...coords,
         };
-        const _guides = {
-          ...guides[item.pageID],
-          [item.id]: {
-            ...guides[item.pageID][item.id],
-            x: calculateGuidePositions(activeItem, 'x', zoom),
-            y: calculateGuidePositions(activeItem, 'y', zoom),
-          },
-        };
-        const match = proximityListener(item.id, _guides);
-        setMatches(match);
+        handleMatches(activeItem);
         requestRef.current = undefined;
       } catch (error) {
         setMatches({});
@@ -124,7 +119,9 @@ const Page = ({
         setIsRightPanelOpen(true);
         newCoords[itemID] = coords;
       } else if (type === DRAGGABLE_ITEM_TYPE) {
-        const dragCoords = getCorrectDroppedOffsetValueBySnap(coords, guides, id, pages, zoom);
+        console.log(coords);
+        const newItem = { ...item, ...coords };
+        const dragCoords = getCorrectDroppedOffsetValueBySnap(newItem, guides, zoom);
         if (isMultipleItemSelected) {
           const leftDifference = additionalData.left - dragCoords.left;
           const topDifference = additionalData.top - dragCoords.top;
@@ -158,6 +155,15 @@ const Page = ({
     hover: onHover,
   });
 
+  const getIntersectionsFromMatches = useCallback(item => {
+    const {
+      left: newActiveBoxLeft,
+      top: newActiveBoxTop,
+    } = getCoordinatesFromMatches(item, matches);
+
+    return { newActiveBoxLeft, newActiveBoxTop };
+  }, [matches]);
+
   const { reportBackgroundColor } = settings;
   const { backgroundColor } = page;
   const bgColor = backgroundColor ? backgroundColor : reportBackgroundColor || '#fff';
@@ -174,13 +180,9 @@ const Page = ({
       >
         <div className="jfReport-hider o-hidden f-all p-relative">
           <ReportItemsWrapper
-            guides={guides[page.id]}
-            isResize={isResize}
-            // if we send matches all the time, DraggableItems are also rendered on dragging
+            getIntersectionsFromMatches={getIntersectionsFromMatches}
+            handleMatches={handleMatches}
             items={items}
-            matches={isResize ? matches : emptyObject}
-            setIsResize={setIsResize}
-            setMatches={setMatches}
           />
           {additionalPageItems}
           <AlignmentGuides
