@@ -119,7 +119,6 @@ const Page = ({
         setIsRightPanelOpen(true);
         newCoords[itemID] = coords;
       } else if (type === DRAGGABLE_ITEM_TYPE) {
-        console.log(coords);
         const newItem = { ...item, ...coords };
         const dragCoords = getCorrectDroppedOffsetValueBySnap(newItem, guides, zoom);
         if (isMultipleItemSelected) {
