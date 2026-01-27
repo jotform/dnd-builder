@@ -57,6 +57,15 @@ const Scene = () => {
     return acc;
   }, {}));
 
+  // Update refs when new pages are added
+  useEffect(() => {
+    pages.forEach(page => {
+      if (!refs.current[page.id]) {
+        refs.current[page.id] = createRef(null);
+      }
+    });
+  }, [pages]);
+
   const isMultipleItemSelected = activeElement !== null && activeElement.length > 1;
 
   /* Calculate snap guides */
@@ -317,7 +326,6 @@ const Scene = () => {
         pageRefs={refs.current}
         pages={pages}
       />
-
       <div
         ref={viewPortRef}
         className={classNames.viewport}
@@ -348,7 +356,6 @@ const Scene = () => {
                   items={page.items}
                   page={page}
                   pageIndex={index}
-                  pageRef={refs.current[page.id]}
                   style={pageContainerStyles.current}
                 />
               </div>

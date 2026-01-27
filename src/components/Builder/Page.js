@@ -29,7 +29,6 @@ const Page = ({
   guides = {},
   items = [],
   page = {},
-  pageRef = {},
   style = {},
 }) => {
   const activeElement = useBuilderStore(state => state.activeElement);
@@ -49,6 +48,7 @@ const Page = ({
 
   const [matches, setMatches] = useState({});
   const requestRef = useRef();
+  const dropRef = useRef(null); // for getting the bounding client rect
 
   const handleMatches = useCallback(item => {
     const newMatches = getMatchesForItem(item, guides, zoom);
@@ -64,13 +64,15 @@ const Page = ({
         }
         const coords = getCorrectDroppedOffsetValue(
           monitor,
-          pageRef.current.getBoundingClientRect(),
+          dropRef.current.getBoundingClientRect(),
           zoom,
         );
         const activeItem = {
           ...item, ...coords,
         };
-        handleMatches(activeItem);
+        if (activeItem.id && activeItem.pageID) {
+          handleMatches(activeItem);
+        }
         requestRef.current = undefined;
       } catch (error) {
         setMatches({});
@@ -94,7 +96,7 @@ const Page = ({
       };
     },
     drop: (item, monitor) => {
-      const pageClient = pageRef.current?.getBoundingClientRect();
+      const pageClient = dropRef.current?.getBoundingClientRect();
       const coords = getCorrectDroppedOffsetValue(
         monitor,
         pageClient,
@@ -163,6 +165,11 @@ const Page = ({
     return { newActiveBoxLeft, newActiveBoxTop };
   }, [matches]);
 
+  const combinedRef = useCallback(node => {
+    dropRef.current = node;
+    drop(node);
+  }, [drop]);
+
   const { reportBackgroundColor } = settings;
   const { backgroundColor } = page;
   const bgColor = backgroundColor ? backgroundColor : reportBackgroundColor || '#fff';
@@ -170,7 +177,7 @@ const Page = ({
   return (
     <>
       <div
-        ref={drop}
+        ref={combinedRef}
         className={classNames.pageContainer}
         style={{
           backgroundColor: bgColor,
@@ -209,9 +216,6 @@ Page.propTypes = {
   ),
   page: PropTypes.shape({
     backgroundColor: PropTypes.string,
-  }),
-  pageRef: PropTypes.shape({
-    current: PropTypes.any,
   }),
   style: PropTypes.shape({}),
 };
