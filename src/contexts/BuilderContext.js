@@ -10,6 +10,7 @@ const builderStore = props => {
     editedElement: props.editedElement || 'l_layout',
     isAllSlidesPanelOpen: props.isAllSlidesPanelOpen || false,
     isLeftPanelOpen: props.isLeftPanelOpen || false,
+    isResize: false,
     isRightPanelOpen: props.isRightPanelOpen || false,
     isSlidesPanelOpen: props.isSlidesPanelOpen || false,
     isTextEditorOpen: props.isTextEditorOpen || false,
@@ -50,6 +51,9 @@ const builderStore = props => {
         ...status && !isEnoughCanvasSize && { isRightPanelOpen: false },
       });
     }),
+    setIsResize: status => {
+      set({ isResize: status });
+    },
     setIsRightPanelOpen: props.setIsRightPanelOpen || (status => {
       const { isEnoughCanvasSize, onRightPanelsToggled } = get();
       set({

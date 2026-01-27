@@ -1,18 +1,16 @@
 import { memo } from 'react';
+import PropTypes from 'prop-types';
 import ReportItemRenderer from './Builder/ReportItemRenderer';
 import DraggableItem from './DraggableItem/DraggableItem';
 import getMergedItem from '../utils/getMergedItem';
 import { useBuilderStore } from '../contexts/BuilderContext';
-import { isSelected } from '../utils/functions';
+import { isSelectedItem } from '../utils/functions';
 import { usePropStore } from '../contexts/PropContext';
 
 const ReportItemsWrapper = ({
-  guides,
-  isResize,
+  getIntersectionsFromMatches,
+  handleMatches,
   items,
-  matches,
-  setIsResize,
-  setMatches,
 }) => {
   const acceptedItems = usePropStore(state => state.acceptedItems);
   const activeElement = useBuilderStore(state => state.activeElement);
@@ -26,29 +24,22 @@ const ReportItemsWrapper = ({
         ? item.isVisible
         : true
     ))
-    .map((item, index) => {
+    .map(item => {
       const mergedItem = getMergedItem(item, acceptedItems);
       return (
         <DraggableItem
           key={item.id}
-          guides={guides}
-          index={index}
-          isMultipleItemSelected={activeElement !== null && activeElement.length > 1}
-          isResize={isResize}
-          isSelected={isSelected(item.id, activeElement)}
+          getIntersectionsFromMatches={getIntersectionsFromMatches}
+          handleMatches={handleMatches}
           item={item}
-          matches={matches}
-          setIsResize={setIsResize}
-          setMatches={setMatches}
         >
           <ReportItemRenderer
-            key={item.id}
             item={mergedItem}
           >
             {ReportItem => (
               <ReportItem
                 isMultipleItemSelected={activeElement !== null && activeElement.length > 1}
-                isSelected={isSelected(item.id, activeElement)}
+                isSelected={isSelectedItem(item.id, activeElement)}
                 item={mergedItem}
                 itemAccessor={itemAccessor}
                 onAnEventTrigger={onAnEventTrigger}
@@ -59,6 +50,14 @@ const ReportItemsWrapper = ({
         </DraggableItem>
       );
     });
+};
+
+ReportItemsWrapper.propTypes = {
+  getIntersectionsFromMatches: PropTypes.func,
+  handleMatches: PropTypes.func,
+  items: PropTypes.arrayOf(
+    PropTypes.shape({}),
+  ),
 };
 
 export default memo(ReportItemsWrapper);

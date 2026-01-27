@@ -31,7 +31,7 @@ export const getStyles = (left, top, isDragging) => {
   };
 };
 
-export const isSelected = (id, activeElements) => {
+export const isSelectedItem = (id, activeElements) => {
   if (activeElements === null) return id === activeElements;
   return activeElements.indexOf(id) !== -1;
 };
@@ -43,9 +43,9 @@ export const findItemById = (itemID, pages) => {
 };
 
 export const getSelectedItems = (selectedItemsIds, pages) => {
-  const page = pages.find(p => p.items.find(item => isSelected(item.id, selectedItemsIds)));
+  const page = pages.find(p => p.items.find(item => isSelectedItem(item.id, selectedItemsIds)));
   if (!page) return null;
-  return page.items.filter(item => isSelected(item.id, selectedItemsIds));
+  return page.items.filter(item => isSelectedItem(item.id, selectedItemsIds));
 };
 
 const traverse = (obj, condition) => condition.split('.').reduce((cur, key) => cur[key], obj);
@@ -207,41 +207,48 @@ export const proximityListener = (active, allGuides) => {
   return allMatchedGuides;
 };
 
-export const getCorrectDroppedOffsetValueBySnap = (coords, guides, itemID, pages, zoom) => {
-  let newItem = findItemById(itemID, pages);
-  newItem = { ...newItem, ...coords };
-  const pageGuides = guides[newItem.pageID];
+export const getMatchesForItem = (item, guides, zoom) => {
+  const pageGuides = guides[item.pageID];
   const _guides = {
     ...pageGuides,
-    [itemID]: {
-      ...pageGuides[itemID],
-      x: calculateGuidePositions(newItem, 'x', zoom),
-      y: calculateGuidePositions(newItem, 'y', zoom),
+    [item.id]: {
+      ...pageGuides[item.id],
+      x: calculateGuidePositions(item, 'x', zoom),
+      y: calculateGuidePositions(item, 'y', zoom),
     },
   };
-  const match = proximityListener(itemID, _guides);
-  let newActiveBoxLeft = newItem.left;
-  let newActiveBoxTop = newItem.top;
-  Object.keys(match).forEach(axis => {
-    const { activeBoxGuides, matchedArray, proximity } = match[axis];
+  return proximityListener(item.id, _guides);
+};
+
+export const getCoordinatesFromMatches = (item, matches) => {
+  let newActiveBoxLeft = item.left;
+  let newActiveBoxTop = item.top;
+  Object.keys(matches).forEach(axis => {
+    const { activeBoxGuides, matchedArray, proximity } = matches[axis];
     const activeBoxProximityIndex = proximity.activeBoxIndex;
     const matchedBoxProximityIndex = proximity.matchedBoxIndex;
     if (axis === 'x') {
       if (activeBoxGuides[activeBoxProximityIndex] > matchedArray[matchedBoxProximityIndex]) {
-        newActiveBoxLeft = newItem.left - proximity.value;
+        newActiveBoxLeft = item.left - proximity.value;
       } else {
-        newActiveBoxLeft = newItem.left + proximity.value;
+        newActiveBoxLeft = item.left + proximity.value;
       }
     } else if (activeBoxGuides[activeBoxProximityIndex] > matchedArray[matchedBoxProximityIndex]) {
-      newActiveBoxTop = newItem.top - proximity.value;
+      newActiveBoxTop = item.top - proximity.value;
     } else {
-      newActiveBoxTop = newItem.top + proximity.value;
+      newActiveBoxTop = item.top + proximity.value;
     }
   });
+
   return {
     left: newActiveBoxLeft,
     top: newActiveBoxTop,
   };
+};
+
+export const getCorrectDroppedOffsetValueBySnap = (item, guides, zoom) => {
+  const matches = getMatchesForItem(item, guides, zoom);
+  return getCoordinatesFromMatches(item, matches);
 };
 
 export const getPosition = e => {

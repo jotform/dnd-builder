@@ -4,10 +4,7 @@ import { useDrag } from 'react-dnd';
 import { getEmptyImage } from 'react-dnd-html5-backend';
 import ItemPositioner from '../ItemPositioner';
 import { DRAGGABLE_ITEM_TYPE } from '../../constants/itemTypes';
-import {
-  getStyles,
-  getPosition, calculateGuidePositions, proximityListener,
-} from '../../utils/functions';
+import { getStyles, getPosition, isSelectedItem } from '../../utils/functions';
 import PageItemResizer from '../PageItemResizer';
 import ErrorBoundary from '../ErrorBoundary';
 import * as classNames from '../../constants/classNames';
@@ -27,14 +24,9 @@ const reportItemStyle = {
 
 const DraggableItem = ({
   children = null,
-  guides = {},
-  isMultipleItemSelected = false,
-  isResize = false,
-  isSelected = false,
   item = {},
-  matches = {},
-  setIsResize = () => {},
-  setMatches = () => {},
+  handleMatches,
+  getIntersectionsFromMatches,
 }) => {
   const {
     height,
@@ -66,12 +58,17 @@ const DraggableItem = ({
   const onItemChange = usePropStore(state => state.onItemChange);
   const onItemRemove = usePropStore(state => state.onItemRemove);
   const onItemResize = usePropStore(state => state.onItemResize);
+
+  const activeElement = useBuilderStore(state => state.activeElement);
   const setActiveElement = useBuilderStore(state => state.setActiveElement);
   const setContextMenuProps = useBuilderStore(state => state.setContextMenuProps);
-  const zoom = useBuilderStore(state => state.zoom);
   const isTextEditorOpen = useBuilderStore(state => state.isTextEditorOpen);
   const isRightPanelOpen = useBuilderStore(state => state.isRightPanelOpen);
   const setIsRightPanelOpen = useBuilderStore(state => state.setIsRightPanelOpen);
+  const setIsResize = useBuilderStore(state => state.setIsResize);
+
+  const isSelected = isSelectedItem(item.id, activeElement);
+  const isMultipleItemSelected = activeElement !== null && activeElement.length > 1;
 
   const select = event => {
     if (!isSelected) {
@@ -132,22 +129,20 @@ const DraggableItem = ({
   }, [preview]);
 
   useEffect(() => {
-    if (!isResize) {
-      setResizeSize(prev => {
-        if (prev.left !== left || prev.top !== top || prev.width !== width || prev.height !== height) {
-          return {
-            ...prev,
-            height,
-            left,
-            top,
-            width,
-          };
-        }
+    setResizeSize(prev => {
+      if (prev.left !== left || prev.top !== top || prev.width !== width || prev.height !== height) {
+        return {
+          ...prev,
+          height,
+          left,
+          top,
+          width,
+        };
+      }
 
-        return prev;
-      });
-    }
-  }, [left, top, width, height, isResize]);
+      return prev;
+    });
+  }, [left, top, width, height]);
 
   const onResizeStop = (deltaWidth, deltaHeight, direction) => {
     const activeItem = {
@@ -157,26 +152,7 @@ const DraggableItem = ({
     };
     if (/left/i.test(direction)) activeItem.left = activeItem.left - deltaWidth;
     if (/top/i.test(direction)) activeItem.top = activeItem.top - deltaHeight;
-    let newActiveBoxLeft = activeItem.left;
-    let newActiveBoxTop = activeItem.top;
-    Object.keys(matches).forEach(axis => {
-      const { activeBoxGuides, matchedArray, proximity } = matches[axis];
-      const activeBoxProximityIndex = proximity.activeBoxIndex;
-      const matchedBoxProximityIndex = proximity.matchedBoxIndex;
-      if (axis === 'x') {
-        if (activeBoxGuides[activeBoxProximityIndex] > matchedArray[matchedBoxProximityIndex]) {
-          newActiveBoxLeft = activeItem.left - proximity.value;
-        } else {
-          newActiveBoxLeft = activeItem.left + proximity.value;
-        }
-      } else if (activeBoxGuides[activeBoxProximityIndex]
-        > matchedArray[matchedBoxProximityIndex]) {
-        newActiveBoxTop = activeItem.top - proximity.value;
-      } else {
-        newActiveBoxTop = activeItem.top + proximity.value;
-      }
-    });
-
+    const { newActiveBoxLeft, newActiveBoxTop } = getIntersectionsFromMatches(activeItem);
     let newResizeSize = {
       height: activeItem.height,
       left: activeItem.left,
@@ -202,7 +178,7 @@ const DraggableItem = ({
   };
 
   const onResize = (deltaWidth, deltaHeight, direction) => {
-    if (!isResize) { setIsResize(true); }
+    setIsResize(true);
     const activeItem = {
       ...item,
       height: item.height + deltaHeight,
@@ -210,15 +186,7 @@ const DraggableItem = ({
     };
     if (/left/i.test(direction)) activeItem.left = activeItem.left - deltaWidth;
     if (/top/i.test(direction)) activeItem.top = activeItem.top - deltaHeight;
-    const _guides = {
-      ...guides,
-      [item.id]: {
-        ...guides[item.id],
-        x: calculateGuidePositions(activeItem, 'x', zoom),
-        y: calculateGuidePositions(activeItem, 'y', zoom),
-      },
-    };
-    setMatches(proximityListener(item.id, _guides));
+    handleMatches(activeItem);
     setResizeSize({
       height: activeItem.height,
       left: activeItem.left,
@@ -347,21 +315,15 @@ const DraggableItem = ({
         deleteItem={deleteItem}
         duplicateItem={duplicateItem}
         isDragging={isDragging}
-        isMultipleItemSelected={isMultipleItemSelected}
-        isSelectedElement={isSelected}
-        isTextEditorOpen={isTextEditorOpen}
         item={item}
         onClickOutside={onClickOutside}
         onResize={onResize}
         onResizeStop={onResizeStop}
         pageID={pageID}
-        setActiveElement={setActiveElement}
-        setIsRightPanelOpen={setIsRightPanelOpen}
         stateHeight={stateHeight}
         stateLeft={stateLeft}
         stateTop={stateTop}
         stateWidth={stateWidth}
-        zoom={zoom}
       />
     </ErrorBoundary>
   );
@@ -369,10 +331,8 @@ const DraggableItem = ({
 
 DraggableItem.propTypes = {
   children: PropTypes.any,
-  guides: PropTypes.shape({}),
-  isMultipleItemSelected: PropTypes.bool,
-  isResize: PropTypes.bool,
-  isSelected: PropTypes.bool,
+  getIntersectionsFromMatches: PropTypes.func,
+  handleMatches: PropTypes.func,
   item: PropTypes.shape({
     height: PropTypes.oneOfType([
       PropTypes.number,
@@ -395,9 +355,6 @@ DraggableItem.propTypes = {
       PropTypes.string,
     ]),
   }),
-  matches: PropTypes.shape({}),
-  setIsResize: PropTypes.func,
-  setMatches: PropTypes.func,
 };
 
 export default memo(DraggableItem);

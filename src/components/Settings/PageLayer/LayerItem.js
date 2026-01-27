@@ -65,7 +65,18 @@ const LayerItem = ({
       return item.value ? stripHTML(item.value) : CLICK_TO_EDIT_TEXT;
     }
     return capitalize(item.itemType || PAGE_ELEMENT);
-  }, [item]);
+  }, [
+    item.itemType,
+    item.shapeType,
+    item.headerText,
+    item.text,
+    item.value,
+    RECTANGLE,
+    CHART_ELEMENT,
+    CLIK_TO_EDIT_HEADER,
+    CLICK_TO_EDIT_TEXT,
+    PAGE_ELEMENT,
+  ]);
 
   const content = useMemo(() => (
     <div className="jfReportSelectOption">
