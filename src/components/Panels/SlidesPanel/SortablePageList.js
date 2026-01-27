@@ -156,12 +156,10 @@ const SortablePageList = () => {
               ref={virtuosoRef}
               fixedItemHeight={127}
               itemContent={index => {
-                const page = pageGetter(index);
-                if (!page) return null;
                 return (
                   <SortablePageItemRenderer
                     data={itemData}
-                    id={page.id}
+                    id={index.toString()}
                     index={index}
                     style={{ height: 127 }}
                   />
