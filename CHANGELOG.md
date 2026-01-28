@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.1.0](https://github.com/jotform/dnd-builder/compare/v3.0.0...v3.1.0) (2026-01-28)
+
+
+### Features
+
+* add title for data card ([f330385](https://github.com/jotform/dnd-builder/commit/f330385f473491b200daa24f89f4ac56375dace6))
+
+
+### Bug Fixes
+
+* console.log is removed ([d3c5aff](https://github.com/jotform/dnd-builder/commit/d3c5aff0bdcca72a00551d99a01299066bad2917))
+* sortable page list is fixed ([3ddeb45](https://github.com/jotform/dnd-builder/commit/3ddeb4536705896af3c11fff1d6c62c390bb99cd))
+* updating refs when new pages are added ([ba6071d](https://github.com/jotform/dnd-builder/commit/ba6071d68b18abbb768c3687abc9d7c02531fed3))
+
 ## [3.0.0](https://github.com/jotform/dnd-builder/compare/v2.9.19...v3.0.0) (2026-01-23)
 
 
