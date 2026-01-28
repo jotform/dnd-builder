@@ -45,7 +45,6 @@ const Scene = () => {
 
   const [itemToPaste, setItemToPaste] = useState(null);
   const lastScrollPosition = useBuilderStore(state => state.lastScrollPosition);
-  const isHeaderHidden = useRef(false);
 
   const pageStyles = useRef({});
   const pageContainerStyles = useRef({});
@@ -103,12 +102,6 @@ const Scene = () => {
       viewPortRef.current.scrollTop = lastScrollPosition;
     }
   }, [lastScrollPosition]); // set last scroll position after changing mode
-
-  useEffect(() => {
-    if (document.body.classList.contains('hideHeader') && isHeaderHidden) {
-      document.body.classList.remove('hideHeader');
-    }
-  }, []); // reset hideHeader
 
   const foundItem = findItemById(activeElement === null ? null : activeElement[0], pages);
 
@@ -261,19 +254,6 @@ const Scene = () => {
     }
   };
 
-  const onScroll = e => {
-    const { scrollTop } = e.currentTarget;
-    const hiddenHeaderHeight = 70;
-    const headerHidingLimit = isHeaderHidden ? 230 : 300;
-    if (scrollTop > headerHidingLimit + hiddenHeaderHeight && !isHeaderHidden.current) {
-      isHeaderHidden.current = true;
-      document.body.classList.add('hideHeader');
-    } else if (scrollTop < headerHidingLimit && isHeaderHidden.current) {
-      isHeaderHidden.current = false;
-      document.body.classList.remove('hideHeader');
-    }
-  };
-
   const shouldSuppressKeyboardEvent = e => (
     EVENT_IGNORED_ROLES.some(role => e.target.closest(`[role=${role}]`))
   );
@@ -330,7 +310,6 @@ const Scene = () => {
         ref={viewPortRef}
         className={classNames.viewport}
         data-zoom={zoom}
-        onScroll={onScroll}
       >
         <div
           className={classNames.canvas}
