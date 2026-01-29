@@ -1,1 +1,3 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><title>cloud</title><g id="cloud"><path id="cloud-2" data-name="cloud" d="M19,10.025V10A7,7,0,0,0,5,10v.025A5.5,5.5,0,0,0,5.5,21h13A5.5,5.5,0,0,0,19,10.025Z"/></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+  <path d="M1 14.45a4.951 4.951 0 0 0 4.95 4.95H18.6a4.4 4.4 0 0 0 .88-8.71 3.3 3.3 0 0 0-4.912-3.933A5.496 5.496 0 0 0 9.8 4a5.498 5.498 0 0 0-5.5 5.5c0 .093.003.186.007.278A4.953 4.953 0 0 0 1 14.45Z"/>
+</svg>

@@ -1,1 +1,3 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><title>caret-up-circle</title><g id="caret-up-circle"><path id="caret-up-circle-2" data-name="caret-up-circle" d="M12,0A12,12,0,1,0,24,12,12,12,0,0,0,12,0Zm5.609,15.363a1,1,0,0,1-1.4-.183L12,9.71,7.793,15.18a1,1,0,0,1-1.586-1.22L12,6.43l5.793,7.53A1,1,0,0,1,17.609,15.363Z"/></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+  <path fill-rule="evenodd" d="M12 23c6.075 0 11-4.925 11-11S18.075 1 12 1 1 5.925 1 12s4.925 11 11 11Zm3.293-9.293a1 1 0 0 0 1.414-1.414l-4-4a1 1 0 0 0-1.414 0l-4 4a1 1 0 1 0 1.414 1.414L12 10.414l3.293 3.293Z" clip-rule="evenodd"/>
+</svg>
