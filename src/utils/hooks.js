@@ -194,3 +194,25 @@ export const usePageTransition = (style, currentPage) => {
 
   return finalStyle;
 };
+
+export const useActiveElement = () => {
+  const pages = usePropStore(state => state.pages);
+  const activeElement = useBuilderStore(state => state.activeElement);
+  const acceptedItems = usePropStore(state => state.acceptedItems);
+
+  return useMemo(() => {
+    if (activeElement === null || activeElement.length === 0) return [];
+    const items = activeElement.map(itemID => {
+      let foundItem = [];
+      pages.forEach(page => {
+        const item = page.items.find(el => el.id === itemID);
+        if (item) {
+          foundItem = item;
+        }
+      });
+      const defItem = (acceptedItems[foundItem.itemType] && acceptedItems[foundItem.itemType].defaultItem) || {};
+      return { ...defItem, ...foundItem };
+    });
+    return items;
+  }, [pages, activeElement, acceptedItems]);
+};

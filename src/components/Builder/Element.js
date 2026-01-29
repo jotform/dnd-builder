@@ -30,11 +30,14 @@ const Element = ({
       isDragging: monitor.isDragging(),
     }),
 
-    item: () => ({
-      itemType,
-      type: DROPPABLE_ITEM_TYPE,
-      ...additionalData,
-    }),
+    item: () => {
+      setActiveElement(null);
+      return {
+        itemType,
+        type: DROPPABLE_ITEM_TYPE,
+        ...additionalData,
+      };
+    },
 
     type: DROPPABLE_ITEM_TYPE,
   }), [itemType, additionalData]);

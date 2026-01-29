@@ -20,12 +20,11 @@ import {
   findItemById,
   findItemsOnPage,
   getMostVisiblePage,
-  getSelectedItems,
 } from '../../utils/functions';
-import { useEventListener } from '../../utils/hooks';
-import DraggableItemLayer from '../DraggableItem/DraggableItemLayer';
+import { useActiveElement, useEventListener } from '../../utils/hooks';
 import generateId from '../../utils/generateId';
 import { EVENT_IGNORED_ROLES } from '../../constants/eventIgnoredRoles';
+import DraggableLayer from './DraggableLayer';
 
 const Scene = () => {
   const pages = usePropStore(state => state.pages);
@@ -105,7 +104,7 @@ const Scene = () => {
 
   const foundItem = findItemById(activeElement === null ? null : activeElement[0], pages);
 
-  const selectedItems = getSelectedItems(activeElement, pages);
+  const selectedItems = useActiveElement();
   const moveItemWithKeyboard = (event, direction, value) => {
     event.preventDefault();
     selectedItems.forEach(item => {
@@ -301,10 +300,9 @@ const Scene = () => {
     <main // Builder.js
       className={classNames.mainWrapper}
     >
-      <DraggableItemLayer
+      <DraggableLayer
         guides={guides}
         pageRefs={refs.current}
-        pages={pages}
       />
       <div
         ref={viewPortRef}
