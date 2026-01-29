@@ -1,11 +1,9 @@
 /* global Image */
 import objectDiff from './object-diff';
 
-export const getCorrectDroppedOffsetValue = (monitor, clientRect, zoom = 1) => {
-  const dropTargetPosition = clientRect;
-
-  const { x: finalX, y: finalY } = monitor.getSourceClientOffset();
-  const { x: initialX, y: initialY } = monitor.getInitialSourceClientOffset();
+export const getCorrectDroppedOffsetValue = (finalOffset, initialOffset, dropTargetPosition, zoom = 1) => {
+  const { x: finalX, y: finalY } = finalOffset;
+  const { x: initialX, y: initialY } = initialOffset;
 
   const newYposition = finalY > initialY
     ? (initialY + (finalY - initialY)) - dropTargetPosition.top

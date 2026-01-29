@@ -1,21 +1,11 @@
-import { memo } from 'react';
+import { memo, useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
-import memoizeOne from 'memoize-one';
-import { useDragLayer } from 'react-dnd';
 import ReportItemRenderer from '../Builder/ReportItemRenderer';
-import { proximityListener, calculateGuidePositions } from '../../utils/functions';
+import { getCoordinatesFromMatches, getCorrectDroppedOffsetValue, getMatchesForItem } from '../../utils/functions';
 import ItemPositioner from '../ItemPositioner';
 import { useBuilderStore } from '../../contexts/BuilderContext';
 import { usePropStore } from '../../contexts/PropContext';
-import getMergedItem from '../../utils/getMergedItem';
-
-const layerStyles = ({ x, y }) => ({
-  left: x,
-  pointerEvents: 'none',
-  position: 'fixed',
-  top: y,
-  zIndex: 100,
-});
+import { useActiveElement } from '../../utils/hooks';
 
 const getDraggedItem = ({ defaultItem = {}, details }, item) => ({
   ...defaultItem,
@@ -24,227 +14,143 @@ const getDraggedItem = ({ defaultItem = {}, details }, item) => ({
   id: 'temp',
 });
 
-const getMemoizedDraggedItem = memoizeOne(getDraggedItem);
-
-const getAdditionalItems = memoizeOne((activeElems, __itemId, _pages, _acceptedItems) => {
-  if (activeElems === null || activeElems.length === 1) return [];
-  const index = activeElems.findIndex(aE => aE === __itemId);
-  const act = [...activeElems.slice(0, index), ...activeElems.slice(index + 1)];
-  const items = act.map(_i => {
-    const _item = _pages.reduce((acc, curr) => {
-      if (acc) {
-        return acc;
-      }
-      return curr.items.find(el => el.id === _i);
-    }, undefined);
-    const defItem = (_acceptedItems[_item.itemType]
-      && _acceptedItems[_item.itemType].defaultItem);
-    return { ...defItem, ..._item };
-  });
-  return items;
-});
-
-function getItemStyles(initialOffset, currentOffset, ref, pageGuides, item, zoom) {
-  if (ref.current) {
-    const dropTargetPosition = ref.current.getBoundingClientRect();
-    const { x: finalX, y: finalY } = currentOffset;
-    const { x: initialX, y: initialY } = initialOffset;
-    const newYposition = finalY > initialY
-      ? (initialY + (finalY - initialY)) - dropTargetPosition.top
-      : initialY - (initialY - finalY) - dropTargetPosition.top;
-
-    const newXposition = finalX > initialX
-      ? (initialX + (finalX - initialX)) - dropTargetPosition.left
-      : initialX - (initialX - finalX) - dropTargetPosition.left;
-
-    const newItem = {
-      ...item,
-      left: newXposition / zoom,
-      top: newYposition / zoom,
-    };
-    const _guides = {
-      ...pageGuides,
-      [item.id]: {
-        ...pageGuides[item.id],
-        x: calculateGuidePositions(newItem, 'x', zoom),
-        y: calculateGuidePositions(newItem, 'y', zoom),
-      },
-    };
-
-    const match = proximityListener(item.id, _guides);
-    let newActiveBoxLeft = newXposition;
-    let newActiveBoxTop = newYposition;
-    const haveMatch = Object.keys(match).length > 0;
-    const haveXMatch = haveMatch && match.x;
-    const haveYMatch = haveMatch && match.y;
-    Object.keys(match).forEach(axis => {
-      const { activeBoxGuides, matchedArray, proximity } = match[axis];
-      const activeBoxProximityIndex = proximity.activeBoxIndex;
-      const matchedBoxProximityIndex = proximity.matchedBoxIndex;
-      if (axis === 'x') {
-        if (activeBoxGuides[activeBoxProximityIndex] > matchedArray[matchedBoxProximityIndex]) {
-          newActiveBoxLeft = newItem.left - proximity.value;
-        } else {
-          newActiveBoxLeft = newItem.left + proximity.value;
-        }
-      } else if (activeBoxGuides[activeBoxProximityIndex]
-        > matchedArray[matchedBoxProximityIndex]) {
-        newActiveBoxTop = newItem.top - proximity.value;
-      } else {
-        newActiveBoxTop = newItem.top + proximity.value;
-      }
-    });
-    return {
-      x: (newActiveBoxLeft * (haveXMatch ? zoom : 1)) + dropTargetPosition.left,
-      y: (newActiveBoxTop * (haveYMatch ? zoom : 1)) + dropTargetPosition.top,
-    };
-  }
-}
-
 const DraggableItemLayer = ({
+  collectedProps = {},
   guides = {},
   pageRefs = {},
-  pages = [],
 }) => {
   const {
     currentOffset,
     initialOffset,
     isDragging,
     item,
-  } = useDragLayer(monitor => ({
-    currentOffset: monitor.getSourceClientOffset(),
-    initialOffset: monitor.getInitialSourceClientOffset(),
-    isDragging: monitor.isDragging(),
-    item: monitor.getItem(),
-    itemType: monitor.getItemType(),
-  }));
-
-  const activeElement = useBuilderStore(state => state.activeElement);
+  } = collectedProps;
   const zoom = useBuilderStore(state => state.zoom);
 
   const acceptedItems = usePropStore(state => state.acceptedItems);
   const itemAccessor = usePropStore(state => state.itemAccessor);
 
-  if (!currentOffset || !isDragging) {
-    return null;
-  }
-  let draggedItem = pages.reduce((acc, curr) => {
-    if (acc) {
-      return acc;
-    }
-    return curr.items.find(el => el.id === item.id);
-  }, undefined);
+  const referenceItem = useMemo(() => {
+    const _item = item.id ? item : getDraggedItem(acceptedItems[item.itemType], item);
 
-  let pageID;
-  if (draggedItem) {
-    pageID = draggedItem.pageID;
-  } else {
-    draggedItem = getMemoizedDraggedItem(acceptedItems[item.itemType], item);
-  }
-  const element = document.elementFromPoint(currentOffset.x, currentOffset.y);
-  if (element && element.closest('.jfReport-page')) { // add polyfill if will we use that one
-    pageID = element.closest('.jfReport-page').getAttribute('data-id');
-    if (!draggedItem.pageID) {
-      draggedItem.pageID = pageID;
+    // for a element that is dragging to the left panel
+    if (!_item.pageID) {
+      const element = document.elementFromPoint(currentOffset.x, currentOffset.y);
+      if (element && element.closest('.jfReport-page')) {
+        const pageID = element.closest('.jfReport-page').getAttribute('data-id');
+        return { ..._item, pageID };
+      }
     }
-  }
 
-  const ref = pageRefs[pageID];
-  let itemStyle = {};
-  // No page
-  if (!ref || !ref.current) {
-    itemStyle = {
+    return _item;
+  }, [
+    item,
+    acceptedItems,
+    currentOffset.x,
+    currentOffset.y,
+  ]);
+
+  const { pageID } = referenceItem;
+
+  const refCoords = useMemo(() => {
+    if (pageID) {
+      const dropTargetPosition = pageRefs[pageID].current.getBoundingClientRect();
+      const coords = getCorrectDroppedOffsetValue(
+        currentOffset,
+        initialOffset,
+        dropTargetPosition,
+        zoom,
+      );
+      const newItem = { ...referenceItem, ...coords };
+      const newMatches = getMatchesForItem(newItem, guides, zoom);
+      const { left, top } = getCoordinatesFromMatches(newItem, newMatches);
+      return {
+        x: (left * zoom) + dropTargetPosition.left,
+        y: (top * zoom) + dropTargetPosition.top,
+      };
+    }
+    return {
       x: currentOffset.x,
       y: currentOffset.y,
     };
-  } else { // In the page
-    const pageGuides = guides[pageID];
-    itemStyle = getItemStyles(
-      initialOffset,
-      currentOffset,
-      pageRefs[pageID],
-      pageGuides,
-      draggedItem,
-      zoom,
-    );
-  }
+  }, [
+    currentOffset,
+    initialOffset,
+    referenceItem,
+    pageID,
+    pageRefs,
+    zoom,
+    guides,
+  ]);
 
-  const additionalitems = getAdditionalItems(
-    activeElement,
-    draggedItem.id,
-    pages,
-    acceptedItems,
-  );
+  const getItemStyle = useCallback(({ x, y }, { height, width }) => {
+    return {
+      cursor: 'grabbing',
+      height,
+      left: x,
+      outlineColor: '#4277ff',
+      pointerEvents: 'none',
+      position: 'fixed',
+      top: y,
+      transform: `scale(${zoom})`,
+      transformOrigin: '0 0',
+      width,
+      zIndex: 100,
+    };
+  }, [zoom]);
 
-  const mergedItem = getMergedItem(draggedItem, acceptedItems);
+  const activeItems = useActiveElement();
 
-  return (
-    <>
+  const hasActiveItems = activeItems !== null && activeItems.length > 0;
+
+  // for a element is added from the left panel
+  const activeElements = hasActiveItems ? activeItems : [referenceItem];
+
+  return activeElements.map(activeItem => {
+    const coords = hasActiveItems ? {
+      x: refCoords.x - ((referenceItem.left - activeItem.left) * zoom),
+      y: refCoords.y - ((referenceItem.top - activeItem.top) * zoom),
+    } : refCoords;
+
+    const exactItem = hasActiveItems ? activeItem : referenceItem;
+
+    return (
       <ItemPositioner
-        classNames={`reportItem${isDragging ? ' isDraggingLayerElement' : ''}`}
-        style={{
-          ...layerStyles(itemStyle),
-          cursor: isDragging ? 'grabbing' : 'pointer',
-          height: draggedItem.height,
-          outlineColor: '#4277ff',
-          transform: `scale(${zoom})`,
-          transformOrigin: '0 0',
-          width: draggedItem.width,
-        }}
+        key={item.id}
+        classNames="reportItem isDraggingLayerElement"
+        style={getItemStyle(coords, exactItem)}
       >
-        <ReportItemRenderer item={draggedItem}>
+        <ReportItemRenderer item={exactItem}>
           {ReportItem => (
             <ReportItem
               isDragging={isDragging}
-              item={mergedItem}
+              item={exactItem}
               itemAccessor={itemAccessor}
               zoom={zoom}
             />
           )}
         </ReportItemRenderer>
       </ItemPositioner>
-      {additionalitems.map(ii => {
-        const __itemStyle = {
-          x: itemStyle.x - ((draggedItem.left - ii.left) * zoom),
-          y: itemStyle.y - ((draggedItem.top - ii.top) * zoom),
-        };
-        return (
-          <ItemPositioner
-            key={ii.id}
-            classNames={`reportItem${isDragging ? ' isDraggingLayerElement' : ''}`}
-            style={{
-              ...layerStyles(__itemStyle),
-              cursor: isDragging ? 'grabbing' : 'pointer',
-              height: ii.height,
-              outlineColor: '#4277ff',
-              transform: `scale(${zoom})`,
-              transformOrigin: '0 0',
-              width: ii.width,
-            }}
-          >
-            <ReportItemRenderer item={ii}>
-              {ReportItem => (
-                <ReportItem
-                  isDragging={isDragging}
-                  item={ii}
-                  itemAccessor={itemAccessor}
-                  zoom={zoom}
-                />
-              )}
-            </ReportItemRenderer>
-          </ItemPositioner>
-        );
-      })}
-    </>
-  );
+    );
+  });
 };
 
 DraggableItemLayer.propTypes = {
+  collectedProps: PropTypes.shape({
+    currentOffset: PropTypes.shape({
+      x: PropTypes.number,
+      y: PropTypes.number,
+    }),
+    initialOffset: PropTypes.shape({
+      x: PropTypes.number,
+      y: PropTypes.number,
+    }),
+    isDragging: PropTypes.bool,
+    item: PropTypes.shape({}),
+    itemType: PropTypes.string,
+  }),
   guides: PropTypes.shape({}),
   pageRefs: PropTypes.shape({}),
-  pages: PropTypes.arrayOf(
-    PropTypes.shape({}),
-  ),
 };
 
 export default memo(DraggableItemLayer);

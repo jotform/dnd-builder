@@ -63,7 +63,8 @@ const Page = ({
           return;
         }
         const coords = getCorrectDroppedOffsetValue(
-          monitor,
+          monitor.getSourceClientOffset(),
+          monitor.getInitialSourceClientOffset(),
           dropRef.current.getBoundingClientRect(),
           zoom,
         );
@@ -96,10 +97,10 @@ const Page = ({
       };
     },
     drop: (item, monitor) => {
-      const pageClient = dropRef.current?.getBoundingClientRect();
       const coords = getCorrectDroppedOffsetValue(
-        monitor,
-        pageClient,
+        monitor.getSourceClientOffset(),
+        monitor.getInitialSourceClientOffset(),
+        dropRef.current?.getBoundingClientRect(),
         zoom,
       );
       const type = monitor.getItemType();
