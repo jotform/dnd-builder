@@ -168,12 +168,14 @@
   cursor: pointer;
   display: flex;
   align-items: center;
+  justify-content: flex-start;
   background: none;
   border: none;
   height: 45px;
   width: 100%;
   font-size: 0.875rem;
   padding-left: 14px;
+  text-align: left;
 
   .contextMenu-icon {
     margin-right: 9px;
@@ -199,8 +201,8 @@
 
   .contextMenu-icon {
     svg {
-      width: 10px;
-      height: 14px;
+      width: 16px;
+      height: 16px;
     }
   }
 }

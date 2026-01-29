@@ -51,7 +51,12 @@ const SearchInput = ({
         />
         <span
           className="search-icon"
-          style={{ left: '8px', position: 'absolute' }}
+          style={{
+            left: '8px',
+            position: 'absolute',
+            top: '50%',
+            transform: 'translateY(-40%)',
+          }}
         >
           <SearchIcon className="section-search-icon" />
         </span>

@@ -1,1 +1,3 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><title>arrow-up-right</title><g id="arrow-up-right"><path id="arrow-up-right-2" data-name="arrow-up-right" d="M8.828,3A2,2,0,0,0,7.414,6.414l2.965,2.965-6.5,6.5a3.009,3.009,0,0,0,0,4.243h0a3.009,3.009,0,0,0,4.243,0l6.5-6.5,2.965,2.965A2,2,0,0,0,21,15.172V3Z"/></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+  <path fill-rule="evenodd" d="M10 6a1 1 0 0 0 0 2h4.586l-8.293 8.293a1 1 0 1 0 1.414 1.414L16 9.414V14a1 1 0 1 0 2 0V7a1 1 0 0 0-1-1h-7Z" clip-rule="evenodd"/>
+</svg>
