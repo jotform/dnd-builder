@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.1.1](https://github.com/jotform/dnd-builder/compare/v3.1.0...v3.1.1) (2026-02-03)
+
+
+### Bug Fixes
+
+* remove overflow hidden styles in print mode ([917f824](https://github.com/jotform/dnd-builder/commit/917f824cc970ed0ec04f1eb1bf2b5518d65808c1))
+* **SearchInput:** format inline styles for better readability ([0201863](https://github.com/jotform/dnd-builder/commit/0201863dbbea9bdb602b8b60a9267ea529b3ed52))
+
 ## [3.1.0](https://github.com/jotform/dnd-builder/compare/v3.0.0...v3.1.0) (2026-01-28)
 
 
