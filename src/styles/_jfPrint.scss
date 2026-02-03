@@ -21,10 +21,6 @@
   height: 100vh !important;
 }
 .jfReport.printMode .jfReport-viewport {
-  *:not(.jfGrid-colHeaderContainer):not(.jfGrid-colHeaderContainer *) {
-    overflow: hidden !important;
-  }
-
   display: block;
 }
 .jfReport.printMode [id*="presentation-page-"] {
