@@ -25,6 +25,8 @@ import {
 import * as classNames from '../../constants/classNames';
 import generateId from '../../utils/generateId';
 
+const axes = ['x', 'y'];
+
 const Page = ({
   guides = {},
   items = [],
@@ -192,18 +194,17 @@ const Page = ({
             items={items}
           />
           {additionalPageItems}
-          <AlignmentGuides
-            axis="x"
-            guides={guides[page.id]}
-            matches={matches}
-            show={(isOver || isResize)}
-          />
-          <AlignmentGuides
-            axis="y"
-            guides={guides[page.id]}
-            matches={matches}
-            show={(isOver || isResize)}
-          />
+          {(isOver || isResize) && axes.map(axis => {
+            if (!matches[axis]) return null;
+            return (
+              <AlignmentGuides
+                key={axis}
+                axis={axis}
+                guides={guides[page.id]}
+                matches={matches[axis]}
+              />
+            );
+          })}
         </div>
       </div>
     </>
