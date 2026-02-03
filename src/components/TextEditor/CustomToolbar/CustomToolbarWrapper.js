@@ -2,12 +2,9 @@ import { memo } from 'react';
 import PropTypes from 'prop-types';
 import CustomToolbar from './CustomToolbar';
 
-// This wrapper is needed to prevent the re-render
-// of the toolbar id div since it breaks the editor
 const CustomToolbarWrapper = ({
-  isTextEditorOpen = false,
   itemWidth = 0,
-}) => isTextEditorOpen && (
+}) => (
   <div
     id="toolbar"
     style={{
@@ -21,7 +18,6 @@ const CustomToolbarWrapper = ({
 );
 
 CustomToolbarWrapper.propTypes = {
-  isTextEditorOpen: PropTypes.bool,
   itemWidth: PropTypes.number,
 };
 
