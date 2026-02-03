@@ -13,7 +13,7 @@ const DragHandle = () => (
 );
 
 const LayerDragOverlay = ({
-  activeItemData = null,
+  activeItemData,
 }) => {
   const {
     CHART_ELEMENT,
@@ -22,8 +22,6 @@ const LayerDragOverlay = ({
     PAGE_ELEMENT,
     RECTANGLE,
   } = useTranslatedTexts();
-
-  if (!activeItemData) return null;
 
   const { icon: Icon, item } = activeItemData;
   const { id, isVisible } = item;
@@ -102,7 +100,7 @@ LayerDragOverlay.propTypes = {
       isVisible: PropTypes.bool,
       itemType: PropTypes.string,
     }),
-  }),
+  }).isRequired,
 };
 
 export default memo(LayerDragOverlay);

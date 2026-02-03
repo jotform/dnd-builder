@@ -109,7 +109,7 @@ const PageLayer = ({
             })}
           </ul>
         </SortableContext>
-        <LayerDragOverlay activeItemData={activeItemData} />
+        {activeItemData && <LayerDragOverlay activeItemData={activeItemData} />}
       </DndContext>
     ) : (
       <div className="toolSection-notifier">

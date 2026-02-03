@@ -1,5 +1,4 @@
 import {
-  useCallback,
   useMemo,
   useRef,
   useState,
@@ -14,8 +13,8 @@ import DraggableItemActions from './DraggableItem/DraggableItemActions';
 import ItemPositioner from './ItemPositioner';
 import withClickOutside from './withClickOutside';
 import { useBuilderStore } from '../contexts/BuilderContext';
-import { isSelectedItem } from '../utils/functions';
 
+const exceptionalClassesForClickOutside = ['contextMenu-itemLabel', 'contextMenu-item'];
 const ResizableWithClickOutside = withClickOutside(Resizable);
 
 const enableResize = {
@@ -43,19 +42,9 @@ const exceptionalClasses = [
 ];
 
 const PageItemResizer = ({
-  changeLockStatus,
-  deleteItem,
-  duplicateItem,
-  isDragging,
   item,
-  onClickOutside,
   onResize,
   onResizeStop,
-  pageID,
-  stateHeight,
-  stateLeft,
-  stateTop,
-  stateWidth,
 }) => {
   const zoom = useBuilderStore(state => state.zoom);
   const setIsRightPanelOpen = useBuilderStore(state => state.setIsRightPanelOpen);
@@ -63,7 +52,6 @@ const PageItemResizer = ({
   const activeElement = useBuilderStore(state => state.activeElement);
   const isTextEditorOpen = useBuilderStore(state => state.isTextEditorOpen);
 
-  const isSelected = isSelectedItem(item.id, activeElement);
   const isMultipleItemSelected = activeElement !== null && activeElement.length > 1;
 
   const requestRef = useRef();
@@ -113,29 +101,37 @@ const PageItemResizer = ({
     window.removeEventListener('keyup', handleKeyUp);
   };
 
+  const onClickOutside = event => {
+    // clickoutside should not work for scrollbar
+    const viewPort = document.querySelector('.jfReport-viewport');
+    const { clientHeight, offsetHeight } = viewPort;
+    const headerHeight = window.innerHeight - offsetHeight;
+    if (event.clientY - headerHeight >= clientHeight
+        || Array.from(event.target.classList)
+          .some(xClass => exceptionalClassesForClickOutside.includes(xClass))) {
+      return;
+    }
+    setIsRightPanelOpen(false);
+    setActiveElement(null);
+  };
+
   const itemPositionerStyle = useMemo(() => ({
-    height: Math.round(stateHeight * zoom),
-    left: Math.round(stateLeft * zoom),
+    height: Math.round(item.height * zoom),
+    left: Math.round(item.left * zoom),
     pointerEvents: 'none',
     position: 'absolute',
-    top: Math.round(stateTop * zoom),
+    top: Math.round(item.top * zoom),
     touchAction: 'none',
-    width: Math.round(stateWidth * zoom),
-  }), [stateHeight, stateLeft, stateTop, stateWidth, zoom]);
+    width: Math.round(item.width * zoom),
+  }), [item.height, item.left, item.top, item.width, zoom]);
 
   const size = useMemo(() => ({
-    height: Math.round(stateHeight * zoom),
-    width: Math.round(stateWidth * zoom),
-  }), [stateHeight, stateWidth, zoom]);
-
-  const openSettings = useCallback(() => {
-    setActiveElement(item.id);
-    setIsRightPanelOpen(true);
-  }, [item.id, setIsRightPanelOpen, setActiveElement]);
+    height: Math.round(item.height * zoom),
+    width: Math.round(item.width * zoom),
+  }), [item.height, item.width, zoom]);
 
   const { isLocked } = item;
 
-  if (isDragging || !isSelected) return null;
   return createPortal(
     <ItemPositioner
       style={itemPositionerStyle}
@@ -157,20 +153,14 @@ const PageItemResizer = ({
         {...resizeStaticProps}
         withClickOutsideWrapperClass={`reportItemResizer-wrapper${isLocked ? ' isLocked' : ''}`}
       />
-      <DraggableItemActions
-        changeLockStatus={changeLockStatus}
-        deleteItem={deleteItem}
-        duplicateItem={duplicateItem}
-        isLocked={item.isLocked}
-        isMultipleItemSelected={isMultipleItemSelected}
-        openSettings={openSettings}
-      />
-      <TextEditorToolbar
-        isTextEditorOpen={isTextEditorOpen}
-        itemWidth={stateWidth * zoom}
-      />
+      {!isMultipleItemSelected && <DraggableItemActions />}
+      {isTextEditorOpen && (
+        <TextEditorToolbar
+          itemWidth={item.width * zoom}
+        />
+      )}
     </ItemPositioner>,
-    document.querySelector(`.jfReport-page[data-id="${pageID}"]`),
+    document.querySelector(`.jfReport-page[data-id="${item.pageID}"]`),
   );
 };
 

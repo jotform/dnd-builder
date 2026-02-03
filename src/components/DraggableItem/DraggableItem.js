@@ -1,4 +1,6 @@
-import { useEffect, useState, memo } from 'react';
+import {
+  useEffect, useState, memo, useMemo,
+} from 'react';
 import PropTypes from 'prop-types';
 import { useDrag } from 'react-dnd';
 import { getEmptyImage } from 'react-dnd-html5-backend';
@@ -16,7 +18,6 @@ import {
 import { useBuilderStore } from '../../contexts/BuilderContext';
 import { usePropStore } from '../../contexts/PropContext';
 
-const exceptionalClassesForClickOutside = ['contextMenu-itemLabel', 'contextMenu-item'];
 const reportItemStyle = {
   height: '100%',
   width: '100%',
@@ -55,15 +56,12 @@ const DraggableItem = ({
 
   const onAnEventTrigger = usePropStore(state => state.onAnEventTrigger);
   const onItemAdd = usePropStore(state => state.onItemAdd);
-  const onItemChange = usePropStore(state => state.onItemChange);
-  const onItemRemove = usePropStore(state => state.onItemRemove);
   const onItemResize = usePropStore(state => state.onItemResize);
 
   const activeElement = useBuilderStore(state => state.activeElement);
   const setActiveElement = useBuilderStore(state => state.setActiveElement);
   const setContextMenuProps = useBuilderStore(state => state.setContextMenuProps);
   const isTextEditorOpen = useBuilderStore(state => state.isTextEditorOpen);
-  const isRightPanelOpen = useBuilderStore(state => state.isRightPanelOpen);
   const setIsRightPanelOpen = useBuilderStore(state => state.setIsRightPanelOpen);
   const setIsResize = useBuilderStore(state => state.setIsResize);
 
@@ -195,42 +193,6 @@ const DraggableItem = ({
     });
   };
 
-  const deleteItem = () => {
-    setIsRightPanelOpen(false);
-    setActiveElement(null);
-    onItemRemove(item);
-    onAnEventTrigger('removeItem', item.itemType);
-  };
-
-  const duplicateItem = () => {
-    const itemID = generateId();
-    onItemAdd({
-      ...item,
-      id: itemID,
-      left: item.left + 50,
-      top: item.top + 50,
-    });
-    onAnEventTrigger('duplicateItem', item.itemType);
-    setActiveElement(itemID);
-    if (!isRightPanelOpen) {
-      setIsRightPanelOpen(true);
-    }
-  };
-
-  const onClickOutside = event => {
-    // clickoutside should not work for scrollbar
-    const viewPort = document.querySelector('.jfReport-viewport');
-    const { clientHeight, offsetHeight } = viewPort;
-    const headerHeight = window.innerHeight - offsetHeight;
-    if (event.clientY - headerHeight >= clientHeight
-        || Array.from(event.target.classList)
-          .some(xClass => exceptionalClassesForClickOutside.includes(xClass))) {
-      return;
-    }
-    setIsRightPanelOpen(false);
-    setActiveElement(null);
-  };
-
   const onContextMenuClick = e => {
     if (
       e.target.contentEditable === 'true'
@@ -277,14 +239,13 @@ const DraggableItem = ({
     }
   };
 
-  const changeLockStatus = () => {
-    onAnEventTrigger(item.isLocked ? 'unlockReportItem' : 'lockReportItem', item.itemType);
-    onItemChange({ id: item.id }, { isLocked: item.isLocked ? false : true });
-    if (!item.isLocked) {
-      setActiveElement(item.id, false);
-      setIsRightPanelOpen(false);
-    }
-  };
+  const modifiedItem = useMemo(() => ({
+    ...item,
+    height: stateHeight,
+    left: stateLeft,
+    top: stateTop,
+    width: stateWidth,
+  }), [item, stateHeight, stateLeft, stateTop, stateWidth]);
 
   return (
     <ErrorBoundary>
@@ -310,21 +271,13 @@ const DraggableItem = ({
           {children}
         </div>
       </ItemPositioner>
-      <PageItemResizer
-        changeLockStatus={changeLockStatus}
-        deleteItem={deleteItem}
-        duplicateItem={duplicateItem}
-        isDragging={isDragging}
-        item={item}
-        onClickOutside={onClickOutside}
-        onResize={onResize}
-        onResizeStop={onResizeStop}
-        pageID={pageID}
-        stateHeight={stateHeight}
-        stateLeft={stateLeft}
-        stateTop={stateTop}
-        stateWidth={stateWidth}
-      />
+      {!isDragging && isSelected && (
+        <PageItemResizer
+          item={modifiedItem}
+          onResize={onResize}
+          onResizeStop={onResizeStop}
+        />
+      )}
     </ErrorBoundary>
   );
 };

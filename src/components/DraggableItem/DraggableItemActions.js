@@ -1,16 +1,10 @@
-import { memo } from 'react';
-import PropTypes from 'prop-types';
 import * as icons from '../../utils/icons';
-import { useTranslatedTexts } from '../../utils/hooks';
+import { useActiveElement, useTranslatedTexts } from '../../utils/hooks';
+import { usePropStore } from '../../contexts/PropContext';
+import { useBuilderStore } from '../../contexts/BuilderContext';
+import generateId from '../../utils/generateId';
 
-const DraggableItemActions = ({
-  changeLockStatus = () => {},
-  deleteItem = () => {},
-  duplicateItem = () => {},
-  isLocked = false,
-  isMultipleItemSelected = false,
-  openSettings = () => {},
-}) => {
+const DraggableItemActions = () => {
   const {
     DELETE_ITEM,
     DUPLICATE_ITEM,
@@ -18,7 +12,52 @@ const DraggableItemActions = ({
     LOCK_ITEM,
   } = useTranslatedTexts();
 
-  if (isMultipleItemSelected) return null;
+  const onAnEventTrigger = usePropStore(state => state.onAnEventTrigger);
+  const onItemChange = usePropStore(state => state.onItemChange);
+  const onItemRemove = usePropStore(state => state.onItemRemove);
+  const onItemAdd = usePropStore(state => state.onItemAdd);
+
+  const setActiveElement = useBuilderStore(state => state.setActiveElement);
+  const setIsRightPanelOpen = useBuilderStore(state => state.setIsRightPanelOpen);
+
+  const activeElement = useActiveElement();
+  const item = activeElement[0]; // ACTIONS WORKS ONLY FOR ONE ITEM
+
+  const { isLocked } = item;
+
+  const changeLockStatus = () => {
+    onAnEventTrigger(isLocked ? 'unlockReportItem' : 'lockReportItem', item.itemType);
+    onItemChange({ id: item.id }, { isLocked: isLocked ? false : true });
+    if (!isLocked) {
+      setActiveElement(item.id, false);
+      setIsRightPanelOpen(false);
+    }
+  };
+
+  const deleteItem = () => {
+    setIsRightPanelOpen(false);
+    setActiveElement(null);
+    onItemRemove(item);
+    onAnEventTrigger('removeItem', item.itemType);
+  };
+
+  const duplicateItem = () => {
+    const itemID = generateId();
+    onItemAdd({
+      ...item,
+      id: itemID,
+      left: item.left + 50,
+      top: item.top + 50,
+    });
+    onAnEventTrigger('duplicateItem', item.itemType);
+    setActiveElement(itemID);
+    setIsRightPanelOpen(true);
+  };
+
+  const openSettings = () => {
+    setActiveElement(item.id);
+    setIsRightPanelOpen(true);
+  };
 
   if (isLocked) {
     return (
@@ -75,13 +114,4 @@ const DraggableItemActions = ({
   );
 };
 
-DraggableItemActions.propTypes = {
-  changeLockStatus: PropTypes.func,
-  deleteItem: PropTypes.func,
-  duplicateItem: PropTypes.func,
-  isLocked: PropTypes.bool,
-  isMultipleItemSelected: PropTypes.bool,
-  openSettings: PropTypes.func,
-};
-
-export default memo(DraggableItemActions);
+export default DraggableItemActions;
