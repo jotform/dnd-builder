@@ -17,7 +17,7 @@ const builderStore = props => {
     lastScrollPosition: props.lastScrollPosition || 0,
     onRightPanelsToggled: props.onRightPanelsToggled || (() => {}),
     resetActiveElements: () => {
-      set({ activeElements: [] });
+      set({ activeElements: [], editedElement: 'l_layout' });
     },
     setActiveElements: props.setActiveElements || ((itemID, edit = true, replace = true) => {
       const { activeElements } = get();

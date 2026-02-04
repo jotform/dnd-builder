@@ -245,8 +245,6 @@ const DraggableItem = ({
     width: stateWidth,
   }), [item, stateHeight, stateLeft, stateTop, stateWidth]);
 
-  console.log(activeElements);
-
   return (
     <ErrorBoundary>
       <ItemPositioner
