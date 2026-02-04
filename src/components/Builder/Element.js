@@ -21,7 +21,8 @@ const Element = ({
   const acceptedItems = usePropStore(state => state.acceptedItems);
   const onAnEventTrigger = usePropStore(state => state.onAnEventTrigger);
   const onItemAdd = usePropStore(state => state.onItemAdd);
-  const setActiveElement = useBuilderStore(state => state.setActiveElement);
+  const resetActiveElements = useBuilderStore(state => state.resetActiveElements);
+  const setActiveElements = useBuilderStore(state => state.setActiveElements);
   const setIsRightPanelOpen = useBuilderStore(state => state.setIsRightPanelOpen);
   const zoom = useBuilderStore(state => state.zoom);
 
@@ -31,7 +32,7 @@ const Element = ({
     }),
 
     item: () => {
-      setActiveElement(null);
+      resetActiveElements();
       return {
         itemType,
         type: DROPPABLE_ITEM_TYPE,
@@ -63,7 +64,7 @@ const Element = ({
       top,
     });
     onAnEventTrigger('reportItemAdd', itemType);
-    setActiveElement(itemID);
+    setActiveElements(itemID, true);
     setIsRightPanelOpen(true);
   };
 

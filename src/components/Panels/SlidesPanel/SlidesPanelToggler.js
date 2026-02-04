@@ -4,18 +4,20 @@ import * as icons from '../../../utils/icons';
 import { useTranslatedTexts } from '../../../utils/hooks';
 
 const SlidesPanelToggler = ({ onClosePanel = () => {} }) => {
-  const setActiveElement = useBuilderStore(state => state.setActiveElement);
+  const resetActiveElements = useBuilderStore(state => state.resetActiveElements);
   const setIsSlidesPanelOpen = useBuilderStore(state => state.setIsSlidesPanelOpen);
   const { SLIDES } = useTranslatedTexts();
+
+  const onOpenSlidesPanel = () => {
+    resetActiveElements();
+    setIsSlidesPanelOpen(true);
+  };
 
   return (
     <>
       <button
         className="paneToggler settingsToggle"
-        onClick={() => {
-          setActiveElement(null);
-          setIsSlidesPanelOpen(true);
-        }}
+        onClick={onOpenSlidesPanel}
         title={SLIDES}
         type="button"
       >

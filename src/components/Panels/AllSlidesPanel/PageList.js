@@ -140,12 +140,6 @@ const PageList = ({
 };
 
 PageList.propTypes = {
-  acceptedItems: PropTypes.shape({}),
-  layoutSettings: PropTypes.shape({
-    reportBackgroundColor: PropTypes.string,
-    reportLayoutHeight: PropTypes.string,
-    reportLayoutWidth: PropTypes.string,
-  }),
   onPageClick: PropTypes.func,
   onSortEnd: PropTypes.func,
   selectedPages: PropTypes.arrayOf(PropTypes.string),

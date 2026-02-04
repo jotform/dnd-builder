@@ -58,27 +58,26 @@ const DraggableItem = ({
   const onItemAdd = usePropStore(state => state.onItemAdd);
   const onItemResize = usePropStore(state => state.onItemResize);
 
-  const activeElement = useBuilderStore(state => state.activeElement);
-  const setActiveElement = useBuilderStore(state => state.setActiveElement);
+  const activeElements = useBuilderStore(state => state.activeElements);
+  const setActiveElements = useBuilderStore(state => state.setActiveElements);
   const setContextMenuProps = useBuilderStore(state => state.setContextMenuProps);
   const isTextEditorOpen = useBuilderStore(state => state.isTextEditorOpen);
   const setIsRightPanelOpen = useBuilderStore(state => state.setIsRightPanelOpen);
   const setIsResize = useBuilderStore(state => state.setIsResize);
 
-  const isSelected = isSelectedItem(item.id, activeElement);
-  const isMultipleItemSelected = activeElement !== null && activeElement.length > 1;
+  const isSelected = isSelectedItem(item.id, activeElements);
 
   const select = event => {
     if (!isSelected) {
-      if (!event || !event.metaKey) {
+      if (!event || !event.metaKey) { // Single item selected
+        setActiveElements(id, true);
         if (isLocked) {
-          setActiveElement(id, false);
           setIsRightPanelOpen(false);
-        } else {
-          setActiveElement(id);
         }
       } else {
-        setActiveElement(id, undefined, true);
+        // Multiple items selected
+        setActiveElements(id, false, false);
+        setIsRightPanelOpen(false);
       }
     }
   };
@@ -105,7 +104,7 @@ const DraggableItem = ({
       }
       removeEventListenerForSidebar();
     },
-    isDragging: () => (isMultipleItemSelected && isSelected) || (!isMultipleItemSelected && isSelected),
+    isDragging: () => isSelected,
     item: () => {
       select();
       addEventListenerForSidebar();
@@ -116,7 +115,6 @@ const DraggableItem = ({
     item,
     canDrag,
     id,
-    isMultipleItemSelected,
     isSelected,
   ]);
 

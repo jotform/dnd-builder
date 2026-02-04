@@ -33,8 +33,8 @@ const Page = ({
   page = {},
   style = {},
 }) => {
-  const activeElement = useBuilderStore(state => state.activeElement);
-  const setActiveElement = useBuilderStore(state => state.setActiveElement);
+  const activeElements = useBuilderStore(state => state.activeElements);
+  const setActiveElements = useBuilderStore(state => state.setActiveElements);
   const setIsRightPanelOpen = useBuilderStore(state => state.setIsRightPanelOpen);
   const zoom = useBuilderStore(state => state.zoom);
   const isResize = useBuilderStore(state => state.isResize);
@@ -83,7 +83,7 @@ const Page = ({
     };
   };
 
-  const isMultipleItemSelected = activeElement !== null && activeElement.length > 1;
+  const isMultipleItemSelected = activeElements.length > 1;
 
   const onHover = (item, monitor) => {
     if (!requestRef.current) {
@@ -120,7 +120,7 @@ const Page = ({
           ...additionalData,
         });
         onAnEventTrigger('reportItemAdd', itemType);
-        setActiveElement(itemID);
+        setActiveElements(itemID);
         setIsRightPanelOpen(true);
         newCoords[itemID] = coords;
       } else if (type === DRAGGABLE_ITEM_TYPE) {
@@ -129,7 +129,7 @@ const Page = ({
         if (isMultipleItemSelected) {
           const leftDifference = additionalData.left - dragCoords.left;
           const topDifference = additionalData.top - dragCoords.top;
-          const _items = activeElement.reduce((acc, curr) => {
+          const _items = activeElements.reduce((acc, curr) => {
             const tempItem = findItemById(curr, pages);
             acc[curr] = {
               id: curr,

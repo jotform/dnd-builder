@@ -1,4 +1,3 @@
-import { memo } from 'react';
 import { useBuilderStore } from '../../../contexts/BuilderContext';
 import * as icons from '../../../utils/icons';
 import { useTranslatedTexts } from '../../../utils/hooks';
@@ -6,11 +5,16 @@ import { useTranslatedTexts } from '../../../utils/hooks';
 const LeftPanelToggler = () => {
   const setIsLeftPanelOpen = useBuilderStore(state => state.setIsLeftPanelOpen);
   const { ADD_ELEMENT } = useTranslatedTexts();
+
+  const onOpenLeftPanel = () => {
+    setIsLeftPanelOpen(true);
+  };
+
   return (
     <>
       <button
         className="paneToggler addElementToggle"
-        onClick={() => { setIsLeftPanelOpen(true); }}
+        onClick={onOpenLeftPanel}
         title={ADD_ELEMENT}
         type="button"
       >
@@ -21,4 +25,4 @@ const LeftPanelToggler = () => {
   );
 };
 
-export default memo(LeftPanelToggler);
+export default LeftPanelToggler;

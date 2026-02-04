@@ -30,7 +30,7 @@ const RightPanel = () => {
   const editedElement = useBuilderStore(state => state.editedElement);
   const isRightPanelOpen = useBuilderStore(state => state.isRightPanelOpen);
   const isSlidesPanelOpen = useBuilderStore(state => state.isSlidesPanelOpen);
-  const setActiveElement = useBuilderStore(state => state.setActiveElement);
+  const resetActiveElements = useBuilderStore(state => state.resetActiveElements);
   const setActiveTab = useBuilderStore(state => state.setActiveTab);
   const setIsRightPanelOpen = useBuilderStore(state => state.setIsRightPanelOpen);
 
@@ -87,7 +87,7 @@ const RightPanel = () => {
           ...pageItem,
           settings: pageItem.settings.map(setting => {
             if (setting.key === 'pageLayer') {
-              return { ...setting, setActiveElement, updater: onItemChange };
+              return { ...setting, updater: onItemChange };
             }
             return setting;
           }) || Page.settings,
@@ -104,7 +104,6 @@ const RightPanel = () => {
     onSettingChange,
     translatedTexts,
     pages,
-    setActiveElement,
   ]);
 
   const editedEl = useMemo(() => {
@@ -166,8 +165,8 @@ const RightPanel = () => {
       return;
     }
     setIsRightPanelOpen(false);
-    setActiveElement(null);
-  }, [editedElement, panelRef, setIsRightPanelOpen, setActiveElement]);
+    resetActiveElements();
+  }, [editedElement, setIsRightPanelOpen, resetActiveElements]);
 
   useEffect(() => {
     if (isRightPanelOpen) window.addEventListener('click', onClickOutsideForPanel, false);

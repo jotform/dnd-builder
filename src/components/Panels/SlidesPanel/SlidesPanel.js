@@ -1,4 +1,4 @@
-import { memo, useCallback, useState } from 'react';
+import { useCallback, useState } from 'react';
 import classNames from 'classnames';
 import Panel from '../../Builder/Panel';
 import SortablePageList from './SortablePageList';
@@ -102,4 +102,4 @@ const SlidesPanel = () => {
   );
 };
 
-export default memo(SlidesPanel);
+export default SlidesPanel;

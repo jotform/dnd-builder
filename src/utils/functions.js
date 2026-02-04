@@ -30,20 +30,13 @@ export const getStyles = (left, top, isDragging) => {
 };
 
 export const isSelectedItem = (id, activeElements) => {
-  if (activeElements === null) return id === activeElements;
-  return activeElements.indexOf(id) !== -1;
+  return activeElements.includes(id);
 };
 
 export const findItemById = (itemID, pages) => {
   const page = pages.find(p => p.items.find(item => item.id === itemID));
   if (!page) return null;
   return page.items.find(item => item.id === itemID);
-};
-
-export const getSelectedItems = (selectedItemsIds, pages) => {
-  const page = pages.find(p => p.items.find(item => isSelectedItem(item.id, selectedItemsIds)));
-  if (!page) return null;
-  return page.items.filter(item => isSelectedItem(item.id, selectedItemsIds));
 };
 
 const traverse = (obj, condition) => condition.split('.').reduce((cur, key) => cur[key], obj);
