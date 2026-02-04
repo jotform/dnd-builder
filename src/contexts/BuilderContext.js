@@ -16,9 +16,9 @@ const builderStore = props => {
     isTextEditorOpen: props.isTextEditorOpen || false,
     lastScrollPosition: props.lastScrollPosition || 0,
     onRightPanelsToggled: props.onRightPanelsToggled || (() => {}),
-    resetActiveElements: () => {
+    resetActiveElements: props.resetActiveElements || (() => {
       set({ activeElements: [], editedElement: 'l_layout' });
-    },
+    }),
     setActiveElements: props.setActiveElements || ((itemID, edit = true, replace = true) => {
       const { activeElements } = get();
       set({
