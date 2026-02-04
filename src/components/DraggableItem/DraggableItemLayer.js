@@ -5,7 +5,7 @@ import { getCoordinatesFromMatches, getCorrectDroppedOffsetValue, getMatchesForI
 import ItemPositioner from '../ItemPositioner';
 import { useBuilderStore } from '../../contexts/BuilderContext';
 import { usePropStore } from '../../contexts/PropContext';
-import { useActiveElement } from '../../utils/hooks';
+import { useSelectedElements } from '../../utils/hooks';
 
 const getDraggedItem = ({ defaultItem = {}, details }, item) => ({
   ...defaultItem,
@@ -99,12 +99,12 @@ const DraggableItemLayer = ({
     };
   }, [zoom]);
 
-  const activeItems = useActiveElement();
+  const selectedElements = useSelectedElements();
 
-  const hasActiveItems = activeItems !== null && activeItems.length > 0;
+  const hasActiveItems = selectedElements.length > 0;
 
   // for a element is added from the left panel
-  const activeElements = hasActiveItems ? activeItems : [referenceItem];
+  const activeElements = hasActiveItems ? selectedElements : [referenceItem];
 
   return activeElements.map(activeItem => {
     const coords = hasActiveItems ? {
@@ -116,7 +116,7 @@ const DraggableItemLayer = ({
 
     return (
       <ItemPositioner
-        key={item.id}
+        key={activeItem.id}
         classNames="reportItem isDraggingLayerElement"
         style={getItemStyle(coords, exactItem)}
       >

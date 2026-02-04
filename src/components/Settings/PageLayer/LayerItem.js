@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import { capitalize, stripHTML } from '../../../utils/string';
 import * as icons from '../../../utils/icons';
 import { useTranslatedTexts } from '../../../utils/hooks';
+import { useBuilderStore } from '../../../contexts/BuilderContext';
 
 const DragHandle = () => (
   <span className="jfReportSelectOption-drag">
@@ -19,7 +20,6 @@ const LayerItem = ({
   item,
   onItemChange,
   optionKey,
-  setActiveElement,
 }) => {
   const {
     attributes,
@@ -30,6 +30,7 @@ const LayerItem = ({
     transition,
   } = useSortable({ id: itemId });
 
+  const setActiveElements = useBuilderStore(state => state.setActiveElements);
   const dragStyle = useMemo(() => ({
     opacity: isDragging ? 0.5 : 1,
     transform: CSS.Transform.toString(transform),
@@ -78,6 +79,10 @@ const LayerItem = ({
     PAGE_ELEMENT,
   ]);
 
+  const handleClick = () => {
+    setActiveElements(id, false);
+  };
+
   const content = useMemo(() => (
     <div className="jfReportSelectOption">
       <div className="jfReportSelectOption-icon">
@@ -95,7 +100,7 @@ const LayerItem = ({
       className={classNames('jfReportSelectOption', {
         isSelected: isVisib,
       })}
-      onClick={() => setActiveElement(id, false)}
+      onClick={handleClick}
       onKeyDown={() => {}}
       style={dragStyle}
       {...attributes}
@@ -144,7 +149,6 @@ LayerItem.propTypes = {
   }),
   onItemChange: PropTypes.func,
   optionKey: PropTypes.string,
-  setActiveElement: PropTypes.func,
 };
 
 export default memo(LayerItem);

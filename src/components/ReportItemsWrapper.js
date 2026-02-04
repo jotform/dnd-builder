@@ -13,7 +13,7 @@ const ReportItemsWrapper = ({
   items,
 }) => {
   const acceptedItems = usePropStore(state => state.acceptedItems);
-  const activeElement = useBuilderStore(state => state.activeElement);
+  const activeElements = useBuilderStore(state => state.activeElements);
   const itemAccessor = usePropStore(state => state.itemAccessor);
   const onAnEventTrigger = usePropStore(state => state.onAnEventTrigger);
   const onItemChange = usePropStore(state => state.onItemChange);
@@ -38,8 +38,8 @@ const ReportItemsWrapper = ({
           >
             {ReportItem => (
               <ReportItem
-                isMultipleItemSelected={activeElement !== null && activeElement.length > 1}
-                isSelected={isSelectedItem(item.id, activeElement)}
+                isMultipleItemSelected={activeElements.length > 1}
+                isSelected={isSelectedItem(item.id, activeElements)}
                 item={mergedItem}
                 itemAccessor={itemAccessor}
                 onAnEventTrigger={onAnEventTrigger}

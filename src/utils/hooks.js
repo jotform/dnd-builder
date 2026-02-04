@@ -195,14 +195,14 @@ export const usePageTransition = (style, currentPage) => {
   return finalStyle;
 };
 
-export const useActiveElement = () => {
+export const useSelectedElements = () => {
   const pages = usePropStore(state => state.pages);
-  const activeElement = useBuilderStore(state => state.activeElement);
+  const activeElements = useBuilderStore(state => state.activeElements);
   const acceptedItems = usePropStore(state => state.acceptedItems);
 
   return useMemo(() => {
-    if (activeElement === null || activeElement.length === 0) return [];
-    const items = activeElement.map(itemID => {
+    if (activeElements.length === 0) return [];
+    const items = activeElements.map(itemID => {
       let foundItem = [];
       pages.forEach(page => {
         const item = page.items.find(el => el.id === itemID);
@@ -214,5 +214,5 @@ export const useActiveElement = () => {
       return { ...defItem, ...foundItem };
     });
     return items;
-  }, [pages, activeElement, acceptedItems]);
+  }, [pages, activeElements, acceptedItems]);
 };

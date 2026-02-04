@@ -1,4 +1,4 @@
-import { memo, useCallback, useState } from 'react';
+import { useCallback, useState } from 'react';
 import classNames from 'classnames';
 import Panel from '../../Builder/Panel';
 import { useBuilderStore } from '../../../contexts/BuilderContext';
@@ -94,4 +94,4 @@ const AllSlidesPanel = () => {
   );
 };
 
-export default memo(AllSlidesPanel);
+export default AllSlidesPanel;

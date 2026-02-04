@@ -1,4 +1,3 @@
-import { memo } from 'react';
 import classNames from 'classnames';
 import Panel from '../../Builder/Panel';
 import { useBuilderStore } from '../../../contexts/BuilderContext';
@@ -23,4 +22,4 @@ const LeftPanel = () => {
   );
 };
 
-export default memo(LeftPanel);
+export default LeftPanel;

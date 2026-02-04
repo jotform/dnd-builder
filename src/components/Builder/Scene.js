@@ -21,7 +21,7 @@ import {
   findItemsOnPage,
   getMostVisiblePage,
 } from '../../utils/functions';
-import { useActiveElement, useEventListener } from '../../utils/hooks';
+import { useSelectedElements, useEventListener } from '../../utils/hooks';
 import generateId from '../../utils/generateId';
 import { EVENT_IGNORED_ROLES } from '../../constants/eventIgnoredRoles';
 import DraggableLayer from './DraggableLayer';
@@ -34,10 +34,11 @@ const Scene = () => {
   const settings = usePropStore(state => state.settings);
   const onItemChange = usePropStore(state => state.onItemChange);
 
-  const activeElement = useBuilderStore(state => state.activeElement);
+  const activeElements = useBuilderStore(state => state.activeElements);
   const contextMenuProps = useBuilderStore(state => state.contextMenuProps);
   const isRightPanelOpen = useBuilderStore(state => state.isRightPanelOpen);
-  const setActiveElement = useBuilderStore(state => state.setActiveElement);
+  const setActiveElements = useBuilderStore(state => state.setActiveElements);
+  const resetActiveElements = useBuilderStore(state => state.resetActiveElements);
   const setContextMenuProps = useBuilderStore(state => state.setContextMenuProps);
   const setIsRightPanelOpen = useBuilderStore(state => state.setIsRightPanelOpen);
   const zoom = useBuilderStore(state => state.zoom);
@@ -64,7 +65,7 @@ const Scene = () => {
     });
   }, [pages]);
 
-  const isMultipleItemSelected = activeElement !== null && activeElement.length > 1;
+  const isMultipleItemSelected = activeElements.length > 1;
 
   /* Calculate snap guides */
   const keyDownCount = useRef(null);
@@ -102,9 +103,9 @@ const Scene = () => {
     }
   }, [lastScrollPosition]); // set last scroll position after changing mode
 
-  const foundItem = findItemById(activeElement === null ? null : activeElement[0], pages);
+  const foundItem = findItemById(activeElements.length ? activeElements[0] : null, pages);
 
-  const selectedItems = useActiveElement();
+  const selectedItems = useSelectedElements();
   const moveItemWithKeyboard = (event, direction, value) => {
     event.preventDefault();
     selectedItems.forEach(item => {
@@ -126,22 +127,22 @@ const Scene = () => {
     const referenceItem = deletedItem ? deletedItem : foundItem;
 
     const page = pages.find(_page => _page.id === referenceItem.pageID);
-    if (!page || (page && !page.items.length)) return setActiveElement(null);
+    if (!page || (page && !page.items.length)) return resetActiveElements();
     const { items } = page;
 
     const currentIndex = items.findIndex(item => item.id === referenceItem.id);
 
     // Pages are not updated in time so here is an unnecessary check
     if (items.length === 1 && deletedItem) {
-      return setActiveElement(null);
+      return resetActiveElements();
     }
 
     if (event.shiftKey) {
-      if (items[currentIndex - 1]) setActiveElement(items[currentIndex - 1].id);
-      else setActiveElement(items[items.length - 1].id);
+      if (items[currentIndex - 1]) setActiveElements(items[currentIndex - 1].id);
+      else setActiveElements(items[items.length - 1].id);
     } else if (items[currentIndex + 1]) {
-      setActiveElement(items[currentIndex + 1].id);
-    } else setActiveElement(items[0].id);
+      setActiveElements(items[currentIndex + 1].id);
+    } else setActiveElements(items[0].id);
   };
 
   const onItemRemoveFromPage = e => {
@@ -151,7 +152,7 @@ const Scene = () => {
     if (foundItem.isLocked) {
       return false;
     }
-    setActiveElement(null);
+    resetActiveElements();
     onItemRemove(foundItem);
     selectNextOrPrevElement({ shiftKey: false }, foundItem);
     onAnEventTrigger('removeItem', foundItem.itemType);
@@ -174,7 +175,7 @@ const Scene = () => {
     onItemAdd(item);
 
     onAnEventTrigger('pasteItem', itemToPaste.itemType);
-    setActiveElement(itemID);
+    setActiveElements(itemID);
     // set as last reference to paste
     setItemToPaste(item);
   };
@@ -228,7 +229,7 @@ const Scene = () => {
           top: foundItem.top + 50,
         });
         onAnEventTrigger('duplicateItem', foundItem.itemType);
-        setActiveElement(itemID);
+        setActiveElements(itemID);
         if (!isRightPanelOpen) {
           setIsRightPanelOpen(true);
         }
@@ -243,7 +244,7 @@ const Scene = () => {
     switch (key) {
     case 'Backspace': return onItemRemoveFromPage(event);
     case 'Delete': return onItemRemoveFromPage(event);
-    case 'Escape': return setActiveElement(null);
+    case 'Escape': return resetActiveElements();
     case 'ArrowLeft': return moveItemWithKeyboard(event, 'left', -movementValue);
     case 'ArrowUp': return moveItemWithKeyboard(event, 'top', -movementValue);
     case 'ArrowRight': return moveItemWithKeyboard(event, 'left', movementValue);
@@ -264,7 +265,7 @@ const Scene = () => {
       return;
     }
 
-    if (activeElement && !shouldPaste) {
+    if (activeElements.length && !shouldPaste) {
       const arrowKeyCodes = ['ArrowLeft', 'ArrowUp', 'ArrowDown', 'ArrowBottom'];
       if (arrowKeyCodes.includes(e.key)) e.preventDefault();
       keyboardActions(e);

@@ -48,11 +48,9 @@ const PageItemResizer = ({
 }) => {
   const zoom = useBuilderStore(state => state.zoom);
   const setIsRightPanelOpen = useBuilderStore(state => state.setIsRightPanelOpen);
-  const setActiveElement = useBuilderStore(state => state.setActiveElement);
-  const activeElement = useBuilderStore(state => state.activeElement);
+  const resetActiveElements = useBuilderStore(state => state.resetActiveElements);
+  const isMultipleItemSelected = useBuilderStore(state => state.activeElements.length > 1);
   const isTextEditorOpen = useBuilderStore(state => state.isTextEditorOpen);
-
-  const isMultipleItemSelected = activeElement !== null && activeElement.length > 1;
 
   const requestRef = useRef();
   const [lockAspectRatio, setLockAspectRatio] = useState(false);
@@ -112,7 +110,7 @@ const PageItemResizer = ({
       return;
     }
     setIsRightPanelOpen(false);
-    setActiveElement(null);
+    resetActiveElements();
   };
 
   const itemPositionerStyle = useMemo(() => ({

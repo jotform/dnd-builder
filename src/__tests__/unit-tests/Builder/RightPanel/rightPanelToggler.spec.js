@@ -25,9 +25,9 @@ describe('RightPanelToggler', () => {
     expect(eventMock).toHaveBeenCalledTimes(2);
   });
 
-  it('Should Call setActiveElement Once Click Right Panel Open Button', () => {
+  it('Should Call setActiveElements Once Click Right Panel Open Button', () => {
     const eventMock = jest.fn();
-    const rightPanelTogglerWrapper = mountWithProviders(<RightPanelToggler />, { builderProps: { setActiveElement: eventMock } });
+    const rightPanelTogglerWrapper = mountWithProviders(<RightPanelToggler />, { builderProps: { setActiveElements: eventMock } });
     const rightPanelOpenButton = rightPanelTogglerWrapper.find(selectors.rightPanelOpen);
     rightPanelOpenButton.simulate('click');
     expect(eventMock).toHaveBeenCalled();

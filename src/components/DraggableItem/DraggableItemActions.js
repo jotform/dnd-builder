@@ -1,5 +1,5 @@
 import * as icons from '../../utils/icons';
-import { useActiveElement, useTranslatedTexts } from '../../utils/hooks';
+import { useSelectedElements, useTranslatedTexts } from '../../utils/hooks';
 import { usePropStore } from '../../contexts/PropContext';
 import { useBuilderStore } from '../../contexts/BuilderContext';
 import generateId from '../../utils/generateId';
@@ -17,11 +17,12 @@ const DraggableItemActions = () => {
   const onItemRemove = usePropStore(state => state.onItemRemove);
   const onItemAdd = usePropStore(state => state.onItemAdd);
 
-  const setActiveElement = useBuilderStore(state => state.setActiveElement);
+  const setActiveElements = useBuilderStore(state => state.setActiveElements);
+  const resetActiveElements = useBuilderStore(state => state.resetActiveElements);
   const setIsRightPanelOpen = useBuilderStore(state => state.setIsRightPanelOpen);
 
-  const activeElement = useActiveElement();
-  const item = activeElement[0]; // ACTIONS WORKS ONLY FOR ONE ITEM
+  const selectedElements = useSelectedElements();
+  const item = selectedElements[0]; // ACTIONS WORKS ONLY FOR ONE ITEM
 
   const { isLocked } = item;
 
@@ -29,14 +30,13 @@ const DraggableItemActions = () => {
     onAnEventTrigger(isLocked ? 'unlockReportItem' : 'lockReportItem', item.itemType);
     onItemChange({ id: item.id }, { isLocked: isLocked ? false : true });
     if (!isLocked) {
-      setActiveElement(item.id, false);
       setIsRightPanelOpen(false);
     }
   };
 
   const deleteItem = () => {
     setIsRightPanelOpen(false);
-    setActiveElement(null);
+    resetActiveElements();
     onItemRemove(item);
     onAnEventTrigger('removeItem', item.itemType);
   };
@@ -50,12 +50,11 @@ const DraggableItemActions = () => {
       top: item.top + 50,
     });
     onAnEventTrigger('duplicateItem', item.itemType);
-    setActiveElement(itemID);
+    setActiveElements(itemID, true);
     setIsRightPanelOpen(true);
   };
 
   const openSettings = () => {
-    setActiveElement(item.id);
     setIsRightPanelOpen(true);
   };
 

@@ -1,21 +1,22 @@
-import { memo } from 'react';
 import { useBuilderStore } from '../../../contexts/BuilderContext';
 import * as icons from '../../../utils/icons';
 import { useTranslatedTexts } from '../../../utils/hooks';
 
 const RightPanelToggler = () => {
-  const setActiveElement = useBuilderStore(state => state.setActiveElement);
+  const resetActiveElements = useBuilderStore(state => state.resetActiveElements);
   const setIsRightPanelOpen = useBuilderStore(state => state.setIsRightPanelOpen);
   const { LAYOUT_SETTINGS } = useTranslatedTexts();
+
+  const onOpenRightPanel = () => {
+    resetActiveElements();
+    setIsRightPanelOpen(true);
+  };
 
   return (
     <>
       <button
         className="paneToggler js-openRightPanel settingsToggle"
-        onClick={() => {
-          setActiveElement(null);
-          setIsRightPanelOpen(true);
-        }}
+        onClick={onOpenRightPanel}
         title={LAYOUT_SETTINGS}
         type="button"
       >
@@ -32,4 +33,4 @@ const RightPanelToggler = () => {
   );
 };
 
-export default memo(RightPanelToggler);
+export default RightPanelToggler;

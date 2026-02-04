@@ -1,4 +1,3 @@
-import { memo } from 'react';
 import PropTypes from 'prop-types';
 import CustomToolbar from './CustomToolbar';
 
@@ -21,4 +20,4 @@ CustomToolbarWrapper.propTypes = {
   itemWidth: PropTypes.number,
 };
 
-export default memo(CustomToolbarWrapper);
+export default CustomToolbarWrapper;

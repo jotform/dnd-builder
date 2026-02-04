@@ -4,7 +4,7 @@ import { createStore, useStore } from 'zustand';
 
 const builderStore = props => {
   return createStore((set, get) => ({
-    activeElement: props.activeElement || null,
+    activeElements: props.activeElement || [],
     activeTab: props.activeTab || { left: 0, right: 0 },
     contextMenuProps: props.contextMenuProps || false,
     editedElement: props.editedElement || 'l_layout',
@@ -16,20 +16,15 @@ const builderStore = props => {
     isTextEditorOpen: props.isTextEditorOpen || false,
     lastScrollPosition: props.lastScrollPosition || 0,
     onRightPanelsToggled: props.onRightPanelsToggled || (() => {}),
-    setActiveElement: props.setActiveElement || ((itemID, edit = true, multiple = false) => {
-      if (!multiple) {
-        const config = {
-          activeElement: itemID === null ? null : [itemID],
-        };
-        if (edit) {
-          const editedElement = !itemID ? 'l_layout' : `i_${itemID}`;
-          config.editedElement = editedElement;
-        }
-        set(config);
-      } else {
-        const { activeElement } = get();
-        set({ activeElement: activeElement === null ? [itemID] : [...activeElement, itemID] });
-      }
+    resetActiveElements: () => {
+      set({ activeElements: [] });
+    },
+    setActiveElements: props.setActiveElements || ((itemID, edit = true, replace = true) => {
+      const { activeElements } = get();
+      set({
+        activeElements: replace ? [itemID] : [...activeElements, itemID],
+        ...edit ? { editedElement: !itemID ? 'l_layout' : `i_${itemID}` } : {},
+      });
     }),
     setActiveTab: props.setActiveTab || ((panel, tabIndex) => {
       const { activeTab } = get();

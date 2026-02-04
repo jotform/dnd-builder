@@ -103,7 +103,6 @@ const PageLayer = ({
                   item={item}
                   onItemChange={config.updater}
                   optionKey={index}
-                  setActiveElement={config.setActiveElement}
                 />
               );
             })}
@@ -121,7 +120,6 @@ const PageLayer = ({
 
 PageLayer.propTypes = {
   config: PropTypes.shape({
-    setActiveElement: PropTypes.func,
     updater: PropTypes.func,
   }),
   item: PropTypes.shape({
