@@ -16,9 +16,10 @@ import { useBuilderStore } from '../../contexts/BuilderContext';
 import { usePropStore } from '../../contexts/PropContext';
 import {
   getCorrectDroppedOffsetValue,
-  getCorrectDroppedOffsetValueBySnap,
   findItemById,
   getMatchesForItem,
+  roundPositionValues,
+  getCoordinatesFromMatches,
 } from '../../utils/functions';
 import * as classNames from '../../constants/classNames';
 import generateId from '../../utils/generateId';
@@ -111,34 +112,39 @@ const Page = ({
       const newCoords = {};
       if (type === DROPPABLE_ITEM_TYPE) {
         const itemID = generateId();
+        const roundedCoords = roundPositionValues(coords);
         onItemAdd({
           ...acceptedItems[itemType].details,
           id: itemID,
           pageID: page.id,
-          ...coords,
+          ...roundedCoords,
           ...additionalData,
         });
         onAnEventTrigger('reportItemAdd', itemType);
         setActiveElements(itemID);
         setIsRightPanelOpen(true);
-        newCoords[itemID] = coords;
+        newCoords[itemID] = roundedCoords;
       } else if (type === DRAGGABLE_ITEM_TYPE) {
         const newItem = { ...item, ...coords };
-        const dragCoords = getCorrectDroppedOffsetValueBySnap(newItem, guides, zoom);
+        const newMatches = getMatchesForItem(newItem, guides, zoom);
+        const dragCoords = getCoordinatesFromMatches(newItem, newMatches, zoom);
+        const roundedDragCoords = roundPositionValues(dragCoords);
         if (isMultipleItemSelected) {
-          const leftDifference = additionalData.left - dragCoords.left;
-          const topDifference = additionalData.top - dragCoords.top;
+          const leftDifference = additionalData.left - roundedDragCoords.left;
+          const topDifference = additionalData.top - roundedDragCoords.top;
           const _items = activeElements.reduce((acc, curr) => {
             const tempItem = findItemById(curr, pages);
+            const itemLeft = Math.round(tempItem.left - leftDifference);
+            const itemTop = Math.round(tempItem.top - topDifference);
             acc[curr] = {
               id: curr,
-              left: tempItem.left - leftDifference,
+              left: itemLeft,
               pageID: page.id,
-              top: tempItem.top - topDifference,
+              top: itemTop,
             };
             newCoords[curr] = {
-              left: tempItem.left - leftDifference,
-              top: tempItem.top - topDifference,
+              left: itemLeft,
+              top: itemTop,
             };
             return acc;
           }, {});
@@ -147,9 +153,9 @@ const Page = ({
           onItemMove({
             id,
             pageID: page.id,
-            ...dragCoords,
+            ...roundedDragCoords,
           });
-          newCoords[id] = dragCoords;
+          newCoords[id] = roundedDragCoords;
         }
       }
 
