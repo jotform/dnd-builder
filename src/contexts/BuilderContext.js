@@ -8,6 +8,7 @@ const builderStore = props => {
     activeTab: props.activeTab || { left: 0, right: 0 },
     contextMenuProps: props.contextMenuProps || false,
     editedElement: props.editedElement || 'l_layout',
+    guides: {},
     isAllSlidesPanelOpen: props.isAllSlidesPanelOpen || false,
     isLeftPanelOpen: props.isLeftPanelOpen || false,
     isResize: false,
@@ -15,6 +16,7 @@ const builderStore = props => {
     isSlidesPanelOpen: props.isSlidesPanelOpen || false,
     isTextEditorOpen: props.isTextEditorOpen || false,
     lastScrollPosition: props.lastScrollPosition || 0,
+    matches: {},
     onRightPanelsToggled: props.onRightPanelsToggled || (() => {}),
     resetActiveElements: props.resetActiveElements || (() => {
       set({ activeElements: [], editedElement: 'l_layout' });
@@ -47,6 +49,9 @@ const builderStore = props => {
     },
     setEditedElement: id => {
       set({ editedElement: id });
+    },
+    setGuides: guides => {
+      set({ guides });
     },
     setIsAllSlidesPanelOpen: status => {
       set({ isAllSlidesPanelOpen: status });
@@ -81,6 +86,9 @@ const builderStore = props => {
     }),
     setIsTextEditorOpen: status => {
       set({ isTextEditorOpen: status });
+    },
+    setMatches: matches => {
+      set({ matches });
     },
     setZoom: (zoom, layoutWidth) => {
       set({ zoom });
