@@ -55,7 +55,8 @@ const RightPanel = () => {
         return acceptedItems[item.itemType];
       },
       title: item => {
-        return translatedTexts[`${(acceptedItems[item.itemType].title || item.itemType).toLocaleUpperCase()}_SETTINGS`];
+        const textKey = `${(acceptedItems[item.itemType].title || item.itemType).toLocaleUpperCase()}_SETTINGS`;
+        return translatedTexts[textKey] || acceptedItems[item.itemType].title;
       },
       updater: onItemChange,
     },
