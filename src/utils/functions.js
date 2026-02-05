@@ -818,3 +818,14 @@ export const getItemsInSelectionBox = (selectionBox, items, zoom = 1) => {
     .filter(item => !item.isLocked && isItemInSelectionBox(selectionBox, item, zoom))
     .map(item => item.id);
 };
+
+export const getDimensions = ({
+  height, left, top, width,
+}) => {
+  return {
+    height,
+    left,
+    top,
+    width,
+  };
+};
