@@ -8,8 +8,6 @@ import { isSelectedItem } from '../utils/functions';
 import { usePropStore } from '../contexts/PropContext';
 
 const ReportItemsWrapper = ({
-  getIntersectionsFromMatches,
-  handleMatches,
   items,
 }) => {
   const acceptedItems = usePropStore(state => state.acceptedItems);
@@ -29,8 +27,6 @@ const ReportItemsWrapper = ({
       return (
         <DraggableItem
           key={item.id}
-          getIntersectionsFromMatches={getIntersectionsFromMatches}
-          handleMatches={handleMatches}
           item={item}
         >
           <ReportItemRenderer
@@ -53,8 +49,6 @@ const ReportItemsWrapper = ({
 };
 
 ReportItemsWrapper.propTypes = {
-  getIntersectionsFromMatches: PropTypes.func,
-  handleMatches: PropTypes.func,
   items: PropTypes.arrayOf(
     PropTypes.shape({}),
   ),

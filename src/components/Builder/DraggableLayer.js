@@ -3,7 +3,6 @@ import { useDragLayer } from 'react-dnd';
 import DraggableItemLayer from '../DraggableItem/DraggableItemLayer';
 
 const DraggableLayer = ({
-  guides = {},
   pageRefs = {},
 }) => {
   const collectedProps = useDragLayer(monitor => ({
@@ -21,14 +20,12 @@ const DraggableLayer = ({
   return (
     <DraggableItemLayer
       collectedProps={collectedProps}
-      guides={guides}
       pageRefs={pageRefs}
     />
   );
 };
 
 DraggableLayer.propTypes = {
-  guides: PropTypes.shape({}),
   pageRefs: PropTypes.shape({}),
 };
 

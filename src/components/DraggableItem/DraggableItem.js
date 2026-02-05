@@ -6,7 +6,9 @@ import { useDrag } from 'react-dnd';
 import { getEmptyImage } from 'react-dnd-html5-backend';
 import ItemPositioner from '../ItemPositioner';
 import { DRAGGABLE_ITEM_TYPE } from '../../constants/itemTypes';
-import { getStyles, getPosition, isSelectedItem } from '../../utils/functions';
+import {
+  getStyles, getPosition, isSelectedItem, getMatchesForItem,
+} from '../../utils/functions';
 import PageItemResizer from '../PageItemResizer';
 import ErrorBoundary from '../ErrorBoundary';
 import * as classNames from '../../constants/classNames';
@@ -26,8 +28,6 @@ const reportItemStyle = {
 const DraggableItem = ({
   children = null,
   item = {},
-  handleMatches,
-  getIntersectionsFromMatches,
 }) => {
   const {
     height,
@@ -64,6 +64,9 @@ const DraggableItem = ({
   const isTextEditorOpen = useBuilderStore(state => state.isTextEditorOpen);
   const setIsRightPanelOpen = useBuilderStore(state => state.setIsRightPanelOpen);
   const setIsResize = useBuilderStore(state => state.setIsResize);
+  const setMatches = useBuilderStore(state => state.setMatches);
+  const guides = useBuilderStore(state => state.guides);
+  const zoom = useBuilderStore(state => state.zoom);
 
   const isSelected = isSelectedItem(item.id, activeElements);
 
@@ -140,54 +143,67 @@ const DraggableItem = ({
     });
   }, [left, top, width, height]);
 
-  const onResizeStop = (deltaWidth, deltaHeight, direction) => {
-    const activeItem = {
-      ...item,
-      height: item.height + deltaHeight,
-      width: item.width + deltaWidth,
-    };
-    if (/left/i.test(direction)) activeItem.left = activeItem.left - deltaWidth;
-    if (/top/i.test(direction)) activeItem.top = activeItem.top - deltaHeight;
-    const { newActiveBoxLeft, newActiveBoxTop } = getIntersectionsFromMatches(activeItem);
-    let newResizeSize = {
-      height: activeItem.height,
-      left: activeItem.left,
-      top: activeItem.top,
-      width: activeItem.width,
-    };
-
-    if (!(/top/i.test(direction) && /left/i.test(direction))) {
-      newResizeSize = {
-        ...newResizeSize,
-        height: newResizeSize.height + (newActiveBoxTop - activeItem.top),
-        width: newResizeSize.width + (newActiveBoxLeft - activeItem.left),
-      };
-    }
-    if (/top/i.test(direction) && newActiveBoxTop !== newResizeSize.top) {
-      newResizeSize.top = newActiveBoxTop;
-    }
-    if (/left/i.test(direction) && newActiveBoxLeft !== newResizeSize.left) {
-      newResizeSize.left = newActiveBoxLeft;
-    }
+  const onResizeStop = () => {
     setIsResize(false);
-    onItemResize(item, newResizeSize);
+    setMatches({});
+    onItemResize(item, {
+      height: stateHeight,
+      left: stateLeft,
+      top: stateTop,
+      width: stateWidth,
+    });
   };
 
   const onResize = (deltaWidth, deltaHeight, direction) => {
     setIsResize(true);
+
+    const isLeft = /left/i.test(direction);
+    const isTop = /top/i.test(direction);
+    const isRight = /right/i.test(direction);
+    const isBottom = /bottom/i.test(direction);
+
     const activeItem = {
       ...item,
       height: item.height + deltaHeight,
+      left: isLeft ? item.left - deltaWidth : item.left,
+      top: isTop ? item.top - deltaHeight : item.top,
       width: item.width + deltaWidth,
     };
-    if (/left/i.test(direction)) activeItem.left = activeItem.left - deltaWidth;
-    if (/top/i.test(direction)) activeItem.top = activeItem.top - deltaHeight;
-    handleMatches(activeItem);
+
+    const newMatches = getMatchesForItem(activeItem, guides, zoom, direction);
+    setMatches(newMatches);
+
+    const snapX = newMatches?.x?.intersection / zoom;
+    const snapY = newMatches?.y?.intersection / zoom;
+
+    const rightEdge = item.left + item.width;
+    const bottomEdge = item.top + item.height;
+
+    const getWidth = () => {
+      if (!snapX) return activeItem.width;
+      return isRight ? snapX - item.left : rightEdge - snapX;
+    };
+
+    const getHeight = () => {
+      if (!snapY) return activeItem.height;
+      return isBottom ? snapY - item.top : bottomEdge - snapY;
+    };
+
+    const getLeft = () => {
+      if (snapX && isLeft) return snapX;
+      return isLeft ? activeItem.left : item.left;
+    };
+
+    const getTop = () => {
+      if (snapY && isTop) return snapY;
+      return isTop ? activeItem.top : item.top;
+    };
+
     setResizeSize({
-      height: activeItem.height,
-      left: activeItem.left,
-      top: activeItem.top,
-      width: activeItem.width,
+      height: getHeight(),
+      left: getLeft(),
+      top: getTop(),
+      width: getWidth(),
     });
   };
 
@@ -246,7 +262,7 @@ const DraggableItem = ({
   }), [item, stateHeight, stateLeft, stateTop, stateWidth]);
 
   return (
-    <ErrorBoundary>
+    <ErrorBoundary item={item}>
       <ItemPositioner
         classNames={`reportItemWrapper${isSelected ? ' isSelected' : ''}`}
         style={{
@@ -282,8 +298,6 @@ const DraggableItem = ({
 
 DraggableItem.propTypes = {
   children: PropTypes.any,
-  getIntersectionsFromMatches: PropTypes.func,
-  handleMatches: PropTypes.func,
   item: PropTypes.shape({
     height: PropTypes.oneOfType([
       PropTypes.number,

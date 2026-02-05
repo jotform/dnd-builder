@@ -16,7 +16,6 @@ const getDraggedItem = ({ defaultItem = {}, details }, item) => ({
 
 const DraggableItemLayer = ({
   collectedProps = {},
-  guides = {},
   pageRefs = {},
 }) => {
   const {
@@ -26,6 +25,7 @@ const DraggableItemLayer = ({
     item,
   } = collectedProps;
   const zoom = useBuilderStore(state => state.zoom);
+  const guides = useBuilderStore(state => state.guides);
 
   const acceptedItems = usePropStore(state => state.acceptedItems);
   const itemAccessor = usePropStore(state => state.itemAccessor);
@@ -149,7 +149,6 @@ DraggableItemLayer.propTypes = {
     item: PropTypes.shape({}),
     itemType: PropTypes.string,
   }),
-  guides: PropTypes.shape({}),
   pageRefs: PropTypes.shape({}),
 };
 

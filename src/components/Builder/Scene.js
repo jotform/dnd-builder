@@ -4,7 +4,6 @@ import {
   Fragment,
   useCallback,
   useEffect,
-  useMemo,
   useRef,
   useState,
 } from 'react';
@@ -44,6 +43,7 @@ const Scene = () => {
   const resetActiveElements = useBuilderStore(state => state.resetActiveElements);
   const setActiveElementsSelection = useBuilderStore(state => state.setActiveElementsSelection);
   const setContextMenuProps = useBuilderStore(state => state.setContextMenuProps);
+  const setGuides = useBuilderStore(state => state.setGuides);
   const setIsRightPanelOpen = useBuilderStore(state => state.setIsRightPanelOpen);
   const zoom = useBuilderStore(state => state.zoom);
 
@@ -80,8 +80,8 @@ const Scene = () => {
   /* Calculate snap guides */
   const keyDownCount = useRef(null);
 
-  const guides = useMemo(() => {
-    return pages.reduce((acc, page) => {
+  useEffect(() => {
+    setGuides(pages.reduce((acc, page) => {
       const _pageGuides = {};
       const pageRef = refs.current[page.id];
       if (pageRef && pageRef.current) {
@@ -104,8 +104,8 @@ const Scene = () => {
       }
       acc[page.id] = _pageGuides;
       return acc;
-    }, {});
-  }, [pages, zoom]);
+    }, {}));
+  }, [pages, zoom, setGuides]);
 
   useEffect(() => {
     if (viewPortRef.current) {
@@ -422,7 +422,6 @@ const Scene = () => {
       className={classNames.mainWrapper}
     >
       <DraggableLayer
-        guides={guides}
         pageRefs={refs.current}
       />
       <div
@@ -453,7 +452,6 @@ const Scene = () => {
                 style={{ ...pageStyles.current, position: 'relative' }}
               >
                 <Page
-                  guides={guides}
                   items={page.items}
                   page={page}
                   pageIndex={index}

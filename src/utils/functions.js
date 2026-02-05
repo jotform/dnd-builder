@@ -101,19 +101,41 @@ export const getTabsWithElements = leftPanelConfig => {
   }, {});
 };
 
-export const calculateGuidePositions = (dimensions, axis, zoom = 1) => {
+export const calculateGuidePositions = (dimensions, axis, zoom = 1, direction = null) => {
   const isItem = dimensions && dimensions.id;
+
   if (axis === 'x') {
     const start = dimensions.left;
     const middle = dimensions.left + parseInt(dimensions.width / 2, 10);
     const end = dimensions.left + dimensions.width;
-    if (isItem) return [start, middle, end].map(p => p * zoom);
+
+    if (isItem) {
+      const result = [start, middle, end].map(p => p * zoom);
+      if (direction) {
+        if (direction === 'bottom') return [];
+        if (direction === 'top') return [];
+        if (/left/i.test(direction)) return [result[0]];
+        if (/right/i.test(direction)) return [result[2]];
+      }
+      return result;
+    }
     return [start, middle, end];
   }
+
   const start = dimensions.top;
   const middle = dimensions.top + parseInt(dimensions.height / 2, 10);
   const end = dimensions.top + dimensions.height;
-  if (isItem) return [start, middle, end].map(p => p * zoom);
+
+  if (isItem) {
+    const result = [start, middle, end].map(p => p * zoom);
+    if (direction) {
+      if (direction === 'left') return [];
+      if (direction === 'right') return [];
+      if (/top/i.test(direction)) return [result[0]];
+      if (/bottom/i.test(direction)) return [result[2]];
+    }
+    return result;
+  }
   return [start, middle, end];
 };
 
@@ -198,14 +220,14 @@ export const proximityListener = (active, allGuides) => {
   return allMatchedGuides;
 };
 
-export const getMatchesForItem = (item, guides, zoom) => {
+export const getMatchesForItem = (item, guides, zoom, direction = null) => {
   const pageGuides = guides[item.pageID];
   const _guides = {
     ...pageGuides,
     [item.id]: {
       ...pageGuides[item.id],
-      x: calculateGuidePositions(item, 'x', zoom),
-      y: calculateGuidePositions(item, 'y', zoom),
+      x: calculateGuidePositions(item, 'x', zoom, direction),
+      y: calculateGuidePositions(item, 'y', zoom, direction),
     },
   };
   return proximityListener(item.id, _guides);

@@ -8,6 +8,8 @@ const builderStore = props => {
     activeTab: props.activeTab || { left: 0, right: 0 },
     contextMenuProps: props.contextMenuProps || false,
     editedElement: props.editedElement || 'l_layout',
+    guides: {},
+    matches: {},
     isAllSlidesPanelOpen: props.isAllSlidesPanelOpen || false,
     isLeftPanelOpen: props.isLeftPanelOpen || false,
     isResize: false,
@@ -47,6 +49,12 @@ const builderStore = props => {
     },
     setEditedElement: id => {
       set({ editedElement: id });
+    },
+    setGuides: guides => {
+      set({ guides });
+    },
+    setMatches: matches => {
+      set({ matches });
     },
     setIsAllSlidesPanelOpen: status => {
       set({ isAllSlidesPanelOpen: status });

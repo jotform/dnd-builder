@@ -1,5 +1,4 @@
 import {
-  useState,
   useRef,
   memo,
   useCallback,
@@ -20,15 +19,14 @@ import {
   getCorrectDroppedOffsetValueBySnap,
   findItemById,
   getMatchesForItem,
-  getCoordinatesFromMatches,
 } from '../../utils/functions';
 import * as classNames from '../../constants/classNames';
 import generateId from '../../utils/generateId';
+import { useSelectedElements } from '../../utils/hooks';
 
 const axes = ['x', 'y'];
 
 const Page = ({
-  guides = {},
   items = [],
   page = {},
   style = {},
@@ -38,6 +36,9 @@ const Page = ({
   const setIsRightPanelOpen = useBuilderStore(state => state.setIsRightPanelOpen);
   const zoom = useBuilderStore(state => state.zoom);
   const isResize = useBuilderStore(state => state.isResize);
+  const guides = useBuilderStore(state => state.guides);
+  const matches = useBuilderStore(state => state.matches);
+  const setMatches = useBuilderStore(state => state.setMatches);
 
   const onItemAdd = usePropStore(state => state.onItemAdd);
   const onItemMove = usePropStore(state => state.onItemMove);
@@ -48,14 +49,8 @@ const Page = ({
   const acceptedItems = usePropStore(state => state.acceptedItems);
   const pages = usePropStore(state => state.pages);
 
-  const [matches, setMatches] = useState({});
   const requestRef = useRef();
   const dropRef = useRef(null); // for getting the bounding client rect
-
-  const handleMatches = useCallback(item => {
-    const newMatches = getMatchesForItem(item, guides, zoom);
-    setMatches(newMatches);
-  }, [guides, zoom]);
 
   const drawAlignmentGuides = (item, monitor) => {
     return () => {
@@ -74,7 +69,8 @@ const Page = ({
           ...item, ...coords,
         };
         if (activeItem.id && activeItem.pageID) {
-          handleMatches(activeItem);
+          const newMatches = getMatchesForItem(activeItem, guides, zoom);
+          setMatches(newMatches);
         }
         requestRef.current = undefined;
       } catch (error) {
@@ -91,6 +87,8 @@ const Page = ({
     }
   };
 
+  const selectedElements = useSelectedElements();
+
   const [{ isOver }, drop] = useDrop({
     accept: ACCEPTED_TYPES,
     collect: monitor => {
@@ -99,6 +97,7 @@ const Page = ({
       };
     },
     drop: (item, monitor) => {
+      setMatches({});
       const coords = getCorrectDroppedOffsetValue(
         monitor.getSourceClientOffset(),
         monitor.getInitialSourceClientOffset(),
@@ -159,15 +158,6 @@ const Page = ({
     hover: onHover,
   });
 
-  const getIntersectionsFromMatches = useCallback(item => {
-    const {
-      left: newActiveBoxLeft,
-      top: newActiveBoxTop,
-    } = getCoordinatesFromMatches(item, matches);
-
-    return { newActiveBoxLeft, newActiveBoxTop };
-  }, [matches]);
-
   const combinedRef = useCallback(node => {
     dropRef.current = node;
     drop(node);
@@ -189,12 +179,12 @@ const Page = ({
       >
         <div className="jfReport-hider o-hidden f-all p-relative">
           <ReportItemsWrapper
-            getIntersectionsFromMatches={getIntersectionsFromMatches}
-            handleMatches={handleMatches}
             items={items}
           />
           {additionalPageItems}
-          {(isOver || isResize) && axes.map(axis => {
+          {/* when isOver is true, the alignment guides are shown completely */}
+          {/* when isResize is true, the alignment guides are shown only for the page of the selected element */}
+          {(isOver || (isResize && selectedElements[0]?.pageID === page.id)) && axes.map(axis => {
             if (!matches[axis]) return null;
             return (
               <AlignmentGuides
@@ -212,7 +202,6 @@ const Page = ({
 };
 
 Page.propTypes = {
-  guides: PropTypes.shape({}),
   items: PropTypes.arrayOf(
     PropTypes.shape({}),
   ),
