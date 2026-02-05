@@ -1,10 +1,6 @@
 import PropTypes from 'prop-types';
 
-const SelectionBox = ({ isSelecting, selectionBox }) => {
-  if (!isSelecting || !selectionBox) {
-    return null;
-  }
-
+const SelectionBox = ({ selectionBox }) => {
   const {
     endX, endY, startX, startY,
   } = selectionBox;
@@ -36,7 +32,6 @@ const SelectionBox = ({ isSelecting, selectionBox }) => {
 };
 
 SelectionBox.propTypes = {
-  isSelecting: PropTypes.bool,
   selectionBox: PropTypes.shape({
     endX: PropTypes.number,
     endY: PropTypes.number,
