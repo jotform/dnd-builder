@@ -63,7 +63,7 @@ const DraggableItemLayer = ({
       );
       const newItem = { ...referenceItem, ...coords };
       const newMatches = getMatchesForItem(newItem, guides, zoom);
-      const { left, top } = getCoordinatesFromMatches(newItem, newMatches);
+      const { left, top } = getCoordinatesFromMatches(newItem, newMatches, zoom);
       return {
         x: (left * zoom) + dropTargetPosition.left,
         y: (top * zoom) + dropTargetPosition.top,

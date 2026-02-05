@@ -233,23 +233,25 @@ export const getMatchesForItem = (item, guides, zoom, direction = null) => {
   return proximityListener(item.id, _guides);
 };
 
-export const getCoordinatesFromMatches = (item, matches) => {
+export const getCoordinatesFromMatches = (item, matches, zoom = 1) => {
   let newActiveBoxLeft = item.left;
   let newActiveBoxTop = item.top;
   Object.keys(matches).forEach(axis => {
     const { activeBoxGuides, matchedArray, proximity } = matches[axis];
     const activeBoxProximityIndex = proximity.activeBoxIndex;
     const matchedBoxProximityIndex = proximity.matchedBoxIndex;
+    // proximity.value is in zoomed pixels, divide by zoom to get canvas coordinates
+    const adjustedValue = proximity.value / zoom;
     if (axis === 'x') {
       if (activeBoxGuides[activeBoxProximityIndex] > matchedArray[matchedBoxProximityIndex]) {
-        newActiveBoxLeft = item.left - proximity.value;
+        newActiveBoxLeft = item.left - adjustedValue;
       } else {
-        newActiveBoxLeft = item.left + proximity.value;
+        newActiveBoxLeft = item.left + adjustedValue;
       }
     } else if (activeBoxGuides[activeBoxProximityIndex] > matchedArray[matchedBoxProximityIndex]) {
-      newActiveBoxTop = item.top - proximity.value;
+      newActiveBoxTop = item.top - adjustedValue;
     } else {
-      newActiveBoxTop = item.top + proximity.value;
+      newActiveBoxTop = item.top + adjustedValue;
     }
   });
 
@@ -261,7 +263,7 @@ export const getCoordinatesFromMatches = (item, matches) => {
 
 export const getCorrectDroppedOffsetValueBySnap = (item, guides, zoom) => {
   const matches = getMatchesForItem(item, guides, zoom);
-  return getCoordinatesFromMatches(item, matches);
+  return getCoordinatesFromMatches(item, matches, zoom);
 };
 
 export const getPosition = e => {
