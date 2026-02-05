@@ -11,7 +11,8 @@
   "project": ["src/**/*.js"],
   "ignore": [
     "src/__tests__/**",
-    "src/__test_helpers__/**"
+    "src/__test_helpers__/**",
+    "src/components/ResponsiveContent.js"
   ],
   "ignoreDependencies": [
     "@babel/helper-builder-react-jsx-experimental",
@@ -44,10 +45,7 @@
     "src/constants/*.js": ["exports"],
     "jest.config.js": ["unresolved"]
   },
-  "ignoreUnresolved": [
-    ".*/builderContext\\.js",
-    ".*/propContext\\.js"
-  ],
+  "ignoreUnresolved": [".*/builderContext\\.js", ".*/propContext\\.js"],
   "storybook": {
     "config": [".storybook/main.js"],
     "entry": ["stories/**/*.@(js|mdx)"]
