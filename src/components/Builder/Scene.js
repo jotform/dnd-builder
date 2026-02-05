@@ -2,6 +2,7 @@
 import {
   createRef,
   Fragment,
+  useCallback,
   useEffect,
   useMemo,
   useRef,
@@ -12,6 +13,7 @@ import ContextMenu from './ContextMenu';
 import PageActions from './PageActions';
 import PageAdder from './PageAdder';
 import ZoomControls from './ZoomControls';
+import SelectionBox from './SelectionBox';
 import { useBuilderStore } from '../../contexts/BuilderContext';
 import { usePropStore } from '../../contexts/PropContext';
 import Page from './Page';
@@ -19,6 +21,7 @@ import {
   calculateGuidePositions,
   findItemById,
   findItemsOnPage,
+  getItemsInSelectionBox,
   getMostVisiblePage,
 } from '../../utils/functions';
 import { useSelectedElements, useEventListener } from '../../utils/hooks';
@@ -39,11 +42,18 @@ const Scene = () => {
   const isRightPanelOpen = useBuilderStore(state => state.isRightPanelOpen);
   const setActiveElements = useBuilderStore(state => state.setActiveElements);
   const resetActiveElements = useBuilderStore(state => state.resetActiveElements);
+  const setActiveElementsSelection = useBuilderStore(state => state.setActiveElementsSelection);
   const setContextMenuProps = useBuilderStore(state => state.setContextMenuProps);
   const setIsRightPanelOpen = useBuilderStore(state => state.setIsRightPanelOpen);
   const zoom = useBuilderStore(state => state.zoom);
 
   const [itemToPaste, setItemToPaste] = useState(null);
+
+  // Marquee selection state
+  const [isSelecting, setIsSelecting] = useState(false);
+  const [selectionBox, setSelectionBox] = useState(null);
+  const [selectionPageId, setSelectionPageId] = useState(null);
+  const selectionStartRef = useRef(null);
   const lastScrollPosition = useBuilderStore(state => state.lastScrollPosition);
 
   const pageStyles = useRef({});
@@ -277,6 +287,116 @@ const Scene = () => {
   useEventListener('keydown', handleKeyboardEvent);
   useEventListener('keyup', () => { keyDownCount.current = 0; });
 
+  // Marquee selection handlers
+  const handleCanvasMouseDown = useCallback(e => {
+    // Selection starts with left click only
+    if (e.button !== 0) return;
+
+    const { target } = e;
+
+    // Don't start selection if clicking on an item or interactive element
+    const activeElementsSelectors = [
+      '.reportItem',
+      '.reportItemWrapper',
+      '.pageActions',
+      '.jfReport-addSlide',
+      '[role="button"]',
+      'button',
+      '.contextMenu',
+    ];
+
+    if (activeElementsSelectors.some(selector => target.closest(selector))) {
+      return;
+    }
+
+    // Find the page element from the click target
+    const pageElement = target.closest('.jfReport-page') || target.closest('[id*="presentation-page-"]');
+    if (!pageElement) return;
+
+    const pageId = pageElement.getAttribute('data-id') || pageElement.getAttribute('id').replace('presentation-page-', '');
+    if (!pageId) return;
+
+    // Prevent text selection during drag
+    e.preventDefault();
+
+    const pageRect = pageElement.getBoundingClientRect();
+    const startX = e.clientX - pageRect.left;
+    const startY = e.clientY - pageRect.top;
+
+    selectionStartRef.current = {
+      pageRect,
+      startX,
+      startY,
+    };
+    setSelectionPageId(pageId);
+    setSelectionBox({
+      endX: startX,
+      endY: startY,
+      startX,
+      startY,
+    });
+    setIsSelecting(true);
+
+    // Clear current selection when starting new marquee
+    resetActiveElements();
+  }, [resetActiveElements]);
+
+  const handleCanvasMouseMove = useCallback(e => {
+    if (!isSelecting || !selectionStartRef.current) return;
+
+    const { pageRect, startX, startY } = selectionStartRef.current;
+
+    // Calculate end position (clamped to page bounds)
+    const endX = Math.max(0, Math.min(e.clientX - pageRect.left, pageRect.width));
+    const endY = Math.max(0, Math.min(e.clientY - pageRect.top, pageRect.height));
+
+    setSelectionBox({
+      endX,
+      endY,
+      startX,
+      startY,
+    });
+  }, [isSelecting]);
+
+  const handleCanvasMouseUp = useCallback(() => {
+    if (!isSelecting || !selectionBox || !selectionPageId) {
+      setIsSelecting(false);
+      setSelectionBox(null);
+      selectionStartRef.current = null;
+      return;
+    }
+
+    // Find the page and its items
+    const page = pages.find(p => p.id === selectionPageId);
+
+    if (page && page.items) {
+      const selectedItemIds = getItemsInSelectionBox(selectionBox, page.items, zoom);
+      if (selectedItemIds.length > 0) {
+        setActiveElementsSelection(selectedItemIds);
+      }
+    }
+
+    // Reset selection state
+    setIsSelecting(false);
+    setSelectionBox(null);
+    setSelectionPageId(null);
+    selectionStartRef.current = null;
+  }, [isSelecting, selectionBox, selectionPageId, pages, zoom, setActiveElementsSelection]);
+
+  // Add global mouse event listeners for marquee selection
+  useEffect(() => {
+    if (isSelecting) {
+      document.body.style.cursor = 'crosshair';
+      document.addEventListener('mousemove', handleCanvasMouseMove);
+      document.addEventListener('mouseup', handleCanvasMouseUp);
+      return () => {
+        document.body.style.cursor = '';
+        document.removeEventListener('mousemove', handleCanvasMouseMove);
+        document.removeEventListener('mouseup', handleCanvasMouseUp);
+      };
+    }
+  }, [isSelecting, handleCanvasMouseMove, handleCanvasMouseUp]);
+
   const { reportLayoutHeight = 794, reportLayoutWidth = 1123 } = settings;
 
   // TODO: Some strange shit is going on here on first render
@@ -312,6 +432,9 @@ const Scene = () => {
       >
         <div
           className={classNames.canvas}
+          onMouseDown={handleCanvasMouseDown}
+          onMouseMove={handleCanvasMouseMove}
+          onMouseUp={handleCanvasMouseUp}
         >
           {pages.map((page, index) => (
             // TODO: This part can be moved into a different component
@@ -327,7 +450,7 @@ const Scene = () => {
                 data-id={page.id}
                 data-order={page.order}
                 id={`presentation-page-${page.id.toString()}`}
-                style={pageStyles.current}
+                style={{ ...pageStyles.current, position: 'relative' }}
               >
                 <Page
                   guides={guides}
@@ -336,6 +459,12 @@ const Scene = () => {
                   pageIndex={index}
                   style={pageContainerStyles.current}
                 />
+                {selectionPageId === page.id && (
+                  <SelectionBox
+                    isSelecting={isSelecting}
+                    selectionBox={selectionBox}
+                  />
+                )}
               </div>
             </Fragment>
           ))}

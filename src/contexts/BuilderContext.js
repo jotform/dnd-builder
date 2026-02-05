@@ -26,6 +26,18 @@ const builderStore = props => {
         ...edit ? { editedElement: !itemID ? 'l_layout' : `i_${itemID}` } : {},
       });
     }),
+    setActiveElementsSelection: props.setActiveElementsSelection || (itemIDs => {
+      if (!itemIDs || itemIDs.length === 0) {
+        set({ activeElements: [], editedElement: 'l_layout' });
+      } else if (itemIDs.length === 1) {
+        set({
+          activeElements: itemIDs,
+          editedElement: `i_${itemIDs[0]}`,
+        });
+      } else {
+        set({ activeElements: itemIDs });
+      }
+    }),
     setActiveTab: props.setActiveTab || ((panel, tabIndex) => {
       const { activeTab } = get();
       set({ activeTab: { ...activeTab, [panel]: tabIndex } });
