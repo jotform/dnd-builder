@@ -8,7 +8,6 @@ const ALL_TEXTS = {
   CHART_SETTINGS: 'Chart Settings',
   CLICK_TO_EDIT_HEADER: 'Click to edit header',
   CLICK_TO_EDIT_TEXT: 'Click to edit text',
-  DATACARD_SETTINGS: 'Data Card Settings',
   DELETE: 'Delete',
   DELETE_ITEM: 'Delete Item',
   DUPLICATE_ITEM: 'Duplicate Item',
