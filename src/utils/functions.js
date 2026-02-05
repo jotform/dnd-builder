@@ -1,6 +1,25 @@
 /* global Image */
 import objectDiff from './object-diff';
 
+/**
+ * Rounds position/dimension values to integers before sending to service
+ * This prevents decimal values from being sent when zoom is not 1
+ * Should only be used at the final step before service calls
+ */
+export const roundPositionValues = ({
+  height,
+  left,
+  top,
+  width,
+  ...rest
+}) => ({
+  ...rest,
+  ...(height !== undefined && { height: Math.round(height) }),
+  ...(left !== undefined && { left: Math.round(left) }),
+  ...(top !== undefined && { top: Math.round(top) }),
+  ...(width !== undefined && { width: Math.round(width) }),
+});
+
 export const getCorrectDroppedOffsetValue = (finalOffset, initialOffset, dropTargetPosition, zoom = 1) => {
   const { x: finalX, y: finalY } = finalOffset;
   const { x: initialX, y: initialY } = initialOffset;
@@ -259,11 +278,6 @@ export const getCoordinatesFromMatches = (item, matches, zoom = 1) => {
     left: newActiveBoxLeft,
     top: newActiveBoxTop,
   };
-};
-
-export const getCorrectDroppedOffsetValueBySnap = (item, guides, zoom) => {
-  const matches = getMatchesForItem(item, guides, zoom);
-  return getCoordinatesFromMatches(item, matches, zoom);
 };
 
 export const getPosition = e => {

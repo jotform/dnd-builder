@@ -7,7 +7,7 @@ import { getEmptyImage } from 'react-dnd-html5-backend';
 import ItemPositioner from '../ItemPositioner';
 import { DRAGGABLE_ITEM_TYPE } from '../../constants/itemTypes';
 import {
-  getStyles, getPosition, isSelectedItem, getMatchesForItem,
+  getStyles, getPosition, isSelectedItem, getMatchesForItem, roundPositionValues,
 } from '../../utils/functions';
 import PageItemResizer from '../PageItemResizer';
 import ErrorBoundary from '../ErrorBoundary';
@@ -146,12 +146,12 @@ const DraggableItem = ({
   const onResizeStop = () => {
     setIsResize(false);
     setMatches({});
-    onItemResize(item, {
+    onItemResize(item, roundPositionValues({
       height: stateHeight,
       left: stateLeft,
       top: stateTop,
       width: stateWidth,
-    });
+    }));
   };
 
   const onResize = (deltaWidth, deltaHeight, direction) => {
