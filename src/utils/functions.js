@@ -770,3 +770,29 @@ export function isValidHexColor(value) {
 }
 
 export const emptyFunction = f => f;
+
+export const isItemInSelectionBox = (selectionBox, item, zoom = 1) => {
+  const boxLeft = Math.min(selectionBox.startX, selectionBox.endX);
+  const boxTop = Math.min(selectionBox.startY, selectionBox.endY);
+  const boxRight = Math.max(selectionBox.startX, selectionBox.endX);
+  const boxBottom = Math.max(selectionBox.startY, selectionBox.endY);
+
+  const itemLeft = item.left * zoom;
+  const itemTop = item.top * zoom;
+  const itemRight = (item.left + item.width) * zoom;
+  const itemBottom = (item.top + item.height) * zoom;
+
+  // Check if rectangles intersect
+  return !(
+    boxRight < itemLeft
+    || boxLeft > itemRight
+    || boxBottom < itemTop
+    || boxTop > itemBottom
+  );
+};
+
+export const getItemsInSelectionBox = (selectionBox, items, zoom = 1) => {
+  return items
+    .filter(item => !item.isLocked && isItemInSelectionBox(selectionBox, item, zoom))
+    .map(item => item.id);
+};

@@ -186,7 +186,9 @@ const ContextMenu = ({
             <span className="contextMenu-icon">
               {menuItem.icon}
             </span>
-            {menuItem.text}
+            <span className="contextMenu-text">
+              {menuItem.text}
+            </span>
           </button>
         );
       })}
