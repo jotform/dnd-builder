@@ -1,0 +1,69 @@
+{
+  "$schema": "https://unpkg.com/knip@latest/schema.json",
+  "entry": [
+    "src/index.js",
+    "src/contexts/*.js",
+    "src/utils/hooks.js",
+    "src/utils/functions.js",
+    "src/constants/*.js",
+    "stories/**/*.js"
+  ],
+  "project": ["src/**/*.js"],
+  "ignore": [
+    "src/__tests__/**",
+    "src/__test_helpers__/**",
+    "src/components/ResponsiveContent.js"
+  ],
+  "ignoreDependencies": [
+    "@babel/helper-builder-react-jsx-experimental",
+    "core-js",
+    "regenerator-runtime",
+    "@babel/plugin-transform-react-jsx",
+    "@babel/plugin-transform-react-jsx-development",
+    "@commitlint/cli",
+    "@commitlint/config-conventional",
+    "@mdx-js/loader",
+    "@storybook/addon-storysource",
+    "@storybook/theming",
+    "husky",
+    "sass",
+    "@storybook/source-loader",
+    "@babel/plugin-proposal-class-properties",
+    "@babel/plugin-proposal-private-methods",
+    "@storybook/addon-actions",
+    "@storybook/addon-docs"
+  ],
+  "ignoreExportsUsedInFile": true,
+  "rules": {
+    "unlisted": "warn"
+  },
+  "includeEntryExports": true,
+  "ignoreIssues": {
+    "src/contexts/*.js": ["exports"],
+    "src/utils/hooks.js": ["exports"],
+    "src/utils/functions.js": ["exports"],
+    "src/constants/*.js": ["exports"],
+    "jest.config.js": ["unresolved"]
+  },
+  "ignoreUnresolved": [".*/builderContext\\.js", ".*/propContext\\.js"],
+  "storybook": {
+    "config": [".storybook/main.js"],
+    "entry": ["stories/**/*.@(js|mdx)"]
+  },
+  "eslint": true,
+  "jest": {
+    "config": ["jest.config.js"]
+  },
+  "rollup": {
+    "config": ["rollup.*.config.js"]
+  },
+  "babel": {
+    "config": ["babel.config.js"]
+  },
+  "commitlint": {
+    "config": [".commitlintrc", ".commitlintrc.json", "commitlint.config.js"]
+  },
+  "husky": {
+    "config": [".huskyrc", ".huskyrc.json"]
+  }
+}
