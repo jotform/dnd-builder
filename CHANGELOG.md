@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.2.0](https://github.com/jotform/dnd-builder/compare/v3.1.1...v3.2.0) (2026-02-06)
+
+
+### Features
+
+* **dnd-builder:** implement marquee selection for multiple items ([4b82867](https://github.com/jotform/dnd-builder/commit/4b82867f2ee185553a59affa1994fc46a5a13607))
+
+
+### Bug Fixes
+
+* corrects item snapping with zoom changes ([e6e72bd](https://github.com/jotform/dnd-builder/commit/e6e72bd6da6cc6cd743e7790dbc969af817cd28f))
+* **dnd-builder:** use item title as default value ([e3c8fb0](https://github.com/jotform/dnd-builder/commit/e3c8fb0ae0e532c7291201fbf7919df5aea33169))
+* resetActiveElements method is updated ([48c3efd](https://github.com/jotform/dnd-builder/commit/48c3efd73b13dc9a5546d0ef79bba883e9b8f976))
+* resets active elements to layout on panel open ([f508ca2](https://github.com/jotform/dnd-builder/commit/f508ca2c9721c998190160534d0e9ab73d12595b))
+* rounds position values before service calls ([868a7dc](https://github.com/jotform/dnd-builder/commit/868a7dca0c72273362066a7585b1ce166ae32daf))
+* sort lines ([dac6978](https://github.com/jotform/dnd-builder/commit/dac6978f45ded1c083a5134a0952461ec869f33c))
+
 ### [3.1.1](https://github.com/jotform/dnd-builder/compare/v3.1.0...v3.1.1) (2026-02-03)
 
 
