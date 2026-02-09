@@ -240,7 +240,6 @@
         display: none;
       }
 
-      &[data-tab="2"] {
       &.left[data-tab="2"],
       &.right[data-tab="2"] {
         .toolTabs-tab[tab-count="0"]:checked ~ .toolTabs-indicator {
