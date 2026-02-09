@@ -1,7 +1,6 @@
 import React from 'react';
 import { selectors } from '../../../../__test_helpers__/constants';
 import Tabs from '../../../../components/Builder/Tabs';
-import { BuilderProvider } from '../../../../contexts/BuilderContext';
 import { mountWithProviders } from '../../../../__test_helpers__/utils';
 
 describe('SettingTabs', () => {
@@ -22,18 +21,18 @@ describe('SettingTabs', () => {
       { builderProps: { isRightPanelOpen: true }
     });
 
-    settingTabWrapper.find('#LINE').simulate('change', { target: { checked: true } });
-    expect(settingTabWrapper.find('#LINE').props().checked).toBe(true);
+    settingTabWrapper.find('#tabs-right-1').simulate('change', { target: { checked: true } });
+    expect(settingTabWrapper.find('#tabs-right-1').props().checked).toBe(true);
   });
 
   it('Should Call setActiveTab Once Click on a Tab', () => {
     const eventMock = jest.fn();
     const settingTabWrapper = mountWithProviders(
-      <Tabs tabs={['HEADER', 'LINE', 'SUBHEADER']} />,
+      <Tabs panel="right" tabs={['HEADER', 'LINE', 'SUBHEADER']} />,
       { builderProps: { setActiveTab: eventMock } }
     );
 
-    settingTabWrapper.find('#SUBHEADER').simulate('change');
+    settingTabWrapper.find('#tabs-right-2').simulate('change');
     expect(eventMock).toHaveBeenCalledTimes(1);
   });
 

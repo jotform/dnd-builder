@@ -240,7 +240,8 @@
         display: none;
       }
 
-      &[data-tab="2"] {
+      &.left[data-tab="2"],
+      &.right[data-tab="2"] {
         .toolTabs-tab[tab-count="0"]:checked ~ .toolTabs-indicator {
           left: 0;
         }
@@ -249,7 +250,8 @@
         }
       }
 
-      &[data-tab="3"] {
+      &.left[data-tab="3"],
+      &.right[data-tab="3"] {
         .toolTabs-tab[tab-count="0"]:checked ~ .toolTabs-indicator {
           left: 0;
         }
