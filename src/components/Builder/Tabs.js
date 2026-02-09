@@ -20,7 +20,7 @@ const Tabs = ({ panel, tabs = [] }) => {
         data-tab={tabs.length}
       >
         {tabs.map((tab, index) => {
-          const inputId = `tabs-${panel}-${tab}-${index}`;
+          const inputId = `tabs-${panel}-${index}`;
           return (
             <Fragment key={inputId}>
               <input
