@@ -111,6 +111,9 @@ const PageItemResizer = ({
     }
     setIsRightPanelOpen(false);
     resetActiveElements();
+    if (document.activeElement) {
+      document.activeElement.blur();
+    }
   };
 
   const itemPositionerStyle = useMemo(() => ({
