@@ -5,15 +5,13 @@ import { usePropStore } from '../../contexts/PropContext';
 
 const Tabs = ({ panel, tabs = [] }) => {
   const activeTab = useBuilderStore(state => state.activeTab);
-  const isLeftPanelOpen = useBuilderStore(state => state.isLeftPanelOpen);
-  const isRightPanelOpen = useBuilderStore(state => state.isRightPanelOpen);
   const setActiveTab = useBuilderStore(state => state.setActiveTab);
   const onAnEventTrigger = usePropStore(state => state.onAnEventTrigger);
 
-  const setCurrentTab = useCallback((index, tab) => {
+  const setCurrentTab = useCallback(index => () => {
     setActiveTab(panel, index);
-    onAnEventTrigger('settingTabChanged', tab);
-  }, [setActiveTab, onAnEventTrigger, panel]);
+    onAnEventTrigger('settingTabChanged', tabs[index]);
+  }, [setActiveTab, onAnEventTrigger, panel, tabs]);
 
   return (
     tabs.length > 1 && (
@@ -21,23 +19,22 @@ const Tabs = ({ panel, tabs = [] }) => {
         className={`toolTabs d-flex p-relative ${panel}`}
         data-tab={tabs.length}
       >
-        { tabs.map((tab, index) => {
-          const checked = activeTab[panel] === index
-            && ((panel === 'left' && isLeftPanelOpen) || (panel === 'right' && isRightPanelOpen));
+        {tabs.map((tab, index) => {
+          const inputId = `tabs-${panel}-${tab}-${index}`;
           return (
-            <Fragment key={tab}>
+            <Fragment key={inputId}>
               <input
-                checked={checked}
-                className="toolTabs-tab"
-                id={tab}
-                name="tabs"
-                onChange={() => setCurrentTab(index, tab)}
+                checked={activeTab[panel] === index}
+                className={`toolTabs-tab ${panel}`}
+                id={inputId}
+                name={`tabs-${panel}`}
+                onChange={setCurrentTab(index)}
                 tab-count={index}
                 type="radio"
               />
               <label
                 className="t-normal js-tabLabel"
-                htmlFor={tab}
+                htmlFor={inputId}
               >
                 <span>
                   {tab}
