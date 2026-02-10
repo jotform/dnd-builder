@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.2.1](https://github.com/jotform/dnd-builder/compare/v3.2.0...v3.2.1) (2026-02-10)
+
+
+### Bug Fixes
+
+* corrects tab indicator positioning ([95c8b59](https://github.com/jotform/dnd-builder/commit/95c8b59480bdc3d189baf2aae15863c9a4419cc4))
+* preventing focus-stayed element ([3999359](https://github.com/jotform/dnd-builder/commit/39993593f34ca4be44a40c38a23313b49f709b7a))
+* tests ([83ab97c](https://github.com/jotform/dnd-builder/commit/83ab97c3a0669a436fb18c66bafef9f98e6fc4dd))
+* unnecessary css line is removed ([485f38d](https://github.com/jotform/dnd-builder/commit/485f38db46a07eb1d440f64478b1ee4b3f24a9ab))
+
 ## [3.2.0](https://github.com/jotform/dnd-builder/compare/v3.1.1...v3.2.0) (2026-02-06)
 
 
