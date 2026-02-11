@@ -26,6 +26,7 @@ const propStore = props => {
     onPageDuplicate: props.onPageDuplicate || fn,
     onPageOrdersChange: props.onPageOrdersChange || fn,
     onPageRemove: props.onPageRemove || fn,
+    onSelectedItemsChange: props.onSelectedItemsChange || fn,
     onSettingChange: props.onSettingChange || fn,
     pages: props.pages || [],
     setAcceptedItems: acceptedItems => { set({ acceptedItems }); },

@@ -72,6 +72,8 @@ Builder.propTypes = {
    * not the panel is toggled open.
    */
   onRightPanelsToggled: PropTypes.func,
+  /** Function called upon selecting items */
+  onSelectedItemsChange: PropTypes.func,
   /** Function called upon editing a general report setting */
   onSettingChange: PropTypes.func,
   /** Array of pages with their settings and items */

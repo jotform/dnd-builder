@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import ReportWrapper from '../ReportWrapper';
 import { usePropStore } from '../../contexts/PropContext';
 import { useBuilderStore } from '../../contexts/BuilderContext';
-import { useFitZoom } from '../../utils/hooks';
+import { useFitZoom, useSelectedElements } from '../../utils/hooks';
 
 const BuilderWrapper = ({ children }) => {
   const decidedWhichPanelToOpen = useRef(false);
@@ -13,6 +13,13 @@ const BuilderWrapper = ({ children }) => {
   const isSlidesPanelOpen = useBuilderStore(state => state.isSlidesPanelOpen);
   const setIsLeftPanelOpen = useBuilderStore(state => state.setIsLeftPanelOpen);
   const setIsSlidesPanelOpen = useBuilderStore(state => state.setIsSlidesPanelOpen);
+  const onSelectedItemsChange = usePropStore(state => state.onSelectedItemsChange);
+
+  const selectedItems = useSelectedElements();
+
+  useEffect(() => {
+    onSelectedItemsChange(selectedItems);
+  }, [selectedItems, onSelectedItemsChange]);
 
   useFitZoom();
 
