@@ -119,3 +119,7 @@ export { default as fit } from '../assets/svg/fit_screen.svg';
 
 // Loading //
 export { default as loadingCircle } from '../assets/svg/loading_circle.svg';
+
+// Error Boundary //
+
+export { default as exclamationIcon } from '../assets/svg/exclamation.svg';
