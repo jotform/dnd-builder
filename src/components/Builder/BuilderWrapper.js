@@ -1,9 +1,10 @@
 import { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
+import isEqual from 'lodash.isequal';
 import ReportWrapper from '../ReportWrapper';
 import { usePropStore } from '../../contexts/PropContext';
 import { useBuilderStore } from '../../contexts/BuilderContext';
-import { useFitZoom, useSelectedElements } from '../../utils/hooks';
+import { useFitZoom, usePrevious, useSelectedElements } from '../../utils/hooks';
 
 const BuilderWrapper = ({ children }) => {
   const decidedWhichPanelToOpen = useRef(false);
@@ -13,13 +14,19 @@ const BuilderWrapper = ({ children }) => {
   const isSlidesPanelOpen = useBuilderStore(state => state.isSlidesPanelOpen);
   const setIsLeftPanelOpen = useBuilderStore(state => state.setIsLeftPanelOpen);
   const setIsSlidesPanelOpen = useBuilderStore(state => state.setIsSlidesPanelOpen);
-  const onSelectedItemsChange = usePropStore(state => state.onSelectedItemsChange);
-
+  const onSelectedItemsChanged = usePropStore(state => state.onSelectedItemsChanged);
   const selectedItems = useSelectedElements();
+  const prevSelectedItems = usePrevious(selectedItems);
 
   useEffect(() => {
-    onSelectedItemsChange(selectedItems);
-  }, [selectedItems, onSelectedItemsChange]);
+    if (prevSelectedItems && !isEqual(prevSelectedItems, selectedItems)) {
+      onSelectedItemsChanged(selectedItems);
+    }
+  }, [
+    selectedItems,
+    onSelectedItemsChanged,
+    prevSelectedItems,
+  ]);
 
   useFitZoom();
 

@@ -1,4 +1,3 @@
-import { memo } from 'react';
 import { useBuilderStore } from '../../../contexts/BuilderContext';
 import * as icons from '../../../utils/icons';
 
@@ -17,4 +16,4 @@ const LeftPanelToggler = () => {
   );
 };
 
-export default memo(LeftPanelToggler);
+export default LeftPanelToggler;

@@ -1,5 +1,4 @@
 import {
-  memo,
   useCallback,
   useEffect,
   useMemo,
@@ -204,4 +203,4 @@ const RightPanel = () => {
   );
 };
 
-export default memo(RightPanel);
+export default RightPanel;

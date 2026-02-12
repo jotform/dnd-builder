@@ -2,6 +2,7 @@ import {
   createContext, useContext, useEffect, useRef,
 } from 'react';
 import PropTypes from 'prop-types';
+import isEqual from 'lodash.isequal';
 import { createStore, useStore } from 'zustand';
 
 const fn = () => {};
@@ -26,7 +27,7 @@ const propStore = props => {
     onPageDuplicate: props.onPageDuplicate || fn,
     onPageOrdersChange: props.onPageOrdersChange || fn,
     onPageRemove: props.onPageRemove || fn,
-    onSelectedItemsChange: props.onSelectedItemsChange || fn,
+    onSelectedItemsChanged: props.onSelectedItemsChanged || fn,
     onSettingChange: props.onSettingChange || fn,
     pages: props.pages || [],
     setAcceptedItems: acceptedItems => { set({ acceptedItems }); },
@@ -54,10 +55,9 @@ export const PropProvider = ({ children, ...props }) => {
   } = props;
 
   useEffect(() => {
-    const { setPages } = storeRef.current.getState();
-    if (pages) {
-      setPages(pages);
-    }
+    const state = storeRef.current.getState();
+    if (!pages || isEqual(state.pages, pages)) return;
+    state.setPages(pages);
   }, [pages]);
 
   useEffect(() => {
@@ -66,17 +66,15 @@ export const PropProvider = ({ children, ...props }) => {
   }, [itemAccessor]);
 
   useEffect(() => {
-    const { setAcceptedItems } = storeRef.current.getState();
-    if (acceptedItems) {
-      setAcceptedItems(acceptedItems);
-    }
+    const state = storeRef.current.getState();
+    if (!acceptedItems || isEqual(state.acceptedItems, acceptedItems)) return;
+    state.setAcceptedItems(acceptedItems);
   }, [acceptedItems]);
 
   useEffect(() => {
-    const { setSettings } = storeRef.current.getState();
-    if (settings) {
-      setSettings(settings);
-    }
+    const state = storeRef.current.getState();
+    if (!settings || isEqual(state.settings, settings)) return;
+    state.setSettings(settings);
   }, [settings]);
 
   return (
