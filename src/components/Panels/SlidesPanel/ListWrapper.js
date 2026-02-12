@@ -12,12 +12,12 @@ const ListWrapper = ({
   onSortEnd = () => {},
   pageGetter = () => {},
 }) => {
-  const pages = usePropStore(state => state.pages);
-  const pageCount = useMemo(() => pages.length, [pages]);
+  const pageCount = usePropStore(state => state.pages.length);
   const onPageAdd = usePropStore(state => state.onPageAdd);
   const onPageDuplicate = usePropStore(state => state.onPageDuplicate);
   const onPageRemove = usePropStore(state => state.onPageRemove);
   const reportSettings = usePropStore(state => state.settings);
+  const onPageVisibilityChanged = usePropStore(state => state.onPageVisibilityChanged);
 
   const listRef = useRef(null);
   const [selectedPageIndex, setSelectedPageIndex] = useState(-1);
@@ -52,7 +52,7 @@ const ListWrapper = ({
     }
   }, []);
 
-  usePageVisibility(index => {
+  const handlePageVisibility = useCallback(index => {
     if (index && !Number.isNaN(index)) {
       if (listRef.current?.scrollToIndex) {
         listRef.current.scrollToIndex(index, 'center');
@@ -67,9 +67,12 @@ const ListWrapper = ({
         .querySelector(`.thumbnailWrapper[data-order="${index}"]`);
       if (nextSelectedThumbnail) {
         nextSelectedThumbnail.classList.add('isSelected');
+        onPageVisibilityChanged(index);
       }
     }
-  }, pageCount, selectedPageIndex);
+  }, [onPageVisibilityChanged]);
+
+  usePageVisibility(handlePageVisibility, pageCount, selectedPageIndex);
 
   // TODO: could be better than now. scrollend listener is a choice for some cases
   const resetSelectedPageIndex = useCallback(() => {

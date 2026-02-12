@@ -27,6 +27,7 @@ const propStore = props => {
     onPageDuplicate: props.onPageDuplicate || fn,
     onPageOrdersChange: props.onPageOrdersChange || fn,
     onPageRemove: props.onPageRemove || fn,
+    onPageVisibilityChanged: props.onPageVisibilityChanged || fn,
     onSelectedItemsChanged: props.onSelectedItemsChanged || fn,
     onSettingChange: props.onSettingChange || fn,
     pages: props.pages || [],
