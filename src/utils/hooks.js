@@ -88,6 +88,7 @@ export const useFitZoom = () => {
 
 export const usePageVisibility = (callback, pageCount, selectedPageIndex) => {
   const ratio = useRef({});
+  const prevVisiblePageIndex = useRef(-1);
   const pageRefs = useRef([]);
   const observer = useMemo(() => new window.IntersectionObserver(entries => {
     entries.forEach(entry => {
@@ -98,16 +99,20 @@ export const usePageVisibility = (callback, pageCount, selectedPageIndex) => {
         delete ratio.current[order];
       }
     });
-    callback(parseInt(
+    const visiblePageIndex = parseInt(
       Object.keys(ratio.current)
         .find(key => ratio.current[key] === Math.max(...Object.values(ratio.current))),
       10,
-    ));
+    );
+    if (visiblePageIndex !== prevVisiblePageIndex.current) {
+      prevVisiblePageIndex.current = visiblePageIndex;
+      callback(visiblePageIndex);
+    }
   },
   {
     delay: 100,
     root: document.querySelector('.jfReport-viewport'),
-    threshold: [0, 0.5, 1],
+    threshold: [0, 0.25, 0.5, 0.75, 1],
   }), [callback]);
 
   useEffect(() => {

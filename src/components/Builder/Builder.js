@@ -67,6 +67,8 @@ Builder.propTypes = {
   onPageOrdersChange: PropTypes.func,
   /** Function called upon removing a page */
   onPageRemove: PropTypes.func,
+  /** Function called upon page visibility changed */
+  onPageVisibilityChanged: PropTypes.func,
   /** Function called when the slides or the right panel is
    * toggled takes a boolean value to indicate whether or
    * not the panel is toggled open.
