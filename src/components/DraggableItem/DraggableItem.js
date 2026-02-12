@@ -25,7 +25,11 @@ const reportItemStyle = {
   width: '100%',
 };
 
-const DraggableItem = ({
+const TestError = () => {
+  throw new Error('Test error for ErrorBoundary');
+};
+
+const DraggableItemContent = ({
   children = null,
   item = {},
 }) => {
@@ -262,17 +266,22 @@ const DraggableItem = ({
   }), [item, stateHeight, stateLeft, stateTop, stateWidth]);
 
   return (
-    <ErrorBoundary item={item}>
-      <ItemPositioner
-        classNames={`reportItemWrapper${isSelected ? ' isSelected' : ''}`}
-        style={{
-          ...getStyles(left, top, isDragging),
-          height: stateHeight,
-          left: stateLeft,
-          top: stateTop,
-          width: stateWidth,
-        }}
+    <ItemPositioner
+      classNames={`reportItemWrapper${isSelected ? ' isSelected' : ''}`}
+      style={{
+        ...getStyles(left, top, isDragging),
+        height: stateHeight,
+        left: stateLeft,
+        top: stateTop,
+        width: stateWidth,
+      }}
+    >
+      <ErrorBoundary
+        item={item}
+        level="item"
       >
+        {/* TODO: Remove - temporary error test */}
+        <TestError />
         <div
           ref={drag}
           className={`${classNames.reportItem}${isLocked ? ' isLocked' : ''}`}
@@ -284,17 +293,23 @@ const DraggableItem = ({
         >
           {children}
         </div>
-      </ItemPositioner>
-      {!isDragging && isSelected && (
-        <PageItemResizer
-          item={modifiedItem}
-          onResize={onResize}
-          onResizeStop={onResizeStop}
-        />
-      )}
-    </ErrorBoundary>
+        {!isDragging && isSelected && (
+          <PageItemResizer
+            item={modifiedItem}
+            onResize={onResize}
+            onResizeStop={onResizeStop}
+          />
+        )}
+      </ErrorBoundary>
+    </ItemPositioner>
   );
 };
+
+const DraggableItem = ({ children, item }) => (
+  <DraggableItemContent item={item}>
+    {children}
+  </DraggableItemContent>
+);
 
 DraggableItem.propTypes = {
   children: PropTypes.any,
@@ -321,5 +336,7 @@ DraggableItem.propTypes = {
     ]),
   }),
 };
+
+DraggableItemContent.propTypes = DraggableItem.propTypes;
 
 export default memo(DraggableItem);

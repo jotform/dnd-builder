@@ -6,6 +6,10 @@ import { getStyles } from '../../utils/functions';
 import ItemPositioner from '../ItemPositioner';
 import ErrorBoundary from '../ErrorBoundary';
 
+const TestError = () => {
+  throw new Error('Test error for ErrorBoundary (StaticItem)');
+};
+
 const elementStyle = {
   height: '100%',
   width: '100%',
@@ -22,14 +26,20 @@ const StaticItem = ({
     width,
   } = item;
   return (
-    <ErrorBoundary>
-      <ItemPositioner
-        style={{
-          ...getStyles(left, top, false),
-          height,
-          width,
-        }}
+    <ItemPositioner
+      style={{
+        ...getStyles(left, top, false),
+        height,
+        width,
+      }}
+    >
+      <ErrorBoundary
+        isStatic={true}
+        item={item}
+        level="item"
       >
+        {/* TODO: Remove - temporary error test */}
+        <TestError />
         <div
           className={classNames.reportItemWrapper}
         >
@@ -43,8 +53,8 @@ const StaticItem = ({
             {children}
           </div>
         </div>
-      </ItemPositioner>
-    </ErrorBoundary>
+      </ErrorBoundary>
+    </ItemPositioner>
   );
 };
 

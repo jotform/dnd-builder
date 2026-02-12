@@ -7,6 +7,10 @@ import SettingsItemRenderer from '../../Settings/SettingsItemRenderer';
 import { onChangeFunction } from '../../../utils/functions';
 import ErrorBoundary from '../../ErrorBoundary';
 
+const TestError = () => {
+  throw new Error('Test error for ErrorBoundary (Settings)');
+};
+
 const Settings = ({
   element = {},
   item = {},
@@ -46,7 +50,12 @@ const Settings = ({
             >
               {SettingItem => {
                 return (
-                  <ErrorBoundary>
+                  <ErrorBoundary
+                    item={newItem}
+                    level="settings"
+                  >
+                    {/* TODO: Remove - temporary error test */}
+                    <TestError />
                     <SettingItem
                       config={setting}
                       item={newItem}
