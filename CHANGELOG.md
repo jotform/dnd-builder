@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.3.0](https://github.com/jotform/dnd-builder/compare/v3.2.1...v3.3.0) (2026-02-12)
+
+
+### Features
+
+* adds callback for page visibility changes ([543a49e](https://github.com/jotform/dnd-builder/commit/543a49e62e3be52907d40df6de8f86dc09ae917c))
+* passes selected items to a callback function ([22e801b](https://github.com/jotform/dnd-builder/commit/22e801b27f980b7aae39ce85fe35c02c3f7d9ab9))
+
+
+### Bug Fixes
+
+* renames and memoizes selected items handler ([78d347b](https://github.com/jotform/dnd-builder/commit/78d347b04009a5d880b827356a0ad29e44f058e1))
+
 ### [3.2.1](https://github.com/jotform/dnd-builder/compare/v3.2.0...v3.2.1) (2026-02-10)
 
 
