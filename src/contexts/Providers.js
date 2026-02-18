@@ -9,6 +9,7 @@ const Providers = ({
   mode,
   onRightPanelsToggled,
   presentationBarActions,
+  shouldShowRightPanelInitially,
   useFixedPresentationBar,
   ...props
 }) => {
@@ -16,6 +17,7 @@ const Providers = ({
     <BuilderProvider
       lastScrollPosition={lastScrollPosition}
       onRightPanelsToggled={onRightPanelsToggled}
+      shouldShowRightPanelInitially={shouldShowRightPanelInitially}
     >
       <PropProvider {...props}>
         {mode === 'customize' ? children : (
@@ -45,6 +47,8 @@ Providers.propTypes = {
   /** To pass in action definitions that will be rendered as buttons */
   presentationBarActions: PropTypes.arrayOf(PropTypes.shape({})),
   /** Flag for fixed action bar */
+  shouldShowRightPanelInitially: PropTypes.bool,
+  /** Flag for whether to show the right panel initially */
   useFixedPresentationBar: PropTypes.bool,
 };
 

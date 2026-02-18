@@ -14,6 +14,7 @@ const BuilderWrapper = ({ children }) => {
   const isSlidesPanelOpen = useBuilderStore(state => state.isSlidesPanelOpen);
   const setIsLeftPanelOpen = useBuilderStore(state => state.setIsLeftPanelOpen);
   const setIsSlidesPanelOpen = useBuilderStore(state => state.setIsSlidesPanelOpen);
+  const shouldShowRightPanelInitially = useBuilderStore(state => state.shouldShowRightPanelInitially);
   const onSelectedItemsChanged = usePropStore(state => state.onSelectedItemsChanged);
   const selectedItems = useSelectedElements();
   const prevSelectedItems = usePrevious(selectedItems);
@@ -36,7 +37,7 @@ const BuilderWrapper = ({ children }) => {
         if (isLeftPanelOpen) {
           setIsLeftPanelOpen(false);
         }
-        setIsSlidesPanelOpen(true);
+        setIsSlidesPanelOpen(shouldShowRightPanelInitially);
       } else {
         if (isSlidesPanelOpen) {
           setIsSlidesPanelOpen(false);
@@ -52,6 +53,7 @@ const BuilderWrapper = ({ children }) => {
     isSlidesPanelOpen,
     setIsLeftPanelOpen,
     setIsSlidesPanelOpen,
+    shouldShowRightPanelInitially,
   ]);
 
   return (
