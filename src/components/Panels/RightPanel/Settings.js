@@ -5,11 +5,7 @@ import { useBuilderStore } from '../../../contexts/BuilderContext';
 import { usePropStore } from '../../../contexts/PropContext';
 import SettingsItemRenderer from '../../Settings/SettingsItemRenderer';
 import { onChangeFunction } from '../../../utils/functions';
-import ErrorBoundary from '../../ErrorBoundary';
-
-const TestError = () => {
-  throw new Error('Test error for ErrorBoundary (Settings)');
-};
+import ErrorBoundary from '../../ErrorBoundary/ErrorBoundary';
 
 const Settings = ({
   element = {},
@@ -54,8 +50,6 @@ const Settings = ({
                     item={newItem}
                     level="settings"
                   >
-                    {/* TODO: Remove - temporary error test */}
-                    <TestError />
                     <SettingItem
                       config={setting}
                       item={newItem}

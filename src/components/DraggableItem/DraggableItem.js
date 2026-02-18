@@ -10,7 +10,7 @@ import {
   getStyles, getPosition, isSelectedItem, getMatchesForItem, roundPositionValues,
 } from '../../utils/functions';
 import PageItemResizer from '../PageItemResizer';
-import ErrorBoundary from '../ErrorBoundary';
+import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
 import * as classNames from '../../constants/classNames';
 import generateId from '../../utils/generateId';
 import {
@@ -23,10 +23,6 @@ import { usePropStore } from '../../contexts/PropContext';
 const reportItemStyle = {
   height: '100%',
   width: '100%',
-};
-
-const TestError = () => {
-  throw new Error('Test error for ErrorBoundary');
 };
 
 const DraggableItemContent = ({
@@ -280,8 +276,6 @@ const DraggableItemContent = ({
         item={item}
         level="item"
       >
-        {/* TODO: Remove - temporary error test */}
-        <TestError />
         <div
           ref={drag}
           className={`${classNames.reportItem}${isLocked ? ' isLocked' : ''}`}

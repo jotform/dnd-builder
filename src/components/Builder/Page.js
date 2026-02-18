@@ -24,7 +24,7 @@ import {
 import * as classNames from '../../constants/classNames';
 import generateId from '../../utils/generateId';
 import { useSelectedElements } from '../../utils/hooks';
-import ErrorBoundary from '../ErrorBoundary';
+import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
 
 const axes = ['x', 'y'];
 

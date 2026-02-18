@@ -4,11 +4,7 @@ import cn from 'classnames';
 import * as classNames from '../../constants/classNames';
 import { getStyles } from '../../utils/functions';
 import ItemPositioner from '../ItemPositioner';
-import ErrorBoundary from '../ErrorBoundary';
-
-const TestError = () => {
-  throw new Error('Test error for ErrorBoundary (StaticItem)');
-};
+import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
 
 const elementStyle = {
   height: '100%',
@@ -38,8 +34,6 @@ const StaticItem = ({
         item={item}
         level="item"
       >
-        {/* TODO: Remove - temporary error test */}
-        <TestError />
         <div
           className={classNames.reportItemWrapper}
         >
