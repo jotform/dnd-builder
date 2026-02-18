@@ -105,6 +105,7 @@ const builderStore = props => {
         }
       }
     },
+    shouldShowRightPanelInitially: props.shouldShowRightPanelInitially ?? true,
     zoom: 1,
   }));
 };

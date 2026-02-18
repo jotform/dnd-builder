@@ -28,10 +28,6 @@ import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
 
 const axes = ['x', 'y'];
 
-const TestError = () => {
-  throw new Error('Test error for ErrorBoundary (Page)');
-};
-
 const Page = ({
   items = [],
   page = {},
@@ -180,8 +176,6 @@ const Page = ({
 
   return (
     <ErrorBoundary level="page">
-      {/* TODO: Remove - temporary error test */}
-      <TestError />
       <div
         ref={combinedRef}
         className={classNames.pageContainer}
