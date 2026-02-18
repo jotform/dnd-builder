@@ -10,7 +10,7 @@ import {
   getStyles, getPosition, isSelectedItem, getMatchesForItem, roundPositionValues,
 } from '../../utils/functions';
 import PageItemResizer from '../PageItemResizer';
-import ErrorBoundary from '../ErrorBoundary';
+import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
 import * as classNames from '../../constants/classNames';
 import generateId from '../../utils/generateId';
 import {
@@ -25,7 +25,7 @@ const reportItemStyle = {
   width: '100%',
 };
 
-const DraggableItem = ({
+const DraggableItemContent = ({
   children = null,
   item = {},
 }) => {
@@ -262,16 +262,19 @@ const DraggableItem = ({
   }), [item, stateHeight, stateLeft, stateTop, stateWidth]);
 
   return (
-    <ErrorBoundary item={item}>
-      <ItemPositioner
-        classNames={`reportItemWrapper${isSelected ? ' isSelected' : ''}`}
-        style={{
-          ...getStyles(left, top, isDragging),
-          height: stateHeight,
-          left: stateLeft,
-          top: stateTop,
-          width: stateWidth,
-        }}
+    <ItemPositioner
+      classNames={`reportItemWrapper${isSelected ? ' isSelected' : ''}`}
+      style={{
+        ...getStyles(left, top, isDragging),
+        height: stateHeight,
+        left: stateLeft,
+        top: stateTop,
+        width: stateWidth,
+      }}
+    >
+      <ErrorBoundary
+        item={item}
+        level="item"
       >
         <div
           ref={drag}
@@ -284,17 +287,23 @@ const DraggableItem = ({
         >
           {children}
         </div>
-      </ItemPositioner>
-      {!isDragging && isSelected && (
-        <PageItemResizer
-          item={modifiedItem}
-          onResize={onResize}
-          onResizeStop={onResizeStop}
-        />
-      )}
-    </ErrorBoundary>
+        {!isDragging && isSelected && (
+          <PageItemResizer
+            item={modifiedItem}
+            onResize={onResize}
+            onResizeStop={onResizeStop}
+          />
+        )}
+      </ErrorBoundary>
+    </ItemPositioner>
   );
 };
+
+const DraggableItem = ({ children, item }) => (
+  <DraggableItemContent item={item}>
+    {children}
+  </DraggableItemContent>
+);
 
 DraggableItem.propTypes = {
   children: PropTypes.any,
@@ -321,5 +330,7 @@ DraggableItem.propTypes = {
     ]),
   }),
 };
+
+DraggableItemContent.propTypes = DraggableItem.propTypes;
 
 export default memo(DraggableItem);

@@ -5,7 +5,7 @@ import { useBuilderStore } from '../../../contexts/BuilderContext';
 import { usePropStore } from '../../../contexts/PropContext';
 import SettingsItemRenderer from '../../Settings/SettingsItemRenderer';
 import { onChangeFunction } from '../../../utils/functions';
-import ErrorBoundary from '../../ErrorBoundary';
+import ErrorBoundary from '../../ErrorBoundary/ErrorBoundary';
 
 const Settings = ({
   element = {},
@@ -46,7 +46,10 @@ const Settings = ({
             >
               {SettingItem => {
                 return (
-                  <ErrorBoundary>
+                  <ErrorBoundary
+                    item={newItem}
+                    level="settings"
+                  >
                     <SettingItem
                       config={setting}
                       item={newItem}

@@ -38,7 +38,7 @@ module.exports = {
     'declaration-block-trailing-semicolon': 'always',
     'declaration-colon-space-after': 'always',
     'declaration-colon-space-before': 'never',
-    'declaration-no-important': true,
+    'declaration-no-important': null,
     'font-family-name-quotes': 'always-where-recommended',
     'font-family-no-duplicate-names': true,
     'font-weight-notation': 'numeric',

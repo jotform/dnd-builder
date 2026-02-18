@@ -24,8 +24,13 @@ import {
 import * as classNames from '../../constants/classNames';
 import generateId from '../../utils/generateId';
 import { useSelectedElements } from '../../utils/hooks';
+import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
 
 const axes = ['x', 'y'];
+
+const TestError = () => {
+  throw new Error('Test error for ErrorBoundary (Page)');
+};
 
 const Page = ({
   items = [],
@@ -174,7 +179,9 @@ const Page = ({
   const bgColor = backgroundColor ? backgroundColor : reportBackgroundColor || '#fff';
 
   return (
-    <>
+    <ErrorBoundary level="page">
+      {/* TODO: Remove - temporary error test */}
+      <TestError />
       <div
         ref={combinedRef}
         className={classNames.pageContainer}
@@ -203,7 +210,7 @@ const Page = ({
           })}
         </div>
       </div>
-    </>
+    </ErrorBoundary>
   );
 };
 

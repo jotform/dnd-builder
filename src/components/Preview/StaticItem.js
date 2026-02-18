@@ -4,7 +4,7 @@ import cn from 'classnames';
 import * as classNames from '../../constants/classNames';
 import { getStyles } from '../../utils/functions';
 import ItemPositioner from '../ItemPositioner';
-import ErrorBoundary from '../ErrorBoundary';
+import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
 
 const elementStyle = {
   height: '100%',
@@ -22,13 +22,17 @@ const StaticItem = ({
     width,
   } = item;
   return (
-    <ErrorBoundary>
-      <ItemPositioner
-        style={{
-          ...getStyles(left, top, false),
-          height,
-          width,
-        }}
+    <ItemPositioner
+      style={{
+        ...getStyles(left, top, false),
+        height,
+        width,
+      }}
+    >
+      <ErrorBoundary
+        isStatic={true}
+        item={item}
+        level="item"
       >
         <div
           className={classNames.reportItemWrapper}
@@ -43,8 +47,8 @@ const StaticItem = ({
             {children}
           </div>
         </div>
-      </ItemPositioner>
-    </ErrorBoundary>
+      </ErrorBoundary>
+    </ItemPositioner>
   );
 };
 

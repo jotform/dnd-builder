@@ -43,6 +43,7 @@
     "src/utils/hooks.js": ["exports"],
     "src/utils/functions.js": ["exports"],
     "src/constants/*.js": ["exports"],
+    "index.d.ts": ["exports", "types"],
     "jest.config.js": ["unresolved"]
   },
   "ignoreUnresolved": [".*/builderContext\\.js", ".*/propContext\\.js"],
