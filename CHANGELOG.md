@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.4.0](https://github.com/jotform/dnd-builder/compare/v3.3.0...v3.4.0) (2026-02-18)
+
+
+### Features
+
+* **error-boundary:** new error screen and item and page diff ([52bc053](https://github.com/jotform/dnd-builder/commit/52bc053c15ef76fc4712f4d55b278ad33074c3bd))
+
+
+### Bug Fixes
+
+* **dnd-builder:** control right panel visibility ([c985243](https://github.com/jotform/dnd-builder/commit/c985243adc6d074b9c599362f26304bacb7a96a1))
+* **error-boundary:** update for ErrorBoundary component and error details ([0aa8d0e](https://github.com/jotform/dnd-builder/commit/0aa8d0ecbcb87910e71f4eb457d2c48dc1f32924))
+* **knip:** add ignores ([c4e0796](https://github.com/jotform/dnd-builder/commit/c4e07967823924976bcbf9680e9d1dfc5d3f9f5d))
+* **knip:** add ignores types ([3907435](https://github.com/jotform/dnd-builder/commit/39074359c79c05c9deabcf882c128ffe41eb893c))
+
 ## [3.3.0](https://github.com/jotform/dnd-builder/compare/v3.2.1...v3.3.0) (2026-02-12)
 
 
