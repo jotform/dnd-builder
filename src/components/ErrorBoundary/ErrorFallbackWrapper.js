@@ -10,7 +10,16 @@ const ErrorFallbackWrapper = ({
   isStatic = false,
   item = null,
   level = 'page',
-  textConfig,
+  textConfig = {
+    item: {
+      description: '',
+      title: '',
+    },
+    page: {
+      description: '',
+      title: '',
+    },
+  },
 }) => {
   const { description = '', title = '' } = textConfig[level] || textConfig.page || {};
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
@@ -85,24 +94,6 @@ ErrorFallbackWrapper.propTypes = {
       title: PropTypes.string,
     }),
   }),
-};
-
-ErrorFallbackWrapper.defaultProps = {
-  error: null,
-  errorInfo: null,
-  isStatic: false,
-  item: null,
-  level: 'page',
-  textConfig: {
-    item: {
-      description: '',
-      title: '',
-    },
-    page: {
-      description: '',
-      title: '',
-    },
-  },
 };
 
 export default ErrorFallbackWrapper;
