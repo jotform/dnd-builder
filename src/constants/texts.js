@@ -45,6 +45,7 @@ const ALL_TEXTS = {
   REMOVE_PAGE: 'Remove Slide',
   SEARCH: 'Search',
   SETTINGS: 'Settings',
+  SHAPES_SETTINGS: 'Shape Settings',
   SHOW_ALL: 'Show All',
   SLIDES: 'Slides',
   TEXT_SETTINGS: 'Text Settings',
