@@ -1,4 +1,9 @@
-import { useCallback, useMemo, useState } from 'react';
+import {
+  useCallback,
+  useMemo,
+  useState,
+  useEffect,
+} from 'react';
 import PropTypes from 'prop-types';
 import domPurify from 'dompurify';
 import QuillEditor from './QuillEditor';
@@ -15,6 +20,12 @@ const TextEditor = ({
 
   const isTextEditorOpen = useBuilderStore(state => state.isTextEditorOpen);
   const setIsTextEditorOpen = useBuilderStore(state => state.setIsTextEditorOpen);
+
+  useEffect(() => {
+    if (isTextEditorOpen && !isSelected) {
+      setIsTextEditorOpen(false);
+    }
+  }, [isSelected, isTextEditorOpen, setIsTextEditorOpen]);
 
   const onClick = useCallback(() => {
     if (isSelected && !isLocked) {
