@@ -5,7 +5,7 @@ import { useTranslatedTexts } from '../../utils/hooks';
 import ErrorFallbackWrapper from './ErrorFallbackWrapper';
 
 function ErrorBoundary({
-  children, isStatic, item, level,
+  children, isStatic = false, item = null, level = 'page',
 }) {
   const [errorInfo, setErrorInfo] = useState(null);
   const {
@@ -63,12 +63,6 @@ ErrorBoundary.propTypes = {
     itemType: PropTypes.string,
   }),
   level: PropTypes.oneOf(['item', 'page']),
-};
-
-ErrorBoundary.defaultProps = {
-  isStatic: false,
-  item: null,
-  level: 'page',
 };
 
 export default ErrorBoundary;

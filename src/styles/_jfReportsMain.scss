@@ -213,6 +213,11 @@ body {
 }
 
 .errorBoundary-details-close-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  justify-content: center;
   background: #DADEF3;
   height: 40px;
   margin-left: auto;
