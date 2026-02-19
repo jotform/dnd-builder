@@ -1,13 +1,13 @@
 import {
   useCallback,
   useMemo,
-  useState,
   useEffect,
 } from 'react';
 import PropTypes from 'prop-types';
 import domPurify from 'dompurify';
 import QuillEditor from './QuillEditor';
 import { useBuilderStore } from '../../contexts/BuilderContext';
+import { usePropState } from '../../utils/hooks';
 
 const TextEditor = ({
   content = '',
@@ -16,7 +16,7 @@ const TextEditor = ({
   isSelected = false,
   placeholder,
 }) => {
-  const [_content, setContent] = useState(domPurify.sanitize(content));
+  const [_content, setContent] = usePropState(content, domPurify.sanitize);
 
   const isTextEditorOpen = useBuilderStore(state => state.isTextEditorOpen);
   const setIsTextEditorOpen = useBuilderStore(state => state.setIsTextEditorOpen);

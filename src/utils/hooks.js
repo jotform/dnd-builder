@@ -66,6 +66,16 @@ export const usePrevious = value => {
   return ref.current;
 };
 
+export const usePropState = (propValue, transform = v => v) => {
+  const [state, setState] = useState(() => transform(propValue));
+
+  useEffect(() => {
+    setState(transform(propValue));
+  }, [propValue, transform]);
+
+  return [state, setState];
+};
+
 export const useFitZoom = () => {
   const settings = usePropStore(state => state.settings);
   const setZoom = useBuilderStore(state => state.setZoom);
