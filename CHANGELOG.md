@@ -1,6 +1,22 @@
 # Changelog
 
-All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
+
+## [3.5.0](https://github.com/jotform/dnd-builder/compare/v3.4.0...v3.5.0) (2026-02-19)
+
+
+### Features
+
+* adds 'Shape Settings' text ([f6ee80d](https://github.com/jotform/dnd-builder/commit/f6ee80d814618c38cc6caff987a8543f70356aba))
+
+
+### Bug Fixes
+
+* **dnd-builder:** element comp updates ([bfa94ff](https://github.com/jotform/dnd-builder/commit/bfa94ff8bcef6e37f246545bb5eb26ab158f232a))
+* don't close text editor on QuillEditor's componentWillUnmount ([678c099](https://github.com/jotform/dnd-builder/commit/678c099b873a127896eaab54613a128456a83f09))
+* **error-boundry:** set default props for ErrorFallbackWrapper ([a919f26](https://github.com/jotform/dnd-builder/commit/a919f26e7348b181b1ace1ff9c7fbad9a5435b07))
+* **text-editor:** close editor when not selected ([3bdf97c](https://github.com/jotform/dnd-builder/commit/3bdf97cd45834ac0fa54ba47ac8b0a26986722a4))
+* textbox content should be up-to-date ([193010c](https://github.com/jotform/dnd-builder/commit/193010c4777197baba808dd9e1dac17fea47b54d))
 
 ## [3.4.0](https://github.com/jotform/dnd-builder/compare/v3.3.0...v3.4.0) (2026-02-18)
 
