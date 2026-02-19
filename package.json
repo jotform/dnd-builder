@@ -117,7 +117,7 @@
     "lint:js:fix": "eslint src --fix --ignore-pattern 'src/__tests__'",
     "storybook": "start-storybook",
     "lint-staged": "lint-staged",
-    "release": "standard-version",
+    "release": "commit-and-tag-version",
     "knip": "knip",
     "knip:fix": "knip --fix",
     "knip:unused": "knip --include files,dependencies,exports"
