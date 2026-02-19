@@ -26,19 +26,20 @@ class QuillEditor extends React.PureComponent {
   }
 
   componentWillUnmount() {
-    this.saveAndQuit();
+    this.save();
   }
 
-  saveAndQuit = () => {
-    const { content, handleSave, setIsTextEditorOpen } = this.props;
-    setIsTextEditorOpen(false);
+  save = () => {
+    const { content, handleSave } = this.props;
     handleSave(content);
   }
 
   handleKeyDown = e => {
     e.stopPropagation();
     if (e.keyCode === 27) {
-      this.saveAndQuit();
+      const { onClose } = this.props;
+      this.save();
+      onClose?.();
     }
   }
 
@@ -77,9 +78,9 @@ QuillEditor.formats = formats;
 QuillEditor.propTypes = {
   content: PropTypes.string,
   handleSave: PropTypes.func,
+  onClose: PropTypes.func,
   placeholder: PropTypes.string.isRequired,
   setContent: PropTypes.func,
-  setIsTextEditorOpen: PropTypes.func,
 };
 
 export default QuillEditor;
