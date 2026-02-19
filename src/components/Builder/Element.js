@@ -12,6 +12,7 @@ import { useBuilderStore } from '../../contexts/BuilderContext';
 import { usePropStore } from '../../contexts/PropContext';
 
 const Element = ({
+  badge = null,
   icon = null,
   iconType = '',
   itemType = '',
@@ -90,12 +91,14 @@ const Element = ({
         <span className="js-toolItemName toolItem-name d-flex a-center">
           { title }
         </span>
+        {badge}
       </div>
     </>
   );
 };
 
 Element.propTypes = {
+  badge: PropTypes.node,
   icon: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
   iconType: PropTypes.string,
   itemType: PropTypes.string,
