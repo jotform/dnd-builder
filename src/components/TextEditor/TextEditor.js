@@ -23,10 +23,6 @@ const TextEditor = ({
     }
   }, [isSelected, isLocked, setIsTextEditorOpen]);
 
-  const onClose = useCallback(() => {
-    setIsTextEditorOpen(false);
-  }, [setIsTextEditorOpen]);
-
   const isNotEmpty = useMemo(() => {
     const el = document.createElement('div');
     el.innerHTML = _content;
@@ -37,9 +33,9 @@ const TextEditor = ({
     <QuillEditor
       content={_content}
       handleSave={handleSave}
-      onClose={onClose}
       placeholder={placeholder}
       setContent={setContent}
+      setIsTextEditorOpen={setIsTextEditorOpen}
     />
   ) : (
     <div
