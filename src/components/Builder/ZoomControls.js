@@ -50,37 +50,37 @@ const ZoomControls = () => {
   const { FIT_TO_SCENE, ZOOM_IN, ZOOM_OUT } = useTranslatedTexts();
 
   return (
-    <div className="floatingController forZoom">
-      <div className="floatingController-container isGray">
+    <div className="floatingController zoom-toolbar">
+      <div className="floatingController-container">
         <button
-          className="controllerItem isWhite"
+          className="controllerItem"
           onClick={increaseZoom}
           title={ZOOM_IN}
           type="button"
         >
-          <icons.plus className="jfReportSVG controllerItem-icon" />
+          <icons.plus className="toolbar-icon" />
         </button>
         <div className="controllerIndicator">
           {zoomValue}
           %
         </div>
         <button
-          className="controllerItem isWhite"
+          className="controllerItem"
           onClick={decreaseZoom}
           title={ZOOM_OUT}
           type="button"
         >
-          <icons.minus className="jfReportSVG controllerItem-icon" />
+          <icons.minus className="toolbar-icon" />
         </button>
       </div>
       <div className="floatingController-container">
         <button
-          className="controllerItem isSingle"
+          className="controllerItem"
           onClick={fitZoom}
           title={FIT_TO_SCENE}
           type="button"
         >
-          <icons.fit className="jfReportSVG icon-fit" />
+          <icons.fit className="toolbar-icon" />
         </button>
       </div>
     </div>

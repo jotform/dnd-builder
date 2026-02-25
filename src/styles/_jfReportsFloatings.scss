@@ -151,13 +151,13 @@
       }
     }
 
-    .controllerItem {
+    :where(.controllerItem) {
       background: #343C6A;
       border-radius: 3px;
       border: none;
       transition: $transition;
 
-      &:hover {
+      &:where(:hover) {
         background: rgba(111, 118, 167, 0.6);
       }
     }
@@ -193,6 +193,107 @@
 
       span {
         opacity: 0.5;
+      }
+    }
+  }
+
+  // Page Toolbar new styles //
+  &.page-toolbar {
+    position: absolute;
+    top: 58px;
+    right: -40px;
+    gap: 4px;
+
+    .controllerItem {
+      max-width: 24px;
+      max-height: 24px;
+      min-width: 24px;
+      min-height: 24px;
+
+      .toolbar-icon {
+        width: 16px;
+        height: 16px;
+      }
+    }
+  }
+
+  // Zoom Toolbar new styles //
+  &.zoom-toolbar {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    gap: 4px;
+    z-index: 2;
+
+    .controllerItem {
+      max-width: 32px;
+      max-height: 32px;
+      min-width: 32px;
+      min-height: 32px;
+
+      .toolbar-icon {
+        width: 20px;
+        height: 20px;
+      }
+    }
+  }
+
+  &.page-toolbar, &.zoom-toolbar {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    transition: $transition;
+
+    .floatingController-container {
+      display: flex;
+      padding: 4px;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .controllerItem {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      padding: 4px;
+      flex-shrink: 0;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      border-radius: 4px;
+      background-color: #F9F9FF;
+      transition: $transition;
+
+      .toolbar-icon {
+        color: #0A1551;
+        fill: #0A1551;
+        transition: $transition;
+      }
+
+      &:where(:hover) {
+        background-color: #E3E5F5;
+        transition: $transition;
+      }
+
+      &:hover.primary {
+        background-color: #EDF8FF;
+
+        .toolbar-icon {
+          color: #0075E3;
+          fill: #0075E3;
+        }
+      }
+
+      &:hover.error {
+        background-color: #FEF2F2;
+
+        .toolbar-icon {
+          color: #DC2626;
+          fill: #DC2626;
+        }
       }
     }
   }
