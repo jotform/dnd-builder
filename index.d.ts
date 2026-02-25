@@ -164,6 +164,8 @@ export interface CommonProps {
 export interface BuilderProps extends CommonProps {
   /** Array of strings representing item types that should have disabled interaction */
   disableInteraction?: string[];
+  /** CSS selectors ignored by right panel click-outside logic */
+  clickOutsideIgnoreSelectors?: string[];
   /** Last scroll position */
   lastScrollPosition?: number;
   /** Configuration for the left panel elements */

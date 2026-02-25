@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 import { createContext, useContext, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { createStore, useStore } from 'zustand';
@@ -6,6 +7,7 @@ const builderStore = props => {
   return createStore((set, get) => ({
     activeElements: props.activeElement || [],
     activeTab: props.activeTab || { left: 0, right: 0 },
+    clickOutsideIgnoreSelectors: props.clickOutsideIgnoreSelectors || [],
     contextMenuProps: props.contextMenuProps || false,
     editedElement: props.editedElement || 'l_layout',
     guides: {},

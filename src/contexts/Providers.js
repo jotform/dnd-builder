@@ -5,6 +5,7 @@ import { PropProvider } from './PropContext';
 
 const Providers = ({
   children,
+  clickOutsideIgnoreSelectors,
   lastScrollPosition,
   mode,
   onRightPanelsToggled,
@@ -15,6 +16,7 @@ const Providers = ({
 }) => {
   return (
     <BuilderProvider
+      clickOutsideIgnoreSelectors={clickOutsideIgnoreSelectors}
       lastScrollPosition={lastScrollPosition}
       onRightPanelsToggled={onRightPanelsToggled}
       shouldShowRightPanelInitially={shouldShowRightPanelInitially}
@@ -35,6 +37,8 @@ const Providers = ({
 
 Providers.propTypes = {
   children: PropTypes.node.isRequired,
+  /** CSS selectors ignored by right panel click-outside logic */
+  clickOutsideIgnoreSelectors: PropTypes.arrayOf(PropTypes.string),
   /** Last scroll position */
   lastScrollPosition: PropTypes.number,
   /** Mode of the report */

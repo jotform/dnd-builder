@@ -32,6 +32,7 @@ const RightPanel = () => {
   const resetActiveElements = useBuilderStore(state => state.resetActiveElements);
   const setActiveTab = useBuilderStore(state => state.setActiveTab);
   const setIsRightPanelOpen = useBuilderStore(state => state.setIsRightPanelOpen);
+  const clickOutsideIgnoreSelectors = useBuilderStore(state => state.clickOutsideIgnoreSelectors);
 
   const acceptedItems = usePropStore(state => state.acceptedItems);
   const layoutSettings = usePropStore(state => state.settings);
@@ -156,9 +157,12 @@ const RightPanel = () => {
   );
 
   const onClickOutsideForPanel = useCallback(e => {
+    const isIgnoredBySelector = clickOutsideIgnoreSelectors.some(selector => selector && e.target.closest(selector));
+
     if (editedElement.substr(0, 2) === 'i_'
       || panelRef.current.contains(e.target)
       || panelRef.current.contains(document.activeElement)
+      || isIgnoredBySelector
       || Array.from(e.target.classList).some(xClass => exceptionalClasses.includes(xClass))
       || exceptionalClasses.some(xClass => e.target.closest(`.${xClass}`))
     ) {
@@ -166,7 +170,7 @@ const RightPanel = () => {
     }
     setIsRightPanelOpen(false);
     resetActiveElements();
-  }, [editedElement, setIsRightPanelOpen, resetActiveElements]);
+  }, [clickOutsideIgnoreSelectors, editedElement, setIsRightPanelOpen, resetActiveElements]);
 
   useEffect(() => {
     if (isRightPanelOpen) window.addEventListener('click', onClickOutsideForPanel, false);
