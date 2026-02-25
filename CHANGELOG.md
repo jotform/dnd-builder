@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [3.4.4](https://github.com/jotform/dnd-builder/compare/v3.4.3...v3.4.4) (2026-02-25)
+
+
+### Bug Fixes
+
+* **context-menu/tool-bar:** update SVG icons and improve toolbar styles for consistency ([68304a3](https://github.com/jotform/dnd-builder/commit/68304a3c9bc16745af349721c3a595beb68ec793))
+* **dnd-builder:** toolbar actions renw ([a6b0ce8](https://github.com/jotform/dnd-builder/commit/a6b0ce8bd6308e0b8b68c6ecd753b9eda6b0296a))
+
 ## [3.4.3](https://github.com/jotform/dnd-builder/compare/v3.4.1...v3.4.3) (2026-02-20)
 
 ## [3.4.2](https://github.com/jotform/dnd-builder/compare/v3.4.1...v3.4.2) (2026-02-20)
