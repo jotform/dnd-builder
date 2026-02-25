@@ -291,7 +291,7 @@
     }
   }
 
-  .reportItemMenu + .ql-toolbar.ql-snow {
+  .report-item-toolbar + .ql-toolbar.ql-snow {
     .ql-stroke {
       /* stylelint-disable-next-line declaration-no-important */
       stroke: #6F76A7 !important;
@@ -304,6 +304,6 @@
   }
 }
 
-.reportItemMenu + .ql-toolbar.ql-snow .ql-button:hover {
+.report-item-toolbar + .ql-toolbar.ql-snow .ql-button:hover {
   background-color: #F3F3FE;
 }

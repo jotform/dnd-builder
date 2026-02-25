@@ -175,7 +175,7 @@ const ContextMenu = ({
       }}
     >
       {menuItems.map(menuItem => {
-        const btnClass = `contextMenu-button jfReportButton${menuItem.class ? menuItem.class : ''}`;
+        const btnClass = `contextMenu-button ${menuItem.class ? menuItem.class : ''}`;
         return (
           <button
             key={menuItem.text}

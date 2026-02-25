@@ -44,21 +44,21 @@
       fill: $additionalGray;
     }
 
-    .reportItemMenu-item:hover .isWhite {
+    .report-item-toolbar-item:hover .isWhite {
       fill: darken($additionalGray, 10);
       opacity: 1;
     }
   }
 
   .reportItem {
-    outline: 1px solid transparent;
+    outline: 3px solid transparent;
     outline-offset: -1px;
   }
 
   [data-zoom="0.5"] .reportItem,
   [data-zoom="0.6"] .reportItem,
   [data-zoom="0.7"] .reportItem {
-    outline-width: 2px;
+    outline-width: 3px;
   }
 
   .reportItemWrapper.isSelected:hover .isLocked {
@@ -70,6 +70,6 @@
   }
 
   .reportItemWrapper:not(.isSelected) .reportItem:not(.isLocked):hover {
-    outline-color: $blue;
+    outline-color: #0099FF;
   }
 }
