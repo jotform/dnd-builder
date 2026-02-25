@@ -38,6 +38,8 @@ Builder.propTypes = {
   acceptedItems: PropTypes.shape({}),
   /** Array of React components to render statically on each page (eg. watermark) */
   additionalPageItems: PropTypes.arrayOf(PropTypes.node),
+  /** CSS selectors ignored by right panel click-outside logic */
+  clickOutsideIgnoreSelectors: PropTypes.arrayOf(PropTypes.string),
   disableInteraction: PropTypes.arrayOf(PropTypes.string),
   /** To pass in extra props to items selectively */
   itemAccessor: PropTypes.func,

@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { EVENT_IGNORED_ROLES } from '../constants/eventIgnoredRoles';
+import { useBuilderStore } from '../contexts/BuilderContext';
 
 function getDisplayName(WrappedComponent) {
   return WrappedComponent.displayName || WrappedComponent.name || 'Component';
@@ -14,6 +15,7 @@ function withClickOutside(WrappedComponent) {
       withClickOutsideWrapperClass = null,
     } = props;
 
+    const clickOutsideIgnoreSelectors = useBuilderStore(state => state.clickOutsideIgnoreSelectors);
     const wrapper = useRef(null);
 
     const handleClickOutside = useCallback(event => {
@@ -25,6 +27,7 @@ function withClickOutside(WrappedComponent) {
           || Array.from(classList).some(xClass => exceptionalClasses.includes(xClass))
           || exceptionalClasses.some(item => event.target.closest(`.${item}`))
           || EVENT_IGNORED_ROLES.some(role => event.target.closest(`[role=${role}]`))
+          || clickOutsideIgnoreSelectors.some(selector => selector && event.target.closest(selector))
         )
       ) {
         return;
@@ -33,7 +36,7 @@ function withClickOutside(WrappedComponent) {
       if (wrapper.current && !wrapper.current.contains(event.target)) {
         onClickOutside(event);
       }
-    }, [exceptionalClasses, onClickOutside]);
+    }, [exceptionalClasses, onClickOutside, clickOutsideIgnoreSelectors]);
 
     useEffect(() => {
       window.addEventListener('mousedown', handleClickOutside, true);
