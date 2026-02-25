@@ -78,68 +78,68 @@ const PageActions = ({
       <div className="pageCounter p-relative d-flex">
         {`${order}`}
       </div>
-      <div className="floatingController forPageAction">
-        <div className="floatingController-container hasGroup">
+      <div className="floatingController page-toolbar">
+        <div className="floatingController-container">
           <button
             key="Slide Settings"
-            className="controllerItem pageSettingSideBtn js-pageSetting"
+            className="controllerItem"
             onClick={pageSettings}
             title={PAGE_SETTINGS}
             type="button"
           >
-            <icons.pageSettings className="jfReportSVG icon-pageSettings" />
+            <icons.pageSettings className="toolbar-icon" />
           </button>
           <button
             key="Duplicate Page"
-            className="controllerItem js-duplicatePage"
+            className="controllerItem"
             disabled={disableInteraction.indexOf('duplicate') > -1}
             onClick={onPageDuplicateClick}
             title={DUPLICATE_PAGE}
             type="button"
           >
-            <icons.duplicate className="jfReportSVG icon-duplicateLine" />
+            <icons.duplicate className="toolbar-icon" />
           </button>
           <button
             key="Remove Slide"
-            className="controllerItem isDanger js-removePage"
+            className="controllerItem error"
             disabled={disableInteraction.indexOf('remove') > -1}
             onClick={onPageRemoveClick}
             title={REMOVE_PAGE}
             type="button"
           >
-            <icons.trash className="jfReportSVG icon-trashLine" />
+            <icons.trash className="toolbar-icon" />
           </button>
         </div>
-        <div className="floatingController-container hasGroup">
+        <div className="floatingController-container">
           <button
             key="Move Page Upwards"
-            className={`js-changeOrderUp controllerItem${order === 1 ? ' disabled' : ''}`}
+            className={`controllerItem${order === 1 ? ' disabled' : ''}`}
             onClick={changeOrder(-1)}
             title={MOVE_PAGE_UPWARDS}
             type="button"
           >
-            <icons.arrowUp className="jfReportSVG icon-arrow isTick" />
+            <icons.angleUp className="toolbar-icon" />
           </button>
           <button
             key="Move Page Downwards"
-            className={`js-changeOrderDown controllerItem${order === pageCount ? ' disabled' : ''}`}
+            className={`controllerItem${order === pageCount ? ' disabled' : ''}`}
             onClick={changeOrder(1)}
             title={MOVE_PAGE_DOWNWARDS}
             type="button"
           >
-            <icons.arrowDown className="jfReportSVG icon-arrow isTick" />
+            <icons.angleDown className="toolbar-icon" />
           </button>
         </div>
         <div className="floatingController-container">
           <button
             key="Add Slide"
-            className="js-addNewPage controllerItem"
+            className="controllerItem primary"
             disabled={disableInteraction.indexOf('add') > -1}
             onClick={onPageAddClick}
             title={ADD_NEW_PAGE}
             type="button"
           >
-            <icons.plus className="jfReportSVG icon-plus" />
+            <icons.plus className="toolbar-icon" />
           </button>
         </div>
       </div>
