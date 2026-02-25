@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [3.4.5](https://github.com/jotform/dnd-builder/compare/v3.4.4...v3.4.5) (2026-02-25)
+
+
+### Bug Fixes
+
+* **dnd-builder:** add ignore events to enhance keyboard event suppression ([392f035](https://github.com/jotform/dnd-builder/commit/392f035865630478f26fdc45660553b7fd075aff))
+
 ## [3.4.4](https://github.com/jotform/dnd-builder/compare/v3.4.3...v3.4.4) (2026-02-25)
 
 
