@@ -4,7 +4,7 @@ import { useBuilderStore } from '../contexts/BuilderContext';
 import { usePropStore } from '../contexts/PropContext';
 import { findItemById, getDimensions, getMostVisiblePage } from './functions';
 import { useEventListener, useSelectedElements } from './hooks';
-import { EVENT_IGNORED_ROLES } from '../constants/eventIgnoredRoles';
+import { EVENT_IGNORED_FIELDS, EVENT_IGNORED_ROLES } from '../constants/eventIgnoredRoles';
 import generateId from './generateId';
 
 const useKeyboardActions = () => {
@@ -71,6 +71,7 @@ const useKeyboardActions = () => {
   const onItemRemoveFromPage = e => {
     // Firefox updates browser history on backspace
     e.preventDefault();
+    if (isRightPanelOpen) return;
     if (isMultipleItemSelected) return;
     if (foundItem.isLocked) {
       return false;
@@ -179,6 +180,7 @@ const useKeyboardActions = () => {
 
   const shouldSuppressKeyboardEvent = e => (
     EVENT_IGNORED_ROLES.some(role => e.target.closest(`[role=${role}]`))
+    || EVENT_IGNORED_FIELDS.some(field => e.target.closest(field))
   );
 
   const handleKeyboardEvent = e => {
