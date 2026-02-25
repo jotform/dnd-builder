@@ -88,7 +88,7 @@ const DraggableItemLayer = ({
       cursor: 'grabbing',
       height,
       left: x,
-      outlineColor: '#4277ff',
+      outlineColor: '#0099FF',
       pointerEvents: 'none',
       position: 'fixed',
       top: y,

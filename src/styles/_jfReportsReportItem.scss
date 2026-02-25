@@ -74,17 +74,16 @@
       content: "";
       position: absolute;
       display: block;
-      background-color: #ddefff;
-      border: 1px solid $blue;
+      background-color: #FFFFFF;
+      border: 3px solid #0099FF;
       transition: .3s ease-in-out;
     }
 
     &:not(.forLine):after {
-      left: 2px;
-      top: 2px;
-      right: 2px;
-      bottom: 2px;
-      border-radius: 2px;
+      inset: 2px;
+      width: 3px;
+      height: 3px;
+      border-radius: 3px;
     }
 
     &.forLine {
@@ -93,26 +92,28 @@
       }
       &:not(.isVertical) {
         &:after {
-          top: 1px;
+          top: -0.5px;
           bottom: 1px;
-          left: calc(50% - 10px);
-          width: 18px;
+          left: calc(50% - 6px);
+          width: 8px;
+          height: 4px;
         }
       }
 
       &.isVertical {
         &:after {
-          top: calc(50% - 10px);
-          left: 1px;
-          right: 1px;
-          height: 18px;
+          top: calc(50% - 6px);
+          left: -0.5px;
+          right: -0.5px;
+          height: 8px;
+          width: 4px;
         }
       }
     }
 
     &:hover {
       &:after {
-        background-color: #B4DCFF;
+        background-color: #FFFFFF;
       }
     }
   }
@@ -123,7 +124,7 @@
     top: -50px;
     padding: 5px;
     background-color: #ddefff;
-    border: 1px solid $blue;
+    border: 2px solid #0099FF;
     border-radius: 50%;
 
     &:before {
@@ -148,8 +149,7 @@
   }
 
   .reportItemResizer {
-    border: 1px solid $blue;
-    box-shadow: 0 0 0 3px rgba(106, 110, 143, 0.15);
+    border: 3px solid #0099FF;
     border-radius: 3px;
 
     &.hideVerticalHandle {
@@ -216,56 +216,82 @@
 }
 
 .jfReport {
-  .reportItemMenu {
+  .report-item-toolbar {
     position: absolute;
-    top: 0;
+    top: 50%;
+    transform: translateY(-50%);
     right: -24px;
-    background-color: $blue;
-    border-radius: 4px;
+    background-color: #FFFFFF;
+    padding: 4px;
+    border-radius: 3px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     text-align: center;
     pointer-events: all;
+    z-index: 2;
     animation: .2s fadeRight forwards;
+    gap: 4px;
+    box-shadow: 0 4px 8px 0 rgba(84, 95, 111, 0.15), 0 0 2px 0 rgba(37, 45, 91, 0.1);
 
     &-item {
-      display: inline-block;
-      padding: 6px 5px;
-      background-color: transparent;
+      max-width: 24px;
+      max-height: 24px;
+      min-width: 24px;
+      min-height: 24px;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      padding: 4px;
+      flex-shrink: 0;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      border-radius: 4px;
+      background-color: #F9F9FF;
+      transition: $transition;
 
-      svg {
-        width: 14px;
-        height: 14px;
-        backface-visibility: hidden;
-        transition: .3s ease-in-out;
-        transform: translateZ(0);
+      .toolbar-icon {
+        width: 16px;
+        height: 16px;
+        color: #0A1551;
+        fill: #0A1551;
+        transition: $transition;
+      }
+
+      &:where(:hover) {
+        background-color: #E3E5F5;
+        transition: $transition;
+      }
+
+      &:hover.primary {
+        background-color: #EDF8FF;
+
+        .toolbar-icon {
+          color: #0075E3;
+          fill: #0075E3;
+        }
+      }
+
+      &:hover.error {
+        background-color: #FEF2F2;
+
+        .toolbar-icon {
+          color: #DC2626;
+          fill: #DC2626;
+        }
       }
     }
 
-    &:not(.forLocked) {
-      padding: 0 4px;
-      .reportItemMenu-item {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 20px;
-        height: 20px;
-        padding: 0;
-        border-radius: 3px;
-        transition: 0.3s ease-in;
+    &.isLocked.forLocked {
+      background-color: #C8CEED;
 
-        + .reportItemMenu-item {
-          margin-top: 4px;
-        }
-
-        &:first-child {
-          margin-top: 4px;
-        }
-
-        &:last-child {
-          margin-bottom: 4px;
-        }
+      .report-item-toolbar-item {
+        background-color: #C8CEED;
 
         &:hover {
-          background-color: rgba(255, 255, 255, 0.2);
+          background-color: #E3E5F5;
         }
       }
     }
@@ -277,7 +303,7 @@
       opacity: 0;
     }
     100% {
-      right: -35px;
+      right: -38px;
       opacity: 1;
     }
   }

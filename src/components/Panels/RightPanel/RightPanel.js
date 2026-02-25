@@ -21,7 +21,15 @@ import Settings from './Settings';
 import RightPanelToggler from './RightPanelToggler';
 
 const exceptionalClasses = [
-  'pageSettingSideBtn', 'paneClose', 'paneToggler', 'forZoom', 'jSheetContextMenu',
+  'pageSettingSideBtn',
+  'paneClose',
+  'paneToggler',
+  'forZoom',
+  'jSheetContextMenu',
+  'page-toolbar',
+  'report-item-toolbar',
+  'zoom-toolbar',
+  'controllerItem',
 ];
 
 const RightPanel = () => {

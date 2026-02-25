@@ -60,54 +60,50 @@ const DraggableItemActions = () => {
 
   if (isLocked) {
     return (
-      <div className="reportItemMenu d-flex dir-col a-center forLocked">
+      <div className="report-item-toolbar isLocked forLocked">
         <button
-          className="reportItemMenu-item js-locked"
+          className="report-item-toolbar-item"
           onClick={changeLockStatus}
           type="button"
         >
-          <icons.lock
-            className="jfReportSVG icon-lock isWhite"
-          />
+          <icons.lock className="toolbar-icon" />
         </button>
       </div>
     );
   }
   return (
-    <div className="reportItemMenu d-flex dir-col a-center">
+    <div className="report-item-toolbar">
       <button
-        className="reportItemMenu-item js-itemSettings"
+        className="report-item-toolbar-item"
         onClick={openSettings}
         title={ITEM_SETTINGS}
         type="button"
       >
-        <icons.settings className="jfReportSVG icon-settings isWhite" />
+        <icons.settings className="toolbar-icon" />
       </button>
       <button
-        className="reportItemMenu-item js-duplicateItem"
+        className="report-item-toolbar-item"
         onClick={duplicateItem}
         title={DUPLICATE_ITEM}
         type="button"
       >
-        <icons.duplicate className="jfReportSVG icon-duplicate isWhite" />
+        <icons.duplicate className="toolbar-icon" />
       </button>
       <button
-        className="reportItemMenu-item js-lockItem"
+        className="report-item-toolbar-item"
         onClick={changeLockStatus}
         title={LOCK_ITEM}
         type="button"
       >
-        <icons.unlock
-          className="jfReportSVG icon-lock isWhite"
-        />
+        <icons.unlock className="toolbar-icon" />
       </button>
       <button
-        className="reportItemMenu-item js-deleteItem"
+        className="report-item-toolbar-item error"
         onClick={deleteItem}
         title={DELETE_ITEM}
         type="button"
       >
-        <icons.trash className="jfReportSVG icon-trash isWhite" />
+        <icons.trash className="toolbar-icon" />
       </button>
     </div>
   );

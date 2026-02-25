@@ -244,6 +244,7 @@
     align-items: flex-start;
     justify-content: flex-start;
     transition: $transition;
+    border-radius: 3px;
 
     .floatingController-container {
       display: flex;
@@ -252,6 +253,11 @@
       justify-content: center;
       align-items: center;
       gap: 4px;
+      box-shadow: 0 4px 8px 0 rgba(84, 95, 111, 0.15), 0 0 2px 0 rgba(37, 45, 91, 0.1);
+    }
+
+    :where(.floatingController-container + .floatingController-container) {
+      margin-top: 0;
     }
 
     .controllerItem {

@@ -153,43 +153,40 @@
 
 
 .contextMenu-wrapper {
-  border-radius: 3px;
-  background: #fff;
-  color: #fff;
-  display: block;
+  display: flex;
+  padding: 4px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
   position: absolute;
   width: 225px;
   z-index: 10;
-  box-shadow: 0 0 8px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  background: #252D5B;
+  color: #FFFFFF;
 }
 
 .contextMenu-button {
-  transition: .2s ease-in-out;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: flex-start;
   background: none;
   border: none;
-  height: 45px;
+  height: 40px;
   width: 100%;
   font-size: 0.875rem;
-  padding-left: 14px;
+  padding: 0 8px;
   text-align: left;
+  color: #FFFFFF;
+  transition: .2s ease-in-out;
 
   .contextMenu-icon {
+    color: #FFFFFF;
     margin-right: 9px;
-    width: 15px;
-    height: 14px;
-
-    .icon-lock {
-      width: 16px;
-      height: 14px;
-      fill: $blue;
-      stroke: $blue;
-
-      > path { fill: $blue; }
-    }
+    width: 16px;
+    height: 16px;
+    fill: #FFFFFF;
   }
 
   .contextMenu-text {
@@ -200,20 +197,16 @@
   }
 
   &:hover {
-    background: #f0f0f0;
+    background-color: #454E80;
+    transition: all 0.3s ease;
   }
 }
 
 .contextMenu-button.isDanger {
+  color: #DC2626;
 
   .contextMenu-icon {
-    svg {
-      width: 16px;
-      height: 16px;
-    }
+    color: #DC2626;
+    fill: #DC2626;
   }
-}
-
-.contextMenu-button + .contextMenu-button {
-  border-top: 1px solid #F0F0F0;
 }

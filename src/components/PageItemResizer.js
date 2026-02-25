@@ -30,7 +30,7 @@ const enableResize = {
 const lockAspectRatioTypes = ['image', 'icon'];
 const exceptionalClasses = [
   'reportHandle',
-  'reportItemMenu',
+  'report-item-toolbar',
   'jfReport-pane',
   'pageSettingSideBtn',
   'reportItemWrapper',
