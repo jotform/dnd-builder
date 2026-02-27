@@ -42,7 +42,7 @@ const RightPanel = () => {
   const setActiveTab = useBuilderStore(state => state.setActiveTab);
   const setIsRightPanelOpen = useBuilderStore(state => state.setIsRightPanelOpen);
   const clickOutsideIgnoreSelectors = useBuilderStore(state => state.clickOutsideIgnoreSelectors);
-  const [selectedItemId, setSelectedItemID] = useState(null);
+  const [selectedItemID, setSelectedItemID] = useState(null);
 
   const acceptedItems = usePropStore(state => state.acceptedItems);
   const layoutSettings = usePropStore(state => state.settings);
@@ -146,7 +146,7 @@ const RightPanel = () => {
   }, [editedEl, editedElement, settingMap.l_]);
 
   useEffect(() => {
-    if (selectedItemId !== selectedItem.id) {
+    if (selectedItemID !== selectedItem.id) {
       setSelectedItemID(prev => {
         if (prev) {
           setActiveTab('right', 0);
@@ -154,7 +154,7 @@ const RightPanel = () => {
         return selectedItem.id;
       });
     }
-  }, [selectedItem, selectedItemId, setActiveTab]);
+  }, [selectedItem, selectedItemID, setActiveTab]);
 
   // Tabs
   const tabsWithSettings = getTabsWithSettings(element, selectedItem, itemAccessor);
