@@ -3,6 +3,7 @@ import {
   useEffect,
   useMemo,
   useRef,
+  useState,
 } from 'react';
 import classNames from 'classnames';
 import Panel from '../../Builder/Panel';
@@ -41,6 +42,7 @@ const RightPanel = () => {
   const setActiveTab = useBuilderStore(state => state.setActiveTab);
   const setIsRightPanelOpen = useBuilderStore(state => state.setIsRightPanelOpen);
   const clickOutsideIgnoreSelectors = useBuilderStore(state => state.clickOutsideIgnoreSelectors);
+  const [selectedItemId, setSelectedItemID] = useState(null);
 
   const acceptedItems = usePropStore(state => state.acceptedItems);
   const layoutSettings = usePropStore(state => state.settings);
@@ -142,6 +144,17 @@ const RightPanel = () => {
       updateFunc: editedEl.updater,
     };
   }, [editedEl, editedElement, settingMap.l_]);
+
+  useEffect(() => {
+    if (selectedItemId !== selectedItem.id) {
+      setSelectedItemID(prev => {
+        if (prev) {
+          setActiveTab('right', 0);
+        }
+        return selectedItem.id;
+      });
+    }
+  }, [selectedItem, selectedItemId, setActiveTab]);
 
   // Tabs
   const tabsWithSettings = getTabsWithSettings(element, selectedItem, itemAccessor);
