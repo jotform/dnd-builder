@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [3.4.8](https://github.com/jotform/dnd-builder/compare/v3.4.6...v3.4.8) (2026-03-03)
+
+
+### Bug Fixes
+
+* **dnd-builder:** add page visibility handling to BuilderWrapper ([9e11ea5](https://github.com/jotform/dnd-builder/commit/9e11ea5451778c07209042651d18c954b79d40ca))
+* **dnd-builder:** reset right panel tab when different element selected ([23d8b20](https://github.com/jotform/dnd-builder/commit/23d8b20cb5542e4fce8496a4dca66a2646a82b0b))
+* **dnd-builder:** typo fix ([bd91cb8](https://github.com/jotform/dnd-builder/commit/bd91cb89373f7fd1acd06f2fbbfb8011cae9ecfb))
+
 ## [3.4.7](https://github.com/jotform/dnd-builder/compare/v3.4.6...v3.4.7) (2026-03-03)
 
 
