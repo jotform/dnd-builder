@@ -1,10 +1,12 @@
-import { useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import isEqual from 'lodash.isequal';
 import ReportWrapper from '../ReportWrapper';
 import { usePropStore } from '../../contexts/PropContext';
 import { useBuilderStore } from '../../contexts/BuilderContext';
-import { useFitZoom, usePrevious, useSelectedElements } from '../../utils/hooks';
+import {
+  useFitZoom, usePageVisibility, usePrevious, useSelectedElements,
+} from '../../utils/hooks';
 
 const BuilderWrapper = ({ children }) => {
   const decidedWhichPanelToOpen = useRef(false);
@@ -16,6 +18,7 @@ const BuilderWrapper = ({ children }) => {
   const setIsSlidesPanelOpen = useBuilderStore(state => state.setIsSlidesPanelOpen);
   const shouldShowRightPanelInitially = useBuilderStore(state => state.shouldShowRightPanelInitially);
   const onSelectedItemsChanged = usePropStore(state => state.onSelectedItemsChanged);
+  const onPageVisibilityChanged = usePropStore(state => state.onPageVisibilityChanged);
   const selectedItems = useSelectedElements();
   const prevSelectedItems = usePrevious(selectedItems);
 
@@ -28,6 +31,16 @@ const BuilderWrapper = ({ children }) => {
     onSelectedItemsChanged,
     prevSelectedItems,
   ]);
+
+  const handlePageVisibility = useCallback(index => {
+    if (index && !Number.isNaN(index)) {
+      onPageVisibilityChanged(index);
+    }
+  }, [onPageVisibilityChanged]);
+
+  // for initial page visibility check and slides panel visibility usage
+  const selectedPageIndexReference = isSlidesPanelOpen ? 0 : -1;
+  usePageVisibility(handlePageVisibility, pageCount, selectedPageIndexReference);
 
   useFitZoom();
 
