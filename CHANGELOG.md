@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [3.4.9](https://github.com/jotform/dnd-builder/compare/v3.4.8...v3.4.9) (2026-03-03)
+
 ## [3.4.8](https://github.com/jotform/dnd-builder/compare/v3.4.6...v3.4.8) (2026-03-03)
 
 
