@@ -22,6 +22,8 @@ const useKeyboardActions = () => {
   const onItemRemove = usePropStore(state => state.onItemRemove);
   const onItemChange = usePropStore(state => state.onItemChange);
   const onAnEventTrigger = usePropStore(state => state.onAnEventTrigger);
+  const redo = usePropStore(state => state.redo);
+  const undo = usePropStore(state => state.undo);
 
   const isMultipleItemSelected = activeElements.length > 1;
 
@@ -104,6 +106,26 @@ const useKeyboardActions = () => {
     setItemToPaste(item);
   };
 
+  const handleUndoRedo = (event, key, shiftKey) => {
+    if (key === 'z' && !shiftKey) {
+      event.preventDefault();
+      if (undo()) {
+        onAnEventTrigger('undo');
+        resetActiveElements();
+      }
+      return true;
+    }
+    if (key === 'y' || (key === 'z' && shiftKey)) {
+      event.preventDefault();
+      if (redo()) {
+        onAnEventTrigger('redo');
+        resetActiveElements();
+      }
+      return true;
+    }
+    return false;
+  };
+
   const keyboardActions = event => {
     const {
       key,
@@ -112,6 +134,9 @@ const useKeyboardActions = () => {
     } = event;
 
     if (metaKey) {
+      // Handle undo/redo first
+      if (handleUndoRedo(event, key, shiftKey)) return;
+
       if (key === 'l') {
         // Lock
         if (isMultipleItemSelected) return;
