@@ -98,7 +98,7 @@ jobs:
             -H "x-api-key: $ANTHROPIC_API_KEY" \
             -H "anthropic-version: 2023-06-01" \
             -d "{
-              \"model\": \"claude-sonnet-4-20250514\",
+              \"model\": \"claude-opus-4-20250514\",
               \"max_tokens\": 2048,
               \"messages\": [{
                 \"role\": \"user\",
@@ -152,7 +152,7 @@ jobs:
             -H "x-api-key: $ANTHROPIC_API_KEY" \
             -H "anthropic-version: 2023-06-01" \
             -d "{
-              \"model\": \"claude-sonnet-4-20250514\",
+              \"model\": \"claude-opus-4-20250514\",
               \"max_tokens\": 2048,
               \"messages\": [{
                 \"role\": \"user\",
@@ -205,7 +205,7 @@ jobs:
             -H "x-api-key: $ANTHROPIC_API_KEY" \
             -H "anthropic-version: 2023-06-01" \
             -d "{
-              \"model\": \"claude-sonnet-4-20250514\",
+              \"model\": \"claude-opus-4-20250514\",
               \"max_tokens\": 2048,
               \"messages\": [{
                 \"role\": \"user\",
@@ -248,7 +248,7 @@ jobs:
           
           ---
           
-          _Powered by Claude Sonnet 4_
+          _Powered by Claude Opus 4_
           SUMMARY
 
       - name: Post PR Comment
