@@ -1,6 +1,6 @@
 # AI Agent Workflow
 
-Bu proje, Claude Sonnet 4 AI kullanarak otomatik kod review yapar.
+Bu proje, Claude Opus 4 AI kullanarak otomatik kod review yapar.
 
 ## Nasıl Çalışır?
 
