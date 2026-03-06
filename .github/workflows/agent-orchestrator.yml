@@ -1,0 +1,286 @@
+name: AI Agent Orchestrator
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+  issue_comment:
+    types: [created]
+  workflow_dispatch:
+    inputs:
+      pr_number:
+        description: 'PR number to analyze'
+        required: false
+        type: string
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+
+env:
+  ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+
+jobs:
+  # Trigger check - only run on PR events or when manually triggered
+  should-run:
+    runs-on: ubuntu-latest
+    outputs:
+      should_run: ${{ steps.check.outputs.should_run }}
+      pr_number: ${{ steps.check.outputs.pr_number }}
+    steps:
+      - name: Check trigger conditions
+        id: check
+        run: |
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            echo "should_run=true" >> $GITHUB_OUTPUT
+            echo "pr_number=${{ github.event.pull_request.number }}" >> $GITHUB_OUTPUT
+          elif [[ "${{ github.event_name }}" == "workflow_dispatch" && -n "${{ inputs.pr_number }}" ]]; then
+            echo "should_run=true" >> $GITHUB_OUTPUT
+            echo "pr_number=${{ inputs.pr_number }}" >> $GITHUB_OUTPUT
+          elif [[ "${{ github.event_name }}" == "issue_comment" ]]; then
+            if [[ "${{ github.event.comment.body }}" == *"@ai-review"* ]]; then
+              echo "should_run=true" >> $GITHUB_OUTPUT
+              echo "pr_number=${{ github.event.issue.number }}" >> $GITHUB_OUTPUT
+            else
+              echo "should_run=false" >> $GITHUB_OUTPUT
+            fi
+          else
+            echo "should_run=false" >> $GITHUB_OUTPUT
+          fi
+
+  # Code Review Agent
+  code-review-agent:
+    needs: should-run
+    if: needs.should-run.outputs.should_run == 'true'
+    runs-on: ubuntu-latest
+    outputs:
+      review_result: ${{ steps.review.outputs.result }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Get changed files
+        id: changed
+        run: |
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            FILES=$(git diff --name-only origin/${{ github.base_ref }}...HEAD | grep -E '\.(js|jsx|ts|tsx)$' | head -20 || echo "")
+          else
+            FILES=$(git diff --name-only HEAD~1 | grep -E '\.(js|jsx|ts|tsx)$' | head -20 || echo "")
+          fi
+          echo "files=$FILES" >> $GITHUB_OUTPUT
+
+      - name: Run Code Review Agent
+        id: review
+        if: steps.changed.outputs.files != ''
+        run: |
+          # Prepare file contents
+          CONTENTS=""
+          for file in ${{ steps.changed.outputs.files }}; do
+            if [[ -f "$file" ]]; then
+              CONTENTS+="=== FILE: $file ===\n"
+              CONTENTS+=$(head -200 "$file" | sed 's/"/\\"/g' | sed ':a;N;$!ba;s/\n/\\n/g')
+              CONTENTS+="\n\n"
+            fi
+          done
+          
+          # Read prompt template
+          PROMPT=$(cat .github/agents/code-review-agent.md)
+          PROMPT="${PROMPT//\{\{FILES\}\}/${{ steps.changed.outputs.files }}}"
+          PROMPT="${PROMPT//\{\{CONTENTS\}\}/$CONTENTS}"
+          
+          # Escape for JSON
+          PROMPT=$(echo "$PROMPT" | jq -Rs .)
+          
+          # Call Claude API
+          RESPONSE=$(curl -s https://api.anthropic.com/v1/messages \
+            -H "Content-Type: application/json" \
+            -H "x-api-key: $ANTHROPIC_API_KEY" \
+            -H "anthropic-version: 2023-06-01" \
+            -d "{
+              \"model\": \"claude-sonnet-4-20250514\",
+              \"max_tokens\": 2048,
+              \"messages\": [{
+                \"role\": \"user\",
+                \"content\": $PROMPT
+              }]
+            }")
+          
+          # Extract content
+          RESULT=$(echo "$RESPONSE" | jq -r '.content[0].text // "No response"')
+          echo "result<<EOF" >> $GITHUB_OUTPUT
+          echo "$RESULT" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+        continue-on-error: true
+
+  # Testing Agent
+  testing-agent:
+    needs: should-run
+    if: needs.should-run.outputs.should_run == 'true'
+    runs-on: ubuntu-latest
+    outputs:
+      test_result: ${{ steps.test-review.outputs.result }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+
+      - name: Install dependencies
+        run: yarn --frozen-lockfile
+
+      - name: Run tests with coverage
+        id: coverage
+        run: |
+          yarn test --coverage --coverageReporters=text 2>&1 | tee coverage-output.txt || true
+          echo "coverage<<EOF" >> $GITHUB_OUTPUT
+          cat coverage-output.txt | tail -100 >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+        continue-on-error: true
+
+      - name: Run Testing Agent
+        id: test-review
+        run: |
+          PROMPT=$(cat .github/agents/testing-agent.md)
+          COVERAGE=$(cat coverage-output.txt | tail -100 | sed 's/"/\\"/g' | sed ':a;N;$!ba;s/\n/\\n/g')
+          PROMPT="${PROMPT//\{\{COVERAGE\}\}/$COVERAGE}"
+          PROMPT=$(echo "$PROMPT" | jq -Rs .)
+          
+          RESPONSE=$(curl -s https://api.anthropic.com/v1/messages \
+            -H "Content-Type: application/json" \
+            -H "x-api-key: $ANTHROPIC_API_KEY" \
+            -H "anthropic-version: 2023-06-01" \
+            -d "{
+              \"model\": \"claude-sonnet-4-20250514\",
+              \"max_tokens\": 2048,
+              \"messages\": [{
+                \"role\": \"user\",
+                \"content\": $PROMPT
+              }]
+            }")
+          
+          RESULT=$(echo "$RESPONSE" | jq -r '.content[0].text // "No response"')
+          echo "result<<EOF" >> $GITHUB_OUTPUT
+          echo "$RESULT" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+        continue-on-error: true
+
+  # Security Agent
+  security-agent:
+    needs: should-run
+    if: needs.should-run.outputs.should_run == 'true'
+    runs-on: ubuntu-latest
+    outputs:
+      security_result: ${{ steps.security.outputs.result }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+
+      - name: Install dependencies
+        run: yarn --frozen-lockfile
+
+      - name: Run npm audit
+        id: audit
+        run: |
+          npm audit --json 2>&1 | head -300 > audit-output.json || true
+          echo "audit<<EOF" >> $GITHUB_OUTPUT
+          cat audit-output.json >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+        continue-on-error: true
+
+      - name: Run Security Agent
+        id: security
+        run: |
+          PROMPT=$(cat .github/agents/security-agent.md)
+          AUDIT=$(cat audit-output.json | head -300 | sed 's/"/\\"/g' | sed ':a;N;$!ba;s/\n/\\n/g')
+          PROMPT="${PROMPT//\{\{AUDIT\}\}/$AUDIT}"
+          PROMPT=$(echo "$PROMPT" | jq -Rs .)
+          
+          RESPONSE=$(curl -s https://api.anthropic.com/v1/messages \
+            -H "Content-Type: application/json" \
+            -H "x-api-key: $ANTHROPIC_API_KEY" \
+            -H "anthropic-version: 2023-06-01" \
+            -d "{
+              \"model\": \"claude-sonnet-4-20250514\",
+              \"max_tokens\": 2048,
+              \"messages\": [{
+                \"role\": \"user\",
+                \"content\": $PROMPT
+              }]
+            }")
+          
+          RESULT=$(echo "$RESPONSE" | jq -r '.content[0].text // "No response"')
+          echo "result<<EOF" >> $GITHUB_OUTPUT
+          echo "$RESULT" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+        continue-on-error: true
+
+  # Orchestrator - Aggregate results and post comment
+  orchestrator:
+    needs: [should-run, code-review-agent, testing-agent, security-agent]
+    if: always() && needs.should-run.outputs.should_run == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Create Summary
+        id: summary
+        run: |
+          cat << 'SUMMARY' > summary.md
+          ## 🤖 AI Agent Review Summary
+          
+          ### Code Review Agent
+          ${{ needs.code-review-agent.outputs.review_result || '✅ No issues found' }}
+          
+          ---
+          
+          ### Testing Agent
+          ${{ needs.testing-agent.outputs.test_result || '✅ Tests passed' }}
+          
+          ---
+          
+          ### Security Agent
+          ${{ needs.security-agent.outputs.security_result || '✅ No vulnerabilities found' }}
+          
+          ---
+          
+          _Powered by Claude Sonnet 4_
+          SUMMARY
+
+      - name: Post PR Comment
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const summary = fs.readFileSync('summary.md', 'utf8');
+            
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+            });
+            
+            const botComment = comments.find(c => 
+              c.user.type === 'Bot' && c.body.includes('AI Agent Review Summary')
+            );
+            
+            if (botComment) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: botComment.id,
+                body: summary
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: summary
+              });
+            }
