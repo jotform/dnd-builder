@@ -75,20 +75,25 @@
       position: absolute;
       display: block;
       background-color: #FFFFFF;
-      border: 3px solid #0099FF;
+      border: 2.5px solid #0099FF;
       transition: .3s ease-in-out;
     }
 
     &:not(.forLine):after {
-      inset: 2px;
+      top: 2px;
+      left: 1.5px;
       width: 3px;
       height: 3px;
+      min-width: 3px;
+      min-height: 3px;
+      max-height: 3px;
+      max-width: 3px;
       border-radius: 3px;
     }
 
     &.forLine {
       &:after {
-        border-radius: 3px;
+        border-radius: 4px;
       }
       &:not(.isVertical) {
         &:after {
@@ -97,16 +102,24 @@
           left: calc(50% - 6px);
           width: 8px;
           height: 4px;
+          max-width: 8px;
+          min-width: 8px;
+          min-height: 4px;
+          max-height: 4px;
         }
       }
 
       &.isVertical {
         &:after {
           top: calc(50% - 6px);
-          left: -0.5px;
-          right: -0.5px;
+          left: -1px;
+          right: 1px;
           height: 8px;
           width: 4px;
+          min-width: 4px;
+          max-width: 4px;
+          min-height: 8px;
+          max-height: 8px;
         }
       }
     }
@@ -151,6 +164,7 @@
   .reportItemResizer {
     border: 3px solid #0099FF;
     border-radius: 3px;
+    transition: all .3s;
 
     &.hideVerticalHandle {
       .forLine.isVertical:after {
@@ -161,6 +175,14 @@
     &.hideHorizontalHandle {
       .forLine:not(.isVertical):after {
         opacity: 0;
+      }
+    }
+
+    &-wrapper {
+      &:hover {
+        .reportItemResizer {
+          border: 3px solid #0099FF;
+        }
       }
     }
   }
@@ -218,22 +240,33 @@
 .jfReport {
   .report-item-toolbar {
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    right: -24px;
     background-color: #FFFFFF;
     padding: 4px;
     border-radius: 3px;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
     pointer-events: all;
     z-index: 2;
-    animation: .2s fadeRight forwards;
     gap: 4px;
     box-shadow: 0 4px 8px 0 rgba(84, 95, 111, 0.15), 0 0 2px 0 rgba(37, 45, 91, 0.1);
+
+    &.right-align {
+      flex-direction: column;
+      top: 50%;
+      transform: translateY(-50%);
+      right: -24px;
+      animation: .2s fadeRight forwards;
+    }
+
+    &.top-align {
+      flex-direction: row;
+      top: calc(100% + 8px);
+      transform: translateX(50%);
+      right: 50% !important;
+      animation: .2s fadeTop forwards;
+    }
 
     &-item {
       max-width: 24px;
@@ -304,6 +337,17 @@
     }
     100% {
       right: -38px;
+      opacity: 1;
+    }
+  }
+
+  @keyframes fadeTop {
+    0% {
+      top: -24px;
+      opacity: 0;
+    }
+    100% {
+      top: -38px;
       opacity: 1;
     }
   }

@@ -24,7 +24,10 @@ const DraggableItemActions = () => {
   const selectedElements = useSelectedElements();
   const item = selectedElements[0]; // ACTIONS WORKS ONLY FOR ONE ITEM
 
-  const { isLocked } = item;
+  const { isLocked, itemType } = item;
+
+  const reportItemToolbarPosition = usePropStore(state => state.reportItemToolbarPosition);
+  const toolbarPosition = reportItemToolbarPosition?.toolbarPositionByItemType?.[itemType] || 'right-align';
 
   const changeLockStatus = () => {
     onAnEventTrigger(isLocked ? 'unlockReportItem' : 'lockReportItem', item.itemType);
@@ -60,7 +63,7 @@ const DraggableItemActions = () => {
 
   if (isLocked) {
     return (
-      <div className="report-item-toolbar isLocked forLocked">
+      <div className={`report-item-toolbar isLocked forLocked ${toolbarPosition}`}>
         <button
           className="report-item-toolbar-item"
           onClick={changeLockStatus}
@@ -72,7 +75,7 @@ const DraggableItemActions = () => {
     );
   }
   return (
-    <div className="report-item-toolbar">
+    <div className={`report-item-toolbar ${toolbarPosition}`}>
       <button
         className="report-item-toolbar-item"
         onClick={openSettings}
