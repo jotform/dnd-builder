@@ -204,6 +204,12 @@
     right: -40px;
     gap: 4px;
 
+    &.disabled {
+      opacity: 0.25;
+      pointer-events: none;
+      cursor: not-allowed;
+    }
+
     .controllerItem {
       max-width: 24px;
       max-height: 24px;

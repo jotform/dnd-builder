@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
+import { useMemo } from 'react';
 import * as icons from '../../utils/icons';
 import { moveItemInArrayFromIndexToIndex, scrollToTarget } from '../../utils/functions';
-import { useTranslatedTexts } from '../../utils/hooks';
+import { useSelectedElements, useTranslatedTexts } from '../../utils/hooks';
 import { useBuilderStore } from '../../contexts/BuilderContext';
 import { usePropStore } from '../../contexts/PropContext';
 
@@ -20,6 +21,9 @@ const PageActions = ({
 
   const setIsRightPanelOpen = useBuilderStore(state => state.setIsRightPanelOpen);
   const setEditedElement = useBuilderStore(state => state.setEditedElement);
+
+  const selectedItems = useSelectedElements();
+  const isSelectedItemExists = useMemo(() => selectedItems?.length > 0, [selectedItems]);
 
   const pageSettings = () => {
     setEditedElement(`p_${pageID}`);
@@ -78,7 +82,7 @@ const PageActions = ({
       <div className="pageCounter p-relative d-flex">
         {`${order}`}
       </div>
-      <div className="floatingController page-toolbar">
+      <div className={`floatingController page-toolbar${isSelectedItemExists ? ' disabled' : ''}`}>
         <div className="floatingController-container">
           <button
             key="Slide Settings"
