@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [3.5.2](https://github.com/jotform/dnd-builder/compare/v3.5.1...v3.5.2) (2026-03-11)
+
+
+### Bug Fixes
+
+* **dnd-builder:** enhance page actions and draggable item toolbar positioning ([f61d1e0](https://github.com/jotform/dnd-builder/commit/f61d1e0deb3c534c81420fdff26b73705afe3312))
+
 ## [3.5.1](https://github.com/jotform/dnd-builder/compare/v3.4.6...v3.5.1) (2026-03-03)
 
 
