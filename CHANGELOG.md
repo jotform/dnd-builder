@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [3.5.3](https://github.com/jotform/dnd-builder/compare/v3.5.2...v3.5.3) (2026-03-26)
+
+
+### Features
+
+* add data-id attribute for pages and elements ([ede180e](https://github.com/jotform/dnd-builder/commit/ede180e5d38462062b9b694f36d0039bd5e227d5))
+
 ## [3.5.2](https://github.com/jotform/dnd-builder/compare/v3.5.1...v3.5.2) (2026-03-11)
 
 
