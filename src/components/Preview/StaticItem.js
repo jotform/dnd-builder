@@ -23,6 +23,7 @@ const StaticItem = ({
   } = item;
   return (
     <ItemPositioner
+      dataItemId={item.id}
       style={{
         ...getStyles(left, top, false),
         height,

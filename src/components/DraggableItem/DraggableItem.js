@@ -264,6 +264,7 @@ const DraggableItemContent = ({
   return (
     <ItemPositioner
       classNames={`reportItemWrapper${isSelected ? ' isSelected' : ''}`}
+      dataItemId={id}
       style={{
         ...getStyles(left, top, isDragging),
         height: stateHeight,
