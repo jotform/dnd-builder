@@ -1,0 +1,134 @@
+.slides-navigator {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: start;
+  min-width: 192px;
+  max-width: 192px;
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+  gap: 12px;
+  background: #E7E9F9;
+  z-index: 1000;
+  border-top: 1px solid #D8DAE9;
+
+  &-toggle {
+    width: 40px;
+    height: 40px;
+    background: #FFFFFF;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px 0 rgba(84, 95, 111, 0.16), 0 0 2px 0 rgba(37, 45, 91, 0.04);
+    &:hover {
+      background: #F5F5F5;
+    }
+  }
+
+  &-add-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 .5rem;
+    width: 100%;
+    height: 100%;
+    max-height: 32px;
+    border-radius: 4px;
+    border: 1px solid #C8CEED;
+    background: #E7E9F9;
+    transition: all 0.3s ease;
+    color: #343C6A;
+    cursor: pointer;
+
+    &:hover {
+      border-color: #979dc6;
+      transition: all 0.3s ease;
+    }
+
+    &-icon {
+      width: 1rem;
+      height: 1rem;
+      color: #343C6A;
+    }
+
+    &-text {
+      color: #343C6A;
+      text-align: center;
+      font-size: .75rem;
+      font-weight: 500;
+      line-height: 16px;
+      padding: 0 4px;
+    }
+  }
+
+  &-item-list {
+    display: flex;
+    align-items: start;
+    justify-content: start;
+    flex-direction: column;
+    width: 100%;
+    gap: 8px;
+  }
+
+  &-item {
+    $self: &;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+    width: 100%;
+    height: 100%;
+    padding: .25rem;
+    gap: 8px;
+    max-height: 98.5px;
+    min-height: 98.5px;
+    margin-bottom: .5rem;
+
+    &-order {
+      max-width: 1rem;
+      min-width: 1rem;
+      max-height: 1.25rem;
+      min-height: 1.25rem;
+      width: 100%;
+      height: 100%;
+      background: transparent;
+      color: #6C73A8;
+      font-size: .875rem;
+      font-weight: 400;
+      line-height: 20px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    &-content {
+      overflow: hidden;
+      width: 100%;
+      height: 100%;
+      background: #FFFFFF;
+      border: 1px solid #FFFFFF;
+      border-radius: 4px;
+    }
+
+    &.selected {
+      #{$self}-order {
+        color: #0075E3;
+      }
+
+      #{$self}-content {
+        outline: 2px solid #0075E3;
+        transition: all 0.3s ease;
+      }
+    }
+  }
+}
+
+.slidesNavigatorIsActive {
+  .floatingController.slides-navigator-toggle {
+    .controllerItem {
+      background: #E3E5F5;
+    }
+  }
+}

@@ -7,6 +7,8 @@ import { useBuilderStore } from '../../contexts/BuilderContext';
 import {
   useFitZoom, usePageVisibility, usePrevious, useSelectedElements,
 } from '../../utils/hooks';
+import SlidesNavigator from '../Panels/SlidesNavigator/SlidesNavigator';
+import { SLIDES_LIST_TYPE_MAP } from '../../constants/panel';
 
 const BuilderWrapper = ({ children }) => {
   const decidedWhichPanelToOpen = useRef(false);
@@ -14,11 +16,15 @@ const BuilderWrapper = ({ children }) => {
   const pageCount = usePropStore(state => state.pages.length);
   const isLeftPanelOpen = useBuilderStore(state => state.isLeftPanelOpen);
   const isSlidesPanelOpen = useBuilderStore(state => state.isSlidesPanelOpen);
+  const isSlidesNavigatorOpen = useBuilderStore(state => state.isSlidesNavigatorOpen);
   const setIsLeftPanelOpen = useBuilderStore(state => state.setIsLeftPanelOpen);
   const setIsSlidesPanelOpen = useBuilderStore(state => state.setIsSlidesPanelOpen);
+  const setIsSlidesNavigatorOpen = useBuilderStore(state => state.setIsSlidesNavigatorOpen);
   const shouldShowRightPanelInitially = useBuilderStore(state => state.shouldShowRightPanelInitially);
   const onSelectedItemsChanged = usePropStore(state => state.onSelectedItemsChanged);
   const onPageVisibilityChanged = usePropStore(state => state.onPageVisibilityChanged);
+  const setVisiblePageOrder = useBuilderStore(state => state.setVisiblePageOrder);
+  const slidesListType = useBuilderStore(state => state.slidesListType);
   const selectedItems = useSelectedElements();
   const prevSelectedItems = usePrevious(selectedItems);
 
@@ -34,15 +40,22 @@ const BuilderWrapper = ({ children }) => {
 
   const handlePageVisibility = useCallback(index => {
     if (index && !Number.isNaN(index)) {
+      setVisiblePageOrder(index);
       onPageVisibilityChanged(index);
     }
-  }, [onPageVisibilityChanged]);
+  }, [setVisiblePageOrder, onPageVisibilityChanged]);
 
   // for initial page visibility check and slides panel visibility usage
   const selectedPageIndexReference = isSlidesPanelOpen ? 0 : -1;
   usePageVisibility(handlePageVisibility, pageCount, selectedPageIndexReference);
 
   useFitZoom();
+
+  useEffect(() => {
+    if (slidesListType === SLIDES_LIST_TYPE_MAP.NAVIGATOR) {
+      setIsSlidesNavigatorOpen(true);
+    }
+  }, [slidesListType, setIsSlidesNavigatorOpen]);
 
   useEffect(() => {
     if (!decidedWhichPanelToOpen.current) {
@@ -64,15 +77,20 @@ const BuilderWrapper = ({ children }) => {
     pageCount,
     isLeftPanelOpen,
     isSlidesPanelOpen,
+    isSlidesNavigatorOpen,
     setIsLeftPanelOpen,
     setIsSlidesPanelOpen,
+    setIsSlidesNavigatorOpen,
     shouldShowRightPanelInitially,
   ]);
 
   return (
-    <ReportWrapper mode="customize">
-      {children}
-    </ReportWrapper>
+    <>
+      {slidesListType === SLIDES_LIST_TYPE_MAP.NAVIGATOR && <SlidesNavigator />}
+      <ReportWrapper mode="customize">
+        {children}
+      </ReportWrapper>
+    </>
   );
 };
 

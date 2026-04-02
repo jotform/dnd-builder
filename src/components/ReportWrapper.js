@@ -12,10 +12,10 @@ const ReportWrapper = ({
 }) => {
   const theme = usePropStore(state => state.theme);
 
-  const isAllSlidesPanelOpen = useBuilderStore(state => state.isAllSlidesPanelOpen);
   const isLeftPanelOpen = useBuilderStore(state => state.isLeftPanelOpen);
   const isRightPanelOpen = useBuilderStore(state => state.isRightPanelOpen);
   const isSlidesPanelOpen = useBuilderStore(state => state.isSlidesPanelOpen);
+  const isSlidesNavigatorOpen = useBuilderStore(state => state.isSlidesNavigatorOpen);
 
   const wrapperClass = classNames(
     'jfReport',
@@ -24,9 +24,9 @@ const ReportWrapper = ({
     getModeClass(mode),
     theme,
     {
-      allSlidesPaneIsActive: isAllSlidesPanelOpen,
       leftPaneIsActive: isLeftPanelOpen,
       rightPaneIsActive: isRightPanelOpen || isSlidesPanelOpen,
+      slidesNavigatorIsActive: isSlidesNavigatorOpen,
       slidesPaneIsActive: isSlidesPanelOpen,
     },
   );

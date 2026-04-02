@@ -81,6 +81,13 @@ body {
   }
 }
 
+.slidesNavigatorIsActive {
+  &.jfReport {
+    left: $slides-navigator-width;
+    width: calc(100% - $slides-navigator-width);
+  }
+}
+
 .errorBoundary-wrapper {
   display: flex;
   flex-direction: column;

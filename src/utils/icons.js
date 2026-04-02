@@ -7,7 +7,6 @@ export { default as close } from '../assets/svg/close.svg';
 export { default as rotate } from '../assets/svg/rotate.svg';
 export { default as customize } from '../assets/svg/customize.svg';
 export { default as slides } from '../assets/svg/slides.svg';
-export { default as allSlides } from '../assets/svg/all_slides.svg';
 export { default as settingsToggle } from '../assets/svg/settings_toggle.svg';
 
 // Elements //

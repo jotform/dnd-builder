@@ -1,6 +1,7 @@
 /* eslint-disable max-len */
 const ALL_TEXTS = {
   ADD_ELEMENT: 'Add Element',
+  ADD_ITEM: 'Add Item',
   ADD_LINK: 'ADD LINK',
   ADD_NEW_PAGE: 'ADD SLIDE',
   BACKGROUND_COLOR: 'Background Color',
@@ -48,6 +49,7 @@ const ALL_TEXTS = {
   SHAPES_SETTINGS: 'Shape Settings',
   SHOW_ALL: 'Show All',
   SLIDES: 'Slides',
+  SLIDES_NAVIGATOR_TOGGLE: 'Slides Navigator Toggle',
   TEXT_SETTINGS: 'Text Settings',
   TOGGLE_OFF: 'OFF',
   TOGGLE_ON: 'ON',

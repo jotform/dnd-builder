@@ -39,6 +39,8 @@ const exceptionalClasses = [
   'ql-toolbar',
   'jSheetContextMenu',
   'reset-default-contextMenu',
+  'slides-navigator-toggle',
+  'slides-navigator',
 ];
 
 const PageItemResizer = ({

@@ -4,14 +4,12 @@ import Scene from './Scene';
 import RightPanel from '../Panels/RightPanel';
 import LeftPanel from '../Panels/LeftPanel';
 import SlidesPanel from '../Panels/SlidesPanel';
-import AllSlidesPanel from '../Panels/AllSlidesPanel';
 import { leftPanelConfigPropType } from '../../constants/propTypes';
 import '../../styles/jfReportsBundle.scss';
 import BuilderWrapper from './BuilderWrapper';
 import Providers from '../../contexts/Providers';
 
 const Builder = props => {
-  const { useExperimentalFeatures } = props;
   return (
     <Providers
       mode="customize"
@@ -24,9 +22,6 @@ const Builder = props => {
         </DndWrapper>
         <RightPanel />
         <SlidesPanel />
-        {useExperimentalFeatures && (
-          <AllSlidesPanel />
-        )}
       </BuilderWrapper>
     </Providers>
 

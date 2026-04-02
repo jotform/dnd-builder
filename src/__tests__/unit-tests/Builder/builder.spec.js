@@ -5,7 +5,6 @@ import LeftPanel from '../../../components/Panels/LeftPanel';
 import Scene from '../../../components/Builder/Scene';
 import RightPanel from '../../../components/Panels/RightPanel';
 import SlidesPanel from '../../../components/Panels/SlidesPanel';
-import AllSlidesPanel from '../../../components/Panels/AllSlidesPanel';
 import BuilderWrapper from '../../../components/Builder/BuilderWrapper';
 import Providers from '../../../contexts/Providers';
 
@@ -40,10 +39,6 @@ describe('Builder Component Tree', () => {
     expect(builderWrapper.find(SlidesPanel)).toHaveLength(1);
   });
 
-  it('Should Always Render AllSlidesPanel in Builder', () => {
-    expect(builderWrapper.find(AllSlidesPanel)).toHaveLength(0);
-  });
-
   it('ReportWrapper contains DndProvider', () => {
     expect(builderWrapper.find(DndWrapper).parent().is(BuilderWrapper)).toEqual(true);
   });
@@ -53,7 +48,5 @@ describe('Builder Component Tree', () => {
     expect(builderWrapper.find(RightPanel).parent().is(DndWrapper)).toEqual(false);
     expect(builderWrapper.find(LeftPanel).parent().is(DndWrapper)).toEqual(true);
     expect(builderWrapper.find(SlidesPanel).parent().is(DndWrapper)).toEqual(false);
-    builderWrapper.setProps({ useExperimentalFeatures: true });
-    expect(builderWrapper.find(AllSlidesPanel).parent().is(DndWrapper)).toEqual(false);
   });
 });
