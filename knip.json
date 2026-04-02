@@ -12,7 +12,8 @@
   "ignore": [
     "src/__tests__/**",
     "src/__test_helpers__/**",
-    "src/components/ResponsiveContent.js"
+    "src/components/ResponsiveContent.js",
+    "src/components/Settings/Button.js"
   ],
   "ignoreDependencies": [
     "@babel/helper-builder-react-jsx-experimental",
@@ -31,7 +32,8 @@
     "@babel/plugin-proposal-class-properties",
     "@babel/plugin-proposal-private-methods",
     "@storybook/addon-actions",
-    "@storybook/addon-docs"
+    "@storybook/addon-docs",
+    "@floating-ui/react"
   ],
   "ignoreExportsUsedInFile": true,
   "rules": {

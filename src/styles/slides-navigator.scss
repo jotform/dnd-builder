@@ -110,6 +110,8 @@
       background: #FFFFFF;
       border: 1px solid #FFFFFF;
       border-radius: 4px;
+      outline: 2px solid transparent;
+      transition: all 0.3s ease;
     }
 
     &.selected {
