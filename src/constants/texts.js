@@ -1,9 +1,10 @@
 /* eslint-disable max-len */
 const ALL_TEXTS = {
   ADD_ELEMENT: 'Add Element',
-  ADD_ITEM: 'Add Item',
   ADD_LINK: 'ADD LINK',
-  ADD_NEW_PAGE: 'ADD SLIDE',
+  ADD_NEW_PAGE: 'Add New Slide',
+  ADD_NEW_SLIDE: 'Add new slide',
+  ADD_SLIDE: 'Add Slide',
   BACKGROUND_COLOR: 'Background Color',
   CHART_ELEMENT: 'Chart Element',
   CHART_SETTINGS: 'Chart Settings',
@@ -11,8 +12,10 @@ const ALL_TEXTS = {
   CLICK_TO_EDIT_TEXT: 'Click to edit text',
   DELETE: 'Delete',
   DELETE_ITEM: 'Delete Item',
+  DELETE_SLIDE: 'Delete slide',
   DUPLICATE_ITEM: 'Duplicate Item',
   DUPLICATE_PAGE: 'Duplicate Slide',
+  DUPLICATE_SLIDE: 'Duplicate slide',
   ELEMENTS: 'Elements',
   ERROR_BOUNDARY_DESCRIPTION: 'We\'ve been notified of the issue and aim to fix it shortly. Please try again later.',
   ERROR_BOUNDARY_ITEM_DESCRIPTION: 'Please try removing and re-adding the item.',

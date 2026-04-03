@@ -12,6 +12,7 @@
   background: #E7E9F9;
   z-index: 1000;
   border-top: 1px solid #D8DAE9;
+  animation: slideInFromLeft .3s ease-out;
 
   &-toggle {
     width: 40px;
@@ -85,6 +86,7 @@
     max-height: 98.5px;
     min-height: 98.5px;
     margin-bottom: .5rem;
+    animation: slideItemReveal .25s cubic-bezier(0.2, 0, 0.2, 1);
 
     &-order {
       max-width: 1rem;
@@ -112,6 +114,7 @@
       border-radius: 4px;
       outline: 2px solid transparent;
       transition: all 0.3s ease;
+      pointer-events: none;
     }
 
     &.selected {
@@ -124,6 +127,91 @@
         transition: all 0.3s ease;
       }
     }
+  }
+
+  &-context-menu {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: start;
+    width: auto;
+    height: auto;
+    min-width: 14rem;
+    max-width: 14rem;
+    max-height: 70vh;
+    background: #252D5B !important;
+    border-radius: 4px;
+
+    &-items {
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+      justify-content: start;
+      padding: 0.25rem;
+      width: 100%;
+      height: 100%;
+    }
+
+    &-item {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: start;
+      width: 100%;
+      height: 40px;
+      text-align: left;
+      padding: 0.5rem;
+      gap: .25rem;
+      transition-duration: 0.3s;
+      border-radius: 4px;
+      background: #252D5B;
+      color: #FFFFFF;
+      z-index: 1;
+
+      &:hover {
+        background: #343C6A;
+        transition-duration: 0.3s;
+      }
+    }
+
+    &-item-icon {
+      width: 1rem;
+      height: 1rem;
+      color: #FFFFFF;
+
+      &.delete {
+        color: #FF0000;
+      }
+    }
+
+    &-item-text {
+      color: #FFF;
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 18px;
+
+      &.delete {
+        color: #FF0000;
+      }
+    }
+  }
+}
+
+@keyframes slideItemReveal {
+  from {
+    filter: opacity(0);
+    scale: 0.85;
+  }
+}
+
+@keyframes slideInFromLeft {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
   }
 }
 

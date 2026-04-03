@@ -85,6 +85,7 @@ body {
   &.jfReport {
     left: $slides-navigator-width;
     width: calc(100% - $slides-navigator-width);
+    transition: all .3s ease-in;
   }
 }
 

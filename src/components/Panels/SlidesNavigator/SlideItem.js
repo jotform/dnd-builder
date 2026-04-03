@@ -1,10 +1,11 @@
 import {
-  memo, useCallback, useMemo,
+  memo, useCallback, useMemo, useRef,
 } from 'react';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import PropTypes from 'prop-types';
 import StaticSlideItem from './StaticSlideItem';
+import SlideItemMoreMenu from './MoreMenu/SlideItemMoreMenu';
 import { emptyFunction } from '../../../utils/functions';
 import { useBuilderStore } from '../../../contexts/BuilderContext';
 
@@ -17,6 +18,8 @@ const SlideItem = ({
   reportWidth,
   style,
 }) => {
+  const moreMenuRef = useRef(null);
+
   const {
     attributes,
     isDragging,
@@ -33,6 +36,11 @@ const SlideItem = ({
     onPageClick?.(e);
     setVisiblePageOrder(order);
   }, [order, onPageClick, setVisiblePageOrder]);
+
+  const handleContextMenu = useCallback(e => {
+    e.preventDefault();
+    moreMenuRef.current?.handleOpenMenu(e);
+  }, []);
 
   const dragStyle = useMemo(() => {
     const baseStyle = {
@@ -53,6 +61,7 @@ const SlideItem = ({
       data-id={page.id}
       data-order={order}
       onClick={itemClickHandler}
+      onContextMenu={handleContextMenu}
       onKeyDown={emptyFunction}
       style={dragStyle}
       {...attributes}
@@ -67,6 +76,11 @@ const SlideItem = ({
           reportWidth={reportWidth}
         />
       </div>
+      <SlideItemMoreMenu
+        ref={moreMenuRef}
+        order={order}
+        page={page}
+      />
     </div>
   );
 };

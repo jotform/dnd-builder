@@ -8,7 +8,7 @@ import { scrollToTarget } from '../../../utils/functions';
 const SlidesNavigator = () => {
   const isSlidesNavigatorOpen = useBuilderStore(state => state.isSlidesNavigatorOpen);
   const visiblePageOrder = useBuilderStore(state => state.visiblePageOrder);
-  const { ADD_ITEM } = useTranslatedTexts();
+  const { ADD_SLIDE } = useTranslatedTexts();
   const onPageAdd = usePropStore(state => state.onPageAdd);
 
   const onAddItemClick = () => {
@@ -26,11 +26,11 @@ const SlidesNavigator = () => {
       <button
         className="slides-navigator-add-item"
         onClick={onAddItemClick}
-        title={ADD_ITEM}
+        title={ADD_SLIDE}
         type="button"
       >
         <icons.plus className="slides-navigator-add-item-icon" />
-        <span className="slides-navigator-add-item-text">{ADD_ITEM}</span>
+        <span className="slides-navigator-add-item-text">{ADD_SLIDE}</span>
       </button>
       <SlideItemsList />
     </aside>

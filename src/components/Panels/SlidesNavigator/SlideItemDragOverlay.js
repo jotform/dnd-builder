@@ -1,12 +1,20 @@
-import { DragOverlay } from '@dnd-kit/core';
+import { DragOverlay, defaultDropAnimationSideEffects } from '@dnd-kit/core';
 import PropTypes from 'prop-types';
 import StaticSlideItem from './StaticSlideItem';
+
+const dropAnimation = {
+  duration: 150,
+  easing: 'ease-out',
+  sideEffects: defaultDropAnimationSideEffects({
+    styles: { dragOverlay: { opacity: '0', transform: 'rotate(10deg) scale(1.2)' } },
+  }),
+};
 
 const SlideItemDragOverlay = ({ activePageData }) => {
   return (
     <DragOverlay
       adjustScale={false}
-      dropAnimation={null}
+      dropAnimation={dropAnimation}
       style={{ cursor: 'grabbing' }}
     >
       {activePageData ? (

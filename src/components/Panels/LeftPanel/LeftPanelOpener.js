@@ -18,8 +18,7 @@ const LeftPanelToggler = () => {
         title={ADD_ELEMENT}
         type="button"
       >
-        <span>{ADD_ELEMENT}</span>
-        <icons.plus className="jfReportSVG isWhite" />
+        <icons.plus className="jfReportSVG isWhite plus-icon" />
       </button>
     </>
   );

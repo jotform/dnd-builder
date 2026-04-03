@@ -1,5 +1,5 @@
 import {
-  useCallback, useMemo, useRef, useState,
+  useCallback, useEffect, useMemo, useRef, useState,
 } from 'react';
 import {
   DndContext,
@@ -26,6 +26,11 @@ const SlideItemsList = () => {
 
   const virtuosoRef = useRef(null);
   const [activeId, setActiveId] = useState(null);
+  const [localPages, setLocalPages] = useState(pages);
+
+  useEffect(() => {
+    setLocalPages(pages);
+  }, [pages]);
 
   const {
     reportLayoutHeight = 794,
@@ -44,7 +49,7 @@ const SlideItemsList = () => {
     }),
   );
 
-  const items = useMemo(() => pages.map((_, index) => index.toString()), [pages]);
+  const items = useMemo(() => localPages.map(page => page.id), [localPages]);
 
   const onPageClick = useCallback(e => {
     const order = e.currentTarget.getAttribute('data-order');
@@ -62,9 +67,15 @@ const SlideItemsList = () => {
     setActiveId(null);
 
     if (over && active.id !== over.id) {
-      const oldIndex = parseInt(active.id, 10);
-      const newIndex = parseInt(over.id, 10);
-      const newPageOrders = arrayMove(pages, oldIndex, newIndex).reduce((acc, page, index) => {
+      const oldIndex = localPages.findIndex(p => p.id === active.id);
+      const newIndex = localPages.findIndex(p => p.id === over.id);
+      if (oldIndex === -1 || newIndex === -1) return;
+
+      const reordered = arrayMove(localPages, oldIndex, newIndex);
+
+      setLocalPages(reordered);
+
+      const newPageOrders = reordered.reduce((acc, page, index) => {
         acc[page.id] = { order: index + 1 };
         return acc;
       }, {});
@@ -72,7 +83,7 @@ const SlideItemsList = () => {
       onPageOrdersChange(newPageOrders);
       onAnEventTrigger('sortPageFromSlides');
     }
-  }, [pages, onPageOrdersChange, onAnEventTrigger]);
+  }, [localPages, onPageOrdersChange, onAnEventTrigger]);
 
   const handleDragCancel = useCallback(() => {
     setActiveId(null);
@@ -80,12 +91,11 @@ const SlideItemsList = () => {
 
   const activePageData = useMemo(() => {
     if (!activeId) return null;
-    const activeIndex = parseInt(activeId, 10);
-    const page = pages[activeIndex];
+    const page = localPages.find(p => p.id === activeId);
     if (!page) return null;
 
     return { page, reportHeight, reportWidth };
-  }, [activeId, pages, reportWidth, reportHeight]);
+  }, [activeId, localPages, reportWidth, reportHeight]);
 
   const virtuosoStyle = useMemo(() => ({
     height: '100%',
@@ -108,14 +118,15 @@ const SlideItemsList = () => {
         <Virtuoso
           ref={virtuosoRef}
           className="slides-navigator-item-list"
+          computeItemKey={index => localPages[index]?.id ?? index}
           fixedItemHeight={ITEM_HEIGHT}
           itemContent={index => {
-            const page = pages[index];
+            const page = localPages[index];
             if (!page) return null;
 
             return (
               <SlideItem
-                id={index.toString()}
+                id={page.id}
                 onPageClick={onPageClick}
                 order={page.order}
                 page={page}
@@ -126,7 +137,7 @@ const SlideItemsList = () => {
             );
           }}
           style={virtuosoStyle}
-          totalCount={pages.length}
+          totalCount={localPages.length}
         />
       </SortableContext>
 

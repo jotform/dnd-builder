@@ -304,18 +304,21 @@
       }
 
       &.addElementToggle {
-        width: 160px;
+        width: 54px;
         background-color: #252D5B;
         height: 54px;
-        border-radius: 0;
-        border-top-right-radius: 100px;
-        border-bottom-right-radius: 100px;
-        justify-content: space-between;
-        padding: 19px 18px;
+        border-radius: 100px;
+        justify-content: center;
+        padding: 14px;
 
         span {
           color: #ffffff;
           font-size: 15px;
+        }
+
+        .plus-icon {
+          width: 28px;
+          height: 28px;
         }
       }
 
@@ -426,7 +429,7 @@
         left: calc(100% + 15px);
 
         &.addElementToggle {
-          left: 100%;
+          left: calc(100% + 12px);
         }
       }
     }
