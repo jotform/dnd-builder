@@ -25,6 +25,7 @@
 .jfReport.customizeMode {
   .jfReport-canvas {
     padding: 0 120px;
+    transition: margin .3s ease-in;
   }
 
   .jfReport-page {

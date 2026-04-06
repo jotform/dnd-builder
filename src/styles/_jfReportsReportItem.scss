@@ -188,7 +188,7 @@
   }
 }
 
-.jfReport, .jfPresentation, .pageThumbnailHelper {
+.jfReport, .jfPresentation, .pageThumbnailHelper, .slides-navigator {
   .reportItem {
     .fitFor- {
       width: 100%;
@@ -230,7 +230,7 @@
   }
 }
 
-.pageThumbnailHelper {
+.pageThumbnailHelper, .slides-navigator {
   .reportItemWrapper {
     width: 100%;
     height: 100%;

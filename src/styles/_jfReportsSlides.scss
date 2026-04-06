@@ -86,12 +86,12 @@
   text-align: center;
 }
 
-.pageThumbnailHelper .thumbnailFrame {
+.pageThumbnailHelper .thumbnailFrame, .slides-navigator .thumbnailFrame {
   width: 158px;
   height: 112px;
 }
 
-.forSlides .thumbnailWrapper, .pageThumbnailHelper {
+.forSlides .thumbnailWrapper, .pageThumbnailHelper, .slides-navigator {
   min-height: 120px;
   padding: 4px;
   border-left: 3px solid transparent;

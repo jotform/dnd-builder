@@ -79,9 +79,6 @@ const PageActions = ({
       className="jfReport-pageInfo d-flex j-center"
       id={`pageActions-id-${order}`}
     >
-      <div className="pageCounter p-relative d-flex">
-        {`${order}`}
-      </div>
       <div className={`floatingController page-toolbar${isSelectedItemExists ? ' disabled' : ''}`}>
         <div className="floatingController-container">
           <button
@@ -114,26 +111,28 @@ const PageActions = ({
             <icons.trash className="toolbar-icon" />
           </button>
         </div>
-        <div className="floatingController-container">
-          <button
-            key="Move Page Upwards"
-            className={`controllerItem${order === 1 ? ' disabled' : ''}`}
-            onClick={changeOrder(-1)}
-            title={MOVE_PAGE_UPWARDS}
-            type="button"
-          >
-            <icons.angleUp className="toolbar-icon" />
-          </button>
-          <button
-            key="Move Page Downwards"
-            className={`controllerItem${order === pageCount ? ' disabled' : ''}`}
-            onClick={changeOrder(1)}
-            title={MOVE_PAGE_DOWNWARDS}
-            type="button"
-          >
-            <icons.angleDown className="toolbar-icon" />
-          </button>
-        </div>
+        {false && (
+          <div className="floatingController-container">
+            <button
+              key="Move Page Upwards"
+              className={`controllerItem${order === 1 ? ' disabled' : ''}`}
+              onClick={changeOrder(-1)}
+              title={MOVE_PAGE_UPWARDS}
+              type="button"
+            >
+              <icons.angleUp className="toolbar-icon" />
+            </button>
+            <button
+              key="Move Page Downwards"
+              className={`controllerItem${order === pageCount ? ' disabled' : ''}`}
+              onClick={changeOrder(1)}
+              title={MOVE_PAGE_DOWNWARDS}
+              type="button"
+            >
+              <icons.angleDown className="toolbar-icon" />
+            </button>
+          </div>
+        )}
         <div className="floatingController-container">
           <button
             key="Add Slide"

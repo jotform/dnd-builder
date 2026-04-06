@@ -1,4 +1,5 @@
 /* global Image */
+import { SLIDES_LIST_TYPE_MAP } from '../constants/panel';
 import objectDiff from './object-diff';
 
 /**
@@ -844,4 +845,12 @@ export const getDimensions = ({
     top,
     width,
   };
+};
+
+export const slidesAsNavigator = slidesListType => {
+  return slidesListType === SLIDES_LIST_TYPE_MAP.NAVIGATOR;
+};
+
+export const slidesAsPanel = slidesListType => {
+  return slidesListType === SLIDES_LIST_TYPE_MAP.PANEL;
 };

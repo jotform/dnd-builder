@@ -31,6 +31,8 @@ const exceptionalClasses = [
   'report-item-toolbar',
   'zoom-toolbar',
   'controllerItem',
+  'slides-navigator-toggle',
+  'slides-navigator',
 ];
 
 const RightPanel = () => {

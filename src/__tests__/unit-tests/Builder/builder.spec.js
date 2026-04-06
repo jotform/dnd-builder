@@ -5,9 +5,18 @@ import LeftPanel from '../../../components/Panels/LeftPanel';
 import Scene from '../../../components/Builder/Scene';
 import RightPanel from '../../../components/Panels/RightPanel';
 import SlidesPanel from '../../../components/Panels/SlidesPanel';
-import AllSlidesPanel from '../../../components/Panels/AllSlidesPanel';
+import SlidesNavigator from '../../../components/Panels/SlidesNavigator/SlidesNavigator';
 import BuilderWrapper from '../../../components/Builder/BuilderWrapper';
 import Providers from '../../../contexts/Providers';
+import { mountWithProviders } from '../../../__test_helpers__/utils';
+
+beforeAll(() => {
+  window.IntersectionObserver = jest.fn(() => ({
+    disconnect: jest.fn(),
+    observe: jest.fn(),
+    unobserve: jest.fn(),
+  }));
+});
 
 describe('Builder Component Tree', () => {
   const builderWrapper = shallow(<Builder />);
@@ -40,10 +49,6 @@ describe('Builder Component Tree', () => {
     expect(builderWrapper.find(SlidesPanel)).toHaveLength(1);
   });
 
-  it('Should Always Render AllSlidesPanel in Builder', () => {
-    expect(builderWrapper.find(AllSlidesPanel)).toHaveLength(0);
-  });
-
   it('ReportWrapper contains DndProvider', () => {
     expect(builderWrapper.find(DndWrapper).parent().is(BuilderWrapper)).toEqual(true);
   });
@@ -53,7 +58,27 @@ describe('Builder Component Tree', () => {
     expect(builderWrapper.find(RightPanel).parent().is(DndWrapper)).toEqual(false);
     expect(builderWrapper.find(LeftPanel).parent().is(DndWrapper)).toEqual(true);
     expect(builderWrapper.find(SlidesPanel).parent().is(DndWrapper)).toEqual(false);
-    builderWrapper.setProps({ useExperimentalFeatures: true });
-    expect(builderWrapper.find(AllSlidesPanel).parent().is(DndWrapper)).toEqual(false);
+  });
+
+  it('Should Render SlidesNavigator in BuilderWrapper when slidesListType is NAVIGATOR', () => {
+    const wrapper = mountWithProviders(
+      <BuilderWrapper><div /></BuilderWrapper>,
+      {
+        builderProps: { slidesListType: 'NAVIGATOR' },
+        propProps: { pages: [] },
+      },
+    );
+    expect(wrapper.find(SlidesNavigator)).toHaveLength(1);
+  });
+
+  it('Should Not Render SlidesNavigator when slidesListType is PANEL', () => {
+    const wrapper = mountWithProviders(
+      <BuilderWrapper><div /></BuilderWrapper>,
+      {
+        builderProps: { slidesListType: 'PANEL' },
+        propProps: { pages: [] },
+      },
+    );
+    expect(wrapper.find(SlidesNavigator)).toHaveLength(0);
   });
 });

@@ -1,0 +1,183 @@
+import {
+  forwardRef, useCallback, useEffect, useMemo, useRef, useState,
+} from 'react';
+import {
+  DndContext,
+  closestCenter,
+  KeyboardSensor,
+  PointerSensor,
+  useSensor,
+  useSensors,
+} from '@dnd-kit/core';
+import { SortableContext, verticalListSortingStrategy, sortableKeyboardCoordinates } from '@dnd-kit/sortable';
+import { Virtuoso } from 'react-virtuoso';
+import PropTypes from 'prop-types';
+import { usePropStore } from '../../../contexts/PropContext';
+import { arrayMove, scrollToTarget } from '../../../utils/functions';
+import SlideItem from './SlideItem';
+import SlideItemDragOverlay from './SlideItemDragOverlay';
+
+const ITEM_HEIGHT = 90.5;
+
+const slideItemFixedStyle = { height: ITEM_HEIGHT };
+
+const SlidesNavigatorVirtuosoList = forwardRef(({ children, style, ...rest }, ref) => (
+  <div
+    ref={ref}
+    className="slides-navigator-virtuoso-list"
+    style={style}
+    {...rest}
+  >
+    {children}
+  </div>
+));
+
+SlidesNavigatorVirtuosoList.displayName = 'SlidesNavigatorVirtuosoList';
+
+SlidesNavigatorVirtuosoList.propTypes = {
+  children: PropTypes.node,
+  style: PropTypes.shape({}),
+};
+
+const virtuosoComponents = { List: SlidesNavigatorVirtuosoList };
+
+const SlideItemsList = () => {
+  const pages = usePropStore(state => state.pages);
+  const settings = usePropStore(state => state.settings);
+  const onPageOrdersChange = usePropStore(state => state.onPageOrdersChange);
+  const onAnEventTrigger = usePropStore(state => state.onAnEventTrigger);
+
+  const virtuosoRef = useRef(null);
+  const [activeId, setActiveId] = useState(null);
+  const [localPages, setLocalPages] = useState(pages);
+
+  useEffect(() => {
+    setLocalPages(pages);
+  }, [pages]);
+
+  const {
+    reportLayout = 'A4 Landscape',
+    reportLayoutHeight = 794,
+    reportLayoutWidth = 1123,
+  } = settings;
+
+  const reportWidth = parseInt(reportLayoutWidth, 10);
+  const reportHeight = parseInt(reportLayoutHeight, 10);
+
+  const sensors = useSensors(
+    useSensor(PointerSensor, {
+      activationConstraint: { delay: 100, distance: 0, tolerance: 0.1 },
+    }),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    }),
+  );
+
+  const items = useMemo(() => localPages.map(page => page.id), [localPages]);
+
+  const onPageClick = useCallback(e => {
+    const order = e.currentTarget.getAttribute('data-order');
+    if (order) {
+      scrollToTarget(`pageActions-id-${order}`);
+    }
+  }, []);
+
+  const handleDragStart = useCallback(event => {
+    setActiveId(event.active.id);
+  }, []);
+
+  const handleDragEnd = useCallback(event => {
+    const { active, over } = event;
+    setActiveId(null);
+
+    if (over && active.id !== over.id) {
+      const oldIndex = localPages.findIndex(p => p.id === active.id);
+      const newIndex = localPages.findIndex(p => p.id === over.id);
+      if (oldIndex === -1 || newIndex === -1) return;
+
+      const reordered = arrayMove(localPages, oldIndex, newIndex);
+      const withOrders = reordered.map((page, i) => {
+        const nextOrder = i + 1;
+        return page.order === nextOrder ? page : { ...page, order: nextOrder };
+      });
+
+      setLocalPages(withOrders);
+
+      const newPageOrders = reordered.reduce((acc, page, index) => {
+        acc[page.id] = { order: index + 1 };
+        return acc;
+      }, {});
+
+      onPageOrdersChange(newPageOrders);
+      onAnEventTrigger('sortPageFromSlides');
+    }
+  }, [localPages, onPageOrdersChange, onAnEventTrigger]);
+
+  const handleDragCancel = useCallback(() => {
+    setActiveId(null);
+  }, []);
+
+  const activePageData = useMemo(() => {
+    if (!activeId) return null;
+    const page = localPages.find(p => p.id === activeId);
+    if (!page) return null;
+
+    return { page, reportHeight, reportWidth };
+  }, [activeId, localPages, reportWidth, reportHeight]);
+
+  const virtuosoStyle = useMemo(() => ({
+    height: '100%',
+    scrollbarWidth: 'none',
+    width: '100%',
+  }), []);
+
+  const itemContent = useCallback(index => {
+    const page = localPages[index];
+    if (!page) return null;
+
+    return (
+      <SlideItem
+        id={page.id}
+        onPageClick={onPageClick}
+        order={page.order}
+        page={page}
+        reportHeight={reportHeight}
+        reportWidth={reportWidth}
+        style={slideItemFixedStyle}
+      />
+    );
+  }, [localPages, onPageClick, reportHeight, reportWidth]);
+
+  const reportLayoutLowercase = useMemo(() => reportLayout?.toLocaleLowerCase() ?? '', [reportLayout]);
+
+  return (
+    <DndContext
+      collisionDetection={closestCenter}
+      onDragCancel={handleDragCancel}
+      onDragEnd={handleDragEnd}
+      onDragStart={handleDragStart}
+      sensors={sensors}
+    >
+      <SortableContext
+        items={items}
+        strategy={verticalListSortingStrategy}
+      >
+        <Virtuoso
+          ref={virtuosoRef}
+          className="slides-navigator-item-list"
+          components={virtuosoComponents}
+          computeItemKey={index => localPages[index]?.id ?? index}
+          data-report-layout={reportLayoutLowercase}
+          fixedItemHeight={ITEM_HEIGHT}
+          itemContent={itemContent}
+          style={virtuosoStyle}
+          totalCount={localPages.length}
+        />
+      </SortableContext>
+
+      <SlideItemDragOverlay activePageData={activePageData} />
+    </DndContext>
+  );
+};
+
+export default SlideItemsList;

@@ -22,6 +22,8 @@ import {
 import DraggableLayer from './DraggableLayer';
 import useKeyboardActions from '../../utils/useKeyboardActions';
 import useMarqueeSelection from '../../utils/useMarqueeSelection';
+import SlidesNavigatorToggle from './SlidesNavigatorToggle';
+import { SLIDES_LIST_TYPE_MAP } from '../../constants/panel';
 
 const Scene = () => {
   const pages = usePropStore(state => state.pages);
@@ -31,6 +33,7 @@ const Scene = () => {
   const setGuides = useBuilderStore(state => state.setGuides);
   const zoom = useBuilderStore(state => state.zoom);
   const lastScrollPosition = useBuilderStore(state => state.lastScrollPosition);
+  const slidesListType = useBuilderStore(state => state.slidesListType);
 
   const pageStyles = useRef({});
   const pageContainerStyles = useRef({});
@@ -158,7 +161,10 @@ const Scene = () => {
           <PageAdder />
         </div>
       </div>
-      <ZoomControls />
+      <div className="bottom-actions-container">
+        {slidesListType === SLIDES_LIST_TYPE_MAP.NAVIGATOR && <SlidesNavigatorToggle />}
+        <ZoomControls />
+      </div>
       {contextMenuProps
         && (
           <ContextMenu

@@ -2,6 +2,7 @@
 import { createContext, useContext, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { createStore, useStore } from 'zustand';
+import { SLIDES_LIST_TYPE_MAP } from '../constants/panel';
 
 const builderStore = props => {
   return createStore((set, get) => ({
@@ -11,10 +12,10 @@ const builderStore = props => {
     contextMenuProps: props.contextMenuProps || false,
     editedElement: props.editedElement || 'l_layout',
     guides: {},
-    isAllSlidesPanelOpen: props.isAllSlidesPanelOpen || false,
     isLeftPanelOpen: props.isLeftPanelOpen || false,
     isResize: false,
     isRightPanelOpen: props.isRightPanelOpen || false,
+    isSlidesNavigatorOpen: props.isSlidesNavigatorOpen || false,
     isSlidesPanelOpen: props.isSlidesPanelOpen || false,
     isTextEditorOpen: props.isTextEditorOpen || false,
     lastScrollPosition: props.lastScrollPosition || 0,
@@ -55,9 +56,6 @@ const builderStore = props => {
     setGuides: guides => {
       set({ guides });
     },
-    setIsAllSlidesPanelOpen: status => {
-      set({ isAllSlidesPanelOpen: status });
-    },
     setIsLeftPanelOpen: props.setIsLeftPanelOpen || (status => {
       const { isEnoughCanvasSize } = get();
       set({
@@ -77,6 +75,9 @@ const builderStore = props => {
       });
       onRightPanelsToggled(status);
     }),
+    setIsSlidesNavigatorOpen: status => {
+      set({ isSlidesNavigatorOpen: status });
+    },
     setIsSlidesPanelOpen: props.setIsSlidesPanelOpen || (status => {
       const { isEnoughCanvasSize, onRightPanelsToggled } = get();
       set({
@@ -91,6 +92,9 @@ const builderStore = props => {
     },
     setMatches: matches => {
       set({ matches });
+    },
+    setVisiblePageOrder: visiblePageOrder => {
+      set({ visiblePageOrder });
     },
     setZoom: (zoom, layoutWidth) => {
       set({ zoom });
@@ -108,7 +112,9 @@ const builderStore = props => {
       }
     },
     shouldShowRightPanelInitially: props.shouldShowRightPanelInitially ?? true,
-    zoom: 1,
+    slidesListType: props.slidesListType || SLIDES_LIST_TYPE_MAP.PANEL,
+    visiblePageOrder: 1,
+    zoom: 0.8,
   }));
 };
 

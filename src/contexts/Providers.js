@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import { BuilderProvider } from './BuilderContext';
 import { PresentationProvider } from './PresentationContext';
 import { PropProvider } from './PropContext';
+import { SLIDES_LIST_TYPE_MAP } from '../constants/panel';
 
 const Providers = ({
   children,
@@ -11,6 +12,7 @@ const Providers = ({
   onRightPanelsToggled,
   presentationBarActions,
   shouldShowRightPanelInitially,
+  slidesListType,
   useFixedPresentationBar,
   ...props
 }) => {
@@ -20,6 +22,7 @@ const Providers = ({
       lastScrollPosition={lastScrollPosition}
       onRightPanelsToggled={onRightPanelsToggled}
       shouldShowRightPanelInitially={shouldShowRightPanelInitially}
+      slidesListType={slidesListType}
     >
       <PropProvider {...props}>
         {mode === 'customize' ? children : (
@@ -53,6 +56,8 @@ Providers.propTypes = {
   /** Flag for fixed action bar */
   shouldShowRightPanelInitially: PropTypes.bool,
   /** Flag for whether to show the right panel initially */
+  slidesListType: PropTypes.oneOf(Object.values(SLIDES_LIST_TYPE_MAP)),
+  /** Slides list type for the report */
   useFixedPresentationBar: PropTypes.bool,
 };
 

@@ -1,0 +1,4 @@
+export const SLIDES_LIST_TYPE_MAP = {
+  NAVIGATOR: 'NAVIGATOR',
+  PANEL: 'PANEL',
+};

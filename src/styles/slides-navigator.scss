@@ -1,0 +1,239 @@
+.slides-navigator {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: start;
+  min-width: 192px;
+  max-width: 192px;
+  width: 100%;
+  height: 100%;
+  padding: 1rem 1rem 0;
+  gap: 12px;
+  background: #E7E9F9;
+  z-index: 1000;
+  border-top: 1px solid #D8DAE9;
+  animation: slideInFromLeft .3s ease-out;
+
+  &-toggle {
+    width: 40px;
+    height: 40px;
+    background: #FFFFFF;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px 0 rgba(84, 95, 111, 0.16), 0 0 2px 0 rgba(37, 45, 91, 0.04);
+    &:hover {
+      background: #F5F5F5;
+    }
+  }
+
+  &-add-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 .5rem;
+    width: 100%;
+    height: 100%;
+    max-height: 32px;
+    border-radius: 4px;
+    border: 1px solid #C8CEED;
+    background: #E7E9F9;
+    transition: all 0.3s ease;
+    color: #343C6A;
+    cursor: pointer;
+
+    &:hover {
+      border-color: #979dc6;
+      transition: all 0.3s ease;
+    }
+
+    &-icon {
+      width: 1rem;
+      height: 1rem;
+      color: #343C6A;
+    }
+
+    &-text {
+      color: #343C6A;
+      text-align: center;
+      font-size: .75rem;
+      font-weight: 500;
+      line-height: 16px;
+      padding: 0 4px;
+    }
+  }
+
+  &-item-list {
+    display: flex;
+    align-items: start;
+    justify-content: start;
+    flex-direction: column;
+    width: 100%;
+    gap: 8px;
+  }
+
+  &-item {
+    $self: &;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+    width: 100%;
+    height: 100%;
+    padding: .25rem;
+    gap: 8px;
+    max-height: 98.5px;
+    min-height: 98.5px;
+    margin-bottom: .5rem;
+
+    &-motion {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: start;
+      width: 100%;
+      height: 100%;
+      gap: 8px;
+    }
+
+    &-order {
+      max-width: 1rem;
+      min-width: 1rem;
+      max-height: 1.25rem;
+      min-height: 1.25rem;
+      width: 100%;
+      height: 100%;
+      background: transparent;
+      color: #6C73A8;
+      font-size: .875rem;
+      font-weight: 400;
+      line-height: 20px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    &-content {
+      overflow: hidden;
+      width: 100%;
+      height: 100%;
+      background: #ffffff30;
+      border: 1px solid #ffffff30;
+      border-radius: 4px;
+      outline: 2px solid transparent;
+      transition: all 0.3s ease;
+      pointer-events: none;
+    }
+
+    &.selected {
+      #{$self}-order {
+        color: #0075E3;
+      }
+
+      #{$self}-content {
+        outline: 2px solid #0075E3;
+        transition: all 0.3s ease;
+      }
+    }
+  }
+
+  &-item-list[data-report-layout*="landscape"] {
+    .slides-navigator-item-content {
+      background: #FFFFFF;
+      border: 1px solid #FFFFFF;
+    }
+  }
+
+  &-context-menu {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: start;
+    width: auto;
+    height: auto;
+    min-width: 14rem;
+    max-width: 14rem;
+    max-height: 70vh;
+    background: #252D5B !important;
+    border-radius: 4px;
+
+    &-items {
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+      justify-content: start;
+      padding: 0.25rem;
+      width: 100%;
+      height: 100%;
+    }
+
+    &-item {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: start;
+      width: 100%;
+      height: 40px;
+      text-align: left;
+      padding: 0.5rem;
+      gap: .25rem;
+      transition-duration: 0.3s;
+      border-radius: 4px;
+      background: #252D5B;
+      color: #FFFFFF;
+      z-index: 1;
+
+      &:hover {
+        background: #343C6A;
+        transition-duration: 0.3s;
+      }
+    }
+
+    &-item-icon {
+      width: 1rem;
+      height: 1rem;
+      color: #FFFFFF;
+
+      &.delete {
+        color: #FF0000;
+      }
+    }
+
+    &-item-text {
+      color: #FFF;
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 18px;
+
+      &.delete {
+        color: #FF0000;
+      }
+    }
+  }
+
+  &-virtuoso-list {
+    > div:last-child {
+      padding-bottom: 1rem;
+    }
+  }
+}
+
+@keyframes slideInFromLeft {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.slidesNavigatorIsActive {
+  .floatingController.slides-navigator-toggle {
+    .controllerItem {
+      background: #E3E5F5;
+    }
+  }
+}
