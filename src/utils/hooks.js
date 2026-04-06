@@ -11,6 +11,8 @@ import { usePropStore } from '../contexts/PropContext';
 import { useBuilderStore } from '../contexts/BuilderContext';
 import { usePresentationStore } from '../contexts/PresentationContext';
 
+const INITIAL_ZOOM_MAX = 0.8;
+
 export const useStateWithCallback = (initialState, callback) => {
   const [state, setState] = useState(initialState);
 
@@ -81,13 +83,14 @@ export const useFitZoom = () => {
   const setZoom = useBuilderStore(state => state.setZoom);
 
   useEffect(() => {
-    const newZoom = getZoomValue({
+    const fitZoom = getZoomValue({
       limitZoom: true,
       settings: {
         reportLayoutHeight: settings.reportLayoutHeight,
         reportLayoutWidth: settings.reportLayoutWidth,
       },
     });
+    const newZoom = Math.min(fitZoom, INITIAL_ZOOM_MAX);
     setZoom(newZoom, settings.reportLayoutWidth);
   }, [
     settings.reportLayoutHeight,

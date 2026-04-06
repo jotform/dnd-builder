@@ -114,7 +114,7 @@ const builderStore = props => {
     shouldShowRightPanelInitially: props.shouldShowRightPanelInitially ?? true,
     slidesListType: props.slidesListType || SLIDES_LIST_TYPE_MAP.PANEL,
     visiblePageOrder: 1,
-    zoom: 1,
+    zoom: 0.8,
   }));
 };
 

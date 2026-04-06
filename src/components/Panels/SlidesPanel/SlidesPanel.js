@@ -5,11 +5,10 @@ import SortablePageList from './SortablePageList';
 import Section from '../../Builder/Section';
 import { useBuilderStore } from '../../../contexts/BuilderContext';
 import { usePropStore } from '../../../contexts/PropContext';
-import { arrayMove } from '../../../utils/functions';
+import { arrayMove, slidesAsPanel } from '../../../utils/functions';
 import SlidesPanelToggler from './SlidesPanelToggler';
 import ListWrapper from './ListWrapper';
 import { useClickOutsideListener, useTranslatedTexts } from '../../../utils/hooks';
-import { SLIDES_LIST_TYPE_MAP } from '../../../constants/panel';
 
 const SlidesPanel = () => {
   const isRightPanelOpen = useBuilderStore(state => state.isRightPanelOpen);
@@ -65,7 +64,7 @@ const SlidesPanel = () => {
 
   const { SLIDES } = useTranslatedTexts();
   return (
-    slidesListType === SLIDES_LIST_TYPE_MAP.PANEL ? (
+    slidesAsPanel(slidesListType) ? (
       <Panel
         additionalClassName={panelAdditionalClassName}
         onAnimationEnd={onAnimationEnd}

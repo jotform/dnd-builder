@@ -8,7 +8,7 @@ import {
   useFitZoom, usePageVisibility, usePrevious, useSelectedElements,
 } from '../../utils/hooks';
 import SlidesNavigator from '../Panels/SlidesNavigator/SlidesNavigator';
-import { SLIDES_LIST_TYPE_MAP } from '../../constants/panel';
+import { slidesAsNavigator } from '../../utils/functions';
 
 const BuilderWrapper = ({ children }) => {
   const decidedWhichPanelToOpen = useRef(false);
@@ -52,7 +52,7 @@ const BuilderWrapper = ({ children }) => {
   useFitZoom();
 
   useEffect(() => {
-    if (slidesListType === SLIDES_LIST_TYPE_MAP.NAVIGATOR) {
+    if (slidesAsNavigator(slidesListType)) {
       setIsSlidesNavigatorOpen(true);
     }
   }, [slidesListType, setIsSlidesNavigatorOpen]);
@@ -86,7 +86,7 @@ const BuilderWrapper = ({ children }) => {
 
   return (
     <>
-      {slidesListType === SLIDES_LIST_TYPE_MAP.NAVIGATOR && <SlidesNavigator />}
+      {slidesAsNavigator(slidesListType) && <SlidesNavigator />}
       <ReportWrapper mode="customize">
         {children}
       </ReportWrapper>
