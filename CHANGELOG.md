@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [3.6.0](https://github.com/jotform/dnd-builder/compare/v3.5.6...v3.6.0) (2026-04-06)
+
+
+### Features
+
+* **dnd-builder:** add slide navigator ([c9492c2](https://github.com/jotform/dnd-builder/commit/c9492c2eb5e8a78076025e949297be240c18cfb2))
+* **dnd-builder:** init slide navigator ([95ef9a9](https://github.com/jotform/dnd-builder/commit/95ef9a91ecea8202359fdafa50fc590aee07ae5f))
+
+
+### Bug Fixes
+
+* **dnd-builder:** add behavioral changes ([59931a4](https://github.com/jotform/dnd-builder/commit/59931a4250574b1e6d268f4cf5ff80c3f2da6d62))
+* **dnd-builder:** integrate motion animations and enhance slide navigator functionality ([6f3bcfc](https://github.com/jotform/dnd-builder/commit/6f3bcfc36eeb59c300ea350c8070f6e676e4f73f))
+
 ## [3.5.6](https://github.com/jotform/dnd-builder/compare/v3.5.5...v3.5.6) (2026-03-26)
 
 ## [3.5.4](https://github.com/jotform/dnd-builder/compare/v3.5.3...v3.5.4) (2026-03-26)
