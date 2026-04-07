@@ -206,7 +206,7 @@
 
     &.disabled {
       opacity: 0.25;
-      pointer-events: none;
+      pointer-events: all;
       cursor: not-allowed;
     }
 
@@ -220,6 +220,17 @@
         width: 16px;
         height: 16px;
       }
+    }
+
+    &.active:not(.disabled) {
+      opacity: 1;
+      pointer-events: all;
+      transition: $transition;
+    }
+
+    &.inactive {
+      opacity: 0;
+      transition: $transition;
     }
   }
 

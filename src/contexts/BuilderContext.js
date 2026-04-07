@@ -21,6 +21,7 @@ const builderStore = props => {
     lastScrollPosition: props.lastScrollPosition || 0,
     matches: {},
     onRightPanelsToggled: props.onRightPanelsToggled || (() => {}),
+    overedPageId: props.activePageId || null,
     resetActiveElements: props.resetActiveElements || (() => {
       set({ activeElements: [], editedElement: 'l_layout' });
     }),
@@ -168,6 +169,12 @@ const builderStore = props => {
     },
     setMatches: matches => {
       set({ matches });
+    },
+    setOutPage: outPageId => {
+      set({ overedPageId: outPageId });
+    },
+    setOverPage: overPageId => {
+      set({ overedPageId: overPageId });
     },
     setVisiblePageOrder: visiblePageOrder => {
       set({ visiblePageOrder });

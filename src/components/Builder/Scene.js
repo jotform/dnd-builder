@@ -1,7 +1,7 @@
+/* eslint-disable jsx-a11y/mouse-events-have-key-events */
 /* eslint-disable complexity */
 import {
   createRef,
-  Fragment,
   useEffect,
   useRef,
 } from 'react';
@@ -18,12 +18,12 @@ import {
   calculateGuidePositions,
   findItemById,
   findItemsOnPage,
+  slidesAsNavigator,
 } from '../../utils/functions';
 import DraggableLayer from './DraggableLayer';
 import useKeyboardActions from '../../utils/useKeyboardActions';
 import useMarqueeSelection from '../../utils/useMarqueeSelection';
 import SlidesNavigatorToggle from './SlidesNavigatorToggle';
-import { SLIDES_LIST_TYPE_MAP } from '../../constants/panel';
 
 const Scene = () => {
   const pages = usePropStore(state => state.pages);
@@ -34,6 +34,8 @@ const Scene = () => {
   const zoom = useBuilderStore(state => state.zoom);
   const lastScrollPosition = useBuilderStore(state => state.lastScrollPosition);
   const slidesListType = useBuilderStore(state => state.slidesListType);
+  const setOverPage = useBuilderStore(state => state.setOverPage);
+  const setOutPage = useBuilderStore(state => state.setOutPage);
 
   const pageStyles = useRef({});
   const pageContainerStyles = useRef({});
@@ -115,7 +117,7 @@ const Scene = () => {
   };
 
   return (
-    <main // Builder.js
+    <main
       className={classNames.mainWrapper}
     >
       <DraggableLayer
@@ -131,8 +133,11 @@ const Scene = () => {
           className={classNames.canvas}
         >
           {pages.map((page, index) => (
-            // TODO: This part can be moved into a different component
-            <Fragment key={page.id}>
+            <div
+              key={page.id}
+              onMouseOut={() => setOutPage(null)}
+              onMouseOver={() => setOverPage(page.id)}
+            >
               <PageActions
                 order={page.order}
                 pageID={page.id}
@@ -156,13 +161,13 @@ const Scene = () => {
                   <SelectionBox selectionBox={selectionBox} />
                 )}
               </div>
-            </Fragment>
+            </div>
           ))}
           <PageAdder />
         </div>
       </div>
       <div className="bottom-actions-container">
-        {slidesListType === SLIDES_LIST_TYPE_MAP.NAVIGATOR && <SlidesNavigatorToggle />}
+        {slidesAsNavigator(slidesListType) && <SlidesNavigatorToggle />}
         <ZoomControls />
       </div>
       {contextMenuProps
