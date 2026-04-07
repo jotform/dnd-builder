@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [3.6.2](https://github.com/jotform/dnd-builder/compare/v3.6.0...v3.6.2) (2026-04-07)
+
+
+### Bug Fixes
+
+* **dnd-builder:** enable text edit in double click ([78c134b](https://github.com/jotform/dnd-builder/commit/78c134b2b9b9c9730114c55001755560272baced))
+* **dnd-builder:** improve panel management and slide item interactions ([b7366f5](https://github.com/jotform/dnd-builder/commit/b7366f5a73e783bfbacf5989678ecabb8506888a))
+* **dnd-builder:** page actions visibility changes ([2ce60e4](https://github.com/jotform/dnd-builder/commit/2ce60e46ad84c9ae37feb244120055943b276cb2))
+
 ## [3.6.1](https://github.com/jotform/dnd-builder/compare/v3.6.0...v3.6.1) (2026-04-07)
 
 
