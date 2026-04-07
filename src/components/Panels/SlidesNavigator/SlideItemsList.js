@@ -5,9 +5,10 @@ import {
   DndContext,
   closestCenter,
   KeyboardSensor,
-  PointerSensor,
   useSensor,
   useSensors,
+  MouseSensor,
+  TouchSensor,
 } from '@dnd-kit/core';
 import { SortableContext, verticalListSortingStrategy, sortableKeyboardCoordinates } from '@dnd-kit/sortable';
 import { Virtuoso } from 'react-virtuoso';
@@ -65,8 +66,16 @@ const SlideItemsList = () => {
   const reportHeight = parseInt(reportLayoutHeight, 10);
 
   const sensors = useSensors(
-    useSensor(PointerSensor, {
-      activationConstraint: { delay: 100, distance: 0, tolerance: 0.1 },
+    useSensor(MouseSensor, {
+      activationConstraint: {
+        distance: 5,
+      },
+    }),
+    useSensor(TouchSensor, {
+      activationConstraint: {
+        delay: 300,
+        tolerance: 8,
+      },
     }),
     useSensor(KeyboardSensor, {
       coordinateGetter: sortableKeyboardCoordinates,
@@ -78,7 +87,10 @@ const SlideItemsList = () => {
   const onPageClick = useCallback(e => {
     const order = e.currentTarget.getAttribute('data-order');
     if (order) {
-      scrollToTarget(`pageActions-id-${order}`);
+      scrollToTarget(`pageActions-id-${order}`, 100, {
+        behavior: 'smooth',
+        block: 'start',
+      });
     }
   }, []);
 
@@ -174,7 +186,6 @@ const SlideItemsList = () => {
           totalCount={localPages.length}
         />
       </SortableContext>
-
       <SlideItemDragOverlay activePageData={activePageData} />
     </DndContext>
   );

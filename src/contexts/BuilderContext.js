@@ -24,6 +24,8 @@ const builderStore = props => {
     resetActiveElements: props.resetActiveElements || (() => {
       set({ activeElements: [], editedElement: 'l_layout' });
     }),
+    restoreLeftPanelWhenNavigatorCloses: false,
+    restoreSlidesNavigatorWhenLeftCloses: false,
     setActiveElements: props.setActiveElements || ((itemID, edit = true, replace = true) => {
       const { activeElements } = get();
       set({
@@ -57,11 +59,42 @@ const builderStore = props => {
       set({ guides });
     },
     setIsLeftPanelOpen: props.setIsLeftPanelOpen || (status => {
-      const { isEnoughCanvasSize } = get();
-      set({
-        isLeftPanelOpen: status,
-        ...status && !isEnoughCanvasSize && { isRightPanelOpen: false },
-      });
+      const {
+        isEnoughCanvasSize,
+        isSlidesNavigatorOpen: previousIsSlidesNavigatorOpen,
+        restoreSlidesNavigatorWhenLeftCloses,
+      } = get();
+
+      if (status) {
+        if (previousIsSlidesNavigatorOpen) {
+          set({
+            isLeftPanelOpen: true,
+            isSlidesNavigatorOpen: false,
+            restoreLeftPanelWhenNavigatorCloses: false,
+            restoreSlidesNavigatorWhenLeftCloses: true,
+            ...!isEnoughCanvasSize && { isRightPanelOpen: false },
+          });
+        } else {
+          set({
+            isLeftPanelOpen: true,
+            restoreLeftPanelWhenNavigatorCloses: false,
+            restoreSlidesNavigatorWhenLeftCloses: false,
+            ...!isEnoughCanvasSize && { isRightPanelOpen: false },
+          });
+        }
+        return;
+      }
+
+      if (restoreSlidesNavigatorWhenLeftCloses) {
+        set({
+          isLeftPanelOpen: false,
+          isSlidesNavigatorOpen: true,
+          restoreSlidesNavigatorWhenLeftCloses: false,
+        });
+        return;
+      }
+
+      set({ isLeftPanelOpen: false });
     }),
     setIsResize: status => {
       set({ isResize: status });
@@ -70,19 +103,62 @@ const builderStore = props => {
       const { isEnoughCanvasSize, onRightPanelsToggled } = get();
       set({
         isRightPanelOpen: status,
-        ...status && !isEnoughCanvasSize && { isLeftPanelOpen: false },
+        ...status && !isEnoughCanvasSize && {
+          isLeftPanelOpen: false,
+          restoreLeftPanelWhenNavigatorCloses: false,
+          restoreSlidesNavigatorWhenLeftCloses: false,
+        },
         ...status && { isSlidesPanelOpen: false },
       });
       onRightPanelsToggled(status);
     }),
     setIsSlidesNavigatorOpen: status => {
-      set({ isSlidesNavigatorOpen: status });
+      const {
+        isLeftPanelOpen: previousIsLeftPanelOpen,
+        restoreLeftPanelWhenNavigatorCloses,
+      } = get();
+
+      if (status) {
+        if (previousIsLeftPanelOpen) {
+          set({
+            isLeftPanelOpen: false,
+            isSlidesNavigatorOpen: true,
+            restoreLeftPanelWhenNavigatorCloses: true,
+            restoreSlidesNavigatorWhenLeftCloses: false,
+          });
+        } else {
+          set({
+            isSlidesNavigatorOpen: true,
+            restoreLeftPanelWhenNavigatorCloses: false,
+            restoreSlidesNavigatorWhenLeftCloses: false,
+          });
+        }
+        return;
+      }
+
+      if (restoreLeftPanelWhenNavigatorCloses) {
+        set({
+          isLeftPanelOpen: true,
+          isSlidesNavigatorOpen: false,
+          restoreLeftPanelWhenNavigatorCloses: false,
+        });
+        return;
+      }
+
+      set({
+        isSlidesNavigatorOpen: false,
+        restoreSlidesNavigatorWhenLeftCloses: false,
+      });
     },
     setIsSlidesPanelOpen: props.setIsSlidesPanelOpen || (status => {
       const { isEnoughCanvasSize, onRightPanelsToggled } = get();
       set({
         isSlidesPanelOpen: status,
-        ...status && !isEnoughCanvasSize && { isLeftPanelOpen: false },
+        ...status && !isEnoughCanvasSize && {
+          isLeftPanelOpen: false,
+          restoreLeftPanelWhenNavigatorCloses: false,
+          restoreSlidesNavigatorWhenLeftCloses: false,
+        },
         ...status && { isRightPanelOpen: false },
       });
       onRightPanelsToggled(status);
@@ -107,6 +183,8 @@ const builderStore = props => {
           set({
             isEnoughCanvasSize: false,
             isLeftPanelOpen: false,
+            restoreLeftPanelWhenNavigatorCloses: false,
+            restoreSlidesNavigatorWhenLeftCloses: false,
           });
         }
       }

@@ -41,12 +41,10 @@ const SlideItem = ({
       [order],
     ),
   );
-  const setVisiblePageOrder = useBuilderStore(state => state.setVisiblePageOrder);
 
   const itemClickHandler = useCallback(e => {
     onPageClick?.(e);
-    setVisiblePageOrder(order);
-  }, [order, onPageClick, setVisiblePageOrder]);
+  }, [onPageClick]);
 
   const handleContextMenu = useCallback(e => {
     e.preventDefault();
