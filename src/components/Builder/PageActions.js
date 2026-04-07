@@ -1,5 +1,8 @@
+/* eslint-disable jsx-a11y/mouse-events-have-key-events */
 import PropTypes from 'prop-types';
-import { useMemo } from 'react';
+import {
+  useCallback, useEffect, useMemo, useState,
+} from 'react';
 import * as icons from '../../utils/icons';
 import { moveItemInArrayFromIndexToIndex, scrollToTarget } from '../../utils/functions';
 import { useSelectedElements, useTranslatedTexts } from '../../utils/hooks';
@@ -24,6 +27,16 @@ const PageActions = ({
 
   const selectedItems = useSelectedElements();
   const isSelectedItemExists = useMemo(() => selectedItems?.length > 0, [selectedItems]);
+
+  const setOverPage = useBuilderStore(state => state.setOverPage);
+  const setOutPage = useBuilderStore(state => state.setOutPage);
+  const overPageId = useBuilderStore(state => state.overedPageId);
+
+  const [toolbarDisabled, setToolbarDisabled] = useState(isSelectedItemExists);
+
+  useEffect(() => {
+    setToolbarDisabled(isSelectedItemExists);
+  }, [isSelectedItemExists]);
 
   const pageSettings = () => {
     setEditedElement(`p_${pageID}`);
@@ -70,6 +83,22 @@ const PageActions = ({
     onAnEventTrigger('duplicatePage', order + 1);
   };
 
+  const isOverPage = useMemo(() => overPageId === pageID, [overPageId, pageID]);
+
+  const pageToolbarMouseOver = useCallback(() => {
+    if (isSelectedItemExists) {
+      setToolbarDisabled(false);
+    }
+    setOverPage(pageID);
+  }, [pageID, setToolbarDisabled, setOverPage, isSelectedItemExists]);
+
+  const pageToolbarMouseOut = useCallback(() => {
+    if (isSelectedItemExists) {
+      setToolbarDisabled(true);
+    }
+    setOutPage(null);
+  }, [setOutPage, setToolbarDisabled, isSelectedItemExists]);
+
   const {
     ADD_NEW_PAGE, DUPLICATE_PAGE, MOVE_PAGE_DOWNWARDS,
     MOVE_PAGE_UPWARDS, PAGE_SETTINGS, REMOVE_PAGE,
@@ -79,7 +108,11 @@ const PageActions = ({
       className="jfReport-pageInfo d-flex j-center"
       id={`pageActions-id-${order}`}
     >
-      <div className={`floatingController page-toolbar${isSelectedItemExists ? ' disabled' : ''}`}>
+      <div
+        className={`floatingController page-toolbar${toolbarDisabled ? ' disabled' : ''}${isOverPage ? ' active' : ' inactive'}`}
+        onMouseOut={pageToolbarMouseOut}
+        onMouseOver={pageToolbarMouseOver}
+      >
         <div className="floatingController-container">
           <button
             key="Slide Settings"
