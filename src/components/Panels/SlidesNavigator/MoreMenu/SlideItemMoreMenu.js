@@ -20,8 +20,9 @@ import PropTypes from 'prop-types';
 import * as icons from '../../../../utils/icons';
 import { useTranslatedTexts } from '../../../../utils/hooks';
 import { usePropStore } from '../../../../contexts/PropContext';
-import { scrollToTarget } from '../../../../utils/functions';
 import { useBuilderStore } from '../../../../contexts/BuilderContext';
+
+const PAGE_ACTIONS_SYNC_MS = 100;
 
 const SlideItemMoreMenu = forwardRef(({ order, page }, ref) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -105,35 +106,34 @@ const SlideItemMoreMenu = forwardRef(({ order, page }, ref) => {
     zIndex: '99999',
   };
 
-  const nextPageIndex = order + 1;
-
   const handleAddNewSlide = useCallback(() => {
-    onPageAdd(nextPageIndex);
-    onAnEventTrigger('addNewPageFromSlides', nextPageIndex);
+    const nextPageOrder = order + 1;
+    onPageAdd(nextPageOrder);
+    onAnEventTrigger('addNewPageFromSlides', nextPageOrder);
     setIsOpen(false);
-    setTimeout(() => {
-      setVisiblePageOrder(nextPageIndex);
-      scrollToTarget(`pageActions-id-${nextPageIndex}`, 350);
-    }, 100);
-  }, [onPageAdd, nextPageIndex, onAnEventTrigger, setVisiblePageOrder]);
+    window.setTimeout(() => {
+      setVisiblePageOrder(nextPageOrder);
+    }, PAGE_ACTIONS_SYNC_MS);
+  }, [onPageAdd, order, onAnEventTrigger, setVisiblePageOrder]);
 
   const handleDuplicateSlide = useCallback(() => {
+    const nextPageOrder = order + 1;
     onPageDuplicate(page);
-    onAnEventTrigger('duplicatePage', nextPageIndex);
+    onAnEventTrigger('duplicatePage', nextPageOrder);
     setIsOpen(false);
-    setTimeout(() => {
-      setVisiblePageOrder(nextPageIndex);
-      scrollToTarget(`pageActions-id-${nextPageIndex}`, 350);
-    }, 100);
-  }, [onPageDuplicate, page, nextPageIndex, onAnEventTrigger, setVisiblePageOrder]);
+    window.setTimeout(() => {
+      setVisiblePageOrder(nextPageOrder);
+    }, PAGE_ACTIONS_SYNC_MS);
+  }, [onPageDuplicate, page, order, onAnEventTrigger, setVisiblePageOrder]);
 
   const handleDeleteSlide = useCallback(() => {
     onPageRemove(page.id);
     onAnEventTrigger('removePageFromSlides', page.id);
     setIsOpen(false);
-    setTimeout(() => {
-      setVisiblePageOrder(Math.max(order - 1, 1));
-    }, 100);
+    const visibleOrderAfterDelete = Math.max(order - 1, 1);
+    window.setTimeout(() => {
+      setVisiblePageOrder(visibleOrderAfterDelete);
+    }, PAGE_ACTIONS_SYNC_MS);
   }, [page, order, onPageRemove, onAnEventTrigger, setVisiblePageOrder]);
 
   const schemaOptions = useMemo(() => {

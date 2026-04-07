@@ -13,6 +13,7 @@
   z-index: 1000;
   border-top: 1px solid #D8DAE9;
   animation: slideInFromLeft .3s ease-out;
+  user-select: none;
 
   &-toggle {
     width: 40px;

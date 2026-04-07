@@ -52,37 +52,28 @@ const BuilderWrapper = ({ children }) => {
   useFitZoom();
 
   useEffect(() => {
-    if (slidesAsNavigator(slidesListType)) {
-      setIsSlidesNavigatorOpen(true);
-    }
-  }, [slidesListType, setIsSlidesNavigatorOpen]);
-
-  useEffect(() => {
     if (!decidedWhichPanelToOpen.current) {
       if (pageCount > 1) {
         if (isLeftPanelOpen) {
           setIsLeftPanelOpen(false);
+        }
+        if (slidesAsNavigator(slidesListType)) {
+          setIsSlidesNavigatorOpen(true);
         }
         setIsSlidesPanelOpen(shouldShowRightPanelInitially);
       } else {
         if (isSlidesPanelOpen) {
           setIsSlidesPanelOpen(false);
         }
+        if (slidesAsNavigator(slidesListType) && isSlidesNavigatorOpen) {
+          setIsSlidesNavigatorOpen(false);
+        }
         setIsLeftPanelOpen(true);
       }
 
       decidedWhichPanelToOpen.current = true;
     }
-  }, [
-    pageCount,
-    isLeftPanelOpen,
-    isSlidesPanelOpen,
-    isSlidesNavigatorOpen,
-    setIsLeftPanelOpen,
-    setIsSlidesPanelOpen,
-    setIsSlidesNavigatorOpen,
-    shouldShowRightPanelInitially,
-  ]);
+  }, [pageCount, isLeftPanelOpen, isSlidesPanelOpen, isSlidesNavigatorOpen, setIsLeftPanelOpen, setIsSlidesPanelOpen, setIsSlidesNavigatorOpen, shouldShowRightPanelInitially, slidesListType]);
 
   return (
     <>
