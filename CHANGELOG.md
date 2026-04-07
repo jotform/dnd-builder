@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [3.6.1](https://github.com/jotform/dnd-builder/compare/v3.6.0...v3.6.1) (2026-04-07)
+
+
+### Bug Fixes
+
+* **dnd-builder:** enable rich text edit in double click ([78c134b](https://github.com/jotform/dnd-builder/commit/78c134b2b9b9c9730114c55001755560272baced))
+
 ## [3.6.0](https://github.com/jotform/dnd-builder/compare/v3.5.6...v3.6.0) (2026-04-06)
 
 
