@@ -17,7 +17,7 @@ const TextEditor = ({
   const isTextEditorOpen = useBuilderStore(state => state.isTextEditorOpen);
   const setIsTextEditorOpen = useBuilderStore(state => state.setIsTextEditorOpen);
 
-  const onClick = useCallback(() => {
+  const onDoubleClick = useCallback(() => {
     if (isSelected && !isLocked) {
       setIsTextEditorOpen(true);
     }
@@ -43,7 +43,7 @@ const TextEditor = ({
       dangerouslySetInnerHTML={{
         __html: isNotEmpty ? _content : placeholder,
       }}
-      onClick={onClick}
+      onDoubleClick={onDoubleClick}
       onKeyDown={() => {}}
     />
   );
