@@ -76,6 +76,7 @@
   &-item {
     $self: &;
 
+    position: relative;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -209,6 +210,44 @@
 
       &.delete {
         color: #FF0000;
+      }
+    }
+
+    &-button {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: auto;
+      height: auto;
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      padding: 4px 2px;
+      background: #FFFFFF;
+      border: 1px solid #E3E5F5;
+      color: #979dC6;
+      border-radius: 6px;
+      box-shadow: 0 2px 6px 0 rgba(84, 95, 111, 0.12), 0 0 1px 0 rgba(37, 45, 91, 0.04);
+      cursor: pointer;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background: #F5F5F5;
+        color: #343C6A;
+        border: 1px solid #979DC6;
+        transition: all 0.3s ease;
+      }
+    }
+
+    @keyframes fadeInTop {
+      from {
+        opacity: 0;
+        transform: translateY(100%);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
       }
     }
   }

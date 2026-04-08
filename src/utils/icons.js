@@ -8,6 +8,7 @@ export { default as rotate } from '../assets/svg/rotate.svg';
 export { default as customize } from '../assets/svg/customize.svg';
 export { default as slides } from '../assets/svg/slides.svg';
 export { default as settingsToggle } from '../assets/svg/settings_toggle.svg';
+export { default as ellipsisVertical } from '../assets/svg/ellipsis-vertical.svg';
 
 // Elements //
 

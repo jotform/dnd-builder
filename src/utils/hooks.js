@@ -43,6 +43,29 @@ export const useEventListener = (eventName, handler, element = global) => {
   );
 };
 
+export const useResizeListener = (condition = true) => {
+  const [innerWidth, setInnerWidth] = useState(() => (
+    typeof window !== 'undefined' ? window.innerWidth : 0
+  ));
+
+  const handleResize = useCallback(() => {
+    if (typeof window !== 'undefined') {
+      setInnerWidth(window.innerWidth);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (condition && typeof window !== 'undefined') {
+      setInnerWidth(window.innerWidth);
+    }
+  }, [condition]);
+
+  const target = condition && typeof window !== 'undefined' ? window : null;
+  useEventListener('resize', handleResize, target);
+
+  return innerWidth;
+};
+
 export const useInterval = (callback, delay) => {
   const savedCallback = useRef();
   useEffect(() => {

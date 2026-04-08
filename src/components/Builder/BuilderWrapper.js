@@ -8,7 +8,7 @@ import {
   useFitZoom, usePageVisibility, usePrevious, useSelectedElements,
 } from '../../utils/hooks';
 import SlidesNavigator from '../Panels/SlidesNavigator/SlidesNavigator';
-import { slidesAsNavigator } from '../../utils/functions';
+import { isSlidesListType } from '../../utils/functions';
 
 const BuilderWrapper = ({ children }) => {
   const decidedWhichPanelToOpen = useRef(false);
@@ -57,7 +57,7 @@ const BuilderWrapper = ({ children }) => {
         if (isLeftPanelOpen) {
           setIsLeftPanelOpen(false);
         }
-        if (slidesAsNavigator(slidesListType)) {
+        if (isSlidesListType(slidesListType, 'NAVIGATOR')) {
           setIsSlidesNavigatorOpen(true);
         }
         setIsSlidesPanelOpen(shouldShowRightPanelInitially);
@@ -65,7 +65,7 @@ const BuilderWrapper = ({ children }) => {
         if (isSlidesPanelOpen) {
           setIsSlidesPanelOpen(false);
         }
-        if (slidesAsNavigator(slidesListType) && isSlidesNavigatorOpen) {
+        if (isSlidesListType(slidesListType, 'NAVIGATOR') && isSlidesNavigatorOpen) {
           setIsSlidesNavigatorOpen(false);
         }
         setIsLeftPanelOpen(true);
@@ -77,7 +77,7 @@ const BuilderWrapper = ({ children }) => {
 
   return (
     <>
-      {slidesAsNavigator(slidesListType) && <SlidesNavigator />}
+      {isSlidesListType(slidesListType, 'NAVIGATOR') && <SlidesNavigator />}
       <ReportWrapper mode="customize">
         {children}
       </ReportWrapper>

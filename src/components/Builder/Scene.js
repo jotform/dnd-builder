@@ -2,6 +2,7 @@
 /* eslint-disable complexity */
 import {
   createRef,
+  useCallback,
   useEffect,
   useRef,
 } from 'react';
@@ -18,7 +19,7 @@ import {
   calculateGuidePositions,
   findItemById,
   findItemsOnPage,
-  slidesAsNavigator,
+  isSlidesListType,
 } from '../../utils/functions';
 import DraggableLayer from './DraggableLayer';
 import useKeyboardActions from '../../utils/useKeyboardActions';
@@ -116,6 +117,14 @@ const Scene = () => {
     width,
   };
 
+  const pageOverHandler = useCallback(pageId => {
+    setOverPage(pageId);
+  }, [setOverPage]);
+
+  const pageOutHandler = useCallback(() => {
+    setOutPage(null);
+  }, [setOutPage]);
+
   return (
     <main
       className={classNames.mainWrapper}
@@ -135,8 +144,8 @@ const Scene = () => {
           {pages.map((page, index) => (
             <div
               key={page.id}
-              onMouseOut={() => setOutPage(null)}
-              onMouseOver={() => setOverPage(page.id)}
+              onMouseOut={pageOutHandler}
+              onMouseOver={() => pageOverHandler(page.id)}
             >
               <PageActions
                 order={page.order}
@@ -167,7 +176,7 @@ const Scene = () => {
         </div>
       </div>
       <div className="bottom-actions-container">
-        {slidesAsNavigator(slidesListType) && <SlidesNavigatorToggle />}
+        {isSlidesListType(slidesListType, 'NAVIGATOR') && <SlidesNavigatorToggle />}
         <ZoomControls />
       </div>
       {contextMenuProps

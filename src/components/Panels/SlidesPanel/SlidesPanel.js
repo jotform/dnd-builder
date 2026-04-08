@@ -5,7 +5,7 @@ import SortablePageList from './SortablePageList';
 import Section from '../../Builder/Section';
 import { useBuilderStore } from '../../../contexts/BuilderContext';
 import { usePropStore } from '../../../contexts/PropContext';
-import { arrayMove, slidesAsPanel } from '../../../utils/functions';
+import { arrayMove, isSlidesListType } from '../../../utils/functions';
 import SlidesPanelToggler from './SlidesPanelToggler';
 import ListWrapper from './ListWrapper';
 import { useClickOutsideListener, useTranslatedTexts } from '../../../utils/hooks';
@@ -64,7 +64,7 @@ const SlidesPanel = () => {
 
   const { SLIDES } = useTranslatedTexts();
   return (
-    slidesAsPanel(slidesListType) ? (
+    isSlidesListType(slidesListType, 'PANEL') ? (
       <Panel
         additionalClassName={panelAdditionalClassName}
         onAnimationEnd={onAnimationEnd}
