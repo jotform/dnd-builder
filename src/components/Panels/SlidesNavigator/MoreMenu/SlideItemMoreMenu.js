@@ -21,6 +21,7 @@ import * as icons from '../../../../utils/icons';
 import { useTranslatedTexts } from '../../../../utils/hooks';
 import { usePropStore } from '../../../../contexts/PropContext';
 import { useBuilderStore } from '../../../../contexts/BuilderContext';
+import MoreMenuOverlay from '../MoreMenuOverlay';
 
 const PAGE_ACTIONS_SYNC_MS = 100;
 
@@ -185,7 +186,7 @@ const SlideItemMoreMenu = forwardRef(({ order, page }, ref) => {
     <>
       {isOpen && (
         <FloatingPortal>
-          {/* <PopoverOverlay /> */}
+          <MoreMenuOverlay />
           <div
             ref={refs.setFloating}
             alignItems="start"

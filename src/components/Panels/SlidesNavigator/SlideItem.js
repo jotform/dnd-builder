@@ -25,6 +25,9 @@ const SlideItem = ({
   style,
 }) => {
   const moreMenuRef = useRef(null);
+  const setVisiblePageOrder = useBuilderStore(state => state.setVisiblePageOrder);
+  const visiblePageOrder = useBuilderStore(state => state.visiblePageOrder);
+  const selected = visiblePageOrder === order;
 
   const {
     attributes,
@@ -35,16 +38,10 @@ const SlideItem = ({
     transition,
   } = useSortable({ id });
 
-  const selected = useBuilderStore(
-    useCallback(
-      state => state.visiblePageOrder.toString() === order.toString(),
-      [order],
-    ),
-  );
-
   const itemClickHandler = useCallback(e => {
+    setVisiblePageOrder(order);
     onPageClick?.(e);
-  }, [onPageClick]);
+  }, [onPageClick, setVisiblePageOrder, order]);
 
   const handleContextMenu = useCallback(e => {
     e.preventDefault();

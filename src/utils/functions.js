@@ -847,10 +847,5 @@ export const getDimensions = ({
   };
 };
 
-export const slidesAsNavigator = slidesListType => {
-  return slidesListType === SLIDES_LIST_TYPE_MAP.NAVIGATOR;
-};
-
-export const slidesAsPanel = slidesListType => {
-  return slidesListType === SLIDES_LIST_TYPE_MAP.PANEL;
-};
+/** @param {'NAVIGATOR' | 'PANEL'} mode */
+export const isSlidesListType = (slidesListType, mode) => slidesListType === SLIDES_LIST_TYPE_MAP[mode];
