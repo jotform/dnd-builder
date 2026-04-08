@@ -93,6 +93,7 @@ const SlideItem = ({
           ref={moreMenuRef}
           order={order}
           page={page}
+          selected={selected}
         />
       </motion.div>
     </div>
