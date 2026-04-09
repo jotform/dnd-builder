@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [3.6.3](https://github.com/jotform/dnd-builder/compare/v3.6.2...v3.6.3) (2026-04-09)
+
+
+### Bug Fixes
+
+* **dnd-builder:** fix mobile context handling ([83a9845](https://github.com/jotform/dnd-builder/commit/83a98457eedb793e540881c3eee65007724e7d4c))
+* **dnd-builder:** slide item functionality fixes and more menu improvements ([5e799c6](https://github.com/jotform/dnd-builder/commit/5e799c6863f400105ebd3f7dd41ed863dd92dbd1))
+
 ## [3.6.2](https://github.com/jotform/dnd-builder/compare/v3.6.0...v3.6.2) (2026-04-07)
 
 
