@@ -9,6 +9,7 @@ import StaticSlideItem from './StaticSlideItem';
 import SlideItemMoreMenu from './MoreMenu/SlideItemMoreMenu';
 import { emptyFunction } from '../../../utils/functions';
 import { useBuilderStore } from '../../../contexts/BuilderContext';
+import { usePropStore } from '../../../contexts/PropContext';
 
 const slideRevealTransition = {
   duration: 0.25,
@@ -27,6 +28,7 @@ const SlideItem = ({
   const moreMenuRef = useRef(null);
   const setVisiblePageOrder = useBuilderStore(state => state.setVisiblePageOrder);
   const visiblePageOrder = useBuilderStore(state => state.visiblePageOrder);
+  const reportBackgroundColor = usePropStore(state => state.settings?.reportBackgroundColor);
   const selected = visiblePageOrder === order;
 
   const {
@@ -83,7 +85,7 @@ const SlideItem = ({
           className="slides-navigator-item-content"
         >
           <StaticSlideItem
-            backgroundColor={page.backgroundColor}
+            backgroundColor={page.backgroundColor || reportBackgroundColor || '#fff'}
             items={page.items}
             reportHeight={reportHeight}
             reportWidth={reportWidth}
