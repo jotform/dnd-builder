@@ -1,6 +1,7 @@
 import { DragOverlay, defaultDropAnimationSideEffects } from '@dnd-kit/core';
 import PropTypes from 'prop-types';
 import StaticSlideItem from './StaticSlideItem';
+import { usePropStore } from '../../../contexts/PropContext';
 
 const dropAnimation = {
   duration: 150,
@@ -11,6 +12,8 @@ const dropAnimation = {
 };
 
 const SlideItemDragOverlay = ({ activePageData }) => {
+  const reportBackgroundColor = usePropStore(state => state.settings?.reportBackgroundColor);
+
   return (
     <DragOverlay
       adjustScale={false}
@@ -25,7 +28,7 @@ const SlideItemDragOverlay = ({ activePageData }) => {
           <div className="slides-navigator-item-order">{activePageData.page.order}</div>
           <div className="slides-navigator-item-content">
             <StaticSlideItem
-              backgroundColor={activePageData.page.backgroundColor}
+              backgroundColor={activePageData.page.backgroundColor || reportBackgroundColor || '#fff'}
               items={activePageData.page.items}
               reportHeight={activePageData.reportHeight}
               reportWidth={activePageData.reportWidth}

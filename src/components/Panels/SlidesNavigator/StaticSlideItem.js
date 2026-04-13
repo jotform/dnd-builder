@@ -6,8 +6,8 @@ import StaticItem from '../../Preview/StaticItem';
 import ErrorBoundary from '../../ErrorBoundary/ErrorBoundary';
 import { usePropStore } from '../../../contexts/PropContext';
 
-const THUMBNAIL_MAX_WIDTH = 128;
-const THUMBNAIL_MAX_HEIGHT = 90.5;
+const THUMBNAIL_MAX_WIDTH = 124;
+const THUMBNAIL_MAX_HEIGHT = 88.5;
 
 const wrapperStyle = {
   height: '100%',
