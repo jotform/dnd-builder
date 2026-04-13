@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [3.6.4](https://github.com/jotform/dnd-builder/compare/v3.6.3...v3.6.4) (2026-04-13)
+
+
+### Bug Fixes
+
+* **dnd-builder:** enhance slide item background color handling and adjust thumbnail dimensions ([e74b759](https://github.com/jotform/dnd-builder/commit/e74b7591fd29278ced3b5640e4d5a2f5ffdb72c5))
+
 ## [3.6.3](https://github.com/jotform/dnd-builder/compare/v3.6.2...v3.6.3) (2026-04-09)
 
 
