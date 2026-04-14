@@ -200,7 +200,7 @@ export const useFullscreenChange = (isFullscreen, fitToScreen) => {
 };
 
 export const useTranslatedTexts = () => {
-  return useMemo(() => SharingTextsModule.Texts, []);
+  return SharingTextsModule.Texts;
 };
 
 export const useClickOutsideListener = (classes, conditionValue, onClose) => {
