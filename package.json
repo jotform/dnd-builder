@@ -1,6 +1,6 @@
 {
   "name": "@jotforminc/dnd-builder",
-  "version": "3.6.4",
+  "version": "3.6.5",
   "files": [
     "lib",
     "index.d.ts"

@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [3.6.5](https://github.com/jotform/dnd-builder/compare/v3.6.4...v3.6.5) (2026-04-14)
+
+
+### Bug Fixes
+
+* **dnd-builder:** remove text object memoization ([f87c108](https://github.com/jotform/dnd-builder/commit/f87c108991b78c60164e20e88bf30b8ec3dade22))
+
 ## [3.6.4](https://github.com/jotform/dnd-builder/compare/v3.6.3...v3.6.4) (2026-04-13)
 
 
