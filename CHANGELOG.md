@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [3.7.1](https://github.com/jotform/dnd-builder/compare/v3.7.0...v3.7.1) (2026-04-20)
+
+
+### Bug Fixes
+
+* **dnd-builder:** zoom actions some updates ([a33afc5](https://github.com/jotform/dnd-builder/commit/a33afc52dacdf5187fe572428c4ed707b36ab3f3))
+* improve zoom behavior and responsiveness in preview mode ([cfbca2b](https://github.com/jotform/dnd-builder/commit/cfbca2b8131159068ccfc81ce0aae8389f596a64))
+* remove comment in css ([6784c70](https://github.com/jotform/dnd-builder/commit/6784c70caf91d7708cbc1d1d09b51e02d05d2799))
+
 ## [3.7.0](https://github.com/jotform/dnd-builder/compare/v3.6.5...v3.7.0) (2026-04-20)
 
 
