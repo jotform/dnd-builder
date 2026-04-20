@@ -196,10 +196,12 @@ const builderStore = props => {
         }
       }
     },
+    shouldFitZoomInitially: !!props.defaultZoom,
     shouldShowRightPanelInitially: props.shouldShowRightPanelInitially ?? true,
+    shouldShowZoomControls: props.shouldShowZoomControls ?? true,
     slidesListType: props.slidesListType || SLIDES_LIST_TYPE_MAP.PANEL,
     visiblePageOrder: 1,
-    zoom: 0.8,
+    zoom: props.defaultZoom ?? 0.8,
   }));
 };
 

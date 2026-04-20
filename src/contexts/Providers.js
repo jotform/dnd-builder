@@ -7,11 +7,13 @@ import { SLIDES_LIST_TYPE_MAP } from '../constants/panel';
 const Providers = ({
   children,
   clickOutsideIgnoreSelectors,
+  defaultZoom,
   lastScrollPosition,
   mode,
   onRightPanelsToggled,
   presentationBarActions,
   shouldShowRightPanelInitially,
+  shouldShowZoomControls,
   slidesListType,
   useFixedPresentationBar,
   ...props
@@ -19,9 +21,11 @@ const Providers = ({
   return (
     <BuilderProvider
       clickOutsideIgnoreSelectors={clickOutsideIgnoreSelectors}
+      defaultZoom={defaultZoom}
       lastScrollPosition={lastScrollPosition}
       onRightPanelsToggled={onRightPanelsToggled}
       shouldShowRightPanelInitially={shouldShowRightPanelInitially}
+      shouldShowZoomControls={shouldShowZoomControls}
       slidesListType={slidesListType}
     >
       <PropProvider {...props}>
@@ -42,6 +46,8 @@ Providers.propTypes = {
   children: PropTypes.node.isRequired,
   /** CSS selectors ignored by right panel click-outside logic */
   clickOutsideIgnoreSelectors: PropTypes.arrayOf(PropTypes.string),
+  /** Default zoom */
+  defaultZoom: PropTypes.number,
   /** Last scroll position */
   lastScrollPosition: PropTypes.number,
   /** Mode of the report */
@@ -55,6 +61,8 @@ Providers.propTypes = {
   presentationBarActions: PropTypes.arrayOf(PropTypes.shape({})),
   /** Flag for fixed action bar */
   shouldShowRightPanelInitially: PropTypes.bool,
+  /** Flag for whether to show the zoom controls */
+  shouldShowZoomControls: PropTypes.bool,
   /** Flag for whether to show the right panel initially */
   slidesListType: PropTypes.oneOf(Object.values(SLIDES_LIST_TYPE_MAP)),
   /** Slides list type for the report */
