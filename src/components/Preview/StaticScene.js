@@ -39,6 +39,8 @@ const StaticScene = ({
   } = settings;
   const width = parseInt(reportLayoutWidth, 10);
   const height = parseInt(reportLayoutHeight, 10);
+  const zoomToUse = Number.isNaN(zoom) ? 1 : zoom;
+  const isPreviewCssZoom = mode === 'preview';
 
   useEffect(() => {
     transformRefs.current = transformRefs.current.slice(0, pages.length);
@@ -60,12 +62,15 @@ const StaticScene = ({
   }, [setZoom]);
 
   useEffect(() => {
+    if (mode !== 'presentation') {
+      return;
+    }
     if (transformRefs.current.length > 0) {
       for (let i = 0; i < pages.length; i++) {
-        transformRefs.current[i].centerView(zoom);
+        transformRefs.current[i]?.centerView?.(zoom);
       }
     }
-  }, [pages.length, zoom]);
+  }, [pages.length, zoom, mode]);
 
   const isEnabledZoomControls = (!isFullscreen || (isFullscreen && showControlsInFullScreen)) && !hideZoom;
 
@@ -76,6 +81,7 @@ const StaticScene = ({
       <div
         ref={viewPortRef}
         className={classNames.viewport}
+        data-zoom={isPreviewCssZoom ? zoom : undefined}
         {...gesture()}
       >
         <div
@@ -84,10 +90,25 @@ const StaticScene = ({
         >
           {pages.map((page, index) => {
             const { backgroundColor } = page;
-            const style = {
+            const bg = backgroundColor ? backgroundColor : reportBackgroundColor || '#fff';
+
+            const style = isPreviewCssZoom ? {
+              backgroundColor: bg,
+              height,
+              transform: `scale(${zoomToUse})`,
+              transformOrigin: '0 0',
+              width,
+            } : {
               ...pageContainerStyles,
-              backgroundColor: backgroundColor ? backgroundColor : reportBackgroundColor || '#fff',
+              backgroundColor: bg,
             };
+
+            const pageOuterStyle = isPreviewCssZoom ? {
+              height: parseFloat((height * zoomToUse).toFixed(1)),
+              position: 'relative',
+              width: parseFloat((width * zoomToUse).toFixed(1)),
+            } : undefined;
+
             return (
               <div
                 key={`page_${index.toString()}`}
@@ -98,6 +119,7 @@ const StaticScene = ({
                 })}
                 data-id={page.id}
                 id={`presentation-page-${page.id.toString()}`}
+                style={pageOuterStyle}
               >
                 <StaticPageWithZoomPanPinch
                   handleZoom={handleZoom}
@@ -111,7 +133,11 @@ const StaticScene = ({
           })}
         </div>
       </div>
-      {isEnabledZoomControls && <ZoomControls />}
+      {isEnabledZoomControls && (
+        <div className="bottom-actions-container">
+          <ZoomControls />
+        </div>
+      )}
     </main>
   );
 };
