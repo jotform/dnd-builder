@@ -3,6 +3,7 @@ import {
   useRef,
   useState,
 } from 'react';
+import PropTypes from 'prop-types';
 import { Resizable } from 're-resizable';
 import { createPortal } from 'react-dom';
 import classNames from 'classnames';
@@ -165,6 +166,21 @@ const PageItemResizer = ({
     </ItemPositioner>,
     document.querySelector(`.jfReport-page[data-id="${item.pageID}"]`),
   );
+};
+
+PageItemResizer.propTypes = {
+  item: PropTypes.shape({
+    height: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
+    isLocked: PropTypes.bool,
+    itemType: PropTypes.string,
+    left: PropTypes.number.isRequired,
+    pageID: PropTypes.string.isRequired,
+    top: PropTypes.number.isRequired,
+    width: PropTypes.number.isRequired,
+  }).isRequired,
+  onResize: PropTypes.func.isRequired,
+  onResizeStop: PropTypes.func.isRequired,
 };
 
 export default PageItemResizer;
