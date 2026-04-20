@@ -104,21 +104,25 @@ export const usePropState = (propValue, transform = v => v) => {
 export const useFitZoom = () => {
   const settings = usePropStore(state => state.settings);
   const setZoom = useBuilderStore(state => state.setZoom);
+  const shouldFitZoomInitially = useBuilderStore(state => state.shouldFitZoomInitially);
 
   useEffect(() => {
-    const fitZoom = getZoomValue({
-      limitZoom: true,
-      settings: {
-        reportLayoutHeight: settings.reportLayoutHeight,
-        reportLayoutWidth: settings.reportLayoutWidth,
-      },
-    });
-    const newZoom = Math.min(fitZoom, INITIAL_ZOOM_MAX);
-    setZoom(newZoom, settings.reportLayoutWidth);
+    if (shouldFitZoomInitially) {
+      const fitZoom = getZoomValue({
+        limitZoom: true,
+        settings: {
+          reportLayoutHeight: settings.reportLayoutHeight,
+          reportLayoutWidth: settings.reportLayoutWidth,
+        },
+      });
+      const newZoom = Math.min(fitZoom, INITIAL_ZOOM_MAX);
+      setZoom(newZoom, settings.reportLayoutWidth);
+    }
   }, [
     settings.reportLayoutHeight,
     settings.reportLayoutWidth,
     setZoom,
+    shouldFitZoomInitially,
   ]);
 };
 
