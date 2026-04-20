@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [3.7.0](https://github.com/jotform/dnd-builder/compare/v3.6.5...v3.7.0) (2026-04-20)
+
+
+### Features
+
+* add properties to control zoom and zoom controls visibility ([bd4ccc5](https://github.com/jotform/dnd-builder/commit/bd4ccc58b2f8807bdf17fe4b4597022adf387df9))
+
 ## [3.6.5](https://github.com/jotform/dnd-builder/compare/v3.6.4...v3.6.5) (2026-04-14)
 
 
