@@ -7,12 +7,17 @@ import {
   ZOOM_MIN,
   ZOOM_MAX,
   ZOOM_MULTIPLIER,
+  ZOOM_MOBILE_MIN,
+  ZOOM_MOBILE_MAX,
 } from '../../constants/zoom';
-import { useTranslatedTexts } from '../../utils/hooks';
+import { useResizeListener, useTranslatedTexts } from '../../utils/hooks';
 
 const ZoomControls = () => {
   const setZoom = useBuilderStore(state => state.setZoom);
   const zoom = useBuilderStore(state => state.zoom);
+  const resizedWidth = useResizeListener();
+  const minZoom = resizedWidth < 768 ? ZOOM_MOBILE_MIN : ZOOM_MIN;
+  const maxZoom = resizedWidth < 768 ? ZOOM_MOBILE_MAX : ZOOM_MAX;
 
   const onAnEventTrigger = usePropStore(state => state.onAnEventTrigger);
   const settings = usePropStore(state => state.settings);
@@ -20,13 +25,13 @@ const ZoomControls = () => {
   const { reportLayoutHeight = 794, reportLayoutWidth = 1123 } = settings;
   const decreaseZoom = () => {
     onAnEventTrigger('zoomOut', 'report');
-    if (zoom > (ZOOM_STEP + ZOOM_MIN)) {
+    if (zoom > minZoom) {
       setZoom(parseFloat((zoom - ZOOM_STEP).toFixed(1)), reportLayoutWidth);
     }
   };
   const increaseZoom = () => {
     onAnEventTrigger('zoomIn', 'report');
-    if (zoom < (ZOOM_MAX)) {
+    if (zoom < maxZoom) {
       setZoom(parseFloat((zoom + ZOOM_STEP).toFixed(1)), reportLayoutWidth);
     }
   };

@@ -13,7 +13,6 @@ const Providers = ({
   onRightPanelsToggled,
   presentationBarActions,
   shouldShowRightPanelInitially,
-  shouldShowZoomControls,
   slidesListType,
   useFixedPresentationBar,
   ...props
@@ -25,7 +24,6 @@ const Providers = ({
       lastScrollPosition={lastScrollPosition}
       onRightPanelsToggled={onRightPanelsToggled}
       shouldShowRightPanelInitially={shouldShowRightPanelInitially}
-      shouldShowZoomControls={shouldShowZoomControls}
       slidesListType={slidesListType}
     >
       <PropProvider {...props}>
@@ -61,8 +59,6 @@ Providers.propTypes = {
   presentationBarActions: PropTypes.arrayOf(PropTypes.shape({})),
   /** Flag for fixed action bar */
   shouldShowRightPanelInitially: PropTypes.bool,
-  /** Flag for whether to show the zoom controls */
-  shouldShowZoomControls: PropTypes.bool,
   /** Flag for whether to show the right panel initially */
   slidesListType: PropTypes.oneOf(Object.values(SLIDES_LIST_TYPE_MAP)),
   /** Slides list type for the report */

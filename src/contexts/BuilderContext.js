@@ -181,7 +181,7 @@ const builderStore = props => {
     },
     setZoom: (zoom, layoutWidth) => {
       set({ zoom });
-      if (layoutWidth) {
+      if (layoutWidth && get().mode === 'customize') {
         const { clientWidth: paneWidth } = document.querySelector('.jfReport-pane .toolItemWrapper');
         const sceneWidth = parseInt(layoutWidth, 10) * zoom;
         if (window.innerWidth - sceneWidth + 100 > (paneWidth * 2)) {
@@ -198,7 +198,6 @@ const builderStore = props => {
     },
     shouldFitZoomInitially: !!props.defaultZoom,
     shouldShowRightPanelInitially: props.shouldShowRightPanelInitially ?? true,
-    shouldShowZoomControls: props.shouldShowZoomControls ?? true,
     slidesListType: props.slidesListType || SLIDES_LIST_TYPE_MAP.PANEL,
     visiblePageOrder: 1,
     zoom: props.defaultZoom ?? 0.8,

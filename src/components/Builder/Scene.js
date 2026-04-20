@@ -37,7 +37,6 @@ const Scene = () => {
   const slidesListType = useBuilderStore(state => state.slidesListType);
   const setOverPage = useBuilderStore(state => state.setOverPage);
   const setOutPage = useBuilderStore(state => state.setOutPage);
-  const shouldShowZoomControls = useBuilderStore(state => state.shouldShowZoomControls);
 
   const pageStyles = useRef({});
   const pageContainerStyles = useRef({});
@@ -178,7 +177,7 @@ const Scene = () => {
       </div>
       <div className="bottom-actions-container">
         {isSlidesListType(slidesListType, 'NAVIGATOR') && <SlidesNavigatorToggle />}
-        {shouldShowZoomControls && <ZoomControls />}
+        <ZoomControls />
       </div>
       {contextMenuProps
         && (
