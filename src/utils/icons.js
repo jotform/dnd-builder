@@ -69,6 +69,7 @@ export { default as arrowDown } from '../assets/svg/arrow_down.svg';
 export { default as arrowUp } from '../assets/svg/arrow_up.svg';
 export { default as arrowLeft } from '../assets/svg/arrow_left.svg';
 export { default as arrowRight } from '../assets/svg/arrow_right.svg';
+export { default as anglesLeft } from '../assets/svg/angles-left.svg';
 export { default as angleDown } from '../assets/svg/angle_down.svg';
 export { default as angleUp } from '../assets/svg/angle_up.svg';
 export { default as angleLeft } from '../assets/svg/angle_left.svg';

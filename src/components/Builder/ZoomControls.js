@@ -59,6 +59,7 @@ const ZoomControls = () => {
       <div className="floatingController-container">
         <button
           className="controllerItem"
+          disabled={zoom === maxZoom}
           onClick={increaseZoom}
           title={ZOOM_IN}
           type="button"
@@ -71,6 +72,7 @@ const ZoomControls = () => {
         </div>
         <button
           className="controllerItem"
+          disabled={zoom === minZoom}
           onClick={decreaseZoom}
           title={ZOOM_OUT}
           type="button"

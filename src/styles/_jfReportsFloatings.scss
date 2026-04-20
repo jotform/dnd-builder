@@ -265,6 +265,14 @@
         color: #0a1551;
         fill: #0a1551;
 
+        &.angles-left {
+          animation: fadeInAnglesLeft 0.3s ease-out;
+        }
+
+        &.slides {
+          animation: fadeInSlides 0.3s ease-out;
+        }
+
         path {
           color: #0a1551;
           fill: #0a1551;
@@ -435,4 +443,27 @@
   left: 20px;
   gap: 4px;
   z-index: 2;
+}
+
+
+@keyframes fadeInAnglesLeft {
+  from {
+    opacity: 0.8;
+    transform: scale(0.8) translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateX(0);
+  }
+}
+
+@keyframes fadeInSlides {
+  from {
+    opacity: 0.8;
+    transform: scale(0.8) translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
 }

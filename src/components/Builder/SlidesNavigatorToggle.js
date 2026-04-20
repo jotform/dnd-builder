@@ -20,7 +20,7 @@ const SlidesNavigatorToggle = () => {
           title={SLIDES_NAVIGATOR_TOGGLE}
           type="button"
         >
-          <icons.slides className="toolbar-icon" />
+          {isSlidesNavigatorOpen ? <icons.anglesLeft className="toolbar-icon angles-left" /> : <icons.slides className="toolbar-icon slides" />}
         </button>
       </div>
     </div>
