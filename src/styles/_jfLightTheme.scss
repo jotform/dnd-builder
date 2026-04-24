@@ -24,6 +24,14 @@
       background-color: $white;
     }
 
+    .toolItem-subSection {
+      background-color: #e8eaf0;
+
+      &-title {
+        color: #6c7389;
+      }
+    }
+
     .toolItem:not(.toolSection) {
       border-bottom: 1px solid #dde0ea;
     }

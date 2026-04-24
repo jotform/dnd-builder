@@ -95,6 +95,14 @@
       background-color: #394049;
     }
 
+    .toolItem-subSection {
+      background-color: #292D3C;
+
+      &-title {
+        color: #A0A6B6;
+      }
+    }
+
     .toolItem:not(.toolSection) {
       border-bottom: 1px solid #4C5360;
     }

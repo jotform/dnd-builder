@@ -87,6 +87,28 @@
             height: 100%;
           }
         }
+      }
+
+      &-subSection {
+        display: flex;
+        flex-direction: column;
+
+        &-title {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 36px;
+          font-size: 0.875rem;
+          font-weight: 400;
+          line-height: 20px;
+          letter-spacing: -0.084px;
+          white-space: nowrap;
+          user-select: none;
+          pointer-events: none;
+        }
+      }
+
+      &-tabContent {
 
         &:not(.hasInnerScroll):after {
           content: "";
