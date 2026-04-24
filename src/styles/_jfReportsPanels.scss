@@ -87,6 +87,13 @@
             height: 100%;
           }
         }
+
+        &:not(.hasInnerScroll):after {
+          content: "";
+          display: block;
+          height: 30px;
+          pointer-events: none;
+        }
       }
 
       &-subSection {
@@ -104,16 +111,6 @@
           letter-spacing: -0.084px;
           white-space: nowrap;
           user-select: none;
-          pointer-events: none;
-        }
-      }
-
-      &-tabContent {
-
-        &:not(.hasInnerScroll):after {
-          content: "";
-          display: block;
-          height: 30px;
           pointer-events: none;
         }
       }
