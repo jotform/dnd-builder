@@ -39,6 +39,15 @@ const Elements = () => {
     return Array.isArray(elements) ? elements : [];
   }, [elements]);
 
+  const flatElements = useMemo(() => {
+    return elementWillBeUsed.reduce((acc, item) => {
+      if (Array.isArray(item.elements)) {
+        return acc.concat(item.elements);
+      }
+      return acc.concat(item);
+    }, []);
+  }, [elementWillBeUsed]);
+
   const [searchElements, setSearchElements] = useState(elementWillBeUsed);
 
   useEffect(() => {
@@ -50,9 +59,36 @@ const Elements = () => {
       setSearchElements(elementWillBeUsed);
       return;
     }
-    const filteredElements = elementWillBeUsed?.filter(element => element.title.toLowerCase().includes(value.toLowerCase()));
+    const filteredElements = flatElements.filter(element => element.title.toLowerCase().includes(value.toLowerCase()));
     setSearchElements(filteredElements);
-  }, [elementWillBeUsed]);
+  }, [elementWillBeUsed, flatElements]);
+
+  const renderElements = useCallback(items => {
+    return items.map((item, index) => {
+      if (Array.isArray(item.elements)) {
+        return (
+          <div
+            key={item.section || index}
+            className="toolItem-subSection"
+          >
+            <span className="toolItem-subSection-title">{item.title}</span>
+            {item.elements.map((el, elIndex) => (
+              <Element
+                key={elIndex.toString()}
+                {...el}
+              />
+            ))}
+          </div>
+        );
+      }
+      return (
+        <Element
+          key={index.toString()}
+          {...item}
+        />
+      );
+    });
+  }, []);
 
   return (
     <div className="toolItemWrapper f-height d-flex dir-col o-auto p-relative">
@@ -68,12 +104,7 @@ const Elements = () => {
           <SearchInput onSearch={filterElementsBySearch} />
         )}
         <div className="toolItem-tabContent">
-          {searchElements.length > 0 ? searchElements.map((element, index) => (
-            <Element
-              key={index.toString()}
-              {...element}
-            />
-          )) : (
+          {searchElements.length > 0 ? renderElements(searchElements) : (
             <div className="no-search-result-text">{NO_RESULT}</div>
           )}
         </div>
