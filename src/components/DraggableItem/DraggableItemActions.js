@@ -4,6 +4,16 @@ import { usePropStore } from '../../contexts/PropContext';
 import { useBuilderStore } from '../../contexts/BuilderContext';
 import generateId from '../../utils/generateId';
 
+const DEFAULT_TOOLBAR_ALIGN = 'right-align';
+
+const toolbarAlignForItem = (state, selectedId) => {
+  const { itemId, position } = state.toolbarPosition ?? {};
+  if (itemId == null || itemId === '' || String(itemId) !== String(selectedId)) {
+    return DEFAULT_TOOLBAR_ALIGN;
+  }
+  return position ?? DEFAULT_TOOLBAR_ALIGN;
+};
+
 const DraggableItemActions = () => {
   const {
     DELETE_ITEM,
@@ -24,10 +34,10 @@ const DraggableItemActions = () => {
   const selectedElements = useSelectedElements();
   const item = selectedElements[0]; // ACTIONS WORKS ONLY FOR ONE ITEM
 
-  const { isLocked, itemType } = item;
+  const { isLocked } = item;
 
-  const reportItemToolbarPosition = usePropStore(state => state.reportItemToolbarPosition);
-  const toolbarPosition = reportItemToolbarPosition?.toolbarPositionByItemType?.[itemType] || 'right-align';
+  const itemId = item?.id;
+  const position = useBuilderStore(s => toolbarAlignForItem(s, itemId));
 
   const changeLockStatus = () => {
     onAnEventTrigger(isLocked ? 'unlockReportItem' : 'lockReportItem', item.itemType);
@@ -63,7 +73,7 @@ const DraggableItemActions = () => {
 
   if (isLocked) {
     return (
-      <div className={`report-item-toolbar isLocked forLocked ${toolbarPosition}`}>
+      <div className={`report-item-toolbar isLocked forLocked ${position}`}>
         <button
           className="report-item-toolbar-item"
           onClick={changeLockStatus}
@@ -75,7 +85,7 @@ const DraggableItemActions = () => {
     );
   }
   return (
-    <div className={`report-item-toolbar ${toolbarPosition}`}>
+    <div className={`report-item-toolbar ${position}`}>
       <button
         className="report-item-toolbar-item"
         onClick={openSettings}

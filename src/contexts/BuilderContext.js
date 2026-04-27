@@ -176,6 +176,9 @@ const builderStore = props => {
     setOverPage: overPageId => {
       set({ overedPageId: overPageId });
     },
+    setToolbarPosition: ({ itemId, position }) => {
+      set({ toolbarPosition: { itemId, position } });
+    },
     setVisiblePageOrder: visiblePageOrder => {
       set({ visiblePageOrder });
     },
@@ -199,6 +202,7 @@ const builderStore = props => {
     shouldFitZoomInitially: !!props.defaultZoom,
     shouldShowRightPanelInitially: props.shouldShowRightPanelInitially ?? true,
     slidesListType: props.slidesListType || SLIDES_LIST_TYPE_MAP.PANEL,
+    toolbarPosition: props.toolbarPosition || { itemId: '', position: 'right-align' },
     visiblePageOrder: 1,
     zoom: props.defaultZoom ?? 0.8,
   }));

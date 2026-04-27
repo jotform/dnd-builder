@@ -31,7 +31,6 @@ const propStore = props => {
     onSelectedItemsChanged: props.onSelectedItemsChanged || fn,
     onSettingChange: props.onSettingChange || fn,
     pages: props.pages || [],
-    reportItemToolbarPosition: props.reportItemToolbarPosition || {},
     setAcceptedItems: acceptedItems => { set({ acceptedItems }); },
     setItemAccessor: itemAccessor => { set({ itemAccessor }); },
     setPages: pages => { set({ pages }); },

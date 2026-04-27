@@ -1,5 +1,5 @@
 import {
-  useEffect, useState, memo, useMemo,
+  useEffect, useLayoutEffect, useState, memo, useMemo,
 } from 'react';
 import PropTypes from 'prop-types';
 import { useDrag } from 'react-dnd';
@@ -57,6 +57,8 @@ const DraggableItemContent = ({
   const onAnEventTrigger = usePropStore(state => state.onAnEventTrigger);
   const onItemAdd = usePropStore(state => state.onItemAdd);
   const onItemResize = usePropStore(state => state.onItemResize);
+  const pages = usePropStore(state => state.pages);
+  const settings = usePropStore(state => state.settings);
 
   const activeElements = useBuilderStore(state => state.activeElements);
   const setActiveElements = useBuilderStore(state => state.setActiveElements);
@@ -67,6 +69,8 @@ const DraggableItemContent = ({
   const setMatches = useBuilderStore(state => state.setMatches);
   const guides = useBuilderStore(state => state.guides);
   const zoom = useBuilderStore(state => state.zoom);
+
+  const setToolbarPosition = useBuilderStore(state => state.setToolbarPosition);
 
   const isSelected = isSelectedItem(item.id, activeElements);
 
@@ -260,6 +264,36 @@ const DraggableItemContent = ({
     top: stateTop,
     width: stateWidth,
   }), [item, stateHeight, stateLeft, stateTop, stateWidth]);
+
+  useLayoutEffect(() => {
+    if (!isSelected) return;
+    const THRESHOLD = 80;
+
+    const currentPage = pages?.find(p => p.id === pageID);
+
+    const pageWidth = parseInt(currentPage?.reportLayoutWidth || settings?.reportLayoutWidth || '1123', 10);
+    const pageHeight = parseInt(currentPage?.reportLayoutHeight || settings?.reportLayoutHeight || '794', 10);
+
+    const itemRight = stateLeft + stateWidth;
+    const itemBottom = stateTop + stateHeight;
+
+    const verticalAlignment = stateHeight > stateWidth;
+
+    const getVerticalPosition = () => {
+      if (stateLeft < THRESHOLD) return 'right-align';
+      if (pageWidth - itemRight < THRESHOLD) return 'left-align';
+      return 'right-align';
+    };
+
+    const getHorizontalPosition = () => {
+      if (stateTop < THRESHOLD) return 'bottom-align';
+      if (pageHeight - itemBottom < THRESHOLD) return 'top-align';
+      return 'top-align';
+    };
+
+    const toolbarPosition = verticalAlignment ? getVerticalPosition() : getHorizontalPosition();
+    setToolbarPosition({ itemId: id, position: toolbarPosition });
+  }, [id, isSelected, pageID, pages, settings, setToolbarPosition, stateHeight, stateLeft, stateTop, stateWidth]);
 
   return (
     <ItemPositioner
