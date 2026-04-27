@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [3.8.0](https://github.com/jotform/dnd-builder/compare/v3.7.1...v3.8.0) (2026-04-27)
+
+
+### Features
+
+* **dnd-builder:** dynamic positioning for item actions ([f6e6185](https://github.com/jotform/dnd-builder/commit/f6e6185c5f996f2ffe2d1265e46017f32e836664))
+* sub section support in left panel ([9e15812](https://github.com/jotform/dnd-builder/commit/9e158126e5a6e4e4e85b63501362b28bdbe64885))
+
+
+### Bug Fixes
+
+* **dnd-builder:** presentation expand/collapse icons change ([2454090](https://github.com/jotform/dnd-builder/commit/2454090fcfe93bd85a729abc0b993da862ce58e0))
+* **dnd-builder:** sketch-picker and input updates ([2c8e92e](https://github.com/jotform/dnd-builder/commit/2c8e92ef921763ee8997351f09160dc11158704c))
+* duplicate selector fix ([b72b52d](https://github.com/jotform/dnd-builder/commit/b72b52dcbca61f2258e31640b3ec60639992116c))
+
 ## [3.7.1](https://github.com/jotform/dnd-builder/compare/v3.7.0...v3.7.1) (2026-04-20)
 
 
