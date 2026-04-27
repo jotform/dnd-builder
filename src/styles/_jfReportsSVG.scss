@@ -126,6 +126,11 @@
   .icon-fullscreen {
     width: 12px;
     height: 12px;
+    fill: #FFFFFF;
+
+    path {
+      fill: #FFFFFF;
+    }
   }
 
   .icon-aspectLock, .icon-aspectUnlock {
