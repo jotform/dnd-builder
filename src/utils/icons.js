@@ -119,6 +119,8 @@ export { default as textGridPlaceholder } from '../assets/svg/placeholder/grid.s
 // Zoom //
 
 export { default as fit } from '../assets/svg/fit_screen.svg';
+export { default as collapsePresentation } from '../assets/svg/carets_to_center.svg';
+export { default as expandPresentation } from '../assets/svg/carets_from_center.svg';
 
 // Zoom //
 

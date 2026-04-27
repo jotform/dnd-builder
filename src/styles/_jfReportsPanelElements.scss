@@ -603,6 +603,18 @@
         max-width: calc(100% - 20px);
         z-index: 3;
       }
+
+      &[data-position="right"] {
+        .sketch-picker {
+          right: 0;
+        }
+      }
+
+      &[data-position="left"] {
+        .sketch-picker {
+          left: 0;
+        }
+      }
     }
 
     &-preview {

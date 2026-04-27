@@ -13,9 +13,9 @@ export const getDefaultPresentationActions = ({
       type="button"
     >
       {isFullscreen ? (
-        <icons.exitFullscreen className="jfReportSVG icon-fullscreen" />
+        <icons.collapsePresentation className="jfReportSVG icon-fullscreen" />
       ) : (
-        <icons.enterFullscreen className="jfReportSVG icon-fullscreen" />
+        <icons.expandPresentation className="jfReportSVG icon-fullscreen" />
       )}
     </button>
   ),
