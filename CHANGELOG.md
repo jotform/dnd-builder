@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [3.8.1](https://github.com/jotform/dnd-builder/compare/v3.8.0...v3.8.1) (2026-04-29)
+
+
+### Bug Fixes
+
+* **dnd-builder:** set active elements to selected report items ([50a652d](https://github.com/jotform/dnd-builder/commit/50a652d8c2ef95584ad469ed1755160ebe104aa6))
+* **dnd-builder:** undefined check ([2957210](https://github.com/jotform/dnd-builder/commit/29572108167a7bcd3e1ce5f467aac532499c0e7a))
+
 ## [3.8.0](https://github.com/jotform/dnd-builder/compare/v3.7.1...v3.8.0) (2026-04-27)
 
 
