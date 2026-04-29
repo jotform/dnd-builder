@@ -1,6 +1,12 @@
 /* eslint-disable complexity */
-import { createContext, useContext, useRef } from 'react';
+import {
+  createContext,
+  useContext,
+  useRef,
+  useEffect,
+} from 'react';
 import PropTypes from 'prop-types';
+import isEqual from 'lodash.isequal';
 import { createStore, useStore } from 'zustand';
 import { SLIDES_LIST_TYPE_MAP } from '../constants/panel';
 
@@ -210,11 +216,19 @@ const builderStore = props => {
 
 const BuilderContext = createContext(null);
 
-export const BuilderProvider = ({ children, value, ...props }) => {
+export const BuilderProvider = ({
+  activeElement, children, value, ...props
+}) => {
   const storeRef = useRef();
   if (!storeRef.current) {
     storeRef.current = builderStore(props);
   }
+
+  useEffect(() => {
+    const state = storeRef.current.getState();
+    if (!activeElement?.length || isEqual(state.activeElements, activeElement)) return;
+    state.setActiveElementsSelection(activeElement);
+  }, [activeElement]);
 
   return (
     <BuilderContext.Provider value={storeRef.current}>
@@ -224,6 +238,7 @@ export const BuilderProvider = ({ children, value, ...props }) => {
 };
 
 BuilderProvider.propTypes = {
+  activeElement: PropTypes.array,
   children: PropTypes.any,
   value: PropTypes.object,
 };

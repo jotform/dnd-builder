@@ -248,7 +248,7 @@ export const useSelectedElements = () => {
   return useMemo(() => {
     if (activeElements.length === 0) return [];
     const items = activeElements.map(itemID => {
-      let foundItem = [];
+      let foundItem = {};
       pages.forEach(page => {
         const item = page.items.find(el => el.id === itemID);
         if (item) {
