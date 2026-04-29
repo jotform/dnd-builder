@@ -12,6 +12,7 @@ const Providers = ({
   mode,
   onRightPanelsToggled,
   presentationBarActions,
+  selectedReportItemIDs,
   shouldShowRightPanelInitially,
   slidesListType,
   useFixedPresentationBar,
@@ -19,6 +20,7 @@ const Providers = ({
 }) => {
   return (
     <BuilderProvider
+      activeElement={selectedReportItemIDs}
       clickOutsideIgnoreSelectors={clickOutsideIgnoreSelectors}
       defaultZoom={defaultZoom}
       lastScrollPosition={lastScrollPosition}
@@ -57,6 +59,8 @@ Providers.propTypes = {
   onRightPanelsToggled: PropTypes.func,
   /** To pass in action definitions that will be rendered as buttons */
   presentationBarActions: PropTypes.arrayOf(PropTypes.shape({})),
+  /** Selected report item IDs */
+  selectedReportItemIDs: PropTypes.array,
   /** Flag for fixed action bar */
   shouldShowRightPanelInitially: PropTypes.bool,
   /** Flag for whether to show the right panel initially */
