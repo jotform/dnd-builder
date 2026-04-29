@@ -226,7 +226,7 @@ export const BuilderProvider = ({
 
   useEffect(() => {
     const state = storeRef.current.getState();
-    if (!activeElement.length || isEqual(state.activeElements, activeElement)) return;
+    if (!activeElement?.length || isEqual(state.activeElements, activeElement)) return;
     state.setActiveElementsSelection(activeElement);
   }, [activeElement]);
 
