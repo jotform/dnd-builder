@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [3.8.2](https://github.com/jotform/dnd-builder/compare/v3.8.1...v3.8.2) (2026-04-30)
+
+
+### Bug Fixes
+
+* **dnd-builder:** remove empty array check ([de4e9f1](https://github.com/jotform/dnd-builder/commit/de4e9f1a72453770f48daaff93f832cc594d6f7a))
+
 ## [3.8.1](https://github.com/jotform/dnd-builder/compare/v3.8.0...v3.8.1) (2026-04-29)
 
 
