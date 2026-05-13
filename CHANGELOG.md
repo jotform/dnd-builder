@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [3.9.0](https://github.com/jotform/dnd-builder/compare/v3.8.2...v3.9.0) (2026-05-13)
+
+
+### Features
+
+* **dnd-builder:** Introduce controlled actions for draggable items ([dfb2f73](https://github.com/jotform/dnd-builder/commit/dfb2f73a40988543475373e35059e7419bb98dff))
+
 ## [3.8.3](https://github.com/jotform/dnd-builder/compare/v3.8.2...v3.8.3) (2026-05-13)
 
 
