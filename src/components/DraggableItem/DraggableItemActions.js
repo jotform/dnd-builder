@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import * as icons from '../../utils/icons';
 import { useSelectedElements, useTranslatedTexts } from '../../utils/hooks';
 import { usePropStore } from '../../contexts/PropContext';
@@ -14,7 +15,14 @@ const toolbarAlignForItem = (state, selectedId) => {
   return position ?? DEFAULT_TOOLBAR_ALIGN;
 };
 
-const DraggableItemActions = () => {
+const DraggableItemActions = ({
+  actions = {
+    delete: true,
+    duplicate: true,
+    lock: true,
+    settings: true,
+  },
+}) => {
   const {
     DELETE_ITEM,
     DUPLICATE_ITEM,
@@ -86,40 +94,57 @@ const DraggableItemActions = () => {
   }
   return (
     <div className={`report-item-toolbar ${position}`}>
-      <button
-        className="report-item-toolbar-item"
-        onClick={openSettings}
-        title={ITEM_SETTINGS}
-        type="button"
-      >
-        <icons.settings className="toolbar-icon" />
-      </button>
-      <button
-        className="report-item-toolbar-item"
-        onClick={duplicateItem}
-        title={DUPLICATE_ITEM}
-        type="button"
-      >
-        <icons.duplicate className="toolbar-icon" />
-      </button>
-      <button
-        className="report-item-toolbar-item"
-        onClick={changeLockStatus}
-        title={LOCK_ITEM}
-        type="button"
-      >
-        <icons.unlock className="toolbar-icon" />
-      </button>
-      <button
-        className="report-item-toolbar-item error"
-        onClick={deleteItem}
-        title={DELETE_ITEM}
-        type="button"
-      >
-        <icons.trash className="toolbar-icon" />
-      </button>
+      {actions.settings && (
+        <button
+          className="report-item-toolbar-item"
+          onClick={openSettings}
+          title={ITEM_SETTINGS}
+          type="button"
+        >
+          <icons.settings className="toolbar-icon" />
+        </button>
+      )}
+      {actions.duplicate && (
+        <button
+          className="report-item-toolbar-item"
+          onClick={duplicateItem}
+          title={DUPLICATE_ITEM}
+          type="button"
+        >
+          <icons.duplicate className="toolbar-icon" />
+        </button>
+      )}
+      {actions.lock && (
+        <button
+          className="report-item-toolbar-item"
+          onClick={changeLockStatus}
+          title={LOCK_ITEM}
+          type="button"
+        >
+          <icons.unlock className="toolbar-icon" />
+        </button>
+      )}
+      {actions.delete && (
+        <button
+          className="report-item-toolbar-item error"
+          onClick={deleteItem}
+          title={DELETE_ITEM}
+          type="button"
+        >
+          <icons.trash className="toolbar-icon" />
+        </button>
+      )}
     </div>
   );
+};
+
+DraggableItemActions.propTypes = {
+  actions: PropTypes.shape({
+    delete: PropTypes.bool,
+    duplicate: PropTypes.bool,
+    lock: PropTypes.bool,
+    settings: PropTypes.bool,
+  }),
 };
 
 export default DraggableItemActions;

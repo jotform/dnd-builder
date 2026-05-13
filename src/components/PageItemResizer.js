@@ -13,6 +13,7 @@ import DraggableItemActions from './DraggableItem/DraggableItemActions';
 import ItemPositioner from './ItemPositioner';
 import withClickOutside from './withClickOutside';
 import { useBuilderStore } from '../contexts/BuilderContext';
+import { usePropStore } from '../contexts/PropContext';
 
 const exceptionalClassesForClickOutside = ['contextMenu-itemLabel', 'contextMenu-item'];
 const ResizableWithClickOutside = withClickOutside(Resizable);
@@ -53,6 +54,7 @@ const PageItemResizer = ({
   const resetActiveElements = useBuilderStore(state => state.resetActiveElements);
   const isMultipleItemSelected = useBuilderStore(state => state.activeElements.length > 1);
   const isTextEditorOpen = useBuilderStore(state => state.isTextEditorOpen);
+  const itemAccessor = usePropStore(state => state.itemAccessor);
 
   const requestRef = useRef();
   const [lockAspectRatio, setLockAspectRatio] = useState(false);
@@ -134,6 +136,8 @@ const PageItemResizer = ({
   }), [item.height, item.width, zoom]);
 
   const { isLocked } = item;
+  const accessorItemData = useMemo(() => itemAccessor(item), [item, itemAccessor]);
+  const { actions } = accessorItemData;
 
   return createPortal(
     <ItemPositioner
@@ -156,7 +160,7 @@ const PageItemResizer = ({
         {...resizeStaticProps}
         withClickOutsideWrapperClass={`reportItemResizer-wrapper${isLocked ? ' isLocked' : ''}`}
       />
-      {!isMultipleItemSelected && <DraggableItemActions />}
+      {!isMultipleItemSelected && <DraggableItemActions actions={actions} />}
       {isTextEditorOpen && (
         <TextEditorToolbar
           itemWidth={item.width * zoom}

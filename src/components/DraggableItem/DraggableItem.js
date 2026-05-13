@@ -229,12 +229,23 @@ const DraggableItemContent = ({
     });
   };
 
+  const itemAccessor = usePropStore(state => state.itemAccessor);
+  const accessorItemData = useMemo(() => {
+    return itemAccessor(item);
+  }, [item, itemAccessor]);
+
+  const { actions = { settings: true } } = accessorItemData;
+
   const onDoubleClick = e => {
     if (
       e.target.contentEditable === 'true'
       || isTextEditorOpen
     ) {
       // Dont override behaviour on text edits.
+      return;
+    }
+
+    if (!actions.settings) {
       return;
     }
 
