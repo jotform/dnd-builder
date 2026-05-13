@@ -161,6 +161,19 @@ const RightPanel = () => {
   // Tabs
   const tabsWithSettings = getTabsWithSettings(element, selectedItem, itemAccessor);
   const tabs = Object.keys(tabsWithSettings);
+  const selectedItemActions = useMemo(() => {
+    return itemAccessor(selectedItem)?.actions || { settings: true };
+  }, [itemAccessor, selectedItem]);
+
+  useEffect(() => {
+    if (
+      isRightPanelOpen
+      && editedElement.substr(0, 2) === 'i_'
+      && !selectedItemActions?.settings
+    ) {
+      setIsRightPanelOpen(false);
+    }
+  }, [editedElement, isRightPanelOpen, selectedItemActions, setIsRightPanelOpen]);
 
   useEffect(() => {
     const currentTab = tabs[activeTab.right];
