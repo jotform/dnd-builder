@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [3.9.1](https://github.com/jotform/dnd-builder/compare/v3.9.0...v3.9.1) (2026-06-09)
+
+
+### Bug Fixes
+
+* **right-panel:** correctly handle items without settings ([0bbd30b](https://github.com/jotform/dnd-builder/commit/0bbd30be94acad62c27101b950099ae457a3d2b8))
+
 ## [3.9.0](https://github.com/jotform/dnd-builder/compare/v3.8.2...v3.9.0) (2026-05-13)
 
 
