@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [3.9.4](https://github.com/jotform/dnd-builder/compare/v3.9.3...v3.9.4) (2026-06-10)
+
+
+### Bug Fixes
+
+* **npm:** change npm token ([9cb4b15](https://github.com/jotform/dnd-builder/commit/9cb4b15d66b15da6916b613bd4b5c2c7c872f1e6))
+
 ## [3.9.3](https://github.com/jotform/dnd-builder/compare/v3.9.0...v3.9.3) (2026-06-09)
 
 
