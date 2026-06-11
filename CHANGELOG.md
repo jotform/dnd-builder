@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [3.9.5](https://github.com/jotform/dnd-builder/compare/v3.9.4...v3.9.5) (2026-06-11)
+
+
+### Bug Fixes
+
+* **right-panel:** guard against empty tabs in effect hook ([e9d0e26](https://github.com/jotform/dnd-builder/commit/e9d0e263818a3018c80f4c42a8b1842ddaf63d23))
+
 ## [3.9.4](https://github.com/jotform/dnd-builder/compare/v3.9.3...v3.9.4) (2026-06-10)
 
 
