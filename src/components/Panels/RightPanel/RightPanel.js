@@ -170,7 +170,7 @@ const RightPanel = () => {
     return getTabsWithSettings(element, selectedItem, itemAccessor);
   }, [element, selectedItem, itemAccessor, isItemWithoutSettings]);
 
-  const tabs = Object.keys(tabsWithSettings);
+  const tabs = useMemo(() => Object.keys(tabsWithSettings), [tabsWithSettings]);
 
   useEffect(() => {
     if (isRightPanelOpen && isItemWithoutSettings) {
@@ -179,6 +179,7 @@ const RightPanel = () => {
   }, [isRightPanelOpen, isItemWithoutSettings, setIsRightPanelOpen]);
 
   useEffect(() => {
+    if (tabs.length === 0) return;
     const currentTab = tabs[activeTab.right];
     if (!tabsWithSettings[currentTab]) {
       // This is due to conditionaly hiding tabs
