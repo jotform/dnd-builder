@@ -16,5 +16,8 @@ module.exports = {
   moduleNameMapper: {
     '^.+\\.module\\.(css|sass|scss)$': 'identity-obj-proxy',
     '^react-native$': 'react-native-web',
+    '^react$': '<rootDir>/node_modules/react',
+    '^react-dom$': '<rootDir>/node_modules/react-dom',
+    '^react-dnd$': '<rootDir>/node_modules/react-dnd',
   },
 };

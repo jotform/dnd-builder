@@ -12,29 +12,28 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.5.0
       - uses: actions/setup-node@v3
         with:
           node-version-file: '.nvmrc'
-          registry-url: https://registry.yarnpkg.com/
+          registry-url: https://registry.npmjs.org/
+          cache: pnpm
 
-      - name: Cache
-        uses: actions/cache@v3
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
 
       - name: Build package
-        run: yarn build
+        run: pnpm build
 
       - name: Publish package
         if: github.event_name == 'release' && github.event.release.draft == false
         run: |
           if [[ ${{ github.event.release.prerelease }} == true || ${{ github.event.release.tag_name }} =~ -alpha|-beta|-rc ]]; then
-            yarn publish --tag next
+            pnpm publish --tag next
           else
-            yarn publish --tag latest
+            pnpm publish --tag latest
           fi
 
         env:

@@ -29,15 +29,15 @@ The best way to get your bug fixed is to provide a reduced test case. CodeSandbo
 + Fork the repo and create your branch from `master`.
 + If you've added code that should be **tested**, add tests!
 + If you've changed APIs, update the documentation.
-+ Ensure the test suite passes (`yarn test`).
-+ Make sure your code lints (`yarn lint`) - we've done our best to make sure these rules match our internal linting guidelines.
-+ Write visual tests for new features by adding them in the `stories` directory. Run storybooks (`yarn storybook`) and check out changes.
++ Ensure the test suite passes (`pnpm test`).
++ Make sure your code lints (`pnpm lint`) - we've done our best to make sure these rules match our internal linting guidelines.
++ Write visual tests for new features by adding them in the `stories` directory. Run storybooks (`pnpm storybook`) and check out changes.
 
 
 ## <a name="code"></a>Code Guide
 
 Our linter will catch most styling issues that may exist in your code.
-You can check the status of your code styling by simply running: `yarn run lint`
+You can check the status of your code styling by simply running: `pnpm lint`
 
 However, there are still some styles that the linter cannot pick up.
 ### Code Conventions

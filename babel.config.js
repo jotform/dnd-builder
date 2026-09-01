@@ -24,16 +24,7 @@ module.exports = function createConfig(api) {
       },
     ]);
   } else {
-    config.presets.push([
-      require.resolve('@babel/preset-env'),
-      {
-        corejs: {
-          proposals: true,
-          version: 3,
-        },
-        useBuiltIns: 'usage',
-      },
-    ]);
+    config.presets.push([require.resolve('@babel/preset-env')]);
   }
 
   config.presets.push([require.resolve('@babel/preset-react'), { runtime: 'automatic' }]);

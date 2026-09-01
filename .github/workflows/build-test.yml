@@ -16,27 +16,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
         - uses: actions/checkout@v3
+        - uses: pnpm/action-setup@v4
+          with:
+            version: 11.5.0
         - uses: actions/setup-node@v3
           with:
             node-version-file: '.nvmrc'
             registry-url: https://registry.npmjs.org/
-
-        - name: Cache
-          uses: actions/cache@v3
-          with:
-            path: node_modules
-            key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-            restore-keys: |
-                ${{ runner.os }}-yarn-
+            cache: pnpm
 
         - name: Install dependencies
-          run: yarn --frozen-lockfile
+          run: pnpm install --frozen-lockfile
 
         - name: Run linter
-          run: yarn lint
+          run: pnpm lint
 
         - name: Build package
-          run: yarn build
+          run: pnpm build
 
         - name: Run tests
-          run: yarn test
+          run: pnpm test

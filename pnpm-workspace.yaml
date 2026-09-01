@@ -1,0 +1,53 @@
+# Flags
+optimisticRepeatInstall: true
+strictPeerDependencies: true
+savePrefix: ''
+saveExact: true
+engineStrict: true
+autoInstallPeers: false
+dedupePeers: true
+dedupePeerDependents: false
+pmOnFail: download
+runtimeOnFail: download
+verifyDepsBeforeRun: false
+blockExoticSubdeps: false
+trustLockfile: false
+childConcurrency: 16
+networkConcurrency: 32
+enableGlobalVirtualStore: true
+
+# Minimum release age
+minimumReleaseAge: 10080 # 1 week
+minimumReleaseAgeExclude:
+  - '@jotforminc/*'
+
+# Allow builds for dependencies
+allowBuilds:
+  '@swc/core': true
+  unrs-resolver: true
+  core-js: true
+  core-js-pure: true
+  fsevents: true
+  husky: true
+
+# Legacy packages omit runtime deps that Yarn hoisted into node_modules
+packageExtensions:
+  react-dnd-multi-backend:
+    dependencies:
+      react-dnd: 14.0.4
+  react-quill:
+    dependencies:
+      react: 18.3.0
+      react-dom: 18.3.0
+
+# Yarn never enforced these; Storybook 6 / Enzyme still declare React 16–17 peers
+peerDependencyRules:
+  allowedVersions:
+    react: '*'
+    react-dom: '*'
+    '@babel/core': '*'
+  ignoreMissing:
+    - webpack
+    - '@types/node'
+    - '@emnapi/core'
+    - '@emnapi/runtime'

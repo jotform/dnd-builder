@@ -30,7 +30,7 @@
 Install it using one of the following.
 
 ```shell
-$yarn add @jotforminc/dnd-builder
+$pnpm add @jotforminc/dnd-builder
 ```
 
 or
