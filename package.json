@@ -16,7 +16,6 @@
     "@floating-ui/react": "^0.27.19",
     "@use-gesture/react": "10.2.24",
     "classnames": "2.2.6",
-    "core-js": "3.9.0",
     "dompurify": "3.2.3",
     "framer-motion": "^11.11.17",
     "lodash.isequal": "4.5.0",
@@ -126,6 +125,7 @@
     "release": "commit-and-tag-version",
     "knip": "knip",
     "knip:fix": "knip --fix",
-    "knip:unused": "knip --include files,dependencies,exports"
+    "knip:unused": "knip --include files,dependencies,exports",
+    "prepare": "node node_modules/husky/husky install && node scripts/patch-husky-pnpm11.js"
   }
 }

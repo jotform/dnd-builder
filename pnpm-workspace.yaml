@@ -25,10 +25,10 @@ minimumReleaseAgeExclude:
 allowBuilds:
   '@swc/core': true
   unrs-resolver: true
-  core-js: true
-  core-js-pure: true
   fsevents: true
   husky: true
+  core-js: set this to true or false
+  core-js-pure: set this to true or false
 
 # Legacy packages omit runtime deps that Yarn hoisted into node_modules
 packageExtensions:

@@ -29,9 +29,6 @@ importers:
       classnames:
         specifier: 2.2.6
         version: 2.2.6
-      core-js:
-        specifier: 3.9.0
-        version: 3.9.0
       dompurify:
         specifier: 3.2.3
         version: 3.2.3
@@ -3092,10 +3089,6 @@ packages:
 
   core-js@3.19.1:
     resolution: {integrity: sha512-Tnc7E9iKd/b/ff7GFbhwPVzJzPztGrChB8X8GLqoYGdEOG8IpLnK1xPyo3ZoO3HsK6TodJS58VGPOxA+hLHQMg==}
-    deprecated: core-js@<3.23.3 is no longer maintained and not recommended for usage due to the number of issues. Because of the V8 engine whims, feature detection in old core-js versions could cause a slowdown up to 100x even if nothing is polyfilled. Some versions have web compatibility issues. Please, upgrade your dependencies to the actual version of core-js.
-
-  core-js@3.9.0:
-    resolution: {integrity: sha512-PyFBJaLq93FlyYdsndE5VaueA9K5cNB7CGzeCj191YYLhkQM0gdZR2SKihM70oF0wdqKSKClv/tEBOpoRmdOVQ==}
     deprecated: core-js@<3.23.3 is no longer maintained and not recommended for usage due to the number of issues. Because of the V8 engine whims, feature detection in old core-js versions could cause a slowdown up to 100x even if nothing is polyfilled. Some versions have web compatibility issues. Please, upgrade your dependencies to the actual version of core-js.
 
   core-util-is@1.0.3:
@@ -12559,8 +12552,6 @@ snapshots:
   core-js-pure@3.19.1: {}
 
   core-js@3.19.1: {}
-
-  core-js@3.9.0: {}
 
   core-util-is@1.0.3: {}
 
