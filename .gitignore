@@ -5,7 +5,7 @@
 # OS specific
 .DS_STORE
 
-# npm/yarn stuff
+# npm/pnpm stuff
 node_modules/
 .pnp
 .pnp.js

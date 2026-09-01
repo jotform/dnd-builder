@@ -5,7 +5,7 @@ What is Jotform DND Builder
     build what ever you warnt.
 # Getting Started
 - Installation
->npm and yarn commands
+>npm and pnpm commands
 - Quick start
 >Quick configurable version of report component.
 ## Basic Usage
