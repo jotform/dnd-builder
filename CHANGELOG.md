@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [3.9.7](https://github.com/jotform/dnd-builder/compare/v3.9.5...v3.9.7) (2026-09-23)
+
+
+### Bug Fixes
+
+* **pnpm:** allow corejs build ([efa8674](https://github.com/jotform/dnd-builder/commit/efa86744a3c887dda803f6152fb9d5f5b9ca7263))
+* **test:** test webhook ([1ab501a](https://github.com/jotform/dnd-builder/commit/1ab501a3ab5fea3f552fbeafa38dbe84270d6d71))
+
 ## [3.9.5](https://github.com/jotform/dnd-builder/compare/v3.9.4...v3.9.5) (2026-06-11)
 
 
