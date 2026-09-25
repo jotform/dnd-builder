@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import PrintWrapper from './PrintWrapper';
 import Providers from '../../contexts/Providers';
 import ReportWrapper from '../ReportWrapper';
@@ -21,6 +22,13 @@ const Print = props => {
       </PrintWrapper>
     </Providers>
   );
+};
+
+Print.propTypes = {
+  acceptedItems: PropTypes.shape({}),
+  pages: PropTypes.arrayOf(PropTypes.object),
+  settings: PropTypes.shape({}),
+  theme: PropTypes.oneOf(['lightMode', 'darkMode']),
 };
 
 export default Print;
