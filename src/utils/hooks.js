@@ -129,7 +129,7 @@ export const useFitZoom = () => {
 export const usePageVisibility = (callback, pageCount, selectedPageIndex) => {
   const ratio = useRef({});
   const prevVisiblePageIndex = useRef(-1);
-  const pageRefs = useRef([]);
+  const renderedPageRange = useBuilderStore(state => state.renderedPageRange);
   const observer = useMemo(() => new window.IntersectionObserver(entries => {
     entries.forEach(entry => {
       const order = entry.target.getAttribute('data-order');
@@ -156,23 +156,40 @@ export const usePageVisibility = (callback, pageCount, selectedPageIndex) => {
   }), [callback]);
 
   useEffect(() => {
-    ratio.current = {};
-    pageRefs.current = document.querySelectorAll('.jfReport-page');
-  }, [pageCount]);
-
-  useEffect(() => {
-    if (selectedPageIndex === -1) {
-      pageRefs.current.forEach(page => {
-        observer.observe(page);
-      });
+    if (selectedPageIndex !== -1) {
+      return;
     }
 
+    const pageNodes = [...document.querySelectorAll('.jfReport-page')];
+    const mountedPageOrders = pageNodes.map(page => page.getAttribute('data-order'));
+    Object.keys(ratio.current).forEach(order => {
+      if (!mountedPageOrders.includes(order)) {
+        delete ratio.current[order];
+      }
+    });
+
+    pageNodes.forEach(page => {
+      observer.observe(page);
+    });
+
     return () => {
-      pageRefs.current.forEach(page => {
+      pageNodes.forEach(page => {
         observer.unobserve(page);
       });
     };
-  }, [selectedPageIndex, observer]);
+  }, [selectedPageIndex, observer, pageCount, renderedPageRange]);
+};
+
+export const useScrollToPage = () => {
+  const pageScroller = useBuilderStore(state => state.pageScroller);
+
+  return useCallback((order, timeout = 0) => {
+    setTimeout(() => {
+      if (pageScroller) {
+        pageScroller(order);
+      }
+    }, timeout);
+  }, [pageScroller]);
 };
 
 export const useFullscreenChange = (isFullscreen, fitToScreen) => {
@@ -260,4 +277,34 @@ export const useSelectedElements = () => {
     });
     return items;
   }, [pages, activeElements, acceptedItems]);
+};
+
+export const useScenePageScroller = (pages, visiblePageRefs) => {
+  const setPageScroller = useBuilderStore(state => state.setPageScroller);
+  const virtuosoRef = useRef(null);
+  const pagesRef = useRef(pages);
+
+  useEffect(() => {
+    pagesRef.current = pages;
+  }, [pages]);
+
+  const scrollToPage = useCallback(order => {
+    const targetOrder = +order;
+    const index = pagesRef.current.findIndex(page => +page.order === targetOrder);
+    if (index === -1 || !virtuosoRef.current) {
+      return;
+    }
+    const { id } = pagesRef.current[index];
+    const behavior = visiblePageRefs.current[id]?.current ? 'smooth' : 'auto';
+    virtuosoRef.current.scrollToIndex({ align: 'start', behavior, index });
+  }, [visiblePageRefs]);
+
+  useEffect(() => {
+    setPageScroller(scrollToPage);
+    return () => {
+      setPageScroller(null);
+    };
+  }, [scrollToPage, setPageScroller]);
+
+  return virtuosoRef;
 };

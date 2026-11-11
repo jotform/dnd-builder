@@ -4,8 +4,8 @@ import {
   useCallback, useEffect, useMemo, useState,
 } from 'react';
 import * as icons from '../../utils/icons';
-import { moveItemInArrayFromIndexToIndex, scrollToTarget } from '../../utils/functions';
-import { useSelectedElements, useTranslatedTexts } from '../../utils/hooks';
+import { moveItemInArrayFromIndexToIndex } from '../../utils/functions';
+import { useScrollToPage, useSelectedElements, useTranslatedTexts } from '../../utils/hooks';
 import { useBuilderStore } from '../../contexts/BuilderContext';
 import { usePropStore } from '../../contexts/PropContext';
 
@@ -24,6 +24,7 @@ const PageActions = ({
 
   const setIsRightPanelOpen = useBuilderStore(state => state.setIsRightPanelOpen);
   const setEditedElement = useBuilderStore(state => state.setEditedElement);
+  const scrollToPage = useScrollToPage();
 
   const selectedItems = useSelectedElements();
   const isSelectedItemExists = useMemo(() => selectedItems?.length > 0, [selectedItems]);
@@ -46,7 +47,7 @@ const PageActions = ({
   const onPageAddClick = () => {
     const newPageIndex = order + 1;
     onPageAdd(newPageIndex);
-    scrollToTarget(`pageActions-id-${newPageIndex}`, 350);
+    scrollToPage(newPageIndex, 350);
     onAnEventTrigger('addNewPage', newPageIndex);
   };
 
@@ -71,7 +72,7 @@ const PageActions = ({
         return acc;
       }, {});
       onPageOrdersChange(pageOrders);
-      scrollToTarget(`pageActions-id-${order + direction}`);
+      scrollToPage(order + direction);
       onAnEventTrigger('changePageOrder', direction);
     };
   };
@@ -79,7 +80,7 @@ const PageActions = ({
   const onPageDuplicateClick = () => {
     const foundPage = pages.find(page => page.id === pageID);
     onPageDuplicate(foundPage);
-    scrollToTarget(`pageActions-id-${order + 1}`, 350);
+    scrollToPage(order + 1, 350);
     onAnEventTrigger('duplicatePage', order + 1);
   };
 

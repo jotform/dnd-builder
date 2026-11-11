@@ -28,6 +28,8 @@ const builderStore = props => {
     matches: {},
     onRightPanelsToggled: props.onRightPanelsToggled || (() => {}),
     overedPageId: props.activePageId || null,
+    pageScroller: null,
+    renderedPageRange: null,
     resetActiveElements: props.resetActiveElements || (() => {
       set({ activeElements: [], editedElement: 'l_layout' });
     }),
@@ -181,6 +183,12 @@ const builderStore = props => {
     },
     setOverPage: overPageId => {
       set({ overedPageId: overPageId });
+    },
+    setPageScroller: pageScroller => {
+      set({ pageScroller });
+    },
+    setRenderedPageRange: renderedPageRange => {
+      set({ renderedPageRange });
     },
     setToolbarPosition: ({ itemId, position }) => {
       set({ toolbarPosition: { itemId, position } });

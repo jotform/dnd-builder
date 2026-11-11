@@ -4,8 +4,11 @@ import {
   createRef,
   useCallback,
   useEffect,
+  useMemo,
   useRef,
+  useState,
 } from 'react';
+import { Virtuoso } from 'react-virtuoso';
 import * as classNames from '../../constants/classNames';
 import ContextMenu from './ContextMenu';
 import PageActions from './PageActions';
@@ -25,6 +28,10 @@ import DraggableLayer from './DraggableLayer';
 import useKeyboardActions from '../../utils/useKeyboardActions';
 import useMarqueeSelection from '../../utils/useMarqueeSelection';
 import SlidesNavigatorToggle from './SlidesNavigatorToggle';
+import { useScenePageScroller } from '../../utils/hooks';
+import { getPageId } from '../../utils/getPageId';
+
+const OVERSCAN_PAGE_COUNT = 2;
 
 const Scene = () => {
   const pages = usePropStore(state => state.pages);
@@ -37,30 +44,25 @@ const Scene = () => {
   const slidesListType = useBuilderStore(state => state.slidesListType);
   const setOverPage = useBuilderStore(state => state.setOverPage);
   const setOutPage = useBuilderStore(state => state.setOutPage);
+  const renderedPageRange = useBuilderStore(state => state.renderedPageRange);
+  const setRenderedPageRange = useBuilderStore(state => state.setRenderedPageRange);
 
-  const pageStyles = useRef({});
-  const pageContainerStyles = useRef({});
-  const viewPortRef = useRef({});
+  const [viewPort, setViewPort] = useState(null);
+  const [isListMeasured, setIsListMeasured] = useState(false);
   const canvasRef = useRef(null);
 
-  /* Page Refs */
-  const refs = useRef(pages.reduce((acc, curr) => {
-    acc[curr.id] = createRef(null);
-    return acc;
-  }, {}));
+  const refs = useRef({});
+  const getPageRef = useCallback(pageID => {
+    if (!refs.current[pageID]) {
+      refs.current[pageID] = createRef(null);
+    }
+    return refs.current[pageID];
+  }, []);
 
   // Custom hooks
   useKeyboardActions();
   const { selectionBox, selectionPageId } = useMarqueeSelection(canvasRef);
-
-  // Update refs when new pages are added
-  useEffect(() => {
-    pages.forEach(page => {
-      if (!refs.current[page.id]) {
-        refs.current[page.id] = createRef(null);
-      }
-    });
-  }, [pages]);
+  const virtuosoRef = useScenePageScroller(pages, refs);
 
   // Calculate guides for snap functionality
   useEffect(() => {
@@ -88,14 +90,20 @@ const Scene = () => {
       acc[page.id] = _pageGuides;
       return acc;
     }, {}));
-  }, [pages, zoom, setGuides]);
+  }, [pages, zoom, setGuides, renderedPageRange]);
+
+  const handleTotalListHeightChange = useCallback(listHeight => {
+    if (listHeight > 0) {
+      setIsListMeasured(true);
+    }
+  }, []);
 
   // Restore scroll position after mode change
   useEffect(() => {
-    if (viewPortRef.current) {
-      viewPortRef.current.scrollTop = lastScrollPosition;
+    if (viewPort && isListMeasured) {
+      viewPort.scrollTop = lastScrollPosition;
     }
-  }, [lastScrollPosition]);
+  }, [viewPort, isListMeasured, lastScrollPosition]);
 
   const { reportLayoutHeight = 794, reportLayoutWidth = 1123 } = settings;
 
@@ -105,17 +113,23 @@ const Scene = () => {
   width = Number.isNaN(width) ? 1 : width;
   height = Number.isNaN(height) ? 1 : height;
   const zoomToUse = Number.isNaN(zoom) ? 1 : zoom;
+  const zoomedHeight = parseFloat((height * zoomToUse).toFixed(1));
+  const zoomedWidth = parseFloat((width * zoomToUse).toFixed(1));
 
-  pageStyles.current = {
-    height: parseFloat((height * zoomToUse).toFixed(1)),
-    width: parseFloat((width * zoomToUse).toFixed(1)),
-  };
-  pageContainerStyles.current = {
+  const pageStyle = useMemo(() => ({
+    height: zoomedHeight,
+    position: 'relative',
+    width: zoomedWidth,
+  }), [zoomedHeight, zoomedWidth]);
+
+  const pageContainerStyle = useMemo(() => ({
     height,
     transform: `scale(${zoomToUse})`,
     transformOrigin: '0 0',
     width,
-  };
+  }), [height, width, zoomToUse]);
+
+  const listStyle = useMemo(() => ({ width: zoomedWidth }), [zoomedWidth]);
 
   const pageOverHandler = useCallback(pageId => {
     setOverPage(pageId);
@@ -125,6 +139,44 @@ const Scene = () => {
     setOutPage(null);
   }, [setOutPage]);
 
+  const renderPage = useCallback((index, page) => (
+    <div
+      onMouseOut={pageOutHandler}
+      onMouseOver={() => pageOverHandler(page.id)}
+    >
+      <PageActions
+        order={page.order}
+        pageID={page.id}
+      />
+      <div
+        ref={getPageRef(page.id)}
+        className={classNames.page}
+        data-id={page.id}
+        data-order={page.order}
+        id={`presentation-page-${page.id.toString()}`}
+        style={pageStyle}
+      >
+        <Page
+          items={page.items}
+          page={page}
+          pageIndex={index}
+          style={pageContainerStyle}
+        />
+        {selectionPageId === page.id && selectionBox && (
+          <SelectionBox selectionBox={selectionBox} />
+        )}
+      </div>
+    </div>
+  ), [
+    getPageRef,
+    pageContainerStyle,
+    pageOutHandler,
+    pageOverHandler,
+    pageStyle,
+    selectionBox,
+    selectionPageId,
+  ]);
+
   return (
     <main
       className={classNames.mainWrapper}
@@ -133,7 +185,7 @@ const Scene = () => {
         pageRefs={refs.current}
       />
       <div
-        ref={viewPortRef}
+        ref={setViewPort}
         className={classNames.viewport}
         data-zoom={zoom}
       >
@@ -141,37 +193,19 @@ const Scene = () => {
           ref={canvasRef}
           className={classNames.canvas}
         >
-          {pages.map((page, index) => (
-            <div
-              key={page.id}
-              onMouseOut={pageOutHandler}
-              onMouseOver={() => pageOverHandler(page.id)}
-            >
-              <PageActions
-                order={page.order}
-                pageID={page.id}
-              />
-              <div
-                key={`page_${page.id}`}
-                ref={refs.current[page.id]}
-                className={classNames.page}
-                data-id={page.id}
-                data-order={page.order}
-                id={`presentation-page-${page.id.toString()}`}
-                style={{ ...pageStyles.current, position: 'relative' }}
-              >
-                <Page
-                  items={page.items}
-                  page={page}
-                  pageIndex={index}
-                  style={pageContainerStyles.current}
-                />
-                {selectionPageId === page.id && selectionBox && (
-                  <SelectionBox selectionBox={selectionBox} />
-                )}
-              </div>
-            </div>
-          ))}
+          {viewPort && (
+            <Virtuoso
+              ref={virtuosoRef}
+              computeItemKey={getPageId}
+              customScrollParent={viewPort}
+              data={pages}
+              increaseViewportBy={OVERSCAN_PAGE_COUNT * zoomedHeight}
+              itemContent={renderPage}
+              rangeChanged={setRenderedPageRange}
+              style={listStyle}
+              totalListHeightChanged={handleTotalListHeightChange}
+            />
+          )}
           <PageAdder />
         </div>
       </div>

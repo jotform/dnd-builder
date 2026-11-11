@@ -1,8 +1,7 @@
 import { string } from 'prop-types';
 import classNames from 'classnames';
-import { scrollToTarget } from '../../utils/functions';
 import * as icons from '../../utils/icons';
-import { useTranslatedTexts } from '../../utils/hooks';
+import { useScrollToPage, useTranslatedTexts } from '../../utils/hooks';
 import { usePropStore } from '../../contexts/PropContext';
 
 const PageAdder = ({
@@ -10,10 +9,11 @@ const PageAdder = ({
 }) => {
   const pageCount = usePropStore(state => state.pages.length);
   const onPageAdd = usePropStore(state => state.onPageAdd);
+  const scrollToPage = useScrollToPage();
   const onPageAddClick = () => {
     const newPageIndex = pageCount + 1;
     onPageAdd(newPageIndex);
-    scrollToTarget(`pageActions-id-${newPageIndex}`, 350);
+    scrollToPage(newPageIndex, 350);
   };
 
   const { ADD_NEW_PAGE } = useTranslatedTexts();
