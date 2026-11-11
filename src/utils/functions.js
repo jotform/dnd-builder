@@ -789,15 +789,6 @@ export const getScaleForPageThumbnailLarge = (width, height) => {
   return defaultScaleRatio;
 };
 
-export const scrollToTarget = (id, timeout = 0, options = { behavior: 'smooth' }) => {
-  setTimeout(() => {
-    const target = document.getElementById(id);
-    if (target) {
-      target.scrollIntoView(options);
-    }
-  }, timeout);
-};
-
 export function normalizeHexColor(value) {
   let v = value.trim();
   if (!v.startsWith('#')) v = `#${v}`;

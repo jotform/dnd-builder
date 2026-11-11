@@ -3,8 +3,8 @@ import {
 } from 'react';
 import PropTypes from 'prop-types';
 import PageAdder from '../../Builder/PageAdder';
-import { getScaleForPageThumbnail, scrollToTarget } from '../../../utils/functions';
-import { usePageVisibility } from '../../../utils/hooks';
+import { getScaleForPageThumbnail } from '../../../utils/functions';
+import { usePageVisibility, useScrollToPage } from '../../../utils/hooks';
 import { usePropStore } from '../../../contexts/PropContext';
 
 const ListWrapper = ({
@@ -18,6 +18,7 @@ const ListWrapper = ({
   const onPageRemove = usePropStore(state => state.onPageRemove);
   const reportSettings = usePropStore(state => state.settings);
   const onPageVisibilityChanged = usePropStore(state => state.onPageVisibilityChanged);
+  const scrollToPage = useScrollToPage();
 
   const listRef = useRef(null);
   const [selectedPageIndex, setSelectedPageIndex] = useState(-1);
@@ -85,10 +86,10 @@ const ListWrapper = ({
     const order = e.target.getAttribute('data-order');
     setSelectedPageIndex(parseInt(order, 10));
     if (!e.target.classList.contains('controllerItem')) { // for page thumbnails actions
-      scrollToTarget(`pageActions-id-${order}`);
+      scrollToPage(order);
     }
     resetSelectedPageIndex();
-  }, [resetSelectedPageIndex]);
+  }, [resetSelectedPageIndex, scrollToPage]);
 
   const handlePageAdd = useCallback(index => {
     setSelectedPageIndex(index);
@@ -106,9 +107,9 @@ const ListWrapper = ({
   }, [onPageRemove]);
 
   useEffect(() => { // after new page added
-    scrollToTarget(`pageActions-id-${selectedPageIndex}`, 0, { behavior: 'smooth' });
+    scrollToPage(selectedPageIndex);
     resetSelectedPageIndex();
-  }, [resetSelectedPageIndex, selectedPageIndex]);
+  }, [resetSelectedPageIndex, scrollToPage, selectedPageIndex]);
 
   return (
     <>
