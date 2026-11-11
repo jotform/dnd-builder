@@ -53,8 +53,9 @@ const DraggableItemLayer = ({
   const { pageID } = referenceItem;
 
   const refCoords = useMemo(() => {
-    if (pageID) {
-      const dropTargetPosition = pageRefs[pageID].current.getBoundingClientRect();
+    const pageElement = pageID ? pageRefs[pageID]?.current : null;
+    if (pageElement) {
+      const dropTargetPosition = pageElement.getBoundingClientRect();
       const coords = getCorrectDroppedOffsetValue(
         currentOffset,
         initialOffset,

@@ -14,7 +14,8 @@ import { SortableContext, verticalListSortingStrategy, sortableKeyboardCoordinat
 import { Virtuoso } from 'react-virtuoso';
 import PropTypes from 'prop-types';
 import { usePropStore } from '../../../contexts/PropContext';
-import { arrayMove, scrollToTarget } from '../../../utils/functions';
+import { arrayMove } from '../../../utils/functions';
+import { useScrollToPage } from '../../../utils/hooks';
 import SlideItem from './SlideItem';
 import SlideItemDragOverlay from './SlideItemDragOverlay';
 
@@ -47,6 +48,7 @@ const SlideItemsList = () => {
   const settings = usePropStore(state => state.settings);
   const onPageOrdersChange = usePropStore(state => state.onPageOrdersChange);
   const onAnEventTrigger = usePropStore(state => state.onAnEventTrigger);
+  const scrollToPage = useScrollToPage();
 
   const virtuosoRef = useRef(null);
   const [activeId, setActiveId] = useState(null);
@@ -87,12 +89,9 @@ const SlideItemsList = () => {
   const onPageClick = useCallback(e => {
     const order = e.currentTarget.getAttribute('data-order');
     if (order) {
-      scrollToTarget(`pageActions-id-${order}`, 100, {
-        behavior: 'smooth',
-        block: 'start',
-      });
+      scrollToPage(order, 100);
     }
-  }, []);
+  }, [scrollToPage]);
 
   const handleDragStart = useCallback(event => {
     setActiveId(event.active.id);
