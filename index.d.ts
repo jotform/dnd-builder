@@ -90,6 +90,7 @@ export interface AcceptedItem<T = unknown> {
   settings: ElementSetting[];
   details: ElementDetails;
   defaultItem?: Partial<T>;
+  getMinimumSize?: (item: T) => { width?: number; height?: number };
 }
 
 export type AcceptedItems = Record<string, AcceptedItem>;
