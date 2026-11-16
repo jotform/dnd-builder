@@ -57,6 +57,8 @@ const DraggableItemContent = ({
   const onAnEventTrigger = usePropStore(state => state.onAnEventTrigger);
   const onItemAdd = usePropStore(state => state.onItemAdd);
   const onItemResize = usePropStore(state => state.onItemResize);
+  const getMinimumSize = usePropStore(state => state.acceptedItems[item.itemType]?.getMinimumSize);
+  const minimumSize = getMinimumSize?.(item);
   const pages = usePropStore(state => state.pages);
   const settings = usePropStore(state => state.settings);
 
@@ -203,11 +205,16 @@ const DraggableItemContent = ({
       return isTop ? activeItem.top : item.top;
     };
 
+    const resizedWidth = getWidth();
+    const resizedHeight = getHeight();
+    const boundedWidth = Math.max(resizedWidth, minimumSize?.width ?? resizedWidth);
+    const boundedHeight = Math.max(resizedHeight, minimumSize?.height ?? resizedHeight);
+
     setResizeSize({
-      height: getHeight(),
-      left: getLeft(),
-      top: getTop(),
-      width: getWidth(),
+      height: boundedHeight,
+      left: getLeft() + (isLeft ? resizedWidth - boundedWidth : 0),
+      top: getTop() + (isTop ? resizedHeight - boundedHeight : 0),
+      width: boundedWidth,
     });
   };
 
@@ -336,6 +343,7 @@ const DraggableItemContent = ({
         {!isDragging && isSelected && (
           <PageItemResizer
             item={modifiedItem}
+            minimumSize={minimumSize}
             onResize={onResize}
             onResizeStop={onResizeStop}
           />

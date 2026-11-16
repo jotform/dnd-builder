@@ -46,6 +46,7 @@ const exceptionalClasses = [
 
 const PageItemResizer = ({
   item,
+  minimumSize,
   onResize,
   onResizeStop,
 }) => {
@@ -152,6 +153,8 @@ const PageItemResizer = ({
         enable={!item.isLocked && enableResize}
         exceptionalClasses={exceptionalClasses}
         lockAspectRatio={lockAspectRatioTypes.includes(item.itemType) || lockAspectRatio}
+        minHeight={minimumSize?.height && minimumSize.height * zoom}
+        minWidth={minimumSize?.width && minimumSize.width * zoom}
         onClickOutside={onClickOutside}
         onResize={onResizeRAF}
         onResizeStart={onResizeStart}

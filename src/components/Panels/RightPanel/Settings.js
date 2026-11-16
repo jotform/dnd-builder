@@ -18,6 +18,17 @@ const Settings = ({
   const activeTab = useBuilderStore(state => state.activeTab);
   const useExperimentalFeatures = usePropStore(state => state.useExperimentalFeatures);
 
+  const onItemChange = (target, changes) => {
+    const nextItem = { ...item, ...changes };
+    const minimumSize = element.getMinimumSize?.(nextItem);
+    if (!minimumSize) return onChange(target, changes);
+
+    const dimensions = {};
+    if (nextItem.width < minimumSize.width) dimensions.width = minimumSize.width;
+    if (nextItem.height < minimumSize.height) dimensions.height = minimumSize.height;
+    return onChange(target, { ...changes, ...dimensions });
+  };
+
   return (tabs.map((tabKey, index) => {
     return (
       <div
@@ -56,7 +67,7 @@ const Settings = ({
                       itemAccessor={itemAccessor}
                       onItemChange={onChangeFunction(
                         setting,
-                        onChange,
+                        onItemChange,
                         newItem,
                         customUpdaterFunction,
                       )}
